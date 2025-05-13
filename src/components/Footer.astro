@@ -1,0 +1,122 @@
+---
+import { Github, Heart, Twitter } from "lucide-react";
+
+const currentYear = new Date().getFullYear();
+
+const footerLinks = [
+  {
+    title: "Product",
+    links: [
+      { name: "Features", href: "#features" },
+      { name: "Download", href: "#download" },
+      {
+        name: "Changelog",
+        href: "https://github.com/shm11C3/HardwareVisualizer/releases",
+      },
+      { name: "Roadmap", href: "#" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { name: "Documentation", href: "#docs" },
+      { name: "FAQ", href: "#faq" },
+      { name: "GitHub", href: "https://github.com/shm11C3/HardwareVisualizer" },
+      {
+        name: "Report an Issue",
+        href: "https://github.com/shm11C3/HardwareVisualizer/issues",
+      },
+    ],
+  },
+  {
+    title: "Community",
+    links: [
+      {
+        name: "GitHub Discussions",
+        href: "https://github.com/shm11C3/HardwareVisualizer/discussions",
+      },
+      {
+        name: "Contributing",
+        href: "https://github.com/shm11C3/HardwareVisualizer/blob/main/CONTRIBUTING.md",
+      },
+      { name: "Code of Conduct", href: "#" },
+    ],
+  },
+];
+---
+
+<footer class="bg-slate-900 text-white pt-16 pb-8">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <img src="/app-icon.png" alt="Logo" class="h-8 w-8" />
+          <span class="font-bold text-xl text-white">HardwareVisualizer</span>
+        </div>
+        <p class="text-slate-400 mb-4">
+          A lightweight hardware monitor built with Tauri for real-time hardware
+          status monitoring.
+        </p>
+        <div class="flex gap-4">
+          <a
+            href="https://github.com/shm11C3/HardwareVisualizer"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-slate-400 hover:text-white transition-colors"
+            aria-label="GitHub"
+          >
+            <Github className="w-5 h-5" />
+          </a>
+          <a
+            href="#"
+            class="text-slate-400 hover:text-white transition-colors"
+            aria-label="Twitter"
+          >
+            <Twitter className="w-5 h-5" />
+          </a>
+        </div>
+      </div>
+
+      {
+        footerLinks.map((section) => (
+          <div>
+            <h3 class="font-semibold text-lg mb-4">{section.title}</h3>
+            <ul class="space-y-2">
+              {section.links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="text-slate-400 hover:text-white transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <div
+      class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center"
+    >
+      <p class="text-slate-400 text-sm mb-4 md:mb-0">
+        &copy; {currentYear} HardwareVisualizer. All rights reserved.
+      </p>
+      <div class="flex items-center gap-1 text-slate-400 text-sm">
+        <span>Made with</span>
+        <Heart className="w-4 h-4 text-red-500 fill-red-500" />
+        <span>by</span>
+        <a
+          href="https://github.com/shm11C3"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-cyan-400 hover:text-cyan-300"
+        >
+          shm11C3
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
