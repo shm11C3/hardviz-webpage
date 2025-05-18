@@ -1,5 +1,5 @@
 {
-  "name": "hardviz.com",
+  "name": "hardware_visualizer",
   "compatibility_date": "2025-05-18",
   "assets": {
     "directory": "./dist"
