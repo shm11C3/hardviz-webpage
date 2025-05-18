@@ -1,0 +1,7 @@
+{
+  "name": "hardviz.com",
+  "compatibility_date": "2025-05-18",
+  "assets": {
+    "directory": "./dist"
+  }
+}
