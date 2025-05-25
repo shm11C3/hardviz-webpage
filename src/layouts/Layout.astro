@@ -37,6 +37,14 @@ const {
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content="/og-image.png" />
+    
+    <!-- Initialize language from localStorage if available -->
+    <script>
+      const savedLanguage = localStorage.getItem('i18nextLng');
+      if (savedLanguage) {
+        document.documentElement.lang = savedLanguage;
+      }
+    </script>
   </head>
   <body class="dark:bg-slate-900">
     <slot />

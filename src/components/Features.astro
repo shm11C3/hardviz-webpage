@@ -1,42 +1,47 @@
 ---
 import { Cpu, Gauge, LineChart, MemoryStick, Shield, Zap } from "lucide-react";
+import { useTranslations } from "../lib/i18n/astro-i18n";
+
+// Get the current language from localStorage or default to 'en'
+const currentLang = () => {
+  if (typeof localStorage !== 'undefined') {
+    return localStorage.getItem('i18nextLng') || 'en';
+  }
+  return 'en';
+};
+
+const t = useTranslations(currentLang());
 
 const features = [
   {
     icon: "cpu",
-    title: "CPU Monitoring",
-    description:
-      "Track CPU usage, temperature, and frequency in real-time with detailed per-core statistics.",
+    titleKey: "features.cpu.title",
+    descriptionKey: "features.cpu.description",
   },
   {
     icon: "memory",
-    title: "Memory Analysis",
-    description:
-      "Monitor RAM usage, available memory, and memory allocation across applications.",
+    titleKey: "features.memory.title",
+    descriptionKey: "features.memory.description",
   },
   {
     icon: "gauge",
-    title: "GPU Metrics",
-    description:
-      "View GPU utilization, temperature, memory usage, and clock speeds for supported graphics cards.",
+    titleKey: "features.gpu.title",
+    descriptionKey: "features.gpu.description",
   },
   {
     icon: "line-chart",
-    title: "Performance Insights",
-    description:
-      "Analyze long-term hardware usage patterns with historical logs, trend visualization, and process usage statistics.",
+    titleKey: "features.performance.title",
+    descriptionKey: "features.performance.description",
   },
   {
     icon: "zap",
-    title: "Lightweight",
-    description:
-      "Built with Tauri for minimal resource usage, ensuring the monitor itself doesn't impact system performance.",
+    titleKey: "features.lightweight.title",
+    descriptionKey: "features.lightweight.description",
   },
   {
     icon: "shield",
-    title: "Open Source",
-    description:
-      "Fully transparent, community-driven development with the source code available on GitHub.",
+    titleKey: "features.opensource.title",
+    descriptionKey: "features.opensource.description",
   },
 ];
 ---
@@ -44,10 +49,9 @@ const features = [
 <section class="py-20 bg-slate-50 dark:bg-slate-900" id="features">
   <div class="container mx-auto px-4">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4 dark:text-white">Powerful Monitoring Features</h2>
-      <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">
-        HardwareVisualizer provides comprehensive hardware monitoring with an intuitive interface and minimal system
-        impact.
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 dark:text-white" data-i18n-key="features.title">{t("features.title")}</h2>
+      <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg" data-i18n-key="features.subtitle">
+        {t("features.subtitle")}
       </p>
     </div>
 
@@ -63,8 +67,8 @@ const features = [
               {feature.icon === "zap" && <Zap className="w-6 h-6 text-rose-400" />}
               {feature.icon === "shield" && <Shield className="w-6 h-6 text-blue-400" />}
             </div>
-            <h3 class="text-xl font-semibold mb-2 dark:text-white">{feature.title}</h3>
-            <p class="text-slate-600 dark:text-slate-400">{feature.description}</p>
+            <h3 class="text-xl font-semibold mb-2 dark:text-white" data-i18n-key={feature.titleKey}>{t(feature.titleKey)}</h3>
+            <p class="text-slate-600 dark:text-slate-400" data-i18n-key={feature.descriptionKey}>{t(feature.descriptionKey)}</p>
           </div>
         ))
       }
