@@ -1,21 +1,30 @@
 ---
 import "../styles/global.css";
+import { getAlternateLanguageURL, languages, Language } from "../i18n";
 
 interface Props {
   title: string;
   description?: string;
+  lang: Language;
+  currentUrl: URL;
 }
 
 const {
   title,
   description = "A lightweight hardware monitor built with Tauri for real-time hardware status monitoring.",
+  lang = "en",
+  currentUrl,
 } = Astro.props;
+
+// Generate alternate language URLs for <link rel="alternate"> tags
+const alternateUrls = languages.map(l => ({
+  language: l,
+  url: getAlternateLanguageURL(currentUrl, l),
+}));
 ---
 
-
-
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang={lang} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,27 +33,25 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
 
+    <!-- Alternate language versions -->
+    {alternateUrls.map(({ language, url }) => (
+      <link rel="alternate" hreflang={language} href={url} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={getAlternateLanguageURL(currentUrl, "en")} />
+
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url} />
+    <meta property="og:url" content={currentUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content="/og-image.png" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:url" content={currentUrl} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content="/og-image.png" />
-    
-    <!-- Initialize language from localStorage if available -->
-    <script>
-      const savedLanguage = localStorage.getItem('i18nextLng');
-      if (savedLanguage) {
-        document.documentElement.lang = savedLanguage;
-      }
-    </script>
   </head>
   <body class="dark:bg-slate-900">
     <slot />

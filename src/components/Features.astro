@@ -1,47 +1,71 @@
 ---
 import { Cpu, Gauge, LineChart, MemoryStick, Shield, Zap } from "lucide-react";
-import { useTranslations } from "../lib/i18n/astro-i18n";
+import { Language } from "../i18n";
 
-// Get the current language from localStorage or default to 'en'
-const currentLang = () => {
-  if (typeof localStorage !== 'undefined') {
-    return localStorage.getItem('i18nextLng') || 'en';
-  }
-  return 'en';
-};
+interface Props {
+  lang: Language;
+  translations: {
+    title: string;
+    subtitle: string;
+    cpu: {
+      title: string;
+      description: string;
+    };
+    memory: {
+      title: string;
+      description: string;
+    };
+    gpu: {
+      title: string;
+      description: string;
+    };
+    performance: {
+      title: string;
+      description: string;
+    };
+    lightweight: {
+      title: string;
+      description: string;
+    };
+    opensource: {
+      title: string;
+      description: string;
+    };
+  };
+}
 
-const t = useTranslations(currentLang());
+const { lang, translations } = Astro.props;
 
 const features = [
   {
     icon: "cpu",
-    titleKey: "features.cpu.title",
-    descriptionKey: "features.cpu.description",
+    title: translations.cpu.title,
+    description: translations.cpu.description,
   },
   {
     icon: "memory",
-    titleKey: "features.memory.title",
-    descriptionKey: "features.memory.description",
+    title: translations.memory.title,
+    description: translations.memory.description,
   },
   {
     icon: "gauge",
-    titleKey: "features.gpu.title",
-    descriptionKey: "features.gpu.description",
+    title: translations.gpu.title,
+    description: translations.gpu.description,
   },
   {
     icon: "line-chart",
-    titleKey: "features.performance.title",
-    descriptionKey: "features.performance.description",
+    title: translations.performance.title,
+    description: translations.performance.description,
   },
   {
     icon: "zap",
-    titleKey: "features.lightweight.title",
-    descriptionKey: "features.lightweight.description",
+    title: translations.lightweight.title,
+    description: translations.lightweight.description,
   },
   {
     icon: "shield",
-    titleKey: "features.opensource.title",
-    descriptionKey: "features.opensource.description",
+    title: translations.opensource.title,
+    description: translations.opensource.description,
   },
 ];
 ---
@@ -49,9 +73,9 @@ const features = [
 <section class="py-20 bg-slate-50 dark:bg-slate-900" id="features">
   <div class="container mx-auto px-4">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4 dark:text-white" data-i18n-key="features.title">{t("features.title")}</h2>
-      <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg" data-i18n-key="features.subtitle">
-        {t("features.subtitle")}
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 dark:text-white">{translations.title}</h2>
+      <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">
+        {translations.subtitle}
       </p>
     </div>
 
@@ -67,8 +91,8 @@ const features = [
               {feature.icon === "zap" && <Zap className="w-6 h-6 text-rose-400" />}
               {feature.icon === "shield" && <Shield className="w-6 h-6 text-blue-400" />}
             </div>
-            <h3 class="text-xl font-semibold mb-2 dark:text-white" data-i18n-key={feature.titleKey}>{t(feature.titleKey)}</h3>
-            <p class="text-slate-600 dark:text-slate-400" data-i18n-key={feature.descriptionKey}>{t(feature.descriptionKey)}</p>
+            <h3 class="text-xl font-semibold mb-2 dark:text-white">{feature.title}</h3>
+            <p class="text-slate-600 dark:text-slate-400">{feature.description}</p>
           </div>
         ))
       }

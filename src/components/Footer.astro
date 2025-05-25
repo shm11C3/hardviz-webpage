@@ -1,55 +1,70 @@
 ---
 import { Github, Heart, Twitter } from "lucide-react";
-import { useTranslations } from "../lib/i18n/astro-i18n";
+import { Language } from "../i18n";
 
-// Get the current language from localStorage or default to 'en'
-const currentLang = () => {
-  if (typeof localStorage !== 'undefined') {
-    return localStorage.getItem('i18nextLng') || 'en';
-  }
-  return 'en';
-};
+interface Props {
+  lang: Language;
+  translations: {
+    description: string;
+    product: string;
+    resources: string;
+    community: string;
+    links: {
+      features: string;
+      download: string;
+      changelog: string;
+      roadmap: string;
+      documentation: string;
+      faq: string;
+      github: string;
+      reportIssue: string;
+      discussions: string;
+      contributing: string;
+      codeOfConduct: string;
+    };
+  };
+}
 
-const t = useTranslations(currentLang());
+const { lang, translations } = Astro.props;
 const currentYear = new Date().getFullYear();
 
 const footerLinks = [
   {
-    titleKey: "footer.product",
+    title: translations.product,
     links: [
-      { nameKey: "footer.links.features", href: "#features" },
-      { nameKey: "footer.links.download", href: "#download" },
+      { name: translations.links.features, href: "#features" },
+      { name: translations.links.download, href: "#download" },
       {
-        nameKey: "footer.links.changelog",
+        name: translations.links.changelog,
         href: "https://github.com/shm11C3/HardwareVisualizer/releases",
       },
-      { nameKey: "footer.links.roadmap", href: "#" },
+      { name: translations.links.roadmap, href: "#" },
     ],
   },
   {
-    titleKey: "footer.resources",
+    title: translations.resources,
     links: [
-      { nameKey: "footer.links.documentation", href: "#docs" },
-      { nameKey: "footer.links.faq", href: "#faq" },
-      { nameKey: "footer.links.github", href: "https://github.com/shm11C3/HardwareVisualizer" },
+      { name: translations.links.documentation, href: "#docs" },
+      { name: translations.links.faq, href: "#faq" },
+      { name: translations.links.github, href: "https://github.com/shm11C3/HardwareVisualizer" },
       {
-        nameKey: "footer.links.reportIssue",
+        name: translations.links.reportIssue,
         href: "https://github.com/shm11C3/HardwareVisualizer/issues",
       },
     ],
   },
   {
-    titleKey: "footer.community",
+    title: translations.community,
     links: [
       {
-        nameKey: "footer.links.discussions",
+        name: translations.links.discussions,
         href: "https://github.com/shm11C3/HardwareVisualizer/discussions",
       },
       {
-        nameKey: "footer.links.contributing",
+        name: translations.links.contributing,
         href: "https://github.com/shm11C3/HardwareVisualizer/blob/main/CONTRIBUTING.md",
       },
-      { nameKey: "footer.links.codeOfConduct", href: "#" },
+      { name: translations.links.codeOfConduct, href: "#" },
     ],
   },
 ];
@@ -63,8 +78,8 @@ const footerLinks = [
           <img src="/app-icon.png" alt="Logo" class="h-8 w-8" />
           <span class="font-bold text-xl text-white">HardwareVisualizer</span>
         </div>
-        <p class="text-slate-400 mb-4" data-i18n-key="footer.description">
-          {t("footer.description")}
+        <p class="text-slate-400 mb-4">
+          {translations.description}
         </p>
         <div class="flex gap-4">
           <a
@@ -89,16 +104,15 @@ const footerLinks = [
       {
         footerLinks.map((section) => (
           <div>
-            <h3 class="font-semibold text-lg mb-4" data-i18n-key={section.titleKey}>{t(section.titleKey)}</h3>
+            <h3 class="font-semibold text-lg mb-4">{section.title}</h3>
             <ul class="space-y-2">
               {section.links.map((link) => (
                 <li>
                   <a
                     href={link.href}
                     class="text-slate-400 hover:text-white transition-colors"
-                    data-i18n-key={link.nameKey}
                   >
-                    {t(link.nameKey)}
+                    {link.name}
                   </a>
                 </li>
               ))}

@@ -1,28 +1,29 @@
 ---
-import Download from "../components/Download.tsx";
-import Features from "../components/Features.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header";
-import Hero from "../components/Hero.astro";
-import Layout from "../layouts/Layout.astro";
+// This is the root index file that redirects to the appropriate language
+import { defaultLanguage, languages } from '../i18n';
+
+function getBrowserLanguage(acceptLanguage: string): string {
+  // Parse the Accept-Language header to get language preferences
+  return acceptLanguage
+    .split(',')
+    .map(lang => {
+      const [tag, priority] = lang.trim().split(';q=');
+      return { tag: tag.split('-')[0], priority: priority ? Number(priority) : 1 };
+    })
+    .sort((a, b) => b.priority - a.priority)
+    .map(lang => lang.tag)
+    .find(lang => languages.includes(lang as any)) || defaultLanguage;
+}
+
+// Get the browser's preferred language from the Accept-Language header
+const acceptLanguage = Astro.request.headers.get('accept-language') || '';
+const preferredLanguage = getBrowserLanguage(acceptLanguage);
+
+// Redirect to the appropriate language page
+const redirectPath = `/${preferredLanguage}${Astro.url.pathname === '/' ? '' : Astro.url.pathname}${Astro.url.search}`;
 ---
 
-<Layout title="HardwareVisualizer - Lightweight Hardware Monitoring Tool">
-  <Header client:load />
-  <main>
-    <Hero />
-    <Features />
-    <Download client:load />
-  </main>
-  <Footer />
-</Layout>
-
-<script>
-  // This ensures the i18n detection and configuration works properly on page load
-  document.addEventListener('DOMContentLoaded', () => {
-    const savedLanguage = localStorage.getItem('i18nextLng');
-    if (savedLanguage) {
-      document.documentElement.lang = savedLanguage;
-    }
-  });
+<meta http-equiv="refresh" content={`0;url=${redirectPath}`} />
+<script define:vars={{ redirectPath }}>
+  window.location.href = redirectPath;
 </script>

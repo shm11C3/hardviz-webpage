@@ -1,0 +1,62 @@
+{
+  "header": {
+    "features": "特徴",
+    "download": "ダウンロード",
+    "documentation": "ドキュメント",
+    "github": "GitHub"
+  },
+  "hero": {
+    "title": "ハードウェアを監視",
+    "titleHighlight": "リアルタイムで",
+    "description": "Tauriで構築された軽量のオープンソースハードウェア監視ツール。CPU、GPU、メモリ使用量などをシステムへの影響を最小限に抑えながら監視します。",
+    "downloadButton": "今すぐダウンロード",
+    "githubButton": "GitHubで見る"
+  },
+  "features": {
+    "title": "強力な監視機能",
+    "subtitle": "HardwareVisualizerは、直感的なインターフェースとシステムへの最小限の影響で包括的なハードウェア監視を提供します。",
+    "cpu": {
+      "title": "CPU監視",
+      "description": "CPU使用率、温度、周波数をコアごとの詳細な統計情報でリアルタイムに追跡します。"
+    },
+    "memory": {
+      "title": "メモリ分析",
+      "description": "RAM使用量、利用可能なメモリ、アプリケーション間のメモリ割り当てを監視します。"
+    },
+    "gpu": {
+      "title": "GPU計測",
+      "description": "サポートされているグラフィックカードのGPU使用率、温度、メモリ使用量、クロック速度を表示します。"
+    },
+    "performance": {
+      "title": "パフォーマンスの洞察",
+      "description": "履歴ログ、傾向の視覚化、プロセス使用統計を使用して、長期的なハードウェア使用パターンを分析します。"
+    },
+    "lightweight": {
+      "title": "軽量",
+      "description": "リソース使用量を最小限に抑えるためにTauriで構築され、モニター自体がシステムパフォーマンスに影響を与えないようにします。"
+    },
+    "opensource": {
+      "title": "オープンソース",
+      "description": "完全に透明で、コミュニティ主導の開発により、ソースコードはGitHubで利用可能です。"
+    }
+  },
+  "footer": {
+    "description": "Tauriで構築された軽量のハードウェアモニターで、リアルタイムのハードウェアステータス監視を行います。",
+    "product": "製品",
+    "resources": "リソース",
+    "community": "コミュニティ",
+    "links": {
+      "features": "特徴",
+      "download": "ダウンロード",
+      "changelog": "変更履歴",
+      "roadmap": "ロードマップ",
+      "documentation": "ドキュメント",
+      "faq": "よくある質問",
+      "github": "GitHub",
+      "reportIssue": "問題を報告",
+      "discussions": "GitHub ディスカッション",
+      "contributing": "貢献",
+      "codeOfConduct": "行動規範"
+    }
+  }
+}

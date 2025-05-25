@@ -1,0 +1,32 @@
+---
+import { Language, languages, getAlternateLanguageURL } from "../i18n";
+
+interface Props {
+  lang: Language;
+  currentUrl: URL;
+  className?: string;
+  isScrolled?: boolean;
+}
+
+const { lang, currentUrl, className = "", isScrolled = false } = Astro.props;
+
+// Generate the URL for the alternative language
+const targetLang: Language = lang === "en" ? "ja" : "en";
+const targetUrl = getAlternateLanguageURL(currentUrl, targetLang);
+---
+
+<a
+  href={targetUrl}
+  class:list={[
+    "rounded-full p-2",
+    isScrolled
+      ? "text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+      : "text-white/80 hover:bg-white/10",
+    className
+  ]}
+  aria-label={`Switch to ${targetLang === "en" ? "English" : "Japanese"}`}
+>
+  <span class="w-5 h-5 flex items-center justify-center font-bold">
+    {targetLang === "en" ? "EN" : "JA"}
+  </span>
+</a>
