@@ -1,6 +1,6 @@
 "use client";
 
-import { BarChart3, Cpu, Gauge, Minus, Square, X } from "lucide-react";
+import { BarChart3, Cpu, Gauge, Minus, Square, X, Zap } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function HardwareMonitor() {
@@ -112,25 +112,28 @@ export default function HardwareMonitor() {
                   <span className="font-bold text-2xl text-white">
                     {cpuUsage}%
                   </span>
-                  <span className="text-slate-400 text-xs">使用率</span>
+                  <span className="flex items-center text-slate-400 text-xs">
+                    <Zap size={12} className="mr-1" />
+                    Usage
+                  </span>
                 </div>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-2 text-slate-300 text-xs">
               <div>
-                <p className="text-slate-400">名前</p>
+                <p className="text-slate-400">Name</p>
                 <p>AMD Ryzen 7 7800X3D</p>
               </div>
               <div>
-                <p className="text-slate-400">ベンダー</p>
+                <p className="text-slate-400">Vendor</p>
                 <p>AMD</p>
               </div>
               <div>
-                <p className="text-slate-400">コア数</p>
+                <p className="text-slate-400">Core Count</p>
                 <p>16</p>
               </div>
               <div>
-                <p className="text-slate-400">標準クロック数</p>
+                <p className="text-slate-400">Default Clock Speed</p>
                 <p>4201 MHz</p>
               </div>
             </div>
@@ -153,25 +156,28 @@ export default function HardwareMonitor() {
                   <span className="font-bold text-2xl text-white">
                     {memoryUsage}%
                   </span>
-                  <span className="text-slate-400 text-xs">使用率</span>
+                  <span className="flex items-center text-slate-400 text-xs">
+                    <Zap size={12} className="mr-1" />
+                    Usage
+                  </span>
                 </div>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-2 text-slate-300 text-xs">
               <div>
-                <p className="text-slate-400">メモリタイプ</p>
+                <p className="text-slate-400">Memory Type</p>
                 <p>DDR5</p>
               </div>
               <div>
-                <p className="text-slate-400">合計メモリ</p>
+                <p className="text-slate-400">Total Memory</p>
                 <p>64.0 GB</p>
               </div>
               <div>
-                <p className="text-slate-400">メモリ枚数</p>
+                <p className="text-slate-400">Memory Slots</p>
                 <p>2/4</p>
               </div>
               <div>
-                <p className="text-slate-400">メモリクロック数</p>
+                <p className="text-slate-400">Memory Clock Speed</p>
                 <p>5600 MHz</p>
               </div>
             </div>
@@ -196,7 +202,10 @@ export default function HardwareMonitor() {
                   <span className="font-bold text-white text-xl">
                     {gpuUsage}%
                   </span>
-                  <span className="text-slate-400 text-xs">使用率</span>
+                  <span className="flex items-center text-slate-400 text-xs">
+                    <Zap size={12} className="mr-1" />
+                    Usage
+                  </span>
                 </div>
               </div>
             </div>
@@ -213,26 +222,26 @@ export default function HardwareMonitor() {
                   <span className="font-bold text-white text-xl">
                     {gpuTemp}°C
                   </span>
-                  <span className="text-slate-400 text-xs">温度</span>
+                  <span className="text-slate-400 text-xs">Temp</span>
                 </div>
               </div>
             </div>
           </div>
           <div className="grid grid-cols-4 gap-2 text-slate-300 text-xs">
             <div>
-              <p className="text-slate-400">名前</p>
+              <p className="text-slate-400">Name</p>
               <p>NVIDIA GeForce RTX 5080</p>
             </div>
             <div>
-              <p className="text-slate-400">ベンダー</p>
+              <p className="text-slate-400">Vendor</p>
               <p>NVIDIA</p>
             </div>
             <div>
-              <p className="text-slate-400">メモリ容量</p>
+              <p className="text-slate-400">Memory Size</p>
               <p>31.6 GB</p>
             </div>
             <div>
-              <p className="text-slate-400">メモリ容量（専用）</p>
+              <p className="text-slate-400">Memory Size (Dedicated)</p>
               <p>15.9 GB</p>
             </div>
           </div>
