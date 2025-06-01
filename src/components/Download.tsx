@@ -3,16 +3,17 @@ import {
   LaptopIcon as Linux,
   ComputerIcon as Windows,
 } from "lucide-react";
+import React, { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { cn } from "../lib/utils";
 
 export default function Download() {
-  const downloads = [
+  const initialDownloads = [
     {
       platform: "Windows",
       icon: <Windows className="h-8 w-8" />,
       versions: [{ name: "Windows 10/11 (x64)", url: "#", size: "14.2 MB" }],
-      primary: true,
+      primary: false,
     },
     {
       platform: "macOS",
@@ -33,6 +34,23 @@ export default function Download() {
       primary: false,
     },
   ];
+
+  const [downloads, setDownloads] = useState(initialDownloads);
+
+  useEffect(() => {
+    const ua = window.navigator.userAgent;
+    let detected = "Windows";
+    if (/Macintosh|Mac OS X/.test(ua)) {
+      detected = "macOS";
+    } else if (/Linux/.test(ua)) {
+      detected = "Linux";
+    } else if (/Windows/.test(ua)) {
+      detected = "Windows";
+    }
+    setDownloads((prev) =>
+      prev.map((d) => ({ ...d, primary: d.platform === detected })),
+    );
+  }, []);
 
   return (
     <section className="bg-white py-20 dark:bg-slate-800" id="download">
