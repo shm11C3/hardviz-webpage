@@ -1,0 +1,62 @@
+{
+  "header": {
+    "features": "Features",
+    "download": "Download",
+    "documentation": "Documentation",
+    "github": "GitHub"
+  },
+  "hero": {
+    "title": "Monitor Your Hardware",
+    "titleHighlight": "In Real-Time",
+    "description": "A lightweight, open-source hardware monitoring tool built with Tauri. Track CPU, GPU, memory usage and more with minimal system impact.",
+    "downloadButton": "Download Now",
+    "githubButton": "View on GitHub"
+  },
+  "features": {
+    "title": "Powerful Monitoring Features",
+    "subtitle": "HardwareVisualizer provides comprehensive hardware monitoring with an intuitive interface and minimal system impact.",
+    "cpu": {
+      "title": "CPU Monitoring",
+      "description": "Track CPU usage, temperature, and frequency in real-time with detailed per-core statistics."
+    },
+    "memory": {
+      "title": "Memory Analysis",
+      "description": "Monitor RAM usage, available memory, and memory allocation across applications."
+    },
+    "gpu": {
+      "title": "GPU Metrics",
+      "description": "View GPU utilization, temperature, memory usage, and clock speeds for supported graphics cards."
+    },
+    "performance": {
+      "title": "Performance Insights",
+      "description": "Analyze long-term hardware usage patterns with historical logs, trend visualization, and process usage statistics."
+    },
+    "lightweight": {
+      "title": "Lightweight",
+      "description": "Built with Tauri for minimal resource usage, ensuring the monitor itself doesn't impact system performance."
+    },
+    "opensource": {
+      "title": "Open Source",
+      "description": "Fully transparent, community-driven development with the source code available on GitHub."
+    }
+  },
+  "footer": {
+    "description": "A lightweight hardware monitor built with Tauri for real-time hardware status monitoring.",
+    "product": "Product",
+    "resources": "Resources",
+    "community": "Community",
+    "links": {
+      "features": "Features",
+      "download": "Download",
+      "changelog": "Changelog",
+      "roadmap": "Roadmap",
+      "documentation": "Documentation",
+      "faq": "FAQ",
+      "github": "GitHub",
+      "reportIssue": "Report an Issue",
+      "discussions": "GitHub Discussions",
+      "contributing": "Contributing",
+      "codeOfConduct": "Code of Conduct"
+    }
+  }
+}

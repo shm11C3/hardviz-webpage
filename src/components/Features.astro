@@ -1,42 +1,71 @@
 ---
 import { Cpu, Gauge, LineChart, MemoryStick, Shield, Zap } from "lucide-react";
+import { Language } from "../i18n";
+
+interface Props {
+  lang: Language;
+  translations: {
+    title: string;
+    subtitle: string;
+    cpu: {
+      title: string;
+      description: string;
+    };
+    memory: {
+      title: string;
+      description: string;
+    };
+    gpu: {
+      title: string;
+      description: string;
+    };
+    performance: {
+      title: string;
+      description: string;
+    };
+    lightweight: {
+      title: string;
+      description: string;
+    };
+    opensource: {
+      title: string;
+      description: string;
+    };
+  };
+}
+
+const { lang, translations } = Astro.props;
 
 const features = [
   {
     icon: "cpu",
-    title: "CPU Monitoring",
-    description:
-      "Track CPU usage, temperature, and frequency in real-time with detailed per-core statistics.",
+    title: translations.cpu.title,
+    description: translations.cpu.description,
   },
   {
     icon: "memory",
-    title: "Memory Analysis",
-    description:
-      "Monitor RAM usage, available memory, and memory allocation across applications.",
+    title: translations.memory.title,
+    description: translations.memory.description,
   },
   {
     icon: "gauge",
-    title: "GPU Metrics",
-    description:
-      "View GPU utilization, temperature, memory usage, and clock speeds for supported graphics cards.",
+    title: translations.gpu.title,
+    description: translations.gpu.description,
   },
   {
     icon: "line-chart",
-    title: "Performance Insights",
-    description:
-      "Analyze long-term hardware usage patterns with historical logs, trend visualization, and process usage statistics.",
+    title: translations.performance.title,
+    description: translations.performance.description,
   },
   {
     icon: "zap",
-    title: "Lightweight",
-    description:
-      "Built with Tauri for minimal resource usage, ensuring the monitor itself doesn't impact system performance.",
+    title: translations.lightweight.title,
+    description: translations.lightweight.description,
   },
   {
     icon: "shield",
-    title: "Open Source",
-    description:
-      "Fully transparent, community-driven development with the source code available on GitHub.",
+    title: translations.opensource.title,
+    description: translations.opensource.description,
   },
 ];
 ---
@@ -44,10 +73,9 @@ const features = [
 <section class="py-20 bg-slate-50 dark:bg-slate-900" id="features">
   <div class="container mx-auto px-4">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4 dark:text-white">Powerful Monitoring Features</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 dark:text-white">{translations.title}</h2>
       <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">
-        HardwareVisualizer provides comprehensive hardware monitoring with an intuitive interface and minimal system
-        impact.
+        {translations.subtitle}
       </p>
     </div>
 

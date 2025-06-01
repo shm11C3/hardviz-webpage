@@ -1,45 +1,70 @@
 ---
 import { Github, Heart, Twitter } from "lucide-react";
+import { Language } from "../i18n";
 
+interface Props {
+  lang: Language;
+  translations: {
+    description: string;
+    product: string;
+    resources: string;
+    community: string;
+    links: {
+      features: string;
+      download: string;
+      changelog: string;
+      roadmap: string;
+      documentation: string;
+      faq: string;
+      github: string;
+      reportIssue: string;
+      discussions: string;
+      contributing: string;
+      codeOfConduct: string;
+    };
+  };
+}
+
+const { lang, translations } = Astro.props;
 const currentYear = new Date().getFullYear();
 
 const footerLinks = [
   {
-    title: "Product",
+    title: translations.product,
     links: [
-      { name: "Features", href: "#features" },
-      { name: "Download", href: "#download" },
+      { name: translations.links.features, href: "#features" },
+      { name: translations.links.download, href: "#download" },
       {
-        name: "Changelog",
+        name: translations.links.changelog,
         href: "https://github.com/shm11C3/HardwareVisualizer/releases",
       },
-      { name: "Roadmap", href: "#" },
+      { name: translations.links.roadmap, href: "#" },
     ],
   },
   {
-    title: "Resources",
+    title: translations.resources,
     links: [
-      { name: "Documentation", href: "#docs" },
-      { name: "FAQ", href: "#faq" },
-      { name: "GitHub", href: "https://github.com/shm11C3/HardwareVisualizer" },
+      { name: translations.links.documentation, href: "#docs" },
+      { name: translations.links.faq, href: "#faq" },
+      { name: translations.links.github, href: "https://github.com/shm11C3/HardwareVisualizer" },
       {
-        name: "Report an Issue",
+        name: translations.links.reportIssue,
         href: "https://github.com/shm11C3/HardwareVisualizer/issues",
       },
     ],
   },
   {
-    title: "Community",
+    title: translations.community,
     links: [
       {
-        name: "GitHub Discussions",
+        name: translations.links.discussions,
         href: "https://github.com/shm11C3/HardwareVisualizer/discussions",
       },
       {
-        name: "Contributing",
+        name: translations.links.contributing,
         href: "https://github.com/shm11C3/HardwareVisualizer/blob/main/CONTRIBUTING.md",
       },
-      { name: "Code of Conduct", href: "#" },
+      { name: translations.links.codeOfConduct, href: "#" },
     ],
   },
 ];
@@ -54,8 +79,7 @@ const footerLinks = [
           <span class="font-bold text-xl text-white">HardwareVisualizer</span>
         </div>
         <p class="text-slate-400 mb-4">
-          A lightweight hardware monitor built with Tauri for real-time hardware
-          status monitoring.
+          {translations.description}
         </p>
         <div class="flex gap-4">
           <a

@@ -1,6 +1,20 @@
 ---
 import { ArrowDownToLine } from "lucide-react";
 import HardwareVisualizer from "./HardwareVisualizer";
+import { Language } from "../i18n";
+
+interface Props {
+  lang: Language;
+  translations: {
+    title: string;
+    titleHighlight: string;
+    description: string;
+    downloadButton: string;
+    githubButton: string;
+  };
+}
+
+const { lang, translations } = Astro.props;
 ---
 
 <section class="relative overflow-hidden bg-gradient-to-b from-slate-900 to-slate-800 py-20 sm:py-32">
@@ -9,11 +23,10 @@ import HardwareVisualizer from "./HardwareVisualizer";
     <div class="flex flex-col lg:flex-row items-center gap-12">
       <div class="flex-1 text-center lg:text-left">
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-          Monitor Your Hardware <span class="text-cyan-400">In Real-Time</span>
+          <span>{translations.title}</span> <span class="text-cyan-400">{translations.titleHighlight}</span>
         </h1>
         <p class="text-lg md:text-xl text-slate-300 mb-8 max-w-2xl mx-auto lg:mx-0">
-          A lightweight, open-source hardware monitoring tool built with Tauri. Track CPU, GPU, memory usage and
-          more with minimal system impact.
+          {translations.description}
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
           <a
@@ -21,7 +34,7 @@ import HardwareVisualizer from "./HardwareVisualizer";
             class="download-btn px-8 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-medium rounded-lg flex items-center justify-center gap-2 transition-all"
           >
             <ArrowDownToLine className="w-5 h-5" />
-            Download Now
+            {translations.downloadButton}
           </a>
           <a
             href="https://github.com/shm11C3/HardwareVisualizer"
@@ -29,7 +42,7 @@ import HardwareVisualizer from "./HardwareVisualizer";
             rel="noopener noreferrer"
             class="px-8 py-3 bg-transparent hover:bg-white/10 text-white border border-white/30 font-medium rounded-lg flex items-center justify-center gap-2 transition-all"
           >
-            View on GitHub
+            {translations.githubButton}
           </a>
         </div>
       </div>
@@ -43,7 +56,7 @@ import HardwareVisualizer from "./HardwareVisualizer";
 </section>
 
 <script>
-  // アニメーション効果のためのJavaScript
+  // Animation JavaScript
   const downloadBtn = document.querySelector('.download-btn');
 
   if (downloadBtn) {

@@ -1,0 +1,30 @@
+---
+import Download from "../../components/Download.tsx";
+import Features from "../../components/Features.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header";
+import Hero from "../../components/Hero.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getTranslations } from "../../i18n";
+
+// Define the language for this page
+const lang = 'en';
+const t = getTranslations(lang);
+
+// Get the current URL to generate alternate language URLs
+const currentUrl = Astro.url;
+---
+
+<Layout 
+  title="HardwareVisualizer - Lightweight Hardware Monitoring Tool"
+  lang={lang}
+  currentUrl={currentUrl}
+>
+  <Header client:load lang={lang} translations={t.header} />
+  <main>
+    <Hero lang={lang} translations={t.hero} />
+    <Features lang={lang} translations={t.features} />
+    <Download client:load />
+  </main>
+  <Footer lang={lang} translations={t.footer} />
+</Layout>
