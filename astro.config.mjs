@@ -6,10 +6,9 @@ import robotsTxt from "astro-robots-txt";
 import { defineConfig } from "astro/config";
 
 console.log("[BUILD INFO] PRODUCTION:", process.env.PRODUCTION);
-console.log("[BUILD INFO] BRANCH:", process.env.BRANCH);
 
 const robots =
-  process.env.BRANCH === "master"
+  process.env.PRODUCTION === "true"
     ? {
         policy: [
           {
