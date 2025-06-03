@@ -1,4 +1,4 @@
-import cloudflare from "@astrojs/cloudflare";
+import cloudflare from "@astrojs/cloudflare-static";
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
