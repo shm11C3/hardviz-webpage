@@ -1,9 +1,0 @@
----
-const isProd =
-  Astro.site?.toString().includes("hardviz.com") ||
-  import.meta.env.PROD === true;
----
-
-plaintext
-User-agent: *
-{isProd ? "Allow: /" : "Disallow: /"}
