@@ -1,38 +1,37 @@
-import {
-  Apple,
-  LaptopIcon as Linux,
-  ComputerIcon as Windows,
-} from "lucide-react";
-import { twMerge } from "tailwind-merge";
+import { ComputerIcon, LaptopIcon } from "lucide-react";
+import { type JSX, useEffect, useState } from "react";
 import { cn } from "../lib/utils";
+import type { Platform, PlatformDownload } from "../types/platform";
 
-export default function Download() {
-  const downloads = [
-    {
-      platform: "Windows",
-      icon: <Windows className="h-8 w-8" />,
-      versions: [{ name: "Windows 10/11 (x64)", url: "#", size: "14.2 MB" }],
-      primary: true,
-    },
-    {
-      platform: "macOS",
-      icon: <Apple className="h-8 w-8" />,
-      versions: [
-        { name: "macOS (Intel)", url: "#", size: "15.8 MB" },
-        { name: "macOS (Apple Silicon)", url: "#", size: "15.1 MB" },
-      ],
-      primary: false,
-    },
-    {
-      platform: "Linux",
-      icon: <Linux className="h-8 w-8" />,
-      versions: [
-        { name: "AppImage", url: "#", size: "16.3 MB" },
-        { name: "Debian/Ubuntu (.deb)", url: "#", size: "15.9 MB" },
-      ],
-      primary: false,
-    },
-  ];
+const platform2Icon: Record<"Windows" | "Linux", JSX.Element> = {
+  Windows: <ComputerIcon className="h-8 w-8" />,
+  Linux: <LaptopIcon className="h-8 w-8" />,
+};
+
+export default function Download({
+  downloads: initialDownloads,
+  latestVersion,
+}: {
+  downloads: PlatformDownload[];
+  latestVersion: string | null;
+}) {
+  const [downloads, setDownloads] = useState(initialDownloads);
+
+  useEffect(() => {
+    const ua = navigator.userAgent;
+    const detected = (() => {
+      if (/Macintosh|Mac OS X/.test(ua)) {
+        return "macOS";
+      }
+      if (/Linux/.test(ua)) {
+        return "Linux";
+      }
+      if (/Windows/.test(ua)) {
+        return "Windows";
+      }
+      return "Windows";
+    })();
+  }, []);
 
   return (
     <section className="bg-white py-20 dark:bg-slate-800" id="download">
@@ -45,11 +44,13 @@ export default function Download() {
             Available for all major platforms. Free and open source.
           </p>
           <p className="mt-2 text-slate-500 text-sm dark:text-slate-500">
-            Current version: v0.7.1
+            {latestVersion
+              ? `Current version: v${latestVersion}`
+              : "Current version: -"}
           </p>
         </div>
 
-        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-3">
+        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2">
           {downloads.map((platform) => (
             <div
               key={platform.platform}
@@ -69,7 +70,7 @@ export default function Download() {
                 )}
               >
                 <div className="mb-4 flex items-center justify-center">
-                  {platform.icon}
+                  {platform2Icon[platform.platform]}
                 </div>
                 <h3 className="text-center font-bold text-xl">
                   {platform.platform}
@@ -85,20 +86,40 @@ export default function Download() {
                       <span className="text-slate-500 text-xs dark:text-slate-500">
                         {version.size}
                       </span>
-                      <a
-                        href={version.url}
-                        className={cn(
-                          "rounded-lg px-4 py-2 font-medium text-sm",
-                          platform.primary
-                            ? "bg-cyan-500 text-white hover:bg-cyan-600"
-                            : "bg-slate-200 text-slate-800 hover:bg-slate-300 dark:bg-slate-700 dark:text-white dark:hover:bg-slate-600",
-                        )}
-                      >
-                        Download
-                      </a>
+                      {version.url ? (
+                        <a
+                          href={version.url}
+                          className={cn(
+                            "rounded-lg px-4 py-2 font-medium text-sm",
+                            platform.primary
+                              ? "bg-cyan-500 text-white hover:bg-cyan-600"
+                              : "bg-slate-200 text-slate-800 hover:bg-slate-300 dark:bg-slate-700 dark:text-white dark:hover:bg-slate-600",
+                          )}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Download
+                        </a>
+                      ) : (
+                        <div
+                          className={cn(
+                            "rounded-lg px-4 py-2 font-medium text-sm",
+                            platform.primary
+                              ? "bg-cyan-500 text-white"
+                              : "bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white",
+                          )}
+                        >
+                          Download
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
+                {platform.versions.length === 0 && (
+                  <p className="text-slate-500 text-sm dark:text-slate-400">
+                    No downloads available for {platform.platform} yet.
+                  </p>
+                )}
               </div>
             </div>
           ))}

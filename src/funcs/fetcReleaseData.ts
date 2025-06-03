@@ -1,0 +1,83 @@
+import type { GitHubRelease } from "../types/github";
+import type { Platform } from "../types/platform";
+
+interface ReleaseData {
+  version: string;
+  platforms: {
+    [K in Platform]?: {
+      url: string;
+      size: string;
+      name: string;
+      browser_download_url: string;
+      updated_at: string;
+    };
+  };
+}
+
+/**
+ * TODO SSGで取得するようにしたい
+ *
+ * @returns
+ */
+export function fetchLatestRelease(): Promise<ReleaseData> {
+  return fetch(
+    "https://api.github.com/repos/shm11C3/HardwareVisualizer/releases/latest",
+    {
+      headers: {
+        "User-Agent": "hardviz-webpage (Astro SSG)",
+        Accept: "application/vnd.github+json",
+      },
+    },
+  )
+    .then((res) => {
+      console.log("fetchLatestRelease", res);
+      if (!res.ok) throw new Error("Failed to fetch");
+      return res.json();
+    })
+    .then((data: GitHubRelease) => {
+      const platforms = (data.assets || []).reduce(
+        (
+          acc: ReleaseData["platforms"],
+          asset: { name: string; browser_download_url: string; size?: number },
+        ) => {
+          if (/.msi/.test(asset.name) && !/offline/.test(asset.name)) {
+            acc.windows = {
+              url: asset.browser_download_url,
+              size: asset.size
+                ? `${(asset.size / 1024 / 1024).toFixed(1)} MB`
+                : "-",
+              name: asset.name,
+              browser_download_url: asset.browser_download_url,
+              updated_at: data.published_at,
+            };
+          } else if (/.AppImage/.test(asset.name)) {
+            acc.linuxAppImage = {
+              url: asset.browser_download_url,
+              size: asset.size
+                ? `${(asset.size / 1024 / 1024).toFixed(1)} MB`
+                : "-",
+              name: asset.name,
+              browser_download_url: asset.browser_download_url,
+              updated_at: data.published_at,
+            };
+          } else if (/.deb/.test(asset.name)) {
+            acc.linuxDeb = {
+              url: asset.browser_download_url,
+              size: asset.size
+                ? `${(asset.size / 1024 / 1024).toFixed(1)} MB`
+                : "-",
+              name: asset.name,
+              browser_download_url: asset.browser_download_url,
+              updated_at: data.published_at,
+            };
+          }
+          return acc;
+        },
+        {},
+      );
+      return {
+        version: data.tag_name?.replace(/^v/, "") || data.name,
+        platforms,
+      };
+    });
+}
