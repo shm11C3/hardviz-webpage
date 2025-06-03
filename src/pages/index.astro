@@ -4,7 +4,46 @@ import Features from "../components/Features.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header";
 import Hero from "../components/Hero.astro";
+import { fetchLatestRelease } from "../funcs/fetcReleaseData";
 import Layout from "../layouts/Layout.astro";
+import type { PlatformDownload } from "../types/platform";
+
+const release = await fetchLatestRelease();
+
+const downloads: PlatformDownload[] = [
+  {
+    platform: "Windows",
+    versions: [
+      {
+        type: "windows",
+        name: "Windows 10/11 (x64)",
+        url: release.platforms.windows?.browser_download_url ?? null,
+        size: release.platforms.windows?.size ?? "-",
+      },
+    ],
+    primary: false,
+  },
+  {
+    platform: "Linux",
+    versions: [
+      {
+        type: "linuxAppImage",
+        name: "AppImage",
+        url: release.platforms.linuxAppImage?.browser_download_url ?? null,
+        size: release.platforms.linuxAppImage?.size ?? "-",
+      },
+      {
+        type: "linuxDeb",
+        name: "Debian/Ubuntu (.deb)",
+        url: release.platforms.linuxDeb?.browser_download_url ?? null,
+        size: release.platforms.linuxDeb?.size ?? "-",
+      },
+    ],
+    primary: false,
+  },
+];
+
+const latestVersion = release.version;
 ---
 
 <Layout title="HardwareVisualizer - Lightweight Hardware Monitoring Tool">
@@ -12,7 +51,7 @@ import Layout from "../layouts/Layout.astro";
   <main>
     <Hero />
     <Features />
-    <Download client:load />
+    <Download downloads={downloads} latestVersion={latestVersion} />
   </main>
   <Footer />
 </Layout>

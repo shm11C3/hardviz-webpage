@@ -1,96 +1,36 @@
-import {
-  Apple,
-  LaptopIcon as Linux,
-  ComputerIcon as Windows,
-} from "lucide-react";
-import React, { useEffect, useState, type JSX } from "react";
-import { fetchLatestRelease } from "../funcs/fetcReleaseData";
+import { ComputerIcon, LaptopIcon } from "lucide-react";
+import { type JSX, useEffect, useState } from "react";
 import { cn } from "../lib/utils";
-import type { Platform } from "../types/platform";
+import type { Platform, PlatformDownload } from "../types/platform";
 
-export default function Download() {
-  const initialDownloads: Array<{
-    platform: string;
-    icon: JSX.Element;
-    versions: Array<{
-      type: Platform;
-      name: string;
-      url: string | null;
-      size: string;
-    }>;
-    primary: boolean;
-  }> = [
-    {
-      platform: "Windows",
-      icon: <Windows className="h-8 w-8" />,
-      versions: [
-        { type: "windows", name: "Windows 10/11 (x64)", url: null, size: "-" },
-      ],
-      primary: false,
-    },
-    {
-      platform: "Linux",
-      icon: <Linux className="h-8 w-8" />,
-      versions: [
-        { type: "linuxAppImage", name: "AppImage", url: null, size: "-" },
-        {
-          type: "linuxDeb",
-          name: "Debian/Ubuntu (.deb)",
-          url: null,
-          size: "-",
-        },
-      ],
-      primary: false,
-    },
-  ];
+const platform2Icon: Record<"Windows" | "Linux", JSX.Element> = {
+  Windows: <ComputerIcon className="h-8 w-8" />,
+  Linux: <LaptopIcon className="h-8 w-8" />,
+};
 
+export default function Download({
+  downloads: initialDownloads,
+  latestVersion,
+}: {
+  downloads: PlatformDownload[];
+  latestVersion: string | null;
+}) {
   const [downloads, setDownloads] = useState(initialDownloads);
-  const [latestVersion, setLatestVersion] = useState<string | null>(null);
 
   useEffect(() => {
-    // ユーザーエージェント判定
-    const ua = window.navigator.userAgent;
-    let detected = "Windows";
-    if (/Macintosh|Mac OS X/.test(ua)) {
-      detected = "macOS";
-    } else if (/Linux/.test(ua)) {
-      detected = "Linux";
-    } else if (/Windows/.test(ua)) {
-      detected = "Windows";
-    }
-    setDownloads((prev) =>
-      prev.map((d) => ({ ...d, primary: d.platform === detected })),
-    );
-  }, []);
-
-  useEffect(() => {
-    // 最新バージョン情報とダウンロードリンク・サイズを取得
-    const fetchLatest = async () => {
-      try {
-        const release = await fetchLatestRelease();
-        setLatestVersion(release.version);
-        setDownloads((prev) =>
-          prev.map((platform) => {
-            const asset = release.platforms[platform.versions[0]?.type];
-            if (asset) {
-              return {
-                ...platform,
-                versions: platform.versions.map((v) => ({
-                  ...v,
-                  url: asset.browser_download_url,
-                  size: asset.size || "-",
-                })),
-              };
-            }
-            return platform;
-          }),
-        );
-      } catch (e) {
-        console.error("Failed to fetch latest release data:", e);
-        return;
+    const ua = navigator.userAgent;
+    const detected = (() => {
+      if (/Macintosh|Mac OS X/.test(ua)) {
+        return "macOS";
       }
-    };
-    fetchLatest();
+      if (/Linux/.test(ua)) {
+        return "Linux";
+      }
+      if (/Windows/.test(ua)) {
+        return "Windows";
+      }
+      return "Windows";
+    })();
   }, []);
 
   return (
@@ -130,7 +70,7 @@ export default function Download() {
                 )}
               >
                 <div className="mb-4 flex items-center justify-center">
-                  {platform.icon}
+                  {platform2Icon[platform.platform]}
                 </div>
                 <h3 className="text-center font-bold text-xl">
                   {platform.platform}
@@ -165,7 +105,7 @@ export default function Download() {
                           className={cn(
                             "rounded-lg px-4 py-2 font-medium text-sm",
                             platform.primary
-                              ? "bg-cyan-500 text-white hover:bg-cyan-600"
+                              ? "bg-cyan-500 text-white"
                               : "bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white",
                           )}
                         >

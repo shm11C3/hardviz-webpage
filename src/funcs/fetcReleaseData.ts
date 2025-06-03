@@ -22,8 +22,15 @@ interface ReleaseData {
 export function fetchLatestRelease(): Promise<ReleaseData> {
   return fetch(
     "https://api.github.com/repos/shm11C3/HardwareVisualizer/releases/latest",
+    {
+      headers: {
+        "User-Agent": "hardviz-webpage (Astro SSG)",
+        Accept: "application/vnd.github+json",
+      },
+    },
   )
     .then((res) => {
+      console.log("fetchLatestRelease", res);
       if (!res.ok) throw new Error("Failed to fetch");
       return res.json();
     })
