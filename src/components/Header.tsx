@@ -33,7 +33,7 @@ export default function Header() {
   const navLinks = [
     { name: "Features", href: "#features" },
     { name: "Download", href: "#download" },
-    { name: "Documentation", href: "#docs" },
+    //{ name: "Documentation", href: "#docs" },
     {
       name: "GitHub",
       href: "https://github.com/shm11C3/HardwareVisualizer",
