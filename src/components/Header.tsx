@@ -33,7 +33,7 @@ export default function Header() {
   const navLinks = [
     { name: "Features", href: "#features" },
     { name: "Download", href: "#download" },
-    { name: "Documentation", href: "#docs" },
+    //{ name: "Documentation", href: "#docs" },
     {
       name: "GitHub",
       href: "https://github.com/shm11C3/HardwareVisualizer",
@@ -42,14 +42,7 @@ export default function Header() {
   ];
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 right-0 left-0 z-50 transition-all duration-300",
-        isScrolled
-          ? "bg-white/90 shadow-sm backdrop-blur-sm dark:bg-slate-900/90"
-          : "bg-transparent",
-      )}
-    >
+    <header className="fixed top-0 right-0 left-0 z-50 bg-gradient-to-b from-white/90 via-white/60 to-white/0 shadow-sm backdrop-blur-sm dark:from-slate-900/90 dark:via-slate-900/60 dark:to-slate-900/0">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between md:h-20">
           <a href="/" className="flex items-center gap-2">
