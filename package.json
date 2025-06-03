@@ -23,6 +23,7 @@
     "tailwindcss": "^4.1.6"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4"
+    "@biomejs/biome": "^1.9.4",
+    "astro-robots-txt": "^1.0.0"
   }
 }
