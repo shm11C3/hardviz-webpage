@@ -5,23 +5,27 @@ import tailwindcss from "@tailwindcss/vite";
 import robotsTxt from "astro-robots-txt";
 import { defineConfig } from "astro/config";
 
-const robots = process.env.PRODUCTION
-  ? {
-      policy: [
-        {
-          userAgent: "*",
-          allow: "/",
-        },
-      ],
-    }
-  : {
-      policy: [
-        {
-          userAgent: "*",
-          disallow: "/",
-        },
-      ],
-    };
+console.log("[BUILD INFO] PRODUCTION:", process.env.PRODUCTION);
+console.log("[BUILD INFO] BRANCH:", process.env.BRANCH);
+
+const robots =
+  process.env.BRANCH === "master"
+    ? {
+        policy: [
+          {
+            userAgent: "*",
+            allow: "/",
+          },
+        ],
+      }
+    : {
+        policy: [
+          {
+            userAgent: "*",
+            disallow: "/",
+          },
+        ],
+      };
 
 // https://astro.build/config
 export default defineConfig({
