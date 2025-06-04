@@ -38,7 +38,12 @@ const {
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content="/og-image.png" />
   </head>
-  <body class="dark:bg-slate-900">
+  <body class="dark:bg-slate-900 transition-colors duration-300">
     <slot />
   </body>
 </html>
+<style>
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+</style>

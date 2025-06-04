@@ -44,7 +44,7 @@ const features = [
 <section class="py-20 bg-slate-50 dark:bg-slate-900" id="features">
   <div class="container mx-auto px-4">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4 dark:text-white">Powerful Monitoring Features</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-900 dark:text-white">Powerful Monitoring Features</h2>
       <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">
         HardwareVisualizer provides comprehensive hardware monitoring with an intuitive interface and minimal system
         impact.
@@ -54,7 +54,7 @@ const features = [
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {
         features.map((feature) => (
-          <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md transition-all">
+          <div class="bg-white  dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md transition-all">
             <div class="w-12 h-12 flex items-center justify-center bg-slate-100 dark:bg-slate-700 rounded-lg mb-4">
               {feature.icon === "cpu" && <Cpu className="w-6 h-6 text-cyan-400" />}
               {feature.icon === "memory" && <MemoryStick className="w-6 h-6 text-purple-400" />}
@@ -63,7 +63,7 @@ const features = [
               {feature.icon === "zap" && <Zap className="w-6 h-6 text-rose-400" />}
               {feature.icon === "shield" && <Shield className="w-6 h-6 text-blue-400" />}
             </div>
-            <h3 class="text-xl font-semibold mb-2 dark:text-white">{feature.title}</h3>
+            <h3 class="text-xl text-slate-900 font-semibold mb-2 dark:text-white">{feature.title}</h3>
             <p class="text-slate-600 dark:text-slate-400">{feature.description}</p>
           </div>
         ))

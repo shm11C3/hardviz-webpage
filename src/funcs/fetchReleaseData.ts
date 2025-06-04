@@ -1,7 +1,8 @@
+import { fetchLatestReleaseMock } from "../../mocks/fetchLatestRelease.mock";
 import type { GitHubRelease } from "../types/github";
 import type { Platform } from "../types/platform";
 
-interface ReleaseData {
+export interface ReleaseData {
   version: string;
   platforms: {
     [K in Platform]?: {
@@ -14,12 +15,11 @@ interface ReleaseData {
   };
 }
 
-/**
- * TODO SSGで取得するようにしたい
- *
- * @returns
- */
 export function fetchLatestRelease(): Promise<ReleaseData> {
+  if (!process.env.PRODUCTION) {
+    return fetchLatestReleaseMock();
+  }
+
   return fetch(
     "https://api.github.com/repos/shm11C3/HardwareVisualizer/releases/latest",
     {
