@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets";
 import { Github } from "lucide-react";
+import appIcon from "../assets/app-icon.png";
 
 const currentYear = new Date().getFullYear();
 
@@ -50,7 +52,7 @@ const footerLinks = [
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
       <div>
         <div class="flex items-center gap-2 mb-4">
-          <img src="/app-icon.png" alt="Logo" class="h-8 w-8" />
+          <Image src={appIcon} alt="Logo" class="h-8 w-8" />
           <span class="font-bold text-xl text-black dark:text-white">HardwareVisualizer</span>
         </div>
         <p class="text-slate-600 dark:text-slate-400 mb-4">

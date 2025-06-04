@@ -7,7 +7,7 @@ import ThemeIcon from "./ThemeIcon.astro";
 <header class="fixed top-0 right-0 left-0 z-50 bg-gradient-to-b from-white/90 via-white/60 to-white/0 shadow-sm backdrop-blur-sm dark:from-slate-900/90 dark:via-slate-900/60 dark:to-slate-900/0">
   <div class="container mx-auto px-4 flex justify-between items-center h-16 md:h-20">
     <a href="/" class="flex items-center gap-2">
-      <Image src={logo} alt="Logo" width={32} height={32} class="h-8 w-8" />
+      <Image src={logo} alt="Logo" width={32} height={32} class="h-8 w-8" loading="eager" />
       <span class="font-bold text-xl text-slate-900 dark:text-white">HardwareVisualizer</span>
     </a>
 
