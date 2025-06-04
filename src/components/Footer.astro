@@ -45,15 +45,15 @@ const footerLinks = [
 ];
 ---
 
-<footer class="bg-slate-900 text-white pt-16 pb-8">
+<footer class="bg-white text-black dark:bg-slate-900 dark:text-white pt-16 pb-8">
   <div class="container mx-auto px-4">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
       <div>
         <div class="flex items-center gap-2 mb-4">
           <img src="/app-icon.png" alt="Logo" class="h-8 w-8" />
-          <span class="font-bold text-xl text-white">HardwareVisualizer</span>
+          <span class="font-bold text-xl text-black dark:text-white">HardwareVisualizer</span>
         </div>
-        <p class="text-slate-400 mb-4">
+        <p class="text-slate-600 dark:text-slate-400 mb-4">
           A lightweight hardware monitor built with Tauri for real-time hardware
           status monitoring.
         </p>
@@ -62,7 +62,7 @@ const footerLinks = [
             href="https://github.com/shm11C3/HardwareVisualizer"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-slate-400 hover:text-white transition-colors"
+            class="text-slate-600 dark:text-slate-400 hover:text-black dark:hover:text-white transition-colors"
             aria-label="GitHub"
           >
             <Github className="w-5 h-5" />
@@ -79,7 +79,7 @@ const footerLinks = [
                 <li>
                   <a
                     href={link.href}
-                    class="text-slate-400 hover:text-white transition-colors"
+                    class="text-slate-600 dark:text-slate-400 hover:text-black dark:hover:text-white transition-colors"
                   >
                     {link.name}
                   </a>

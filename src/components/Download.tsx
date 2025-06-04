@@ -37,7 +37,7 @@ export default function Download({
     <section className="bg-white py-20 dark:bg-slate-800" id="download">
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
-          <h2 className="mb-4 font-bold text-3xl md:text-4xl dark:text-white">
+          <h2 className="mb-4 font-bold text-3xl text-slate-900 md:text-4xl dark:text-white">
             Download HardwareVisualizer
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-slate-600 dark:text-slate-400">
