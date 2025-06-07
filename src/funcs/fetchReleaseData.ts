@@ -50,7 +50,7 @@ export function fetchLatestRelease(): Promise<ReleaseData> {
               browser_download_url: asset.browser_download_url,
               updated_at: data.published_at,
             };
-          } else if (/.AppImage/.test(asset.name)) {
+          } else if (/.AppImage/.test(asset.name) && !/.sig/.test(asset.name)) {
             acc.linuxAppImage = {
               url: asset.browser_download_url,
               size: asset.size
@@ -60,7 +60,7 @@ export function fetchLatestRelease(): Promise<ReleaseData> {
               browser_download_url: asset.browser_download_url,
               updated_at: data.published_at,
             };
-          } else if (/.deb/.test(asset.name)) {
+          } else if (/.deb/.test(asset.name) && !/.sig/.test(asset.name)) {
             acc.linuxDeb = {
               url: asset.browser_download_url,
               size: asset.size
