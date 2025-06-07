@@ -39,7 +39,7 @@ import slide06 from "../assets/screenshots/slide-6.png";
   <div class="swiper-scrollbar"></div>
 </div>
 
-<style>
+<style is:global>
   .swiper-wrapper {
     max-width: 800px;
     max-height: 500px;
@@ -52,12 +52,12 @@ import slide06 from "../assets/screenshots/slide-6.png";
   }
 
   /* ページネーションの通常色 */
-  :global(.swiper-pagination-bullet) {
+  .swiper-pagination-bullet {
     background: oklch(0.9107 0.0214 222.77) !important;
   }
 
   /* ページネーションのアクティブ色 */
-  :global(.swiper-pagination-bullet-active) {
+  .swiper-pagination-bullet-active {
     background: oklch(0.9107 0.0214 222.77) !important;
     opacity: 1 !important;
   }
@@ -71,7 +71,10 @@ import slide06 from "../assets/screenshots/slide-6.png";
 <script>
   import Swiper from 'swiper'
   import { Navigation, Pagination, Autoplay } from 'swiper/modules'
-  import 'swiper/css/bundle'
+  import 'swiper/css';
+  import 'swiper/css/navigation';
+  import 'swiper/css/pagination';
+  import 'swiper/css/scrollbar';
   import type { SwiperOptions } from 'swiper/types';
 
   export const swiperConfig: SwiperOptions = {
