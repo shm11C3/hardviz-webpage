@@ -54,6 +54,16 @@ export function fetchLatestRelease(): Promise<ReleaseData> {
               browser_download_url: asset.browser_download_url,
               updated_at: data.published_at,
             };
+          } else if (/.rpm/.test(asset.name) && !/.sig/.test(asset.name)) {
+            acc.linuxRPM = {
+              url: asset.browser_download_url,
+              size: asset.size
+                ? `${(asset.size / 1024 / 1024).toFixed(1)} MB`
+                : "-",
+              name: asset.name,
+              browser_download_url: asset.browser_download_url,
+              updated_at: data.published_at,
+            };
           } else if (/.AppImage/.test(asset.name) && !/.sig/.test(asset.name)) {
             acc.linuxAppImage = {
               url: asset.browser_download_url,

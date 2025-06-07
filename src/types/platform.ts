@@ -1,4 +1,4 @@
-export type Platform = "windows" | "linuxAppImage" | "linuxDeb";
+export type Platform = "windows" | "linuxAppImage" | "linuxDeb" | "linuxRPM";
 
 export type VersionInfo = {
   type: Platform;
