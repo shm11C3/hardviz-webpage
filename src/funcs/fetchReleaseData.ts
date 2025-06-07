@@ -40,7 +40,11 @@ export function fetchLatestRelease(): Promise<ReleaseData> {
           acc: ReleaseData["platforms"],
           asset: { name: string; browser_download_url: string; size?: number },
         ) => {
-          if (/.msi/.test(asset.name) && !/offline/.test(asset.name)) {
+          if (
+            /.msi/.test(asset.name) &&
+            !/offline/.test(asset.name) &&
+            !/.sig/.test(asset.name)
+          ) {
             acc.windows = {
               url: asset.browser_download_url,
               size: asset.size
