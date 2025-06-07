@@ -4,6 +4,7 @@ import Features from "../components/Features.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
+import Screenshots from "../components/Screenshots.astro";
 import { fetchLatestRelease } from "../funcs/fetchReleaseData.ts";
 import Layout from "../layouts/Layout.astro";
 import type { PlatformDownload } from "../types/platform";
@@ -57,6 +58,7 @@ const latestVersion = release.version;
   <main>
     <Hero />
     <Features />
+    <Screenshots />
     <Download client:load downloads={downloads} latestVersion={latestVersion} />
   </main>
   <Footer />

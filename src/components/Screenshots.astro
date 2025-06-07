@@ -1,0 +1,120 @@
+---
+import { Image } from "astro:assets";
+import slide01 from "../assets/screenshots/slide-1.png";
+import slide02 from "../assets/screenshots/slide-2.png";
+import slide03 from "../assets/screenshots/slide-3.png";
+import slide04 from "../assets/screenshots/slide-4.png";
+import slide05 from "../assets/screenshots/slide-5.png";
+import slide06 from "../assets/screenshots/slide-6.png";
+---
+
+<div class="swiper swiper-container">
+
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <Image src={slide01} alt="Screenshot of Dashboard"  />
+    </div>
+    <div class="swiper-slide">
+      <Image src={slide02} alt="Screenshot of Insights" />
+    </div>
+    <div class="swiper-slide">
+      <Image src={slide03} alt="Screenshot of CPU Usage" />
+    </div>
+    <div class="swiper-slide">
+      <Image src={slide04} alt="Screenshot of Process Insight" />
+    </div>
+    <div class="swiper-slide">
+      <Image src={slide05} alt="Screenshot of Settings" />
+    </div>
+    <div class="swiper-slide">
+      <Image src={slide06} alt="Screenshot of GPU Insights" />
+    </div>
+  </div>
+
+  <div class="swiper-pagination"></div>
+
+  <div class="swiper-button swiper-button-prev"></div>
+  <div class="swiper-button swiper-button-next"></div>
+
+  <div class="swiper-scrollbar"></div>
+</div>
+
+<style>
+  .swiper-wrapper {
+    max-width: 800px;
+    max-height: 500px;
+  }
+
+  .swiper-slide img {
+    height: auto;
+    max-width: 100%;
+    object-fit: cover;
+  }
+
+  /* ページネーションの通常色 */
+  :global(.swiper-pagination-bullet) {
+    background: oklch(0.9107 0.0214 222.77) !important;
+  }
+
+  /* ページネーションのアクティブ色 */
+  :global(.swiper-pagination-bullet-active) {
+    background: oklch(0.9107 0.0214 222.77) !important;
+    opacity: 1 !important;
+  }
+
+  .swiper-button::after {
+    font-size: 32px;
+    color: oklch(0.9107 0.0214 222.77);
+  }
+</style>
+
+<script>
+  import Swiper from 'swiper'
+  import { Navigation, Pagination, Autoplay } from 'swiper/modules'
+  import 'swiper/css/bundle'
+  import type { SwiperOptions } from 'swiper/types';
+
+  export const swiperConfig: SwiperOptions = {
+    modules: [Navigation, Pagination, Autoplay],
+    loop: true,
+
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+
+    scrollbar: {
+      el: '.swiper-scrollbar',
+    },
+
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: true,
+    },
+
+    spaceBetween: 24,
+    speed: 600,
+
+    slidesPerView: 1,
+    slidesPerGroup: 1,
+
+    breakpoints: {
+      1024: {
+        slidesPerView: 2,
+        slidesPerGroup: 2,
+      },
+      1920: {
+        slidesPerView: 3,
+        slidesPerGroup: 3,
+      },
+    },
+  }
+
+  const swiper = new Swiper('.swiper', swiperConfig);
+  swiper.init();
+</script>
