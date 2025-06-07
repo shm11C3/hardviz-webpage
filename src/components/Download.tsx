@@ -23,6 +23,9 @@ export default function Download({
       if (/Macintosh|Mac OS X/.test(ua)) {
         return "macOS";
       }
+      if (/Android/.test(ua)) {
+        return "Android";
+      }
       if (/Linux/.test(ua)) {
         return "Linux";
       }
@@ -31,6 +34,14 @@ export default function Download({
       }
       return "Windows";
     })();
+    if (detected === "Linux" || detected === "Windows") {
+      setDownloads((ds) =>
+        ds.map((d) => ({
+          ...d,
+          primary: d.platform === detected,
+        })),
+      );
+    }
   }, []);
 
   return (
