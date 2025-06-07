@@ -3,7 +3,7 @@ import { type JSX, memo, useMemo } from "react";
 import { cn } from "../lib/utils";
 import type { Platform, PlatformDownload } from "../types/platform";
 
-const platform2Icon: Record<"Windows" | "Linux", JSX.Element> = {
+const platformToIcon: Record<PlatformDownload["platform"], JSX.Element> = {
   Windows: <ComputerIcon className="h-8 w-8" />,
   Linux: <LaptopIcon className="h-8 w-8" />,
 };
@@ -70,7 +70,7 @@ const Download = ({
                 )}
               >
                 <div className="mb-4 flex items-center justify-center">
-                  {platform2Icon[platform.platform]}
+                  {platformToIcon[platform.platform]}
                 </div>
                 <h3 className="text-center font-bold text-xl">
                   {platform.platform}
