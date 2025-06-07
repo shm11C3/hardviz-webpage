@@ -1,0 +1,53 @@
+---
+import { Image } from "astro:assets";
+import { BarChart3, Paintbrush, Image as ImageIcon } from "lucide-react";
+import bgImageScreenshot from "../assets/screenshots/bg-image.png";
+
+const highlights = [
+  {
+    icon: "bar",
+    title: "Graphical Monitoring",
+    description: "Line charts show CPU, RAM, GPU usage in real-time with smooth visuals.",
+  },
+  {
+    icon: "paint",
+    title: "Custom Appearance",
+    description: "Tweak colors, borders, and legends with flexible visual settings.",
+  },
+  {
+    icon: "image",
+    title: "Custom Wallpaper",
+    description: "Make your dashboard truly yours with a background image you love.",
+  },
+];
+---
+
+<section class="py-16 bg-slate-50 dark:bg-slate-900" id="customization">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">Make It Truly Yours</h2>
+      <p class="text-slate-600 dark:text-slate-400 mt-2 text-lg">
+        Customize charts and set your favorite image as the dashboard wallpaper.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+      {
+        highlights.map((item) => (
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-md transition">
+            <div class="w-12 h-12 mx-auto mb-3 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700">
+              {item.icon === "bar" && <BarChart3 className="w-6 h-6 text-indigo-500" />}
+              {item.icon === "paint" && <Paintbrush className="w-6 h-6 text-pink-500" />}
+              {item.icon === "image" && <ImageIcon className="w-6 h-6 text-green-500" />}
+            </div>
+            <h3 class="text-base font-semibold text-slate-800 dark:text-white">{item.title}</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400">{item.description}</p>
+          </div>
+        ))
+      }
+    </div>
+    <div class="flex justify-center mt-8">
+      <Image src={bgImageScreenshot} alt="Screenshot of Background Image" class="rounded-xl shadow-md w-1/2" />
+    </div>
+  </div>
+</section>

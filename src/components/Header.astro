@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import logo from "../assets/app-icon.png";
 import ThemeIcon from "./ThemeIcon.astro";
+import { SquareArrowOutUpRight } from "lucide-react";
 ---
 
 <header class="fixed top-0 right-0 left-0 z-50 bg-gradient-to-b from-white/90 via-white/60 to-white/0 shadow-sm backdrop-blur-sm dark:from-slate-900/90 dark:via-slate-900/60 dark:to-slate-900/0">
@@ -18,9 +19,10 @@ import ThemeIcon from "./ThemeIcon.astro";
         href="https://github.com/shm11C3/HardwareVisualizer"
         target="_blank"
         rel="noopener noreferrer"
-        class="font-medium transition-colors hover:text-cyan-500 text-slate-600 dark:text-slate-300 hidden md:block"
+        class="font-medium transition-colors hover:text-cyan-500 text-slate-600 dark:text-slate-300 hidden md:flex items-center"
       >
         GitHub
+        <SquareArrowOutUpRight size={16} className="ml-1" />
       </a>
       <ThemeIcon id="themeIconDesktop" />
     </nav>
