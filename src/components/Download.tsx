@@ -1,5 +1,5 @@
 import { ComputerIcon, LaptopIcon } from "lucide-react";
-import { type JSX, useEffect, useState } from "react";
+import { type JSX, memo, useMemo } from "react";
 import { cn } from "../lib/utils";
 import type { Platform, PlatformDownload } from "../types/platform";
 
@@ -8,21 +8,16 @@ const platform2Icon: Record<"Windows" | "Linux", JSX.Element> = {
   Linux: <LaptopIcon className="h-8 w-8" />,
 };
 
-export default function Download({
+const Download = ({
   downloads: initialDownloads,
   latestVersion,
 }: {
   downloads: PlatformDownload[];
   latestVersion: string | null;
-}) {
-  const [downloads, setDownloads] = useState(initialDownloads);
-
-  useEffect(() => {
+}) => {
+  const downloads = useMemo(() => {
     const ua = navigator.userAgent;
     const detected = (() => {
-      if (/Macintosh|Mac OS X/.test(ua)) {
-        return "macOS";
-      }
       if (/Linux/.test(ua)) {
         return "Linux";
       }
@@ -31,7 +26,12 @@ export default function Download({
       }
       return "Windows";
     })();
-  }, []);
+
+    return initialDownloads.map((platform) => ({
+      ...platform,
+      primary: platform.platform === detected,
+    }));
+  }, [initialDownloads]);
 
   return (
     <section className="bg-white py-20 dark:bg-slate-800" id="download">
@@ -141,4 +141,6 @@ export default function Download({
       </div>
     </section>
   );
-}
+};
+
+export default memo(Download);
