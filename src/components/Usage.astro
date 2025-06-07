@@ -2,32 +2,19 @@
 import { Image } from "astro:assets";
 import { BarChart3, Paintbrush, Image as ImageIcon } from "lucide-react";
 import bgImageScreenshot from "../assets/screenshots/bg-image.png";
+import type { I18n } from "../lib/i18n";
 
-const highlights = [
-  {
-    icon: "bar",
-    title: "Graphical Monitoring",
-    description: "Line charts show CPU, RAM, GPU usage in real-time with smooth visuals.",
-  },
-  {
-    icon: "paint",
-    title: "Custom Appearance",
-    description: "Tweak colors, borders, and legends with flexible visual settings.",
-  },
-  {
-    icon: "image",
-    title: "Custom Wallpaper",
-    description: "Make your dashboard truly yours with a background image you love.",
-  },
-];
+const { t, lang } = Astro.props as { t: I18n["usage"]; lang: string };
+
+const highlights = t.highlights;
 ---
 
 <section class="py-16 bg-slate-50 dark:bg-slate-900" id="customization">
   <div class="container mx-auto px-4">
     <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">Make It Truly Yours</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">{t.title}</h2>
       <p class="text-slate-600 dark:text-slate-400 mt-2 text-lg">
-        Customize charts and set your favorite image as the dashboard wallpaper.
+        {t.description}
       </p>
     </div>
 
