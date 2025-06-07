@@ -1,9 +1,6 @@
 {
   "name": "hardviz-webpage",
   "compatibility_date": "2025-05-18",
-  "assets": {
-    "directory": "./dist"
-  },
   "main": "worker/index.ts",
   "site": {
     "bucket": "./dist",
