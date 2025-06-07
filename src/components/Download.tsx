@@ -34,7 +34,7 @@ export default function Download({
       }
       return "Windows";
     })();
-    if (detected === "Linux" || detected === "Windows") {
+    if (["Linux", "Windows", "Android"].includes(detected)) {
       setDownloads((ds) =>
         ds.map((d) => ({
           ...d,
