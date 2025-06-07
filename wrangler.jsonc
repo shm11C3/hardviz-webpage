@@ -4,8 +4,8 @@
   "assets": {
     "directory": "./dist"
   },
+  "main": "worker/index.ts",
   "site": {
     "bucket": "./dist",
-    "entry-point": "./worker"
   }
 }
