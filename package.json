@@ -5,6 +5,9 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && echo _worker.js > dist/.assetsignore",
+    "lint": "biome lint ./src && biome check ./src && biome format --write ./src",
+    "format": "biome format --write ./src && biome check ./src --write",
+    "lint:ci": "biome ci ./src",
     "preview": "astro preview",
     "astro": "astro"
   },

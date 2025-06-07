@@ -1,7 +1,7 @@
 import { ComputerIcon, LaptopIcon } from "lucide-react";
 import { type JSX, memo, useMemo } from "react";
 import { cn } from "../lib/utils";
-import type { Platform, PlatformDownload } from "../types/platform";
+import type { PlatformDownload } from "../types/platform";
 
 const platformToIcon: Record<PlatformDownload["platform"], JSX.Element> = {
   Windows: <ComputerIcon className="h-8 w-8" />,

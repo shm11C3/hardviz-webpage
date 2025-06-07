@@ -3,6 +3,7 @@
   "organizeImports": {
     "enabled": true
   },
+  "files": { "ignoreUnknown": false, "ignore": ["**/*.astro"] },
   "linter": {
     "enabled": true,
     "rules": {
@@ -12,6 +13,19 @@
           "level": "error",
           "fix": "safe",
           "options": {}
+        }
+      },
+      "correctness": {
+        "noUnusedImports": {
+          "level": "error",
+          "fix": "safe"
+        },
+        "noUnusedVariables": {
+          "level": "error",
+          "fix": "safe"
+        },
+        "noUnreachable": {
+          "level": "error"
         }
       }
     }

@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 
-export const GET: APIRoute = ({ site, request }) => {
+export const GET: APIRoute = () => {
   const isProd = import.meta.env.PROD;
 
   const body = isProd
