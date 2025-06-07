@@ -17,6 +17,13 @@ export const mockReleaseData: ReleaseData = {
       browser_download_url: "https://example.com/fake/linux.AppImage",
       updated_at: new Date().toISOString(),
     },
+    linuxRPM: {
+      url: "https://example.com/fake/linux.rpm",
+      size: "50.3 MB",
+      name: "HardwareVisualizer.rpm",
+      browser_download_url: "https://example.com/fake/linux.rpm",
+      updated_at: new Date().toISOString(),
+    },
   },
 };
 

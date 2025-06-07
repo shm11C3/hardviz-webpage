@@ -27,8 +27,14 @@ const downloads: PlatformDownload[] = [
     platform: "Linux",
     versions: [
       {
+        type: "linuxRPM",
+        name: "RPM-based Distros (.rpm)",
+        url: release.platforms.linuxRPM?.browser_download_url ?? null,
+        size: release.platforms.linuxRPM?.size ?? "-",
+      },
+      {
         type: "linuxAppImage",
-        name: "AppImage",
+        name: "AppImage (.AppImage)",
         url: release.platforms.linuxAppImage?.browser_download_url ?? null,
         size: release.platforms.linuxAppImage?.size ?? "-",
       },
