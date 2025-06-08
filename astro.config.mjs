@@ -1,6 +1,8 @@
 import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
+import fs from "node:fs";
+import path from "node:path";
 
 console.log("[BUILD INFO] PRODUCTION:", process.env.PRODUCTION);
 
@@ -8,8 +10,12 @@ console.log("[BUILD INFO] PRODUCTION:", process.env.PRODUCTION);
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
+    buildStart() {
+      console.log("[DEBUG] buildStart called");
+      console.log("[DEBUG] CF_PAGES_URL:", process.env.CF_PAGES_URL);
+      console.log("[DEBUG] CF_PAGES_BRANCH:", process.env.CF_PAGES_BRANCH);
+    },
     buildEnd() {
-      console.log("CF_PAGES_URL", process.env.CF_PAGES_URL)
       if (process.env.CF_PAGES_URL === "https://hardviz.com") {
         const robotsDevPath = path.resolve('dist/robots.develop.txt');
 
