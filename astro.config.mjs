@@ -13,6 +13,6 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   site: 'https://hardviz.com',
-  integrations: [react(), sitemap(), sitemap()],
+  integrations: [react(), sitemap()],
   output: "static",
 });
