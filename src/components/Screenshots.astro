@@ -8,37 +8,38 @@ import slide05 from "../assets/screenshots/slide-5.png";
 import slide06 from "../assets/screenshots/slide-6.png";
 ---
 
-<div class="swiper swiper-container">
+<div class="my-16">
+  <div class="swiper swiper-container">
 
-  <div class="swiper-wrapper">
-    <div class="swiper-slide">
-      <Image src={slide01} alt="Screenshot of Dashboard"  />
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <Image src={slide01} alt="Screenshot of Dashboard"  />
+      </div>
+      <div class="swiper-slide">
+        <Image src={slide02} alt="Screenshot of Insights" />
+      </div>
+      <div class="swiper-slide">
+        <Image src={slide03} alt="Screenshot of CPU Usage" />
+      </div>
+      <div class="swiper-slide">
+        <Image src={slide04} alt="Screenshot of Process Insight" />
+      </div>
+      <div class="swiper-slide">
+        <Image src={slide05} alt="Screenshot of Settings" />
+      </div>
+      <div class="swiper-slide">
+        <Image src={slide06} alt="Screenshot of GPU Insights" />
+      </div>
     </div>
-    <div class="swiper-slide">
-      <Image src={slide02} alt="Screenshot of Insights" />
-    </div>
-    <div class="swiper-slide">
-      <Image src={slide03} alt="Screenshot of CPU Usage" />
-    </div>
-    <div class="swiper-slide">
-      <Image src={slide04} alt="Screenshot of Process Insight" />
-    </div>
-    <div class="swiper-slide">
-      <Image src={slide05} alt="Screenshot of Settings" />
-    </div>
-    <div class="swiper-slide">
-      <Image src={slide06} alt="Screenshot of GPU Insights" />
-    </div>
+
+    <div class="swiper-pagination"></div>
+
+    <div class="swiper-button swiper-button-prev"></div>
+    <div class="swiper-button swiper-button-next"></div>
+
+    <div class="swiper-scrollbar"></div>
   </div>
-
-  <div class="swiper-pagination"></div>
-
-  <div class="swiper-button swiper-button-prev"></div>
-  <div class="swiper-button swiper-button-next"></div>
-
-  <div class="swiper-scrollbar"></div>
 </div>
-
 <style is:global>
   .swiper-wrapper {
     max-width: 800px;
