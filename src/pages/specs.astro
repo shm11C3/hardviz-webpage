@@ -1,0 +1,94 @@
+---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="HardwareVisualizer - System Requirements & Limitations">
+  <Header />
+  <main class="bg-white container mx-auto px-4 py-16 dark:bg-slate-900 pt-32">
+    <h1 class="text-3xl md:text-4xl font-bold mb-8 text-slate-900 dark:text-white">System Requirements & Limitations</h1>
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4 text-slate-800 dark:text-slate-200">Supported OS & Architecture</h2>
+      <table class="w-full max-w-2xl mb-6 border border-slate-300 dark:border-slate-700 rounded-lg overflow-hidden">
+        <thead class="bg-cyan-50 dark:bg-slate-800">
+          <tr>
+            <th class="py-2 px-4 text-left text-slate-900 dark:text-white">OS</th>
+            <th class="py-2 px-4 text-left text-slate-900 dark:text-white">Architecture</th>
+            <th class="py-2 px-4 text-left text-slate-900 dark:text-white">Status</th>
+            <th class="py-2 px-4 text-left text-slate-900 dark:text-white">Notes</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white dark:bg-slate-900">
+          <tr>
+            <td class="py-2 px-4 text-slate-800 dark:text-slate-200">Windows 10/11</td>
+            <td class="py-2 px-4 text-slate-800 dark:text-slate-200">x64</td>
+            <td class="py-2 px-4 text-2xl">✅</td>
+            <td class="py-2 px-4 text-slate-700 dark:text-slate-300">Latest updates recommended</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 text-slate-800 dark:text-slate-200">Linux (Debian/Ubuntu, RPM-based, AppImage)</td>
+            <td class="py-2 px-4 text-slate-800 dark:text-slate-200">x64</td>
+            <td class="py-2 px-4 text-2xl">🟡</td>
+            <td class="py-2 px-4 text-slate-700 dark:text-slate-300">Some limitations on Wayland environments</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 text-slate-800 dark:text-slate-200">macOS</td>
+            <td class="py-2 px-4 text-slate-800 dark:text-slate-200">Apple Silicon, Intel (x64)</td>
+            <td class="py-2 px-4 text-2xl">🚧</td>
+            <td class="py-2 px-4 text-slate-700 dark:text-slate-300">Under development / Experimental</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4 text-slate-800 dark:text-slate-200">Supported CPU/GPU</h2>
+      <table class="w-full max-w-2xl mb-6 border border-slate-300 dark:border-slate-700 rounded-lg overflow-hidden">
+        <thead class="bg-cyan-50 dark:bg-slate-800">
+          <tr>
+            <th class="py-2 px-4 text-left text-slate-900 dark:text-white">Component</th>
+            <th class="py-2 px-4 text-left text-slate-900 dark:text-white">Supported</th>
+            <th class="py-2 px-4 text-left text-slate-900 dark:text-white">Status</th>
+            <th class="py-2 px-4 text-left text-slate-900 dark:text-white">Notes</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white dark:bg-slate-900">
+          <tr>
+            <td class="py-2 px-4 text-slate-800 dark:text-slate-200">CPU</td>
+            <td class="py-2 px-4 text-slate-800 dark:text-slate-200">Intel, AMD (x64)</td>
+            <td class="py-2 px-4 text-2xl">✅</td>
+            <td class="py-2 px-4 text-slate-700 dark:text-slate-300">Embedded/virtual environments may not be fully supported</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 text-slate-800 dark:text-slate-200">GPU (NVIDIA)</td>
+            <td class="py-2 px-4 text-slate-800 dark:text-slate-200">NVIDIA</td>
+            <td class="py-2 px-4 text-2xl">✅</td>
+            <td class="py-2 px-4 text-slate-700 dark:text-slate-300">Mainstream drivers required.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 text-slate-800 dark:text-slate-200">GPU (AMD)</td>
+            <td class="py-2 px-4 text-slate-800 dark:text-slate-200">AMD</td>
+            <td class="py-2 px-4 text-2xl">🟡</td>
+            <td class="py-2 px-4 text-slate-700 dark:text-slate-300">Mainstream drivers required.<br/>Some features may be limited or values may be less accurate.<br/>Support for AMD GPUs is currently under improvement.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 text-slate-800 dark:text-slate-200">GPU (Intel)</td>
+            <td class="py-2 px-4 text-slate-800 dark:text-slate-200">Intel</td>
+            <td class="py-2 px-4 text-2xl">🟡</td>
+            <td class="py-2 px-4 text-slate-700 dark:text-slate-300">Mainstream drivers required.<br/>Some features may be limited or values may be less accurate.<br/>Support for Intel GPUs is currently under improvement.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2 class="text-2xl font-semibold mb-4 text-slate-800 dark:text-slate-200">Known Limitations & Notes</h2>
+      <ul class="list-disc pl-6 space-y-2 text-slate-700 dark:text-slate-200">
+        <li>Some older or special hardware may not be fully supported.</li>
+        <li>Some features are limited on Linux Wayland environments.</li>
+        <li>Administrator/root privileges may be required in some cases.</li>
+        <li>Specifications may change without notice in beta/development versions.</li>
+      </ul>
+    </section>
+  </main>
+  <Footer />
+</Layout>
