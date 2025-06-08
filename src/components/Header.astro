@@ -3,25 +3,28 @@ import { Image } from "astro:assets";
 import logo from "../assets/app-icon.png";
 import ThemeIcon from "./ThemeIcon.astro";
 import { SquareArrowOutUpRight } from "lucide-react";
+import type { I18n } from "../lib/i18n";
+
+const { t, lang } = Astro.props as { t: I18n["header"]; lang: string };
 ---
 
 <header class="fixed top-0 right-0 left-0 z-50 bg-gradient-to-b from-white/90 via-white/60 to-white/0 shadow-sm backdrop-blur-sm dark:from-slate-900/90 dark:via-slate-900/60 dark:to-slate-900/0">
   <div class="container mx-auto px-4 flex justify-between items-center h-16 md:h-20">
-    <a href="/" class="flex items-center gap-2">
+    <a href={`/${lang}/`} class="flex items-center gap-2">
       <Image src={logo} alt="Logo" width={32} height={32} class="h-8 w-8" loading="eager" />
       <span class="font-bold text-xl text-slate-900 dark:text-white">HardwareVisualizer</span>
     </a>
 
     <nav class="md:flex gap-6 items-center">
-      <a href="#features" class="font-medium transition-colors hover:text-cyan-500 text-slate-600 dark:text-slate-300 hidden md:block">Features</a>
-      <a href="#download" class="font-medium transition-colors hover:text-cyan-500 text-slate-600 dark:text-slate-300 hidden md:block">Download</a>
+      <a href={`/${lang}/#features`} class="font-medium transition-colors hover:text-cyan-500 text-slate-600 dark:text-slate-300 hidden md:block">{t.features}</a>
+      <a href={`/${lang}/#download`} class="font-medium transition-colors hover:text-cyan-500 text-slate-600 dark:text-slate-300 hidden md:block">{t.download}</a>
       <a
         href="https://github.com/shm11C3/HardwareVisualizer"
         target="_blank"
         rel="noopener noreferrer"
         class="font-medium transition-colors hover:text-cyan-500 text-slate-600 dark:text-slate-300 hidden md:flex items-center"
       >
-        GitHub
+        {t.github}
         <SquareArrowOutUpRight size={16} className="ml-1" />
       </a>
       <ThemeIcon id="themeIconDesktop" />

@@ -1,6 +1,9 @@
 ---
 import { ArrowDownToLine, SquareArrowOutUpRight } from "lucide-react";
 import HardwareVisualizer from "./HardwareVisualizer";
+import type { I18n } from "../lib/i18n";
+
+const { t, lang } = Astro.props as { t: I18n["hero"]; lang: string };
 ---
 
 <section class="relative overflow-hidden bg-gradient-to-b from-slate-50 to-slate-300 dark:from-slate-900 dark:to-slate-800 py-20 sm:py-32">
@@ -9,19 +12,18 @@ import HardwareVisualizer from "./HardwareVisualizer";
     <div class="flex flex-col lg:flex-row items-center gap-12">
       <div class="flex-1 text-center lg:text-left">
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
-          Monitor Your Hardware <span class="text-cyan-600 dark:text-cyan-400">In Real-Time</span>
+          {t.title} <span class="text-cyan-600 dark:text-cyan-400">{t.highlight}</span>
         </h1>
         <p class="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-2xl mx-auto lg:mx-0">
-          A lightweight, open-source hardware monitoring tool built with Tauri. Track CPU, GPU, memory usage and
-          more with minimal system impact.
+          {t.description}
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
           <a
-            href="#download"
+            href={`/${lang}/#download`}
             class="download-btn px-8 py-3 bg-cyan-600 hover:bg-cyan-700 text-white font-medium rounded-lg flex items-center justify-center gap-2 transition-all"
           >
             <ArrowDownToLine className="w-5 h-5" />
-            Download Now
+            {t.download}
           </a>
           <a
             href="https://github.com/shm11C3/HardwareVisualizer"
@@ -29,7 +31,7 @@ import HardwareVisualizer from "./HardwareVisualizer";
             rel="noopener noreferrer"
             class="px-8 py-3 border text-slate-900 border-slate-300 hover:bg-slate-100 dark:text-white dark:border-white/30 dark:hover:bg-white/10 font-medium rounded-lg flex items-center justify-center gap-2 transition-all"
           >
-            View on GitHub
+            {t.viewOnGithub}
             <SquareArrowOutUpRight size={16} />
           </a>
         </div>

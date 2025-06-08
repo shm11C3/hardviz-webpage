@@ -1,5 +1,6 @@
 import { ComputerIcon, LaptopIcon } from "lucide-react";
 import { type JSX, memo, useMemo } from "react";
+import type { I18n } from "../lib/i18n";
 import { cn } from "../lib/utils";
 import type { PlatformDownload } from "../types/platform";
 
@@ -11,9 +12,11 @@ const platformToIcon: Record<PlatformDownload["platform"], JSX.Element> = {
 const Download = ({
   downloads: initialDownloads,
   latestVersion,
+  t,
 }: {
   downloads: PlatformDownload[];
   latestVersion: string | null;
+  t: I18n["download"];
 }) => {
   const downloads = useMemo(() => {
     const ua = navigator.userAgent;
@@ -38,15 +41,15 @@ const Download = ({
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
           <h2 className="mb-4 font-bold text-3xl text-slate-900 md:text-4xl dark:text-white">
-            Download HardwareVisualizer
+            {t.title}
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-slate-600 dark:text-slate-400">
-            Available for all major platforms. Free and open source.
+            {t.description}
           </p>
           <p className="mt-2 text-slate-500 text-sm dark:text-slate-500">
             {latestVersion
-              ? `Current version: v${latestVersion}`
-              : "Current version: -"}
+              ? `${t.currentVersion}v${latestVersion}`
+              : `${t.currentVersion}-`}
           </p>
         </div>
 
@@ -98,7 +101,7 @@ const Download = ({
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          Download
+                          {t.download}
                         </a>
                       ) : (
                         <div
@@ -109,7 +112,7 @@ const Download = ({
                               : "bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white",
                           )}
                         >
-                          Download
+                          {t.download}
                         </div>
                       )}
                     </div>
@@ -117,7 +120,7 @@ const Download = ({
                 ))}
                 {platform.versions.length === 0 && (
                   <p className="text-slate-500 text-sm dark:text-slate-400">
-                    No downloads available for {platform.platform} yet.
+                    {t.noDownload.replace("{platform}", platform.platform)}
                   </p>
                 )}
               </div>
@@ -127,7 +130,7 @@ const Download = ({
 
         <div className="mt-12 text-center">
           <p className="mb-4 text-slate-600 dark:text-slate-400">
-            Looking for other versions or platforms?
+            {t.otherVersions}
           </p>
           <a
             href="https://github.com/shm11C3/HardwareVisualizer/releases"
@@ -135,7 +138,7 @@ const Download = ({
             rel="noopener noreferrer"
             className="font-medium text-cyan-600 hover:text-cyan-700 dark:text-cyan-400 dark:hover:text-cyan-300"
           >
-            View all releases on GitHub →
+            {t.viewReleases}
           </a>
         </div>
       </div>

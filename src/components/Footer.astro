@@ -2,49 +2,13 @@
 import { Image } from "astro:assets";
 import { Github } from "lucide-react";
 import appIcon from "../assets/app-icon.png";
+import type { I18n } from "../lib/i18n";
+
+const { t, lang } = Astro.props as { t: I18n["footer"]; lang: string };
 
 const currentYear = new Date().getFullYear();
 
-const footerLinks = [
-  {
-    title: "Product",
-    links: [
-      { name: "Features", href: "#features" },
-      { name: "Download", href: "#download" },
-      {
-        name: "Changelog",
-        href: "https://github.com/shm11C3/HardwareVisualizer/releases",
-      },
-      //{ name: "Roadmap", href: "#" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      //{ name: "Documentation", href: "#docs" },
-      //{ name: "FAQ", href: "#faq" },
-      { name: "GitHub", href: "https://github.com/shm11C3/HardwareVisualizer" },
-      {
-        name: "Report an Issue",
-        href: "https://github.com/shm11C3/HardwareVisualizer/issues",
-      },
-    ],
-  },
-  {
-    title: "Community",
-    links: [
-      {
-        name: "GitHub Discussions",
-        href: "https://github.com/shm11C3/HardwareVisualizer/discussions",
-      },
-      //{
-      //  name: "Contributing",
-      //  href: "https://github.com/shm11C3/HardwareVisualizer/blob/main/CONTRIBUTING.md",
-      //},
-      //{ name: "Code of Conduct", href: "#" },
-    ],
-  },
-];
+const footerLinks = t.sections;
 ---
 
 <footer class="bg-white text-black dark:bg-slate-900 dark:text-white pt-16 pb-8">
@@ -56,8 +20,7 @@ const footerLinks = [
           <span class="font-bold text-xl text-black dark:text-white">HardwareVisualizer</span>
         </div>
         <p class="text-slate-600 dark:text-slate-400 mb-4">
-          A lightweight hardware monitor built with Tauri for real-time hardware
-          status monitoring.
+          {t.tagline}
         </p>
         <div class="flex gap-4">
           <a
@@ -80,7 +43,7 @@ const footerLinks = [
               {section.links.map((link) => (
                 <li>
                   <a
-                    href={link.href}
+                    href={link.href.startsWith('#') ? `/${lang}/${link.href}` : link.href}
                     class="text-slate-600 dark:text-slate-400 hover:text-black dark:hover:text-white transition-colors"
                   >
                     {link.name}

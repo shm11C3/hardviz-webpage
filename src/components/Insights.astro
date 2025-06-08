@@ -1,37 +1,17 @@
 ---
 import { Flame, ActivitySquare, Gamepad2, BrainCircuit, ArrowDownToLine } from "lucide-react";
+import type { I18n } from "../lib/i18n";
 
-const insights = [
-  {
-    icon: "activity",
-    title: "Usage Timeline",
-    description: "When was your system under load?",
-  },
-  {
-    icon: "flame",
-    title: "Process Tracking",
-    description: "Find out what caused it.",
-  },
-  {
-    icon: "gamepad",
-    title: "For Gamers",
-    description: "Tracks CPU and GPU usage during gameplay.",
-  },
-  {
-    icon: "brain",
-    title: "For Engineers",
-    description: "Keep track of resource-hungry compute workloads.",
-  },
-];
+const { t, lang } = Astro.props as { t: I18n["insights"]; lang: string };
+
+const insights = t.highlights;
 ---
 
 <section class="py-16 bg-slate-50 dark:bg-slate-900" id="insights">
   <div class="container mx-auto px-4">
     <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">Track & Identify High Load</h2>
-      <p class="text-slate-600 dark:text-slate-400 mt-2 text-lg">
-        Know <span class="text-cyan-600 dark:text-cyan-400">when</span> and <span class="text-rose-600 dark:text-rose-400">why</span> your system slows down.
-      </p>
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">{t.title}</h2>
+      <p class="text-slate-600 dark:text-slate-400 mt-2 text-lg">{t.description}</p>
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
@@ -52,9 +32,9 @@ const insights = [
     </div>
 
     <div class="text-center mt-16">
-      <a href="#download" class="download-btn px-8 py-8 bg-cyan-600 hover:bg-cyan-700 text-white font-medium text-2xl rounded-full flex items-center justify-center gap-2 transition-all max-w-[800px] md:w-full mx-auto">
+      <a href={`/${lang}/#download`} class="download-btn px-8 py-8 bg-cyan-600 hover:bg-cyan-700 text-white font-medium text-2xl rounded-full flex items-center justify-center gap-2 transition-all max-w-[800px] md:w-full mx-auto">
         <ArrowDownToLine className="w-5 h-5" />
-        Start Monitoring Now
+        {t.cta}
       </a>
     </div>
   </div>
