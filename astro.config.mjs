@@ -5,8 +5,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 console.log("[BUILD INFO] PRODUCTION:", process.env.PRODUCTION);
-console.log("[DEBUG] CF_PAGES_URL:", process.env.CF_PAGES_URL);
-console.log("[DEBUG] CF_PAGES_BRANCH:", process.env.CF_PAGES_BRANCH);
+console.log("[BUILD INFO] DEBUG_ENV:", process.env.DEBUG_ENV);
 
 // https://astro.build/config
 export default defineConfig({
