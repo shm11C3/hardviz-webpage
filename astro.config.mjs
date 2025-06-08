@@ -8,6 +8,15 @@ console.log("[BUILD INFO] PRODUCTION:", process.env.PRODUCTION);
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
+    buildEnd() {
+      if (process.env.SKIP_ROBOTS === 'true') {
+        const robotsPath = path.resolve('dist/robots.txt');
+        if (fs.existsSync(robotsPath)) {
+          fs.unlinkSync(robotsPath);
+          console.log('robots.txt removed from dist.');
+        }
+      }
+    }
   },
 
   integrations: [react()],
