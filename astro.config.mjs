@@ -7,6 +7,7 @@ console.log("[BUILD INFO] NODE_ENV:", process.env.NODE_ENV);
 
 // https://astro.build/config
 export default defineConfig({
+  prefetch: true,
   vite: {
     plugins: [tailwindcss()],
   },

@@ -3,14 +3,13 @@ import { Image } from "astro:assets";
 import { Github } from "lucide-react";
 import appIcon from "../assets/app-icon.png";
 
-const currentYear = new Date().getFullYear();
-
 const footerLinks = [
   {
     title: "Product",
     links: [
-      { name: "Features", href: "#features" },
-      { name: "Download", href: "#download" },
+      { name: "Features", href: "/#features" },
+      { name: "Download", href: "/#download" },
+      { name: "Specs", href: "/specs" },
       {
         name: "Changelog",
         href: "https://github.com/shm11C3/HardwareVisualizer/releases",
@@ -81,6 +80,7 @@ const footerLinks = [
                   <a
                     href={link.href}
                     class="text-slate-600 dark:text-slate-400 hover:text-black dark:hover:text-white transition-colors"
+                    data-astro-prefetch
                   >
                     {link.name}
                   </a>
