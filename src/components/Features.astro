@@ -1,42 +1,40 @@
 ---
 import { Cpu, Gauge, LineChart, MemoryStick, Shield, Zap } from "lucide-react";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const features = [
   {
     icon: "cpu",
-    title: "CPU Monitoring",
-    description:
-      "Track CPU usage, temperature, and frequency in real-time with detailed per-core statistics.",
+    title: t("features.card1.title"),
+    description: t("features.card1.description"),
   },
   {
     icon: "memory",
-    title: "Memory Analysis",
-    description:
-      "Monitor RAM usage, available memory, and memory allocation across applications.",
+    title: t("features.card2.title"),
+    description: t("features.card2.description"),
   },
   {
     icon: "gauge",
-    title: "GPU Metrics",
-    description:
-      "View GPU utilization, temperature, memory usage, and clock speeds for supported graphics cards.",
+    title: t("features.card3.title"),
+    description: t("features.card3.description"),
   },
   {
     icon: "line-chart",
-    title: "Performance Insights",
-    description:
-      "Analyze long-term hardware usage patterns with historical logs, trend visualization, and process usage statistics.",
+    title: t("features.card4.title"),
+    description: t("features.card4.description"),
   },
   {
     icon: "zap",
-    title: "Lightweight",
-    description:
-      "Built with Tauri for minimal resource usage, ensuring the monitor itself doesn't impact system performance.",
+    title: t("features.card5.title"),
+    description: t("features.card5.description"),
   },
   {
     icon: "shield",
-    title: "Open Source",
-    description:
-      "Fully transparent, community-driven development with the source code available on GitHub.",
+    title: t("features.card6.title"),
+    description: t("features.card6.description"),
   },
 ];
 ---
@@ -44,10 +42,9 @@ const features = [
 <section class="py-20 bg-slate-50 dark:bg-slate-900" id="features">
   <div class="container mx-auto px-4">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-900 dark:text-white">Powerful Monitoring Features</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-900 dark:text-white">{t("features.title")}</h2>
       <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">
-        HardwareVisualizer provides comprehensive hardware monitoring with an intuitive interface and minimal system
-        impact.
+        {t("features.description")}
       </p>
     </div>
 
