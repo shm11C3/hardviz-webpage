@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import logo from "../assets/app-icon.png";
 import ThemeIcon from "./ThemeIcon.astro";
+import LanguagePicker from "./LanguagePicker.astro";
 import { SquareArrowOutUpRight } from "lucide-react";
 import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
 
@@ -17,7 +18,7 @@ const translatePath = useTranslatedPath(lang);
       <span class="font-bold text-xl text-slate-900 dark:text-white">HardwareVisualizer</span>
     </a>
 
-    <nav class="md:flex gap-6 items-center">
+    <nav class="flex gap-6 items-center">
       <a href={translatePath('#features')} class="font-medium transition-colors hover:text-cyan-500 text-slate-600 dark:text-slate-300 hidden md:block" data-astro-prefetch>{t("nav.Features")}</a>
       <a href={translatePath('#download')} class="font-medium transition-colors hover:text-cyan-500 text-slate-600 dark:text-slate-300 hidden md:block" data-astro-prefetch>{t("nav.Download")}</a>
       <a
@@ -29,6 +30,7 @@ const translatePath = useTranslatedPath(lang);
         GitHub
         <SquareArrowOutUpRight size={16} className="ml-1" />
       </a>
+      <LanguagePicker />
       <ThemeIcon id="themeIconDesktop" />
     </nav>
   </div>
