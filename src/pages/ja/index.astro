@@ -1,16 +1,16 @@
 ---
-import Download from "../components/Download.tsx";
-import Features from "../components/Features.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-import Hero from "../components/Hero.astro";
-import Insights from "../components/Insights.astro";
-import Screenshots from "../components/Screenshots.astro";
-import Usage from "../components/Usage.astro";
-import { fetchLatestRelease } from "../funcs/fetchReleaseData.ts";
-import Layout from "../layouts/Layout.astro";
-import type { PlatformDownload } from "../types/platform";
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import Download from "../../components/Download";
+import Features from "../../components/Features.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import Hero from "../../components/Hero.astro";
+import Insights from "../../components/Insights.astro";
+import Screenshots from "../../components/Screenshots.astro";
+import Usage from "../../components/Usage.astro";
+import { fetchLatestRelease } from "../../funcs/fetchReleaseData.ts";
+import Layout from "../../layouts/Layout.astro";
+import type { PlatformDownload } from "../../types/platform";
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -65,10 +65,9 @@ const downloadTranslations = {
   otherVersions: t("download.otherVersions"),
   githubLink: t("download.githubLink"),
 };
-
 ---
 
-<Layout title="HardwareVisualizer - Lightweight Hardware Monitoring Tool">
+<Layout title="HardwareVisualizer - 軽量なハードウェア監視ツール">
   <Header />
   <main>
     <Hero />

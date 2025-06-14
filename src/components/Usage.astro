@@ -2,22 +2,27 @@
 import { Image } from "astro:assets";
 import { BarChart3, Paintbrush, Image as ImageIcon } from "lucide-react";
 import bgImageScreenshot from "../assets/screenshots/bg-image.png";
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 
 const highlights = [
   {
     icon: "bar",
-    title: "Graphical Monitoring",
-    description: "Line charts show CPU, RAM, GPU usage in real-time with smooth visuals.",
+    title: t("usage.customization.title1"),
+    description: t("usage.customization.description1"),
   },
   {
     icon: "paint",
-    title: "Custom Appearance",
-    description: "Tweak colors, borders, and legends with flexible visual settings.",
+    title: t("usage.customization.title2"),
+    description: t("usage.customization.description2"),
   },
   {
     icon: "image",
-    title: "Custom Wallpaper",
-    description: "Make your dashboard truly yours with a background image you love.",
+    title: t("usage.customization.title3"),
+    description: t("usage.customization.description3"),
   },
 ];
 ---
@@ -25,9 +30,9 @@ const highlights = [
 <section class="py-16 bg-slate-50 dark:bg-slate-900" id="customization">
   <div class="container mx-auto px-4">
     <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">Make It Truly Yours</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">{t("usage.title")}</h2>
       <p class="text-slate-600 dark:text-slate-400 mt-2 text-lg">
-        Customize charts and set your favorite image as the dashboard wallpaper.
+        {t("usage.description")}
       </p>
     </div>
 

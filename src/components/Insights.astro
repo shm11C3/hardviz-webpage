@@ -1,26 +1,30 @@
 ---
 import { Flame, ActivitySquare, Gamepad2, BrainCircuit, ArrowDownToLine } from "lucide-react";
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const insights = [
   {
     icon: "activity",
-    title: "Usage Timeline",
-    description: "When was your system under load?",
+    title: t("insights.card1.title"),
+    description: t("insights.card1.description"),
   },
   {
     icon: "flame",
-    title: "Process Tracking",
-    description: "Find out what caused it.",
+    title: t("insights.card2.title"),
+    description: t("insights.card2.description"),
   },
   {
     icon: "gamepad",
-    title: "For Gamers",
-    description: "Tracks CPU and GPU usage during gameplay.",
+    title: t("insights.card3.title"),
+    description: t("insights.card3.description"),
   },
   {
     icon: "brain",
-    title: "For Engineers",
-    description: "Keep track of resource-hungry compute workloads.",
+    title: t("insights.card4.title"),
+    description: t("insights.card4.description"),
   },
 ];
 ---
@@ -28,9 +32,18 @@ const insights = [
 <section class="py-16 bg-slate-50 dark:bg-slate-900" id="insights">
   <div class="container mx-auto px-4">
     <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">Track & Identify High Load</h2>
+
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">{t("insights.title")}</h2>
+
       <p class="text-slate-600 dark:text-slate-400 mt-2 text-lg">
-        Know <span class="text-cyan-600 dark:text-cyan-400">when</span> and <span class="text-rose-600 dark:text-rose-400">why</span> your system slows down.
+        {(() => {
+          switch (lang) {
+            case "ja":
+              return <>システム負荷が高くなるタイミングと原因を知る</>;
+            default:
+              return <>Know <span class="text-cyan-600 dark:text-cyan-400">when</span> and <span class="text-rose-600 dark:text-rose-400">why</span> your system slows down.</>;
+          }
+        })()}
       </p>
     </div>
 
@@ -54,7 +67,7 @@ const insights = [
     <div class="text-center mt-16">
       <a href="#download" class="download-btn px-8 py-4 md:py-8 bg-cyan-600 hover:bg-cyan-700 text-white font-medium text-lg md:text-2xl rounded-full flex items-center justify-center gap-2 transition-all max-w-[400px] md:max-w-[800px] mx-auto">
         <ArrowDownToLine className="w-5 h-5" />
-        Start Monitoring Now
+        {t("insights.download")}
       </a>
     </div>
   </div>

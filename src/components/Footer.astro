@@ -2,38 +2,43 @@
 import { Image } from "astro:assets";
 import { Github } from "lucide-react";
 import appIcon from "../assets/app-icon.png";
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 
 const footerLinks = [
   {
-    title: "Product",
+    title: t("footer.product"),
     links: [
-      { name: "Features", href: "/#features" },
-      { name: "Download", href: "/#download" },
-      { name: "Specs", href: "/specs" },
+      { name: t("footer.features"), href: translatePath('#features') },
+      { name: t("footer.download"), href: translatePath('#download') },
+      { name: t("footer.specs"), href: translatePath("/specs") },
       {
-        name: "Changelog",
+        name: t("footer.changelog"),
         href: "https://github.com/shm11C3/HardwareVisualizer/releases",
       },
       //{ name: "Roadmap", href: "#" },
     ],
   },
   {
-    title: "Resources",
+    title: t("footer.resources"),
     links: [
       //{ name: "Documentation", href: "#docs" },
       //{ name: "FAQ", href: "#faq" },
-      { name: "GitHub", href: "https://github.com/shm11C3/HardwareVisualizer" },
+      { name: t("footer.github"), href: "https://github.com/shm11C3/HardwareVisualizer" },
       {
-        name: "Report an Issue",
+        name: t("footer.reportIssue"),
         href: "https://github.com/shm11C3/HardwareVisualizer/issues",
       },
     ],
   },
   {
-    title: "Community",
+    title: t("footer.community"),
     links: [
       {
-        name: "GitHub Discussions",
+        name: t("footer.discussions"),
         href: "https://github.com/shm11C3/HardwareVisualizer/discussions",
       },
       //{
@@ -55,7 +60,7 @@ const footerLinks = [
           <span class="font-bold text-xl text-black dark:text-white">HardwareVisualizer</span>
         </div>
         <p class="text-slate-600 dark:text-slate-400 mb-4">
-          HardwareVisualizer is a lightweight and open-source tool for monitoring your hardware. It lets you track CPU, GPU, memory usage, and more with minimal system impact.
+          {t("footer.description")}
         </p>
         <div class="flex gap-4">
           <a
