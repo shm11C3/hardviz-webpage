@@ -61,10 +61,10 @@ export default function HardwareMonitor() {
       <div className="flex items-center justify-between border-slate-700 border-b bg-[#141b2d] px-4 py-2">
         <div className="flex items-center">
           <picture>
-            <source srcSet="app-icon.webp" type="image/webp" />
+            <source srcSet="/app-icon.webp" type="image/webp" />
             <img
               className="mr-2 h-5 w-5"
-              src="app-icon.png"
+              src="/app-icon.png"
               alt="HardwareVisualizer Icon"
               onError={(e) => {
                 e.currentTarget.style.display = "none";
