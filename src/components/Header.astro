@@ -8,7 +8,7 @@ import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/util
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
+const { translatePath } = useTranslatedPath(lang);
 ---
 
 <header class="fixed top-0 right-0 left-0 z-50 bg-gradient-to-b from-white/90 via-white/60 to-white/0 shadow-sm backdrop-blur-sm dark:from-slate-900/90 dark:via-slate-900/60 dark:to-slate-900/0">

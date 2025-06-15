@@ -13,7 +13,20 @@ export function useTranslations(lang: keyof typeof ui) {
 }
 
 export function useTranslatedPath(lang: keyof typeof ui) {
-  return function translatePath(path: string, l: string = lang) {
-    return !showDefaultLang && l === defaultLang ? path : `/${l}${path}`;
+  return {
+    translatePath: (path: string, l: string = lang) => {
+      return !showDefaultLang && l === defaultLang ? path : `/${l}${path}`;
+    },
+
+    noTranslatePath: (path: string) => {
+      // デフォルト言語の部分を削除する
+      if (lang === defaultLang) {
+        return showDefaultLang ? path.replace(`/${defaultLang}`, "") : path;
+      }
+
+      const currentLang = path.split("/")[1];
+
+      return path.replace(`/${currentLang}`, "");
+    },
   };
 }
