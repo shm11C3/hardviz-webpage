@@ -7,7 +7,7 @@ import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/util
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
+const { translatePath } = useTranslatedPath(lang);
 ---
 
 <Layout title="HardwareVisualizer - Lightweight Hardware Monitoring Tool">
