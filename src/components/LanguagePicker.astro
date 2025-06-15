@@ -8,8 +8,9 @@ const { translatePath, noTranslatePath } = useTranslatedPath(lang);
 const currentPath = noTranslatePath(Astro.url.pathname) + Astro.url.search + Astro.url.hash;
 ---
 
-<div class="relative group">
+<div class="relative group" id="language-menu">
   <button
+    id="langToggle"
     type="button"
     class="flex items-center gap-1 px-2 py-1 rounded-md text-slate-600 dark:text-slate-300 hover:text-cyan-500 transition-colors"
     aria-label="Select Language"
@@ -17,7 +18,11 @@ const currentPath = noTranslatePath(Astro.url.pathname) + Astro.url.search + Ast
     <Languages size={16} />
   </button>
 
-  <div class="absolute right-0 top-full mt-2 py-2 w-32 bg-white dark:bg-slate-800 rounded-md shadow-lg border border-slate-200 dark:border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+  <div
+    id="langDropdown"
+    class="absolute right-0 top-full mt-2 py-2 w-32 bg-white dark:bg-slate-800 rounded-md shadow-lg border border-slate-200 dark:border-slate-700
+      opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
+  >
     {Object.entries(languages).map(([langCode, label]) => (
       <a
         href={translatePath(currentPath, langCode)}
@@ -33,3 +38,29 @@ const currentPath = noTranslatePath(Astro.url.pathname) + Astro.url.search + Ast
     ))}
   </div>
 </div>
+
+<script is:inline>
+  const prefersHover = window.matchMedia("(hover: hover)").matches;
+
+  if (!prefersHover) {
+    const toggleBtn = document.getElementById("langToggle");
+    const dropdown = document.getElementById("langDropdown");
+    const wrapper = document.getElementById("language-menu");
+
+    // PC向けの group-hover クラスを削除（スマホ用クリック表示に切り替え）
+    dropdown.classList.remove("group-hover:opacity-100", "group-hover:visible");
+    dropdown.classList.remove("opacity-0", "invisible");
+    dropdown.classList.add("hidden");
+
+    toggleBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      dropdown?.classList.toggle("hidden");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!wrapper.contains(e.target)) {
+        dropdown?.classList.add("hidden");
+      }
+    });
+  }
+</script>
