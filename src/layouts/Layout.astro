@@ -1,13 +1,16 @@
 ---
 import "../styles/global.css";
+import type { ui } from "../i18n/ui";
 
 interface Props {
   title: string;
+  lang:  keyof typeof ui
   description?: string;
 }
 
 const {
   title,
+  lang,
   description = "Monitor your CPU, GPU, and memory with HardwareVisualizer — lightweight, open-source, and efficient.",
 } = Astro.props;
 ---
@@ -15,7 +18,7 @@ const {
 
 
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang={lang} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,7 +26,6 @@ const {
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />
