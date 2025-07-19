@@ -14,21 +14,21 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
-    "@tailwindcss/vite": "^4.1.8",
-    "@types/react": "^19.1.6",
+    "@tailwindcss/vite": "^4.1.11",
+    "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "astro": "^5.9.1",
+    "astro": "^5.12.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.513.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "swiper": "^11.2.8",
-    "tailwind-merge": "^3.3.0",
+    "swiper": "^11.2.10",
+    "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.8"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@playwright/test": "^1.52.0",
-    "@types/node": "^22.15.30"
+    "@playwright/test": "^1.54.1",
+    "@types/node": "^22.16.5"
   }
 }
