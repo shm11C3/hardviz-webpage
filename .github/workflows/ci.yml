@@ -24,7 +24,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Setup Node.js
-        uses: actions/setup-node@3235b876344d2a9aa001b8d1453c930bba69e610
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: lts/*
 
@@ -52,7 +52,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Setup Node.js
-        uses: actions/setup-node@3235b876344d2a9aa001b8d1453c930bba69e610
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: lts/*
 
