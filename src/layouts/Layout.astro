@@ -1,6 +1,8 @@
 ---
 import "../styles/global.css";
 import type { ui } from "../i18n/ui";
+import { defaultLang, showDefaultLang } from "../i18n/ui";
+import { useTranslatedPath } from "../i18n/utils";
 
 interface Props {
   title: string;
@@ -13,6 +15,48 @@ const {
   lang,
   description = "Monitor your CPU, GPU, and memory with HardwareVisualizer — lightweight, open-source, and efficient.",
 } = Astro.props;
+
+// URLs & i18n-aware paths for canonical/alternate
+const { noTranslatePath } = useTranslatedPath(lang);
+const pathnameNoLang = noTranslatePath(Astro.url.pathname);
+const siteUrl = Astro.site ? Astro.site.href : "https://hardviz.com";
+
+function buildHref(l: keyof typeof ui) {
+  const path = !showDefaultLang && l === (defaultLang as keyof typeof ui)
+    ? pathnameNoLang || "/"
+    : `/${l}${pathnameNoLang || "/"}`;
+  return new URL(path, siteUrl).href;
+}
+
+const canonical = buildHref(lang);
+const altEn = buildHref("en");
+const altJa = buildHref("ja");
+const imageAbs = new URL("/app-icon.png", siteUrl).href;
+const ogLocale = lang === "ja" ? "ja_JP" : "en_US";
+
+const organizationLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "HardwareVisualizer",
+  url: siteUrl,
+  logo: imageAbs,
+  sameAs: [
+    "https://github.com/shm11C3/HardwareVisualizer"
+  ]
+};
+
+const websiteLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "HardwareVisualizer",
+  url: siteUrl,
+  inLanguage: lang === "ja" ? "ja-JP" : "en-US"
+};
+
+// Analytics (Plausible) domain from env
+const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as
+  | string
+  | undefined;
 ---
 
 
@@ -27,19 +71,51 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
 
+    <!-- Canonical & Hreflang -->
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={altEn} />
+    <link rel="alternate" hreflang="en" href={altEn} />
+    <link rel="alternate" hreflang="ja" href={altJa} />
+
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url} />
+    <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="/app-icon.png" />
+    <meta property="og:image" content={imageAbs} />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:site_name" content="HardwareVisualizer" />
+    <meta property="og:locale" content={ogLocale} />
+  <meta property="og:locale:alternate" content={ogLocale === "ja_JP" ? "en_US" : "ja_JP"} />
+  <meta property="og:image:alt" content="HardwareVisualizer app icon" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:url" content={canonical} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content="/app-icon.png" />
+    <meta property="twitter:image" content={imageAbs} />
+  <meta property="twitter:image:alt" content="HardwareVisualizer app icon" />
+
+  <!-- UX -->
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="apple-touch-icon" href="/app-icon.png" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">{JSON.stringify(organizationLd)}</script>
+    <script type="application/ld+json">{JSON.stringify(websiteLd)}</script>
+
+    <!-- Page-level additions -->
+    <slot name="head" />
+
+    {plausibleDomain && (
+      <script
+        defer
+        data-domain={plausibleDomain}
+        src="https://plausible.io/js/script.tagged-events.js"
+      />
+    )}
   </head>
   <body class="dark:bg-slate-900 transition-colors duration-300">
     <slot />
