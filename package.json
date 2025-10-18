@@ -30,6 +30,6 @@
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@playwright/test": "^1.56.0",
-    "@types/node": "^24.6.2"
+    "@types/node": "^24.7.2"
   }
 }
