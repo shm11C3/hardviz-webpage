@@ -66,39 +66,9 @@ const downloadTranslations = {
   githubLink: t("download.githubLink"),
 };
 
-
-const siteUrl = Astro.site ? Astro.site.href : "https://hardviz.com";
-const canonical = new URL(Astro.url.pathname, siteUrl).href;
-const imageAbs = new URL("/assets/screenshots/slide-1.png", siteUrl).href;
-
-const downloadUrls = downloads
-  .flatMap((p) => p.versions.map((v) => v.url).filter(Boolean))
-  .slice(0, 6);
-
-const softwareLd = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "HardwareVisualizer",
-  applicationCategory: "UtilitiesApplication",
-  operatingSystem: "Windows, Linux",
-  offers: {
-    "@type": "Offer",
-    price: 0,
-    priceCurrency: "USD",
-  },
-  softwareVersion: release.version || undefined,
-  downloadUrl: downloadUrls,
-  url: canonical,
-  image: [imageAbs],
-  sameAs: ["https://github.com/shm11C3/HardwareVisualizer"],
-  description:
-    "CPU、GPU、メモリを軽量でオープンソースのハードウェアモニターで監視します。",
-};
-
 ---
 
 <Layout title="HardwareVisualizer - 軽量で高機能なハードウェアモニター" lang={lang} description="CPU、GPU、メモリを軽量でオープンソースのハードウェアモニターで監視します。">
-  <script slot="head" type="application/ld+json">{JSON.stringify(softwareLd)}</script>
   <Header />
   <main>
     <Hero />

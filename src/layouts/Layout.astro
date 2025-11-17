@@ -34,25 +34,6 @@ const altJa = buildHref("ja");
 const imageAbs = new URL("/app-icon.png", siteUrl).href;
 const ogLocale = lang === "ja" ? "ja_JP" : "en_US";
 
-const organizationLd = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "HardwareVisualizer",
-  url: siteUrl,
-  logo: imageAbs,
-  sameAs: [
-    "https://github.com/shm11C3/HardwareVisualizer"
-  ]
-};
-
-const websiteLd = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "HardwareVisualizer",
-  url: siteUrl,
-  inLanguage: lang === "ja" ? "ja-JP" : "en-US"
-};
-
 // Analytics (Plausible) domain from env
 const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as
   | string
@@ -101,10 +82,6 @@ const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as
     <!-- UX -->
   <meta name="theme-color" content="#0f172a" />
   <link rel="apple-touch-icon" href="/app-icon.png" />
-
-    <!-- Structured Data -->
-    <script type="application/ld+json">{JSON.stringify(organizationLd)}</script>
-    <script type="application/ld+json">{JSON.stringify(websiteLd)}</script>
 
     <!-- Page-level additions -->
     <slot name="head" />
