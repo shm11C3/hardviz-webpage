@@ -16,6 +16,27 @@ updates:
       default-days: 5
     assignees:
       - "shm11C3"
+    groups:
+      default:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+          - "minor"
+        exclude-patterns:
+          - "react*"
+          - "@types/react*"
+          - "typescript"
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
+        update-types:
+          - "major"
+          - "minor"
+          - "patch"
 
   - package-ecosystem: "github-actions"
     directory: "/"
