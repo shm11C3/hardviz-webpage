@@ -8,12 +8,11 @@ updates:
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "weekly"
-      day: "wednesday"
-      time: "07:00"
+      interval: "daily"
+      time: "08:30"
       timezone: "Asia/Tokyo"
     cooldown:
-      default-days: 5
+      default-days: 1
     assignees:
       - "shm11C3"
     groups:
