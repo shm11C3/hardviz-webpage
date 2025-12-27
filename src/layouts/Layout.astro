@@ -68,8 +68,8 @@ const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as
     <meta property="og:image:height" content="512" />
     <meta property="og:site_name" content="HardwareVisualizer" />
     <meta property="og:locale" content={ogLocale} />
-  <meta property="og:locale:alternate" content={ogLocale === "ja_JP" ? "en_US" : "ja_JP"} />
-  <meta property="og:image:alt" content="HardwareVisualizer app icon" />
+    <meta property="og:locale:alternate" content={ogLocale === "ja_JP" ? "en_US" : "ja_JP"} />
+    <meta property="og:image:alt" content="HardwareVisualizer app icon" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -77,11 +77,11 @@ const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={imageAbs} />
-  <meta property="twitter:image:alt" content="HardwareVisualizer app icon" />
+    <meta property="twitter:image:alt" content="HardwareVisualizer app icon" />
 
     <!-- UX -->
-  <meta name="theme-color" content="#0f172a" />
-  <link rel="apple-touch-icon" href="/app-icon.png" />
+    <meta name="theme-color" content="#0f172a" />
+    <link rel="apple-touch-icon" href="/app-icon.png" />
 
     <!-- Page-level additions -->
     <slot name="head" />
@@ -93,6 +93,21 @@ const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as
         src="https://plausible.io/js/script.tagged-events.js"
       />
     )}
+
+    <script
+      is:inline
+      type="text/partytown"
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-0KB9XD0DMY">
+    </script>
+    <script is:inline type="text/partytown">
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-0KB9XD0DMY");
+    </script>
   </head>
   <body class="dark:bg-slate-900 transition-colors duration-300">
     <slot />

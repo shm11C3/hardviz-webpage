@@ -2,6 +2,7 @@ import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
+import partytown from "@astrojs/partytown";
 
 console.log("[BUILD INFO] PRODUCTION:", process.env.PRODUCTION);
 console.log("[BUILD INFO] NODE_ENV:", process.env.NODE_ENV);
@@ -13,6 +14,6 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   site: 'https://hardviz.com',
-  integrations: [react(), sitemap()],
+  integrations: [react(), sitemap(), partytown()],
   output: "static",
 });
