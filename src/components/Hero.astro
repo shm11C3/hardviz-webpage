@@ -21,10 +21,15 @@ const t = useTranslations(lang);
         <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
           <a
             href="#download"
-            class="download-btn px-8 py-3 bg-cyan-600 hover:bg-cyan-700 text-white font-medium rounded-lg flex items-center justify-center gap-2 transition-all"
+            class="relative download-btn px-8 py-3 bg-hardviz text-white font-medium rounded-lg transition-all hover:bg-[color-mix(in_oklab,var(--primary)_90%,black_10%)] dark:border dark:border-white"
           >
-            <ArrowDownToLine className="w-5 h-5" />
-            {t("hero.download")}
+            <div class="pointer-events-none absolute inset-0 z-0 bg-hardviz-glow opacity-90 blur-2xl" />
+            <div class="pointer-events-none absolute inset-0 z-0 bg-black/15" />
+            <div class="flex relative z-10 items-center justify-center gap-2">
+              <ArrowDownToLine className="w-5 h-5" />
+              {t("hero.download")}
+            </div>
+
           </a>
           <a
             href="https://github.com/shm11C3/HardwareVisualizer"
