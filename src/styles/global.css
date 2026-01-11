@@ -1,1 +1,132 @@
 @import "tailwindcss";
+
+@theme {
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-modal: var(--modal);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-card: var(--card);
+  --color-card-overlay: var(--card-overlay);
+  --color-card-foreground: var(--card-foreground);
+  --color-card-non-transparent: var(--card-non-transparent);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --font-sans: "Noto Sans", sans-serif;
+
+  --background-image-hardviz: linear-gradient(
+    90deg,
+    rgba(120, 120, 125, 0.55) 0%,
+    rgba(40, 40, 45, 0.65) 45%,
+    rgba(10, 14, 35, 0.95) 100%
+  );
+
+  --background-image-hardviz-glow: radial-gradient(
+      ellipse at 18% 55%,
+      rgba(255, 255, 255, 0.22) 0%,
+      transparent 58%
+    ),
+    radial-gradient(ellipse at 55% 40%, rgba(0, 0, 0, 0.5) 0%, transparent 55%),
+    radial-gradient(
+      ellipse at 82% 52%,
+      rgba(99, 102, 241, 0.38) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 92% 62%,
+      rgba(139, 92, 246, 0.28) 0%,
+      transparent 60%
+    );
+}
+
+@layer base {
+  :root {
+    --background: oklch(92% 0.004 286.32);
+    --foreground: hsl(222.2 84% 4.9%);
+    --card: oklch(87.1% 0.006 286.286);
+    --card-non-transparent: oklch(0.8711 0.0055 286.29);
+    --popover: hsl(0 0% 100%);
+    --popover-foreground: hsl(222.2 84% 4.9%);
+    --primary: hsl(222.2 47.4% 11.2%);
+    --primary-foreground: hsl(210 40% 98%);
+    --secondary: hsl(210 40% 96.1%);
+    --secondary-foreground: hsl(222.2 47.4% 11.2%);
+    --muted: hsl(210 40% 96.1%);
+    --muted-foreground: hsl(215.4 16.3% 46.9%);
+    --modal: oklch(0.8954 0.0041 286.32);
+    --accent: hsl(210 40% 96.1%);
+    --accent-foreground: hsl(222.2 47.4% 11.2%);
+    --destructive: hsl(0 84.2% 60.2%);
+    --destructive-foreground: hsl(210 40% 98%);
+    --border: hsl(214.3 31.8% 91.4%);
+    --input: hsl(214.3 31.8% 91.4%);
+    --ring: hsl(222.2 84% 4.9%);
+    --radius: 1rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --chart-base: oklch(92% 0.004 286.32 / 50%);
+
+    --color-storage: oklch(70% 0.12 250);
+    --color-process: oklch(65% 0.16 320);
+  }
+
+  .dark {
+    --background: oklch(21% 0.034 264.665);
+    --foreground: hsl(210 40% 98%);
+    --card: oklch(12.9% 0.042 264.695 / 80%);
+    --card-foreground: hsl(210 40% 98%);
+    --card-non-transparent: oklch(0.1501 0.0378 267.11);
+    --popover: hsl(222.2 84% 4.9%);
+    --popover-foreground: hsl(210 40% 98%);
+    --primary: hsl(210 40% 98%);
+    --primary-foreground: hsl(222.2 47.4% 11.2%);
+    --secondary: hsl(217.2 32.6% 17.5%);
+    --secondary-foreground: hsl(210 40% 98%);
+    --muted: hsl(217.2 32.6% 17.5%);
+    --muted-foreground: hsl(215 20.2% 65.1%);
+    --modal: oklch(0.1727 0.0367 267.72);
+    --accent: hsl(217.2 32.6% 17.5%);
+    --accent-foreground: hsl(210 40% 98%);
+    --destructive: hsl(0 62.8% 30.6%);
+    --destructive-foreground: hsl(210 40% 98%);
+    --border: hsl(217.2 32.6% 17.5%);
+    --input: oklch(51% 0.034 264.665);
+    --ring: hsl(212.7 26.8% 83.9);
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --chart-base: oklch(12.9% 0.042 264.695 / 70%);
+
+    --color-storage: oklch(80% 0.12 250);
+    --color-process: oklch(85% 0.12 320);
+  }
+}

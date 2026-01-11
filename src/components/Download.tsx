@@ -69,24 +69,29 @@ const Download = ({
               className={cn(
                 "overflow-hidden rounded-xl border",
                 platform.primary
-                  ? "border-cyan-500 shadow-cyan-100 shadow-lg dark:shadow-none"
+                  ? "border-primary shadow-accent shadow-lg dark:shadow-none"
                   : "border-slate-200 dark:border-slate-700",
               )}
             >
               <div
                 className={cn(
-                  "p-6",
+                  "relative isolate overflow-hidden p-6",
                   platform.primary
-                    ? "bg-gradient-to-br from-cyan-500 to-blue-600 text-white"
+                    ? "relative overflow-hidden bg-hardviz text-white"
                     : "bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-white",
                 )}
               >
-                <div className="mb-4 flex items-center justify-center">
-                  {platformToIcon[platform.platform]}
+                <div className="pointer-events-none absolute inset-0 z-0 bg-hardviz-glow opacity-90 blur-2xl" />
+                <div className="pointer-events-none absolute inset-0 z-0 bg-black/15" />
+
+                <div className="relative z-10">
+                  <div className="mb-4 flex items-center justify-center">
+                    {platformToIcon[platform.platform]}
+                  </div>
+                  <h3 className="text-center font-bold text-xl">
+                    {platform.platform}
+                  </h3>
                 </div>
-                <h3 className="text-center font-bold text-xl">
-                  {platform.platform}
-                </h3>
               </div>
               <div className="bg-white p-6 dark:bg-slate-800">
                 {platform.versions.map((version) => (
@@ -104,7 +109,7 @@ const Download = ({
                           className={cn(
                             "rounded-lg px-4 py-2 font-medium text-sm",
                             platform.primary
-                              ? "bg-cyan-500 text-white hover:bg-cyan-600"
+                              ? "bg-primary text-primary-foreground hover:bg-[color-mix(in_oklab,var(--primary)_80%,white_20%)] dark:hover:bg-[color-mix(in_oklab,var(--primary)_90%,black_10%)]"
                               : "bg-slate-200 text-slate-800 hover:bg-slate-300 dark:bg-slate-700 dark:text-white dark:hover:bg-slate-600",
                           )}
                           target="_blank"
@@ -117,7 +122,7 @@ const Download = ({
                           className={cn(
                             "rounded-lg px-4 py-2 font-medium text-sm",
                             platform.primary
-                              ? "bg-cyan-500 text-white"
+                              ? "bg-primary text-primary-foreground"
                               : "bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white",
                           )}
                         >
@@ -148,7 +153,7 @@ const Download = ({
             href="https://github.com/shm11C3/HardwareVisualizer/releases"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-medium text-cyan-600 hover:text-cyan-700 dark:text-cyan-400 dark:hover:text-cyan-300"
+            className="font-medium text-foreground"
           >
             {translations.githubLink}
           </a>

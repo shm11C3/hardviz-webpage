@@ -65,9 +65,14 @@ const insights = [
     </div>
 
     <div class="text-center mt-16">
-      <a href="#download" class="download-btn px-8 py-4 md:py-8 bg-cyan-600 hover:bg-cyan-700 text-white font-medium text-lg md:text-2xl rounded-full flex items-center justify-center gap-2 transition-all max-w-[400px] md:max-w-[800px] mx-auto">
-        <ArrowDownToLine className="w-5 h-5" />
-        {t("insights.download")}
+      <a href="#download" class="download-btn px-8 py-4 md:py-8 relative overflow-hidden bg-hardviz text-white font-medium text-lg md:text-2xl rounded-full flex items-center justify-center gap-2 transition-all max-w-[400px] md:max-w-[800px] mx-auto hover:bg-[color-mix(in_oklab,var(--primary)_90%,black_10%)] dark:border-2 dark:border-white">
+        <div class="pointer-events-none absolute inset-0 z-0 bg-hardviz-glow opacity-90 blur-2xl" />
+        <div class="pointer-events-none absolute inset-0 z-0 bg-black/15" />
+
+        <div class="flex relative z-10 items-center justify-center gap-2">
+          <ArrowDownToLine className="w-5 h-5" />
+          {t("insights.download")}
+        </div>
       </a>
     </div>
   </div>
