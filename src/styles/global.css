@@ -46,25 +46,21 @@
   );
 
   --background-image-hardviz-glow: radial-gradient(
-    ellipse at 18% 55%,
-    rgba(255, 255, 255, 0.22) 0%,
-    transparent 58%
-  ),
-  radial-gradient(
-    ellipse at 55% 40%,
-    rgba(0, 0, 0, 0.50) 0%,
-    transparent 55%
-  ),
-  radial-gradient(
-    ellipse at 82% 52%,
-    rgba(99, 102, 241, 0.38) 0%,
-    transparent 55%
-  ),
-  radial-gradient(
-    ellipse at 92% 62%,
-    rgba(139, 92, 246, 0.28) 0%,
-    transparent 60%
-  );
+      ellipse at 18% 55%,
+      rgba(255, 255, 255, 0.22) 0%,
+      transparent 58%
+    ),
+    radial-gradient(ellipse at 55% 40%, rgba(0, 0, 0, 0.5) 0%, transparent 55%),
+    radial-gradient(
+      ellipse at 82% 52%,
+      rgba(99, 102, 241, 0.38) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 92% 62%,
+      rgba(139, 92, 246, 0.28) 0%,
+      transparent 60%
+    );
 }
 
 @layer base {
