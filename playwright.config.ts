@@ -1,13 +1,13 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
-  testDir: 'tests',
+  testDir: "tests",
   webServer: {
-    command: 'npm run preview',
+    command: "npm run preview",
     port: 4321,
     reuseExistingServer: !process.env.CI,
   },
   use: {
-    baseURL: 'http://localhost:4321',
+    baseURL: "http://localhost:4321",
   },
 });

@@ -1,35 +1,51 @@
 ---
 import { ArrowDownToLine, SquareArrowOutUpRight } from "lucide-react";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import HardwareVisualizer from "./HardwareVisualizer.astro";
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section class="relative overflow-hidden bg-gradient-to-b from-slate-50 to-slate-300 dark:from-slate-900 dark:to-slate-800 py-20 sm:py-32">
-  <div class="absolute inset-0 bg-grid-black/[0.05] dark:bg-grid-white/[0.05] bg-[size:60px_60px]"></div>
+<section
+  class="relative overflow-hidden bg-gradient-to-b from-slate-50 to-slate-300 dark:from-slate-900 dark:to-slate-800 py-20 sm:py-32"
+>
+  <div
+    class="absolute inset-0 bg-grid-black/[0.05] dark:bg-grid-white/[0.05] bg-[size:60px_60px]"
+  >
+  </div>
   <div class="container mx-auto px-4 relative z-10">
     <div class="flex flex-col lg:flex-row items-center gap-12">
       <div class="flex-1 text-center lg:text-left">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
-          Monitor Your Hardware <span class="text-cyan-600 dark:text-cyan-400">In Real-Time</span>
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6 leading-tight"
+        >
+          Monitor Your Hardware <span class="text-cyan-600 dark:text-cyan-400"
+            >In Real-Time</span
+          >
         </h1>
-        <p class="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-2xl mx-auto lg:mx-0">
+        <p
+          class="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-2xl mx-auto lg:mx-0"
+        >
           {t("hero.description")}
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+        <div
+          class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+        >
           <a
             href="#download"
             class="relative download-btn px-8 py-3 bg-hardviz text-white font-medium rounded-lg transition-all hover:bg-[color-mix(in_oklab,var(--primary)_90%,black_10%)] dark:border dark:border-white"
           >
-            <div class="pointer-events-none absolute inset-0 z-0 bg-hardviz-glow opacity-90 blur-2xl" />
-            <div class="pointer-events-none absolute inset-0 z-0 bg-black/15" />
+            <div
+              class="pointer-events-none absolute inset-0 z-0 bg-hardviz-glow opacity-90 blur-2xl"
+            >
+            </div>
+            <div class="pointer-events-none absolute inset-0 z-0 bg-black/15">
+            </div>
             <div class="flex relative z-10 items-center justify-center gap-2">
               <ArrowDownToLine className="w-5 h-5" />
               {t("hero.download")}
             </div>
-
           </a>
           <a
             href="https://github.com/shm11C3/HardwareVisualizer"
@@ -44,27 +60,32 @@ const t = useTranslations(lang);
       </div>
       <div class="flex-1 relative">
         <HardwareVisualizer />
-        <div class="absolute -z-10 -bottom-6 -right-6 w-72 h-72 bg-cyan-400/20 dark:bg-cyan-500/30 rounded-full blur-3xl"></div>
-        <div class="absolute -z-10 -top-6 -left-6 w-72 h-72 bg-purple-400/20 dark:bg-purple-500/20 rounded-full blur-3xl"></div>
+        <div
+          class="absolute -z-10 -bottom-6 -right-6 w-72 h-72 bg-cyan-400/20 dark:bg-cyan-500/30 rounded-full blur-3xl"
+        >
+        </div>
+        <div
+          class="absolute -z-10 -top-6 -left-6 w-72 h-72 bg-purple-400/20 dark:bg-purple-500/20 rounded-full blur-3xl"
+        >
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-
 <script>
   // アニメーション効果のためのJavaScript
-  const downloadBtn = document.querySelector('.download-btn');
+  const downloadBtn = document.querySelector(".download-btn");
 
   if (downloadBtn) {
-    downloadBtn.addEventListener('mouseenter', () => {
-      const icon = downloadBtn.querySelector('svg');
-      if (icon) icon.classList.add('animate-bounce');
+    downloadBtn.addEventListener("mouseenter", () => {
+      const icon = downloadBtn.querySelector("svg");
+      if (icon) icon.classList.add("animate-bounce");
     });
 
-    downloadBtn.addEventListener('mouseleave', () => {
-      const icon = downloadBtn.querySelector('svg');
-      if (icon) icon.classList.remove('animate-bounce');
+    downloadBtn.addEventListener("mouseleave", () => {
+      const icon = downloadBtn.querySelector("svg");
+      if (icon) icon.classList.remove("animate-bounce");
     });
   }
 </script>

@@ -10,10 +10,9 @@ import slide06 from "../assets/screenshots/slide-6.png";
 
 <div class="my-16">
   <div class="swiper swiper-container">
-
     <div class="swiper-wrapper">
       <div class="swiper-slide">
-        <Image src={slide01} alt="Screenshot of Dashboard"  />
+        <Image src={slide01} alt="Screenshot of Dashboard" />
       </div>
       <div class="swiper-slide">
         <Image src={slide02} alt="Screenshot of Insights" />
@@ -70,30 +69,30 @@ import slide06 from "../assets/screenshots/slide-6.png";
 </style>
 
 <script>
-  import Swiper from 'swiper'
-  import { Navigation, Pagination, Autoplay } from 'swiper/modules'
-  import 'swiper/css';
-  import 'swiper/css/navigation';
-  import 'swiper/css/pagination';
-  import 'swiper/css/scrollbar';
-  import type { SwiperOptions } from 'swiper/types';
+  import Swiper from "swiper";
+  import { Navigation, Pagination, Autoplay } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/navigation";
+  import "swiper/css/pagination";
+  import "swiper/css/scrollbar";
+  import type { SwiperOptions } from "swiper/types";
 
   export const swiperConfig: SwiperOptions = {
     modules: [Navigation, Pagination, Autoplay],
     loop: true,
 
     pagination: {
-      el: '.swiper-pagination',
+      el: ".swiper-pagination",
       clickable: true,
     },
 
     navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
     },
 
     scrollbar: {
-      el: '.swiper-scrollbar',
+      el: ".swiper-scrollbar",
     },
 
     autoplay: {
@@ -117,8 +116,8 @@ import slide06 from "../assets/screenshots/slide-6.png";
         slidesPerGroup: 3,
       },
     },
-  }
+  };
 
-  const swiper = new Swiper('.swiper', swiperConfig);
+  const swiper = new Swiper(".swiper", swiperConfig);
   swiper.init();
 </script>
