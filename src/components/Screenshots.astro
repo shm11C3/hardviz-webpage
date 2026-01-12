@@ -1,34 +1,72 @@
 ---
 import { Image } from "astro:assets";
 import slide01 from "../assets/screenshots/slide-1.png";
+import slideLight01 from "../assets/screenshots/slide-1-l.png";
 import slide02 from "../assets/screenshots/slide-2.png";
+import slideLight02 from "../assets/screenshots/slide-2-l.png";
 import slide03 from "../assets/screenshots/slide-3.png";
+import slideLight03 from "../assets/screenshots/slide-3-l.png";
 import slide04 from "../assets/screenshots/slide-4.png";
+import slideLight04 from "../assets/screenshots/slide-4-l.png";
 import slide05 from "../assets/screenshots/slide-5.png";
+import slideLight05 from "../assets/screenshots/slide-5-l.png";
 import slide06 from "../assets/screenshots/slide-6.png";
+import slideLight06 from "../assets/screenshots/slide-6-l.png";
+
+const slides = [
+  {
+    key: "slide-1",
+    alt: "Screenshot of Dashboard",
+    light: slideLight01,
+    dark: slide01,
+  },
+  {
+    key: "slide-2",
+    alt: "Screenshot of Insights",
+    light: slideLight02,
+    dark: slide02,
+  },
+  {
+    key: "slide-3",
+    alt: "Screenshot of CPU Usage",
+    light: slideLight03,
+    dark: slide03,
+  },
+  {
+    key: "slide-4",
+    alt: "Screenshot of Process Insight",
+    light: slideLight04,
+    dark: slide04,
+  },
+  {
+    key: "slide-5",
+    alt: "Screenshot of Settings",
+    light: slideLight05,
+    dark: slide05,
+  },
+  {
+    key: "slide-6",
+    alt: "Screenshot of GPU Insights",
+    light: slideLight06,
+    dark: slide06,
+  },
+] as const;
 ---
 
-<div class="my-16">
+<div class="py-16 bg-neutral-200 dark:bg-slate-900">
   <div class="swiper swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <Image src={slide01} alt="Screenshot of Dashboard" />
-      </div>
-      <div class="swiper-slide">
-        <Image src={slide02} alt="Screenshot of Insights" />
-      </div>
-      <div class="swiper-slide">
-        <Image src={slide03} alt="Screenshot of CPU Usage" />
-      </div>
-      <div class="swiper-slide">
-        <Image src={slide04} alt="Screenshot of Process Insight" />
-      </div>
-      <div class="swiper-slide">
-        <Image src={slide05} alt="Screenshot of Settings" />
-      </div>
-      <div class="swiper-slide">
-        <Image src={slide06} alt="Screenshot of GPU Insights" />
-      </div>
+      {
+        slides.map((slide) => (
+          <div class="swiper-slide">
+            <div class="screenshot-slot" data-screenshot={slide.key}>
+              <noscript>
+                <Image src={slide.light} alt={slide.alt} />
+              </noscript>
+            </div>
+          </div>
+        ))
+      }
     </div>
 
     <div class="swiper-pagination"></div>
@@ -38,6 +76,23 @@ import slide06 from "../assets/screenshots/slide-6.png";
 
     <div class="swiper-scrollbar"></div>
   </div>
+
+  {
+    slides.map((slide) => (
+      <>
+        <template data-screenshot-template={slide.key} data-theme="light">
+          <Image
+            src={slide.light}
+            alt={slide.alt}
+            data-screenshot={slide.key}
+          />
+        </template>
+        <template data-screenshot-template={slide.key} data-theme="dark">
+          <Image src={slide.dark} alt={slide.alt} data-screenshot={slide.key} />
+        </template>
+      </>
+    ))
+  }
 </div>
 <style is:global>
   .swiper-wrapper {
@@ -77,7 +132,40 @@ import slide06 from "../assets/screenshots/slide-6.png";
   import "swiper/css/scrollbar";
   import type { SwiperOptions } from "swiper/types";
 
-  export const swiperConfig: SwiperOptions = {
+  type Theme = "light" | "dark";
+
+  const getCurrentTheme = (): Theme => {
+    return document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light";
+  };
+
+  const applyScreenshotsForTheme = (theme: Theme) => {
+    const templates = document.querySelectorAll<HTMLTemplateElement>(
+      `template[data-screenshot-template][data-theme="${theme}"]`
+    );
+
+    const templateByKey = new Map<string, HTMLTemplateElement>();
+    for (const template of templates) {
+      const key = template.getAttribute("data-screenshot-template");
+      if (key) templateByKey.set(key, template);
+    }
+
+    const slots = document.querySelectorAll<HTMLElement>(
+      ".swiper .screenshot-slot[data-screenshot]"
+    );
+    for (const slot of slots) {
+      const key = slot.getAttribute("data-screenshot");
+      if (!key) continue;
+
+      const template = templateByKey.get(key);
+      if (!template) continue;
+
+      slot.replaceChildren(template.content.cloneNode(true));
+    }
+  };
+
+  const swiperConfig: SwiperOptions = {
     modules: [Navigation, Pagination, Autoplay],
     loop: true,
 
@@ -118,6 +206,27 @@ import slide06 from "../assets/screenshots/slide-6.png";
     },
   };
 
+  const initialTheme = getCurrentTheme();
+  applyScreenshotsForTheme(initialTheme);
+
   const swiper = new Swiper(".swiper", swiperConfig);
-  swiper.init();
+
+  let lastTheme: Theme = initialTheme;
+  const observer = new MutationObserver(() => {
+    const nextTheme = getCurrentTheme();
+    if (nextTheme === lastTheme) return;
+
+    applyScreenshotsForTheme(nextTheme);
+    swiper.update();
+    lastTheme = nextTheme;
+  });
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+
+  window.addEventListener("beforeunload", () => {
+    observer.disconnect();
+  });
 </script>
