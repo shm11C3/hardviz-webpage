@@ -225,4 +225,8 @@ const slides = [
     attributes: true,
     attributeFilter: ["class"],
   });
+
+  window.addEventListener("beforeunload", () => {
+    observer.disconnect();
+  });
 </script>
