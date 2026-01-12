@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && echo _worker.js > dist/.assetsignore",
-    "lint": "biome lint ./src && biome check ./src && biome format --write ./src",
-    "format": "biome format --write ./src && biome check ./src --write",
-    "lint:ci": "biome ci ./src",
+    "lint": "biome check && prettier --check ./src/**/*.astro",
+    "format": "biome format --write && biome check --write && prettier --write ./src/**/*.astro",
+    "lint:ci": "biome ci",
     "preview": "astro preview",
     "astro": "astro",
     "test:e2e": "npm run build && npx playwright test"
@@ -29,8 +29,10 @@
     "tailwindcss": "^4.1.17"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@biomejs/biome": "^2.3.11",
     "@playwright/test": "^1.57.0",
-    "@types/node": "^25.0.6"
+    "@types/node": "^25.0.6",
+    "prettier": "^3.7.4",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

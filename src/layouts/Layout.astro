@@ -6,7 +6,7 @@ import { useTranslatedPath } from "../i18n/utils";
 
 interface Props {
   title: string;
-  lang:  keyof typeof ui
+  lang: keyof typeof ui;
   description?: string;
 }
 
@@ -22,9 +22,10 @@ const pathnameNoLang = noTranslatePath(Astro.url.pathname);
 const siteUrl = Astro.site ? Astro.site.href : "https://hardviz.com";
 
 function buildHref(l: keyof typeof ui) {
-  const path = !showDefaultLang && l === (defaultLang as keyof typeof ui)
-    ? pathnameNoLang || "/"
-    : `/${l}${pathnameNoLang || "/"}`;
+  const path =
+    !showDefaultLang && l === (defaultLang as keyof typeof ui)
+      ? pathnameNoLang || "/"
+      : `/${l}${pathnameNoLang || "/"}`;
   return new URL(path, siteUrl).href;
 }
 
@@ -40,9 +41,7 @@ const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as
   | undefined;
 ---
 
-
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang={lang} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
@@ -68,7 +67,10 @@ const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as
     <meta property="og:image:height" content="512" />
     <meta property="og:site_name" content="HardwareVisualizer" />
     <meta property="og:locale" content={ogLocale} />
-    <meta property="og:locale:alternate" content={ogLocale === "ja_JP" ? "en_US" : "ja_JP"} />
+    <meta
+      property="og:locale:alternate"
+      content={ogLocale === "ja_JP" ? "en_US" : "ja_JP"}
+    />
     <meta property="og:image:alt" content="HardwareVisualizer app icon" />
 
     <!-- Twitter -->
@@ -86,20 +88,21 @@ const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as
     <!-- Page-level additions -->
     <slot name="head" />
 
-    {plausibleDomain && (
-      <script
-        defer
-        data-domain={plausibleDomain}
-        src="https://plausible.io/js/script.tagged-events.js"
-      />
-    )}
+    {
+      plausibleDomain && (
+        <script
+          defer
+          data-domain={plausibleDomain}
+          src="https://plausible.io/js/script.tagged-events.js"
+        />
+      )
+    }
 
     <script
       is:inline
       type="text/partytown"
       async
-      src="https://www.googletagmanager.com/gtag/js?id=G-0KB9XD0DMY">
-    </script>
+      src="https://www.googletagmanager.com/gtag/js?id=G-0KB9XD0DMY"></script>
     <script is:inline type="text/partytown">
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -114,7 +117,7 @@ const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as
   </body>
 </html>
 <style>
-@import "tailwindcss";
+  @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
+  @custom-variant dark (&:where(.dark, .dark *));
 </style>

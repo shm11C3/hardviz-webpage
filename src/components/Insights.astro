@@ -1,6 +1,12 @@
 ---
-import { Flame, ActivitySquare, Gamepad2, BrainCircuit, ArrowDownToLine } from "lucide-react";
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import {
+  ActivitySquare,
+  ArrowDownToLine,
+  BrainCircuit,
+  Flame,
+  Gamepad2,
+} from "lucide-react";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -32,18 +38,29 @@ const insights = [
 <section class="py-16 bg-slate-50 dark:bg-slate-900" id="insights">
   <div class="container mx-auto px-4">
     <div class="text-center mb-12">
-
-      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">{t("insights.title")}</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
+        {t("insights.title")}
+      </h2>
 
       <p class="text-slate-600 dark:text-slate-400 mt-2 text-lg">
-        {(() => {
-          switch (lang) {
-            case "ja":
-              return <>システム負荷が高くなるタイミングと原因を知る</>;
-            default:
-              return <>Know <span class="text-cyan-600 dark:text-cyan-400">when</span> and <span class="text-rose-600 dark:text-rose-400">why</span> your system slows down.</>;
-          }
-        })()}
+        {
+          (() => {
+            switch (lang) {
+              case "ja":
+                return <>システム負荷が高くなるタイミングと原因を知る</>;
+              default:
+                return (
+                  <>
+                    Know{" "}
+                    <span class="text-cyan-600 dark:text-cyan-400">when</span>{" "}
+                    and{" "}
+                    <span class="text-rose-600 dark:text-rose-400">why</span>{" "}
+                    your system slows down.
+                  </>
+                );
+            }
+          })()
+        }
       </p>
     </div>
 
@@ -52,22 +69,40 @@ const insights = [
         insights.map((item) => (
           <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-md transition">
             <div class="w-12 h-12 mx-auto mb-3 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700">
-              {item.icon === "activity" && <ActivitySquare className="w-6 h-6 text-cyan-500" />}
-              {item.icon === "flame" && <Flame className="w-6 h-6 text-rose-500" />}
-              {item.icon === "gamepad" && <Gamepad2 className="w-6 h-6 text-lime-500" />}
-              {item.icon === "brain" && <BrainCircuit className="w-6 h-6 text-indigo-500" />}
+              {item.icon === "activity" && (
+                <ActivitySquare className="w-6 h-6 text-cyan-500" />
+              )}
+              {item.icon === "flame" && (
+                <Flame className="w-6 h-6 text-rose-500" />
+              )}
+              {item.icon === "gamepad" && (
+                <Gamepad2 className="w-6 h-6 text-lime-500" />
+              )}
+              {item.icon === "brain" && (
+                <BrainCircuit className="w-6 h-6 text-indigo-500" />
+              )}
             </div>
-            <h3 class="text-base font-semibold text-slate-800 dark:text-white">{item.title}</h3>
-            <p class="text-sm text-slate-600 dark:text-slate-400">{item.description}</p>
+            <h3 class="text-base font-semibold text-slate-800 dark:text-white">
+              {item.title}
+            </h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400">
+              {item.description}
+            </p>
           </div>
         ))
       }
     </div>
 
     <div class="text-center mt-16">
-      <a href="#download" class="download-btn px-8 py-4 md:py-8 relative overflow-hidden bg-hardviz text-white font-medium text-lg md:text-2xl rounded-full flex items-center justify-center gap-2 transition-all max-w-[400px] md:max-w-[800px] mx-auto hover:bg-[color-mix(in_oklab,var(--primary)_90%,black_10%)] dark:border-2 dark:border-white">
-        <div class="pointer-events-none absolute inset-0 z-0 bg-hardviz-glow opacity-90 blur-2xl" />
-        <div class="pointer-events-none absolute inset-0 z-0 bg-black/15" />
+      <a
+        href="#download"
+        class="download-btn px-8 py-4 md:py-8 relative overflow-hidden bg-hardviz text-white font-medium text-lg md:text-2xl rounded-full flex items-center justify-center gap-2 transition-all max-w-[400px] md:max-w-[800px] mx-auto hover:bg-[color-mix(in_oklab,var(--primary)_90%,black_10%)] dark:border-2 dark:border-white"
+      >
+        <div
+          class="pointer-events-none absolute inset-0 z-0 bg-hardviz-glow opacity-90 blur-2xl"
+        >
+        </div>
+        <div class="pointer-events-none absolute inset-0 z-0 bg-black/15"></div>
 
         <div class="flex relative z-10 items-center justify-center gap-2">
           <ArrowDownToLine className="w-5 h-5" />

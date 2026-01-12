@@ -8,9 +8,9 @@ import Insights from "../components/Insights.astro";
 import Screenshots from "../components/Screenshots.astro";
 import Usage from "../components/Usage.astro";
 import { fetchLatestRelease } from "../funcs/fetchReleaseData.ts";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import Layout from "../layouts/Layout.astro";
 import type { PlatformDownload } from "../types/platform";
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -65,10 +65,13 @@ const downloadTranslations = {
   otherVersions: t("download.otherVersions"),
   githubLink: t("download.githubLink"),
 };
-
 ---
 
-<Layout title="HardwareVisualizer - Lightweight Hardware Monitoring Tool" lang={lang} description="Monitor your CPU, GPU, and memory with HardwareVisualizer — lightweight, open-source, and efficient.">
+<Layout
+  title="HardwareVisualizer - Lightweight Hardware Monitoring Tool"
+  lang={lang}
+  description="Monitor your CPU, GPU, and memory with HardwareVisualizer — lightweight, open-source, and efficient."
+>
   <Header />
   <main>
     <Hero />
@@ -76,8 +79,12 @@ const downloadTranslations = {
     <Usage />
     <Insights />
     <Features />
-    <Download client:load downloads={downloads} latestVersion={release.version} translations={downloadTranslations} />
-
+    <Download
+      client:load
+      downloads={downloads}
+      latestVersion={release.version}
+      translations={downloadTranslations}
+    />
   </main>
   <Footer />
 </Layout>
