@@ -102,6 +102,11 @@ export const ui = {
       "Mainstream drivers required. Some features may be limited or values may be less accurate. Support for AMD GPUs is currently under improvement.",
     "specs.supportedHardware.intel.notes":
       "Mainstream drivers required. Some features may be limited or values may be less accurate. Support for Intel GPUs is currently under improvement.",
+    "specs.supportedLanguages.title": "Supported Languages",
+    "specs.supportedLanguages.language": "Language",
+    "specs.supportedLanguages.status": "Status",
+    "specs.supportedLanguages.howToAdd":
+      "If you want to add a supported language, please create an issue on GitHub to suggest it.",
     "specs.limitations.title": "Known Limitations & Notes",
     "specs.limitations.item1":
       "Some older or special hardware may not be fully supported.",
@@ -211,6 +216,11 @@ export const ui = {
       "主流ドライバーが必要です。一部機能が制限されるか、値の精度が低下する場合があります。AMD GPU対応は現在改善中です。",
     "specs.supportedHardware.intel.notes":
       "主流ドライバーが必要です。一部機能が制限されるか、値の精度が低下する場合があります。Intel GPU対応は現在改善中です。",
+    "specs.supportedLanguages.title": "対応言語",
+    "specs.supportedLanguages.language": "言語",
+    "specs.supportedLanguages.status": "状態",
+    "specs.supportedLanguages.howToAdd":
+      "対応言語を追加したい場合は、GitHubでIssueを作成して提案してください。",
     "specs.limitations.title": "既知の制限事項・注意点",
     "specs.limitations.item1":
       "一部の古いハードウェアや特殊なハードウェアは完全に対応していない場合があります。",
