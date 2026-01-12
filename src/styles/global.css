@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Noto+Sans+JP:wght@100..900&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -35,8 +36,6 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
-
-  --font-sans: "Noto Sans", sans-serif;
 
   --background-image-hardviz: linear-gradient(
     90deg,
@@ -96,6 +95,8 @@
 
     --color-storage: oklch(70% 0.12 250);
     --color-process: oklch(65% 0.16 320);
+
+    --font-sans: "Geist", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
   }
 
   .dark {
