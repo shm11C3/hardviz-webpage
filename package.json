@@ -1,7 +1,8 @@
 {
-  "name": "",
+  "name": "hardviz-webpage",
   "type": "module",
   "version": "0.0.1",
+  "packageManager": "pnpm@10.28.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && echo _worker.js > dist/.assetsignore",
@@ -10,7 +11,8 @@
     "lint:ci": "biome ci",
     "preview": "astro preview",
     "astro": "astro",
-    "test:e2e": "npm run build && npx playwright test"
+    "test:e2e": "playwright test",
+    "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
     "@astrojs/partytown": "^2.1.4",
@@ -34,5 +36,10 @@
     "@types/node": "^25.0.8",
     "prettier": "^3.7.4",
     "prettier-plugin-astro": "^0.14.1"
+  },
+  "engines": {
+    "node": ">=24",
+    "pnpm": ">=10.28.0",
+    "npm": "not allowed, use pnpm instead"
   }
 }
