@@ -21,22 +21,22 @@
   </svg>
 </button>
 
-<style>
+<style is:global>
   #themeToggle {
     border: 0;
     background: none;
   }
-  .sun {
+  #themeToggle .sun {
     fill: black;
   }
-  .moon {
+  #themeToggle .moon {
     fill: transparent;
   }
 
-  :global(.dark) .sun {
+  .dark #themeToggle .sun {
     fill: transparent;
   }
-  :global(.dark) .moon {
+  .dark #themeToggle .moon {
     fill: white;
   }
 </style>

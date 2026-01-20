@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && echo _worker.js > dist/.assetsignore",
-    "lint": "biome check && prettier --check ./src/**/*.astro",
-    "format": "biome format --write && biome check --write && prettier --write ./src/**/*.astro",
+    "lint": "biome check",
+    "format": "biome check --write",
     "lint:ci": "biome ci",
     "preview": "astro preview",
     "astro": "astro",
@@ -35,8 +35,6 @@
     "@biomejs/biome": "2.3.11",
     "@playwright/test": "^1.57.0",
     "@types/node": "^25.0.9",
-    "prettier": "^3.8.0",
-    "prettier-plugin-astro": "^0.14.1",
     "wrangler": "^4.59.2"
   },
   "engines": {

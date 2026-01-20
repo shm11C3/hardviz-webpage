@@ -37,6 +37,9 @@
     "indentStyle": "space",
     "indentWidth": 2
   },
+  "html": {
+    "experimentalFullSupportEnabled": true
+  },
   "css": {
     "parser": {
       "tailwindDirectives": true
@@ -57,9 +60,6 @@
             "useHookAtTopLevel": "off"
           }
         }
-      },
-      "formatter": {
-        "enabled": false
       }
     }
   ]
