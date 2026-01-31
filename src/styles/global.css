@@ -1,4 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Noto+Sans+JP:wght@100..900&display=swap");
+@import "@fontsource/geist/400.css";
+@import "@fontsource/geist/700.css";
+@import "@fontsource/geist/800.css";
 @import "tailwindcss";
 
 @theme {
