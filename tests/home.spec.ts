@@ -8,7 +8,7 @@ test("home page loads", async ({ page }) => {
   );
 });
 
-test("download links route to top page anchors", async ({ page }) => {
+test("download links point to home anchors on FAQ pages", async ({ page }) => {
   await page.goto("/faq/");
   await expect(
     page.locator("header a", { hasText: "Download" }),
