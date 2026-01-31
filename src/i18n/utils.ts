@@ -15,7 +15,9 @@ export function useTranslations(lang: keyof typeof ui) {
 export function useTranslatedPath(lang: keyof typeof ui) {
   return {
     translatePath: (path: string, l: string = lang) => {
-      return !showDefaultLang && l === defaultLang ? path : `/${l}${path}`;
+      const translatedPath = !showDefaultLang && l === defaultLang ? path : `/${l}${path}`;
+      // Add trailing slash if not present (for trailingSlash: "always" config)
+      return translatedPath.endsWith('/') ? translatedPath : `${translatedPath}/`;
     },
 
     noTranslatePath: (path: string) => {
