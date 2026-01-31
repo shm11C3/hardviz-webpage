@@ -41,14 +41,14 @@ const { translatePath } = useTranslatedPath(lang);
 
     <nav class="flex gap-6 items-center">
       <a
-        href="#features"
-        class="font-medium transition-colors hover:text-cyan-500 text-slate-600 dark:text-slate-300 hidden md:block"
-        data-astro-prefetch>{t("nav.Features")}</a
-      >
-      <a
         href="#download"
         class="font-medium transition-colors hover:text-cyan-500 text-slate-600 dark:text-slate-300 hidden md:block"
         data-astro-prefetch>{t("nav.Download")}</a
+      >
+      <a
+        href={translatePath("/faq")}
+        class="font-medium transition-colors hover:text-cyan-500 text-slate-600 dark:text-slate-300 hidden md:block"
+        data-astro-prefetch>{t("nav.faq")}</a
       >
       <a
         href="https://github.com/shm11C3/HardwareVisualizer"

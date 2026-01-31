@@ -1,5 +1,6 @@
 ---
 import Download from "../components/Download.tsx";
+import FAQPreview from "../components/FAQPreview.astro";
 import Features from "../components/Features.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
@@ -65,12 +66,48 @@ const downloadTranslations = {
   otherVersions: t("download.otherVersions"),
   githubLink: t("download.githubLink"),
 };
+
+// SoftwareApplication JSON-LD for rich search results
+const softwareJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "HardwareVisualizer",
+  applicationCategory: "UtilitiesApplication",
+  operatingSystem: "Windows 10, Windows 11, Linux",
+  url: "https://hardviz.com/",
+  downloadUrl: "https://github.com/shm11C3/HardwareVisualizer/releases",
+  softwareVersion: release.version,
+  description:
+    "Free, lightweight, and open-source hardware monitoring tool. Track CPU temperature, GPU usage, memory allocation, and system performance in real-time with beautiful graphs.",
+  featureList: [
+    "Real-time CPU monitoring with per-core statistics",
+    "GPU temperature and utilization tracking",
+    "Memory usage analysis",
+    "30-day historical data and trend visualization",
+    "Process tracking for high CPU/GPU usage",
+    "Custom dashboard with wallpaper support",
+    "Lightweight Tauri/Rust architecture",
+  ],
+  screenshot: "https://hardviz.com/screenshots/slide-1.png",
+  author: {
+    "@type": "Person",
+    name: "shm11C3",
+    url: "https://github.com/shm11C3",
+  },
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+  license: "https://opensource.org/licenses/MIT",
+};
 ---
 
 <Layout
-  title="HardwareVisualizer - Lightweight Hardware Monitoring Tool"
+  title="HardwareVisualizer - Free Lightweight CPU, GPU & Memory Monitor for Windows/Linux"
   lang={lang}
-  description="Monitor your CPU, GPU, and memory with HardwareVisualizer — lightweight, open-source, and efficient."
+  description="Free open-source hardware monitoring tool for Windows and Linux. Track CPU temperature, GPU usage, memory in real-time with beautiful graphs. Lightweight alternative to HWiNFO and Task Manager."
+  jsonLd={softwareJsonLd}
 >
   <Header />
   <main>
@@ -85,6 +122,7 @@ const downloadTranslations = {
       latestVersion={release.version}
       translations={downloadTranslations}
     />
+    <FAQPreview />
   </main>
   <Footer />
 </Layout>

@@ -1,0 +1,132 @@
+---
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+// Show only top 3 FAQs on homepage
+const faqs: FAQItem[] = [
+  {
+    question: t("faq.q1"),
+    answer: t("faq.a1"),
+  },
+  {
+    question: t("faq.q4"),
+    answer: t("faq.a4"),
+  },
+  {
+    question: t("faq.q5"),
+    answer: t("faq.a5"),
+  },
+];
+
+// FAQPage JSON-LD schema (for the preview items)
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+<section id="faq" class="py-20 bg-slate-50 dark:bg-slate-800/50">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2
+        class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4"
+      >
+        {t("faq.title")}
+      </h2>
+      <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+        {t("faq.description")}
+      </p>
+    </div>
+
+    <div class="max-w-3xl mx-auto space-y-4">
+      {
+        faqs.map((faq, index) => (
+          <details
+            class="group bg-white dark:bg-slate-900 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700"
+            id={`faq-${index + 1}`}
+          >
+            <summary class="flex items-center justify-between cursor-pointer p-6 text-left">
+              <span class="flex items-start gap-3">
+                <span class="shrink-0 w-7 h-7 flex items-center justify-center rounded-full bg-cyan-100 dark:bg-cyan-900/50 text-cyan-600 dark:text-cyan-400 font-bold text-sm">
+                  Q
+                </span>
+                <span class="text-lg font-semibold text-slate-900 dark:text-white pr-4">
+                  {faq.question}
+                </span>
+              </span>
+              <span class="shrink-0 ml-2 text-slate-500 dark:text-slate-400 group-open:rotate-180 transition-transform duration-200">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </span>
+            </summary>
+            <div class="px-6 pb-6 text-slate-600 dark:text-slate-300">
+              <div class="flex items-start gap-3 ml-0">
+                <span class="shrink-0 w-7 h-7 flex items-center justify-center rounded-full bg-violet-100 dark:bg-violet-900/50 text-violet-600 dark:text-violet-400 font-bold text-sm">
+                  A
+                </span>
+                <p class="pt-1">{faq.answer}</p>
+              </div>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+
+    <div class="text-center mt-8">
+      <a
+        href={translatePath("/faq")}
+        class="inline-flex items-center gap-2 text-slate-700 dark:text-white hover:text-slate-900 dark:hover:text-slate-200 font-medium transition-colors"
+      >
+        {t("faq.viewAll")}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-4 w-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- FAQ JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+</section>
