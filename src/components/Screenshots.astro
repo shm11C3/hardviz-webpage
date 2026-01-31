@@ -78,17 +78,23 @@ const slides = [
   </div>
 
   {
-    slides.map((slide) => (
+    slides.map((slide, index) => (
       <>
         <template data-screenshot-template={slide.key} data-theme="light">
           <Image
             src={slide.light}
             alt={slide.alt}
             data-screenshot={slide.key}
+            loading={index < 2 ? "eager" : "lazy"}
           />
         </template>
         <template data-screenshot-template={slide.key} data-theme="dark">
-          <Image src={slide.dark} alt={slide.alt} data-screenshot={slide.key} />
+          <Image
+            src={slide.dark}
+            alt={slide.alt}
+            data-screenshot={slide.key}
+            loading={index < 2 ? "eager" : "lazy"}
+          />
         </template>
       </>
     ))
@@ -124,12 +130,6 @@ const slides = [
 </style>
 
 <script>
-  import Swiper from "swiper";
-  import { Navigation, Pagination, Autoplay } from "swiper/modules";
-  import "swiper/css";
-  import "swiper/css/navigation";
-  import "swiper/css/pagination";
-  import "swiper/css/scrollbar";
   import type { SwiperOptions } from "swiper/types";
 
   type Theme = "light" | "dark";
@@ -142,7 +142,7 @@ const slides = [
 
   const applyScreenshotsForTheme = (theme: Theme) => {
     const templates = document.querySelectorAll<HTMLTemplateElement>(
-      `template[data-screenshot-template][data-theme="${theme}"]`
+      `template[data-screenshot-template][data-theme="${theme}"]`,
     );
 
     const templateByKey = new Map<string, HTMLTemplateElement>();
@@ -152,7 +152,7 @@ const slides = [
     }
 
     const slots = document.querySelectorAll<HTMLElement>(
-      ".swiper .screenshot-slot[data-screenshot]"
+      ".swiper .screenshot-slot[data-screenshot]",
     );
     for (const slot of slots) {
       const key = slot.getAttribute("data-screenshot");
@@ -166,7 +166,6 @@ const slides = [
   };
 
   const swiperConfig: SwiperOptions = {
-    modules: [Navigation, Pagination, Autoplay],
     loop: true,
 
     pagination: {
@@ -206,27 +205,65 @@ const slides = [
     },
   };
 
-  const initialTheme = getCurrentTheme();
-  applyScreenshotsForTheme(initialTheme);
+  // Swiper の動的インポートと初期化
+  const initSwiper = async () => {
+    const initialTheme = getCurrentTheme();
+    applyScreenshotsForTheme(initialTheme);
 
-  const swiper = new Swiper(".swiper", swiperConfig);
+    // Swiper と CSS を動的にインポート
+    const [{ default: Swiper }, { Navigation, Pagination, Autoplay }] =
+      await Promise.all([import("swiper"), import("swiper/modules")]);
 
-  let lastTheme: Theme = initialTheme;
-  const observer = new MutationObserver(() => {
-    const nextTheme = getCurrentTheme();
-    if (nextTheme === lastTheme) return;
+    // CSS も動的にインポート
+    await Promise.all([
+      import("swiper/css"),
+      import("swiper/css/navigation"),
+      import("swiper/css/pagination"),
+      import("swiper/css/scrollbar"),
+    ]);
 
-    applyScreenshotsForTheme(nextTheme);
-    swiper.update();
-    lastTheme = nextTheme;
-  });
+    // Swiper を初期化
+    const swiper = new Swiper(".swiper", {
+      ...swiperConfig,
+      modules: [Navigation, Pagination, Autoplay],
+    });
 
-  observer.observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ["class"],
-  });
+    // テーマ変更の監視
+    let lastTheme: Theme = initialTheme;
+    const themeObserver = new MutationObserver(() => {
+      const nextTheme = getCurrentTheme();
+      if (nextTheme === lastTheme) return;
 
-  window.addEventListener("beforeunload", () => {
-    observer.disconnect();
-  });
+      applyScreenshotsForTheme(nextTheme);
+      swiper.update();
+      lastTheme = nextTheme;
+    });
+
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    window.addEventListener("beforeunload", () => {
+      themeObserver.disconnect();
+    });
+  };
+
+  // Intersection Observer でビューポートに近づいた時に Swiper を読み込み
+  const swiperContainer = document.querySelector(".swiper-container");
+  if (swiperContainer) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          initSwiper();
+          observer.disconnect();
+        }
+      },
+      {
+        rootMargin: "200px", // 200px手前から読み込み開始
+      },
+    );
+
+    observer.observe(swiperContainer);
+  }
 </script>
