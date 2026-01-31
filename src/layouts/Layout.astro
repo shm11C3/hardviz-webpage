@@ -118,7 +118,10 @@ const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as
     <!-- JSON-LD Structured Data -->
     {
       structuredData.map((data) => (
-        <script type="application/ld+json" set:html={JSON.stringify(data)} />
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(data).replace(/</g, "\\u003c")}
+        />
       ))
     }
 
