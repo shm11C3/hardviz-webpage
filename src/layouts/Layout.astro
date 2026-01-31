@@ -49,14 +49,6 @@ const defaultJsonLd = {
       ? "CPU、GPU、メモリをリアルタイムで監視する軽量オープンソースのハードウェアモニタリングツール"
       : "Lightweight open-source hardware monitoring tool for real-time CPU, GPU, and memory tracking",
   inLanguage: lang === "ja" ? "ja" : "en",
-  potentialAction: {
-    "@type": "SearchAction",
-    target: {
-      "@type": "EntryPoint",
-      urlTemplate: `${siteUrl}?q={search_term_string}`,
-    },
-    "query-input": "required name=search_term_string",
-  },
 };
 
 const structuredData = jsonLd
