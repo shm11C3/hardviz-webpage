@@ -1,0 +1,22 @@
+---
+import FAQ from "../components/FAQ.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import Layout from "../layouts/Layout.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout
+  title="FAQ - HardwareVisualizer | Common Questions About Hardware Monitoring"
+  lang={lang}
+  description="Frequently asked questions about HardwareVisualizer. Learn about supported operating systems, GPU compatibility, comparison with HWiNFO and Task Manager, and more."
+>
+  <Header />
+  <main class="pt-20">
+    <FAQ />
+  </main>
+  <Footer />
+</Layout>

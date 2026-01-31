@@ -1,0 +1,166 @@
+---
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
+
+interface FAQItem {
+  question: string;
+  answer: string;
+  link?: {
+    text: string;
+    href: string;
+  };
+}
+
+const faqs: FAQItem[] = [
+  {
+    question: t("faq.q1"),
+    answer: t("faq.a1"),
+  },
+  {
+    question: t("faq.q2"),
+    answer: t("faq.a2"),
+  },
+  {
+    question: t("faq.q3"),
+    answer: t("faq.a3"),
+    link: {
+      text: t("faq.specsLink"),
+      href: translatePath("/specs"),
+    },
+  },
+  {
+    question: t("faq.q4"),
+    answer: t("faq.a4"),
+  },
+  {
+    question: t("faq.q5"),
+    answer: t("faq.a5"),
+  },
+  {
+    question: t("faq.q6"),
+    answer: t("faq.a6"),
+    link: {
+      text: t("faq.specsLink"),
+      href: translatePath("/specs"),
+    },
+  },
+  {
+    question: t("faq.q7"),
+    answer: t("faq.a7"),
+    link: {
+      text: t("faq.githubLink"),
+      href: "https://github.com/shm11C3/HardwareVisualizer/issues",
+    },
+  },
+];
+
+// FAQPage JSON-LD schema
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+<section id="faq" class="py-20 bg-slate-50 dark:bg-slate-800/50">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2
+        class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4"
+      >
+        {t("faq.title")}
+      </h2>
+      <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+        {t("faq.description")}
+      </p>
+    </div>
+
+    <div class="max-w-3xl mx-auto space-y-4">
+      {
+        faqs.map((faq, index) => (
+          <details
+            class="group bg-white dark:bg-slate-900 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700"
+            id={`faq-${index + 1}`}
+            open
+          >
+            <summary class="flex items-center justify-between cursor-pointer p-6 text-left">
+              <div class="flex items-start gap-3">
+                <span class="shrink-0 w-7 h-7 flex items-center justify-center rounded-full bg-cyan-100 dark:bg-cyan-900/50 text-cyan-600 dark:text-cyan-400 font-bold text-sm">
+                  Q
+                </span>
+                <h3 class="text-lg font-semibold text-slate-900 dark:text-white pr-4">
+                  {faq.question}
+                </h3>
+              </div>
+              <span class="shrink-0 ml-2 text-slate-500 dark:text-slate-400 group-open:rotate-180 transition-transform duration-200">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </span>
+            </summary>
+            <div class="px-6 pb-6 text-slate-600 dark:text-slate-300">
+              <div class="flex items-start gap-3 ml-0">
+                <span class="shrink-0 w-7 h-7 flex items-center justify-center rounded-full bg-violet-100 dark:bg-violet-900/50 text-violet-600 dark:text-violet-400 font-bold text-sm">
+                  A
+                </span>
+                <div class="pt-1">
+                  <p>{faq.answer}</p>
+                  {faq.link && (
+                    <a
+                      href={faq.link.href}
+                      class="inline-flex items-center gap-1 mt-2 text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 font-medium transition-colors"
+                    >
+                      {faq.link.text}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- FAQ JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+</section>

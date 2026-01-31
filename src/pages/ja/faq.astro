@@ -1,0 +1,22 @@
+---
+import FAQ from "../../components/FAQ.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import Layout from "../../layouts/Layout.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout
+  title="FAQ - HardwareVisualizer | ハードウェア監視ツールのFAQ"
+  lang={lang}
+  description="HardwareVisualizerに関するよくある質問。対応OS、GPU互換性、HWiNFOやタスクマネージャーとの比較など。CPU温度・GPU使用率の監視について。"
+>
+  <Header />
+  <main class="pt-20">
+    <FAQ />
+  </main>
+  <Footer />
+</Layout>
