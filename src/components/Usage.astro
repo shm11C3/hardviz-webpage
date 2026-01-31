@@ -67,6 +67,11 @@ const highlights = [
         src={bgImageScreenshot}
         alt="Screenshot of Background Image"
         class="rounded-xl shadow-md w-full md:w-2/3 lg:w-1/2"
+        loading="lazy"
+        widths={[400, 800, 1200]}
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 66vw, 50vw"
+        quality={95}
+        format="webp"
       />
     </div>
   </div>
