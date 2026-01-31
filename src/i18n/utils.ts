@@ -15,12 +15,14 @@ export function useTranslations(lang: keyof typeof ui) {
 export function useTranslatedPath(lang: keyof typeof ui) {
   return {
     translatePath: (path: string, l: string = lang) => {
+      const [basePath, hash] = path.split("#");
       const translatedPath =
-        !showDefaultLang && l === defaultLang ? path : `/${l}${path}`;
+        !showDefaultLang && l === defaultLang ? basePath : `/${l}${basePath}`;
       // Add trailing slash if not present (for trailingSlash: "always" config)
-      return translatedPath.endsWith("/")
+      const normalizedPath = translatedPath.endsWith("/")
         ? translatedPath
         : `${translatedPath}/`;
+      return hash ? `${normalizedPath}#${hash}` : normalizedPath;
     },
 
     noTranslatePath: (path: string) => {
