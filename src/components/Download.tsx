@@ -1,5 +1,5 @@
-import { FaWindows, FaLinux } from "react-icons/fa";
 import { type JSX, memo, useMemo } from "react";
+import { FaLinux, FaWindows } from "react-icons/fa";
 import { cn } from "../lib/utils";
 import type { PlatformDownload } from "../types/platform";
 
