@@ -1,11 +1,11 @@
-import { ComputerIcon, LaptopIcon } from "lucide-react";
 import { type JSX, memo, useMemo } from "react";
+import { FaLinux, FaWindows } from "react-icons/fa";
 import { cn } from "../lib/utils";
 import type { PlatformDownload } from "../types/platform";
 
 const platformToIcon: Record<PlatformDownload["platform"], JSX.Element> = {
-  Windows: <ComputerIcon className="h-8 w-8" />,
-  Linux: <LaptopIcon className="h-8 w-8" />,
+  Windows: <FaWindows className="h-8 w-8" />,
+  Linux: <FaLinux className="h-8 w-8" />,
 };
 
 interface DownloadTranslations {
