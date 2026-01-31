@@ -1,5 +1,6 @@
 ---
 import Download from "../../components/Download";
+import FAQPreview from "../../components/FAQPreview.astro";
 import Features from "../../components/Features.astro";
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
@@ -65,12 +66,48 @@ const downloadTranslations = {
   otherVersions: t("download.otherVersions"),
   githubLink: t("download.githubLink"),
 };
+
+// SoftwareApplication JSON-LD for rich search results (Japanese)
+const softwareJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "HardwareVisualizer",
+  applicationCategory: "UtilitiesApplication",
+  operatingSystem: "Windows 10, Windows 11, Linux",
+  url: "https://hardviz.com/ja/",
+  downloadUrl: "https://github.com/shm11C3/HardwareVisualizer/releases",
+  softwareVersion: release.version,
+  description:
+    "CPU温度・GPU使用率・メモリをリアルタイムで監視する無料の軽量オープンソースハードウェアモニタリングツール。美しいグラフでシステムパフォーマンスを追跡。",
+  featureList: [
+    "CPU使用率・温度・周波数のリアルタイムモニタリング",
+    "GPU温度・使用率・VRAMの追跡",
+    "メモリ使用量の分析",
+    "30日間の履歴データとトレンド可視化",
+    "高負荷プロセスの特定と追跡",
+    "カスタム壁紙対応のダッシュボード",
+    "Tauri/Rust製の超軽量アーキテクチャ",
+  ],
+  screenshot: "https://hardviz.com/screenshots/slide-1.png",
+  author: {
+    "@type": "Person",
+    name: "shm11C3",
+    url: "https://github.com/shm11C3",
+  },
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "JPY",
+  },
+  license: "https://opensource.org/licenses/MIT",
+};
 ---
 
 <Layout
-  title="HardwareVisualizer - 軽量で高機能なハードウェアモニター"
+  title="HardwareVisualizer - 無料の軽量CPU・GPU・メモリモニター | Windows/Linux対応"
   lang={lang}
-  description="CPU、GPU、メモリを軽量でオープンソースのハードウェアモニターで監視します。"
+  description="CPU温度・GPU使用率・メモリをリアルタイムで監視する無料オープンソースツール。タスクマネージャーやHWiNFOの軽量代替として最適。ゲーム中のパフォーマンス監視にも。"
+  jsonLd={softwareJsonLd}
 >
   <Header />
   <main>
@@ -85,6 +122,7 @@ const downloadTranslations = {
       latestVersion={release.version}
       translations={downloadTranslations}
     />
+    <FAQPreview />
   </main>
   <Footer />
 </Layout>

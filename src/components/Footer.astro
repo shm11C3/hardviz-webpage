@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import { Github } from "lucide-react";
+import { ChevronRight, ExternalLink, Github } from "lucide-react";
 import appIcon from "../assets/app-icon.png";
 import {
   getLangFromUrl,
@@ -16,28 +16,46 @@ const footerLinks = [
   {
     title: t("footer.product"),
     links: [
-      { name: t("footer.features"), href: translatePath("#features") },
-      { name: t("footer.download"), href: translatePath("#download") },
-      { name: t("footer.specs"), href: translatePath("/specs") },
+      {
+        name: t("footer.features"),
+        href: translatePath("/#features"),
+        external: false,
+      },
+      {
+        name: t("footer.download"),
+        href: translatePath("/#download"),
+        external: false,
+      },
+      {
+        name: t("footer.specs"),
+        href: translatePath("/specs"),
+        external: false,
+      },
+      { name: t("footer.faq"), href: translatePath("/faq"), external: false },
       {
         name: t("footer.changelog"),
         href: "https://github.com/shm11C3/HardwareVisualizer/releases",
+        external: true,
       },
-      //{ name: "Roadmap", href: "#" },
     ],
   },
   {
     title: t("footer.resources"),
     links: [
-      //{ name: "Documentation", href: "#docs" },
-      //{ name: "FAQ", href: "#faq" },
       {
         name: t("footer.github"),
         href: "https://github.com/shm11C3/HardwareVisualizer",
+        external: true,
       },
       {
         name: t("footer.reportIssue"),
         href: "https://github.com/shm11C3/HardwareVisualizer/issues",
+        external: true,
+      },
+      {
+        name: t("footer.deepwiki"),
+        href: "https://deepwiki.com/shm11C3/HardwareVisualizer",
+        external: true,
       },
     ],
   },
@@ -47,12 +65,8 @@ const footerLinks = [
       {
         name: t("footer.discussions"),
         href: "https://github.com/shm11C3/HardwareVisualizer/discussions",
+        external: true,
       },
-      //{
-      //  name: "Contributing",
-      //  href: "https://github.com/shm11C3/HardwareVisualizer/blob/main/CONTRIBUTING.md",
-      //},
-      //{ name: "Code of Conduct", href: "#" },
     ],
   },
 ];
@@ -95,10 +109,17 @@ const footerLinks = [
                 <li>
                   <a
                     href={link.href}
-                    class="text-slate-600 dark:text-slate-400 hover:text-black dark:hover:text-white transition-colors"
-                    data-astro-prefetch
+                    class="text-slate-600 dark:text-slate-400 hover:text-black dark:hover:text-white transition-colors inline-flex items-center gap-1"
+                    {...(link.external
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : { "data-astro-prefetch": true })}
                   >
                     {link.name}
+                    {link.external ? (
+                      <ExternalLink className="w-3 h-3" />
+                    ) : (
+                      <ChevronRight className="w-3 h-3" />
+                    )}
                   </a>
                 </li>
               ))}
