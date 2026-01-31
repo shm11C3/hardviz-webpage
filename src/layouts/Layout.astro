@@ -35,7 +35,6 @@ function buildHref(l: keyof typeof ui) {
 const canonical = buildHref(lang);
 const altEn = buildHref("en");
 const altJa = buildHref("ja");
-const imageAbs = new URL("/app-icon.png", siteUrl).href;
 const ogImageAbs = new URL("/og-image.png", siteUrl).href;
 const ogLocale = lang === "ja" ? "ja_JP" : "en_US";
 
