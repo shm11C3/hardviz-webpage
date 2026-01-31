@@ -82,6 +82,7 @@ export const ui = {
     "footer.faq": "FAQ",
     "footer.github": "GitHub",
     "footer.reportIssue": "Report an Issue",
+    "footer.deepwiki": "DeepWiki (AI Docs)",
     "footer.community": "Community",
     "footer.discussions": "GitHub Discussions",
 
@@ -226,6 +227,7 @@ export const ui = {
     "footer.faq": "FAQ",
     "footer.github": "GitHub",
     "footer.reportIssue": "問題を報告",
+    "footer.deepwiki": "DeepWiki（AIドキュメント）",
     "footer.community": "コミュニティ",
     "footer.discussions": "GitHubディスカッション",
 
