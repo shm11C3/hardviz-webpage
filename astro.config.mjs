@@ -1,3 +1,4 @@
+import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
@@ -15,6 +16,6 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   site: "https://hardviz.com",
-  integrations: [react(), sitemap(), partytown()],
+  integrations: [react(), sitemap(), partytown(), mdx()],
   output: "static",
 });

@@ -7,6 +7,7 @@ import {
   useTranslatedPath,
   useTranslations,
 } from "../i18n/utils";
+import { githubRepoUrl } from "../lib/github";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -34,8 +35,8 @@ const footerLinks = [
       { name: t("footer.faq"), href: translatePath("/faq"), external: false },
       {
         name: t("footer.changelog"),
-        href: "https://github.com/shm11C3/HardwareVisualizer/releases",
-        external: true,
+        href: translatePath("/changelog"),
+        external: false,
       },
     ],
   },
@@ -44,12 +45,12 @@ const footerLinks = [
     links: [
       {
         name: t("footer.github"),
-        href: "https://github.com/shm11C3/HardwareVisualizer",
+        href: githubRepoUrl(),
         external: true,
       },
       {
         name: t("footer.reportIssue"),
-        href: "https://github.com/shm11C3/HardwareVisualizer/issues",
+        href: `${githubRepoUrl()}/issues`,
         external: true,
       },
       {
@@ -64,7 +65,7 @@ const footerLinks = [
     links: [
       {
         name: t("footer.discussions"),
-        href: "https://github.com/shm11C3/HardwareVisualizer/discussions",
+        href: `${githubRepoUrl()}/discussions`,
         external: true,
       },
     ],
@@ -89,7 +90,7 @@ const footerLinks = [
         </p>
         <div class="flex gap-4">
           <a
-            href="https://github.com/shm11C3/HardwareVisualizer"
+            href={githubRepoUrl()}
             target="_blank"
             rel="noopener noreferrer"
             class="text-slate-600 dark:text-slate-400 hover:text-black dark:hover:text-white transition-colors"

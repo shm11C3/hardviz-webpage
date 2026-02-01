@@ -1,5 +1,6 @@
 import { type JSX, memo, useMemo } from "react";
 import { FaLinux, FaWindows } from "react-icons/fa";
+import { githubAllReleasesUrl } from "../lib/github";
 import { cn } from "../lib/utils";
 import type { PlatformDownload } from "../types/platform";
 
@@ -150,7 +151,7 @@ const Download = ({
             {translations.otherVersions}
           </p>
           <a
-            href="https://github.com/shm11C3/HardwareVisualizer/releases"
+            href={githubAllReleasesUrl()}
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium text-foreground"
