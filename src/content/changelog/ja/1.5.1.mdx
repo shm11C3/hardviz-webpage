@@ -1,0 +1,18 @@
+---
+lang: ja
+version: 1.5.1
+date: 2026-01-15
+title: "v1.5.1"
+summary: "インサイトを長時間使用すると動作が重くなる問題を修正しました。"
+tags:
+  - バグ修正
+  - Windows
+  - Linux
+links:
+  - label: "GitHub リリース"
+    url: "https://github.com/shm11C3/HardwareVisualizer/releases/tag/v1.5.1"
+---
+
+## 修正
+
+- fix(insights): debounce useInsightChart refetch to prevent rapid DB polling while scrubbing ([#1030](https://github.com/shm11C3/HardwareVisualizer/pull/1030))
