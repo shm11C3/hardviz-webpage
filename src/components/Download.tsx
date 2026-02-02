@@ -153,7 +153,7 @@ const Download = ({
             href="https://github.com/shm11C3/HardwareVisualizer/releases"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-medium text-foreground"
+            className="font-medium text-slate-900 dark:text-white"
           >
             {translations.githubLink}
           </a>
