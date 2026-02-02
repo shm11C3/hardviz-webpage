@@ -13,6 +13,7 @@ export const ui = {
     "nav.Features": "Features",
     "nav.Download": "Download",
     "nav.faq": "FAQ",
+    "nav.changelog": "Changelog",
     "hero.description":
       "HardwareVisualizer is a free, lightweight, and open-source hardware monitoring tool for Windows and Linux. Track CPU temperature, GPU usage, memory allocation, and system performance in real-time with beautiful graphs — a perfect alternative to Task Manager or HWiNFO.",
     "hero.download": "Download Now",
@@ -70,6 +71,20 @@ export const ui = {
     "download.noDownloads": "No downloads available for {platform} yet.",
     "download.otherVersions": "Looking for other versions or platforms?",
     "download.githubLink": "View all releases on GitHub →",
+
+    "changelog.title": "Changelog",
+    "changelog.description":
+      "Release notes and updates for HardwareVisualizer.",
+    "changelog.emptyTitle": "No releases yet.",
+    "changelog.emptyDescription":
+      "Check GitHub Releases for the latest updates.",
+    "changelog.untranslatedNotice":
+      "This entry is not translated yet. Showing English.",
+    "changelog.untranslatedBadge": "Untranslated",
+    "changelog.announcement":
+      "Release notes are now available on the official website.",
+    "changelog.back": "Back to Changelog",
+    "changelog.githubRelease": "View on GitHub",
 
     "footer.description":
       "HardwareVisualizer is a free, lightweight, open-source hardware monitoring tool for Windows and Linux. Monitor CPU temperature, GPU usage, memory, and system performance with real-time graphs and 30-day historical data.",
@@ -157,6 +172,7 @@ export const ui = {
     "nav.Features": "機能",
     "nav.Download": "ダウンロード",
     "nav.faq": "FAQ",
+    "nav.changelog": "変更履歴",
     "hero.description":
       "HardwareVisualizerは、WindowsとLinux向けの無料・軽量・オープンソースのハードウェアモニタリングツールです。CPU温度、GPU使用率、メモリ割り当て、システムパフォーマンスを美しいグラフでリアルタイムに追跡。タスクマネージャーやHWiNFOの代替として最適です。",
     "hero.download": "今すぐダウンロード",
@@ -215,6 +231,17 @@ export const ui = {
     "download.otherVersions":
       "他のバージョンやプラットフォームをお探しですか？",
     "download.githubLink": "GitHubですべてのリリースを表示 →",
+
+    "changelog.title": "変更履歴",
+    "changelog.description": "HardwareVisualizerのリリースノートと更新情報。",
+    "changelog.emptyTitle": "まだ変更履歴がありません。",
+    "changelog.emptyDescription": "最新情報はGitHub Releasesをご確認ください。",
+    "changelog.untranslatedNotice":
+      "このリリースノートはまだ未翻訳のため、英語版を表示しています。",
+    "changelog.untranslatedBadge": "未翻訳",
+    "changelog.announcement": "リリースノートを公式サイトに追加しました。",
+    "changelog.back": "変更履歴へ戻る",
+    "changelog.githubRelease": "GitHubで見る",
 
     "footer.description":
       "HardwareVisualizerは、WindowsとLinux向けの無料・軽量・オープンソースのハードウェアモニタリングツールです。CPU温度、GPU使用率、メモリ、システムパフォーマンスをリアルタイムグラフと30日間の履歴データで監視。",

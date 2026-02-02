@@ -1,0 +1,13 @@
+---
+import ChangelogVersionPage from "../../components/changelog/ChangelogVersionPage.astro";
+import { getChangelogEntries } from "../../lib/changelog";
+
+export async function getStaticPaths() {
+  const entries = await getChangelogEntries("en");
+  return entries.map((entry) => ({
+    params: { version: entry.data.version },
+  }));
+}
+---
+
+<ChangelogVersionPage />

@@ -4,6 +4,7 @@ import {
   useTranslatedPath,
   useTranslations,
 } from "../i18n/utils";
+import { githubRepoUrl } from "../lib/github";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -56,7 +57,7 @@ const faqs: FAQItem[] = [
     answer: t("faq.a7"),
     link: {
       text: t("faq.githubLink"),
-      href: "https://github.com/shm11C3/HardwareVisualizer/issues",
+      href: `${githubRepoUrl()}/issues`,
     },
   },
 ];
