@@ -135,4 +135,24 @@
     --color-storage: oklch(80% 0.12 250);
     --color-process: oklch(85% 0.12 320);
   }
+
+  /* Dark mode prose styles for changelog content */
+  .dark .prose {
+    --tw-prose-body: oklch(85% 0.01 250);
+    --tw-prose-headings: white;
+    --tw-prose-lead: oklch(80% 0.01 250);
+    --tw-prose-links: oklch(75% 0.12 200);
+    --tw-prose-bold: white;
+    --tw-prose-counters: oklch(70% 0.02 250);
+    --tw-prose-bullets: oklch(60% 0.02 250);
+    --tw-prose-hr: oklch(35% 0.02 250);
+    --tw-prose-quotes: oklch(85% 0.01 250);
+    --tw-prose-quote-borders: oklch(40% 0.02 250);
+    --tw-prose-captions: oklch(70% 0.02 250);
+    --tw-prose-code: white;
+    --tw-prose-pre-code: oklch(85% 0.01 250);
+    --tw-prose-pre-bg: oklch(20% 0.02 250);
+    --tw-prose-th-borders: oklch(40% 0.02 250);
+    --tw-prose-td-borders: oklch(30% 0.02 250);
+  }
 }
