@@ -9,12 +9,18 @@ import Insights from "../components/Insights.astro";
 import Screenshots from "../components/Screenshots.astro";
 import Usage from "../components/Usage.astro";
 import { fetchLatestRelease } from "../funcs/fetchReleaseData.ts";
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../i18n/utils";
 import Layout from "../layouts/Layout.astro";
+import { githubAllReleasesUrl } from "../lib/github";
 import type { PlatformDownload } from "../types/platform";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
 
 const release = await fetchLatestRelease();
 
@@ -64,7 +70,7 @@ const downloadTranslations = {
   button: t("download.button"),
   noDownloads: t("download.noDownloads"),
   otherVersions: t("download.otherVersions"),
-  githubLink: t("download.githubLink"),
+  changelogLink: t("download.changelogLink"),
 };
 
 // SoftwareApplication JSON-LD for rich search results
@@ -75,7 +81,7 @@ const softwareJsonLd = {
   applicationCategory: "UtilitiesApplication",
   operatingSystem: "Windows 10, Windows 11, Linux",
   url: "https://hardviz.com/",
-  downloadUrl: "https://github.com/shm11C3/HardwareVisualizer/releases",
+  downloadUrl: githubAllReleasesUrl(),
   softwareVersion: release.version,
   description:
     "Free, lightweight, and open-source hardware monitoring tool. Track CPU temperature, GPU usage, memory allocation, and system performance in real-time with beautiful graphs.",
@@ -121,6 +127,7 @@ const softwareJsonLd = {
       downloads={downloads}
       latestVersion={release.version}
       translations={downloadTranslations}
+      changelogHref={translatePath("/changelog")}
     />
     <FAQPreview />
   </main>

@@ -1,0 +1,172 @@
+---
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../../i18n/utils";
+import Layout from "../../layouts/Layout.astro";
+import {
+  getChangelogEntries,
+  getChangelogEntriesForJaIndex,
+} from "../../lib/changelog";
+import { githubAllReleasesUrl, githubReleaseTagUrl } from "../../lib/github";
+import Footer from "../Footer.astro";
+import Header from "../Header.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
+
+const isJa = lang === "ja";
+
+const entries = isJa
+  ? await getChangelogEntriesForJaIndex()
+  : (await getChangelogEntries("en")).map((entry) => ({
+      entry,
+      untranslated: false,
+    }));
+
+const dateFormatter = new Intl.DateTimeFormat(isJa ? "ja-JP" : "en-US", {
+  year: "numeric",
+  month: isJa ? "long" : "short",
+  day: isJa ? "numeric" : "2-digit",
+});
+---
+
+<Layout
+  title={`HardwareVisualizer - ${t("changelog.title")}`}
+  lang={isJa ? "ja" : "en"}
+  description={t("changelog.description")}
+>
+  <Header />
+
+  <main class="pt-24 md:pt-28 pb-16">
+    <div class="container mx-auto px-4">
+      <header class="max-w-3xl">
+        <h1
+          class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white"
+        >
+          {t("changelog.title")}
+        </h1>
+        <p class="mt-3 text-slate-600 dark:text-slate-300">
+          {t("changelog.description")}
+        </p>
+      </header>
+
+      <div
+        class="mt-6 max-w-3xl rounded-2xl border border-cyan-200/70 dark:border-cyan-500/30 bg-cyan-50/70 dark:bg-cyan-500/10 backdrop-blur-sm px-5 py-4"
+      >
+        <p class="text-sm text-cyan-900/90 dark:text-cyan-100">
+          {t("changelog.announcement")}
+        </p>
+      </div>
+
+      <section class="mt-10 grid grid-cols-1 gap-4">
+        {
+          entries.length ? (
+            entries.map(({ entry, untranslated }) => (
+              <article class="group relative rounded-2xl border border-slate-200/70 dark:border-slate-800 bg-white/70 dark:bg-slate-900/40 hover:bg-white/90 dark:hover:bg-slate-900/65 focus-within:bg-white/90 dark:focus-within:bg-slate-900/65 hover:border-slate-300/70 dark:hover:border-slate-700 focus-within:border-slate-300/70 dark:focus-within:border-slate-700 backdrop-blur-sm p-5 md:p-6 shadow-sm hover:shadow-md focus-within:shadow-md transition-colors transition-shadow">
+                <a
+                  href={translatePath(`/changelog/${entry.data.version}`)}
+                  data-astro-prefetch
+                  aria-label={`${t("changelog.title")} v${entry.data.version}`}
+                  class="absolute inset-0 z-10 rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-950"
+                />
+
+                <div
+                  aria-hidden="true"
+                  class="pointer-events-none absolute inset-0 z-0 rounded-2xl bg-white opacity-0 transition-opacity duration-200 group-hover:opacity-10 group-focus-within:opacity-10 dark:group-hover:opacity-5 dark:group-focus-within:opacity-5"
+                />
+
+                <div class="relative z-20 pointer-events-none">
+                  <div class="flex items-start justify-between gap-4">
+                    <div>
+                      <p class="text-xl font-semibold text-slate-900 dark:text-white">
+                        {entry.data.title}
+                      </p>
+
+                      <div class="mt-2 flex flex-wrap items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+                        <span class="font-mono">v{entry.data.version}</span>
+                        <span aria-hidden="true">•</span>
+                        <time datetime={entry.data.date.toISOString()}>
+                          {dateFormatter.format(entry.data.date)}
+                        </time>
+                        {untranslated ? (
+                          <>
+                            <span aria-hidden="true">•</span>
+                            <span class="inline-flex items-center rounded-full border border-amber-200/80 dark:border-amber-400/30 bg-amber-50/80 dark:bg-amber-400/10 px-2 py-0.5 text-xs text-amber-800 dark:text-amber-200">
+                              {t("changelog.untranslatedBadge")}
+                            </span>
+                          </>
+                        ) : null}
+                      </div>
+                    </div>
+
+                    <a
+                      href={githubReleaseTagUrl(entry.data.version)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="relative z-30 pointer-events-auto shrink-0 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
+                    >
+                      {t("changelog.githubRelease")}
+                    </a>
+                  </div>
+
+                  {entry.data.tags?.length ? (
+                    <div class="mt-4 flex flex-wrap gap-2">
+                      {entry.data.tags.map((tag) => (
+                        <span class="inline-flex items-center rounded-full border border-slate-200 dark:border-slate-700 px-2.5 py-1 text-xs text-slate-600 dark:text-slate-300">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  ) : null}
+
+                  {entry.data.summary ? (
+                    <p class="mt-4 text-slate-700 dark:text-slate-200">
+                      {entry.data.summary}
+                    </p>
+                  ) : null}
+
+                  {entry.data.links?.length ? (
+                    <div class="mt-4 flex flex-wrap gap-4">
+                      {entry.data.links.map((link) => (
+                        <a
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="relative z-30 pointer-events-auto text-sm text-cyan-600 dark:text-cyan-400 hover:underline"
+                        >
+                          {link.label}
+                        </a>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              </article>
+            ))
+          ) : (
+            <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800 bg-white/70 dark:bg-slate-900/40 backdrop-blur-sm p-5 md:p-6 shadow-sm">
+              <p class="text-slate-700 dark:text-slate-200 font-medium">
+                {t("changelog.emptyTitle")}
+              </p>
+              <p class="mt-2 text-slate-600 dark:text-slate-300">
+                {t("changelog.emptyDescription")}
+              </p>
+              <a
+                href={githubAllReleasesUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex mt-4 text-sm font-medium text-cyan-600 dark:text-cyan-400 hover:underline"
+              >
+                {t("download.githubLink")}
+              </a>
+            </div>
+          )
+        }
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

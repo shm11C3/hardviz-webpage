@@ -1,0 +1,13 @@
+---
+import ChangelogVersionPage from "../../../components/changelog/ChangelogVersionPage.astro";
+import { getChangelogVersionsForJaRoute } from "../../../lib/changelog";
+
+export async function getStaticPaths() {
+  const versions = await getChangelogVersionsForJaRoute();
+  return versions.map((version) => ({
+    params: { version },
+  }));
+}
+---
+
+<ChangelogVersionPage />
