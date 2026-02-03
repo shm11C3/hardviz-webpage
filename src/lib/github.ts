@@ -8,6 +8,10 @@ export function githubAllReleasesUrl(repo: string = HARDVIZ_GITHUB_REPO) {
   return `https://github.com/${repo}/releases`;
 }
 
+export function githubLatestReleaseUrl(repo: string = HARDVIZ_GITHUB_REPO) {
+  return `https://github.com/${repo}/releases/latest`;
+}
+
 export function githubReleaseTagUrl(
   version: string,
   repo: string = HARDVIZ_GITHUB_REPO,
