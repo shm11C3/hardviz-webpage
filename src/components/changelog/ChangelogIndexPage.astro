@@ -1,4 +1,5 @@
 ---
+import { FaGithub } from "react-icons/fa";
 import {
   getLangFromUrl,
   useTranslatedPath,
@@ -153,18 +154,37 @@ const dateFormatter = new Intl.DateTimeFormat(isJa ? "ja-JP" : "en-US", {
               <p class="mt-2 text-slate-600 dark:text-slate-300">
                 {t("changelog.emptyDescription")}
               </p>
-              <a
-                href={githubAllReleasesUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex mt-4 text-sm font-medium text-cyan-600 dark:text-cyan-400 hover:underline"
-              >
-                {t("download.githubLink")}
-              </a>
+              <div class="mt-5 flex justify-center">
+                <a
+                  href={githubAllReleasesUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex w-fit items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200"
+                >
+                  <FaGithub className="h-5 w-5" />
+                  {t("download.githubLink")}
+                </a>
+              </div>
             </div>
           )
         }
       </section>
+
+      {
+        entries.length ? (
+          <div class="mt-10 flex justify-center">
+            <a
+              href={githubAllReleasesUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex w-fit items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200"
+            >
+              <FaGithub className="h-5 w-5" />
+              {t("download.githubLink")}
+            </a>
+          </div>
+        ) : null
+      }
     </div>
   </main>
 

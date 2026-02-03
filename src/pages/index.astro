@@ -15,7 +15,7 @@ import {
   useTranslations,
 } from "../i18n/utils";
 import Layout from "../layouts/Layout.astro";
-import { githubAllReleasesUrl } from "../lib/github";
+import { githubAllReleasesUrl, githubLatestReleaseUrl } from "../lib/github";
 import type { PlatformDownload } from "../types/platform";
 
 const lang = getLangFromUrl(Astro.url);
@@ -71,6 +71,7 @@ const downloadTranslations = {
   noDownloads: t("download.noDownloads"),
   otherVersions: t("download.otherVersions"),
   changelogLink: t("download.changelogLink"),
+  githubDownloadButton: t("download.githubDownloadButton"),
 };
 
 // SoftwareApplication JSON-LD for rich search results
@@ -128,6 +129,7 @@ const softwareJsonLd = {
       latestVersion={release.version}
       translations={downloadTranslations}
       changelogHref={translatePath("/changelog")}
+      githubLatestReleaseHref={githubLatestReleaseUrl()}
     />
     <FAQPreview />
   </main>
