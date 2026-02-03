@@ -15,7 +15,7 @@ Official website for HardwareVisualizer, a hardware visualization tool.
 ## Setup
 
 ```bash
-pnpm install
+pnpm install --frozen-lockfile
 ```
 
 ## Development
