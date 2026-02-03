@@ -71,6 +71,7 @@ export const ui = {
     "download.noDownloads": "No downloads available for {platform} yet.",
     "download.otherVersions": "Looking for other versions or platforms?",
     "download.githubLink": "View all releases on GitHub →",
+    "download.changelogLink": "View past versions →",
 
     "changelog.title": "Changelog",
     "changelog.description":
@@ -231,6 +232,7 @@ export const ui = {
     "download.otherVersions":
       "他のバージョンやプラットフォームをお探しですか？",
     "download.githubLink": "GitHubですべてのリリースを表示 →",
+    "download.changelogLink": "過去のリリースを見る →",
 
     "changelog.title": "変更履歴",
     "changelog.description": "HardwareVisualizerのリリースノートと更新情報。",

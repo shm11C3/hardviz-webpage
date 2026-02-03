@@ -1,6 +1,5 @@
 import { type JSX, memo, useMemo } from "react";
 import { FaLinux, FaWindows } from "react-icons/fa";
-import { githubAllReleasesUrl } from "../lib/github";
 import { cn } from "../lib/utils";
 import type { PlatformDownload } from "../types/platform";
 
@@ -16,17 +15,19 @@ interface DownloadTranslations {
   button: string;
   noDownloads: string;
   otherVersions: string;
-  githubLink: string;
+  changelogLink: string;
 }
 
 const Download = ({
   downloads: initialDownloads,
   latestVersion,
   translations,
+  changelogHref,
 }: {
   downloads: PlatformDownload[];
   latestVersion: string | null;
   translations: DownloadTranslations;
+  changelogHref: string;
 }) => {
   const downloads = useMemo(() => {
     const ua = navigator.userAgent;
@@ -151,12 +152,11 @@ const Download = ({
             {translations.otherVersions}
           </p>
           <a
-            href={githubAllReleasesUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={changelogHref}
             className="font-medium text-foreground"
+            data-astro-prefetch
           >
-            {translations.githubLink}
+            {translations.changelogLink}
           </a>
         </div>
       </div>
