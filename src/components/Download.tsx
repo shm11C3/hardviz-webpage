@@ -1,5 +1,5 @@
 import { type JSX, memo, useMemo } from "react";
-import { FaLinux, FaWindows } from "react-icons/fa";
+import { FaGithub, FaLinux, FaWindows } from "react-icons/fa";
 import { cn } from "../lib/utils";
 import type { PlatformDownload } from "../types/platform";
 
@@ -16,6 +16,7 @@ interface DownloadTranslations {
   noDownloads: string;
   otherVersions: string;
   changelogLink: string;
+  githubDownloadButton: string;
 }
 
 const Download = ({
@@ -23,11 +24,13 @@ const Download = ({
   latestVersion,
   translations,
   changelogHref,
+  githubLatestReleaseHref,
 }: {
   downloads: PlatformDownload[];
   latestVersion: string | null;
   translations: DownloadTranslations;
   changelogHref: string;
+  githubLatestReleaseHref: string;
 }) => {
   const downloads = useMemo(() => {
     const ua = navigator.userAgent;
@@ -151,9 +154,21 @@ const Download = ({
           <p className="mb-4 text-slate-600 dark:text-slate-400">
             {translations.otherVersions}
           </p>
+          <div className="mt-6">
+            <a
+              href={githubLatestReleaseHref}
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-900 px-5 py-3 font-semibold text-white hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaGithub className="h-5 w-5" />
+              {translations.githubDownloadButton}
+            </a>
+          </div>
+
           <a
             href={changelogHref}
-            className="font-medium text-foreground"
+            className="mt-4 inline-block font-medium text-foreground"
             data-astro-prefetch
           >
             {translations.changelogLink}
