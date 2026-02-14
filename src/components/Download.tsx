@@ -1,11 +1,12 @@
 import { type JSX, memo, useMemo } from "react";
-import { FaGithub, FaLinux, FaWindows } from "react-icons/fa";
+import { FaApple, FaGithub, FaLinux, FaWindows } from "react-icons/fa";
 import { cn } from "../lib/utils";
 import type { PlatformDownload } from "../types/platform";
 
 const platformToIcon: Record<PlatformDownload["platform"], JSX.Element> = {
   Windows: <FaWindows className="h-8 w-8" />,
   Linux: <FaLinux className="h-8 w-8" />,
+  macOS: <FaApple className="h-8 w-8" />,
 };
 
 interface DownloadTranslations {
@@ -35,6 +36,9 @@ const Download = ({
   const downloads = useMemo(() => {
     const ua = navigator.userAgent;
     const detected = (() => {
+      if (/Macintosh|Mac OS X/.test(ua)) {
+        return "macOS";
+      }
       if (/Linux/.test(ua)) {
         return "Linux";
       }
@@ -67,7 +71,7 @@ const Download = ({
           </p>
         </div>
 
-        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-3">
           {downloads.map((platform) => (
             <div
               key={platform.platform}

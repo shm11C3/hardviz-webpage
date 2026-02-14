@@ -38,6 +38,24 @@ const downloads: PlatformDownload[] = [
     primary: false,
   },
   {
+    platform: "macOS",
+    versions: [
+      {
+        type: "macOSAppleSilicon",
+        name: "Apple Silicon (ARM64)",
+        url: release.platforms.macOSAppleSilicon?.browser_download_url ?? null,
+        size: release.platforms.macOSAppleSilicon?.size ?? "-",
+      },
+      {
+        type: "macOSIntel",
+        name: "Intel (x64)",
+        url: release.platforms.macOSIntel?.browser_download_url ?? null,
+        size: release.platforms.macOSIntel?.size ?? "-",
+      },
+    ],
+    primary: false,
+  },
+  {
     platform: "Linux",
     versions: [
       {
@@ -80,7 +98,7 @@ const softwareJsonLd = {
   "@type": "SoftwareApplication",
   name: "HardwareVisualizer",
   applicationCategory: "UtilitiesApplication",
-  operatingSystem: "Windows 10, Windows 11, Linux",
+  operatingSystem: "Windows 10, Windows 11, macOS, Linux",
   url: "https://hardviz.com/ja/",
   downloadUrl: githubAllReleasesUrl(),
   softwareVersion: release.version,
