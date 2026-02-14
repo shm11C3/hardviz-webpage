@@ -84,6 +84,28 @@ export function fetchLatestRelease(): Promise<ReleaseData> {
               browser_download_url: asset.browser_download_url,
               updated_at: data.published_at,
             };
+          } else if (/.dmg/.test(asset.name) && !/.sig/.test(asset.name)) {
+            if (/arm64|aarch64/i.test(asset.name)) {
+              acc.macOSAppleSilicon = {
+                url: asset.browser_download_url,
+                size: asset.size
+                  ? `${(asset.size / 1024 / 1024).toFixed(1)} MB`
+                  : "-",
+                name: asset.name,
+                browser_download_url: asset.browser_download_url,
+                updated_at: data.published_at,
+              };
+            } else if (/x64|x86.?64|intel/i.test(asset.name)) {
+              acc.macOSIntel = {
+                url: asset.browser_download_url,
+                size: asset.size
+                  ? `${(asset.size / 1024 / 1024).toFixed(1)} MB`
+                  : "-",
+                name: asset.name,
+                browser_download_url: asset.browser_download_url,
+                updated_at: data.published_at,
+              };
+            }
           }
           return acc;
         },

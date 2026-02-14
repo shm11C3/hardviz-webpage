@@ -58,11 +58,21 @@ const t = useTranslations(lang);
         <tr>
           <td class="py-2 px-4 text-slate-800 dark:text-slate-200">macOS</td>
           <td class="py-2 px-4 text-slate-800 dark:text-slate-200"
-            >Apple Silicon, Intel (x64)</td
+            >Apple Silicon (ARM64)</td
+          >
+          <td class="py-2 px-4 text-2xl">✅</td>
+          <td class="py-2 px-4 text-slate-700 dark:text-slate-300"
+            >{t("specs.supportedOS.macos.appleSilicon.notes")}</td
+          >
+        </tr>
+        <tr>
+          <td class="py-2 px-4 text-slate-800 dark:text-slate-200">macOS</td>
+          <td class="py-2 px-4 text-slate-800 dark:text-slate-200"
+            >Intel (x64)</td
           >
           <td class="py-2 px-4 text-2xl">🚧</td>
           <td class="py-2 px-4 text-slate-700 dark:text-slate-300"
-            >{t("specs.supportedOS.macos.notes")}</td
+            >{t("specs.supportedOS.macos.intel.notes")}</td
           >
         </tr>
       </tbody>

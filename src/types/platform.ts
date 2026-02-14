@@ -1,4 +1,10 @@
-export type Platform = "windows" | "linuxAppImage" | "linuxDeb" | "linuxRPM";
+export type Platform =
+  | "windows"
+  | "linuxAppImage"
+  | "linuxDeb"
+  | "linuxRPM"
+  | "macOSAppleSilicon"
+  | "macOSIntel";
 
 export type VersionInfo = {
   type: Platform;
@@ -8,7 +14,7 @@ export type VersionInfo = {
 };
 
 export type PlatformDownload = {
-  platform: "Windows" | "Linux";
+  platform: "Windows" | "Linux" | "macOS";
   versions: VersionInfo[];
   primary: boolean;
 };

@@ -15,7 +15,7 @@ export const ui = {
     "nav.faq": "FAQ",
     "nav.changelog": "Changelog",
     "hero.description":
-      "HardwareVisualizer is a free, lightweight, and open-source hardware monitoring tool for Windows and Linux. Track CPU temperature, GPU usage, memory allocation, and system performance in real-time with beautiful graphs — a perfect alternative to Task Manager or HWiNFO.",
+      "HardwareVisualizer is a free, lightweight, and open-source hardware monitoring tool for Windows, macOS, and Linux. Track CPU temperature, GPU usage, memory allocation, and system performance in real-time with beautiful graphs — a perfect alternative to Task Manager or HWiNFO.",
     "hero.download": "Download Now",
     "hero.viewGitHub": "View on GitHub",
     "usage.title": "Make It Truly Yours",
@@ -65,7 +65,7 @@ export const ui = {
       "Fully transparent, community-driven development with the source code available on GitHub.",
     "download.title": "Download HardwareVisualizer",
     "download.description":
-      "Available for Windows and Linux OS. Free and open source.",
+      "Available for Windows, macOS, and Linux OS. Free and open source.",
     "download.currentVersion": "Current version:",
     "download.button": "Download",
     "download.noDownloads": "No downloads available for {platform} yet.",
@@ -112,6 +112,9 @@ export const ui = {
     "specs.supportedOS.windows.notes": "Latest updates recommended",
     "specs.supportedOS.linux.notes": "Some limitations on Wayland environments",
     "specs.supportedOS.macos.notes": "Under development / Experimental",
+    "specs.supportedOS.macos.appleSilicon.notes": "Officially supported",
+    "specs.supportedOS.macos.intel.notes":
+      "Experimental - please report issues on GitHub if you encounter problems",
     "specs.supportedHardware.title": "Supported CPU/GPU",
     "specs.supportedHardware.component": "Component",
     "specs.supportedHardware.supported": "Supported",
@@ -152,7 +155,7 @@ export const ui = {
       "Yes, HardwareVisualizer is completely free and open-source under the MIT license. You can download it from our website or GitHub, and even contribute to the project.",
     "faq.q3": "Which operating systems are supported?",
     "faq.a3":
-      "HardwareVisualizer supports Windows 10, Windows 11, and major Linux distributions (Debian/Ubuntu, RPM-based distros, AppImage). macOS support is experimental and under development.",
+      "HardwareVisualizer supports Windows 10, Windows 11, macOS (Apple Silicon officially supported, Intel experimental), and major Linux distributions (Debian/Ubuntu, RPM-based distros, AppImage).",
     "faq.q4": "How is it different from Task Manager or HWiNFO?",
     "faq.a4":
       "HardwareVisualizer is designed to be lightweight with a modern UI. Unlike Task Manager, it provides detailed graphs and 30-day historical data. Compared to HWiNFO, it uses fewer system resources thanks to its Tauri/Rust architecture while offering a customizable interface.",
@@ -176,7 +179,7 @@ export const ui = {
     "nav.faq": "FAQ",
     "nav.changelog": "変更履歴",
     "hero.description":
-      "HardwareVisualizerは、WindowsとLinux向けの無料・軽量・オープンソースのハードウェアモニタリングツールです。CPU温度、GPU使用率、メモリ割り当て、システムパフォーマンスを美しいグラフでリアルタイムに追跡。タスクマネージャーやHWiNFOの代替として最適です。",
+      "HardwareVisualizerは、Windows、macOS、Linux向けの無料・軽量・オープンソースのハードウェアモニタリングツールです。CPU温度、GPU使用率、メモリ割り当て、システムパフォーマンスを美しいグラフでリアルタイムに追跡。タスクマネージャーやHWiNFOの代替として最適です。",
     "hero.download": "今すぐダウンロード",
     "hero.viewGitHub": "GitHubを閲覧",
     "usage.title": "あなただけのカスタマイズ",
@@ -226,7 +229,7 @@ export const ui = {
       "完全な透明性とコミュニティ主導の開発。ソースコードはGitHubで公開。",
     "download.title": "HardwareVisualizerをダウンロード",
     "download.description":
-      "WindowsおよびLinux OSで利用可能。無料でオープンソース。",
+      "Windows、macOS、Linux OSで利用可能。無料でオープンソース。",
     "download.currentVersion": "現在のバージョン:",
     "download.button": "ダウンロード",
     "download.noDownloads": "{platform}用のダウンロードはまだ利用できません。",
@@ -271,6 +274,9 @@ export const ui = {
     "specs.supportedOS.windows.notes": "最新のアップデートを推奨",
     "specs.supportedOS.linux.notes": "Wayland環境では一部制限あり",
     "specs.supportedOS.macos.notes": "開発中 / 実験的",
+    "specs.supportedOS.macos.appleSilicon.notes": "正式サポート",
+    "specs.supportedOS.macos.intel.notes":
+      "実験的サポート - 問題があればGitHubでIssueを作成してください",
     "specs.supportedHardware.title": "対応CPU/GPU",
     "specs.supportedHardware.component": "コンポーネント",
     "specs.supportedHardware.supported": "対応状況",
@@ -311,7 +317,7 @@ export const ui = {
       "はい、HardwareVisualizerは完全に無料で、MITライセンスのオープンソースです。当サイトまたはGitHubからダウンロードでき、プロジェクトへの貢献も可能です。",
     "faq.q3": "どのOSに対応していますか？",
     "faq.a3":
-      "HardwareVisualizerはWindows 10、Windows 11、および主要なLinuxディストリビューション（Debian/Ubuntu、RPM系、AppImage）に対応しています。macOS対応は実験的で開発中です。",
+      "HardwareVisualizerはWindows 10、Windows 11、macOS（Apple Silicon正式対応、Intel実験的）、および主要なLinuxディストリビューション（Debian/Ubuntu、RPM系、AppImage）に対応しています。",
     "faq.q4": "タスクマネージャーやHWiNFOとの違いは？",
     "faq.a4":
       "HardwareVisualizerは軽量でモダンなUIを重視しています。タスクマネージャーと異なり、詳細なグラフ、30日間の履歴データを提供します。HWiNFOと比較すると、Tauri/Rustアーキテクチャによりシステムリソースの消費が少なく、カスタマイズ可能なインターフェースを提供します。",
