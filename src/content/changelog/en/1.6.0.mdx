@@ -1,0 +1,47 @@
+---
+lang: en
+version: 1.6.0
+date: 2026-02-14
+title: "v1.6.0"
+summary: "The macOS version has been officially released. Additionally, we have added new display items, improved the error handling UI, and fixed minor bugs."
+tags:
+  - Release
+  - macOS
+  - Windows
+  - CI
+  - GPU
+---
+
+## Added
+
+- feat(macos): Implement GPU usage monitoring for macOS ([#1035](https://github.com/shm11C3/HardwareVisualizer/pull/1035))
+- feat(macos): Expand GPU information collection by adding GPU memory (VRAM) usage retrieval for macOS ([#1051](https://github.com/shm11C3/HardwareVisualizer/pull/1051))
+- feat(gpu): Add GPU memory usage retrieval and update localization strings for display ([#1053](https://github.com/shm11C3/HardwareVisualizer/pull/1053))
+- feat(ui): Improve error handling UI by introducing a resettable Error Boundary ([#1062](https://github.com/shm11C3/HardwareVisualizer/pull/1062))
+- feat(hw): Add motherboard information retrieval and dashboard integration ([#1081](https://github.com/shm11C3/HardwareVisualizer/pull/1081))
+- CI: Add automatic update workflow and Tauri dependency update script ([#1099](https://github.com/shm11C3/HardwareVisualizer/pull/1099))
+- CI: Add Apple API Key setup for notarization to the publish workflow ([#1115](https://github.com/shm11C3/HardwareVisualizer/pull/1115))
+- feat(windows): Make Windows code signing optional with the ENABLE_WINDOWS_SIGNING flag ([#1119](https://github.com/shm11C3/HardwareVisualizer/pull/1119))
+- CI/docs: Reflect macOS support in CI/Publish and update README for the macOS release ([#1122](https://github.com/shm11C3/HardwareVisualizer/pull/1122))
+
+## Fixed
+
+- fix(macos): Fix Archive DB initialization and data directory creation ([#1050](https://github.com/shm11C3/HardwareVisualizer/pull/1050))
+- fix(macos): Ensure system monitoring sampling works correctly on macOS ([#1054](https://github.com/shm11C3/HardwareVisualizer/pull/1054))
+- fix(ci): Switch JSON parsing in tauri-updater script to Node and replace ripgrep dependency with grep ([#1101](https://github.com/shm11C3/HardwareVisualizer/pull/1101))
+- fix(ci): Switch JSON parsing in tauri-updater script to Node and replace ripgrep dependency with grep ([#1105](https://github.com/shm11C3/HardwareVisualizer/pull/1105))
+- fix(ui): Hide motherboard component on unsupported operating systems ([#1110](https://github.com/shm11C3/HardwareVisualizer/pull/1110))
+- fix(ci): Fix Azure code signing setup via script-based configuration ([#1120](https://github.com/shm11C3/HardwareVisualizer/pull/1120))
+
+## Maintenance
+
+- chore: Remove rust_decimal dependency and simplify rounding logic ([#1047](https://github.com/shm11C3/HardwareVisualizer/pull/1047))
+- chore: Exclude bindings.ts from frontend labeler (later reverted) ([#1052](https://github.com/shm11C3/HardwareVisualizer/pull/1052))
+- revert: Undo exclusion of bindings.ts ([#1056](https://github.com/shm11C3/HardwareVisualizer/pull/1056))
+- chore: Update rust-toolchain action to 1.93.0 ([#1066](https://github.com/shm11C3/HardwareVisualizer/pull/1066))
+- chore: Update actions/cache from v4 to v5 ([#1065](https://github.com/shm11C3/HardwareVisualizer/pull/1065))
+- chore: Support devmode for updater ([#1080](https://github.com/shm11C3/HardwareVisualizer/pull/1080))
+- chore: Optimize Cargo.toml / tauri.conf.json and adjust for schema updates ([#1112](https://github.com/shm11C3/HardwareVisualizer/pull/1112))
+- chore: Update dependencies for Tauri and related packages ([#1114](https://github.com/shm11C3/HardwareVisualizer/pull/1114))
+- docs: Remove platform support table from backend architecture documentation ([#1121](https://github.com/shm11C3/HardwareVisualizer/pull/1121))
+- fix(ci): Modify publish workflow to skip stapling during macOS builds ([#1116](https://github.com/shm11C3/HardwareVisualizer/pull/1116))
