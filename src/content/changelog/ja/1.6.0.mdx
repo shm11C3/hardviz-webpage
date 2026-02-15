@@ -1,0 +1,47 @@
+---
+lang: ja
+version: 1.6.0
+date: 2026-02-14
+title: "v1.6.0"
+summary: "macOS版を正式リリースしました。その他、表示項目の追加やエラー時のUI改善、軽微なバグの修整を行っています。"
+tags:
+  - リリース
+  - macOS
+  - Windows
+  - CI
+  - GPU
+---
+
+## 追加
+
+- feat(macos): macOS向けGPU使用率モニタリングを実装（[#1035](https://github.com/shm11C3/HardwareVisualizer/pull/1035)）
+- feat(macos): macOSのGPUメモリ（VRAM）使用量取得を追加し、GPU情報収集を拡張（[#1051](https://github.com/shm11C3/HardwareVisualizer/pull/1051)）
+- feat(gpu): GPUメモリ使用量の取得を追加し、表示用の言語文字列を更新（[#1053](https://github.com/shm11C3/HardwareVisualizer/pull/1053)）
+- feat(ui): リセット可能なError Boundaryを導入し、エラーハンドリングUIを改善（[#1062](https://github.com/shm11C3/HardwareVisualizer/pull/1062)）
+- feat(hw): マザーボード情報の取得とダッシュボード統合を追加（[#1081](https://github.com/shm11C3/HardwareVisualizer/pull/1081)）
+- CI: 自動アップデート用ワークフローとTauri依存更新スクリプトを追加（[#1099](https://github.com/shm11C3/HardwareVisualizer/pull/1099)）
+- CI: notarization用のApple API Keyセットアップをpublishワークフローに追加（[#1115](https://github.com/shm11C3/HardwareVisualizer/pull/1115)）
+- feat(windows): ENABLE_WINDOWS_SIGNING フラグでWindowsコード署名を任意化（[#1119](https://github.com/shm11C3/HardwareVisualizer/pull/1119)）
+- CI/docs: macOS対応をCI/Publishに反映し、READMEもmacOS提供に合わせて更新（[#1122](https://github.com/shm11C3/HardwareVisualizer/pull/1122)）
+
+## 修正
+
+- fix(macos): Archive DB初期化とデータディレクトリ作成を修正（[#1050](https://github.com/shm11C3/HardwareVisualizer/pull/1050)）
+- fix(macos): macOSでシステム監視サンプリングが確実に動くよう修正（[#1054](https://github.com/shm11C3/HardwareVisualizer/pull/1054)）
+- fix(ci): tauri-updaterスクリプトのJSONパースをnodeに切り替え、ripgrep依存をgrepに置換（[#1101](https://github.com/shm11C3/HardwareVisualizer/pull/1101)）
+- fix(ci): tauri-updaterスクリプトのJSONパースをnodeに切り替え、ripgrep依存をgrepに置換（[#1105](https://github.com/shm11C3/HardwareVisualizer/pull/1105)）
+- fix(ui): 未対応OSではマザーボードコンポーネントを非表示にする（[#1110](https://github.com/shm11C3/HardwareVisualizer/pull/1110)）
+- fix(ci): Azureコード署名セットアップをスクリプト経由の設定に修正（[#1120](https://github.com/shm11C3/HardwareVisualizer/pull/1120)）
+
+## メンテナンス
+
+- chore: rust_decimal依存を削除し、丸め処理を簡素化（[#1047](https://github.com/shm11C3/HardwareVisualizer/pull/1047)）
+- chore: bindings.ts をfrontend labeler対象から除外（※後にrevert）（[#1052](https://github.com/shm11C3/HardwareVisualizer/pull/1052)）
+- revert: bindings.ts除外の変更を取り消し（[#1056](https://github.com/shm11C3/HardwareVisualizer/pull/1056)）
+- chore: rust-toolchain actionを 1.93.0 に更新（[#1066](https://github.com/shm11C3/HardwareVisualizer/pull/1066)）
+- chore: actions/cache を v4 → v5 に更新（[#1065](https://github.com/shm11C3/HardwareVisualizer/pull/1065)）
+- chore: updaterのdevmode対応（[#1080](https://github.com/shm11C3/HardwareVisualizer/pull/1080)）
+- chore: Cargo.toml / tauri.conf.json を最適化・スキーマ更新に合わせて調整（[#1112](https://github.com/shm11C3/HardwareVisualizer/pull/1112)）
+- chore: Tauriおよび関連パッケージの依存を更新（[#1114](https://github.com/shm11C3/HardwareVisualizer/pull/1114)）
+- docs: backend architectureドキュメントからプラットフォームサポート表を削除（[#1121](https://github.com/shm11C3/HardwareVisualizer/pull/1121)）
+- fix(ci): macOSビルドでstaplingをスキップするようpublishワークフローを修正（[#1116](https://github.com/shm11C3/HardwareVisualizer/pull/1116)）
