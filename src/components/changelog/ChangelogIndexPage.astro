@@ -63,30 +63,31 @@ const dateFormatter = new Intl.DateTimeFormat(isJa ? "ja-JP" : "en-US", {
       </div>
 
       <section class="mt-10 grid grid-cols-1 gap-4">
-        {
-          entries.length ? (
+        {entries.length ? (
             entries.map(({ entry, untranslated }) => (
-              <article class="group relative rounded-2xl border border-slate-200/70 dark:border-slate-800 bg-white/70 dark:bg-slate-900/40 hover:bg-white/90 dark:hover:bg-slate-900/65 focus-within:bg-white/90 dark:focus-within:bg-slate-900/65 hover:border-slate-300/70 dark:hover:border-slate-700 focus-within:border-slate-300/70 dark:focus-within:border-slate-700 backdrop-blur-sm p-5 md:p-6 shadow-sm hover:shadow-md focus-within:shadow-md transition-colors transition-shadow">
+              <article class="group relative rounded-2xl border border-slate-200/70 bg-white/70 p-5 shadow-sm backdrop-blur-sm transition-colors transition-shadow focus-within:border-slate-300/70 focus-within:bg-white/90 focus-within:shadow-md hover:border-slate-300/70 hover:bg-white/90 hover:shadow-md md:p-6 dark:border-slate-800 dark:bg-slate-900/40 dark:hover:border-slate-700 dark:hover:bg-slate-900/65 dark:focus-within:border-slate-700 dark:focus-within:bg-slate-900/65">
                 <a
                   href={translatePath(`/changelog/${entry.data.version}`)}
                   data-astro-prefetch
                   aria-label={`${t("changelog.title")} v${entry.data.version}`}
                   class="absolute inset-0 z-10 rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-950"
-                />
+                >
+                  <span class="sr-only">{t("changelog.title")} v{entry.data.version}</span>
+                </a>
 
                 <div
                   aria-hidden="true"
-                  class="pointer-events-none absolute inset-0 z-0 rounded-2xl bg-white opacity-0 transition-opacity duration-200 group-hover:opacity-10 group-focus-within:opacity-10 dark:group-hover:opacity-5 dark:group-focus-within:opacity-5"
+                  class="pointer-events-none absolute inset-0 z-0 rounded-2xl bg-white opacity-0 transition-opacity duration-200 group-focus-within:opacity-10 group-hover:opacity-10 dark:group-hover:opacity-5 dark:group-focus-within:opacity-5"
                 />
 
-                <div class="relative z-20 pointer-events-none">
+                <div class="pointer-events-none relative z-20">
                   <div class="flex items-start justify-between gap-4">
                     <div>
-                      <p class="text-xl font-semibold text-slate-900 dark:text-white">
+                      <p class="font-semibold text-slate-900 text-xl dark:text-white">
                         {entry.data.title}
                       </p>
 
-                      <div class="mt-2 flex flex-wrap items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+                      <div class="mt-2 flex flex-wrap items-center gap-2 text-slate-500 text-sm dark:text-slate-400">
                         <span class="font-mono">v{entry.data.version}</span>
                         <span aria-hidden="true">•</span>
                         <time datetime={entry.data.date.toISOString()}>
@@ -95,7 +96,7 @@ const dateFormatter = new Intl.DateTimeFormat(isJa ? "ja-JP" : "en-US", {
                         {untranslated ? (
                           <>
                             <span aria-hidden="true">•</span>
-                            <span class="inline-flex items-center rounded-full border border-amber-200/80 dark:border-amber-400/30 bg-amber-50/80 dark:bg-amber-400/10 px-2 py-0.5 text-xs text-amber-800 dark:text-amber-200">
+                            <span class="inline-flex items-center rounded-full border border-amber-200/80 bg-amber-50/80 px-2 py-0.5 text-amber-800 text-xs dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-200">
                               {t("changelog.untranslatedBadge")}
                             </span>
                           </>
@@ -107,7 +108,7 @@ const dateFormatter = new Intl.DateTimeFormat(isJa ? "ja-JP" : "en-US", {
                       href={githubReleaseTagUrl(entry.data.version)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="relative z-30 pointer-events-auto shrink-0 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
+                      class="pointer-events-auto relative z-30 shrink-0 font-medium text-slate-600 text-sm transition-colors hover:text-cyan-500 dark:text-slate-300 dark:hover:text-cyan-400"
                     >
                       {t("changelog.githubRelease")}
                     </a>
@@ -116,7 +117,7 @@ const dateFormatter = new Intl.DateTimeFormat(isJa ? "ja-JP" : "en-US", {
                   {entry.data.tags?.length ? (
                     <div class="mt-4 flex flex-wrap gap-2">
                       {entry.data.tags.map((tag) => (
-                        <span class="inline-flex items-center rounded-full border border-slate-200 dark:border-slate-700 px-2.5 py-1 text-xs text-slate-600 dark:text-slate-300">
+                        <span class="inline-flex items-center rounded-full border border-slate-200 px-2.5 py-1 text-slate-600 text-xs dark:border-slate-700 dark:text-slate-300">
                           {tag}
                         </span>
                       ))}
@@ -136,7 +137,7 @@ const dateFormatter = new Intl.DateTimeFormat(isJa ? "ja-JP" : "en-US", {
                           href={link.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          class="relative z-30 pointer-events-auto text-sm text-cyan-600 dark:text-cyan-400 hover:underline"
+                          class="pointer-events-auto relative z-30 text-cyan-600 text-sm hover:underline dark:text-cyan-400"
                         >
                           {link.label}
                         </a>
@@ -147,8 +148,8 @@ const dateFormatter = new Intl.DateTimeFormat(isJa ? "ja-JP" : "en-US", {
               </article>
             ))
           ) : (
-            <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800 bg-white/70 dark:bg-slate-900/40 backdrop-blur-sm p-5 md:p-6 shadow-sm">
-              <p class="text-slate-700 dark:text-slate-200 font-medium">
+            <div class="rounded-2xl border border-slate-200/70 bg-white/70 p-5 shadow-sm backdrop-blur-sm md:p-6 dark:border-slate-800 dark:bg-slate-900/40">
+              <p class="font-medium text-slate-700 dark:text-slate-200">
                 {t("changelog.emptyTitle")}
               </p>
               <p class="mt-2 text-slate-600 dark:text-slate-300">
@@ -159,32 +160,29 @@ const dateFormatter = new Intl.DateTimeFormat(isJa ? "ja-JP" : "en-US", {
                   href={githubAllReleasesUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="inline-flex w-fit items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200"
+                  class="inline-flex w-fit items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 font-semibold text-sm text-white hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200"
                 >
                   <FaGithub className="h-5 w-5" />
                   {t("download.githubLink")}
                 </a>
               </div>
             </div>
-          )
-        }
+          )}
       </section>
 
-      {
-        entries.length ? (
+      {entries.length ? (
           <div class="mt-10 flex justify-center">
             <a
               href={githubAllReleasesUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex w-fit items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200"
+              class="inline-flex w-fit items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 font-semibold text-sm text-white hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200"
             >
               <FaGithub className="h-5 w-5" />
               {t("download.githubLink")}
             </a>
           </div>
-        ) : null
-      }
+        ) : null}
     </div>
   </main>
 

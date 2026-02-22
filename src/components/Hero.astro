@@ -13,8 +13,7 @@ const t = useTranslations(lang);
 >
   <div
     class="absolute inset-0 bg-grid-black/[0.05] dark:bg-grid-white/[0.05] bg-[size:60px_60px]"
-  >
-  </div>
+  ></div>
   <div class="container mx-auto px-4 relative z-10">
     <div class="flex flex-col lg:flex-row items-center gap-12">
       <div class="flex-1 text-center lg:text-left">
@@ -46,10 +45,10 @@ const t = useTranslations(lang);
           >
             <div
               class="pointer-events-none absolute inset-0 z-0 bg-hardviz-glow opacity-90 blur-2xl"
-            >
-            </div>
-            <div class="pointer-events-none absolute inset-0 z-0 bg-black/15">
-            </div>
+            ></div>
+            <div
+              class="pointer-events-none absolute inset-0 z-0 bg-black/15"
+            ></div>
             <div class="flex relative z-10 items-center justify-center gap-2">
               <ArrowDownToLine className="w-5 h-5" />
               {t("hero.download")}
@@ -70,30 +69,28 @@ const t = useTranslations(lang);
         <HardwareVisualizer />
         <div
           class="absolute -z-10 -bottom-6 -right-6 w-72 h-72 bg-cyan-400/20 dark:bg-cyan-500/30 rounded-full blur-3xl"
-        >
-        </div>
+        ></div>
         <div
           class="absolute -z-10 -top-6 -left-6 w-72 h-72 bg-purple-400/20 dark:bg-purple-500/20 rounded-full blur-3xl"
-        >
-        </div>
+        ></div>
       </div>
     </div>
   </div>
 </section>
 
 <script>
-  // アニメーション効果のためのJavaScript
-  const downloadBtn = document.querySelector(".download-btn");
+// アニメーション効果のためのJavaScript
+const downloadBtn = document.querySelector(".download-btn");
 
-  if (downloadBtn) {
-    downloadBtn.addEventListener("mouseenter", () => {
-      const icon = downloadBtn.querySelector("svg");
-      if (icon) icon.classList.add("animate-bounce");
-    });
+if (downloadBtn) {
+  downloadBtn.addEventListener("mouseenter", () => {
+    const icon = downloadBtn.querySelector("svg");
+    if (icon) icon.classList.add("animate-bounce");
+  });
 
-    downloadBtn.addEventListener("mouseleave", () => {
-      const icon = downloadBtn.querySelector("svg");
-      if (icon) icon.classList.remove("animate-bounce");
-    });
-  }
+  downloadBtn.addEventListener("mouseleave", () => {
+    const icon = downloadBtn.querySelector("svg");
+    if (icon) icon.classList.remove("animate-bounce");
+  });
+}
 </script>

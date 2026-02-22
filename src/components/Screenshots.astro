@@ -56,8 +56,7 @@ const slides = [
 <div class="py-16 bg-neutral-200 dark:bg-slate-900">
   <div class="swiper swiper-container">
     <div class="swiper-wrapper">
-      {
-        slides.map((slide) => (
+      {slides.map((slide) => (
           <div class="swiper-slide">
             <div class="screenshot-slot" data-screenshot={slide.key}>
               <noscript>
@@ -65,8 +64,7 @@ const slides = [
               </noscript>
             </div>
           </div>
-        ))
-      }
+        ))}
     </div>
 
     <div class="swiper-pagination"></div>
@@ -77,8 +75,7 @@ const slides = [
     <div class="swiper-scrollbar"></div>
   </div>
 
-  {
-    slides.map((slide, index) => (
+  {slides.map((slide, index) => (
       <>
         <template data-screenshot-template={slide.key} data-theme="light">
           <Image
@@ -97,173 +94,170 @@ const slides = [
           />
         </template>
       </>
-    ))
-  }
+    ))}
 </div>
 <style is:global>
-  .swiper-wrapper {
-    max-width: 800px;
-    max-height: 500px;
-  }
+.swiper-wrapper {
+  max-width: 800px;
+  max-height: 500px;
+}
 
-  .swiper-slide img {
-    height: auto;
-    max-width: 100%;
-    object-fit: cover;
-  }
+.swiper-slide img {
+  height: auto;
+  max-width: 100%;
+  object-fit: cover;
+}
 
-  /* ページネーションの通常色 */
-  .swiper-pagination-bullet {
-    background: oklch(0.9107 0.0214 222.77) !important;
-  }
+/* ページネーションの通常色 */
+.swiper .swiper-pagination-bullet {
+  background: oklch(0.9107 0.0214 222.77);
+}
 
-  /* ページネーションのアクティブ色 */
-  .swiper-pagination-bullet-active {
-    background: oklch(0.9107 0.0214 222.77) !important;
-    opacity: 1 !important;
-  }
+/* ページネーションのアクティブ色 */
+.swiper .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background: oklch(0.9107 0.0214 222.77);
+  opacity: 1;
+}
 
-  .swiper-button::after {
-    font-size: 32px;
-    color: oklch(0.9107 0.0214 222.77);
-  }
+.swiper-button::after {
+  font-size: 32px;
+  color: oklch(0.9107 0.0214 222.77);
+}
 </style>
 
 <script>
-  import type { SwiperOptions } from "swiper/types";
+import type { SwiperOptions } from "swiper/types";
 
-  type Theme = "light" | "dark";
+type Theme = "light" | "dark";
 
-  const getCurrentTheme = (): Theme => {
-    return document.documentElement.classList.contains("dark")
-      ? "dark"
-      : "light";
-  };
+const getCurrentTheme = (): Theme => {
+  return document.documentElement.classList.contains("dark") ? "dark" : "light";
+};
 
-  const applyScreenshotsForTheme = (theme: Theme) => {
-    const templates = document.querySelectorAll<HTMLTemplateElement>(
-      `template[data-screenshot-template][data-theme="${theme}"]`,
-    );
+const applyScreenshotsForTheme = (theme: Theme) => {
+  const templates = document.querySelectorAll<HTMLTemplateElement>(
+    `template[data-screenshot-template][data-theme="${theme}"]`,
+  );
 
-    const templateByKey = new Map<string, HTMLTemplateElement>();
-    for (const template of templates) {
-      const key = template.getAttribute("data-screenshot-template");
-      if (key) templateByKey.set(key, template);
-    }
-
-    const slots = document.querySelectorAll<HTMLElement>(
-      ".swiper .screenshot-slot[data-screenshot]",
-    );
-    for (const slot of slots) {
-      const key = slot.getAttribute("data-screenshot");
-      if (!key) continue;
-
-      const template = templateByKey.get(key);
-      if (!template) continue;
-
-      slot.replaceChildren(template.content.cloneNode(true));
-    }
-  };
-
-  const swiperConfig: SwiperOptions = {
-    loop: true,
-
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-
-    scrollbar: {
-      el: ".swiper-scrollbar",
-    },
-
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: true,
-    },
-
-    spaceBetween: 24,
-    speed: 600,
-
-    slidesPerView: 1,
-    slidesPerGroup: 1,
-
-    breakpoints: {
-      1024: {
-        slidesPerView: 2,
-        slidesPerGroup: 2,
-      },
-      1920: {
-        slidesPerView: 3,
-        slidesPerGroup: 3,
-      },
-    },
-  };
-
-  // Swiper の動的インポートと初期化
-  const initSwiper = async () => {
-    const initialTheme = getCurrentTheme();
-    applyScreenshotsForTheme(initialTheme);
-
-    // Swiper と CSS を動的にインポート
-    const [{ default: Swiper }, { Navigation, Pagination, Autoplay }] =
-      await Promise.all([import("swiper"), import("swiper/modules")]);
-
-    // CSS も動的にインポート
-    await Promise.all([
-      import("swiper/css"),
-      import("swiper/css/navigation"),
-      import("swiper/css/pagination"),
-      import("swiper/css/scrollbar"),
-    ]);
-
-    // Swiper を初期化
-    const swiper = new Swiper(".swiper", {
-      ...swiperConfig,
-      modules: [Navigation, Pagination, Autoplay],
-    });
-
-    // テーマ変更の監視
-    let lastTheme: Theme = initialTheme;
-    const themeObserver = new MutationObserver(() => {
-      const nextTheme = getCurrentTheme();
-      if (nextTheme === lastTheme) return;
-
-      applyScreenshotsForTheme(nextTheme);
-      swiper.update();
-      lastTheme = nextTheme;
-    });
-
-    themeObserver.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-
-    window.addEventListener("beforeunload", () => {
-      themeObserver.disconnect();
-    });
-  };
-
-  // Intersection Observer でビューポートに近づいた時に Swiper を読み込み
-  const swiperContainer = document.querySelector(".swiper-container");
-  if (swiperContainer) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          initSwiper();
-          observer.disconnect();
-        }
-      },
-      {
-        rootMargin: "200px", // 200px手前から読み込み開始
-      },
-    );
-
-    observer.observe(swiperContainer);
+  const templateByKey = new Map<string, HTMLTemplateElement>();
+  for (const template of templates) {
+    const key = template.getAttribute("data-screenshot-template");
+    if (key) templateByKey.set(key, template);
   }
+
+  const slots = document.querySelectorAll<HTMLElement>(
+    ".swiper .screenshot-slot[data-screenshot]",
+  );
+  for (const slot of slots) {
+    const key = slot.getAttribute("data-screenshot");
+    if (!key) continue;
+
+    const template = templateByKey.get(key);
+    if (!template) continue;
+
+    slot.replaceChildren(template.content.cloneNode(true));
+  }
+};
+
+const swiperConfig: SwiperOptions = {
+  loop: true,
+
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+
+  scrollbar: {
+    el: ".swiper-scrollbar",
+  },
+
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: true,
+  },
+
+  spaceBetween: 24,
+  speed: 600,
+
+  slidesPerView: 1,
+  slidesPerGroup: 1,
+
+  breakpoints: {
+    1024: {
+      slidesPerView: 2,
+      slidesPerGroup: 2,
+    },
+    1920: {
+      slidesPerView: 3,
+      slidesPerGroup: 3,
+    },
+  },
+};
+
+// Swiper の動的インポートと初期化
+const initSwiper = async () => {
+  const initialTheme = getCurrentTheme();
+  applyScreenshotsForTheme(initialTheme);
+
+  // Swiper と CSS を動的にインポート
+  const [{ default: Swiper }, { Navigation, Pagination, Autoplay }] =
+    await Promise.all([import("swiper"), import("swiper/modules")]);
+
+  // CSS も動的にインポート
+  await Promise.all([
+    import("swiper/css"),
+    import("swiper/css/navigation"),
+    import("swiper/css/pagination"),
+    import("swiper/css/scrollbar"),
+  ]);
+
+  // Swiper を初期化
+  const swiper = new Swiper(".swiper", {
+    ...swiperConfig,
+    modules: [Navigation, Pagination, Autoplay],
+  });
+
+  // テーマ変更の監視
+  let lastTheme: Theme = initialTheme;
+  const themeObserver = new MutationObserver(() => {
+    const nextTheme = getCurrentTheme();
+    if (nextTheme === lastTheme) return;
+
+    applyScreenshotsForTheme(nextTheme);
+    swiper.update();
+    lastTheme = nextTheme;
+  });
+
+  themeObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+
+  window.addEventListener("beforeunload", () => {
+    themeObserver.disconnect();
+  });
+};
+
+// Intersection Observer でビューポートに近づいた時に Swiper を読み込み
+const swiperContainer = document.querySelector(".swiper-container");
+if (swiperContainer) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting) {
+        initSwiper();
+        observer.disconnect();
+      }
+    },
+    {
+      rootMargin: "200px", // 200px手前から読み込み開始
+    },
+  );
+
+  observer.observe(swiperContainer);
+}
 </script>

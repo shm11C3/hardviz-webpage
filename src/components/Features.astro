@@ -53,38 +53,36 @@ const features = [
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {
-        features.map((feature) => (
-          <div class="bg-white  dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md transition-all">
-            <div class="w-12 h-12 flex items-center justify-center bg-slate-100 dark:bg-slate-700 rounded-lg mb-4">
+      {features.map((feature) => (
+          <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:shadow-md dark:border-slate-700 dark:bg-slate-800">
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-700">
               {feature.icon === "cpu" && (
-                <Cpu className="w-6 h-6 text-cyan-400" />
+                <Cpu className="h-6 w-6 text-cyan-400" />
               )}
               {feature.icon === "memory" && (
-                <MemoryStick className="w-6 h-6 text-purple-400" />
+                <MemoryStick className="h-6 w-6 text-purple-400" />
               )}
               {feature.icon === "gauge" && (
-                <Gauge className="w-6 h-6 text-amber-400" />
+                <Gauge className="h-6 w-6 text-amber-400" />
               )}
               {feature.icon === "line-chart" && (
-                <LineChart className="w-6 h-6 text-indigo-400" />
+                <LineChart className="h-6 w-6 text-indigo-400" />
               )}
               {feature.icon === "zap" && (
-                <Zap className="w-6 h-6 text-rose-400" />
+                <Zap className="h-6 w-6 text-rose-400" />
               )}
               {feature.icon === "shield" && (
-                <Shield className="w-6 h-6 text-blue-400" />
+                <Shield className="h-6 w-6 text-blue-400" />
               )}
             </div>
-            <h3 class="text-xl text-slate-900 font-semibold mb-2 dark:text-white">
+            <h3 class="mb-2 font-semibold text-slate-900 text-xl dark:text-white">
               {feature.title}
             </h3>
             <p class="text-slate-600 dark:text-slate-400">
               {feature.description}
             </p>
           </div>
-        ))
-      }
+        ))}
     </div>
   </div>
 </section>
