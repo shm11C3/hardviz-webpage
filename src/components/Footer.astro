@@ -104,22 +104,22 @@ const footerLinks = [
       {
         footerLinks.map((section) => (
           <div>
-            <h3 class="font-semibold text-lg mb-4">{section.title}</h3>
+            <h3 class="mb-4 font-semibold text-lg">{section.title}</h3>
             <ul class="space-y-2">
               {section.links.map((link) => (
                 <li>
                   <a
                     href={link.href}
-                    class="text-slate-600 dark:text-slate-400 hover:text-black dark:hover:text-white transition-colors inline-flex items-center gap-1"
+                    class="inline-flex items-center gap-1 text-slate-600 transition-colors hover:text-black dark:text-slate-400 dark:hover:text-white"
                     {...(link.external
                       ? { target: "_blank", rel: "noopener noreferrer" }
                       : { "data-astro-prefetch": true })}
                   >
                     {link.name}
                     {link.external ? (
-                      <ExternalLink className="w-3 h-3" />
+                      <ExternalLink className="h-3 w-3" />
                     ) : (
-                      <ChevronRight className="w-3 h-3" />
+                      <ChevronRight className="h-3 w-3" />
                     )}
                   </a>
                 </li>

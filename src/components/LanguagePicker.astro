@@ -33,9 +33,9 @@ const currentPath =
         <a
           href={translatePath(currentPath, langCode)}
           role="menuitem"
-          class={`block px-3 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors ${
+          class={`block px-3 py-2 text-sm transition-colors hover:bg-slate-100 dark:hover:bg-slate-700 ${
             langCode === lang
-              ? "text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-slate-700/50"
+              ? "bg-cyan-50 text-cyan-600 dark:bg-slate-700/50 dark:text-cyan-400"
               : "text-slate-700 dark:text-slate-300"
           }`}
           data-astro-prefetch

@@ -42,6 +42,9 @@
       "tailwindDirectives": true
     }
   },
+  "html": {
+    "experimentalFullSupportEnabled": true
+  },
   "overrides": [
     {
       "includes": ["**/*.astro"],
@@ -54,12 +57,10 @@
           "correctness": {
             "noUnusedVariables": "off",
             "noUnusedImports": "off",
+            "useJsxKeyInIterable": "off",
             "useHookAtTopLevel": "off"
           }
         }
-      },
-      "formatter": {
-        "enabled": false
       }
     }
   ]

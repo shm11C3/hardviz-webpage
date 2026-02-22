@@ -67,25 +67,25 @@ const insights = [
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
       {
         insights.map((item) => (
-          <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-md transition">
-            <div class="w-12 h-12 mx-auto mb-3 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700">
+          <div class="rounded-xl border border-slate-200 bg-white p-5 transition hover:shadow-md dark:border-slate-700 dark:bg-slate-800">
+            <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700">
               {item.icon === "activity" && (
-                <ActivitySquare className="w-6 h-6 text-cyan-500" />
+                <ActivitySquare className="h-6 w-6 text-cyan-500" />
               )}
               {item.icon === "flame" && (
-                <Flame className="w-6 h-6 text-rose-500" />
+                <Flame className="h-6 w-6 text-rose-500" />
               )}
               {item.icon === "gamepad" && (
-                <Gamepad2 className="w-6 h-6 text-lime-500" />
+                <Gamepad2 className="h-6 w-6 text-lime-500" />
               )}
               {item.icon === "brain" && (
-                <BrainCircuit className="w-6 h-6 text-indigo-500" />
+                <BrainCircuit className="h-6 w-6 text-indigo-500" />
               )}
             </div>
-            <h3 class="text-base font-semibold text-slate-800 dark:text-white">
+            <h3 class="font-semibold text-base text-slate-800 dark:text-white">
               {item.title}
             </h3>
-            <p class="text-sm text-slate-600 dark:text-slate-400">
+            <p class="text-slate-600 text-sm dark:text-slate-400">
               {item.description}
             </p>
           </div>
