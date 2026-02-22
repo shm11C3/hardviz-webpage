@@ -59,8 +59,7 @@ const faqJsonLd = {
     </div>
 
     <div class="max-w-3xl mx-auto space-y-4">
-      {
-        faqs.map((faq, index) => (
+      {faqs.map((faq, index) => (
           <details
             class="group rounded-lg border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900"
             id={`faq-${index + 1}`}
@@ -81,8 +80,9 @@ const faqJsonLd = {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+                  aria-hidden="true"
+                  focusable="false"
                 >
-                  <title>Toggle FAQ answer</title>
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -101,8 +101,7 @@ const faqJsonLd = {
               </div>
             </div>
           </details>
-        ))
-      }
+        ))}
     </div>
 
     <div class="text-center mt-8">
@@ -125,7 +124,8 @@ const faqJsonLd = {
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M9 5l7 7-7 7"></path>
+            d="M9 5l7 7-7 7"
+          ></path>
         </svg>
       </a>
     </div>

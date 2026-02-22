@@ -91,8 +91,7 @@ const faqJsonLd = {
     </div>
 
     <div class="max-w-3xl mx-auto space-y-4">
-      {
-        faqs.map((faq, index) => (
+      {faqs.map((faq, index) => (
           <details
             class="group rounded-lg border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900"
             id={`faq-${index + 1}`}
@@ -114,8 +113,9 @@ const faqJsonLd = {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+                  aria-hidden="true"
+                  focusable="false"
                 >
-                  <title>Toggle FAQ answer</title>
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -147,8 +147,9 @@ const faqJsonLd = {
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
+                        aria-hidden="true"
+                        focusable="false"
                       >
-                        <title>External link</title>
                         <path
                           stroke-linecap="round"
                           stroke-linejoin="round"
@@ -162,8 +163,7 @@ const faqJsonLd = {
               </div>
             </div>
           </details>
-        ))
-      }
+        ))}
     </div>
   </div>
 

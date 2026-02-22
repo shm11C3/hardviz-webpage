@@ -63,8 +63,7 @@ const dateFormatter = new Intl.DateTimeFormat(isJa ? "ja-JP" : "en-US", {
       </div>
 
       <section class="mt-10 grid grid-cols-1 gap-4">
-        {
-          entries.length ? (
+        {entries.length ? (
             entries.map(({ entry, untranslated }) => (
               <article class="group relative rounded-2xl border border-slate-200/70 bg-white/70 p-5 shadow-sm backdrop-blur-sm transition-colors transition-shadow focus-within:border-slate-300/70 focus-within:bg-white/90 focus-within:shadow-md hover:border-slate-300/70 hover:bg-white/90 hover:shadow-md md:p-6 dark:border-slate-800 dark:bg-slate-900/40 dark:hover:border-slate-700 dark:hover:bg-slate-900/65 dark:focus-within:border-slate-700 dark:focus-within:bg-slate-900/65">
                 <a
@@ -168,12 +167,10 @@ const dateFormatter = new Intl.DateTimeFormat(isJa ? "ja-JP" : "en-US", {
                 </a>
               </div>
             </div>
-          )
-        }
+          )}
       </section>
 
-      {
-        entries.length ? (
+      {entries.length ? (
           <div class="mt-10 flex justify-center">
             <a
               href={githubAllReleasesUrl()}
@@ -185,8 +182,7 @@ const dateFormatter = new Intl.DateTimeFormat(isJa ? "ja-JP" : "en-US", {
               {t("download.githubLink")}
             </a>
           </div>
-        ) : null
-      }
+        ) : null}
     </div>
   </main>
 

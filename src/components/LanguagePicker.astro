@@ -28,8 +28,7 @@ const currentPath =
     class="absolute right-0 top-full mt-2 py-2 w-32 bg-white dark:bg-slate-800 rounded-md shadow-lg border border-slate-200 dark:border-slate-700
       opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
   >
-    {
-      Object.entries(languages).map(([langCode, label]) => (
+    {Object.entries(languages).map(([langCode, label]) => (
         <a
           href={translatePath(currentPath, langCode)}
           role="menuitem"
@@ -42,35 +41,34 @@ const currentPath =
         >
           {label}
         </a>
-      ))
-    }
+      ))}
   </div>
 </div>
 
 <script is:inline>
-  const prefersHover = window.matchMedia("(hover: hover)").matches;
+const prefersHover = window.matchMedia("(hover: hover)").matches;
 
-  if (!prefersHover) {
-    const toggleBtn = document.getElementById("langToggle");
-    const dropdown = document.getElementById("langDropdown");
-    const wrapper = document.getElementById("language-menu");
+if (!prefersHover) {
+  const toggleBtn = document.getElementById("langToggle");
+  const dropdown = document.getElementById("langDropdown");
+  const wrapper = document.getElementById("language-menu");
 
-    // group-hover クラスの無効化と表示制御を JS に移譲
-    dropdown.classList.remove("group-hover:opacity-100", "group-hover:visible");
-    dropdown.classList.remove("opacity-0", "invisible");
-    dropdown.classList.add("hidden");
+  // group-hover クラスの無効化と表示制御を JS に移譲
+  dropdown.classList.remove("group-hover:opacity-100", "group-hover:visible");
+  dropdown.classList.remove("opacity-0", "invisible");
+  dropdown.classList.add("hidden");
 
-    toggleBtn?.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const isOpen = dropdown?.classList.toggle("hidden") === false;
-      toggleBtn.setAttribute("aria-expanded", String(isOpen));
-    });
+  toggleBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isOpen = dropdown?.classList.toggle("hidden") === false;
+    toggleBtn.setAttribute("aria-expanded", String(isOpen));
+  });
 
-    document.addEventListener("click", (e) => {
-      if (!wrapper.contains(e.target)) {
-        dropdown?.classList.add("hidden");
-        toggleBtn?.setAttribute("aria-expanded", "false");
-      }
-    });
-  }
+  document.addEventListener("click", (e) => {
+    if (!wrapper.contains(e.target)) {
+      dropdown?.classList.add("hidden");
+      toggleBtn?.setAttribute("aria-expanded", "false");
+    }
+  });
+}
 </script>
