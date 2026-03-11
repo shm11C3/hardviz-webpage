@@ -3,7 +3,7 @@ import partytown from "@astrojs/partytown";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
-import { defineConfig } from "astro/config";
+import { defineConfig, memoryCache } from "astro/config";
 
 console.log("[BUILD INFO] PRODUCTION:", process.env.PRODUCTION);
 console.log("[BUILD INFO] NODE_ENV:", process.env.NODE_ENV);
@@ -18,4 +18,11 @@ export default defineConfig({
   site: "https://hardviz.com",
   integrations: [react(), sitemap(), partytown(), mdx()],
   output: "static",
+  experimental: {
+    rustCompiler: true,
+    queuedRendering: {
+      enabled: true,
+    },
+    cache: { provider: memoryCache() },
+  },
 });
