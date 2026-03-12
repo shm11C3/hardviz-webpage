@@ -15,7 +15,7 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/mdx": "^5.0.0",
     "@astrojs/partytown": "^2.1.4",
     "@astrojs/react": "^5.0.0",
     "@astrojs/sitemap": "^3.7.0",
@@ -24,7 +24,7 @@
     "@tailwindcss/vite": "^4.2.1",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "astro": "^5.18.0",
+    "astro": "^6.0.3",
     "clsx": "^2.1.1",
     "lucide-react": "^0.577.0",
     "react": "^19.2.4",
