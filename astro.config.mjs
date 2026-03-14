@@ -24,7 +24,9 @@ export default defineConfig({
         locales: { en: "en-US", ja: "ja-JP" },
       },
     }),
-    partytown(),
+    partytown({
+      config: { forward: ["dataLayer.push", "gtag"] },
+    }),
     mdx(),
   ],
   output: "static",
