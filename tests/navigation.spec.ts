@@ -31,14 +31,16 @@ test.describe("Header", () => {
 
   test("FAQ link href", async ({ page }) => {
     await page.goto("/");
-    await expect(
-      page.locator("header a", { hasText: "FAQ" }),
-    ).toHaveAttribute("href", "/faq/");
+    await expect(page.locator("header a", { hasText: "FAQ" })).toHaveAttribute(
+      "href",
+      "/faq/",
+    );
 
     await page.goto("/ja/");
-    await expect(
-      page.locator("header a", { hasText: "FAQ" }),
-    ).toHaveAttribute("href", "/ja/faq/");
+    await expect(page.locator("header a", { hasText: "FAQ" })).toHaveAttribute(
+      "href",
+      "/ja/faq/",
+    );
   });
 
   test("GitHub link opens in new tab", async ({ page }) => {

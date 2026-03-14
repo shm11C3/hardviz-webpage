@@ -16,9 +16,7 @@ test("clicking toggle adds/removes dark class on html", async ({ page }) => {
     el.classList.contains("dark"),
   );
   await toggle.click();
-  const afterClick = await html.evaluate((el) =>
-    el.classList.contains("dark"),
-  );
+  const afterClick = await html.evaluate((el) => el.classList.contains("dark"));
   expect(afterClick).not.toBe(initialDark);
 
   await toggle.click();

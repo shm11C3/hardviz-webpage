@@ -38,7 +38,9 @@ test("home page has all major sections", async ({ page }) => {
 test("hero has download and GitHub buttons", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator('a[href="#download"]').first()).toBeVisible();
-  const githubLink = page.locator('a[href*="github.com/shm11C3/HardwareVisualizer"]').first();
+  const githubLink = page
+    .locator('a[href*="github.com/shm11C3/HardwareVisualizer"]')
+    .first();
   await expect(githubLink).toHaveAttribute("target", "_blank");
 });
 

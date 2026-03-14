@@ -23,9 +23,7 @@ test("entries show version numbers", async ({ page }) => {
 
 test("entries link to detail pages", async ({ page }) => {
   await page.goto("/changelog/");
-  await expect(
-    page.locator('a[href="/changelog/1.6.0/"]'),
-  ).toHaveCount(1);
+  await expect(page.locator('a[href="/changelog/1.6.0/"]')).toHaveCount(1);
 });
 
 test("entries have GitHub release external links", async ({ page }) => {
@@ -38,9 +36,7 @@ test("entries have GitHub release external links", async ({ page }) => {
 
 test("version page loads with h1", async ({ page }) => {
   await page.goto("/changelog/1.6.0/");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "v1.6.0",
-  );
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("v1.6.0");
 });
 
 test("version page has back link to changelog", async ({ page }) => {
@@ -59,9 +55,7 @@ test("version page shows time element and version text", async ({ page }) => {
 
 test("version page has GitHub release link", async ({ page }) => {
   await page.goto("/changelog/1.6.0/");
-  await expect(
-    page.locator('a[href*="releases/tag/v1.6.0"]'),
-  ).toHaveCount(1);
+  await expect(page.locator('a[href*="releases/tag/v1.6.0"]')).toHaveCount(1);
 });
 
 test("version page shows tags", async ({ page }) => {

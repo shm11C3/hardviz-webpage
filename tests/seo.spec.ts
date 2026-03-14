@@ -113,7 +113,7 @@ test("all main pages have non-empty meta description", async ({ page }) => {
       .getAttribute("content");
     expect(description, `meta description missing on ${path}`).toBeTruthy();
     expect(
-      description!.length,
+      description?.length,
       `meta description empty on ${path}`,
     ).toBeGreaterThan(0);
   }
