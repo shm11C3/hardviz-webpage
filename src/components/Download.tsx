@@ -1,4 +1,4 @@
-import { type JSX, memo, useMemo } from "react";
+import { type JSX, memo, useEffect, useState } from "react";
 import { FaApple, FaGithub, FaLinux, FaWindows } from "react-icons/fa";
 import { cn } from "../lib/utils";
 import type { PlatformDownload } from "../types/platform";
@@ -33,26 +33,25 @@ const Download = ({
   changelogHref: string;
   githubLatestReleaseHref: string;
 }) => {
-  const downloads = useMemo(() => {
-    const ua = navigator.userAgent;
-    const detected = (() => {
-      if (/Macintosh|Mac OS X/.test(ua)) {
-        return "macOS";
-      }
-      if (/Linux/.test(ua)) {
-        return "Linux";
-      }
-      if (/Windows/.test(ua)) {
-        return "Windows";
-      }
-      return "Windows";
-    })();
+  const [detectedPlatform, setDetectedPlatform] = useState<
+    PlatformDownload["platform"] | null
+  >(null);
 
-    return initialDownloads.map((platform) => ({
-      ...platform,
-      primary: platform.platform === detected,
-    }));
-  }, [initialDownloads]);
+  useEffect(() => {
+    const ua = navigator.userAgent;
+    if (/Macintosh|Mac OS X/.test(ua)) {
+      setDetectedPlatform("macOS");
+    } else if (/Linux/.test(ua)) {
+      setDetectedPlatform("Linux");
+    } else {
+      setDetectedPlatform("Windows");
+    }
+  }, []);
+
+  const downloads = initialDownloads.map((platform) => ({
+    ...platform,
+    primary: detectedPlatform !== null && platform.platform === detectedPlatform,
+  }));
 
   return (
     <section className="bg-white py-20 dark:bg-slate-800" id="download">
