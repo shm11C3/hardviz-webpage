@@ -16,7 +16,17 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   site: "https://hardviz.com",
-  integrations: [react(), sitemap(), partytown(), mdx()],
+  integrations: [
+    react(),
+    sitemap({
+      i18n: {
+        defaultLocale: "en",
+        locales: { en: "en-US", ja: "ja-JP" },
+      },
+    }),
+    partytown(),
+    mdx(),
+  ],
   output: "static",
   fonts: [
     {
