@@ -97,7 +97,7 @@
     --color-process: oklch(65% 0.16 320);
 
     --font-sans:
-      var(--font-geist), "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+      var(--font-geist), var(--font-noto-sans-jp), ui-sans-serif, system-ui, sans-serif;
   }
 
   .dark {
