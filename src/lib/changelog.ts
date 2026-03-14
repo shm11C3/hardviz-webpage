@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 
 export type ChangelogLang = "en" | "ja";
 // Replace "changelog" with the actual collection name as defined in your astro.config or content config
-export type ChangelogEntry = CollectionEntry<any>;
+export type ChangelogEntry = CollectionEntry<`changelog`>;
 
 function sortByDateDesc(a: ChangelogEntry, b: ChangelogEntry) {
   return b.data.date.getTime() - a.data.date.getTime();
