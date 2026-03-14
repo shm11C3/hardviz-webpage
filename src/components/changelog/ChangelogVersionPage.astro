@@ -1,4 +1,5 @@
 ---
+import { render } from "astro:content";
 import {
   getLangFromUrl,
   useTranslatedPath,
@@ -33,7 +34,8 @@ if (!entry) {
 
 const untranslated = Boolean(isJa && !jaEntry);
 
-const { Content } = await entry.render();
+// Ensure entry is of the correct type for render
+const { Content } = await render(entry as never);
 
 const dateFormatter = new Intl.DateTimeFormat(isJa ? "ja-JP" : "en-US", {
   year: "numeric",

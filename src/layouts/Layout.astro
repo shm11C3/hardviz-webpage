@@ -22,7 +22,9 @@ const {
 // URLs & i18n-aware paths for canonical/alternate
 const { noTranslatePath } = useTranslatedPath(lang);
 const pathnameNoLang = noTranslatePath(Astro.url.pathname);
-const siteUrl = Astro.site ? Astro.site.href : "https://hardviz.com";
+const siteUrl = import.meta.env.SITE
+  ? import.meta.env.SITE
+  : "https://hardviz.com";
 
 function buildHref(l: keyof typeof ui) {
   const path =
@@ -71,7 +73,6 @@ const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="alternate icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <meta name="generator" content={Astro.generator}>
     <title>{title}</title>
     <meta name="description" content={description}>
 
