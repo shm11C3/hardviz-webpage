@@ -39,5 +39,13 @@ export default defineConfig({
       styles: ["normal"],
       subsets: ["latin"],
     },
+    {
+      provider: fontProviders.fontsource(),
+      name: "Noto Sans JP",
+      cssVariable: "--font-noto-sans-jp",
+      weights: [400, 500, 700],
+      styles: ["normal"],
+      subsets: ["japanese"],
+    },
   ],
 });

@@ -75,6 +75,7 @@ const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as
     <link rel="alternate icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <Font cssVariable="--font-geist" preload />
+    {lang === "ja" && <Font cssVariable="--font-noto-sans-jp" preload />}
     <title>{title}</title>
     <meta name="description" content={description}>
 
