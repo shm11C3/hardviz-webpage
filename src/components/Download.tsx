@@ -50,7 +50,8 @@ const Download = ({
 
   const downloads = initialDownloads.map((platform) => ({
     ...platform,
-    primary: detectedPlatform !== null && platform.platform === detectedPlatform,
+    primary:
+      detectedPlatform !== null && platform.platform === detectedPlatform,
   }));
 
   return (
