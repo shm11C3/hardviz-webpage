@@ -37,8 +37,8 @@
   "devDependencies": {
     "@biomejs/biome": "2.4.4",
     "@playwright/test": "^1.58.2",
-    "@types/node": "^25.4.0",
-    "wrangler": "^4.72.0"
+    "@types/node": "^25.5.0",
+    "wrangler": "^4.73.0"
   },
   "engines": {
     "node": ">=24",
