@@ -1,0 +1,34 @@
+---
+lang: ja
+version: 1.7.0
+date: 2026-03-21
+title: "v1.7.0"
+summary: "AMD GPUのモニタリング対応を追加しました（Windows）。ロシア語対応、テキスト選択の切り替え設定など、UXの改善も行っています。"
+tags:
+  - リリース
+  - AMD
+  - GPU
+  - Windows
+  - macOS
+  - 多言語対応
+---
+
+## 追加
+
+- feat(gpu): ADL経由でAMD GPUの温度・使用率モニタリングに対応（[#1079](https://github.com/shm11C3/HardwareVisualizer/pull/1079)）
+- feat(gpu): InsightsでAMD GPUをサポート（[#1147](https://github.com/shm11C3/HardwareVisualizer/pull/1147)）
+- feat(macos): macOS向けGPUサンプリング機能をモニタリングサービスに追加（[#1161](https://github.com/shm11C3/HardwareVisualizer/pull/1161)）
+- feat(i18n): ロシア語ロケールを追加（[#1215](https://github.com/shm11C3/HardwareVisualizer/pull/1215)）
+- feat(i18n): ロシア語サポートの追加とDoughnutChartラベルの最適化（[#1222](https://github.com/shm11C3/HardwareVisualizer/pull/1222)）
+- feat(ui): 設定にテキスト選択の切り替えオプションを追加（[#1251](https://github.com/shm11C3/HardwareVisualizer/pull/1251)）
+- feat(core): イベントリスナーによるハードウェアモニタリング更新の実装と関連フックのリファクタリング（[#1227](https://github.com/shm11C3/HardwareVisualizer/pull/1227)）
+
+## 修正
+
+- fix(settings): スキーマ不一致時に設定が全リセットされる問題を修正（[#1263](https://github.com/shm11C3/HardwareVisualizer/pull/1263)）
+
+## New Contributors
+
+新しいコントリビューターに感謝します！
+
+- [@Denis11212](https://github.com/Denis11212)
