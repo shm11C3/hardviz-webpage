@@ -6,7 +6,11 @@ export type ChangelogLang = "en" | "ja";
 export type ChangelogEntry = CollectionEntry<`changelog`>;
 
 function sortByDateDesc(a: ChangelogEntry, b: ChangelogEntry) {
-  return b.data.date.getTime() - a.data.date.getTime();
+  const dateDiff = b.data.date.getTime() - a.data.date.getTime();
+  if (dateDiff !== 0) return dateDiff;
+  return b.data.version.localeCompare(a.data.version, undefined, {
+    numeric: true,
+  });
 }
 
 export async function getChangelogEntries(lang: ChangelogLang) {
