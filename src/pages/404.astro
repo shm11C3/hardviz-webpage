@@ -14,9 +14,13 @@ const t = useTranslations(lang);
 const { translatePath } = useTranslatedPath(lang);
 ---
 
-<Layout title="HardwareVisualizer - Lightweight Hardware Monitoring Tool">
+<Layout
+  title="HardwareVisualizer - Lightweight Hardware Monitoring Tool"
+  lang={lang}
+>
   <Header />
   <main
+    id="main-content"
     class="flex flex-col items-center justify-center flex-grow text-center px-4 py-16 sm:py-24"
   >
     <img

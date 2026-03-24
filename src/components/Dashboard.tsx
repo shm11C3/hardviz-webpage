@@ -62,7 +62,7 @@ export default function HardwareMonitor() {
         <div className="rounded-lg bg-[#141b2d] p-4">
           <div className="mb-3 flex items-center gap-2">
             <Cpu className="h-5 w-5 text-cyan-400" />
-            <h3 className="font-medium text-white">CPU</h3>
+            <span className="font-medium text-white">CPU</span>
           </div>
           <div className="mb-3 flex items-center justify-center">
             <div className="relative h-24 w-24">
@@ -106,7 +106,7 @@ export default function HardwareMonitor() {
         <div className="rounded-lg bg-[#141b2d] p-4">
           <div className="mb-3 flex items-center gap-2">
             <BarChart3 className="h-5 w-5 text-emerald-400" />
-            <h3 className="font-medium text-white">RAM</h3>
+            <span className="font-medium text-white">RAM</span>
           </div>
           <div className="mb-3 flex items-center justify-center">
             <div className="relative h-24 w-24">
@@ -151,7 +151,7 @@ export default function HardwareMonitor() {
       <div className="mt-4 rounded-lg bg-[#141b2d] p-4">
         <div className="mb-3 flex items-center gap-2">
           <Gauge className="h-5 w-5 text-amber-400" />
-          <h3 className="font-medium text-white">GPU</h3>
+          <span className="font-medium text-white">GPU</span>
         </div>
         <div className="mb-3 flex justify-around">
           <div className="flex flex-col items-center">

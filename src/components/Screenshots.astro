@@ -69,8 +69,16 @@ const slides = [
 
     <div class="swiper-pagination"></div>
 
-    <div class="swiper-button swiper-button-prev" aria-label="Previous"></div>
-    <div class="swiper-button swiper-button-next" aria-label="Next"></div>
+    <button
+      type="button"
+      class="swiper-button swiper-button-prev"
+      aria-label="Previous"
+    ></button>
+    <button
+      type="button"
+      class="swiper-button swiper-button-next"
+      aria-label="Next"
+    ></button>
 
     <div class="swiper-scrollbar"></div>
   </div>
@@ -117,6 +125,13 @@ const slides = [
 .swiper .swiper-pagination-bullet.swiper-pagination-bullet-active {
   background: oklch(0.9107 0.0214 222.77);
   opacity: 1;
+}
+
+button.swiper-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
 .swiper-button::after {

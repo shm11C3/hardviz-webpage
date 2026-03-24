@@ -3,7 +3,7 @@ import { Font } from "astro:assets";
 import "../styles/global.css";
 import type { ui } from "../i18n/ui";
 import { defaultLang, showDefaultLang } from "../i18n/ui";
-import { useTranslatedPath } from "../i18n/utils";
+import { useTranslatedPath, useTranslations } from "../i18n/utils";
 
 interface Props {
   title: string;
@@ -154,6 +154,9 @@ const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as
     </script>
   </head>
   <body class="dark:bg-slate-900 bg-white transition-colors duration-300">
+    <a href="#main-content" class="skip-link">
+      {useTranslations(lang)("a11y.skipToMain")}
+    </a>
     <slot />
   </body>
 </html>

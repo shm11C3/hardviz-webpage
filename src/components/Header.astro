@@ -13,6 +13,12 @@ import ThemeIcon from "./ThemeIcon.astro";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const { translatePath } = useTranslatedPath(lang);
+
+const pathname = Astro.url.pathname;
+function isCurrentPage(href: string): boolean {
+  const target = new URL(href, Astro.url).pathname;
+  return pathname === target || pathname === `${target}/`;
+}
 ---
 
 <header
@@ -50,6 +56,7 @@ const { translatePath } = useTranslatedPath(lang);
         href={translatePath("/faq")}
         class="font-medium transition-colors hover:text-cyan-500 text-slate-600 dark:text-slate-300 hidden md:block"
         data-astro-prefetch
+        aria-current={isCurrentPage(translatePath("/faq")) ? "page" : undefined}
         >{t("nav.faq")}</a
       >
       <a

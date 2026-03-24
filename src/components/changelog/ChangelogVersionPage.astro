@@ -51,7 +51,7 @@ const dateFormatter = new Intl.DateTimeFormat(isJa ? "ja-JP" : "en-US", {
 >
   <Header />
 
-  <main class="pt-24 md:pt-28 pb-16">
+  <main id="main-content" class="pt-24 md:pt-28 pb-16">
     <div class="container mx-auto px-4">
       <div class="max-w-3xl">
         <a
@@ -69,7 +69,7 @@ const dateFormatter = new Intl.DateTimeFormat(isJa ? "ja-JP" : "en-US", {
         </h1>
 
         <div
-          class="mt-3 flex flex-wrap items-center gap-2 text-sm text-slate-500 dark:text-slate-400"
+          class="mt-3 flex flex-wrap items-center gap-2 text-sm text-slate-600 dark:text-slate-400"
         >
           <span class="font-mono">v{entry.data.version}</span>
           <span aria-hidden="true">•</span>
