@@ -122,6 +122,7 @@ const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as
     <!-- JSON-LD Structured Data -->
     {structuredData.map((data) => (
         <script
+          is:inline
           type="application/ld+json"
           set:html={JSON.stringify(data).replace(/</g, "\\u003c")}
         />
@@ -132,6 +133,7 @@ const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as
 
     {plausibleDomain && (
         <script
+          is:inline
           defer
           data-domain={plausibleDomain}
           src="https://plausible.io/js/script.tagged-events.js"
