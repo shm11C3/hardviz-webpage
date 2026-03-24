@@ -1,9 +1,31 @@
+import fs from "node:fs";
+import path from "node:path";
 import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, fontProviders } from "astro/config";
+
+/** Build a map of changelog URL paths → lastmod dates from MDX frontmatter */
+function buildChangelogLastmodMap() {
+  const dir = path.resolve("src/content/changelog/en");
+  const map = new Map();
+  for (const file of fs.readdirSync(dir).filter((f) => f.endsWith(".mdx"))) {
+    const content = fs.readFileSync(path.join(dir, file), "utf-8");
+    const versionMatch = content.match(/^version:\s*(.+)$/m);
+    const dateMatch = content.match(/^date:\s*(.+)$/m);
+    if (versionMatch && dateMatch) {
+      const version = versionMatch[1].trim();
+      const date = new Date(dateMatch[1].trim());
+      map.set(`/changelog/${version}`, date);
+      map.set(`/ja/changelog/${version}`, date);
+    }
+  }
+  return map;
+}
+
+const changelogLastmod = buildChangelogLastmodMap();
 
 console.log("[BUILD INFO] PRODUCTION:", process.env.PRODUCTION);
 console.log("[BUILD INFO] NODE_ENV:", process.env.NODE_ENV);
@@ -19,6 +41,14 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
+      serialize(item) {
+        const url = new URL(item.url);
+        const lastmod = changelogLastmod.get(url.pathname);
+        if (lastmod) {
+          item.lastmod = lastmod.toISOString();
+        }
+        return item;
+      },
       i18n: {
         defaultLocale: "en",
         locales: { en: "en-US", ja: "ja-JP" },
