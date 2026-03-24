@@ -15,7 +15,7 @@ const changelog = defineCollection({
       .array(
         z.object({
           label: z.string().min(1),
-          url: z.string().url(),
+          url: z.url(),
         }),
       )
       .default([]),
