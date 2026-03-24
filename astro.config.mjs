@@ -11,6 +11,7 @@ import { defineConfig, fontProviders } from "astro/config";
 function buildChangelogLastmodMap() {
   const dir = path.resolve("src/content/changelog/en");
   const map = new Map();
+  let latest = new Date(0);
   for (const file of fs.readdirSync(dir).filter((f) => f.endsWith(".mdx"))) {
     const content = fs.readFileSync(path.join(dir, file), "utf-8");
     const versionMatch = content.match(/^version:\s*(.+)$/m);
@@ -18,10 +19,14 @@ function buildChangelogLastmodMap() {
     if (versionMatch && dateMatch) {
       const version = versionMatch[1].trim();
       const date = new Date(dateMatch[1].trim());
-      map.set(`/changelog/${version}`, date);
-      map.set(`/ja/changelog/${version}`, date);
+      map.set(`/changelog/${version}/`, date);
+      map.set(`/ja/changelog/${version}/`, date);
+      if (date > latest) latest = date;
     }
   }
+  // Index pages use the latest entry date
+  map.set("/changelog/", latest);
+  map.set("/ja/changelog/", latest);
   return map;
 }
 
@@ -49,6 +54,7 @@ export default defineConfig({
         }
         return item;
       },
+      namespaces: { news: false, image: false, video: false },
       i18n: {
         defaultLocale: "en",
         locales: { en: "en-US", ja: "ja-JP" },
