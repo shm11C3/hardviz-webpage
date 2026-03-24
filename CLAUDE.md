@@ -15,6 +15,7 @@ pnpm build                      # Production build (static HTML to dist/)
 pnpm preview                    # Preview production build locally (port 4321)
 pnpm lint                       # Lint with Biome
 pnpm format                     # Auto-fix formatting and lint issues
+pnpm check                      # Type check Astro/TS files (astro check)
 pnpm lint:ci                    # Stricter CI lint check
 pnpm test:e2e                   # Playwright E2E tests (requires build + preview server)
 npx playwright test tests/home.spec.ts           # Run a single test file
