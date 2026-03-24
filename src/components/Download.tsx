@@ -64,7 +64,7 @@ const Download = ({
           <p className="mx-auto max-w-2xl text-lg text-slate-600 dark:text-slate-400">
             {translations.description}
           </p>
-          <p className="mt-2 text-slate-500 text-sm dark:text-slate-500">
+          <p className="mt-2 text-slate-500 text-sm dark:text-slate-400">
             {latestVersion
               ? `${translations.currentVersion} v${latestVersion}`
               : `${translations.currentVersion} -`}
@@ -109,7 +109,7 @@ const Download = ({
                       {version.name}
                     </p>
                     <div className="flex items-center justify-between">
-                      <span className="text-slate-500 text-xs dark:text-slate-500">
+                      <span className="text-slate-500 text-xs dark:text-slate-400">
                         {version.size}
                       </span>
                       {version.url ? (
