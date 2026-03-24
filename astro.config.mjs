@@ -32,6 +32,26 @@ function buildChangelogLastmodMap() {
 
 const changelogLastmod = buildChangelogLastmodMap();
 
+/** Post-build: inject <lastmod> into sitemap-index.xml */
+function sitemapIndexLastmod() {
+  return {
+    name: "sitemap-index-lastmod",
+    hooks: {
+      "astro:build:done": ({ dir }) => {
+        const filePath = new URL("sitemap-index.xml", dir);
+        const xml = fs.readFileSync(filePath, "utf-8");
+        const latest = [...changelogLastmod.values()].reduce(
+          (a, b) => (a > b ? a : b),
+          new Date(0),
+        );
+        const lastmod = `<lastmod>${latest.toISOString()}</lastmod>`;
+        const patched = xml.replace(/<\/loc>/g, `</loc>${lastmod}`);
+        fs.writeFileSync(filePath, patched);
+      },
+    },
+  };
+}
+
 console.log("[BUILD INFO] PRODUCTION:", process.env.PRODUCTION);
 console.log("[BUILD INFO] NODE_ENV:", process.env.NODE_ENV);
 
@@ -64,6 +84,7 @@ export default defineConfig({
       config: { forward: ["dataLayer.push", "gtag"] },
     }),
     mdx(),
+    sitemapIndexLastmod(),
   ],
   output: "static",
   fonts: [
