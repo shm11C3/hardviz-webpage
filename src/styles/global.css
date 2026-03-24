@@ -137,6 +137,16 @@
   }
 }
 
+/* Skip navigation link */
+.skip-link {
+  @apply absolute left-1/2 z-[100] -translate-x-1/2 -translate-y-full rounded-b-lg bg-cyan-600 px-4 py-2 text-sm font-medium text-white transition-transform focus:translate-y-0;
+}
+
+/* Global focus-visible styles for interactive elements */
+:focus-visible {
+  @apply outline-2 outline-offset-2 outline-cyan-500;
+}
+
 /* Prose (Typography) customizations for changelog */
 .prose a {
   @apply text-cyan-600 dark:text-cyan-400 no-underline hover:underline transition-colors;

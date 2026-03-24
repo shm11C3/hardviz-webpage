@@ -140,6 +140,8 @@ export const ui = {
     "specs.limitations.item4":
       "Specifications may change without notice in beta/development versions.",
 
+    "a11y.skipToMain": "Skip to main content",
+
     "404.title": "Page Not Found",
     "404.description": "Sorry, the page you are looking for does not exist.",
     "404.goHome": "Go to Home",
@@ -301,6 +303,8 @@ export const ui = {
       "場合によっては管理者権限/root権限が必要になることがあります。",
     "specs.limitations.item4":
       "ベータ版・開発版では仕様が予告なく変更される場合があります。",
+
+    "a11y.skipToMain": "メインコンテンツへスキップ",
 
     "404.title": "ページが見つかりません",
     "404.description": "申し訳ありませんが、探しているページは存在しません。",
