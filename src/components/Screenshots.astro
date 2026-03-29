@@ -142,6 +142,10 @@ button.swiper-button {
 
 <script>
 import type { SwiperOptions } from "swiper/types";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 
 type Theme = "light" | "dark";
 
@@ -219,17 +223,9 @@ const initSwiper = async () => {
   const initialTheme = getCurrentTheme();
   applyScreenshotsForTheme(initialTheme);
 
-  // Swiper と CSS を動的にインポート
+  // Swiper を動的にインポート
   const [{ default: Swiper }, { Navigation, Pagination, Autoplay }] =
     await Promise.all([import("swiper"), import("swiper/modules")]);
-
-  // CSS も動的にインポート
-  await Promise.all([
-    import("swiper/css"),
-    import("swiper/css/navigation"),
-    import("swiper/css/pagination"),
-    import("swiper/css/scrollbar"),
-  ]);
 
   // Swiper を初期化
   const swiper = new Swiper(".swiper", {
