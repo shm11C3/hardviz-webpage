@@ -1,0 +1,29 @@
+---
+lang: ja
+version: 1.7.2
+date: 2026-03-29
+title: "v1.7.2"
+summary: "macOSでのGPU使用率算出アルゴリズムの改善と、GPU使用率モニタリングの対応GPUの追加を行いました。"
+tags:
+  - 不具合修正
+  - Intel
+  - GPU
+  - Windows
+  - macOS
+---
+
+## 変更内容
+
+macOSでは今までGPU使用率が実際よりも高めに表示されることがありました（アイドル時でも50〜60%と表示されるケースがありました）。  
+これはmacOSがディスプレイ合成のためにGPUを低クロック状態で常時稼働させていることが原因でした。  
+今回のアップデートでDVFS周波数テーブルを参照し、クロック周波数を考慮した使用率算出アルゴリズムに変更することで、  
+より正確なGPU使用率の表示が可能になりました。  
+
+また、WindowsではIntel GPUの使用率が表示されない問題が発生していましたが、  
+今回PDHとDXGIを利用した新しいモニタリング方法を追加しました。  
+これにより、Intel GPUを搭載したシステムでもGPU使用率のモニタリングが可能になります。  
+
+## 修正
+
+- Fix(macos): Use frequency-weighted GPU usage calculation by @shm11C3 in ([#1293](https://github.com/shm11C3/HardwareVisualizer/pull/1293))
+- Fix(windows): Add Intel GPU usage monitoring support via PDH and DXGI by @shm11C3 in ([#1295](https://github.com/shm11C3/HardwareVisualizer/pull/1295))

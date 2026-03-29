@@ -1,0 +1,27 @@
+---
+lang: en
+version: 1.7.2
+date: 2026-03-29
+title: "v1.7.2"
+summary: "Improved GPU usage calculation accuracy on macOS and added Intel GPU usage monitoring support on Windows."
+tags:
+  - Bug Fixes
+  - Intel
+  - GPU
+  - Windows
+  - macOS
+---
+
+## What's Changed
+
+GPU usage on macOS was previously reported significantly higher than actual values (e.g., 50–60% even at idle).  
+This was caused by macOS keeping the GPU clocked at a low P-state for display compositing.  
+This update now references the DVFS frequency table and applies a frequency-weighted usage calculation algorithm, resulting in more accurate GPU usage reporting.  
+
+Additionally, Intel GPU usage was not displayed on Windows.  
+A new monitoring method using PDH and DXGI has been added, enabling GPU usage monitoring on systems with Intel GPUs.  
+
+## Fixed
+
+- Fix(macos): Use frequency-weighted GPU usage calculation by @shm11C3 in ([#1293](https://github.com/shm11C3/HardwareVisualizer/pull/1293))
+- Fix(windows): Add Intel GPU usage monitoring support via PDH and DXGI by @shm11C3 in ([#1295](https://github.com/shm11C3/HardwareVisualizer/pull/1295))
