@@ -41,7 +41,7 @@
     "@biomejs/biome": "2.4.4",
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.5.2",
-    "wrangler": "^4.80.0"
+    "wrangler": "^4.81.0"
   },
   "engines": {
     "node": ">=24",
