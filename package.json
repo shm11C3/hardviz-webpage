@@ -18,14 +18,14 @@
   "dependencies": {
     "@astrojs/check": "^0.9.8",
     "@astrojs/mdx": "^5.0.3",
-    "@astrojs/partytown": "2.1.6",
+    "@astrojs/partytown": "2.1.7",
     "@astrojs/react": "^5.0.3",
     "@astrojs/sitemap": "3.7.2",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.2.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "astro": "^6.1.5",
+    "astro": "^6.1.6",
     "clsx": "^2.1.1",
     "lucide-react": "^1.8.0",
     "react": "^19.2.5",
@@ -41,7 +41,7 @@
     "@biomejs/biome": "2.4.4",
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.6.0",
-    "wrangler": "^4.81.1"
+    "wrangler": "^4.82.2"
   },
   "engines": {
     "node": ">=24",
