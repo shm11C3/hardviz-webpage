@@ -1,0 +1,56 @@
+---
+lang: en
+version: 1.8.0
+date: 2026-05-06
+title: "v1.8.0"
+summary: "Added background monitoring with tray-based status visibility, expanded multi-GPU support, and improved startup recovery and release reliability."
+tags:
+  - Release
+  - Tray
+  - Background Monitoring
+  - GPU
+  - Windows
+  - macOS
+  - Linux
+---
+
+## What's Changed
+
+v1.8.0 focuses on making HardwareVisualizer useful even when the main dashboard is not open.
+The app can now continue running from the system tray after the window is closed, keeping monitoring and history collection active in the background.
+
+The tray and menu-bar experience has also been expanded.
+CPU, GPU, and GPU temperature metrics can now be checked directly from the tray area. macOS uses a native menu-bar renderer, while Windows includes a dedicated tray flyout for readable live metrics and quick actions.
+
+Multi-GPU systems are handled more accurately in this release.
+GPU metrics are now modeled per device, and the dashboard includes GPU selection so users can inspect the device they care about.
+
+## New Features
+
+- Added background/tray mode so monitoring can continue after the main window is closed.
+- Added a close-to-tray setting and first-run prompt for tray mode.
+- Added tray metrics for CPU, GPU, and GPU temperature.
+- Added a native macOS tray renderer.
+- Added a Windows tray widget flyout.
+- Added dashboard GPU selection for multi-GPU systems.
+- Added graceful recovery handling when opening a database created by a newer app version.
+
+## Fixes and Improvements
+
+- Fixed GPU name collisions on Linux systems with multiple AMD GPUs.
+- Improved window restoration behavior when reopening from the macOS Dock.
+- Prevented duplicate tray instances when launching the app again.
+- Improved light-mode visibility for inputs, checkboxes, radio groups, and switches.
+- Fixed GPU temperature handling in the tray widget.
+- Fixed GPU history and chart state handling for null-padded history values.
+- Added English fallback behavior for missing or empty Russian translations.
+
+## Internal Changes
+
+- Continued the move toward a Tauri-independent core workspace.
+- Added an EventBus-based metric fan-out path.
+- Separated collector, persistence, settings, and monitoring lifecycle responsibilities.
+- Reduced Linux AMD GPU polling overhead by avoiding repeated `lspci` launches.
+- Updated CI, release publishing, dependency scanning, and supply-chain checks.
+
+**Full Changelog**: [v1.7.2...v1.8.0](https://github.com/shm11C3/HardwareVisualizer/compare/v1.7.2...v1.8.0)
