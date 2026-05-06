@@ -6,6 +6,7 @@ import type { Platform } from "../types/platform";
 
 export interface ReleaseData {
   version: string;
+  published_at: string | null;
   platforms: {
     [K in Platform]?: {
       url: string;
@@ -124,6 +125,7 @@ function parseRelease(data: GitHubRelease): ReleaseData {
   );
   return {
     version: data.tag_name?.replace(/^v/, "") || data.name,
+    published_at: data.published_at ?? null,
     platforms,
   };
 }

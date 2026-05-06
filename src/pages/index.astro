@@ -16,6 +16,7 @@ import {
 } from "../i18n/utils";
 import Layout from "../layouts/Layout.astro";
 import { githubAllReleasesUrl, githubLatestReleaseUrl } from "../lib/github";
+import { getLatestReleaseDetails } from "../lib/latestRelease";
 import type { PlatformDownload } from "../types/platform";
 
 const lang = getLangFromUrl(Astro.url);
@@ -23,6 +24,11 @@ const t = useTranslations(lang);
 const { translatePath } = useTranslatedPath(lang);
 
 const release = await fetchLatestRelease();
+const latestReleaseDetails = await getLatestReleaseDetails({
+  version: release.version,
+  lang,
+  publishedAt: release.published_at,
+});
 
 const downloads: PlatformDownload[] = [
   {
@@ -90,6 +96,9 @@ const downloadTranslations = {
   otherVersions: t("download.otherVersions"),
   changelogLink: t("download.changelogLink"),
   githubDownloadButton: t("download.githubDownloadButton"),
+  releaseDate: t("download.releaseDate"),
+  latestChanges: t("download.latestChanges"),
+  latestChangesLink: t("download.latestChangesLink"),
 };
 
 // SoftwareApplication JSON-LD for rich search results
@@ -145,6 +154,7 @@ const softwareJsonLd = {
       client:visible
       downloads={downloads}
       latestVersion={release.version}
+      latestReleaseDetails={latestReleaseDetails}
       translations={downloadTranslations}
       changelogHref={translatePath("/changelog")}
       githubLatestReleaseHref={githubLatestReleaseUrl()}

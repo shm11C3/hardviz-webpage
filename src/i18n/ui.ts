@@ -73,6 +73,9 @@ export const ui = {
     "download.githubLink": "View all releases on GitHub →",
     "download.githubDownloadButton": "Download from GitHub",
     "download.changelogLink": "View past versions →",
+    "download.releaseDate": "Released:",
+    "download.latestChanges": "Latest release changes",
+    "download.latestChangesLink": "Read full changelog →",
 
     "changelog.title": "Changelog",
     "changelog.description":
@@ -240,6 +243,9 @@ export const ui = {
     "download.githubLink": "GitHubですべてのリリースを表示 →",
     "download.githubDownloadButton": "GitHubからダウンロード",
     "download.changelogLink": "過去のリリースを見る →",
+    "download.releaseDate": "リリース日時:",
+    "download.latestChanges": "最新リリースの変更内容",
+    "download.latestChangesLink": "変更履歴を詳しく見る →",
 
     "changelog.title": "変更履歴",
     "changelog.description": "HardwareVisualizerのリリースノートと更新情報。",

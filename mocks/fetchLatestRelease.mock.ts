@@ -1,7 +1,8 @@
 import type { ReleaseData } from "../src/funcs/fetchReleaseData";
 
 export const mockReleaseData: ReleaseData = {
-  version: "1.0.0",
+  version: "1.7.2",
+  published_at: "2026-01-02T03:04:00Z",
   platforms: {
     windows: {
       url: "https://example.com/fake/windows-installer.msi",

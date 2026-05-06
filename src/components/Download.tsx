@@ -1,5 +1,7 @@
+import { CalendarDays, Sparkles } from "lucide-react";
 import { type JSX, memo, useEffect, useState } from "react";
 import { FaApple, FaGithub, FaLinux, FaWindows } from "react-icons/fa";
+import type { LatestReleaseDetails } from "../lib/latestRelease";
 import { cn } from "../lib/utils";
 import type { PlatformDownload } from "../types/platform";
 
@@ -18,17 +20,22 @@ interface DownloadTranslations {
   otherVersions: string;
   changelogLink: string;
   githubDownloadButton: string;
+  releaseDate: string;
+  latestChanges: string;
+  latestChangesLink: string;
 }
 
 const Download = ({
   downloads: initialDownloads,
   latestVersion,
+  latestReleaseDetails,
   translations,
   changelogHref,
   githubLatestReleaseHref,
 }: {
   downloads: PlatformDownload[];
   latestVersion: string | null;
+  latestReleaseDetails: LatestReleaseDetails;
   translations: DownloadTranslations;
   changelogHref: string;
   githubLatestReleaseHref: string;
@@ -69,6 +76,14 @@ const Download = ({
               ? `${translations.currentVersion} v${latestVersion}`
               : `${translations.currentVersion} -`}
           </p>
+          {latestReleaseDetails.publishedAt ? (
+            <p className="mt-2 inline-flex items-center justify-center gap-2 text-slate-500 text-sm dark:text-slate-400">
+              <CalendarDays className="h-4 w-4" aria-hidden="true" />
+              <span>
+                {translations.releaseDate} {latestReleaseDetails.publishedAt}
+              </span>
+            </p>
+          ) : null}
         </div>
 
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-3">
@@ -153,6 +168,48 @@ const Download = ({
             </div>
           ))}
         </div>
+
+        {latestReleaseDetails.changesSummary ||
+        latestReleaseDetails.tags.length ? (
+          <article className="mx-auto mt-12 max-w-4xl rounded-lg border border-slate-200 bg-slate-50/70 p-5 text-left shadow-sm md:p-6 dark:border-slate-700 dark:bg-slate-900/30">
+            <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+              <div>
+                <p className="flex items-center gap-2 font-semibold text-lg text-slate-900 dark:text-white">
+                  <Sparkles
+                    className="h-5 w-5 text-cyan-500"
+                    aria-hidden="true"
+                  />
+                  {translations.latestChanges}
+                </p>
+                {latestReleaseDetails.changesSummary ? (
+                  <p className="mt-3 max-w-3xl text-slate-700 dark:text-slate-200">
+                    {latestReleaseDetails.changesSummary}
+                  </p>
+                ) : null}
+              </div>
+              <a
+                href={changelogHref}
+                className="shrink-0 font-medium text-cyan-700 text-sm hover:underline dark:text-cyan-300"
+                data-astro-prefetch="true"
+              >
+                {translations.latestChangesLink}
+              </a>
+            </div>
+
+            {latestReleaseDetails.tags.length ? (
+              <div className="mt-4 flex flex-wrap gap-2">
+                {latestReleaseDetails.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="inline-flex items-center rounded-full border border-slate-200 bg-white px-2.5 py-1 text-slate-600 text-xs dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            ) : null}
+          </article>
+        ) : null}
 
         <div className="mt-12 text-center">
           <p className="mb-4 text-slate-600 dark:text-slate-400">

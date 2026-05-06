@@ -57,7 +57,29 @@ test("download section renders platform cards", async ({ page }) => {
 test("download section shows mock version", async ({ page }) => {
   await page.goto("/");
   await page.waitForSelector("#download");
-  await expect(page.locator("#download")).toContainText("v1.0.0");
+  await expect(page.locator("#download")).toContainText("v1.7.2");
+});
+
+test("download section shows release date and latest changes", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const download = page.locator("#download");
+  await expect(download).toContainText("Released:");
+  await expect(download).toContainText("Jan 2, 2026");
+  await expect(download).toContainText("Latest release changes");
+  await expect(download).toContainText(
+    "Improved GPU usage calculation accuracy on macOS",
+  );
+
+  await page.goto("/ja/");
+  const jaDownload = page.locator("#download");
+  await expect(jaDownload).toContainText("リリース日時:");
+  await expect(jaDownload).toContainText("2026年1月2日");
+  await expect(jaDownload).toContainText("最新リリースの変更内容");
+  await expect(jaDownload).toContainText(
+    "macOSでのGPU使用率算出アルゴリズムの改善",
+  );
 });
 
 test("FAQ preview shows 3 items", async ({ page }) => {
