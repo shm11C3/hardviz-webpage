@@ -151,7 +151,7 @@ const Download = ({
                         )}
                         {...(version.url.startsWith("http")
                           ? { target: "_blank", rel: "noopener noreferrer" }
-                          : { "data-astro-prefetch": true })}
+                          : { "data-astro-prefetch": "hover" })}
                       >
                         {translations.button}
                       </a>
@@ -188,7 +188,7 @@ const Download = ({
           <a
             href={installationHref}
             className="inline-flex items-center justify-center gap-1.5 font-medium text-slate-700 text-sm hover:text-slate-950 hover:underline dark:text-slate-200 dark:hover:text-white"
-            data-astro-prefetch="true"
+            data-astro-prefetch="hover"
           >
             {translations.installationLink}
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -219,7 +219,7 @@ const Download = ({
               <a
                 href={changelogHref}
                 className="shrink-0 font-medium text-cyan-700 text-sm hover:underline dark:text-cyan-300"
-                data-astro-prefetch="true"
+                data-astro-prefetch="hover"
               >
                 {translations.latestChangesLink}
               </a>
@@ -264,7 +264,7 @@ const Download = ({
             <a
               href={changelogHref}
               className="mt-4 inline-block font-medium text-foreground"
-              data-astro-prefetch
+              data-astro-prefetch="hover"
             >
               {translations.changelogLink}
             </a>
