@@ -1,6 +1,6 @@
 ---
 import { render } from "astro:content";
-import { ArrowRight, ShieldCheck } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 import type { ui } from "../i18n/ui";
 import { useTranslations } from "../i18n/utils";
 import type { DownloadGuideEntry } from "../lib/downloadGuide";
@@ -159,26 +159,6 @@ const pageTitleSeparator = t("download.pageTitleSeparator");
           >
             <h2>{installationEntry.data.title}</h2>
             <InstallationContent />
-            <div
-              class="not-prose mt-10 border-slate-200 border-t pt-8 text-center dark:border-slate-700"
-            >
-              <h3 class="font-semibold text-slate-950 dark:text-white">
-                {t("download.verifyAfterInstall.title")}
-              </h3>
-              <p
-                class="mx-auto mt-2 max-w-xl text-slate-700 text-sm leading-7 dark:text-slate-200"
-              >
-                {formatText(t("download.verifyAfterInstall.description"))}
-              </p>
-              <a
-                href={verificationHref}
-                class="mt-5 inline-flex items-center justify-center gap-1.5 font-medium text-slate-700 text-sm hover:text-slate-950 hover:underline dark:text-slate-200 dark:hover:text-white"
-                data-astro-prefetch
-              >
-                {t("download.verifyAfterInstall.link")}
-                <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-              </a>
-            </div>
           </article>
         </div>
       </div>

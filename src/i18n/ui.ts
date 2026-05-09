@@ -81,10 +81,6 @@ export const ui = {
     "download.nav.downloadInstaller": "Download installer",
     "download.nav.installation": "Installation",
     "download.nav.verification": "Installer verification",
-    "download.verifyAfterInstall.title": "Installer verification",
-    "download.verifyAfterInstall.description":
-      "If you are unsure about the source or file name, check the source, checksum, and artifact attestation before running it.",
-    "download.verifyAfterInstall.link": "Go to installer verification",
     "download.verificationPage.metaTitle": "Installer verification",
     "download.verificationPage.metaDescription":
       "Installer verification for HardwareVisualizer, including official sources, SHA-256 checksums, GitHub Artifact Attestations, and code signing status.",
@@ -274,10 +270,6 @@ export const ui = {
     "download.nav.downloadInstaller": "インストーラをダウンロードする",
     "download.nav.installation": "インストール方法",
     "download.nav.verification": "インストーラの検証",
-    "download.verifyAfterInstall.title": "インストーラの検証",
-    "download.verifyAfterInstall.description":
-      "入手元やファイル名に不安がある場合は、実行前に配布元、チェックサム、Artifact Attestationを確認してください。",
-    "download.verifyAfterInstall.link": "インストーラの検証へ",
     "download.verificationPage.metaTitle": "インストーラの検証",
     "download.verificationPage.metaDescription":
       "HardwareVisualizerのインストーラの検証として、公式配布元、SHA-256チェックサム、GitHub Artifact Attestations、コード署名状況の確認方法を案内します。",
