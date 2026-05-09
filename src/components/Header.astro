@@ -51,6 +51,7 @@ function isCurrentPage(href: string): boolean {
         href={downloadHref}
         class="font-medium transition-colors hover:text-cyan-500 text-slate-600 dark:text-slate-300 hidden md:block"
         data-astro-prefetch
+        aria-current={isCurrentPage(downloadHref) ? "page" : undefined}
         >{t("nav.Download")}</a
       >
       <a

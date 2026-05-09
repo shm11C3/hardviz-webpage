@@ -27,6 +27,11 @@ test.describe("Header", () => {
     await expect(
       page.locator("header a", { hasText: "Download" }),
     ).toHaveAttribute("href", "/download/");
+
+    await page.goto("/download/");
+    await expect(
+      page.locator("header a", { hasText: "Download" }),
+    ).toHaveAttribute("aria-current", "page");
   });
 
   test("FAQ link href", async ({ page }) => {
