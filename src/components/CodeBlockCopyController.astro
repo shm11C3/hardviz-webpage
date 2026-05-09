@@ -1,0 +1,154 @@
+---
+import { Check, Copy } from "lucide-react";
+
+interface Props {
+  copyLabel: string;
+  copiedLabel: string;
+}
+
+const { copyLabel, copiedLabel } = Astro.props;
+const buttonClass =
+  "group/copy absolute right-2 inline-flex h-7 w-7 items-center justify-center rounded-md border border-slate-300/15 bg-slate-500/20 text-slate-100 backdrop-blur-[2px] transition-colors hover:border-slate-200/30 hover:bg-slate-400/30 hover:text-white focus-visible:outline-2 focus-visible:outline-cyan-500 focus-visible:outline-offset-2";
+const tooltipClass =
+  "pointer-events-none absolute right-0 bottom-full z-20 mb-2 hidden whitespace-nowrap rounded-md bg-slate-900 px-2 py-1 font-medium text-white text-xs shadow-lg group-hover/copy:block group-focus-visible/copy:block dark:bg-slate-100 dark:text-slate-900";
+---
+
+<template data-code-copy-button-template>
+  <button
+    type="button"
+    class={buttonClass}
+    aria-label={copyLabel}
+    title={copyLabel}
+    data-copy-code-button
+    data-copy-label={copyLabel}
+    data-copied-label={copiedLabel}
+  >
+    <span data-copy-idle>
+      <Copy className="h-3.5 w-3.5" aria-hidden="true" />
+    </span>
+    <span class="hidden" data-copy-done>
+      <Check className="h-3.5 w-3.5" aria-hidden="true" />
+    </span>
+    <span class={tooltipClass} data-copy-tooltip>{copyLabel}</span>
+  </button>
+</template>
+
+<script>
+const resetTimers = new WeakMap<HTMLButtonElement, number>();
+
+async function writeClipboard(text: string): Promise<boolean> {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return true;
+  }
+
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.top = "-9999px";
+  document.body.append(textarea);
+  textarea.select();
+
+  try {
+    return document.execCommand("copy");
+  } finally {
+    textarea.remove();
+  }
+}
+
+function setCopiedState(button: HTMLButtonElement, copied: boolean) {
+  const copyLabel = button.dataset.copyLabel ?? "Copy";
+  const copiedLabel = button.dataset.copiedLabel ?? "Copied";
+  const label = copied ? copiedLabel : copyLabel;
+  const idleIcon = button.querySelector<HTMLElement>("[data-copy-idle]");
+  const doneIcon = button.querySelector<HTMLElement>("[data-copy-done]");
+  const tooltip = button.querySelector<HTMLElement>("[data-copy-tooltip]");
+
+  idleIcon?.classList.toggle("hidden", copied);
+  doneIcon?.classList.toggle("hidden", !copied);
+  button.setAttribute("aria-label", label);
+  button.title = label;
+
+  if (tooltip) {
+    tooltip.textContent = label;
+  }
+}
+
+function enhanceProseCodeBlocks() {
+  const template = document.querySelector<HTMLTemplateElement>(
+    "[data-code-copy-button-template]",
+  );
+  if (!template) {
+    return;
+  }
+
+  for (const pre of document.querySelectorAll<HTMLPreElement>(".prose pre")) {
+    const codeBlock = pre.querySelector("code");
+    if (!codeBlock || pre.closest("[data-copyable-code]")) {
+      continue;
+    }
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "group/code relative min-w-0";
+    wrapper.dataset.copyableCode = "";
+    pre.before(wrapper);
+    wrapper.append(pre);
+
+    const button = template.content.firstElementChild?.cloneNode(
+      true,
+    ) as HTMLButtonElement | null;
+    if (button) {
+      const isSingleLine = !codeBlock.textContent?.trimEnd().includes("\n");
+      button.classList.add(
+        ...(isSingleLine ? ["top-1/2", "-translate-y-1/2"] : ["top-1"]),
+      );
+      wrapper.append(button);
+    }
+  }
+}
+
+function bindCopyButtons() {
+  for (const button of document.querySelectorAll<HTMLButtonElement>(
+    "[data-copy-code-button]",
+  )) {
+    if (button.dataset.copyCodeReady === "true") {
+      continue;
+    }
+
+    button.dataset.copyCodeReady = "true";
+    button.addEventListener("click", async () => {
+      const codeBlock = button
+        .closest("[data-copyable-code]")
+        ?.querySelector("pre code");
+      const code = codeBlock?.textContent?.trimEnd();
+
+      if (!code) {
+        return;
+      }
+
+      try {
+        if (!(await writeClipboard(code))) {
+          return;
+        }
+      } catch {
+        return;
+      }
+
+      const previousTimer = resetTimers.get(button);
+      if (previousTimer) {
+        window.clearTimeout(previousTimer);
+      }
+
+      setCopiedState(button, true);
+      resetTimers.set(
+        button,
+        window.setTimeout(() => setCopiedState(button, false), 1600),
+      );
+    });
+  }
+}
+
+enhanceProseCodeBlocks();
+bindCopyButtons();
+</script>
