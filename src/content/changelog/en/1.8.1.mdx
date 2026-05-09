@@ -1,0 +1,41 @@
+---
+lang: en
+version: 1.8.1
+date: 2026-05-09
+title: "v1.8.1"
+summary: "Added release checksum generation and verification guidance, updated code signing documentation, and improved winget release automation."
+tags:
+  - Release
+  - Verification
+  - Checksums
+  - Documentation
+  - winget
+  - CI
+---
+
+## What's Changed
+
+v1.8.1 focuses on release reliability and safer downloads.
+Release artifacts now include generated SHA-256 checksum data, and the documentation has been expanded to help users verify downloaded installers before running them.
+
+The code signing and download verification guidance has also been updated.
+This makes it clearer how to confirm that a downloaded package matches the published release assets.
+
+This release also improves the Windows distribution workflow.
+The winget manifest submission automation was added and hardened so new releases can be submitted more consistently.
+
+## Documentation and Verification
+
+- Added release checksum generation for published artifacts.
+- Added documentation for verifying release downloads.
+- Updated code signing documentation.
+- Updated download verification documentation.
+
+## Release Automation
+
+- Added a winget manifest submission workflow.
+- Improved winget release lookup without requiring a checkout.
+- Synced the `winget-pkgs` fork before submitting manifests.
+- Added fail-fast handling when the winget fork sync fails.
+
+**Full Changelog**: [v1.8.0...v1.8.1](https://github.com/shm11C3/HardwareVisualizer/compare/v1.8.0...v1.8.1)
