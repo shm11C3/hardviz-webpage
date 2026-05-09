@@ -46,6 +46,7 @@ export interface GitHubRelease {
     created_at: string;
     updated_at: string;
     browser_download_url: string;
+    digest?: string | null;
   }>;
   tarball_url: string;
   zipball_url: string;

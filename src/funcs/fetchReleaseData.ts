@@ -4,17 +4,24 @@ import { fetchLatestReleaseMock } from "../../mocks/fetchLatestRelease.mock";
 import type { GitHubRelease } from "../types/github";
 import type { Platform } from "../types/platform";
 
+export interface ReleasePlatformAsset {
+  url: string;
+  size: string;
+  name: string;
+  browser_download_url: string;
+  updated_at: string;
+  digest: string | null;
+  sha256: string | null;
+  release_url: string;
+  signature_name?: string;
+  signature_url?: string;
+}
+
 export interface ReleaseData {
   version: string;
   published_at: string | null;
   platforms: {
-    [K in Platform]?: {
-      url: string;
-      size: string;
-      name: string;
-      browser_download_url: string;
-      updated_at: string;
-    };
+    [K in Platform]?: ReleasePlatformAsset;
   };
 }
 
@@ -46,83 +53,114 @@ function writeCache(data: ReleaseData): void {
   }
 }
 
-function parseRelease(data: GitHubRelease): ReleaseData {
-  const platforms = (data.assets || []).reduce(
-    (
-      acc: ReleaseData["platforms"],
-      asset: { name: string; browser_download_url: string; size?: number },
-    ) => {
-      if (
-        /.msi/.test(asset.name) &&
-        !/offline/.test(asset.name) &&
-        !/.sig/.test(asset.name)
-      ) {
-        acc.windows = {
-          url: asset.browser_download_url,
-          size: asset.size
-            ? `${(asset.size / 1024 / 1024).toFixed(1)} MB`
-            : "-",
-          name: asset.name,
-          browser_download_url: asset.browser_download_url,
-          updated_at: data.published_at,
-        };
-      } else if (/.rpm/.test(asset.name) && !/.sig/.test(asset.name)) {
-        acc.linuxRPM = {
-          url: asset.browser_download_url,
-          size: asset.size
-            ? `${(asset.size / 1024 / 1024).toFixed(1)} MB`
-            : "-",
-          name: asset.name,
-          browser_download_url: asset.browser_download_url,
-          updated_at: data.published_at,
-        };
-      } else if (/.AppImage/.test(asset.name) && !/.sig/.test(asset.name)) {
-        acc.linuxAppImage = {
-          url: asset.browser_download_url,
-          size: asset.size
-            ? `${(asset.size / 1024 / 1024).toFixed(1)} MB`
-            : "-",
-          name: asset.name,
-          browser_download_url: asset.browser_download_url,
-          updated_at: data.published_at,
-        };
-      } else if (/.deb/.test(asset.name) && !/.sig/.test(asset.name)) {
-        acc.linuxDeb = {
-          url: asset.browser_download_url,
-          size: asset.size
-            ? `${(asset.size / 1024 / 1024).toFixed(1)} MB`
-            : "-",
-          name: asset.name,
-          browser_download_url: asset.browser_download_url,
-          updated_at: data.published_at,
-        };
-      } else if (/.dmg/.test(asset.name) && !/.sig/.test(asset.name)) {
-        if (/arm64|aarch64/i.test(asset.name)) {
-          acc.macOSAppleSilicon = {
-            url: asset.browser_download_url,
-            size: asset.size
-              ? `${(asset.size / 1024 / 1024).toFixed(1)} MB`
-              : "-",
-            name: asset.name,
-            browser_download_url: asset.browser_download_url,
-            updated_at: data.published_at,
-          };
-        } else if (/x64|x86.?64|intel/i.test(asset.name)) {
-          acc.macOSIntel = {
-            url: asset.browser_download_url,
-            size: asset.size
-              ? `${(asset.size / 1024 / 1024).toFixed(1)} MB`
-              : "-",
-            name: asset.name,
-            browser_download_url: asset.browser_download_url,
-            updated_at: data.published_at,
-          };
+type GitHubReleaseAsset = GitHubRelease["assets"][number];
+
+function formatAssetSize(size: number | undefined): string {
+  return typeof size === "number"
+    ? `${(size / 1024 / 1024).toFixed(1)} MB`
+    : "-";
+}
+
+function parseSha256Digest(digest: string | null | undefined): string | null {
+  if (!digest?.startsWith("sha256:")) {
+    return null;
+  }
+
+  const sha256 = digest.slice("sha256:".length);
+  return /^[a-fA-F0-9]{64}$/.test(sha256) ? sha256.toLowerCase() : null;
+}
+
+function isSignatureAsset(asset: GitHubReleaseAsset): boolean {
+  return asset.name.toLowerCase().endsWith(".sig");
+}
+
+function platformForAsset(asset: GitHubReleaseAsset): Platform | null {
+  const name = asset.name;
+  const lowerName = name.toLowerCase();
+
+  if (isSignatureAsset(asset)) {
+    return null;
+  }
+
+  if (lowerName.endsWith(".msi") && !lowerName.includes("offline")) {
+    return "windows";
+  }
+
+  if (lowerName.endsWith(".rpm")) {
+    return "linuxRPM";
+  }
+
+  if (name.endsWith(".AppImage")) {
+    return "linuxAppImage";
+  }
+
+  if (lowerName.endsWith(".deb")) {
+    return "linuxDeb";
+  }
+
+  if (lowerName.endsWith(".dmg")) {
+    if (/arm64|aarch64/i.test(name)) {
+      return "macOSAppleSilicon";
+    }
+
+    if (/x64|x86.?64|intel/i.test(name)) {
+      return "macOSIntel";
+    }
+  }
+
+  return null;
+}
+
+function toReleasePlatformAsset(
+  asset: GitHubReleaseAsset,
+  releaseUrl: string,
+  signatureAsset: GitHubReleaseAsset | undefined,
+): ReleasePlatformAsset {
+  return {
+    url: asset.browser_download_url,
+    size: formatAssetSize(asset.size),
+    name: asset.name,
+    browser_download_url: asset.browser_download_url,
+    updated_at: asset.updated_at,
+    digest: asset.digest ?? null,
+    sha256: parseSha256Digest(asset.digest),
+    release_url: releaseUrl,
+    ...(signatureAsset
+      ? {
+          signature_name: signatureAsset.name,
+          signature_url: signatureAsset.browser_download_url,
         }
+      : {}),
+  };
+}
+
+function parseRelease(data: GitHubRelease): ReleaseData {
+  const signatureAssets = new Map<string, GitHubReleaseAsset>();
+
+  for (const asset of data.assets || []) {
+    if (isSignatureAsset(asset)) {
+      signatureAssets.set(asset.name.slice(0, -".sig".length), asset);
+    }
+  }
+
+  const platforms = (data.assets || []).reduce(
+    (acc: ReleaseData["platforms"], asset) => {
+      const platform = platformForAsset(asset);
+
+      if (!platform) {
+        return acc;
       }
+
+      acc[platform] = toReleasePlatformAsset(
+        asset,
+        data.html_url,
+        signatureAssets.get(asset.name),
+      );
       return acc;
     },
     {},
   );
+
   return {
     version: data.tag_name?.replace(/^v/, "") || data.name,
     published_at: data.published_at ?? null,
