@@ -1,0 +1,35 @@
+---
+lang: ja
+section: verification
+title: "インストーラの検証"
+---
+
+特にWindows版のAuthenticode署名が準備中の間は、インストーラを実行する前に以下を確認してください。
+
+### 配布元を確認する
+
+公式配布元はhardviz.com、GitHub Releases、利用可能な場合のWingetのみです。
+
+### ファイルが改ざんされていないか確認する
+
+チェックサム（SHA-256）が公開されているリリースでは、インストーラと同じGitHub Releaseに掲載された値と照合してください。
+詳しくはGitHubドキュメントに記載の[インストーラの検証](https://github.com/shm11C3/HardwareVisualizer/blob/develop/docs/download-verification.ja.md)を参照してください。
+
+### GitHub Artifact Attestationsを検証する
+
+attestationが公開されているリリースでは、GitHub CLIでアセットが公式リポジトリから生成されたことを確認してください。
+
+```bash
+gh attestation verify ./HardwareVisualizer_* -R shm11C3/HardwareVisualizer
+```
+
+### 署名状況を確認する
+
+WindowsのAuthenticode署名は準備中です。macOS版は署名・公証済みで、Linux版はチェックサムとattestationで検証してください。
+
+### 関連リンク
+
+- [GitHub Releases](https://github.com/shm11C3/HardwareVisualizer/releases)
+- [インストーラの検証](https://github.com/shm11C3/HardwareVisualizer/blob/develop/docs/download-verification.ja.md)
+- [コード署名ポリシー](https://github.com/shm11C3/HardwareVisualizer/blob/develop/CODE_SIGNING_POLICY.md)
+- [セキュリティ関連の報告方法](https://github.com/shm11C3/HardwareVisualizer/security/policy#reporting-a-vulnerability)

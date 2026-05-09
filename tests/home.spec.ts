@@ -8,16 +8,16 @@ test("home page loads", async ({ page }) => {
   );
 });
 
-test("download links point to home anchors on FAQ pages", async ({ page }) => {
+test("download links point to download page on FAQ pages", async ({ page }) => {
   await page.goto("/faq/");
   await expect(
     page.locator("header a", { hasText: "Download" }),
-  ).toHaveAttribute("href", "/#download");
+  ).toHaveAttribute("href", "/download/");
 
   await page.goto("/ja/faq/");
   await expect(
     page.locator("footer a", { hasText: "ダウンロード" }),
-  ).toHaveAttribute("href", "/ja/#download");
+  ).toHaveAttribute("href", "/ja/download/");
 });
 
 test("JA home page loads", async ({ page }) => {
@@ -37,7 +37,7 @@ test("home page has all major sections", async ({ page }) => {
 
 test("hero has download and GitHub buttons", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator('a[href="#download"]').first()).toBeVisible();
+  await expect(page.locator('a[href="/download/"]').first()).toBeVisible();
   const githubLink = page
     .locator('a[href*="github.com/shm11C3/HardwareVisualizer"]')
     .first();
@@ -52,6 +52,35 @@ test("download section renders platform cards", async ({ page }) => {
   await expect(headings.nth(0)).toContainText("Windows");
   await expect(headings.nth(1)).toContainText("macOS");
   await expect(headings.nth(2)).toContainText("Linux");
+});
+
+test("home download section links to dedicated download page", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const download = page.locator("#download");
+
+  await expect(
+    download.locator('[aria-labelledby="download-authenticity-title"]'),
+  ).toHaveCount(0);
+  expect(
+    await download.locator('a[href="/download/"]').count(),
+  ).toBeGreaterThan(0);
+  await expect(
+    download.locator('a[href="/download/#installation"]'),
+  ).toBeVisible();
+
+  await page.goto("/ja/");
+  const jaDownload = page.locator("#download");
+  await expect(
+    jaDownload.locator('[aria-labelledby="download-authenticity-title"]'),
+  ).toHaveCount(0);
+  expect(
+    await jaDownload.locator('a[href="/ja/download/"]').count(),
+  ).toBeGreaterThan(0);
+  await expect(
+    jaDownload.locator('a[href="/ja/download/#installation"]'),
+  ).toBeVisible();
 });
 
 test("download section shows mock version", async ({ page }) => {

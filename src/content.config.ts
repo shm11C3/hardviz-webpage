@@ -22,6 +22,16 @@ const changelog = defineCollection({
   }),
 });
 
+const downloadGuide = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "src/content/download-guide" }),
+  schema: z.object({
+    lang: z.enum(["en", "ja"]),
+    section: z.enum(["source-check", "installation", "verification"]),
+    title: z.string().min(1),
+  }),
+});
+
 export const collections = {
   changelog,
+  downloadGuide,
 };

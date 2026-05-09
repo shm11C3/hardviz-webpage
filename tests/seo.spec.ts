@@ -105,7 +105,18 @@ test("FAQ page JSON-LD has FAQPage type", async ({ page }) => {
 });
 
 test("all main pages have non-empty meta description", async ({ page }) => {
-  const pages = ["/", "/faq/", "/specs/", "/changelog/", "/ja/", "/ja/faq/"];
+  const pages = [
+    "/",
+    "/download/",
+    "/verification/",
+    "/faq/",
+    "/specs/",
+    "/changelog/",
+    "/ja/",
+    "/ja/download/",
+    "/ja/verification/",
+    "/ja/faq/",
+  ];
   for (const path of pages) {
     await page.goto(path);
     const description = await page

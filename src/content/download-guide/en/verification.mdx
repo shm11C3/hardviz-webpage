@@ -1,0 +1,35 @@
+---
+lang: en
+section: verification
+title: "Installer verification"
+---
+
+Use these checks before running an installer, especially on Windows while Authenticode signing is pending.
+
+### Check the source
+
+Official downloads are available only from hardviz.com, GitHub Releases, and Winget where available.
+
+### Check that the file has not been changed
+
+When a release provides a checksum, compare your installer with the SHA-256 value published in the matching GitHub Release.
+For details, see [Installer verification in the GitHub documentation](https://github.com/shm11C3/HardwareVisualizer/blob/develop/docs/download-verification.md).
+
+### Verify GitHub Artifact Attestations
+
+For releases that publish attestations, use GitHub CLI to verify that the asset was produced by the official repository.
+
+```bash
+gh attestation verify ./HardwareVisualizer_* -R shm11C3/HardwareVisualizer
+```
+
+### Review signing status
+
+Windows Authenticode signing is pending. macOS builds are signed and notarized; Linux artifacts should be verified with checksums and attestations.
+
+### Resources
+
+- [GitHub Releases](https://github.com/shm11C3/HardwareVisualizer/releases)
+- [Installer verification](https://github.com/shm11C3/HardwareVisualizer/blob/develop/docs/download-verification.md)
+- [Code signing policy](https://github.com/shm11C3/HardwareVisualizer/blob/develop/CODE_SIGNING_POLICY.md)
+- [Report a security concern](https://github.com/shm11C3/HardwareVisualizer/security/policy#reporting-a-vulnerability)

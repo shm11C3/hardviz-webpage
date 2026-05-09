@@ -21,12 +21,12 @@ test.describe("Header", () => {
     await page.goto("/");
     await expect(
       page.locator("header a", { hasText: "Download" }),
-    ).toHaveAttribute("href", "/#download");
+    ).toHaveAttribute("href", "/download/");
 
     await page.goto("/faq/");
     await expect(
       page.locator("header a", { hasText: "Download" }),
-    ).toHaveAttribute("href", "/#download");
+    ).toHaveAttribute("href", "/download/");
   });
 
   test("FAQ link href", async ({ page }) => {
@@ -74,7 +74,7 @@ test.describe("Footer", () => {
     await page.goto("/");
     const footer = page.locator("footer");
     await expect(footer.locator('a[href="/#features"]')).toBeVisible();
-    await expect(footer.locator('a[href="/#download"]')).toBeVisible();
+    await expect(footer.locator('a[href="/download/"]')).toBeVisible();
     await expect(footer.locator('a[href="/specs/"]')).toBeVisible();
     await expect(footer.locator('a[href="/faq/"]')).toBeVisible();
     await expect(footer.locator('a[href="/changelog/"]')).toBeVisible();

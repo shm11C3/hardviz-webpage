@@ -1,0 +1,49 @@
+---
+import { render } from "astro:content";
+import type { ui } from "../i18n/ui";
+import type { DownloadGuideEntry } from "../lib/downloadGuide";
+import { addJapaneseLineBreaks } from "../lib/japaneseLineBreaks";
+import DownloadGuideNav from "./DownloadGuideNav.astro";
+
+interface Props {
+  lang: keyof typeof ui;
+  entry: DownloadGuideEntry;
+  downloadHref: string;
+  verificationHref: string;
+}
+
+const { lang, entry, downloadHref, verificationHref } = Astro.props;
+const { Content } = await render(entry as never);
+const formatText = (text: string) => addJapaneseLineBreaks(lang, text);
+
+const guideArticleClass =
+  "prose prose-sm prose-slate max-w-full min-w-0 sm:prose-base dark:prose-invert prose-a:text-cyan-700 dark:prose-a:text-cyan-300 prose-blockquote:border-cyan-500 prose-code:break-words prose-pre:max-w-full prose-pre:overflow-x-auto prose-pre:whitespace-pre prose-pre:rounded-none prose-pre:border-slate-800 prose-pre:border-l-4 prose-pre:bg-slate-950 prose-pre:text-cyan-100 prose-pre:text-[0.8125rem] sm:prose-pre:text-sm";
+---
+
+<section id="verification" class="bg-white pt-16 pb-20 dark:bg-slate-800">
+  <div class="container mx-auto px-4">
+    <div
+      class="mx-auto grid max-w-7xl min-w-0 gap-8 lg:grid-cols-[minmax(0,13rem)_minmax(0,1fr)] lg:gap-10"
+    >
+      <DownloadGuideNav
+        lang={lang}
+        current="verification"
+        downloadHref={downloadHref}
+        verificationHref={verificationHref}
+      />
+
+      <div class="max-w-3xl min-w-0">
+        <h1
+          class="font-bold text-3xl text-slate-950 leading-tight md:text-5xl dark:text-white"
+        >
+          {formatText(entry.data.title)}
+        </h1>
+        <article
+          class:list={[guideArticleClass, "mt-8", lang === "ja" && "budoux-ja"]}
+        >
+          <Content />
+        </article>
+      </div>
+    </div>
+  </div>
+</section>

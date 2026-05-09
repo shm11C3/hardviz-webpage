@@ -66,6 +66,28 @@ export const ui = {
     "download.title": "Download HardwareVisualizer",
     "download.description":
       "Available for Windows, macOS, and Linux OS. Free and open source.",
+    "download.pageTitle": "Download HardwareVisualizer",
+    "download.pageTitleBeforeBreak": "Download",
+    "download.pageTitleSeparator": " ",
+    "download.pageTitleAfterBreak": "HardwareVisualizer",
+    "download.pageDescription":
+      "Choose an official installer and verify HardwareVisualizer downloads before installing.",
+    "download.metaTitle": "Download HardwareVisualizer",
+    "download.metaDescription":
+      "Download HardwareVisualizer from official sources only. Get Windows, macOS, and Linux installers, verification guidance, code signing status, and GitHub Releases links.",
+    "download.sectionTitle": "Download",
+    "download.nav.ariaLabel": "Download and verification navigation",
+    "download.nav.download": "Download",
+    "download.nav.downloadInstaller": "Download installer",
+    "download.nav.installation": "Installation",
+    "download.nav.verification": "Installer verification",
+    "download.verifyAfterInstall.title": "Installer verification",
+    "download.verifyAfterInstall.description":
+      "If you are unsure about the source or file name, check the source, checksum, and artifact attestation before running it.",
+    "download.verifyAfterInstall.link": "Go to installer verification",
+    "download.verificationPage.metaTitle": "Installer verification",
+    "download.verificationPage.metaDescription":
+      "Installer verification for HardwareVisualizer, including official sources, SHA-256 checksums, GitHub Artifact Attestations, and code signing status.",
     "download.currentVersion": "Current version:",
     "download.button": "Download",
     "download.noDownloads": "No downloads available for {platform} yet.",
@@ -73,6 +95,7 @@ export const ui = {
     "download.githubLink": "View all releases on GitHub →",
     "download.githubDownloadButton": "Download from GitHub",
     "download.changelogLink": "View past versions →",
+    "download.installationLink": "See detailed installation instructions",
     "download.releaseDate": "Released:",
     "download.latestChanges": "Latest release changes",
     "download.latestChangesLink": "Read full changelog →",
@@ -157,7 +180,7 @@ export const ui = {
       "HardwareVisualizer is a free, open-source, cross-platform hardware monitoring tool. It lets you track CPU temperature, GPU usage, memory allocation, and system performance in real-time with beautiful graphs and minimal system impact.",
     "faq.q2": "Is HardwareVisualizer free?",
     "faq.a2":
-      "Yes, HardwareVisualizer is completely free and open-source under the MIT license. You can download it from our website or GitHub, and even contribute to the project.",
+      "Yes, HardwareVisualizer is completely free and open-source under the MIT license. Download it only from hardviz.com, GitHub Releases, or Winget on Windows where available; third-party mirrors, file-sharing links, YouTube description links, and password-protected archives are not official.",
     "faq.q3": "Which operating systems are supported?",
     "faq.a3":
       "HardwareVisualizer supports Windows 10, Windows 11, macOS (Apple Silicon officially supported, Intel experimental), and major Linux distributions (Debian/Ubuntu, RPM-based distros, AppImage).",
@@ -175,6 +198,7 @@ export const ui = {
       "Absolutely! You can request new hardware support, themes, languages, and other features by creating an issue on GitHub. Contributions are always welcome — feel free to submit pull requests or join the discussions.",
     "faq.specsLink": "View system requirements",
     "faq.githubLink": "Create an issue on GitHub",
+    "faq.verificationGuideLink": "Installer verification",
     "faq.viewAll": "View all FAQs",
   },
   ja: {
@@ -235,6 +259,28 @@ export const ui = {
     "download.title": "HardwareVisualizerをダウンロード",
     "download.description":
       "Windows、macOS、Linux OSで利用可能。無料でオープンソース。",
+    "download.pageTitle": "HardwareVisualizerをダウンロードする",
+    "download.pageTitleBeforeBreak": "HardwareVisualizerを",
+    "download.pageTitleSeparator": "",
+    "download.pageTitleAfterBreak": "ダウンロードする",
+    "download.pageDescription":
+      "公式インストーラを選択し、インストール前にHardwareVisualizerのダウンロードを確認できます。",
+    "download.metaTitle": "HardwareVisualizerをダウンロードする",
+    "download.metaDescription":
+      "HardwareVisualizerは公式配布元のみからダウンロードしてください。Windows、macOS、Linux向けインストーラ、検証方法、コード署名状況、GitHub Releasesへのリンクを確認できます。",
+    "download.sectionTitle": "ダウンロード",
+    "download.nav.ariaLabel": "ダウンロードと検証のナビゲーション",
+    "download.nav.download": "ダウンロード",
+    "download.nav.downloadInstaller": "インストーラをダウンロードする",
+    "download.nav.installation": "インストール方法",
+    "download.nav.verification": "インストーラの検証",
+    "download.verifyAfterInstall.title": "インストーラの検証",
+    "download.verifyAfterInstall.description":
+      "入手元やファイル名に不安がある場合は、実行前に配布元、チェックサム、Artifact Attestationを確認してください。",
+    "download.verifyAfterInstall.link": "インストーラの検証へ",
+    "download.verificationPage.metaTitle": "インストーラの検証",
+    "download.verificationPage.metaDescription":
+      "HardwareVisualizerのインストーラの検証として、公式配布元、SHA-256チェックサム、GitHub Artifact Attestations、コード署名状況の確認方法を案内します。",
     "download.currentVersion": "現在のバージョン:",
     "download.button": "ダウンロード",
     "download.noDownloads": "{platform}用のダウンロードはまだ利用できません。",
@@ -243,6 +289,7 @@ export const ui = {
     "download.githubLink": "GitHubですべてのリリースを表示 →",
     "download.githubDownloadButton": "GitHubからダウンロード",
     "download.changelogLink": "過去のリリースを見る →",
+    "download.installationLink": "詳細なインストール方法はこちら",
     "download.releaseDate": "リリース日時:",
     "download.latestChanges": "最新リリースの変更内容",
     "download.latestChangesLink": "変更履歴を詳しく見る →",
@@ -324,7 +371,7 @@ export const ui = {
       "HardwareVisualizerは、マルチプラットフォーム対応の無料オープンソースのハードウェアモニタリングツールです。CPU温度、GPU使用率、メモリ割り当て、システムパフォーマンスを美しいグラフでリアルタイムに追跡でき、システムへの影響も最小限です。",
     "faq.q2": "HardwareVisualizerは無料ですか？",
     "faq.a2":
-      "はい、HardwareVisualizerは完全に無料で、MITライセンスのオープンソースです。当サイトまたはGitHubからダウンロードでき、プロジェクトへの貢献も可能です。",
+      "はい、HardwareVisualizerは完全に無料で、MITライセンスのオープンソースです。ダウンロードは hardviz.com、GitHub Releases、または利用可能な場合はWindowsのWingetのみを利用してください。第三者のダウンロードサイト、ファイル共有リンク、YouTube概要欄のリンク、パスワード付きZIPは公式ではありません。",
     "faq.q3": "どのOSに対応していますか？",
     "faq.a3":
       "HardwareVisualizerはWindows 10、Windows 11、macOS（Apple Silicon正式対応、Intel実験的）、および主要なLinuxディストリビューション（Debian/Ubuntu、RPM系、AppImage）に対応しています。",
@@ -342,6 +389,7 @@ export const ui = {
       "もちろんです！対応ハードウェアの追加、テーマの追加、言語の追加などの機能リクエストはGitHubのIssueで受け付けています。プルリクエストやディスカッションへの参加も大歓迎です。",
     "faq.specsLink": "システム要件を見る",
     "faq.githubLink": "GitHubでIssueを作成",
+    "faq.verificationGuideLink": "インストーラの検証",
     "faq.viewAll": "すべてのFAQを見る",
   },
 } as const;
