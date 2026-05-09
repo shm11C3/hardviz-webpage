@@ -12,12 +12,14 @@ title: "インストーラの検証"
 
 ### ファイルが改ざんされていないか確認する
 
-チェックサム（SHA-256）が公開されているリリースでは、インストーラと同じGitHub Releaseに掲載された値と照合してください。
+より厳密に確認したい場合は、ダウンロードページからSHA-256の値をコピーし、[最新リリースの検証コマンド](#latest-commands)から対象ファイルに合うものを実行してください。
+コマンドの出力がコピーした値と完全に一致することを確認してください。
 詳しくはGitHubドキュメントに記載の[インストーラの検証](https://github.com/shm11C3/HardwareVisualizer/blob/develop/docs/download-verification.ja.md)を参照してください。
 
 ### GitHub Artifact Attestationsを検証する
 
 attestationが公開されているリリースでは、GitHub CLIでアセットが公式リポジトリから生成されたことを確認してください。
+最新リリース向けのコマンドは下に掲載しています。
 
 ```bash
 gh attestation verify ./HardwareVisualizer_* -R shm11C3/HardwareVisualizer

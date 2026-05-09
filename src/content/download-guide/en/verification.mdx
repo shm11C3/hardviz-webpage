@@ -12,12 +12,14 @@ Official downloads are available only from hardviz.com, GitHub Releases, and Win
 
 ### Check that the file has not been changed
 
-When a release provides a checksum, compare your installer with the SHA-256 value published in the matching GitHub Release.
+For a stricter check, copy the SHA-256 value from the download page, then run the matching checksum command from the [latest release verification commands](#latest-commands).
+The command output should match the copied value exactly.
 For details, see [Installer verification in the GitHub documentation](https://github.com/shm11C3/HardwareVisualizer/blob/develop/docs/download-verification.md).
 
 ### Verify GitHub Artifact Attestations
 
 For releases that publish attestations, use GitHub CLI to verify that the asset was produced by the official repository.
+The latest release commands are listed below.
 
 ```bash
 gh attestation verify ./HardwareVisualizer_* -R shm11C3/HardwareVisualizer

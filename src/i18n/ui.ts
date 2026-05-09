@@ -84,6 +84,13 @@ export const ui = {
     "download.verificationPage.metaTitle": "Installer verification",
     "download.verificationPage.metaDescription":
       "Installer verification for HardwareVisualizer, including official sources, SHA-256 checksums, GitHub Artifact Attestations, and code signing status.",
+    "download.verificationPage.latestCommandsTitle":
+      "Latest release verification commands (Advanced)",
+    "download.verificationPage.latestCommandsDescription":
+      "Copy the SHA-256 value from the download page, then run the command for the file you downloaded.",
+    "download.verificationPage.infoLabel": "Info",
+    "download.verificationPage.beginnerInfo":
+      "SHA-256 is a value used to check whether the file you downloaded is the same as the file that was published. If you are not comfortable using command-line tools, you do not need to force this step. First make sure you downloaded the installer from an official source.",
     "download.currentVersion": "Current version:",
     "download.button": "Download",
     "download.noDownloads": "No downloads available for {platform} yet.",
@@ -95,6 +102,20 @@ export const ui = {
     "download.releaseDate": "Released:",
     "download.latestChanges": "Latest release changes",
     "download.latestChangesLink": "Read full changelog →",
+    "download.verify.summary": "Verify this download",
+    "download.verify.artifact": "Artifact",
+    "download.verify.fileSize": "File size",
+    "download.verify.sha256": "Checksum (SHA-256)",
+    "download.verify.copySha256": "Copy SHA-256",
+    "download.verify.copyCode": "Copy code",
+    "download.verify.copied": "Copied",
+    "download.verify.checksumUnavailable": "Checksum unavailable",
+    "download.verify.verificationCommand": "Verification command",
+    "download.verify.githubAttestation": "GitHub attestation",
+    "download.verify.signatureFile": "Signature file",
+    "download.verify.signingStatus": "Signing status",
+    "download.verify.updaterSignatureAvailable":
+      "Tauri updater signature available.",
 
     "changelog.title": "Changelog",
     "changelog.description":
@@ -273,6 +294,13 @@ export const ui = {
     "download.verificationPage.metaTitle": "インストーラの検証",
     "download.verificationPage.metaDescription":
       "HardwareVisualizerのインストーラの検証として、公式配布元、SHA-256チェックサム、GitHub Artifact Attestations、コード署名状況の確認方法を案内します。",
+    "download.verificationPage.latestCommandsTitle":
+      "最新リリースの検証コマンド（上級者向け）",
+    "download.verificationPage.latestCommandsDescription":
+      "ダウンロードページからSHA-256の値をコピーし、取得したファイルに対応するコマンドを実行してください。",
+    "download.verificationPage.infoLabel": "Info",
+    "download.verificationPage.beginnerInfo":
+      "SHA-256は、ダウンロードしたファイルが配布時と同じか確認するための値です。コマンド操作に慣れていない場合は、この手順を無理に実行する必要はありません。まず公式配布元から入手していることを確認してください。",
     "download.currentVersion": "現在のバージョン:",
     "download.button": "ダウンロード",
     "download.noDownloads": "{platform}用のダウンロードはまだ利用できません。",
@@ -285,6 +313,20 @@ export const ui = {
     "download.releaseDate": "リリース日時:",
     "download.latestChanges": "最新リリースの変更内容",
     "download.latestChangesLink": "変更履歴を詳しく見る →",
+    "download.verify.summary": "このダウンロードを検証する",
+    "download.verify.artifact": "アーティファクト",
+    "download.verify.fileSize": "ファイルサイズ",
+    "download.verify.sha256": "チェックサム (SHA-256)",
+    "download.verify.copySha256": "SHA-256をコピー",
+    "download.verify.copyCode": "コードをコピー",
+    "download.verify.copied": "コピーしました",
+    "download.verify.checksumUnavailable": "チェックサムを取得できません",
+    "download.verify.verificationCommand": "検証コマンド",
+    "download.verify.githubAttestation": "GitHub Attestation",
+    "download.verify.signatureFile": "署名ファイル",
+    "download.verify.signingStatus": "署名状態",
+    "download.verify.updaterSignatureAvailable":
+      "Tauriアップデータ署名を利用できます。",
 
     "changelog.title": "変更履歴",
     "changelog.description": "HardwareVisualizerのリリースノートと更新情報。",

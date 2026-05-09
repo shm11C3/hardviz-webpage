@@ -1,4 +1,11 @@
-import { ArrowRight, CalendarDays, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  CalendarDays,
+  Check,
+  ChevronRight,
+  Copy as CopyIcon,
+  Sparkles,
+} from "lucide-react";
 import { type JSX, memo, useEffect, useState } from "react";
 import { FaApple, FaGithub, FaLinux, FaWindows } from "react-icons/fa";
 import type { LatestReleaseDetails } from "../lib/latestRelease";
@@ -11,7 +18,14 @@ const platformToIcon: Record<PlatformDownload["platform"], JSX.Element> = {
   macOS: <FaApple className="h-8 w-8" />,
 };
 
-interface DownloadTranslations {
+interface DownloadChecksumTranslations {
+  sha256: string;
+  copySha256: string;
+  copied: string;
+  checksumUnavailable: string;
+}
+
+interface DownloadTranslations extends Partial<DownloadChecksumTranslations> {
   button: string;
   noDownloads: string;
   title?: string;
@@ -25,6 +39,23 @@ interface DownloadTranslations {
   latestChanges?: string;
   latestChangesLink?: string;
 }
+
+const getChecksumTranslations = (
+  translations: DownloadTranslations,
+): DownloadChecksumTranslations | null => {
+  const { sha256, copySha256, copied, checksumUnavailable } = translations;
+
+  if (!sha256 || !copySha256 || !copied || !checksumUnavailable) {
+    return null;
+  }
+
+  return {
+    sha256,
+    copySha256,
+    copied,
+    checksumUnavailable,
+  };
+};
 
 const Download = ({
   downloads: initialDownloads,
@@ -54,6 +85,8 @@ const Download = ({
   const [detectedPlatform, setDetectedPlatform] = useState<
     PlatformDownload["platform"] | null
   >(null);
+  const [copiedArtifact, setCopiedArtifact] = useState<string | null>(null);
+  const checksumLabels = getChecksumTranslations(translations);
 
   useEffect(() => {
     const ua = navigator.userAgent;
@@ -65,6 +98,24 @@ const Download = ({
       setDetectedPlatform("Windows");
     }
   }, []);
+
+  const copySha256 = async (artifactName: string, sha256: string) => {
+    if (!navigator.clipboard?.writeText) {
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(sha256);
+      setCopiedArtifact(artifactName);
+      window.setTimeout(() => {
+        setCopiedArtifact((current) =>
+          current === artifactName ? null : current,
+        );
+      }, 1800);
+    } catch {
+      setCopiedArtifact(null);
+    }
+  };
 
   const downloads = initialDownloads.map((platform) => ({
     ...platform,
@@ -168,6 +219,84 @@ const Download = ({
                       </div>
                     )}
                   </div>
+                  {checksumLabels && version.url ? (
+                    <details
+                      className="group/checksum relative z-20 mt-4 overflow-visible rounded-lg border border-slate-200 bg-slate-50/80 text-sm dark:border-slate-700 dark:bg-slate-900/40"
+                      data-download-checksum={version.type}
+                    >
+                      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-3 py-2 [&::-webkit-details-marker]:hidden">
+                        <span className="flex min-w-0 items-center gap-2">
+                          <ChevronRight
+                            className="h-4 w-4 shrink-0 text-slate-500 transition-transform group-open/checksum:rotate-90 dark:text-slate-400"
+                            aria-hidden="true"
+                          />
+                          <span className="font-medium text-slate-600 text-xs uppercase dark:text-slate-400">
+                            {checksumLabels.sha256}
+                          </span>
+                        </span>
+                        {version.sha256 ? (
+                          <button
+                            type="button"
+                            className="group/copy relative inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-slate-300 text-slate-600 hover:bg-white hover:text-slate-900 focus-visible:outline-2 focus-visible:outline-cyan-500 focus-visible:outline-offset-2 dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-white"
+                            aria-label={
+                              copiedArtifact ===
+                              (version.artifactName ?? version.type)
+                                ? checksumLabels.copied
+                                : checksumLabels.copySha256
+                            }
+                            title={
+                              copiedArtifact ===
+                              (version.artifactName ?? version.type)
+                                ? checksumLabels.copied
+                                : checksumLabels.copySha256
+                            }
+                            onClick={(event) => {
+                              event.preventDefault();
+                              event.stopPropagation();
+                              void copySha256(
+                                version.artifactName ?? version.type,
+                                version.sha256 ?? "",
+                              );
+                            }}
+                          >
+                            {copiedArtifact ===
+                            (version.artifactName ?? version.type) ? (
+                              <Check className="h-4 w-4" aria-hidden="true" />
+                            ) : (
+                              <CopyIcon
+                                className="h-4 w-4"
+                                aria-hidden="true"
+                              />
+                            )}
+                            <span
+                              className="pointer-events-none absolute right-0 bottom-full z-50 mb-2 hidden whitespace-nowrap rounded-md bg-slate-900 px-2 py-1 font-medium text-white text-xs shadow-lg group-hover/copy:block group-focus-visible/copy:block dark:bg-slate-100 dark:text-slate-900"
+                              aria-hidden="true"
+                              data-copy-tooltip
+                            >
+                              {copiedArtifact ===
+                              (version.artifactName ?? version.type)
+                                ? checksumLabels.copied
+                                : checksumLabels.copySha256}
+                            </span>
+                          </button>
+                        ) : null}
+                      </summary>
+                      <div className="border-slate-200 border-t p-3 dark:border-slate-700">
+                        {version.sha256 ? (
+                          <code className="block overflow-x-auto break-all rounded bg-white px-2 py-1.5 font-mono text-slate-900 text-xs dark:bg-slate-950 dark:text-slate-100">
+                            {version.sha256}
+                          </code>
+                        ) : (
+                          <div
+                            className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-amber-800 text-sm dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-100"
+                            data-checksum-warning
+                          >
+                            {checksumLabels.checksumUnavailable}
+                          </div>
+                        )}
+                      </div>
+                    </details>
+                  ) : null}
                 </div>
               ))}
               {platform.versions.length === 0 && (

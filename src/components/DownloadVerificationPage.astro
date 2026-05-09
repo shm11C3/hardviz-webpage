@@ -1,8 +1,12 @@
 ---
 import { render } from "astro:content";
+import { Info } from "lucide-react";
 import type { ui } from "../i18n/ui";
+import { useTranslations } from "../i18n/utils";
 import type { DownloadGuideEntry } from "../lib/downloadGuide";
 import { addJapaneseLineBreaks } from "../lib/japaneseLineBreaks";
+import type { PlatformDownload } from "../types/platform";
+import CopyableCode from "./CopyableCode.astro";
 import DownloadGuideNav from "./DownloadGuideNav.astro";
 
 interface Props {
@@ -10,14 +14,33 @@ interface Props {
   entry: DownloadGuideEntry;
   downloadHref: string;
   verificationHref: string;
+  downloads: PlatformDownload[];
 }
 
-const { lang, entry, downloadHref, verificationHref } = Astro.props;
+const { lang, entry, downloadHref, verificationHref, downloads } = Astro.props;
 const { Content } = await render(entry as never);
+const t = useTranslations(lang);
 const formatText = (text: string) => addJapaneseLineBreaks(lang, text);
+const commandEntries = downloads.flatMap((download) =>
+  download.versions.flatMap((version) => {
+    if (!version.artifactName) {
+      return [];
+    }
+
+    return [
+      {
+        artifactName: version.artifactName,
+        platform: download.platform,
+        version,
+      },
+    ];
+  }),
+);
 
 const guideArticleClass =
   "prose prose-sm prose-slate max-w-full min-w-0 sm:prose-base dark:prose-invert prose-a:text-cyan-700 dark:prose-a:text-cyan-300 prose-blockquote:border-cyan-500 prose-code:break-words prose-pre:max-w-full prose-pre:overflow-x-auto prose-pre:whitespace-pre prose-pre:rounded-none prose-pre:border-slate-800 prose-pre:border-l-4 prose-pre:bg-slate-950 prose-pre:text-cyan-100 prose-pre:text-[0.8125rem] sm:prose-pre:text-sm";
+const codeBlockClass =
+  "m-0 max-w-full overflow-x-auto whitespace-pre rounded-none border-slate-800 border-l-4 bg-[#24292e] py-2 pr-12 pl-3 font-mono text-[#e1e4e8] text-[0.8125rem] sm:text-sm";
 ---
 
 <section id="verification" class="bg-white pt-16 pb-20 dark:bg-slate-800">
@@ -38,11 +61,143 @@ const guideArticleClass =
         >
           {formatText(entry.data.title)}
         </h1>
+        <aside
+          class:list={[
+            "mt-6 rounded-lg border border-cyan-200 bg-cyan-50/80 p-4 text-slate-800 dark:border-cyan-500/30 dark:bg-cyan-500/10 dark:text-slate-100",
+            lang === "ja" && "budoux-ja",
+          ]}
+          data-verification-info
+        >
+          <div class="min-w-0">
+            <div class="flex items-center gap-2">
+              <Info
+                className="h-4 w-4 shrink-0 text-cyan-700 dark:text-cyan-300"
+                aria-hidden="true"
+              />
+              <p class="font-semibold text-cyan-900 text-xs dark:text-cyan-100">
+                {t("download.verificationPage.infoLabel")}
+              </p>
+            </div>
+            <p class="mt-2 text-sm leading-6">
+              {formatText(t("download.verificationPage.beginnerInfo"))}
+            </p>
+          </div>
+        </aside>
         <article
           class:list={[guideArticleClass, "mt-8", lang === "ja" && "budoux-ja"]}
         >
           <Content />
         </article>
+
+        {commandEntries.length ? (
+            <section class="mt-12 min-w-0" aria-labelledby="latest-commands">
+              <h2
+                id="latest-commands"
+                class="font-bold text-2xl text-slate-950 leading-tight dark:text-white"
+              >
+                {formatText(t("download.verificationPage.latestCommandsTitle"))}
+              </h2>
+              <p class="mt-3 text-slate-600 text-sm leading-6 dark:text-slate-300">
+                {formatText(
+                  t("download.verificationPage.latestCommandsDescription"),
+                )}
+              </p>
+
+              <div class="mt-6 space-y-4">
+                {commandEntries.map(({ artifactName, platform, version }) => (
+                  <article class="min-w-0 rounded-lg border border-slate-200 bg-slate-50/80 p-4 dark:border-slate-700 dark:bg-slate-900/30">
+                    <h3 class="font-semibold text-slate-950 text-sm dark:text-white">
+                      {platform} - {version.name}
+                    </h3>
+                    <dl class="mt-4 space-y-4">
+                      <div class="min-w-0">
+                        <dt class="mb-1 font-medium text-slate-500 text-xs uppercase dark:text-slate-400">
+                          {t("download.verify.artifact")}
+                        </dt>
+                        <dd>
+                          <CopyableCode
+                            code={artifactName}
+                            lang="plaintext"
+                            class={codeBlockClass}
+                            copyLabel={t("download.verify.copyCode")}
+                            copiedLabel={t("download.verify.copied")}
+                          />
+                        </dd>
+                      </div>
+
+                      {version.verificationCommand ? (
+                        <div class="min-w-0">
+                          <dt class="mb-1 font-medium text-slate-500 text-xs uppercase dark:text-slate-400">
+                            {t("download.verify.verificationCommand")}
+                          </dt>
+                          <dd>
+                            <CopyableCode
+                              code={version.verificationCommand}
+                              lang={
+                                version.type === "windows"
+                                  ? "powershell"
+                                  : "bash"
+                              }
+                              class={codeBlockClass}
+                              copyLabel={t("download.verify.copyCode")}
+                              copiedLabel={t("download.verify.copied")}
+                            />
+                          </dd>
+                        </div>
+                      ) : null}
+
+                      {version.attestationCommand ? (
+                        <div class="min-w-0">
+                          <dt class="mb-1 font-medium text-slate-500 text-xs uppercase dark:text-slate-400">
+                            {t("download.verify.githubAttestation")}
+                          </dt>
+                          <dd>
+                            <CopyableCode
+                              code={version.attestationCommand}
+                              lang="bash"
+                              class={codeBlockClass}
+                              copyLabel={t("download.verify.copyCode")}
+                              copiedLabel={t("download.verify.copied")}
+                            />
+                          </dd>
+                        </div>
+                      ) : null}
+
+                      <div class="min-w-0">
+                        <dt class="mb-1 font-medium text-slate-500 text-xs uppercase dark:text-slate-400">
+                          {t("download.verify.signingStatus")}
+                        </dt>
+                        <dd class="text-slate-700 text-sm dark:text-slate-200">
+                          {version.signingStatus}
+                        </dd>
+                      </div>
+
+                      {version.signatureName && version.signatureUrl ? (
+                        <div class="min-w-0">
+                          <dt class="mb-1 font-medium text-slate-500 text-xs uppercase dark:text-slate-400">
+                            {t("download.verify.signatureFile")}
+                          </dt>
+                          <dd>
+                            <a
+                              href={version.signatureUrl}
+                              class="break-all font-medium text-cyan-700 text-sm hover:underline dark:text-cyan-300"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {version.signatureName}
+                            </a>
+                            <p class="mt-1 text-slate-500 text-xs dark:text-slate-400">
+                              {t("download.verify.updaterSignatureAvailable")}
+                            </p>
+                          </dd>
+                        </div>
+                      ) : null}
+                    </dl>
+                  </article>
+                ))}
+              </div>
+            </section>
+          ) : null}
       </div>
     </div>
   </div>

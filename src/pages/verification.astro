@@ -2,6 +2,7 @@
 import DownloadVerificationPage from "../components/DownloadVerificationPage.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import { fetchLatestRelease } from "../funcs/fetchReleaseData";
 import {
   getLangFromUrl,
   useTranslatedPath,
@@ -9,11 +10,14 @@ import {
 } from "../i18n/utils";
 import Layout from "../layouts/Layout.astro";
 import { getDownloadGuideEntry } from "../lib/downloadGuide";
+import { createPlatformDownloads } from "../lib/platformDownloads";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const { translatePath } = useTranslatedPath(lang);
 const entry = await getDownloadGuideEntry(lang, "verification");
+const release = await fetchLatestRelease();
+const downloads = createPlatformDownloads(release);
 ---
 
 <Layout
@@ -26,6 +30,7 @@ const entry = await getDownloadGuideEntry(lang, "verification");
     <DownloadVerificationPage
       lang={lang}
       entry={entry}
+      downloads={downloads}
       downloadHref={translatePath("/download")}
       verificationHref={translatePath("/verification")}
     />
