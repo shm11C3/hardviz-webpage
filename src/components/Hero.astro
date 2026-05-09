@@ -1,11 +1,16 @@
 ---
 import { ArrowDownToLine, SquareArrowOutUpRight } from "lucide-react";
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../i18n/utils";
 import { githubRepoUrl } from "../lib/github";
 import HardwareVisualizer from "./HardwareVisualizer.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
 ---
 
 <section
@@ -40,7 +45,7 @@ const t = useTranslations(lang);
           class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
         >
           <a
-            href="#download"
+            href={translatePath("/download")}
             class="relative download-btn px-8 py-3 bg-hardviz text-white font-medium rounded-lg transition-all hover:bg-[color-mix(in_oklab,var(--primary)_90%,black_10%)] dark:border dark:border-white"
           >
             <div

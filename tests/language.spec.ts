@@ -24,6 +24,16 @@ test("dropdown href mappings EN to JA", async ({ page }) => {
   await page.goto("/faq/");
   await expect(page.locator('#langDropdown a[href="/ja/faq/"]')).toHaveCount(1);
 
+  await page.goto("/download/");
+  await expect(
+    page.locator('#langDropdown a[href="/ja/download/"]'),
+  ).toHaveCount(1);
+
+  await page.goto("/verification/");
+  await expect(
+    page.locator('#langDropdown a[href="/ja/verification/"]'),
+  ).toHaveCount(1);
+
   await page.goto("/specs/");
   await expect(page.locator('#langDropdown a[href="/ja/specs/"]')).toHaveCount(
     1,
@@ -41,6 +51,16 @@ test("dropdown href mappings JA to EN", async ({ page }) => {
 
   await page.goto("/ja/faq/");
   await expect(page.locator('#langDropdown a[href="/faq/"]')).toHaveCount(1);
+
+  await page.goto("/ja/download/");
+  await expect(page.locator('#langDropdown a[href="/download/"]')).toHaveCount(
+    1,
+  );
+
+  await page.goto("/ja/verification/");
+  await expect(
+    page.locator('#langDropdown a[href="/verification/"]'),
+  ).toHaveCount(1);
 });
 
 test("html lang attribute is correct", async ({ page }) => {

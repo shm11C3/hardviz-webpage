@@ -1,0 +1,124 @@
+---
+lang: ja
+section: installation
+title: "インストール方法"
+---
+
+お使いのOSに合った公式チャネルからインストールしてください。入手元やファイル名に不安がある場合は、実行前に[インストーラの検証](/ja/verification/)を確認してください。
+
+### Windows
+
+#### インストーラを使う
+
+1. このページから `HardwareVisualizer_x.x.x_x64_en-US_windows.msi` をダウンロードします。
+2. ダウンロードした `.msi` インストーラファイルを実行します。
+3. インストールウィザードの指示に従います。
+4. スタートメニューまたはデスクトップショートカットから **HardwareVisualizer** を起動します。
+
+#### Wingetを使う
+
+Windows Package Managerでもインストールできます。PowerShellまたはコマンドプロンプトで次のコマンドを実行してください。
+
+```powershell
+winget install shm11C3.HardwareVisualizer
+```
+
+### macOS
+
+1. お使いのMacに合わせてApple Silicon版またはIntel版のディスクイメージをダウンロードします。
+2. DMGを開き、HardwareVisualizerをApplicationsに移動します。
+3. macOSが確認を求めた場合は、Gatekeeperの表示とインストーラの検証を確認してください。
+
+### Linux
+
+お使いのディストリビューションに合ったパッケージをダウンロードしてください。パッケージ形式が合わない場合は、AppImageを使うとインストールせずに起動できます。
+
+#### Debian / Ubuntu
+
+1. このページから `hardware-visualizer_x.x.x_amd64.deb` をダウンロードします。
+2. `apt` または `dpkg` でインストールします。
+
+```bash
+sudo apt install ./hardware-visualizer_*.deb
+```
+
+`dpkg` を使う場合は、依存関係の解決も実行してください。
+
+```bash
+sudo dpkg -i hardware-visualizer_*.deb
+sudo apt-get install -f
+```
+
+3. アプリケーションメニューまたはターミナルから起動します。
+
+```bash
+hardware-visualizer
+```
+
+#### Fedora / RHEL系
+
+1. このページから `hardware-visualizer_x.x.x_x86_64.rpm` をダウンロードします。
+2. `dnf` でインストールします。
+
+```bash
+sudo dnf install ./hardware-visualizer_*.rpm
+```
+
+#### openSUSE
+
+1. このページから `hardware-visualizer_x.x.x_x86_64.rpm` をダウンロードします。
+2. `zypper` でインストールします。
+
+```bash
+sudo zypper install ./hardware-visualizer_*.rpm
+```
+
+#### Arch Linux / Manjaro
+
+公式のArch向けパッケージは現在提供していません。AppImageを使用してください。
+
+AppImageを実行する前に、WebKitGTKなど実行に必要なライブラリが入っていることを確認します。
+
+```bash
+sudo pacman -S webkit2gtk gtk3 libayatana-appindicator
+```
+
+#### AppImageを使う
+
+1. このページから `HardwareVisualizer_x.x.x_amd64.AppImage` をダウンロードします。
+2. 実行権限を付与します。
+
+```bash
+chmod +x ./HardwareVisualizer_*.AppImage
+```
+
+3. AppImageを起動します。
+
+```bash
+./HardwareVisualizer_*.AppImage
+```
+
+任意の場所から起動したい場合は、`~/.local/bin` などに配置できます。
+
+```bash
+mkdir -p ~/.local/bin
+mv ./HardwareVisualizer_*.AppImage ~/.local/bin/hardware-visualizer
+chmod +x ~/.local/bin/hardware-visualizer
+hardware-visualizer
+```
+
+#### 一部のArch Linux / Wayland環境で画面が真っ白になる場合
+
+Wayland環境では、WebKitGTK / EGL 周りの相性により画面が真っ白になることがあります。その場合は、`libwayland-client.so` を読み込んで起動してください。
+
+`~/.local/bin` に配置している場合:
+
+```bash
+LD_PRELOAD=/usr/lib/libwayland-client.so ~/.local/bin/hardware-visualizer
+```
+
+AppImageを直接起動する場合:
+
+```bash
+LD_PRELOAD=/usr/lib/libwayland-client.so ./HardwareVisualizer_*.AppImage
+```

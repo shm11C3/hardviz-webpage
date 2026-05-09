@@ -1,0 +1,124 @@
+---
+lang: en
+section: installation
+title: "Installation instructions"
+---
+
+Install from the official channel for your operating system. If you are unsure about the source or file name, see [Installer verification](/verification/) before running the installer.
+
+### Windows
+
+#### Using the installer
+
+1. Download `HardwareVisualizer_x.x.x_x64_en-US_windows.msi` from this page.
+2. Run the downloaded `.msi` installer file.
+3. Follow the installation wizard.
+4. Launch **HardwareVisualizer** from the Start Menu or desktop shortcut.
+
+#### Using Winget
+
+You can also install with Windows Package Manager. Run this command in PowerShell or Command Prompt.
+
+```powershell
+winget install shm11C3.HardwareVisualizer
+```
+
+### macOS
+
+1. Download the Apple Silicon or Intel disk image for your Mac.
+2. Open the DMG and move HardwareVisualizer to Applications.
+3. Use Gatekeeper prompts and the verification guide if macOS asks for confirmation.
+
+### Linux
+
+Download the package that matches your distribution. If the available package format does not fit your system, use the AppImage to run HardwareVisualizer without installing it.
+
+#### Debian / Ubuntu
+
+1. Download `hardware-visualizer_x.x.x_amd64.deb` from this page.
+2. Install it with `apt` or `dpkg`.
+
+```bash
+sudo apt install ./hardware-visualizer_*.deb
+```
+
+If you use `dpkg`, also resolve dependencies afterward.
+
+```bash
+sudo dpkg -i hardware-visualizer_*.deb
+sudo apt-get install -f
+```
+
+3. Launch from the application menu or terminal.
+
+```bash
+hardware-visualizer
+```
+
+#### Fedora / RHEL-based distributions
+
+1. Download `hardware-visualizer_x.x.x_x86_64.rpm` from this page.
+2. Install it with `dnf`.
+
+```bash
+sudo dnf install ./hardware-visualizer_*.rpm
+```
+
+#### openSUSE
+
+1. Download `hardware-visualizer_x.x.x_x86_64.rpm` from this page.
+2. Install it with `zypper`.
+
+```bash
+sudo zypper install ./hardware-visualizer_*.rpm
+```
+
+#### Arch Linux / Manjaro
+
+An official Arch package is not currently provided. Use the AppImage.
+
+Before running the AppImage, make sure runtime libraries such as WebKitGTK are installed.
+
+```bash
+sudo pacman -S webkit2gtk gtk3 libayatana-appindicator
+```
+
+#### Using the AppImage
+
+1. Download `HardwareVisualizer_x.x.x_amd64.AppImage` from this page.
+2. Make it executable.
+
+```bash
+chmod +x ./HardwareVisualizer_*.AppImage
+```
+
+3. Run the AppImage.
+
+```bash
+./HardwareVisualizer_*.AppImage
+```
+
+To launch it from anywhere, place it somewhere such as `~/.local/bin`.
+
+```bash
+mkdir -p ~/.local/bin
+mv ./HardwareVisualizer_*.AppImage ~/.local/bin/hardware-visualizer
+chmod +x ~/.local/bin/hardware-visualizer
+hardware-visualizer
+```
+
+#### If the window is blank on some Arch Linux / Wayland environments
+
+On Wayland, the window may appear blank because of WebKitGTK / EGL compatibility issues. In that case, preload `libwayland-client.so` when starting HardwareVisualizer.
+
+If you placed it in `~/.local/bin`:
+
+```bash
+LD_PRELOAD=/usr/lib/libwayland-client.so ~/.local/bin/hardware-visualizer
+```
+
+If you run the AppImage directly:
+
+```bash
+LD_PRELOAD=/usr/lib/libwayland-client.so ./HardwareVisualizer_*.AppImage
+```

@@ -6,6 +6,61 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, fontProviders } from "astro/config";
+import { loadDefaultJapaneseParser } from "budoux";
+
+const budouxJapaneseParser = loadDefaultJapaneseParser();
+const budouxJapaneseTextPattern = /[ぁ-んァ-ヶ一-龠々]/u;
+const budouxZeroWidthSpace = "\u200B";
+const budouxIgnoredTags = new Set([
+  "code",
+  "kbd",
+  "pre",
+  "samp",
+  "script",
+  "style",
+  "textarea",
+]);
+
+function addBudouxLineBreaks(text) {
+  if (!budouxJapaneseTextPattern.test(text)) {
+    return text;
+  }
+
+  return budouxJapaneseParser
+    .parse(text.replaceAll(budouxZeroWidthSpace, ""))
+    .join(budouxZeroWidthSpace);
+}
+
+function applyBudouxToHast(node, ignored = false) {
+  if (!node || typeof node !== "object") {
+    return;
+  }
+
+  const nextIgnored =
+    ignored || (node.type === "element" && budouxIgnoredTags.has(node.tagName));
+
+  if (!nextIgnored && node.type === "text" && typeof node.value === "string") {
+    node.value = addBudouxLineBreaks(node.value);
+    return;
+  }
+
+  if (Array.isArray(node.children)) {
+    for (const child of node.children) {
+      applyBudouxToHast(child, nextIgnored);
+    }
+  }
+}
+
+function rehypeBudouxJapanese() {
+  return (tree, file) => {
+    const sourcePath = file?.path || file?.history?.[0] || "";
+    if (!/(^|[\\/])ja[\\/]/.test(sourcePath)) {
+      return;
+    }
+
+    applyBudouxToHast(tree);
+  };
+}
 
 /** Build a map of changelog URL paths → lastmod dates from MDX frontmatter */
 function buildChangelogLastmodMap() {
@@ -83,7 +138,9 @@ export default defineConfig({
     partytown({
       config: { forward: ["dataLayer.push", "gtag"] },
     }),
-    mdx(),
+    mdx({
+      rehypePlugins: [rehypeBudouxJapanese],
+    }),
     sitemapIndexLastmod(),
   ],
   output: "static",

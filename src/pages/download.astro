@@ -1,0 +1,72 @@
+---
+import DownloadPage from "../components/DownloadPage.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { fetchLatestRelease } from "../funcs/fetchReleaseData.ts";
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../i18n/utils";
+import Layout from "../layouts/Layout.astro";
+import { getDownloadGuideEntry } from "../lib/downloadGuide";
+import { githubAllReleasesUrl } from "../lib/github";
+import { getLatestReleaseDetails } from "../lib/latestRelease";
+import { createPlatformDownloads } from "../lib/platformDownloads";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
+
+const release = await fetchLatestRelease();
+const latestReleaseDetails = await getLatestReleaseDetails({
+  version: release.version,
+  lang,
+  publishedAt: release.published_at,
+});
+
+const downloads = createPlatformDownloads(release);
+const sourceCheckEntry = await getDownloadGuideEntry(lang, "source-check");
+const installationEntry = await getDownloadGuideEntry(lang, "installation");
+
+const softwareJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "HardwareVisualizer",
+  applicationCategory: "UtilitiesApplication",
+  operatingSystem: "Windows 10, Windows 11, macOS, Linux",
+  url: "https://hardviz.com/download/",
+  downloadUrl: githubAllReleasesUrl(),
+  softwareVersion: release.version,
+  description: t("download.metaDescription"),
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+  license: "https://opensource.org/licenses/MIT",
+};
+---
+
+<Layout
+  title={t("download.metaTitle")}
+  lang={lang}
+  description={t("download.metaDescription")}
+  jsonLd={softwareJsonLd}
+>
+  <Header />
+  <main id="main-content" class="pt-20">
+    <DownloadPage
+      lang={lang}
+      downloads={downloads}
+      latestVersion={release.version}
+      latestReleaseDetails={latestReleaseDetails}
+      changelogHref={translatePath("/changelog")}
+      downloadHref={translatePath("/download")}
+      verificationHref={translatePath("/verification")}
+      sourceCheckEntry={sourceCheckEntry}
+      installationEntry={installationEntry}
+    />
+  </main>
+  <Footer />
+</Layout>

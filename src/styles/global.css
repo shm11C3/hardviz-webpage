@@ -188,3 +188,13 @@
 .prose strong {
   @apply text-slate-900 dark:text-white;
 }
+
+.budoux-ja {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.budoux-ja :where(pre, pre code) {
+  word-break: normal;
+  overflow-wrap: normal;
+}

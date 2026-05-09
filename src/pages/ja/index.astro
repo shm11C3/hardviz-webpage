@@ -17,7 +17,7 @@ import {
 import Layout from "../../layouts/Layout.astro";
 import { githubAllReleasesUrl, githubLatestReleaseUrl } from "../../lib/github";
 import { getLatestReleaseDetails } from "../../lib/latestRelease";
-import type { PlatformDownload } from "../../types/platform";
+import { createPlatformDownloads } from "../../lib/platformDownloads";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -30,62 +30,7 @@ const latestReleaseDetails = await getLatestReleaseDetails({
   publishedAt: release.published_at,
 });
 
-const downloads: PlatformDownload[] = [
-  {
-    platform: "Windows",
-    versions: [
-      {
-        type: "windows",
-        name: "Windows 10/11 (x64)",
-        url: release.platforms.windows?.browser_download_url ?? null,
-        size: release.platforms.windows?.size ?? "-",
-      },
-    ],
-    primary: false,
-  },
-  {
-    platform: "macOS",
-    versions: [
-      {
-        type: "macOSAppleSilicon",
-        name: "Apple Silicon (ARM64)",
-        url: release.platforms.macOSAppleSilicon?.browser_download_url ?? null,
-        size: release.platforms.macOSAppleSilicon?.size ?? "-",
-      },
-      {
-        type: "macOSIntel",
-        name: "Intel (x64)",
-        url: release.platforms.macOSIntel?.browser_download_url ?? null,
-        size: release.platforms.macOSIntel?.size ?? "-",
-      },
-    ],
-    primary: false,
-  },
-  {
-    platform: "Linux",
-    versions: [
-      {
-        type: "linuxRPM",
-        name: "RPM-based Distros (.rpm)",
-        url: release.platforms.linuxRPM?.browser_download_url ?? null,
-        size: release.platforms.linuxRPM?.size ?? "-",
-      },
-      {
-        type: "linuxAppImage",
-        name: "AppImage (.AppImage)",
-        url: release.platforms.linuxAppImage?.browser_download_url ?? null,
-        size: release.platforms.linuxAppImage?.size ?? "-",
-      },
-      {
-        type: "linuxDeb",
-        name: "Debian/Ubuntu (.deb)",
-        url: release.platforms.linuxDeb?.browser_download_url ?? null,
-        size: release.platforms.linuxDeb?.size ?? "-",
-      },
-    ],
-    primary: false,
-  },
-];
+const downloads = createPlatformDownloads(release, translatePath("/download"));
 
 const downloadTranslations = {
   title: t("download.title"),
@@ -96,6 +41,7 @@ const downloadTranslations = {
   otherVersions: t("download.otherVersions"),
   changelogLink: t("download.changelogLink"),
   githubDownloadButton: t("download.githubDownloadButton"),
+  installationLink: t("download.installationLink"),
   releaseDate: t("download.releaseDate"),
   latestChanges: t("download.latestChanges"),
   latestChangesLink: t("download.latestChangesLink"),
@@ -158,6 +104,7 @@ const softwareJsonLd = {
       translations={downloadTranslations}
       changelogHref={translatePath("/changelog")}
       githubLatestReleaseHref={githubLatestReleaseUrl()}
+      installationHref={`${translatePath("/download")}#installation`}
     />
     <FAQPreview />
   </main>

@@ -13,6 +13,7 @@ import { githubRepoUrl } from "../lib/github";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const { translatePath } = useTranslatedPath(lang);
+const downloadHref = translatePath("/download");
 
 const footerLinks = [
   {
@@ -25,7 +26,7 @@ const footerLinks = [
       },
       {
         name: t("footer.download"),
-        href: translatePath("/#download"),
+        href: downloadHref,
         external: false,
       },
       {
