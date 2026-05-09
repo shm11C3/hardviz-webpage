@@ -93,7 +93,7 @@ export const ui = {
     "download.changelogLink": "View past versions →",
     "download.installationLink": "See detailed installation instructions",
     "download.releaseDate": "Released:",
-    "download.latestChanges": "Latest release changes",
+    "download.latestChanges": "Release highlights",
     "download.latestChangesLink": "Read full changelog →",
 
     "changelog.title": "Changelog",
@@ -283,7 +283,7 @@ export const ui = {
     "download.changelogLink": "過去のリリースを見る →",
     "download.installationLink": "詳細なインストール方法はこちら",
     "download.releaseDate": "リリース日時:",
-    "download.latestChanges": "最新リリースの変更内容",
+    "download.latestChanges": "リリースハイライト",
     "download.latestChangesLink": "変更履歴を詳しく見る →",
 
     "changelog.title": "変更履歴",
