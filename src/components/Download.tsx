@@ -61,8 +61,10 @@ const Download = ({
   downloads: initialDownloads,
   latestVersion,
   latestReleaseDetails,
+  releaseNotesDetails,
   translations,
   changelogHref,
+  releaseNotesHref,
   githubLatestReleaseHref,
   installationHref,
   embedded = false,
@@ -73,8 +75,10 @@ const Download = ({
   downloads: PlatformDownload[];
   latestVersion: string | null;
   latestReleaseDetails: LatestReleaseDetails;
+  releaseNotesDetails?: LatestReleaseDetails;
   translations: DownloadTranslations;
   changelogHref?: string;
+  releaseNotesHref?: string;
   githubLatestReleaseHref?: string;
   installationHref?: string;
   embedded?: boolean;
@@ -123,6 +127,8 @@ const Download = ({
       detectedPlatform !== null && platform.platform === detectedPlatform,
   }));
   const currentVersionLabel = translations.currentVersion ?? "";
+  const displayedReleaseDetails = releaseNotesDetails ?? latestReleaseDetails;
+  const displayedReleaseHref = releaseNotesHref ?? changelogHref;
 
   const content = (
     <>
@@ -326,8 +332,8 @@ const Download = ({
       ) : null}
 
       {showLatestChanges &&
-      (latestReleaseDetails.changesSummary ||
-        latestReleaseDetails.tags.length) ? (
+      (displayedReleaseDetails.changesSummary ||
+        displayedReleaseDetails.tags.length) ? (
         <article className="mx-auto mt-12 max-w-4xl rounded-lg border border-slate-200 bg-slate-50/70 p-5 text-left shadow-sm md:p-6 dark:border-slate-700 dark:bg-slate-900/30">
           <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
             <div>
@@ -338,15 +344,15 @@ const Download = ({
                 />
                 {translations.latestChanges}
               </p>
-              {latestReleaseDetails.changesSummary ? (
+              {displayedReleaseDetails.changesSummary ? (
                 <p className="mt-3 max-w-3xl text-slate-700 dark:text-slate-200">
-                  {latestReleaseDetails.changesSummary}
+                  {displayedReleaseDetails.changesSummary}
                 </p>
               ) : null}
             </div>
-            {changelogHref && translations.latestChangesLink ? (
+            {displayedReleaseHref && translations.latestChangesLink ? (
               <a
-                href={changelogHref}
+                href={displayedReleaseHref}
                 className="shrink-0 font-medium text-cyan-700 text-sm hover:underline dark:text-cyan-300"
                 data-astro-prefetch="hover"
               >
@@ -355,9 +361,9 @@ const Download = ({
             ) : null}
           </div>
 
-          {latestReleaseDetails.tags.length ? (
+          {displayedReleaseDetails.tags.length ? (
             <div className="mt-4 flex flex-wrap gap-2">
-              {latestReleaseDetails.tags.map((tag) => (
+              {displayedReleaseDetails.tags.map((tag) => (
                 <span
                   key={tag}
                   className="inline-flex items-center rounded-full border border-slate-200 bg-white px-2.5 py-1 text-slate-600 text-xs dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300"

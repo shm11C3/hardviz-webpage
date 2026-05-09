@@ -89,26 +89,34 @@ test("download section shows mock version", async ({ page }) => {
   await expect(page.locator("#download")).toContainText("v1.7.2");
 });
 
-test("download section shows release date and latest changes", async ({
+test("download section shows release date and selected release highlights", async ({
   page,
 }) => {
   await page.goto("/");
   const download = page.locator("#download");
   await expect(download).toContainText("Released:");
   await expect(download).toContainText("Jan 2, 2026");
-  await expect(download).toContainText("Latest release changes");
+  await expect(download).toContainText("Release highlights");
+  await expect(download).not.toContainText("v1.8.0");
   await expect(download).toContainText(
-    "Improved GPU usage calculation accuracy on macOS",
+    "Added background monitoring with tray-based status visibility",
   );
+  await expect(
+    download.getByRole("link", { name: "Read full changelog →" }),
+  ).toHaveAttribute("href", "/changelog/");
 
   await page.goto("/ja/");
   const jaDownload = page.locator("#download");
   await expect(jaDownload).toContainText("リリース日時:");
   await expect(jaDownload).toContainText("2026年1月2日");
-  await expect(jaDownload).toContainText("最新リリースの変更内容");
+  await expect(jaDownload).toContainText("リリースハイライト");
+  await expect(jaDownload).not.toContainText("v1.8.0");
   await expect(jaDownload).toContainText(
-    "macOSでのGPU使用率算出アルゴリズムの改善",
+    "トレイ常駐によるバックグラウンド監視",
   );
+  await expect(
+    jaDownload.getByRole("link", { name: "変更履歴を詳しく見る →" }),
+  ).toHaveAttribute("href", "/ja/changelog/");
 });
 
 test("FAQ preview shows 3 items", async ({ page }) => {

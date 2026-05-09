@@ -16,6 +16,7 @@ import {
 } from "../i18n/utils";
 import Layout from "../layouts/Layout.astro";
 import { githubAllReleasesUrl, githubLatestReleaseUrl } from "../lib/github";
+import { getHomeReleaseNotesDetails } from "../lib/homeReleaseNotes";
 import { getLatestReleaseDetails } from "../lib/latestRelease";
 import { createPlatformDownloads } from "../lib/platformDownloads";
 
@@ -28,6 +29,10 @@ const latestReleaseDetails = await getLatestReleaseDetails({
   version: release.version,
   lang,
   publishedAt: release.published_at,
+});
+const homeReleaseNotesDetails = await getHomeReleaseNotesDetails({
+  lang,
+  latestReleaseDetails,
 });
 
 const downloads = createPlatformDownloads(release, translatePath("/download"));
@@ -101,6 +106,7 @@ const softwareJsonLd = {
       downloads={downloads}
       latestVersion={release.version}
       latestReleaseDetails={latestReleaseDetails}
+      releaseNotesDetails={homeReleaseNotesDetails}
       translations={downloadTranslations}
       changelogHref={translatePath("/changelog")}
       githubLatestReleaseHref={githubLatestReleaseUrl()}

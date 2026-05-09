@@ -2,6 +2,7 @@ import type { ChangelogLang } from "./changelog";
 import { getChangelogEntryByVersion } from "./changelog";
 
 export interface LatestReleaseDetails {
+  version: string;
   publishedAt: string | null;
   changesSummary: string | null;
   tags: string[];
@@ -44,6 +45,7 @@ export async function getLatestReleaseDetails({
   const entry = localizedEntry ?? fallbackEntry;
 
   return {
+    version,
     publishedAt: formatReleaseDate(publishedAt, lang),
     changesSummary: entry?.data.summary ?? null,
     tags: entry?.data.tags ?? [],
