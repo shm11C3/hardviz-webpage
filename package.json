@@ -40,9 +40,9 @@
   "devDependencies": {
     "@biomejs/biome": "2.4.4",
     "@playwright/test": "^1.60.0",
-    "@types/node": "^25.9.1",
+    "@types/node": "^25.9.2",
     "budoux": "^0.8.4",
-    "wrangler": "^4.97.0"
+    "wrangler": "^4.98.0"
   },
   "engines": {
     "node": ">=24",
