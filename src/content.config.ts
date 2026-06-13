@@ -31,7 +31,18 @@ const downloadGuide = defineCollection({
   }),
 });
 
+const about = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "src/content/about" }),
+  schema: z.object({
+    lang: z.enum(["en", "ja"]),
+    metaTitle: z.string().min(1),
+    metaDescription: z.string().min(1),
+    tagline: z.string().min(1),
+  }),
+});
+
 export const collections = {
   changelog,
   downloadGuide,
+  about,
 };

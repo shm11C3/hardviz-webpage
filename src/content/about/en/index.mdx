@@ -1,0 +1,42 @@
+---
+lang: en
+metaTitle: "About HardwareVisualizer"
+metaDescription: "What HardwareVisualizer is, why it exists, how it's built, and who develops it. A free, open-source, cross-platform hardware monitor made with Tauri, Rust, and TypeScript."
+tagline: "A free, lightweight, open-source monitor that visualizes your CPU, GPU, and memory in real time."
+---
+
+HardwareVisualizer is a desktop app that shows your CPU, GPU, and memory in real time. It runs on Windows, macOS, and Linux.
+
+It started with a PC build. I wanted to fit a small screen inside the case and show CPU and GPU stats on it, and at first that was the whole plan. But the more I poked at it, the more I wanted something nicer than the monitors already out there. The built-in OS tools just throw numbers at you, a lot of the third-party ones look dated or are aimed squarely at gamers, and plenty of them only run on one vendor or one OS. The app is really just the result of chipping away at those annoyances one at a time.
+
+## Tech stack
+
+| Layer | What I use |
+| --- | --- |
+| Frontend | React / TypeScript / Jotai / Vite / Tailwind CSS / shadcn/ui / Recharts |
+| Backend | Tauri / Rust |
+| Storage | SQLite |
+
+| OS | Hardware data sources |
+| --- | --- |
+| Common | sysinfo |
+| Windows | WMI / PDH / NVAPI / ADL / DXGI |
+| Linux | procfs / DRM / hwmon |
+| macOS | IOKit |
+
+## Then and now
+
+| When | What happened |
+| --- | --- |
+| 2024.06 | Started development as a monitor for my own PC build |
+| 2024.10 | First release (v0.1.0) |
+| 2025 | Linux support |
+| 2026.02 | Official macOS support (v1.6.0) |
+| 2026 | Wider GPU coverage and background monitoring (v1.7, v1.8) |
+| Next | Filling out sensor data so anyone can see their PC's state at a glance |
+
+The full history is in the [changelog](/changelog/).
+
+## About the developer
+
+HardwareVisualizer is built by shm11C3. By day I work at a software company, doing full-stack web development and trying to make the everyday developer experience a little less painful. On my days off I build the tools I wish existed and put them on GitHub, and this is one of them.

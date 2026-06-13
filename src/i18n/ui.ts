@@ -145,6 +145,7 @@ export const ui = {
     "footer.deepwiki": "DeepWiki (AI Docs)",
     "footer.community": "Community",
     "footer.discussions": "GitHub Discussions",
+    "footer.about": "About",
 
     "specs.title": "System Requirements & Limitations",
     "specs.supportedOS.title": "Supported OS & Architecture",
@@ -217,6 +218,8 @@ export const ui = {
     "faq.githubLink": "Create an issue on GitHub",
     "faq.verificationGuideLink": "Installer verification",
     "faq.viewAll": "View all FAQs",
+    "about.heading": "About HardwareVisualizer",
+    "about.contact.emailLabel": "Email",
   },
   ja: {
     "nav.home": "ホーム",
@@ -353,6 +356,7 @@ export const ui = {
     "footer.deepwiki": "DeepWiki（AIドキュメント）",
     "footer.community": "コミュニティ",
     "footer.discussions": "GitHubディスカッション",
+    "footer.about": "概要",
 
     "specs.title": "システム要件と制限事項",
     "specs.supportedOS.title": "対応OS・アーキテクチャ",
@@ -425,5 +429,7 @@ export const ui = {
     "faq.githubLink": "GitHubでIssueを作成",
     "faq.verificationGuideLink": "インストーラの検証",
     "faq.viewAll": "すべてのFAQを見る",
+    "about.heading": "HardwareVisualizer について",
+    "about.contact.emailLabel": "メール",
   },
 } as const;
