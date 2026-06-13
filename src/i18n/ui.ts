@@ -362,7 +362,7 @@ export const ui = {
     "footer.deepwiki": "DeepWiki（AIドキュメント）",
     "footer.community": "コミュニティ",
     "footer.discussions": "GitHubディスカッション",
-    "footer.about": "概要",
+    "footer.about": "About",
     "footer.privacy": "プライバシー",
 
     "specs.title": "システム要件と制限事項",
