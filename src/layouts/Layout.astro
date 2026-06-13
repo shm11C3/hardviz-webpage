@@ -5,6 +5,7 @@ import "../styles/global.css";
 import type { ui } from "../i18n/ui";
 import { defaultLang, showDefaultLang } from "../i18n/ui";
 import { useTranslatedPath, useTranslations } from "../i18n/utils";
+import { buildBaseGraph } from "../lib/structuredData";
 
 interface Props {
   title: string;
@@ -42,24 +43,11 @@ const altJa = buildHref("ja");
 const ogImageAbs = new URL("/og-image.png", siteUrl).href;
 const ogLocale = lang === "ja" ? "ja_JP" : "en_US";
 
-// Default JSON-LD structured data for WebSite schema
-const defaultJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "HardwareVisualizer",
-  url: siteUrl,
-  description:
-    lang === "ja"
-      ? "CPU、GPU、メモリをリアルタイムで監視する軽量オープンソースのハードウェアモニタリングツール"
-      : "Lightweight open-source hardware monitoring tool for real-time CPU, GPU, and memory tracking",
-  inLanguage: lang === "ja" ? "ja" : "en",
-};
-
-const structuredData = jsonLd
-  ? Array.isArray(jsonLd)
-    ? jsonLd
-    : [jsonLd]
-  : [defaultJsonLd];
+// Base entity graph (Organization + Person + WebSite) emitted on every page,
+// followed by any page-specific JSON-LD (e.g. SoftwareApplication, ProfilePage)
+// which links back to these entities by @id.
+const pageJsonLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+const structuredData = [...buildBaseGraph(lang), ...pageJsonLd];
 
 // Analytics (Plausible) domain from env
 const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as

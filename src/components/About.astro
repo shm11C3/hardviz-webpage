@@ -1,0 +1,103 @@
+---
+import { render } from "astro:content";
+import { Mail } from "lucide-react";
+import { FaGithub, FaXTwitter } from "react-icons/fa6";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import type { AboutEntry } from "../lib/about";
+import { authorEmailParts, authorLinks } from "../lib/author";
+import { buildAboutPage } from "../lib/structuredData";
+
+interface Props {
+  entry: AboutEntry;
+}
+
+const { entry } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const { Content } = await render(entry);
+
+const socialLinks = [
+  { name: "GitHub", href: authorLinks.github, Icon: FaGithub },
+  { name: "X (Twitter)", href: authorLinks.x, Icon: FaXTwitter },
+];
+
+const aboutJsonLd = buildAboutPage(lang);
+---
+
+<article class="pb-20">
+  <!-- Intro -->
+  <section class="bg-slate-50 pt-24 pb-16 dark:bg-slate-800/50">
+    <div class="container mx-auto px-4">
+      <div class="mx-auto flex max-w-3xl flex-col items-center text-center">
+        <h1
+          class="font-bold text-3xl text-slate-900 md:text-4xl dark:text-white"
+        >
+          {t("about.heading")}
+        </h1>
+        <p class="mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-300">
+          {entry.data.tagline}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="container mx-auto px-4">
+    <div class="mx-auto max-w-3xl">
+      <!-- Body (managed as MDX in src/content/about) -->
+      <div class="prose prose-slate dark:prose-invert mt-12 max-w-none">
+        <Content />
+      </div>
+
+      <!-- Developer links (continues the "About the developer" section above) -->
+      <ul class="mt-6 flex flex-wrap gap-3">
+        {socialLinks.map(({ name, href, Icon }) => (
+          <li>
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={name}
+              class="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-slate-700 transition-colors hover:border-cyan-500 hover:text-cyan-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:text-cyan-400"
+            >
+              <Icon className="h-5 w-5" />
+              <span>{name}</span>
+            </a>
+          </li>
+        ))}
+        <li>
+          <a
+            id="author-email"
+            href="#"
+            rel="nofollow noopener"
+            data-u={authorEmailParts.user}
+            data-d={authorEmailParts.domain}
+            aria-label={t("about.contact.emailLabel")}
+            class="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-slate-700 transition-colors hover:border-cyan-500 hover:text-cyan-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:text-cyan-400"
+          >
+            <Mail className="h-5 w-5" />
+            <span>{t("about.contact.emailLabel")}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Assemble the mailto client-side so the plain address never appears in source -->
+  <script is:inline>
+  (() => {
+    const el = document.getElementById("author-email");
+    if (!el) return;
+    const rev = (s) => (s || "").split("").reverse().join("");
+    const addr = `${rev(el.dataset.u)}@${rev(el.dataset.d)}`;
+    el.setAttribute("href", `mailto:${addr}`);
+  })();
+  </script>
+
+  <!-- AboutPage JSON-LD (links to the central Organization + Person by @id) -->
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(aboutJsonLd).replace(/</g, "\\u003c")}
+  />
+</article>

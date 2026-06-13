@@ -19,6 +19,7 @@ import { githubAllReleasesUrl, githubLatestReleaseUrl } from "../lib/github";
 import { getHomeReleaseNotesDetails } from "../lib/homeReleaseNotes";
 import { getLatestReleaseDetails } from "../lib/latestRelease";
 import { createPlatformDownloads } from "../lib/platformDownloads";
+import { organizationRef, personRef } from "../lib/structuredData";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -62,6 +63,7 @@ const softwareJsonLd = {
   url: "https://hardviz.com/",
   downloadUrl: githubAllReleasesUrl(),
   softwareVersion: release.version,
+  dateModified: release.published_at,
   description:
     "Free, lightweight, and open-source hardware monitoring tool. Track CPU temperature, GPU usage, memory allocation, and system performance in real-time with beautiful graphs.",
   featureList: [
@@ -74,11 +76,8 @@ const softwareJsonLd = {
     "Lightweight Tauri/Rust architecture",
   ],
   screenshot: "https://hardviz.com/screenshots/slide-1.png",
-  author: {
-    "@type": "Person",
-    name: "shm11C3",
-    url: "https://github.com/shm11C3",
-  },
+  author: personRef,
+  publisher: organizationRef,
   offers: {
     "@type": "Offer",
     price: "0",
