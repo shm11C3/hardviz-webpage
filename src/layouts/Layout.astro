@@ -50,10 +50,6 @@ const ogLocale = lang === "ja" ? "ja_JP" : "en_US";
 const pageJsonLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 const structuredData = [...buildBaseGraph(lang), ...pageJsonLd];
 
-// Analytics (Plausible) domain from env
-const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as
-  | string
-  | undefined;
 const t = useTranslations(lang);
 ---
 
@@ -121,15 +117,6 @@ const t = useTranslations(lang);
 
     <!-- Page-level additions -->
     <slot name="head" />
-
-    {plausibleDomain && (
-        <script
-          is:inline
-          defer
-          data-domain={plausibleDomain}
-          src="https://plausible.io/js/script.tagged-events.js"
-        />
-      )}
   </head>
   <body class="dark:bg-slate-900 bg-white transition-colors duration-300">
     <a href="#main-content" class="skip-link"> {t("a11y.skipToMain")} </a>

@@ -10,9 +10,12 @@ const t = useTranslations(lang);
 const { translatePath } = useTranslatedPath(lang);
 const privacyHref = translatePath("/privacy");
 
-// Google Analytics 4 measurement ID. Loaded by the inline script below ONLY
-// after the visitor explicitly consents — nothing is loaded by default.
+// Analytics is loaded by the inline script below ONLY after the visitor
+// explicitly consents — nothing is loaded by default.
+// GA4 (run via Partytown, off the main thread) + optional cookieless Plausible.
 const gaId = "G-0KB9XD0DMY";
+const plausibleDomain =
+  (import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as string | undefined) ?? "";
 ---
 
 <div
@@ -54,15 +57,15 @@ const gaId = "G-0KB9XD0DMY";
   </div>
 </div>
 
-<script define:vars={{ gaId }}>
+<script define:vars={{ gaId, plausibleDomain }}>
 const KEY = "analytics-consent";
 const banner = document.getElementById("consent-banner");
 
-const loadGA = () => {
-  if (window.__gaLoaded) {
+const loadAnalytics = () => {
+  if (window.__analyticsLoaded) {
     return;
   }
-  window.__gaLoaded = true;
+  window.__analyticsLoaded = true;
   // Load GA4 through Partytown (off the main thread). Adding the scripts with
   // type="text/partytown" and dispatching "ptupdate" tells Partytown to pick
   // them up and run gtag inside its web worker.
@@ -76,6 +79,16 @@ const loadGA = () => {
   document.head.appendChild(loader);
   document.head.appendChild(init);
   window.dispatchEvent(new CustomEvent("ptupdate"));
+
+  // Plausible (cookieless), only when a domain is configured. Gated on the same
+  // consent so all analytics respect the visitor's choice.
+  if (plausibleDomain) {
+    const plausible = document.createElement("script");
+    plausible.defer = true;
+    plausible.setAttribute("data-domain", plausibleDomain);
+    plausible.src = "https://plausible.io/js/script.tagged-events.js";
+    document.head.appendChild(plausible);
+  }
 };
 
 let consent = null;
@@ -86,7 +99,7 @@ try {
 }
 
 if (consent === "granted") {
-  loadGA();
+  loadAnalytics();
 } else if (consent !== "denied" && banner) {
   banner.hidden = false;
 }
@@ -101,7 +114,7 @@ const setConsent = (value) => {
     banner.hidden = true;
   }
   if (value === "granted") {
-    loadGA();
+    loadAnalytics();
   }
 };
 
