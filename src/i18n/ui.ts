@@ -132,7 +132,7 @@ export const ui = {
     "changelog.githubRelease": "View on GitHub",
 
     "footer.description":
-      "HardwareVisualizer is a free, lightweight, open-source hardware monitoring tool for Windows and Linux. Monitor CPU temperature, GPU usage, memory, and system performance with real-time graphs and 30-day historical data.",
+      "HardwareVisualizer is a free, lightweight, open-source hardware monitoring tool for Windows, macOS, and Linux. Monitor CPU temperature, GPU usage, memory, and system performance with real-time graphs and 30-day historical data.",
     "footer.product": "Product",
     "footer.features": "Features",
     "footer.download": "Download",
@@ -146,6 +146,7 @@ export const ui = {
     "footer.community": "Community",
     "footer.discussions": "GitHub Discussions",
     "footer.about": "About",
+    "footer.privacy": "Privacy",
 
     "specs.title": "System Requirements & Limitations",
     "specs.supportedOS.title": "Supported OS & Architecture",
@@ -220,6 +221,11 @@ export const ui = {
     "faq.viewAll": "View all FAQs",
     "about.heading": "About HardwareVisualizer",
     "about.contact.emailLabel": "Email",
+    "privacy.heading": "Privacy Policy",
+    "consent.message":
+      "We use cookies for analytics (Google Analytics) to see how the site is used. You can accept or decline.",
+    "consent.accept": "Accept",
+    "consent.decline": "Decline",
   },
   ja: {
     "nav.home": "ホーム",
@@ -343,7 +349,7 @@ export const ui = {
     "changelog.githubRelease": "GitHubで見る",
 
     "footer.description":
-      "HardwareVisualizerは、WindowsとLinux向けの無料・軽量・オープンソースのハードウェアモニタリングツールです。CPU温度、GPU使用率、メモリ、システムパフォーマンスをリアルタイムグラフと30日間の履歴データで監視。",
+      "HardwareVisualizerは、Windows、macOS、Linux向けの無料・軽量・オープンソースのハードウェアモニタリングツールです。CPU温度、GPU使用率、メモリ、システムパフォーマンスをリアルタイムグラフと30日間の履歴データで監視。",
     "footer.product": "製品",
     "footer.features": "機能",
     "footer.download": "ダウンロード",
@@ -356,7 +362,8 @@ export const ui = {
     "footer.deepwiki": "DeepWiki（AIドキュメント）",
     "footer.community": "コミュニティ",
     "footer.discussions": "GitHubディスカッション",
-    "footer.about": "概要",
+    "footer.about": "About",
+    "footer.privacy": "プライバシー",
 
     "specs.title": "システム要件と制限事項",
     "specs.supportedOS.title": "対応OS・アーキテクチャ",
@@ -431,5 +438,10 @@ export const ui = {
     "faq.viewAll": "すべてのFAQを見る",
     "about.heading": "HardwareVisualizer について",
     "about.contact.emailLabel": "メール",
+    "privacy.heading": "プライバシーポリシー",
+    "consent.message":
+      "サイトの利用状況を把握するため、アクセス解析（Google Analytics）にCookieを使用します。同意・拒否を選べます。",
+    "consent.accept": "同意する",
+    "consent.decline": "拒否する",
   },
 } as const;

@@ -1,0 +1,127 @@
+---
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
+const privacyHref = translatePath("/privacy");
+
+// Analytics is loaded by the inline script below ONLY after the visitor
+// explicitly consents — nothing is loaded by default.
+// GA4 (run via Partytown, off the main thread) + optional cookieless Plausible.
+const gaId = "G-0KB9XD0DMY";
+const plausibleDomain =
+  (import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as string | undefined) ?? "";
+---
+
+<div
+  id="consent-banner"
+  role="region"
+  aria-labelledby="consent-message"
+  hidden
+  class="fixed inset-x-0 bottom-0 z-[60] border-slate-200 border-t bg-white/95 p-4 shadow-lg backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/95"
+>
+  <div
+    class="container mx-auto flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between"
+  >
+    <p id="consent-message" class="text-slate-600 text-sm dark:text-slate-300">
+      {t("consent.message")}{" "}
+      <a
+        href={privacyHref}
+        class="font-medium text-cyan-600 underline underline-offset-2 hover:text-cyan-700 dark:text-cyan-400 dark:hover:text-cyan-300"
+        data-astro-prefetch
+      >
+        {t("footer.privacy")}
+      </a>
+    </p>
+    <div class="flex shrink-0 gap-2">
+      <button
+        id="consent-decline"
+        type="button"
+        class="rounded-md border border-slate-300 px-4 py-2 font-medium text-slate-700 text-sm transition-colors hover:bg-slate-100 dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-800"
+      >
+        {t("consent.decline")}
+      </button>
+      <button
+        id="consent-accept"
+        type="button"
+        class="rounded-md bg-cyan-600 px-4 py-2 font-medium text-sm text-white transition-colors hover:bg-cyan-700"
+      >
+        {t("consent.accept")}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ gaId, plausibleDomain }}>
+const KEY = "analytics-consent";
+const banner = document.getElementById("consent-banner");
+
+const loadAnalytics = () => {
+  if (window.__analyticsLoaded) {
+    return;
+  }
+  window.__analyticsLoaded = true;
+  // Load GA4 through Partytown (off the main thread). Adding the scripts with
+  // type="text/partytown" and dispatching "ptupdate" tells Partytown to pick
+  // them up and run gtag inside its web worker.
+  const loader = document.createElement("script");
+  loader.type = "text/partytown";
+  loader.async = true;
+  loader.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+  const init = document.createElement("script");
+  init.type = "text/partytown";
+  init.textContent = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}');`;
+  document.head.appendChild(loader);
+  document.head.appendChild(init);
+  window.dispatchEvent(new CustomEvent("ptupdate"));
+
+  // Plausible (cookieless), only when a domain is configured. Gated on the same
+  // consent so all analytics respect the visitor's choice.
+  if (plausibleDomain) {
+    const plausible = document.createElement("script");
+    plausible.defer = true;
+    plausible.setAttribute("data-domain", plausibleDomain);
+    plausible.src = "https://plausible.io/js/script.tagged-events.js";
+    document.head.appendChild(plausible);
+  }
+};
+
+let consent = null;
+try {
+  consent = localStorage.getItem(KEY);
+} catch {
+  /* localStorage unavailable */
+}
+
+if (consent === "granted") {
+  loadAnalytics();
+} else if (consent !== "denied" && banner) {
+  banner.hidden = false;
+}
+
+const setConsent = (value) => {
+  try {
+    localStorage.setItem(KEY, value);
+  } catch {
+    /* localStorage unavailable */
+  }
+  if (banner) {
+    banner.hidden = true;
+  }
+  if (value === "granted") {
+    loadAnalytics();
+  }
+};
+
+document
+  .getElementById("consent-accept")
+  ?.addEventListener("click", () => setConsent("granted"));
+document
+  .getElementById("consent-decline")
+  ?.addEventListener("click", () => setConsent("denied"));
+</script>
