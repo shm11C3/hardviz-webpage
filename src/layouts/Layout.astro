@@ -1,6 +1,7 @@
 ---
 import { Font } from "astro:assets";
 import CodeBlockCopyController from "../components/CodeBlockCopyController.astro";
+import ConsentBanner from "../components/ConsentBanner.astro";
 import "../styles/global.css";
 import type { ui } from "../i18n/ui";
 import { defaultLang, showDefaultLang } from "../i18n/ui";
@@ -129,21 +130,6 @@ const t = useTranslations(lang);
           src="https://plausible.io/js/script.tagged-events.js"
         />
       )}
-
-    <script
-      is:inline
-      type="text/partytown"
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-0KB9XD0DMY"
-    ></script>
-    <script is:inline type="text/partytown">
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-0KB9XD0DMY");
-    </script>
   </head>
   <body class="dark:bg-slate-900 bg-white transition-colors duration-300">
     <a href="#main-content" class="skip-link"> {t("a11y.skipToMain")} </a>
@@ -152,6 +138,7 @@ const t = useTranslations(lang);
       copyLabel={t("download.verify.copyCode")}
       copiedLabel={t("download.verify.copied")}
     />
+    <ConsentBanner />
   </body>
 </html>
 <style>

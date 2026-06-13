@@ -17,6 +17,7 @@ const t = useTranslations(lang);
 const { translatePath } = useTranslatedPath(lang);
 const downloadHref = translatePath("/download");
 const aboutHref = translatePath("/about");
+const privacyHref = translatePath("/privacy");
 const currentYear = new Date().getFullYear();
 
 const footerLinks = [
@@ -148,6 +149,13 @@ const footerLinks = [
           data-astro-prefetch
         >
           {t("footer.about")}
+        </a>
+        <a
+          href={privacyHref}
+          class="text-slate-600 text-sm transition-colors hover:text-black dark:text-slate-400 dark:hover:text-white"
+          data-astro-prefetch
+        >
+          {t("footer.privacy")}
         </a>
         <a
           href={authorLinks.github}
