@@ -1,4 +1,5 @@
 import type { ui } from "../i18n/ui";
+import { useTranslatedPath } from "../i18n/utils";
 import { AUTHOR_HANDLE, AUTHOR_PROFILE_URL, authorSameAs } from "./author";
 
 /**
@@ -8,7 +9,7 @@ import { AUTHOR_HANDLE, AUTHOR_PROFILE_URL, authorSameAs } from "./author";
  * layout. Page-level nodes (e.g. SoftwareApplication, ProfilePage) link back to these
  * entities by `@id`, so Google resolves one coherent entity graph rather than
  * disconnected nodes. `sameAs` ties the project and its author to their off-site
- * footprint (GitHub, X, Zenn, Qiita), the primary entity-disambiguation signal for
+ * footprint (GitHub, X), the primary entity-disambiguation signal for
  * E-E-A-T / authoritativeness.
  */
 
@@ -104,12 +105,16 @@ export function buildBaseGraph(lang: keyof typeof ui) {
  */
 export function buildAboutPage(lang: keyof typeof ui) {
   const isJa = lang === "ja";
+  // useTranslatedPath is an i18n path helper, not a React hook.
+  // biome-ignore lint/correctness/useHookAtTopLevel: not a React hook
+  const { translatePath } = useTranslatedPath(lang);
+  const aboutUrl = new URL(translatePath("/about"), `${SITE_URL}/`).href;
 
   return {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    "@id": `${AUTHOR_PROFILE_URL}#aboutpage`,
-    url: AUTHOR_PROFILE_URL,
+    "@id": `${aboutUrl}#aboutpage`,
+    url: aboutUrl,
     name: isJa ? aboutPageName.ja : aboutPageName.en,
     inLanguage: isJa ? "ja" : "en",
     isPartOf: { "@id": WEBSITE_ID },
