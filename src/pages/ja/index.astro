@@ -63,7 +63,7 @@ const softwareJsonLd = {
   url: "https://hardviz.com/ja/",
   downloadUrl: githubAllReleasesUrl(),
   softwareVersion: release.version,
-  dateModified: release.published_at,
+  ...(release.published_at ? { dateModified: release.published_at } : {}),
   description:
     "CPU温度・GPU使用率・メモリをリアルタイムで監視する無料の軽量オープンソースハードウェアモニタリングツール。美しいグラフでシステムパフォーマンスを追跡。",
   featureList: [

@@ -63,7 +63,7 @@ const softwareJsonLd = {
   url: "https://hardviz.com/",
   downloadUrl: githubAllReleasesUrl(),
   softwareVersion: release.version,
-  dateModified: release.published_at,
+  ...(release.published_at ? { dateModified: release.published_at } : {}),
   description:
     "Free, lightweight, and open-source hardware monitoring tool. Track CPU temperature, GPU usage, memory allocation, and system performance in real-time with beautiful graphs.",
   featureList: [
