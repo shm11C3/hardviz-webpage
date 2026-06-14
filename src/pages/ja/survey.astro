@@ -1,0 +1,151 @@
+---
+import { ArrowLeft } from "lucide-react";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../../i18n/utils";
+import Layout from "../../layouts/Layout.astro";
+import {
+  buildSurveyEmbedSrc,
+  getSurveyFormId,
+  isSurveyConfigured,
+  SURVEY_FORWARDED_PARAMS,
+} from "../../lib/survey";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
+const privacyHref = translatePath("/privacy");
+const homeHref = translatePath("/");
+
+const configured = isSurveyConfigured(lang);
+const embedSrc = configured ? buildSurveyEmbedSrc(getSurveyFormId(lang)) : "";
+const forwardedParams = [...SURVEY_FORWARDED_PARAMS];
+---
+
+<Layout
+  title={t("survey.metaTitle")}
+  lang={lang}
+  description={t("survey.metaDescription")}
+>
+  <Header />
+  <main id="main-content" class="pt-20">
+    <section class="bg-slate-50 pt-16 pb-12 dark:bg-slate-800/50">
+      <div class="container mx-auto px-4">
+        <div class="mx-auto flex max-w-3xl flex-col items-center text-center">
+          <h1
+            class="font-bold text-3xl text-slate-900 md:text-4xl dark:text-white"
+          >
+            {t("survey.heading")}
+          </h1>
+          <p class="mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-300">
+            {t("survey.description")}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="container mx-auto px-4 py-12">
+      <div class="mx-auto max-w-3xl">
+        <p
+          class="mb-8 rounded-lg border border-slate-200 bg-white p-4 text-slate-600 text-sm dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400"
+        >
+          {t("survey.privacyNote")}{" "}
+          <a
+            href={privacyHref}
+            class="font-medium text-cyan-600 underline underline-offset-2 hover:text-cyan-700 dark:text-cyan-400 dark:hover:text-cyan-300"
+            data-astro-prefetch
+          >
+            {t("survey.privacyNoteLink")}
+          </a>
+        </p>
+
+        {configured ? (
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+              <iframe
+                id="survey-frame"
+                data-tally-src={embedSrc}
+                loading="lazy"
+                title={t("survey.heading")}
+                class="w-full"
+                style="min-height: 640px;"
+              />
+            </div>
+          ) : (
+            <div class="rounded-xl border border-slate-200 border-dashed bg-white p-10 text-center text-slate-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400">
+              {t("survey.preparing")}
+            </div>
+          )}
+
+        <div class="mt-10 text-center">
+          <a
+            href={homeHref}
+            class="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-5 py-2.5 font-medium text-slate-700 text-sm transition-colors hover:bg-slate-100 dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-800"
+            data-astro-prefetch
+          >
+            <ArrowLeft className="h-4 w-4" />
+            {t("survey.backHome")}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script define:vars={{ forwardedParams }}>
+    (() => {
+      const iframe = document.getElementById("survey-frame");
+      if (!iframe) return;
+
+      // Forward whitelisted, non-identifying context (app_version, os,
+      // source, locale) from the page URL into the Tally embed URL so they
+      // land in the form's hidden fields.
+      const base = iframe.getAttribute("data-tally-src");
+      if (base) {
+        try {
+          const url = new URL(base);
+          const current = new URLSearchParams(window.location.search);
+          for (const key of forwardedParams) {
+            const value = current.get(key);
+            if (value) url.searchParams.set(key, value);
+          }
+          iframe.setAttribute("data-tally-src", url.toString());
+        } catch {
+          /* keep the original embed URL if parsing fails */
+        }
+      }
+
+      const apply = () => {
+        if (window.Tally && typeof window.Tally.loadEmbeds === "function") {
+          window.Tally.loadEmbeds();
+          return;
+        }
+        // Fallback if Tally's script is unavailable: load the form directly.
+        for (const el of document.querySelectorAll("iframe[data-tally-src]")) {
+          if (!el.src) el.src = el.getAttribute("data-tally-src");
+        }
+      };
+
+      if (window.Tally) {
+        apply();
+        return;
+      }
+      const existing = document.querySelector(
+        'script[src="https://tally.so/widgets/embed.js"]',
+      );
+      if (existing) {
+        existing.addEventListener("load", apply);
+        existing.addEventListener("error", apply);
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = "https://tally.so/widgets/embed.js";
+      script.onload = apply;
+      script.onerror = apply;
+      document.body.appendChild(script);
+    })();
+    </script>
+  </main>
+  <Footer />
+</Layout>

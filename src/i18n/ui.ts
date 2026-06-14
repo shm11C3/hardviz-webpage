@@ -221,6 +221,23 @@ export const ui = {
     "faq.viewAll": "View all FAQs",
     "about.heading": "About HardwareVisualizer",
     "about.contact.emailLabel": "Email",
+    "about.feedback.heading": "Have feedback?",
+    "about.feedback.body":
+      "HardwareVisualizer is shaped by the people who use it. A short, anonymous survey helps decide what to build next.",
+    "about.feedback.cta": "Answer the survey",
+    "footer.survey": "Survey",
+    "survey.metaTitle": "Survey - HardwareVisualizer | Share Your Feedback",
+    "survey.metaDescription":
+      "Share your feedback on HardwareVisualizer — which features you use, what's missing, and how we can improve. Anonymous and takes about 2–3 minutes.",
+    "survey.heading": "Help shape HardwareVisualizer",
+    "survey.description":
+      "Your feedback directly guides what we build next. This survey is anonymous and takes about 2–3 minutes.",
+    "survey.privacyNote":
+      "Responses are anonymous. We attach your app version, OS, entry point, and language so we can group feedback — never your hardware details or anything that identifies you. The form is hosted by Tally.",
+    "survey.privacyNoteLink": "Read our Privacy Policy →",
+    "survey.preparing":
+      "The survey is being prepared and will be available here shortly. Thanks for your interest!",
+    "survey.backHome": "Back to home",
     "privacy.heading": "Privacy Policy",
     "consent.message":
       "We use cookies for analytics (Google Analytics) to see how the site is used. You can accept or decline.",
@@ -438,6 +455,24 @@ export const ui = {
     "faq.viewAll": "すべてのFAQを見る",
     "about.heading": "HardwareVisualizer について",
     "about.contact.emailLabel": "メール",
+    "about.feedback.heading": "ご意見・ご要望はありますか？",
+    "about.feedback.body":
+      "HardwareVisualizer は使ってくださる方々によって形作られています。短い匿名アンケートが、次に作るものを決める助けになります。",
+    "about.feedback.cta": "アンケートに回答する",
+    "footer.survey": "アンケート",
+    "survey.metaTitle":
+      "アンケート - HardwareVisualizer | ご意見をお聞かせください",
+    "survey.metaDescription":
+      "HardwareVisualizerへのご意見をお聞かせください。よく使う機能、足りない機能、改善してほしい点など。匿名で約2〜3分です。",
+    "survey.heading": "HardwareVisualizer をより良くする",
+    "survey.description":
+      "あなたの声が次に作るものを直接決めます。アンケートは匿名で、約2〜3分で回答できます。",
+    "survey.privacyNote":
+      "回答は匿名です。フィードバックを分類するため、アプリのバージョン・OS・流入元・言語のみを付与します（ハードウェア構成やあなたを特定する情報は含みません）。フォームはTallyがホストしています。",
+    "survey.privacyNoteLink": "プライバシーポリシーを読む →",
+    "survey.preparing":
+      "アンケートは準備中です。まもなくこちらで公開します。ご関心ありがとうございます！",
+    "survey.backHome": "TOPへ戻る",
     "privacy.heading": "プライバシーポリシー",
     "consent.message":
       "サイトの利用状況を把握するため、アクセス解析（Google Analytics）にCookieを使用します。同意・拒否を選べます。",
