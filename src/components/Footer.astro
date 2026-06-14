@@ -71,6 +71,11 @@ const footerLinks = [
     title: t("footer.community"),
     links: [
       {
+        name: t("footer.survey"),
+        href: `${translatePath("/survey")}?source=web`,
+        external: false,
+      },
+      {
         name: t("footer.discussions"),
         href: `${githubRepoUrl()}/discussions`,
         external: true,
