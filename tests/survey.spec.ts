@@ -10,9 +10,11 @@ test("survey page loads with heading and privacy note", async ({ page }) => {
   await expect(page.locator('main a[href="/privacy/"]')).toBeVisible();
   // Either the embedded form (once a Tally form ID is configured) or the
   // "preparing" placeholder is rendered.
+  // Either the configured iframe or the "preparing" fallback is shown; `.or()`
+  // resolves at assertion time so there's no stale-count race.
   const frame = page.locator("iframe#survey-frame");
   const preparing = page.getByText("being prepared");
-  await expect((await frame.count()) > 0 ? frame : preparing).toBeVisible();
+  await expect(frame.or(preparing)).toBeVisible();
 });
 
 test("JA survey page loads and links to JA privacy policy", async ({

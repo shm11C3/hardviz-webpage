@@ -31,9 +31,9 @@ forms** — one English, one Japanese — and embed them on `/survey` and
 
 **Intro / welcome:**
 > Thanks for using HardwareVisualizer! This short, anonymous survey takes about
-> 2–3 minutes and helps decide what to build next. Every question except the
-> rating is optional — answer what you like. Aggregated results may be shared
-> publicly; we never publish anything that identifies you.
+> 2–3 minutes and helps decide what to build next. Most questions are optional —
+> answer what you like. Aggregated results may be shared publicly; we never
+> publish anything that identifies you.
 
 **Q1. How long have you been using HardwareVisualizer?**
 _Type: Multiple choice (single) · Optional_
@@ -102,7 +102,7 @@ email. Totally optional — leave it blank to stay anonymous._
 **イントロ / ようこそ:**
 > HardwareVisualizer をご利用いただきありがとうございます！この匿名アンケートは
 > 約2〜3分で回答できます。いただいた声は、次に作るものを決める助けになります。
-> 評価以外の設問はすべて任意です。集計結果を公開する場合がありますが、あなたを
+> ほとんどの設問は任意です。集計結果を公開する場合がありますが、あなたを
 > 特定する情報を公開することはありません。
 
 **Q1. HardwareVisualizer をどのくらい使っていますか？**

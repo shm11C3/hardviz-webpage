@@ -233,7 +233,7 @@ export const ui = {
     "survey.description":
       "Your feedback directly guides what we build next. This survey is anonymous and takes about 2–3 minutes.",
     "survey.privacyNote":
-      "Responses are anonymous. We attach your app version, OS, entry point, and language so we can group feedback — never your hardware details or anything that identifies you. The form is hosted by Tally.",
+      "Responses are anonymous. We attach some non-identifying context so we can group feedback — your entry point and language, plus your app version and OS when you open the survey from the app — never your hardware details or anything that identifies you. The form is hosted by Tally.",
     "survey.privacyNoteLink": "Read our Privacy Policy →",
     "survey.preparing":
       "The survey is being prepared and will be available here shortly. Thanks for your interest!",
@@ -468,7 +468,7 @@ export const ui = {
     "survey.description":
       "あなたの声が次に作るものを直接決めます。アンケートは匿名で、約2〜3分で回答できます。",
     "survey.privacyNote":
-      "回答は匿名です。フィードバックを分類するため、アプリのバージョン・OS・流入元・言語のみを付与します（ハードウェア構成やあなたを特定する情報は含みません）。フォームはTallyがホストしています。",
+      "回答は匿名です。フィードバックを分類するため、非識別の文脈（流入元・言語、およびアプリから開いた場合はアプリのバージョン・OS）を付与します。ハードウェア構成やあなたを特定する情報は含みません。フォームはTallyがホストしています。",
     "survey.privacyNoteLink": "プライバシーポリシーを読む →",
     "survey.preparing":
       "アンケートは準備中です。まもなくこちらで公開します。ご関心ありがとうございます！",

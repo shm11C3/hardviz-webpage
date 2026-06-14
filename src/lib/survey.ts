@@ -16,7 +16,8 @@ export type SurveyLang = "en" | "ja";
 
 /**
  * Tally form IDs per language (the part after `tally.so/r/` / `tally.so/embed/`).
- * TODO: replace with the real form IDs once the Tally forms are created.
+ * Set a language's value to embed that form; leave it as an empty string to
+ * disable the embed (the page then falls back to a "preparing" notice).
  */
 export const surveyFormIds: Record<SurveyLang, string> = {
   en: "kdr0Dj",

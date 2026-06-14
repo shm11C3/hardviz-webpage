@@ -24,6 +24,11 @@ const homeHref = translatePath("/");
 const configured = isSurveyConfigured(lang);
 const embedSrc = configured ? buildSurveyEmbedSrc(getSurveyFormId(lang)) : "";
 const forwardedParams = [...SURVEY_FORWARDED_PARAMS];
+// Defaults used when a param is absent from the page URL: `locale` follows the
+// page language and `source` falls back to "web". Explicit query params (e.g.
+// the app's source=app) still override these. app_version/os have no web
+// default — they only arrive when the app opens the survey.
+const paramDefaults = { locale: lang, source: "web" };
 ---
 
 <Layout
@@ -69,6 +74,7 @@ const forwardedParams = [...SURVEY_FORWARDED_PARAMS];
                 id="survey-frame"
                 data-tally-src={embedSrc}
                 loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
                 title={t("survey.heading")}
                 class="w-full"
                 style="min-height: 640px;"
@@ -93,21 +99,22 @@ const forwardedParams = [...SURVEY_FORWARDED_PARAMS];
       </div>
     </div>
 
-    <script define:vars={{ forwardedParams }}>
+    <script define:vars={{ forwardedParams, paramDefaults }}>
     (() => {
       const iframe = document.getElementById("survey-frame");
       if (!iframe) return;
 
       // Forward whitelisted, non-identifying context (app_version, os,
-      // source, locale) from the page URL into the Tally embed URL so they
-      // land in the form's hidden fields.
+      // source, locale) into the Tally embed URL so it lands in the form's
+      // hidden fields. Values come from the page URL, falling back to
+      // paramDefaults (locale = page language, source = "web").
       const base = iframe.getAttribute("data-tally-src");
       if (base) {
         try {
           const url = new URL(base);
           const current = new URLSearchParams(window.location.search);
           for (const key of forwardedParams) {
-            const value = current.get(key);
+            const value = current.get(key) ?? paramDefaults[key];
             if (value) url.searchParams.set(key, value);
           }
           iframe.setAttribute("data-tally-src", url.toString());
