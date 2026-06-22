@@ -210,7 +210,7 @@ test("verification page exposes official resource links", async ({ page }) => {
     "gh attestation verify",
   );
   await expect(page.locator("main > section#verification")).toContainText(
-    "Authenticode signing pending",
+    "Authenticode signed for v1.9.0+ installers",
   );
   await expect(page.locator("#latest-commands")).not.toContainText(
     "winget install",

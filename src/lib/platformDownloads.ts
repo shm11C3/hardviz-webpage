@@ -21,14 +21,14 @@ function verificationCommandFor(type: Platform, artifactName: string): string {
 
 function signingStatusFor(type: Platform): string {
   if (type === "windows") {
-    return "Authenticode signing pending";
+    return "Authenticode signed for v1.9.0+ installers";
   }
 
   if (type === "macOSAppleSilicon" || type === "macOSIntel") {
     return "Signed and notarized";
   }
 
-  return "Package signing not implemented yet";
+  return "Unsigned package; verify with SHA-256 and attestations";
 }
 
 export function createPlatformDownloads(

@@ -4,7 +4,7 @@ section: verification
 title: "インストーラの検証"
 ---
 
-特にWindows版のAuthenticode署名が準備中の間は、インストーラを実行する前に以下を確認してください。
+インストーラを実行する前に以下を確認してください。Windows のリリースインストーラーは v1.9.0 以降 Authenticode 署名済みですが、手動ダウンロードでは SHA-256 チェックサムと GitHub Artifact Attestations による確認も推奨します。
 
 ### 配布元を確認する
 
@@ -27,7 +27,9 @@ gh attestation verify ./HardwareVisualizer_* -R shm11C3/HardwareVisualizer
 
 ### 署名状況を確認する
 
-WindowsのAuthenticode署名は準備中です。macOS版は署名・公証済みで、Linux版はチェックサムとattestationで検証してください。
+Windows の `.exe` / `.msi` リリースインストーラーは、v1.9.0 以降 Authenticode 署名済みです。v1.9.0 より前の Windows リリースは未署名の場合があります。
+macOS版は署名・公証済みです。Linux パッケージは現時点では Linux package signing では署名されていないため、チェックサムと attestation で検証してください。
+Release assets に含まれる `.sig` ファイルは、アプリ内アップデート経路で使用する Tauri updater 署名です。手動ダウンロードにおけるプラットフォーム署名、SHA-256 チェックサム、GitHub Artifact Attestations の代替ではありません。
 
 ### 関連リンク
 

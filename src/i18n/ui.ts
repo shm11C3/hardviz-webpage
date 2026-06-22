@@ -115,7 +115,7 @@ export const ui = {
     "download.verify.signatureFile": "Signature file",
     "download.verify.signingStatus": "Signing status",
     "download.verify.updaterSignatureAvailable":
-      "Tauri updater signature available.",
+      "Tauri updater signature for the in-app update path; not a platform signing substitute.",
 
     "changelog.title": "Changelog",
     "changelog.description":
@@ -352,7 +352,7 @@ export const ui = {
     "download.verify.signatureFile": "署名ファイル",
     "download.verify.signingStatus": "署名状態",
     "download.verify.updaterSignatureAvailable":
-      "Tauriアップデータ署名を利用できます。",
+      "アプリ内アップデート経路向けのTauri updater署名です。プラットフォーム署名の代替ではありません。",
 
     "changelog.title": "変更履歴",
     "changelog.description": "HardwareVisualizerのリリースノートと更新情報。",

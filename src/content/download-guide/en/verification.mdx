@@ -4,7 +4,7 @@ section: verification
 title: "Installer verification"
 ---
 
-Use these checks before running an installer, especially on Windows while Authenticode signing is pending.
+Use these checks before running an installer. Windows release installers are Authenticode signed starting with v1.9.0, and SHA-256 checksums plus GitHub Artifact Attestations remain recommended verification steps for manual downloads.
 
 ### Check the source
 
@@ -27,7 +27,9 @@ gh attestation verify ./HardwareVisualizer_* -R shm11C3/HardwareVisualizer
 
 ### Review signing status
 
-Windows Authenticode signing is pending. macOS builds are signed and notarized; Linux artifacts should be verified with checksums and attestations.
+Windows `.exe` and `.msi` release installers are Authenticode signed starting with v1.9.0. Earlier Windows releases may be unsigned.
+macOS builds are signed and notarized. Linux packages are not currently signed with a Linux package-signing mechanism, so verify them with checksums and attestations.
+Release assets ending in `.sig` are Tauri updater signatures for the in-app update path; they do not replace platform signing, SHA-256 checksums, or GitHub Artifact Attestations for manual downloads.
 
 ### Resources
 
