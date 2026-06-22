@@ -1,0 +1,54 @@
+---
+lang: ja
+version: 1.9.0
+date: 2026-06-22
+title: "v1.9.0"
+summary: "ストレージ容量だけでなく健康状態まで確認できるStorage Healthを追加し、任意のPawnIOコンポーネントによるWindows CPU温度監視も追加しました。"
+tags:
+  - リリース
+  - Storage Health
+  - 温度
+  - CPU温度
+  - 監視
+  - 信頼性
+  - Windows
+---
+
+## 変更内容
+
+v1.9.0では、HardwareVisualizerに新しい監視領域としてStorage Healthを追加しました。
+これまでストレージ情報は容量などの基本情報が中心でしたが、今回のリリースからダッシュボードでドライブの健康状態も確認できるようになりました。
+
+Storage Healthでは、記録された健康状態、ライブストレージ温度、複数ドライブ環境でのデバイス単位の情報を扱えます。
+WindowsではDeviceIoControlとフォールバック経路を使って健康状態を収集し、Storage Healthの記録を保持しながら、検出済みデバイスを再検出できるようになりました。
+
+また、Windows環境でCPU温度の監視ができるようになりました。
+任意のPawnIOコンポーネントを使ってCPU温度を取得できるようになり、任意の外部コンポーネントや昇格起動に関する案内も追加しました。
+詳細なセットアップガイドは[こちら](https://github.com/shm11C3/HardwareVisualizer/blob/develop/docs/user/external-components.ja.md)をご覧ください。
+その他の更新として、`system_profiler`によるmacOSのマザーボード情報取得、透明UIの調整、Windowsインストーラーの署名などを追加しています。
+
+## Storage Health
+
+- ストレージ容量などの基本情報に加えて、ドライブの健康状態を確認できるStorage Healthを追加しました。
+- Storage Healthの記録と保持設定を追加しました。
+- WindowsでDeviceIoControlとフォールバック処理を使ったStorage Health収集を追加しました。
+- ダッシュボードにStorage Healthサマリーを追加しました。
+- Storage Healthサマリーにライブストレージ温度を表示できるようにしました。
+- 個別のドライブを確認するためのストレージデバイス選択を追加しました。
+- 既存のStorage Health記録を保持したまま、ストレージデバイスを再検出できるようにしました。
+- 起動時や最新レコード取得時にStorage Healthテーブルが見つからない場合の扱いを改善しました。
+
+## 温度とハードウェア情報
+
+- 任意のPawnIOコンポーネントを使ったWindows CPU温度の取得を追加しました。
+- 任意の外部コンポーネントと昇格起動モードに関する案内を追加しました。
+- macOSで`system_profiler`を使ったマザーボード情報の取得を追加しました。
+- 外部コンポーネントの権限に関する案内を改善しました。
+
+## UIとリリース信頼性
+
+- 透明UIとウィンドウ不透明度の設定を追加しました。
+- ガラスぼかしを調整できる設定を追加しました。
+- SSL.com eSignerによるWindowsインストーラー署名を追加しました。
+
+**Full Changelog**: [v1.8.1...v1.9.0](https://github.com/shm11C3/HardwareVisualizer/compare/v1.8.1...v1.9.0)

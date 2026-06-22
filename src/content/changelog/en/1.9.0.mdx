@@ -1,0 +1,54 @@
+---
+lang: en
+version: 1.9.0
+date: 2026-06-22
+title: "v1.9.0"
+summary: "Added Storage Health so drive health can be monitored beyond capacity data, plus Windows CPU temperature monitoring through the optional PawnIO component."
+tags:
+  - Release
+  - Storage Health
+  - Temperature
+  - CPU Temperature
+  - Monitoring
+  - Reliability
+  - Windows
+---
+
+## What's Changed
+
+v1.9.0 adds Storage Health as a new monitoring area in HardwareVisualizer.
+Earlier versions could show storage information such as capacity, but this release makes it possible to monitor drive health status from the dashboard as well.
+
+Storage Health includes recorded health status, live storage temperature, and clearer device-level context for systems with multiple drives.
+On Windows, HardwareVisualizer can collect health information through DeviceIoControl with fallback paths, keep Storage Health records over time, and refresh detected devices while preserving existing health history.
+
+This release also adds CPU temperature monitoring on Windows.
+CPU temperature sampling is available through the optional PawnIO component, with updated guidance for optional external components and elevated startup.
+See the [setup guide](https://github.com/shm11C3/HardwareVisualizer/blob/develop/docs/user/external-components.md) for details.
+Other updates include macOS motherboard information through `system_profiler`, transparent UI adjustments, and Windows installer signing.
+
+## Storage Health
+
+- Added Storage Health so drive health status can be monitored in addition to capacity and basic storage information.
+- Added Storage Health records and retention settings.
+- Added Windows Storage Health collection through DeviceIoControl with fallback handling.
+- Added a Storage Health summary to the dashboard.
+- Added live storage temperature in the Storage Health summary.
+- Added a storage device selector for inspecting individual drives.
+- Added storage device re-detection while preserving existing Storage Health records.
+- Improved handling for missing Storage Health tables during startup and latest-record lookups.
+
+## Temperature and Hardware Signals
+
+- Added Windows CPU temperature sampling through the optional PawnIO component.
+- Added guidance for optional external components and elevated startup mode.
+- Added macOS motherboard information collection through `system_profiler`.
+- Improved permission guidance for external components.
+
+## Interface and Release Reliability
+
+- Added transparent UI and window opacity settings.
+- Added a configurable glass blur control.
+- Added Windows installer signing with SSL.com eSigner.
+
+**Full Changelog**: [v1.8.1...v1.9.0](https://github.com/shm11C3/HardwareVisualizer/compare/v1.8.1...v1.9.0)
