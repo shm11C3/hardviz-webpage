@@ -2,7 +2,11 @@
 import { render } from "astro:content";
 import { Mail } from "lucide-react";
 import { FaGithub, FaXTwitter } from "react-icons/fa6";
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../i18n/utils";
 import type { AboutEntry } from "../lib/about";
 import { authorEmailParts, authorLinks } from "../lib/author";
 import { buildAboutPage } from "../lib/structuredData";
@@ -14,6 +18,8 @@ interface Props {
 const { entry } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
+const surveyHref = `${translatePath("/survey")}?source=web`;
 
 const { Content } = await render(entry);
 
@@ -80,6 +86,25 @@ const aboutJsonLd = buildAboutPage(lang);
           </a>
         </li>
       </ul>
+
+      <!-- Feedback invite (drives responses to the survey on /survey) -->
+      <aside
+        class="mt-12 rounded-xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-700 dark:bg-slate-800/50"
+      >
+        <h2 class="font-semibold text-slate-900 text-xl dark:text-white">
+          {t("about.feedback.heading")}
+        </h2>
+        <p class="mt-2 text-slate-600 dark:text-slate-300">
+          {t("about.feedback.body")}
+        </p>
+        <a
+          href={surveyHref}
+          class="mt-4 inline-flex items-center gap-2 rounded-lg bg-cyan-600 px-4 py-2 font-medium text-sm text-white transition-colors hover:bg-cyan-700"
+          data-astro-prefetch
+        >
+          {t("about.feedback.cta")}
+        </a>
+      </aside>
     </div>
   </div>
 
