@@ -334,7 +334,11 @@ const Download = ({
       {showLatestChanges &&
       (displayedReleaseDetails.changesSummary ||
         displayedReleaseDetails.tags.length) ? (
-        <article className="mx-auto mt-12 max-w-4xl rounded-lg border border-slate-200 bg-slate-50/70 p-5 text-left shadow-sm md:p-6 dark:border-slate-700 dark:bg-slate-900/30">
+        <article
+          className="mx-auto mt-12 max-w-4xl rounded-lg border border-slate-200 bg-slate-50/70 p-5 text-left shadow-sm md:p-6 dark:border-slate-700 dark:bg-slate-900/30"
+          data-release-notes=""
+          data-release-notes-version={displayedReleaseDetails.version}
+        >
           <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
             <div>
               <p className="flex items-center gap-2 font-semibold text-lg text-slate-900 dark:text-white">
@@ -345,7 +349,10 @@ const Download = ({
                 {translations.latestChanges}
               </p>
               {displayedReleaseDetails.changesSummary ? (
-                <p className="mt-3 max-w-3xl text-slate-700 dark:text-slate-200">
+                <p
+                  className="mt-3 max-w-3xl text-slate-700 dark:text-slate-200"
+                  data-release-notes-summary=""
+                >
                   {displayedReleaseDetails.changesSummary}
                 </p>
               ) : null}
@@ -367,6 +374,7 @@ const Download = ({
                 <span
                   key={tag}
                   className="inline-flex items-center rounded-full border border-slate-200 bg-white px-2.5 py-1 text-slate-600 text-xs dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300"
+                  data-release-notes-tag=""
                 >
                   {tag}
                 </span>
