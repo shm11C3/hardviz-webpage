@@ -1,0 +1,37 @@
+---
+lang: en
+version: 1.9.1
+date: 2026-06-25
+title: "v1.9.1"
+summary: "Reworked Transparent UI on macOS to use native vibrancy with a frosted-glass slider for lower GPU and power usage, and reframed the feature with a calmer Experimental badge."
+tags:
+  - Release
+  - Transparent UI
+  - Performance
+  - macOS
+  - Experimental
+---
+
+## What's Changed
+
+v1.9.1 refines the Transparent UI feature introduced in v1.9.0, with a focus on macOS performance.
+
+On macOS, the transparent and glass-blur effect previously relied on the CSS `backdrop-filter` blur, which kept the GPU and compositor under continuous load and noticeably increased power usage.
+This release switches macOS to native vibrancy (NSVisualEffectView), so the frosted-glass look is rendered by the system instead of being repainted every frame.
+
+The Transparent UI setting has also been reorganized into a dedicated Experimental features section.
+A calmer "Experimental" badge and a short note replace the earlier warning callout, while still making clear that the feature is experimental and may increase power usage, especially on macOS.
+
+## macOS Performance
+
+- Switched macOS Transparent UI to native vibrancy (NSVisualEffectView) instead of the CSS `backdrop-filter` blur, reducing GPU and power usage.
+- Added a 4-step frost slider (off / low / medium / high) on macOS, mapped to native materials and reusing the existing glass blur setting.
+- Rendered web UI surfaces as fully opaque on macOS so the native vibrancy effect shows through without per-frame compositing.
+
+## Transparent UI
+
+- Moved Transparent UI into a dedicated Experimental features section.
+- Replaced the warning callout with a calmer "Experimental" badge and a short note.
+- Kept guidance that the feature is experimental and may increase power usage, especially on macOS.
+
+**Full Changelog**: [v1.9.0...v1.9.1](https://github.com/shm11C3/HardwareVisualizer/compare/v1.9.0...v1.9.1)
