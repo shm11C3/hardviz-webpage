@@ -85,8 +85,9 @@ From `src/content.config.ts`:
 
 Notes:
 - `version` is matched by **exact string equality** elsewhere — keep it bare and consistent.
-- Always provide `summary` and at least one `tag`: the home-card resolver throws at build time
-  if the *featured* version has neither (see gotchas).
+- Recommended: provide a `summary` **and** at least one `tag` on every entry so cards and the
+  changelog index render well. The hard *build-time* rule is narrower (at least one of the two
+  for the featured version) — see "homeReleaseNotesVersion" and gotchas.
 
 ## Body templates
 
@@ -195,10 +196,13 @@ card features that exact version (or, when `null`, the latest downloadable relea
 - **Adding notes for a version you also want featured on the top page** → set
   `homeReleaseNotesVersion` to that bare version (e.g. `"1.9.1"`).
 - **Adding notes but the top page should keep showing an older version** → leave it unchanged.
-- The featured version **must** have a changelog entry with a `summary` or `tags`, or
-  `getHomeReleaseNotesDetails` (`src/lib/homeReleaseNotes.ts`) throws during build.
-- `tests/home.spec.ts` reads this constant directly, so the home E2E assertion stays in sync
-  automatically — no test edit needed when you bump it.
+- The featured version's changelog entry **must** have at least one of `summary` or `tags`, or
+  `getHomeReleaseNotesDetails` (`src/lib/homeReleaseNotes.ts`) throws during build —
+  `hasReleaseNotes` checks `Boolean(changesSummary || tags.length)`. Providing both is still
+  recommended for a complete-looking card.
+- `tests/home.spec.ts` reads this constant directly and asserts the card has a summary **or**
+  a tag (`summaryCount + tagCount > 0`), so the home E2E assertion stays in sync automatically —
+  no test edit needed when you bump it.
 
 Only change this when the user's intent is clear; otherwise ask.
 
@@ -236,6 +240,7 @@ ls dist/changelog/<version>/index.html dist/ja/changelog/<version>/index.html
 - `version` frontmatter is bare (`1.9.1`), not `v1.9.1`; `title` is `"v1.9.1"`.
 - Don't forget the Japanese entry — the build succeeds with only one locale, but the site
   expects both and the JA changelog index falls back to English when a translation is missing.
-- The home-card resolver throws if the *featured* version lacks `summary`/`tags`.
+- The home-card resolver throws only if the *featured* version's entry has **neither** a
+  `summary` nor any `tags` (it needs at least one of the two).
 - Adding a changelog entry does **not** require touching any index file or route — the glob
   loader and `[version].astro` handle new versions automatically.
