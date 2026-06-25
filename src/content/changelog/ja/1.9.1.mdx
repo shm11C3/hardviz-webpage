@@ -1,0 +1,37 @@
+---
+lang: ja
+version: 1.9.1
+date: 2026-06-25
+title: "v1.9.1"
+summary: "macOSのTransparent UIをネイティブvibrancyとすりガラス風スライダーに作り直してGPUと消費電力の負荷を軽減し、より落ち着いたExperimentalバッジに見直しました。"
+tags:
+  - リリース
+  - Transparent UI
+  - パフォーマンス
+  - macOS
+  - Experimental
+---
+
+## 変更内容
+
+v1.9.1では、v1.9.0で追加したTransparent UIを、macOSのパフォーマンスを中心に改善しました。
+
+これまでmacOSの透明・ガラスぼかし表現はCSSの`backdrop-filter`ぼかしに依存しており、GPUとコンポジターに継続的な負荷がかかって消費電力も目立って増加していました。
+今回のリリースではmacOSをネイティブvibrancy（NSVisualEffectView）に切り替え、すりガラス風の見た目を毎フレーム描き直すのではなくシステム側で描画するようにしました。
+
+また、Transparent UIの設定を専用のExperimental features（実験的機能）セクションにまとめ直しました。
+以前の警告表示に代えて、落ち着いた「Experimental」バッジと短い注記を表示しつつ、この機能が実験的であり特にmacOSで消費電力が増える可能性があることは引き続き明示しています。
+
+## macOSのパフォーマンス
+
+- macOSのTransparent UIをCSSの`backdrop-filter`ぼかしからネイティブvibrancy（NSVisualEffectView）に切り替え、GPUと消費電力の負荷を軽減しました。
+- macOSで4段階のすりガラススライダー（オフ / 低 / 中 / 高）を追加し、既存のガラスぼかし設定を再利用してネイティブマテリアルに対応付けました。
+- macOSでWeb UIの表面を完全に不透明で描画し、毎フレームの合成なしにネイティブvibrancyの効果が透けて見えるようにしました。
+
+## Transparent UI
+
+- Transparent UIを専用のExperimental features（実験的機能）セクションに移動しました。
+- 警告表示に代えて、より落ち着いた「Experimental」バッジと短い注記を表示するようにしました。
+- この機能が実験的であり、特にmacOSで消費電力が増える可能性があるという案内を引き続き表示しています。
+
+**Full Changelog**: [v1.9.0...v1.9.1](https://github.com/shm11C3/HardwareVisualizer/compare/v1.9.0...v1.9.1)
