@@ -32,7 +32,10 @@ test("languages table contains English, 日本語, and Русский", async ({
   const main = page.locator("main");
   await expect(main).toContainText("English");
   await expect(main).toContainText("日本語");
-  await expect(main).toContainText("Русский");
+  await expect(main).toContainText("Русский (Russian)");
+
+  await page.goto("/ja/specs/");
+  await expect(page.locator("main")).toContainText("Русский (ロシア語)");
 });
 
 test("limitations section with 4 list items", async ({ page }) => {

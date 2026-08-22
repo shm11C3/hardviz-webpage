@@ -173,6 +173,7 @@ export const ui = {
     "specs.supportedLanguages.title": "Supported Languages",
     "specs.supportedLanguages.language": "Language",
     "specs.supportedLanguages.status": "Status",
+    "specs.supportedLanguages.russian": "Русский (Russian)",
     "specs.supportedLanguages.howToAdd":
       "If you want to add a supported language, please create an issue on GitHub to suggest it.",
     "specs.limitations.title": "Known Limitations & Notes",
@@ -407,6 +408,7 @@ export const ui = {
     "specs.supportedLanguages.title": "対応言語",
     "specs.supportedLanguages.language": "言語",
     "specs.supportedLanguages.status": "状態",
+    "specs.supportedLanguages.russian": "Русский (ロシア語)",
     "specs.supportedLanguages.howToAdd":
       "対応言語を追加したい場合は、GitHubでIssueを作成して提案してください。",
     "specs.limitations.title": "既知の制限事項・注意点",
