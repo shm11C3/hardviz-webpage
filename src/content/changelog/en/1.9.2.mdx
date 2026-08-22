@@ -1,0 +1,46 @@
+---
+lang: en
+version: 1.9.2
+date: 2026-07-22
+title: "v1.9.2"
+summary: "CPU temperature is now attempted on any CPU the app recognizes, so some processors that previously showed nothing can now report a temperature, plus lighter recording of process history."
+tags:
+  - Release
+  - CPU Temperature
+  - Windows
+  - Performance
+---
+
+## What's Changed
+
+v1.9.2 is a maintenance release focused on CPU temperature availability.
+
+Until now, CPU temperature was only collected on processors on a known-good list, so a supported machine could still show nothing simply because its exact model had not been confirmed yet.
+This release changes that: when HardwareVisualizer recognizes the processor, it now attempts to read the temperature instead of stopping at the list.
+Recent AMD Ryzen processors are the main beneficiaries, and some machines that previously showed no CPU temperature may now report one.
+
+Because these readings are attempted rather than confirmed on every model, they are treated as experimental internally.
+Guidance about the optional PawnIO component now appears only when reading the temperature actually fails, rather than whenever a model is unrecognized.
+
+## CPU Temperature
+
+- Attempt CPU temperature on any recognized processor instead of only those on a confirmed list.
+- Added coverage for recent AMD Ryzen processors.
+- Kept Intel CPU temperature based on what the processor itself reports.
+- Show optional-component guidance only when a temperature reading actually fails.
+
+## Performance
+
+- Reduced the cost of recording process history by writing entries together instead of one at a time.
+
+## Maintenance
+
+- Updated the Tauri runtime and other dependencies.
+
+## New Contributors
+
+Thank you to our new contributor for making this release possible!
+
+- [@lazizbekravshanov](https://github.com/lazizbekravshanov)
+
+**Full Changelog**: [v1.9.1...v1.9.2](https://github.com/shm11C3/HardwareVisualizer/compare/v1.9.1...v1.9.2)

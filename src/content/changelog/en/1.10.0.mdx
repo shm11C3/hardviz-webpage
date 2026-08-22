@@ -1,0 +1,67 @@
+---
+lang: en
+version: 1.10.0
+date: 2026-08-22
+title: "v1.10.0"
+summary: "Reorganized the app around Performance, System Specifications, and Insights, made the Performance screen rearrangeable, added motherboard temperature and fan speed on Windows and CPU temperature history in Insights, and made the app noticeably lighter."
+tags:
+  - Release
+  - Navigation
+  - Performance
+  - Motherboard Sensors
+  - CPU Temperature
+  - GPU
+  - Windows
+---
+
+## What's Changed
+
+v1.10.0 reorganizes the screen structure itself, which had stayed largely unchanged since the app's earliest releases.
+
+The sidebar is now organized around three places: **Performance** for watching your hardware live, **System Specifications** for looking up what is installed, and **Insights** for reviewing recorded history.
+Previously these were spread across several separate screens, so related information was easy to miss.
+
+The Performance screen can also be arranged to suit how you use it, and this release adds two new kinds of information: motherboard temperature and fan speed on Windows, and CPU temperature history in Insights.
+Alongside that, a large amount of work went into reducing how much CPU, memory, and power HardwareVisualizer uses while it is running.
+
+If you prefer the previous screen layout, it is still available.
+The first time you open v1.10.0, a one-time notice points you to the setting to switch back to **Classic Navigation** at any time.
+
+## A Clearer Structure
+
+- Reorganized the sidebar into Performance, System Specifications, and Insights.
+- Added System Specifications, a single sheet listing your PC's hardware configuration.
+- Kept the previous screen layout available as Classic Navigation, with a one-time notice explaining how to switch.
+
+## Performance Screen
+
+- Added three ways to view live readings: **Panels** (the default), **Compact**, and **Monitor**.
+- Panels shows usage and temperature gauges along the top, with rearrangeable panels below that you can show, hide, and reorder in one or two columns.
+- Added optional panels for per-core CPU usage and motherboard sensors, hidden by default.
+- Compact packs one row per metric for a dense overview; Monitor suits leaving the app on screen.
+- The GPU readings now name the adapter they come from, and you can switch adapters when your PC has more than one.
+
+## New Information
+
+- Added motherboard temperature and fan speed readings on Windows, for supported motherboard sensor chips through the optional PawnIO component.
+- Added CPU temperature history to Insights, including average, maximum, and minimum values.
+- Added a new Cooling view in Insights as the home for temperature-related analysis.
+
+## Graphs
+
+- Added an option to fit graphs to the window, so they resize with it instead of staying a fixed size.
+- Added an adjustable margin for graph layouts.
+- Grouped the graph size options together in settings.
+
+## Lighter and Quieter
+
+- Reduced the drawing cost of the continuously updating graphs, lowering CPU usage while monitoring.
+- Stopped background updates while the window is hidden to the tray. On Windows, memory used while hidden dropped from about 174 MB to about 32 MB, and the window returns in a fraction of a second.
+- Reduced the work done to collect hardware readings and to record them, so long monitoring sessions cost less.
+
+## Fixes
+
+- Fixed two Intel GPUs of the same model being treated as one adapter.
+- Fixed a GPU that stops reporting from lingering in the live readings.
+
+**Full Changelog**: [v1.9.0...v1.10.0](https://github.com/shm11C3/HardwareVisualizer/compare/v1.9.0...v1.10.0)
