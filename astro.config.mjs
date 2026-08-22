@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { unified } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
 import react from "@astrojs/react";
@@ -112,6 +113,7 @@ console.log("[BUILD INFO] NODE_ENV:", process.env.NODE_ENV);
 
 // https://astro.build/config
 export default defineConfig({
+  compressHTML: true,
   prefetch: true,
   trailingSlash: "always",
   vite: {
@@ -139,7 +141,7 @@ export default defineConfig({
       config: { forward: ["dataLayer.push", "gtag"] },
     }),
     mdx({
-      rehypePlugins: [rehypeBudouxJapanese],
+      processor: unified({ rehypePlugins: [rehypeBudouxJapanese] }),
     }),
     sitemapIndexLastmod(),
   ],
