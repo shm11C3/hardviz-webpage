@@ -10,6 +10,7 @@ const changelog = defineCollection({
     date: z.coerce.date(),
     title: z.string().min(1),
     summary: z.string().optional(),
+    highlights: z.array(z.string()).default([]),
     tags: z.array(z.string()).default([]),
     links: z
       .array(

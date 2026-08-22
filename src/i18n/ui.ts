@@ -15,7 +15,7 @@ export const ui = {
     "nav.faq": "FAQ",
     "nav.changelog": "Changelog",
     "hero.description":
-      "HardwareVisualizer is a free, lightweight, and open-source hardware monitoring tool for Windows, macOS, and Linux. Track CPU temperature, GPU usage, memory allocation, and system performance in real-time with beautiful graphs — a perfect alternative to Task Manager or HWiNFO.",
+      "HardwareVisualizer is a free, lightweight, and open-source hardware monitoring tool for Windows, macOS, and Linux. Watch CPU temperature, GPU usage, and memory in real-time, look up your PC's full system specifications, and analyze up to 30 days of history — all in one app, as a modern alternative to Task Manager or HWiNFO.",
     "hero.download": "Download Now",
     "hero.viewGitHub": "View on GitHub",
     "usage.title": "Make It Truly Yours",
@@ -205,13 +205,13 @@ export const ui = {
       "HardwareVisualizer supports Windows 10, Windows 11, macOS (Apple Silicon officially supported, Intel experimental), and major Linux distributions (Debian/Ubuntu, RPM-based distros, AppImage).",
     "faq.q4": "How is it different from Task Manager or HWiNFO?",
     "faq.a4":
-      "HardwareVisualizer is designed to be lightweight with a modern UI. Unlike Task Manager, it provides detailed graphs and 30-day historical data. Compared to HWiNFO, it uses fewer system resources thanks to its Tauri/Rust architecture while offering a customizable interface.",
+      "HardwareVisualizer is designed to be lightweight with a modern UI. Unlike Task Manager, it provides detailed graphs and 30-day historical data. Its always-on monitoring is optimized to minimize background CPU and memory use — while hidden to the tray it uses only around 32 MB of memory — and the interface stays fully customizable.",
     "faq.q5": "Can I monitor hardware while gaming?",
     "faq.a5":
-      "Yes! HardwareVisualizer runs in the background with minimal resource usage, making it perfect for monitoring CPU usage and memory during gaming sessions. GPU temperature monitoring is currently available for NVIDIA GPUs only. You can also check historical data to see how your system performed.",
+      "Yes! HardwareVisualizer runs in the background with minimal resource usage, making it perfect for monitoring CPU usage and memory during gaming sessions. GPU temperature monitoring is fully supported on NVIDIA GPUs, with partial support for AMD and Intel GPUs. You can also check historical data to see how your system performed.",
     "faq.q6": "Which GPUs are supported?",
     "faq.a6":
-      "HardwareVisualizer supports NVIDIA GPUs with full functionality. Support for AMD and Intel GPUs is currently under development.",
+      "HardwareVisualizer fully supports NVIDIA GPUs. AMD and Intel GPUs are partially supported — core metrics such as usage and temperature work, though some readings may be limited or less accurate.",
     "faq.q7": "Can I request new features or contribute?",
     "faq.a7":
       "Absolutely! You can request new hardware support, themes, languages, and other features by creating an issue on GitHub. Contributions are always welcome — feel free to submit pull requests or join the discussions.",
@@ -251,7 +251,7 @@ export const ui = {
     "nav.faq": "FAQ",
     "nav.changelog": "変更履歴",
     "hero.description":
-      "HardwareVisualizerは、Windows、macOS、Linux向けの無料・軽量・オープンソースのハードウェアモニタリングツールです。CPU温度、GPU使用率、メモリ割り当て、システムパフォーマンスを美しいグラフでリアルタイムに追跡。タスクマネージャーやHWiNFOの代替として最適です。",
+      "HardwareVisualizerは、Windows、macOS、Linux向けの無料・軽量・オープンソースのハードウェアモニタリングツールです。CPU温度・GPU使用率・メモリのリアルタイム監視、PCのシステム仕様の確認、最大30日間の履歴分析までこれ一つで行えます。タスクマネージャーやHWiNFOのモダンな代替として最適です。",
     "hero.download": "今すぐダウンロード",
     "hero.viewGitHub": "GitHubを閲覧",
     "usage.title": "あなただけのカスタマイズ",
@@ -439,13 +439,13 @@ export const ui = {
       "HardwareVisualizerはWindows 10、Windows 11、macOS（Apple Silicon正式対応、Intel実験的）、および主要なLinuxディストリビューション（Debian/Ubuntu、RPM系、AppImage）に対応しています。",
     "faq.q4": "タスクマネージャーやHWiNFOとの違いは？",
     "faq.a4":
-      "HardwareVisualizerは軽量でモダンなUIを重視しています。タスクマネージャーと異なり、詳細なグラフ、30日間の履歴データを提供します。HWiNFOと比較すると、Tauri/Rustアーキテクチャによりシステムリソースの消費が少なく、カスタマイズ可能なインターフェースを提供します。",
+      "HardwareVisualizerは軽量でモダンなUIを重視しています。タスクマネージャーと異なり、詳細なグラフ、30日間の履歴データを提供します。常駐監視はバックグラウンドでのCPU・メモリ使用を最小限に抑えるよう最適化されており（トレイ格納中のメモリ使用量は約32MB）、インターフェースも自由にカスタマイズできます。",
     "faq.q5": "ゲーム中でも監視できますか？",
     "faq.a5":
-      "はい！HardwareVisualizerは最小限のリソース使用でバックグラウンドで実行されるため、ゲームセッション中のCPU使用率やメモリの監視に最適です。GPU温度の監視は現在NVIDIA GPUのみ対応しています。履歴データでシステムのパフォーマンスを後から確認することもできます。",
+      "はい！HardwareVisualizerは最小限のリソース使用でバックグラウンドで実行されるため、ゲームセッション中のCPU使用率やメモリの監視に最適です。GPU温度の監視はNVIDIA GPUにフル対応しており、AMD・Intel GPUにも部分的に対応しています。履歴データでシステムのパフォーマンスを後から確認することもできます。",
     "faq.q6": "どのGPUに対応していますか？",
     "faq.a6":
-      "HardwareVisualizerはNVIDIA GPUにフル機能で対応しています。AMDとIntel GPUの対応は現在開発中です。",
+      "HardwareVisualizerはNVIDIA GPUにフル機能で対応しています。AMD・Intel GPUは部分対応で、使用率や温度などの主要な値は取得できますが、一部の値が制限されたり精度が低下する場合があります。",
     "faq.q7": "新しい機能をリクエストしたり貢献できますか？",
     "faq.a7":
       "もちろんです！対応ハードウェアの追加、テーマの追加、言語の追加などの機能リクエストはGitHubのIssueで受け付けています。プルリクエストやディスカッションへの参加も大歓迎です。",

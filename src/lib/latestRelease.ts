@@ -5,6 +5,7 @@ export interface LatestReleaseDetails {
   version: string;
   publishedAt: string | null;
   changesSummary: string | null;
+  highlights: string[];
   tags: string[];
 }
 
@@ -48,6 +49,7 @@ export async function getLatestReleaseDetails({
     version,
     publishedAt: formatReleaseDate(publishedAt, lang),
     changesSummary: entry?.data.summary ?? null,
+    highlights: entry?.data.highlights ?? [],
     tags: entry?.data.tags ?? [],
   };
 }

@@ -25,11 +25,14 @@ test("hardware section with Supported CPU/GPU heading", async ({ page }) => {
   ).toBeVisible();
 });
 
-test("languages table contains English and 日本語", async ({ page }) => {
+test("languages table contains English, 日本語, and Русский", async ({
+  page,
+}) => {
   await page.goto("/specs/");
   const main = page.locator("main");
   await expect(main).toContainText("English");
   await expect(main).toContainText("日本語");
+  await expect(main).toContainText("Русский");
 });
 
 test("limitations section with 4 list items", async ({ page }) => {

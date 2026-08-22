@@ -11,7 +11,9 @@ function normalizeVersion(version: string | null): string | null {
 }
 
 function hasReleaseNotes(details: LatestReleaseDetails): boolean {
-  return Boolean(details.changesSummary || details.tags.length);
+  return Boolean(
+    details.changesSummary || details.highlights.length || details.tags.length,
+  );
 }
 
 export async function getHomeReleaseNotesDetails({

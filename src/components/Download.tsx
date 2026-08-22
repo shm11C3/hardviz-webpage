@@ -333,6 +333,7 @@ const Download = ({
 
       {showLatestChanges &&
       (displayedReleaseDetails.changesSummary ||
+        displayedReleaseDetails.highlights.length ||
         displayedReleaseDetails.tags.length) ? (
         <article
           className="mx-auto mt-12 max-w-4xl rounded-lg border border-slate-200 bg-slate-50/70 p-5 text-left shadow-sm md:p-6 dark:border-slate-700 dark:bg-slate-900/30"
@@ -348,7 +349,22 @@ const Download = ({
                 />
                 {translations.latestChanges}
               </p>
-              {displayedReleaseDetails.changesSummary ? (
+              {displayedReleaseDetails.highlights.length ? (
+                <ul
+                  className="mt-3 max-w-3xl space-y-2 text-slate-700 dark:text-slate-200"
+                  data-release-notes-highlights=""
+                >
+                  {displayedReleaseDetails.highlights.map((highlight) => (
+                    <li key={highlight} className="flex items-start gap-2">
+                      <Check
+                        className="mt-1 h-4 w-4 shrink-0 text-cyan-500"
+                        aria-hidden="true"
+                      />
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : displayedReleaseDetails.changesSummary ? (
                 <p
                   className="mt-3 max-w-3xl text-slate-700 dark:text-slate-200"
                   data-release-notes-summary=""
