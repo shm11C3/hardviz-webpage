@@ -37,11 +37,11 @@ async function expectReleaseNotesCard({
   if (summaryCount > 0) {
     await expect(summary).toHaveText(/\S/);
   }
-  if (highlightCount > 0) {
-    await expect(highlights.first()).toHaveText(/\S/);
+  for (let i = 0; i < highlightCount; i++) {
+    await expect(highlights.nth(i)).toHaveText(/\S/);
   }
-  if (tagCount > 0) {
-    await expect(tags.first()).toHaveText(/\S/);
+  for (let i = 0; i < tagCount; i++) {
+    await expect(tags.nth(i)).toHaveText(/\S/);
   }
 
   await expect(

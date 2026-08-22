@@ -206,7 +206,7 @@ export const ui = {
       "HardwareVisualizer supports Windows 10, Windows 11, macOS (Apple Silicon officially supported, Intel experimental), and major Linux distributions (Debian/Ubuntu, RPM-based distros, AppImage).",
     "faq.q4": "How is it different from Task Manager or HWiNFO?",
     "faq.a4":
-      "HardwareVisualizer is designed to be lightweight with a modern UI. Unlike Task Manager, it provides detailed graphs and 30-day historical data. Its always-on monitoring is optimized to minimize background CPU and memory use — while hidden to the tray it uses only around 32 MB of memory — and the interface stays fully customizable.",
+      "HardwareVisualizer is designed to be lightweight with a modern UI. Unlike Task Manager, it provides detailed graphs and 30-day historical data. Its always-on monitoring is optimized to minimize background CPU and memory use — when minimized to the system tray it uses only around 32 MB of memory — and the interface stays fully customizable.",
     "faq.q5": "Can I monitor hardware while gaming?",
     "faq.a5":
       "Yes! HardwareVisualizer runs in the background with minimal resource usage, making it perfect for monitoring CPU usage and memory during gaming sessions. GPU temperature monitoring is fully supported on NVIDIA GPUs, with partial support for AMD and Intel GPUs. You can also check historical data to see how your system performed.",

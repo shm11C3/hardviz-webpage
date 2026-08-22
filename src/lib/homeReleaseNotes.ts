@@ -38,7 +38,7 @@ export async function getHomeReleaseNotesDetails({
 
   if (!hasReleaseNotes(selectedReleaseDetails)) {
     throw new Error(
-      `Home release notes version "${selectedVersion}" does not have changelog summary or tags. Update src/config/releaseNotes.ts or add a changelog entry.`,
+      `Home release notes version "${selectedVersion}" does not have a changelog summary, highlights, or tags. Update src/config/releaseNotes.ts or add a changelog entry.`,
     );
   }
 
