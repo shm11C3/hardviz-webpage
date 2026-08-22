@@ -11,7 +11,9 @@ function normalizeVersion(version: string | null): string | null {
 }
 
 function hasReleaseNotes(details: LatestReleaseDetails): boolean {
-  return Boolean(details.changesSummary || details.tags.length);
+  return Boolean(
+    details.changesSummary || details.highlights.length || details.tags.length,
+  );
 }
 
 export async function getHomeReleaseNotesDetails({
@@ -36,7 +38,7 @@ export async function getHomeReleaseNotesDetails({
 
   if (!hasReleaseNotes(selectedReleaseDetails)) {
     throw new Error(
-      `Home release notes version "${selectedVersion}" does not have changelog summary or tags. Update src/config/releaseNotes.ts or add a changelog entry.`,
+      `Home release notes version "${selectedVersion}" does not have a changelog summary, highlights, or tags. Update src/config/releaseNotes.ts or add a changelog entry.`,
     );
   }
 

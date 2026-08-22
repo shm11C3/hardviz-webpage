@@ -25,11 +25,26 @@ test("hardware section with Supported CPU/GPU heading", async ({ page }) => {
   ).toBeVisible();
 });
 
-test("languages table contains English and 日本語", async ({ page }) => {
+test("languages table contains English, 日本語, and Русский", async ({
+  page,
+}) => {
   await page.goto("/specs/");
-  const main = page.locator("main");
-  await expect(main).toContainText("English");
-  await expect(main).toContainText("日本語");
+  const languagesTable = page
+    .locator("section")
+    .filter({
+      has: page.getByRole("heading", { name: "Supported Languages" }),
+    })
+    .locator("table");
+  await expect(languagesTable).toContainText("English");
+  await expect(languagesTable).toContainText("日本語");
+  await expect(languagesTable).toContainText("Русский (Russian)");
+
+  await page.goto("/ja/specs/");
+  const jaLanguagesTable = page
+    .locator("section")
+    .filter({ has: page.getByRole("heading", { name: "対応言語" }) })
+    .locator("table");
+  await expect(jaLanguagesTable).toContainText("Русский (ロシア語)");
 });
 
 test("limitations section with 4 list items", async ({ page }) => {

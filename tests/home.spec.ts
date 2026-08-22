@@ -27,16 +27,21 @@ async function expectReleaseNotesCard({
   );
 
   const summary = releaseNotes.locator("[data-release-notes-summary]");
+  const highlights = releaseNotes.locator("[data-release-notes-highlights] li");
   const tags = releaseNotes.locator("[data-release-notes-tag]");
   const summaryCount = await summary.count();
+  const highlightCount = await highlights.count();
   const tagCount = await tags.count();
 
-  expect(summaryCount + tagCount).toBeGreaterThan(0);
+  expect(summaryCount + highlightCount + tagCount).toBeGreaterThan(0);
   if (summaryCount > 0) {
     await expect(summary).toHaveText(/\S/);
   }
-  if (tagCount > 0) {
-    await expect(tags.first()).toHaveText(/\S/);
+  for (let i = 0; i < highlightCount; i++) {
+    await expect(highlights.nth(i)).toHaveText(/\S/);
+  }
+  for (let i = 0; i < tagCount; i++) {
+    await expect(tags.nth(i)).toHaveText(/\S/);
   }
 
   await expect(
