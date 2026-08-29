@@ -34,10 +34,9 @@ test("JA home canonical URL", async ({ page }) => {
 
 test("EN home OG meta tags", async ({ page }) => {
   await page.goto("/");
-  const expectedTitle =
-    "HardwareVisualizer – CPU & GPU Monitor with Long-Term History";
+  const expectedTitle = "HardwareVisualizer – CPU & GPU Monitor with History";
   const expectedDescription =
-    "CPU & GPU monitoring for Windows with configurable long-term CPU, GPU, temperature, and process history stored locally. Review gaming or heavy workloads afterward.";
+    "Hardware monitor for Windows, macOS, and Linux. See CPU, GPU, temperature, and processes live, then review what happened after gaming or heavy workloads.";
   await expect(page).toHaveTitle(expectedTitle);
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
     "content",
@@ -107,9 +106,13 @@ test("home page JSON-LD has SoftwareApplication", async ({ page }) => {
   });
   expect(jsonLd).not.toBeNull();
   expect(jsonLd.name).toBe("HardwareVisualizer");
-  expect(jsonLd.description).toContain("sampled process history locally");
+  expect(jsonLd.description).toContain("Cross-platform hardware monitor");
+  expect(jsonLd.description).toContain("understand what happened");
   expect(jsonLd.featureList).toContain(
-    "Configurable long-term CPU, GPU, temperature, and sampled process history stored locally",
+    "CPU, GPU, temperature, and sampled process history stored locally",
+  );
+  expect(jsonLd.featureList).toContain(
+    "Review what happened after gaming and heavy workloads",
   );
   expect(jsonLd.featureList).toContain("No account and no outbound telemetry");
   expect(jsonLd.featureList).toContain(
@@ -117,13 +120,14 @@ test("home page JSON-LD has SoftwareApplication", async ({ page }) => {
   );
 });
 
-test("JA home metadata and JSON-LD use the same history positioning", async ({
+test("JA home metadata and JSON-LD use the same monitor positioning", async ({
   page,
 }) => {
   await page.goto("/ja/");
-  const expectedTitle = "HardwareVisualizer – 長期履歴対応CPU・GPUモニター";
+  const expectedTitle =
+    "HardwareVisualizer – あとから振り返れるCPU・GPUモニター";
   const expectedDescription =
-    "Windows向けCPU・GPUモニター。CPU、GPU、温度、プロセスの長期履歴をPC内に保存し、ゲームや重い処理のあとに振り返れます。保存期間は変更可能で、macOS・Linuxにも対応。";
+    "Windows、macOS、Linux対応のハードウェアモニター。CPU、GPU、温度、プロセスをリアルタイムで確認し、ゲームや重い処理のあとに何が起きていたか振り返れます。";
 
   await expect(page).toHaveTitle(expectedTitle);
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
@@ -158,8 +162,13 @@ test("JA home metadata and JSON-LD use the same history positioning", async ({
     return null;
   });
   expect(jsonLd).not.toBeNull();
-  expect(jsonLd.description).toContain(
-    "CPU、GPU、温度、プロセスの長期履歴をPC内に保存",
+  expect(jsonLd.description).toContain("ハードウェアモニター");
+  expect(jsonLd.description).toContain("何が起きていたか振り返れる");
+  expect(jsonLd.featureList).toContain(
+    "CPU、GPU、温度、プロセスの履歴をPC内に保存",
+  );
+  expect(jsonLd.featureList).toContain(
+    "ゲームや重い処理のあとに何が起きていたか確認",
   );
   expect(jsonLd.featureList).toContain("アカウント不要・外部テレメトリなし");
 });
