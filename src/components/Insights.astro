@@ -1,10 +1,10 @@
 ---
 import {
-  ActivitySquare,
   ArrowDownToLine,
-  BrainCircuit,
-  Flame,
-  Gamepad2,
+  CalendarRange,
+  ChartNoAxesCombined,
+  HardDrive,
+  ListFilter,
 } from "lucide-react";
 import {
   getLangFromUrl,
@@ -18,22 +18,22 @@ const { translatePath } = useTranslatedPath(lang);
 
 const insights = [
   {
-    icon: "activity",
+    icon: "calendar",
     title: t("insights.card1.title"),
     description: t("insights.card1.description"),
   },
   {
-    icon: "flame",
+    icon: "chart",
     title: t("insights.card2.title"),
     description: t("insights.card2.description"),
   },
   {
-    icon: "gamepad",
+    icon: "list",
     title: t("insights.card3.title"),
     description: t("insights.card3.description"),
   },
   {
-    icon: "brain",
+    icon: "drive",
     title: t("insights.card4.title"),
     description: t("insights.card4.description"),
   },
@@ -47,23 +47,10 @@ const insights = [
         {t("insights.title")}
       </h2>
 
-      <p class="text-slate-600 dark:text-slate-400 mt-2 text-lg">
-        {(() => {
-            switch (lang) {
-              case "ja":
-                return <>システム負荷が高くなるタイミングと原因を知る</>;
-              default:
-                return (
-                  <>
-                    Know{" "}
-                    <span class="text-cyan-600 dark:text-cyan-400">when</span>{" "}
-                    and{" "}
-                    <span class="text-rose-600 dark:text-rose-400">why</span>{" "}
-                    your system slows down.
-                  </>
-                );
-            }
-          })()}
+      <p
+        class="mx-auto mt-3 max-w-3xl text-lg text-slate-600 dark:text-slate-400"
+      >
+        {t("insights.description")}
       </p>
     </div>
 
@@ -71,17 +58,17 @@ const insights = [
       {insights.map((item) => (
           <div class="rounded-xl border border-slate-200 bg-white p-5 transition hover:shadow-md dark:border-slate-700 dark:bg-slate-800">
             <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700">
-              {item.icon === "activity" && (
-                <ActivitySquare className="h-6 w-6 text-cyan-500" />
+              {item.icon === "calendar" && (
+                <CalendarRange className="h-6 w-6 text-violet-500" />
               )}
-              {item.icon === "flame" && (
-                <Flame className="h-6 w-6 text-rose-500" />
+              {item.icon === "chart" && (
+                <ChartNoAxesCombined className="h-6 w-6 text-rose-500" />
               )}
-              {item.icon === "gamepad" && (
-                <Gamepad2 className="h-6 w-6 text-lime-500" />
+              {item.icon === "list" && (
+                <ListFilter className="h-6 w-6 text-cyan-500" />
               )}
-              {item.icon === "brain" && (
-                <BrainCircuit className="h-6 w-6 text-indigo-500" />
+              {item.icon === "drive" && (
+                <HardDrive className="h-6 w-6 text-emerald-500" />
               )}
             </div>
             <h3 class="font-semibold text-base text-slate-800 dark:text-white">
