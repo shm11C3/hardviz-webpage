@@ -1,52 +1,84 @@
 ---
-import { ArrowDownToLine, SquareArrowOutUpRight } from "lucide-react";
+import { Image } from "astro:assets";
+import {
+  ArrowDownToLine,
+  CircleCheck,
+  SquareArrowOutUpRight,
+} from "lucide-react";
+import insightsDark from "../assets/screenshots/slide-2.png";
+import insightsLight from "../assets/screenshots/slide-2-l.png";
 import {
   getLangFromUrl,
   useTranslatedPath,
   useTranslations,
 } from "../i18n/utils";
 import { githubRepoUrl } from "../lib/github";
-import HardwareVisualizer from "./HardwareVisualizer.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const { translatePath } = useTranslatedPath(lang);
+
+const trustItems = [
+  t("hero.trust.noAccount"),
+  t("hero.trust.noTelemetry"),
+  t("hero.trust.openSource"),
+  t("hero.trust.signedInstaller"),
+];
 ---
 
 <section
-  class="relative overflow-hidden bg-gradient-to-b from-slate-50 to-slate-300 dark:from-slate-900 dark:to-slate-800 py-20 sm:py-32"
+  id="hero"
+  aria-labelledby="hero-heading"
+  class="relative overflow-hidden bg-gradient-to-b from-slate-50 to-slate-200 py-16 dark:from-slate-950 dark:to-slate-900 sm:py-24"
 >
   <div
     class="absolute inset-0 bg-grid-black/[0.05] dark:bg-grid-white/[0.05] bg-[size:60px_60px]"
   ></div>
-  <div class="container mx-auto px-4 relative z-10">
-    <div class="flex flex-col lg:flex-row items-center gap-12">
-      <div class="flex-1 text-center lg:text-left">
-        <h1
-          class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight font-extrabold"
+  <div class="container relative z-10 mx-auto px-4">
+    <div
+      class="grid items-center gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]"
+    >
+      <div class="text-center lg:text-left">
+        <p
+          class="mb-5 inline-flex items-center gap-2 rounded-full border border-violet-200 bg-white/80 px-4 py-2 font-medium text-sm text-violet-800 shadow-sm backdrop-blur dark:border-violet-400/30 dark:bg-slate-900/80 dark:text-violet-200"
         >
           <span
-            class="bg-linear-to-r from-slate-900 dark:from-white to-violet-500 dark:to-violet-400 bg-clip-text font-extrabold text-transparent"
-            >Monitor</span
-          >
-          Your
-          <span
-            class="bg-linear-to-r from-slate-900 dark:from-white to-indigo-500 dark:to-indigo-400 bg-clip-text font-extrabold text-transparent"
-            >Hardware</span
-          >
-          <span class="whitespace-nowrap">In Real-Time</span>
+            class="h-2 w-2 rounded-full bg-violet-500"
+            aria-hidden="true"
+          ></span>
+          {t("hero.eyebrow")}
+        </p>
+        <h1
+          id="hero-heading"
+          aria-label={t("hero.title")}
+          class:list={[
+            "mb-6 bg-linear-to-r from-slate-950 via-slate-800 to-violet-600 bg-clip-text font-extrabold text-transparent leading-[1.05] tracking-tight dark:from-white dark:via-slate-100 dark:to-violet-300",
+            lang === "ja"
+              ? "text-[1.65rem] md:text-4xl lg:text-4xl"
+              : "text-4xl md:text-5xl lg:text-6xl",
+          ]}
+        >
+          {lang === "ja" ? (
+            <>
+              <span class="block">{t("hero.titleLine1")}</span>
+              <span class="block">{t("hero.titleLine2")}</span>
+              <span class="block">{t("hero.titleLine3")}</span>
+            </>
+          ) : (
+            t("hero.title")
+          )}
         </h1>
         <p
-          class="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-2xl mx-auto lg:mx-0"
+          class="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-slate-300 md:text-xl lg:mx-0"
         >
           {t("hero.description")}
         </p>
         <div
-          class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+          class="flex flex-col justify-center gap-4 sm:flex-row lg:justify-start"
         >
           <a
             href={translatePath("/download")}
-            class="relative download-btn px-8 py-3 bg-hardviz text-white font-medium rounded-lg transition-all hover:bg-[color-mix(in_oklab,var(--primary)_90%,black_10%)] dark:border dark:border-white"
+            class="relative rounded-lg bg-hardviz px-8 py-3 font-medium text-white transition-all hover:bg-[color-mix(in_oklab,var(--primary)_90%,black_10%)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-600 dark:border dark:border-white"
           >
             <div
               class="pointer-events-none absolute inset-0 z-0 bg-hardviz-glow opacity-90 blur-2xl"
@@ -63,39 +95,72 @@ const { translatePath } = useTranslatedPath(lang);
             href={githubRepoUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            class="px-8 py-3 border text-slate-900 border-slate-300 hover:bg-slate-100 dark:text-white dark:border-white/30 dark:hover:bg-white/10 font-medium rounded-lg flex items-center justify-center gap-2 transition-all"
+            class="flex items-center justify-center gap-2 rounded-lg border border-slate-300 px-8 py-3 font-medium text-slate-900 transition-all hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-600 dark:border-white/30 dark:text-white dark:hover:bg-white/10"
           >
             {t("hero.viewGitHub")}
             <SquareArrowOutUpRight size={16} />
           </a>
         </div>
+        <p class="mt-4 text-slate-600 text-sm dark:text-slate-400">
+          {t("hero.availability")}
+        </p>
       </div>
-      <div class="flex-1 relative">
-        <HardwareVisualizer />
+      <div class="relative">
+        <figure
+          class="overflow-hidden rounded-3xl border border-white/80 bg-white/80 shadow-2xl shadow-slate-900/15 backdrop-blur dark:border-white/10 dark:bg-slate-900/80 dark:shadow-black/40"
+        >
+          <div
+            class="flex items-center justify-between border-slate-200 border-b px-5 py-3 dark:border-slate-700"
+          >
+            <span class="font-semibold text-slate-900 text-sm dark:text-white">
+              {t("hero.screenshotLabel")}
+            </span>
+            <span
+              class="rounded-full bg-violet-100 px-3 py-1 font-medium text-violet-800 text-xs dark:bg-violet-400/15 dark:text-violet-200"
+            >
+              {t("hero.retention")}
+            </span>
+          </div>
+          <Image
+            src={insightsLight}
+            alt={t("hero.screenshotAlt")}
+            class="block h-auto w-full dark:hidden"
+            widths={[640, 960, 1280]}
+            sizes="(max-width: 1024px) 100vw, 55vw"
+            quality={90}
+            loading="eager"
+          />
+          <Image
+            src={insightsDark}
+            alt={t("hero.screenshotAlt")}
+            class="hidden h-auto w-full dark:block"
+            widths={[640, 960, 1280]}
+            sizes="(max-width: 1024px) 100vw, 55vw"
+            quality={90}
+            loading="eager"
+          />
+        </figure>
         <div
-          class="absolute -z-10 -bottom-6 -right-6 w-72 h-72 bg-cyan-400/20 dark:bg-cyan-500/30 rounded-full blur-3xl"
+          class="absolute -right-6 -bottom-6 -z-10 h-72 w-72 rounded-full bg-cyan-400/20 blur-3xl dark:bg-cyan-500/30"
         ></div>
         <div
-          class="absolute -z-10 -top-6 -left-6 w-72 h-72 bg-purple-400/20 dark:bg-purple-500/20 rounded-full blur-3xl"
+          class="absolute -top-6 -left-6 -z-10 h-72 w-72 rounded-full bg-purple-400/20 blur-3xl dark:bg-purple-500/20"
         ></div>
       </div>
     </div>
+    <ul
+      aria-label={t("hero.trustLabel")}
+      class="mt-10 grid gap-3 rounded-2xl border border-slate-300/70 bg-white/70 p-4 shadow-sm backdrop-blur dark:border-white/10 dark:bg-slate-900/70 sm:grid-cols-2 lg:grid-cols-4"
+    >
+      {trustItems.map((item) => (
+          <li class="flex items-center justify-center gap-2 font-medium text-slate-800 text-sm lg:justify-start dark:text-slate-200">
+            <CircleCheck
+              className="h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400"
+              aria-hidden="true"
+            />
+            {item}
+          </li>
+        ))}
+    </ul>
   </div>
 </section>
-
-<script>
-// アニメーション効果のためのJavaScript
-const downloadBtn = document.querySelector(".download-btn");
-
-if (downloadBtn) {
-  downloadBtn.addEventListener("mouseenter", () => {
-    const icon = downloadBtn.querySelector("svg");
-    if (icon) icon.classList.add("animate-bounce");
-  });
-
-  downloadBtn.addEventListener("mouseleave", () => {
-    const icon = downloadBtn.querySelector("svg");
-    if (icon) icon.classList.remove("animate-bounce");
-  });
-}
-</script>
