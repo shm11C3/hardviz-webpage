@@ -75,7 +75,7 @@ test("JA home page loads", async ({ page }) => {
   await expect(
     page.getByRole("heading", {
       level: 1,
-      name: "ゲームや重い処理のあと、PCで何が起きていたか分かる。",
+      name: "See what made your PC hot or slow.",
     }),
   ).toBeVisible();
 });

@@ -50,23 +50,9 @@ const trustItems = [
         </p>
         <h1
           id="hero-heading"
-          aria-label={t("hero.title")}
-          class:list={[
-            "mb-6 bg-linear-to-r from-slate-950 via-slate-800 to-violet-600 bg-clip-text font-extrabold text-transparent leading-[1.05] tracking-tight dark:from-white dark:via-slate-100 dark:to-violet-300",
-            lang === "ja"
-              ? "text-[1.65rem] md:text-4xl lg:text-4xl"
-              : "text-4xl md:text-5xl lg:text-6xl",
-          ]}
+          class="mb-6 bg-linear-to-r from-slate-950 via-slate-800 to-violet-600 bg-clip-text font-extrabold text-4xl text-transparent leading-[1.05] tracking-tight dark:from-white dark:via-slate-100 dark:to-violet-300 md:text-5xl lg:text-6xl"
         >
-          {lang === "ja" ? (
-            <>
-              <span class="block">{t("hero.titleLine1")}</span>
-              <span class="block">{t("hero.titleLine2")}</span>
-              <span class="block">{t("hero.titleLine3")}</span>
-            </>
-          ) : (
-            t("hero.title")
-          )}
+          {t("hero.title")}
         </h1>
         <p
           class="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-slate-300 md:text-xl lg:mx-0"

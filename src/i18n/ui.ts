@@ -16,9 +16,6 @@ export const ui = {
     "nav.changelog": "Changelog",
     "hero.eyebrow": "Long-term history, stored on your PC",
     "hero.title": "See what made your PC hot or slow.",
-    "hero.titleLine1": "See what made your PC",
-    "hero.titleLine2": "hot or slow.",
-    "hero.titleLine3": "",
     "hero.description":
       "HardwareVisualizer keeps long-term CPU, GPU, temperature, and process history locally, so you can understand what happened after gaming or heavy workloads.",
     "hero.download": "Download for Windows",
@@ -274,10 +271,7 @@ export const ui = {
     "nav.faq": "FAQ",
     "nav.changelog": "変更履歴",
     "hero.eyebrow": "長期履歴を、このPC内に保存",
-    "hero.title": "ゲームや重い処理のあと、PCで何が起きていたか分かる。",
-    "hero.titleLine1": "ゲームや重い処理のあと、",
-    "hero.titleLine2": "PCで何が起きていたか",
-    "hero.titleLine3": "分かる。",
+    "hero.title": "See what made your PC hot or slow.",
     "hero.description":
       "HardwareVisualizerは、CPU、GPU、温度、プロセスの長期履歴を、このPC内だけに保存します。ゲームや重い処理が終わったあとでも、何が起きていたか確認できます。",
     "hero.download": "Windows版をダウンロード",
