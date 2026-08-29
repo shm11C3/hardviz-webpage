@@ -14,6 +14,23 @@ export const ui = {
     "nav.Download": "Download",
     "nav.faq": "FAQ",
     "nav.changelog": "Changelog",
+    "seo.ogImageAlt":
+      "HardwareVisualizer logo over a dashboard showing CPU, GPU, RAM, and process metrics",
+    "seo.home.title":
+      "HardwareVisualizer – CPU & GPU Monitor with Long-Term History",
+    "seo.home.description":
+      "CPU & GPU monitoring for Windows with configurable long-term CPU, GPU, temperature, and process history stored locally. Review gaming or heavy workloads afterward.",
+    "seo.home.softwareDescription":
+      "CPU and GPU monitor for Windows that stores configurable long-term CPU, GPU, temperature, and sampled process history locally, helping you review what happened after gaming or heavy workloads. Also available for macOS and Linux.",
+    "seo.home.feature1":
+      "Configurable long-term CPU, GPU, temperature, and sampled process history stored locally",
+    "seo.home.feature2": "Review performance after gaming and heavy workloads",
+    "seo.home.feature3":
+      "Real-time CPU, GPU, temperature, and memory monitoring",
+    "seo.home.feature4": "No account and no outbound telemetry",
+    "seo.home.feature5": "Authenticode-signed Windows release installer",
+    "seo.home.feature6": "Open-source MIT-licensed software",
+    "seo.home.feature7": "Windows, macOS, and Linux support",
     "hero.eyebrow": "Long-term history, stored on your PC",
     "hero.title": "See what made your PC hot or slow.",
     "hero.description":
@@ -270,6 +287,21 @@ export const ui = {
     "nav.Download": "ダウンロード",
     "nav.faq": "FAQ",
     "nav.changelog": "変更履歴",
+    "seo.ogImageAlt":
+      "CPU、GPU、RAM、プロセス情報のダッシュボードに重なるHardwareVisualizerのロゴ",
+    "seo.home.title": "HardwareVisualizer – 長期履歴対応CPU・GPUモニター",
+    "seo.home.description":
+      "Windows向けCPU・GPUモニター。CPU、GPU、温度、プロセスの長期履歴をPC内に保存し、ゲームや重い処理のあとに振り返れます。保存期間は変更可能で、macOS・Linuxにも対応。",
+    "seo.home.softwareDescription":
+      "CPU、GPU、温度、プロセスの長期履歴をPC内に保存し、ゲームや重い処理のあとに何が起きていたか振り返れるWindows向けCPU・GPUモニター。保存期間は変更可能で、macOS・Linuxにも対応。",
+    "seo.home.feature1":
+      "保存期間を変更できるCPU、GPU、温度、プロセスの長期履歴をPC内に保存",
+    "seo.home.feature2": "ゲームや重い処理のあとのパフォーマンス確認",
+    "seo.home.feature3": "CPU、GPU、温度、メモリのリアルタイム監視",
+    "seo.home.feature4": "アカウント不要・外部テレメトリなし",
+    "seo.home.feature5": "Authenticode署名済みWindowsリリースインストーラ",
+    "seo.home.feature6": "MITライセンスのオープンソースソフトウェア",
+    "seo.home.feature7": "Windows、macOS、Linux対応",
     "hero.eyebrow": "長期履歴を、このPC内に保存",
     "hero.title": "See what made your PC hot or slow.",
     "hero.description":

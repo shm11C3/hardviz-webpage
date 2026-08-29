@@ -64,18 +64,15 @@ const softwareJsonLd = {
   downloadUrl: githubAllReleasesUrl(),
   softwareVersion: release.version,
   ...(release.published_at ? { dateModified: release.published_at } : {}),
-  description:
-    "Free, lightweight, and open-source hardware monitoring tool. Track CPU temperature, GPU usage, memory allocation, and system performance in real-time with beautiful graphs.",
+  description: t("seo.home.softwareDescription"),
   featureList: [
-    "Real-time CPU monitoring with per-core statistics",
-    "GPU temperature and utilization tracking",
-    "Memory usage analysis",
-    "Full system specifications view",
-    "30-day historical data and trend visualization",
-    "CPU temperature history and cooling insights",
-    "Process tracking for high CPU/GPU usage",
-    "Custom dashboard with wallpaper support",
-    "Lightweight Tauri/Rust architecture",
+    t("seo.home.feature1"),
+    t("seo.home.feature2"),
+    t("seo.home.feature3"),
+    t("seo.home.feature4"),
+    t("seo.home.feature5"),
+    t("seo.home.feature6"),
+    t("seo.home.feature7"),
   ],
   screenshot: "https://hardviz.com/screenshots/slide-1.png",
   author: personRef,
@@ -90,9 +87,10 @@ const softwareJsonLd = {
 ---
 
 <Layout
-  title="HardwareVisualizer - Free Lightweight CPU, GPU & Memory Monitor for Windows, macOS & Linux"
+  title={t("seo.home.title")}
   lang={lang}
-  description="Free open-source hardware monitoring tool for Windows, macOS, and Linux. Real-time CPU, GPU & memory monitoring, full system specifications, and 30-day history in one lightweight alternative to HWiNFO and Task Manager."
+  description={t("seo.home.description")}
+  ogImageAlt={t("seo.ogImageAlt")}
   jsonLd={softwareJsonLd}
 >
   <Header />
