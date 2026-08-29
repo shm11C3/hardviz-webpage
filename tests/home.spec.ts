@@ -52,8 +52,8 @@ async function expectReleaseNotesCard({
 test("home page loads", async ({ page }) => {
   await page.goto("/");
   await expect(page).toHaveTitle(/HardwareVisualizer/);
-  await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Monitor Your Hardware",
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "See what made your PC hot or slow.",
   );
 });
 
@@ -72,9 +72,12 @@ test("download links point to download page on FAQ pages", async ({ page }) => {
 test("JA home page loads", async ({ page }) => {
   await page.goto("/ja/");
   await expect(page).toHaveTitle(/HardwareVisualizer/);
-  await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Monitor",
-  );
+  await expect(
+    page.getByRole("heading", {
+      level: 1,
+      name: "See what made your PC hot or slow.",
+    }),
+  ).toBeVisible();
 });
 
 test("home page has all major sections", async ({ page }) => {
@@ -82,6 +85,58 @@ test("home page has all major sections", async ({ page }) => {
   await expect(page.locator("#features")).toBeVisible();
   await expect(page.locator("#download")).toBeVisible();
   await expect(page.locator("#faq")).toBeVisible();
+});
+
+test("history value appears before live features and customization", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const sectionOrder = await page
+    .locator("#insights, #features, #customization, #download")
+    .evaluateAll((sections) => sections.map((section) => section.id));
+
+  expect(sectionOrder).toEqual([
+    "insights",
+    "features",
+    "customization",
+    "download",
+  ]);
+});
+
+test("hero shows local history and trust assurances in both languages", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const hero = page.locator("#hero");
+  await expect(hero).toContainText("Long-term history, stored on your PC");
+  await expect(hero).toContainText("No account");
+  await expect(hero).toContainText("No telemetry");
+  await expect(hero).toContainText("Open source");
+  await expect(hero).toContainText("Signed Windows installer");
+
+  await page.goto("/ja/");
+  const jaHero = page.locator("#hero");
+  await expect(jaHero).toContainText("長期履歴を、このPC内に保存");
+  await expect(jaHero).toContainText("アカウント不要");
+  await expect(jaHero).toContainText("テレメトリなし");
+  await expect(jaHero).toContainText("オープンソース");
+  await expect(jaHero).toContainText("署名済みWindowsインストーラ");
+});
+
+test("hero loads only the screenshot for the active theme", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const heroImages = page.locator("#hero figure img");
+  await expect(heroImages).toHaveCount(1);
+
+  const initialSrc = await heroImages.first().getAttribute("src");
+  expect(initialSrc).toBeTruthy();
+
+  await page.locator("#themeToggle").click();
+  await expect(heroImages).toHaveCount(1);
+  await expect(heroImages.first()).toHaveAttribute("src", /.+/);
+  await expect(heroImages.first()).not.toHaveAttribute("src", initialSrc ?? "");
 });
 
 test("hero has download and GitHub buttons", async ({ page }) => {

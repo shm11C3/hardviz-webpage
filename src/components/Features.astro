@@ -1,5 +1,12 @@
 ---
-import { Cpu, Gauge, LineChart, MemoryStick, Shield, Zap } from "lucide-react";
+import {
+  Cpu,
+  Gauge,
+  LaptopMinimal,
+  MemoryStick,
+  ScanSearch,
+  Zap,
+} from "lucide-react";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
@@ -12,17 +19,17 @@ const features = [
     description: t("features.card1.description"),
   },
   {
-    icon: "memory",
+    icon: "gauge",
     title: t("features.card2.title"),
     description: t("features.card2.description"),
   },
   {
-    icon: "gauge",
+    icon: "memory",
     title: t("features.card3.title"),
     description: t("features.card3.description"),
   },
   {
-    icon: "line-chart",
+    icon: "specs",
     title: t("features.card4.title"),
     description: t("features.card4.description"),
   },
@@ -32,7 +39,7 @@ const features = [
     description: t("features.card5.description"),
   },
   {
-    icon: "shield",
+    icon: "platforms",
     title: t("features.card6.title"),
     description: t("features.card6.description"),
   },
@@ -65,14 +72,14 @@ const features = [
               {feature.icon === "gauge" && (
                 <Gauge className="h-6 w-6 text-amber-400" />
               )}
-              {feature.icon === "line-chart" && (
-                <LineChart className="h-6 w-6 text-indigo-400" />
+              {feature.icon === "specs" && (
+                <ScanSearch className="h-6 w-6 text-indigo-400" />
               )}
               {feature.icon === "zap" && (
                 <Zap className="h-6 w-6 text-rose-400" />
               )}
-              {feature.icon === "shield" && (
-                <Shield className="h-6 w-6 text-blue-400" />
+              {feature.icon === "platforms" && (
+                <LaptopMinimal className="h-6 w-6 text-blue-400" />
               )}
             </div>
             <h3 class="mb-2 font-semibold text-slate-900 text-xl dark:text-white">

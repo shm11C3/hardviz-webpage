@@ -31,55 +31,74 @@ export const ui = {
     "seo.home.feature5": "Authenticode-signed Windows release installer",
     "seo.home.feature6": "Open-source MIT-licensed software",
     "seo.home.feature7": "Windows, macOS, and Linux support",
+    "hero.eyebrow": "Long-term history, stored on your PC",
+    "hero.title": "See what made your PC hot or slow.",
     "hero.description":
-      "HardwareVisualizer is a free, lightweight, and open-source hardware monitoring tool for Windows, macOS, and Linux. Watch CPU temperature, GPU usage, and memory in real-time, look up your PC's full system specifications, and analyze up to 30 days of history — all in one app, as a modern alternative to Task Manager or HWiNFO.",
-    "hero.download": "Download Now",
+      "HardwareVisualizer keeps long-term CPU, GPU, temperature, and process history locally, so you can understand what happened after gaming or heavy workloads.",
+    "hero.download": "Download for Windows",
     "hero.viewGitHub": "View on GitHub",
-    "usage.title": "Make It Truly Yours",
+    "hero.availability":
+      "For Windows 10 and 11. Also available on macOS and Linux.",
+    "hero.screenshotLabel": "History in Insights",
+    "hero.retention": "Long-term history",
+    "hero.screenshotAlt":
+      "HardwareVisualizer Insights showing CPU and memory usage history over time",
+    "hero.trustLabel": "Privacy and distribution assurances",
+    "hero.trust.noAccount": "No account",
+    "hero.trust.noTelemetry": "No telemetry",
+    "hero.trust.openSource": "Open source",
+    "hero.trust.signedInstaller": "Signed Windows installer",
+    "usage.title": "Customize the Live View",
     "usage.description":
-      "Customize charts and set your favorite image as the dashboard wallpaper.",
-    "usage.customization.title1": "Graphical Monitoring",
+      "Keep the real-time dashboard readable your way with adjustable charts, colors, and a local background image.",
+    "usage.customization.title1": "Readable Live Charts",
     "usage.customization.description1":
-      "Line charts show CPU, RAM, GPU usage in real-time with smooth visuals.",
+      "Line charts show current CPU, RAM, and GPU usage at a glance.",
     "usage.customization.title2": "Custom Appearance",
     "usage.customization.description2":
       "Tweak colors, borders, and legends with flexible visual settings.",
     "usage.customization.title3": "Custom Wallpaper",
     "usage.customization.description3":
       "Make your dashboard truly yours with a background image you love.",
-    "insights.title": "Track & Identify High Load",
-    "insights.card1.title": "Usage Timeline",
-    "insights.card1.description": "When was your system under load?",
-    "insights.card2.title": "Process Tracking",
-    "insights.card2.description": "Find out what caused it.",
-    "insights.card3.title": "For Gamers",
+    "usage.screenshotAlt":
+      "HardwareVisualizer dashboard using a custom local background image",
+    "insights.title": "Look Back After the Workload Ends",
+    "insights.description":
+      "You do not have to watch a live graph while you play, render, compile, or run another demanding task. Open Insights afterward and review the locally stored record.",
+    "insights.card1.title": "Configurable Long-Term History",
+    "insights.card1.description":
+      "Keep CPU, GPU, temperature, and process history for 30 days by default, or extend the retention period in settings.",
+    "insights.card2.title": "Find the Spike",
+    "insights.card2.description":
+      "See when load or temperature changed during gaming or other demanding work.",
+    "insights.card3.title": "See Which Process Was Active",
     "insights.card3.description":
-      "Track your system's performance while gaming.",
-    "insights.card4.title": "For Engineers",
+      "Use sampled process history to identify applications that consumed CPU or memory.",
+    "insights.card4.title": "Your History Stays Local",
     "insights.card4.description":
-      "Keep track of resource-hungry compute workloads.",
-    "insights.download": "Start Monitoring Now",
-    "features.title": "Powerful Monitoring Features",
+      "History is stored on this PC. No account. No outbound telemetry.",
+    "insights.download": "Download HardwareVisualizer",
+    "features.title": "Live Details When You Need Them",
     "features.description":
-      "HardwareVisualizer provides comprehensive hardware monitoring with an intuitive interface and minimal system impact.",
+      "Check the current state in real time, then return to the history when you need to understand a past slowdown or temperature change.",
     "features.card1.title": "CPU Monitoring",
     "features.card1.description":
       "Track CPU usage, temperature, and frequency in real-time with detailed per-core statistics.",
-    "features.card2.title": "Memory Analysis",
+    "features.card2.title": "GPU Metrics",
     "features.card2.description":
-      "Monitor RAM usage, available memory, and memory allocation across applications.",
-    "features.card3.title": "GPU Metrics",
-    "features.card3.description":
       "View GPU utilization, temperature, memory usage, and clock speeds for supported graphics cards.",
-    "features.card4.title": "Performance Insights",
+    "features.card3.title": "Memory Analysis",
+    "features.card3.description":
+      "Monitor RAM usage, available memory, and memory allocation across applications.",
+    "features.card4.title": "System Specifications",
     "features.card4.description":
-      "Analyze long-term hardware usage patterns with historical logs, trend visualization, and process usage statistics.",
+      "Look up CPU, GPU, memory, storage, and operating system details in one place.",
     "features.card5.title": "Lightweight",
     "features.card5.description":
       "Built with Tauri for minimal resource usage, ensuring the monitor itself doesn't impact system performance.",
-    "features.card6.title": "Open Source",
+    "features.card6.title": "Cross-Platform & Open Source",
     "features.card6.description":
-      "Fully transparent, community-driven development with the source code available on GitHub.",
+      "Built in the open for Windows, macOS, and Linux under the MIT license.",
     "download.title": "Download HardwareVisualizer",
     "download.description":
       "Available for Windows, macOS, and Linux OS. Free and open source.",
@@ -149,7 +168,7 @@ export const ui = {
     "changelog.githubRelease": "View on GitHub",
 
     "footer.description":
-      "HardwareVisualizer is a free, lightweight, open-source hardware monitoring tool for Windows, macOS, and Linux. Monitor CPU temperature, GPU usage, memory, and system performance with real-time graphs and 30-day historical data.",
+      "HardwareVisualizer keeps configurable long-term CPU, GPU, temperature, and process history locally, with live monitoring for Windows, macOS, and Linux.",
     "footer.product": "Product",
     "footer.features": "Features",
     "footer.download": "Download",
@@ -223,7 +242,7 @@ export const ui = {
       "HardwareVisualizer supports Windows 10, Windows 11, macOS (Apple Silicon officially supported, Intel experimental), and major Linux distributions (Debian/Ubuntu, RPM-based distros, AppImage).",
     "faq.q4": "How is it different from Task Manager or HWiNFO?",
     "faq.a4":
-      "HardwareVisualizer is designed to be lightweight with a modern UI. Unlike Task Manager, it provides detailed graphs and 30-day historical data. Its always-on monitoring is optimized to minimize background CPU and memory use — when minimized to the system tray it uses only around 32 MB of memory — and the interface stays fully customizable.",
+      "HardwareVisualizer is designed to be lightweight with a modern UI. Unlike Task Manager, it provides detailed graphs and configurable long-term history, kept for 30 days by default and extendable in settings. Its always-on monitoring is optimized to minimize background CPU and memory use — when minimized to the system tray it uses only around 32 MB of memory — and the interface stays fully customizable.",
     "faq.q5": "Can I monitor hardware while gaming?",
     "faq.a5":
       "Yes! HardwareVisualizer runs in the background with minimal resource usage, making it perfect for monitoring CPU usage and memory during gaming sessions. GPU temperature monitoring is fully supported on NVIDIA GPUs, with partial support for AMD and Intel GPUs. You can also check historical data to see how your system performed.",
@@ -283,55 +302,73 @@ export const ui = {
     "seo.home.feature5": "Authenticode署名済みWindowsリリースインストーラ",
     "seo.home.feature6": "MITライセンスのオープンソースソフトウェア",
     "seo.home.feature7": "Windows、macOS、Linux対応",
+    "hero.eyebrow": "長期履歴を、このPC内に保存",
+    "hero.title": "See what made your PC hot or slow.",
     "hero.description":
-      "HardwareVisualizerは、Windows、macOS、Linux向けの無料・軽量・オープンソースのハードウェアモニタリングツールです。CPU温度・GPU使用率・メモリのリアルタイム監視、PCのシステム仕様の確認、最大30日間の履歴分析までこれ一つで行えます。タスクマネージャーやHWiNFOのモダンな代替として最適です。",
-    "hero.download": "今すぐダウンロード",
+      "HardwareVisualizerは、CPU、GPU、温度、プロセスの長期履歴を、このPC内だけに保存します。ゲームや重い処理が終わったあとでも、何が起きていたか確認できます。",
+    "hero.download": "Windows版をダウンロード",
     "hero.viewGitHub": "GitHubを閲覧",
-    "usage.title": "あなただけのカスタマイズ",
+    "hero.availability": "Windows 10・11に対応。macOS・Linux版も利用できます。",
+    "hero.screenshotLabel": "Insightsの履歴",
+    "hero.retention": "長期履歴",
+    "hero.screenshotAlt":
+      "CPUとメモリの使用履歴を時系列で表示するHardwareVisualizerのInsights画面",
+    "hero.trustLabel": "プライバシーと配布の信頼性",
+    "hero.trust.noAccount": "アカウント不要",
+    "hero.trust.noTelemetry": "テレメトリなし",
+    "hero.trust.openSource": "オープンソース",
+    "hero.trust.signedInstaller": "署名済みWindowsインストーラ",
+    "usage.title": "リアルタイム表示を自分好みに",
     "usage.description":
-      "チャートをカスタマイズし、お気に入りの画像をダッシュボードの壁紙として設定できます。",
-    "usage.customization.title1": "グラフィカルな監視",
+      "チャート、色、PC内の背景画像を調整し、今の状態を見やすいダッシュボードにできます。",
+    "usage.customization.title1": "見やすいリアルタイムグラフ",
     "usage.customization.description1":
-      "ラインチャートでCPU、RAM、GPUの使用状況をリアルタイムで滑らかなビジュアルで表示します。",
+      "CPU、RAM、GPUの現在の使用状況をラインチャートですぐに確認できます。",
     "usage.customization.title2": "カスタム外観",
     "usage.customization.description2":
       "色、境界線、凡例を柔軟に設定して、視覚的な外観を調整できます。",
     "usage.customization.title3": "カスタム壁紙",
     "usage.customization.description3":
       "好きな背景画像でダッシュボードをあなたのものにできます。",
-    "insights.title": "負荷の高いプロセスを追跡・特定",
-    "insights.card1.title": "使用状況タイムライン",
-    "insights.card1.description": "システムが負荷の高い時期はいつか？",
-    "insights.card2.title": "プロセス追跡",
-    "insights.card2.description": "何が原因だったのかを見つけます。",
-    "insights.card3.title": "ゲーマーに",
+    "usage.screenshotAlt":
+      "PC内の背景画像を設定したHardwareVisualizerのダッシュボード",
+    "insights.title": "処理が終わったあとに振り返る",
+    "insights.description":
+      "ゲーム、レンダリング、ビルドなどの最中にグラフを見続ける必要はありません。終了後にInsightsを開き、PC内に保存された履歴を確認できます。",
+    "insights.card1.title": "保存期間を変更できる長期履歴",
+    "insights.card1.description":
+      "CPU、GPU、温度、プロセスの履歴は初期設定で30日間保存され、設定から保存期間を延長できます。",
+    "insights.card2.title": "負荷の山を見つける",
+    "insights.card2.description":
+      "ゲームや重い処理の途中で、負荷や温度がいつ変化したか確認できます。",
+    "insights.card3.title": "動いていたプロセスを確認",
     "insights.card3.description":
-      "ゲーム中のシステムパフォーマンスを追跡します。",
-    "insights.card4.title": "エンジニアに",
+      "サンプリングされたプロセス履歴から、CPUやメモリを消費したアプリを特定できます。",
+    "insights.card4.title": "履歴はPC内に保存",
     "insights.card4.description":
-      "リソースを大量に消費するコンピューティングワークロードを追跡します。",
-    "insights.download": "モニタリングを開始する",
-    "features.title": "強力なモニタリング機能",
+      "履歴はこのPC内に保存。アカウント不要で、外部テレメトリもありません。",
+    "insights.download": "HardwareVisualizerをダウンロード",
+    "features.title": "必要なときは、今の状態も詳しく見る",
     "features.description":
-      "HardwareVisualizerは、直感的なインターフェースと最小限のシステム影響で包括的なハードウェアモニタリングを提供します。",
+      "現在の状態はリアルタイムで確認し、過去の負荷や温度変化を知りたいときは履歴に戻れます。",
     "features.card1.title": "CPUモニタリング",
     "features.card1.description":
       "CPU使用率、温度、周波数をリアルタイムでコアごとに詳細にモニタリングします。",
-    "features.card2.title": "メモリ監視",
+    "features.card2.title": "GPUメトリクス",
     "features.card2.description":
-      "RAM使用量、空きメモリ、アプリごとのメモリ割り当てをモニタリングします。",
-    "features.card3.title": "GPUメトリクス",
-    "features.card3.description":
       "対応GPUの使用率、温度、メモリ使用量、クロックスピードを表示します。",
-    "features.card4.title": "パフォーマンスインサイト",
+    "features.card3.title": "メモリ監視",
+    "features.card3.description":
+      "RAM使用量、空きメモリ、アプリごとのメモリ割り当てをモニタリングします。",
+    "features.card4.title": "システム仕様",
     "features.card4.description":
-      "履歴ログやトレンド可視化、プロセス使用状況で長期的なハードウェア利用傾向を分析します。",
+      "CPU、GPU、メモリ、ストレージ、OSの詳細を一か所で確認できます。",
     "features.card5.title": "超軽量",
     "features.card5.description":
       "Rust製でリソース消費が最小限。モニター自体がシステムに負荷をかけません。",
-    "features.card6.title": "オープンソース",
+    "features.card6.title": "クロスプラットフォーム・OSS",
     "features.card6.description":
-      "完全な透明性とコミュニティ主導の開発。ソースコードはGitHubで公開。",
+      "Windows、macOS、Linux向けにMITライセンスで公開・開発されています。",
     "download.title": "HardwareVisualizerをダウンロード",
     "download.description":
       "Windows、macOS、Linux OSで利用可能。無料でオープンソース。",
@@ -399,7 +436,7 @@ export const ui = {
     "changelog.githubRelease": "GitHubで見る",
 
     "footer.description":
-      "HardwareVisualizerは、Windows、macOS、Linux向けの無料・軽量・オープンソースのハードウェアモニタリングツールです。CPU温度、GPU使用率、メモリ、システムパフォーマンスをリアルタイムグラフと30日間の履歴データで監視。",
+      "HardwareVisualizerは、CPU、GPU、温度、プロセスの長期履歴を保存期間を変更してPC内に残せ、Windows、macOS、Linuxでリアルタイム監視もできます。",
     "footer.product": "製品",
     "footer.features": "機能",
     "footer.download": "ダウンロード",
@@ -473,7 +510,7 @@ export const ui = {
       "HardwareVisualizerはWindows 10、Windows 11、macOS（Apple Silicon正式対応、Intel実験的）、および主要なLinuxディストリビューション（Debian/Ubuntu、RPM系、AppImage）に対応しています。",
     "faq.q4": "タスクマネージャーやHWiNFOとの違いは？",
     "faq.a4":
-      "HardwareVisualizerは軽量でモダンなUIを重視しています。タスクマネージャーと異なり、詳細なグラフ、30日間の履歴データを提供します。常駐監視はバックグラウンドでのCPU・メモリ使用を最小限に抑えるよう最適化されており（トレイ格納中のメモリ使用量は約32MB）、インターフェースも自由にカスタマイズできます。",
+      "HardwareVisualizerは軽量でモダンなUIを重視しています。タスクマネージャーと異なり、詳細なグラフと、初期設定で30日間・設定から延長できる長期履歴を提供します。常駐監視はバックグラウンドでのCPU・メモリ使用を最小限に抑えるよう最適化されており（トレイ格納中のメモリ使用量は約32MB）、インターフェースも自由にカスタマイズできます。",
     "faq.q5": "ゲーム中でも監視できますか？",
     "faq.a5":
       "はい！HardwareVisualizerは最小限のリソース使用でバックグラウンドで実行されるため、ゲームセッション中のCPU使用率やメモリの監視に最適です。GPU温度の監視はNVIDIA GPUにフル対応しており、AMD・Intel GPUにも部分的に対応しています。履歴データでシステムのパフォーマンスを後から確認することもできます。",
