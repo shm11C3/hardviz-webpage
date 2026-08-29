@@ -1,0 +1,40 @@
+<script is:inline>
+(() => {
+  if (window.__landingDownloadTrackingInitialized) return;
+  window.__landingDownloadTrackingInitialized = true;
+
+  const downloadPaths = new Set(["/download/", "/ja/download/"]);
+  const locations = [
+    ["#hero", "hero"],
+    ["#insights", "after_workload"],
+    ["#download", "download_section"],
+    ["header", "header"],
+    ["footer", "footer"],
+  ];
+
+  document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) return;
+
+    const link = event.target.closest("a");
+    if (!(link instanceof HTMLAnchorElement)) return;
+
+    const destination = new URL(link.href, window.location.href);
+    if (
+      destination.origin !== window.location.origin ||
+      !downloadPaths.has(destination.pathname)
+    ) {
+      return;
+    }
+
+    if (!window.__analyticsLoaded || typeof window.gtag !== "function") return;
+
+    const ctaLocation =
+      locations.find(([selector]) => link.closest(selector))?.[1] ?? "other";
+
+    window.gtag("event", "landing_download_click", {
+      cta_location: ctaLocation,
+      page_language: document.documentElement.lang,
+    });
+  });
+})();
+</script>
