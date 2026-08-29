@@ -107,24 +107,73 @@ const trustItems = [
               {t("hero.retention")}
             </span>
           </div>
-          <Image
-            src={insightsLight}
-            alt={t("hero.screenshotAlt")}
-            class="block h-auto w-full dark:hidden"
-            widths={[640, 960, 1280]}
-            sizes="(max-width: 1024px) 100vw, 55vw"
-            quality={90}
-            loading="eager"
-          />
-          <Image
-            src={insightsDark}
-            alt={t("hero.screenshotAlt")}
-            class="hidden h-auto w-full dark:block"
-            widths={[640, 960, 1280]}
-            sizes="(max-width: 1024px) 100vw, 55vw"
-            quality={90}
-            loading="eager"
-          />
+          <template id="hero-screenshot-light">
+            <Image
+              src={insightsLight}
+              alt={t("hero.screenshotAlt")}
+              class="block h-auto w-full"
+              widths={[640, 960, 1280]}
+              sizes="(max-width: 1024px) 100vw, 55vw"
+              quality={90}
+              loading="eager"
+            />
+          </template>
+          <template id="hero-screenshot-dark">
+            <Image
+              src={insightsDark}
+              alt={t("hero.screenshotAlt")}
+              class="block h-auto w-full"
+              widths={[640, 960, 1280]}
+              sizes="(max-width: 1024px) 100vw, 55vw"
+              quality={90}
+              loading="eager"
+            />
+          </template>
+          <div id="hero-screenshot-slot"></div>
+          <noscript>
+            <Image
+              src={insightsLight}
+              alt={t("hero.screenshotAlt")}
+              class="block h-auto w-full"
+              widths={[640, 960, 1280]}
+              sizes="(max-width: 1024px) 100vw, 55vw"
+              quality={90}
+              loading="eager"
+            />
+          </noscript>
+          <script is:inline>
+          (() => {
+            const slot = document.getElementById("hero-screenshot-slot");
+            if (!slot) return;
+
+            let currentTheme = "";
+            const renderForTheme = () => {
+              const theme = document.documentElement.classList.contains("dark")
+                ? "dark"
+                : "light";
+              if (theme === currentTheme && slot.childElementCount > 0) return;
+
+              const template = document.getElementById(
+                `hero-screenshot-${theme}`,
+              );
+              if (!(template instanceof HTMLTemplateElement)) return;
+
+              slot.replaceChildren(template.content.cloneNode(true));
+              currentTheme = theme;
+            };
+
+            renderForTheme();
+
+            const observer = new MutationObserver(renderForTheme);
+            observer.observe(document.documentElement, {
+              attributes: true,
+              attributeFilter: ["class"],
+            });
+            window.addEventListener("pagehide", () => observer.disconnect(), {
+              once: true,
+            });
+          })();
+          </script>
         </figure>
         <div
           class="absolute -right-6 -bottom-6 -z-10 h-72 w-72 rounded-full bg-cyan-400/20 blur-3xl dark:bg-cyan-500/30"

@@ -123,6 +123,21 @@ test("hero shows local history and trust assurances in both languages", async ({
   await expect(jaHero).toContainText("署名済みWindowsインストーラ");
 });
 
+test("hero loads only the screenshot for the active theme", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const heroImages = page.locator("#hero figure img");
+  await expect(heroImages).toHaveCount(1);
+
+  const initialSrc = await heroImages.first().getAttribute("src");
+  expect(initialSrc).toBeTruthy();
+
+  await page.locator("#themeToggle").click();
+  await expect(heroImages).toHaveCount(1);
+  await expect(heroImages.first()).not.toHaveAttribute("src", initialSrc ?? "");
+});
+
 test("hero has download and GitHub buttons", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator('a[href="/download/"]').first()).toBeVisible();
