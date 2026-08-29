@@ -79,6 +79,7 @@ const loadAnalytics = () => {
   document.head.appendChild(loader);
   document.head.appendChild(init);
   window.dispatchEvent(new CustomEvent("ptupdate"));
+  window.dispatchEvent(new CustomEvent("analytics:loaded"));
 
   // Plausible (cookieless), only when a domain is configured. Gated on the same
   // consent so all analytics respect the visitor's choice.
