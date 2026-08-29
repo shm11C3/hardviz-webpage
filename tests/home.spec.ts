@@ -103,24 +103,134 @@ test("history value appears before live features and customization", async ({
   ]);
 });
 
-test("hero shows local history and trust assurances in both languages", async ({
+test("hero shows the product category and trust assurances in both languages", async ({
   page,
 }) => {
   await page.goto("/");
   const hero = page.locator("#hero");
-  await expect(hero).toContainText("Long-term history, stored on your PC");
+  await expect(hero).toContainText("Cross-platform CPU & GPU hardware monitor");
+  await expect(hero).toContainText("30 days by default");
   await expect(hero).toContainText("No account");
   await expect(hero).toContainText("No telemetry");
   await expect(hero).toContainText("Open source");
   await expect(hero).toContainText("Signed Windows installer");
+  await expect(page.locator("footer")).toContainText(
+    "cross-platform hardware monitor",
+  );
 
   await page.goto("/ja/");
   const jaHero = page.locator("#hero");
-  await expect(jaHero).toContainText("長期履歴を、このPC内に保存");
+  await expect(jaHero).toContainText(
+    "クロスプラットフォーム対応CPU・GPUハードウェアモニター",
+  );
+  await expect(jaHero).toContainText("初期設定30日");
   await expect(jaHero).toContainText("アカウント不要");
   await expect(jaHero).toContainText("テレメトリなし");
   await expect(jaHero).toContainText("オープンソース");
   await expect(jaHero).toContainText("署名済みWindowsインストーラ");
+  await expect(page.locator("footer")).toContainText(
+    "クロスプラットフォーム対応ハードウェアモニター",
+  );
+});
+
+test("insights cards explain what users can learn after a workload", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await expect(page.locator("#insights h3")).toHaveText([
+    "Check Peaks During Gaming",
+    "Trace Temperature Rises",
+    "Find the Process Behind the Load",
+    "Compare Earlier Periods",
+  ]);
+  await expect(page.locator("#insights")).not.toContainText(
+    "Your History Stays Local",
+  );
+
+  await page.goto("/ja/");
+  await expect(page.locator("#insights h3")).toHaveText([
+    "ゲーム中のピークを確認",
+    "温度上昇を追跡",
+    "負荷を掛けたプロセスを確認",
+    "以前の記録と見比べる",
+  ]);
+  await expect(page.locator("#insights")).not.toContainText("履歴はPC内に保存");
+});
+
+test("Insights screenshot alternative text follows the page language", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.locator(".swiper-container").scrollIntoViewIfNeeded();
+  await expect(
+    page.locator('.screenshot-slot[data-screenshot="slide-2"] img'),
+  ).toHaveAttribute(
+    "alt",
+    "HardwareVisualizer Insights - review historical CPU and GPU usage after a workload",
+  );
+
+  await page.goto("/ja/");
+  await page.locator(".swiper-container").scrollIntoViewIfNeeded();
+  await expect(
+    page.locator('.screenshot-slot[data-screenshot="slide-2"] img'),
+  ).toHaveAttribute(
+    "alt",
+    "処理後にCPUとGPUの使用履歴を振り返るHardwareVisualizerのInsights画面",
+  );
+});
+
+test("landing download navigation is measured after analytics consent", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const pendingEvent = await page.evaluate(() => {
+    const analyticsWindow = window as typeof window & {
+      __analyticsLoaded: boolean;
+    };
+    analyticsWindow.__analyticsLoaded = true;
+
+    const heroDownload = document.querySelector<HTMLAnchorElement>(
+      '#hero a[href="/download/"]',
+    );
+    if (!heroDownload) throw new Error("Hero download link not found");
+    heroDownload.addEventListener("click", (event) => event.preventDefault(), {
+      once: true,
+    });
+    heroDownload.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    );
+
+    return sessionStorage.getItem("landing-download-click");
+  });
+  expect(JSON.parse(pendingEvent ?? "null")).toEqual({
+    cta_location: "hero",
+    page_language: "en",
+  });
+
+  await page.goto("/download/");
+  const events = await page.evaluate(() => {
+    const analyticsWindow = window as typeof window & {
+      __analyticsLoaded: boolean;
+      __gtagEvents: unknown[][];
+      gtag: (...args: unknown[]) => void;
+    };
+    analyticsWindow.__analyticsLoaded = true;
+    analyticsWindow.__gtagEvents = [];
+    analyticsWindow.gtag = (...args: unknown[]) => {
+      analyticsWindow.__gtagEvents.push(args);
+    };
+    window.dispatchEvent(new CustomEvent("analytics:loaded"));
+
+    return analyticsWindow.__gtagEvents;
+  });
+  expect(events).toContainEqual([
+    "event",
+    "landing_download_click",
+    { cta_location: "hero", page_language: "en" },
+  ]);
+  expect(
+    await page.evaluate(() => sessionStorage.getItem("landing-download-click")),
+  ).toBeNull();
 });
 
 test("hero loads only the screenshot for the active theme", async ({

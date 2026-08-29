@@ -1,10 +1,10 @@
 ---
 import {
   ArrowDownToLine,
-  CalendarRange,
-  ChartNoAxesCombined,
-  HardDrive,
+  Gamepad2,
+  History,
   ListFilter,
+  Thermometer,
 } from "lucide-react";
 import {
   getLangFromUrl,
@@ -18,22 +18,22 @@ const { translatePath } = useTranslatedPath(lang);
 
 const insights = [
   {
-    icon: "calendar",
+    icon: "gaming",
     title: t("insights.card1.title"),
     description: t("insights.card1.description"),
   },
   {
-    icon: "chart",
+    icon: "temperature",
     title: t("insights.card2.title"),
     description: t("insights.card2.description"),
   },
   {
-    icon: "list",
+    icon: "process",
     title: t("insights.card3.title"),
     description: t("insights.card3.description"),
   },
   {
-    icon: "drive",
+    icon: "history",
     title: t("insights.card4.title"),
     description: t("insights.card4.description"),
   },
@@ -58,17 +58,17 @@ const insights = [
       {insights.map((item) => (
           <div class="rounded-xl border border-slate-200 bg-white p-5 transition hover:shadow-md dark:border-slate-700 dark:bg-slate-800">
             <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700">
-              {item.icon === "calendar" && (
-                <CalendarRange className="h-6 w-6 text-violet-500" />
+              {item.icon === "gaming" && (
+                <Gamepad2 className="h-6 w-6 text-violet-500" />
               )}
-              {item.icon === "chart" && (
-                <ChartNoAxesCombined className="h-6 w-6 text-rose-500" />
+              {item.icon === "temperature" && (
+                <Thermometer className="h-6 w-6 text-rose-500" />
               )}
-              {item.icon === "list" && (
+              {item.icon === "process" && (
                 <ListFilter className="h-6 w-6 text-cyan-500" />
               )}
-              {item.icon === "drive" && (
-                <HardDrive className="h-6 w-6 text-emerald-500" />
+              {item.icon === "history" && (
+                <History className="h-6 w-6 text-emerald-500" />
               )}
             </div>
             <h3 class="font-semibold text-base text-slate-800 dark:text-white">

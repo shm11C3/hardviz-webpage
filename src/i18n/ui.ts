@@ -31,18 +31,20 @@ export const ui = {
     "seo.home.feature5": "Authenticode-signed Windows release installer",
     "seo.home.feature6": "Open-source MIT-licensed software",
     "seo.home.feature7": "Windows, macOS, and Linux support",
-    "hero.eyebrow": "Long-term history, stored on your PC",
+    "hero.eyebrow": "Cross-platform CPU & GPU hardware monitor",
     "hero.title": "See what made your PC hot or slow.",
     "hero.description":
-      "HardwareVisualizer keeps long-term CPU, GPU, temperature, and process history locally, so you can understand what happened after gaming or heavy workloads.",
+      "HardwareVisualizer is a cross-platform hardware monitor for CPU, GPU, temperature, and process activity. Review what happened after gaming or heavy workloads—even when you were not watching the live graphs.",
     "hero.download": "Download for Windows",
     "hero.viewGitHub": "View on GitHub",
     "hero.availability":
       "For Windows 10 and 11. Also available on macOS and Linux.",
-    "hero.screenshotLabel": "History in Insights",
-    "hero.retention": "Long-term history",
+    "hero.screenshotLabel": "Insights: review what happened",
+    "hero.retention": "30 days by default",
     "hero.screenshotAlt":
       "HardwareVisualizer Insights showing CPU and memory usage history over time",
+    "screenshots.insightsAlt":
+      "HardwareVisualizer Insights - review historical CPU and GPU usage after a workload",
     "hero.trustLabel": "Privacy and distribution assurances",
     "hero.trust.noAccount": "No account",
     "hero.trust.noTelemetry": "No telemetry",
@@ -64,23 +66,23 @@ export const ui = {
       "HardwareVisualizer dashboard using a custom local background image",
     "insights.title": "Look Back After the Workload Ends",
     "insights.description":
-      "You do not have to watch a live graph while you play, render, compile, or run another demanding task. Open Insights afterward and review the locally stored record.",
-    "insights.card1.title": "Configurable Long-Term History",
+      "You do not have to watch a live graph while you play, render, compile, or run another demanding task. Open Insights afterward to see when load peaked, temperatures rose, or a process used more resources. History is kept for 30 days by default, and retention is configurable.",
+    "insights.card1.title": "Check Peaks During Gaming",
     "insights.card1.description":
-      "Keep CPU, GPU, temperature, and process history for 30 days by default, or extend the retention period in settings.",
-    "insights.card2.title": "Find the Spike",
+      "See when CPU or GPU load peaked and how long demanding activity continued.",
+    "insights.card2.title": "Trace Temperature Rises",
     "insights.card2.description":
-      "See when load or temperature changed during gaming or other demanding work.",
-    "insights.card3.title": "See Which Process Was Active",
+      "Follow temperature changes over time and see how they relate to CPU or GPU load.",
+    "insights.card3.title": "Find the Process Behind the Load",
     "insights.card3.description":
-      "Use sampled process history to identify applications that consumed CPU or memory.",
-    "insights.card4.title": "Your History Stays Local",
+      "Review sampled process activity to see which applications used CPU or memory.",
+    "insights.card4.title": "Compare Earlier Periods",
     "insights.card4.description":
-      "History is stored on this PC. No account. No outbound telemetry.",
+      "Return to an earlier period and compare the same CPU, GPU, and temperature metrics with what you see now.",
     "insights.download": "Download HardwareVisualizer",
     "features.title": "Live Details When You Need Them",
     "features.description":
-      "Check the current state in real time, then return to the history when you need to understand a past slowdown or temperature change.",
+      "Use real-time CPU, GPU, temperature, and memory details when you need to inspect what your PC is doing right now.",
     "features.card1.title": "CPU Monitoring",
     "features.card1.description":
       "Track CPU usage, temperature, and frequency in real-time with detailed per-core statistics.",
@@ -168,7 +170,7 @@ export const ui = {
     "changelog.githubRelease": "View on GitHub",
 
     "footer.description":
-      "HardwareVisualizer keeps configurable long-term CPU, GPU, temperature, and process history locally, with live monitoring for Windows, macOS, and Linux.",
+      "HardwareVisualizer is a cross-platform hardware monitor with real-time CPU and GPU monitoring plus history to help you understand what happened.",
     "footer.product": "Product",
     "footer.features": "Features",
     "footer.download": "Download",
@@ -302,17 +304,19 @@ export const ui = {
     "seo.home.feature5": "Authenticode署名済みWindowsリリースインストーラ",
     "seo.home.feature6": "MITライセンスのオープンソースソフトウェア",
     "seo.home.feature7": "Windows、macOS、Linux対応",
-    "hero.eyebrow": "長期履歴を、このPC内に保存",
+    "hero.eyebrow": "クロスプラットフォーム対応CPU・GPUハードウェアモニター",
     "hero.title": "See what made your PC hot or slow.",
     "hero.description":
-      "HardwareVisualizerは、CPU、GPU、温度、プロセスの長期履歴を、このPC内だけに保存します。ゲームや重い処理が終わったあとでも、何が起きていたか確認できます。",
+      "HardwareVisualizerは、CPU、GPU、温度、プロセスの状態を記録するクロスプラットフォーム対応のハードウェアモニターです。ゲームや重い処理のあと、グラフを見続けていなくても何が起きていたか確認できます。",
     "hero.download": "Windows版をダウンロード",
     "hero.viewGitHub": "GitHubを閲覧",
     "hero.availability": "Windows 10・11に対応。macOS・Linux版も利用できます。",
-    "hero.screenshotLabel": "Insightsの履歴",
-    "hero.retention": "長期履歴",
+    "hero.screenshotLabel": "Insightsで振り返る",
+    "hero.retention": "初期設定30日",
     "hero.screenshotAlt":
       "CPUとメモリの使用履歴を時系列で表示するHardwareVisualizerのInsights画面",
+    "screenshots.insightsAlt":
+      "処理後にCPUとGPUの使用履歴を振り返るHardwareVisualizerのInsights画面",
     "hero.trustLabel": "プライバシーと配布の信頼性",
     "hero.trust.noAccount": "アカウント不要",
     "hero.trust.noTelemetry": "テレメトリなし",
@@ -334,23 +338,23 @@ export const ui = {
       "PC内の背景画像を設定したHardwareVisualizerのダッシュボード",
     "insights.title": "処理が終わったあとに振り返る",
     "insights.description":
-      "ゲーム、レンダリング、ビルドなどの最中にグラフを見続ける必要はありません。終了後にInsightsを開き、PC内に保存された履歴を確認できます。",
-    "insights.card1.title": "保存期間を変更できる長期履歴",
+      "ゲーム、レンダリング、ビルドなどの最中にグラフを見続ける必要はありません。終了後にInsightsを開き、負荷のピーク、温度上昇、プロセスの動きを確認できます。履歴は初期設定で30日間保存され、保存期間は変更できます。",
+    "insights.card1.title": "ゲーム中のピークを確認",
     "insights.card1.description":
-      "CPU、GPU、温度、プロセスの履歴は初期設定で30日間保存され、設定から保存期間を延長できます。",
-    "insights.card2.title": "負荷の山を見つける",
+      "CPUやGPUの負荷がいつ最大になり、高負荷がどのくらい続いたか確認できます。",
+    "insights.card2.title": "温度上昇を追跡",
     "insights.card2.description":
-      "ゲームや重い処理の途中で、負荷や温度がいつ変化したか確認できます。",
-    "insights.card3.title": "動いていたプロセスを確認",
+      "温度の変化を時系列で追い、CPUやGPUの負荷との関係を確認できます。",
+    "insights.card3.title": "負荷を掛けたプロセスを確認",
     "insights.card3.description":
-      "サンプリングされたプロセス履歴から、CPUやメモリを消費したアプリを特定できます。",
-    "insights.card4.title": "履歴はPC内に保存",
+      "サンプリングされたプロセスの動きから、CPUやメモリを使ったアプリを確認できます。",
+    "insights.card4.title": "以前の記録と見比べる",
     "insights.card4.description":
-      "履歴はこのPC内に保存。アカウント不要で、外部テレメトリもありません。",
+      "以前の期間に戻り、CPU、GPU、温度の同じ指標を現在の状態と見比べられます。",
     "insights.download": "HardwareVisualizerをダウンロード",
     "features.title": "必要なときは、今の状態も詳しく見る",
     "features.description":
-      "現在の状態はリアルタイムで確認し、過去の負荷や温度変化を知りたいときは履歴に戻れます。",
+      "CPU、GPU、温度、メモリの詳細をリアルタイムで確認し、PCが今どう動いているか詳しく見られます。",
     "features.card1.title": "CPUモニタリング",
     "features.card1.description":
       "CPU使用率、温度、周波数をリアルタイムでコアごとに詳細にモニタリングします。",
@@ -436,7 +440,7 @@ export const ui = {
     "changelog.githubRelease": "GitHubで見る",
 
     "footer.description":
-      "HardwareVisualizerは、CPU、GPU、温度、プロセスの長期履歴を保存期間を変更してPC内に残せ、Windows、macOS、Linuxでリアルタイム監視もできます。",
+      "HardwareVisualizerは、CPU・GPUのリアルタイム監視と履歴から、PCで何が起きていたか確認できるクロスプラットフォーム対応ハードウェアモニターです。",
     "footer.product": "製品",
     "footer.features": "機能",
     "footer.download": "ダウンロード",

@@ -6,6 +6,7 @@ import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
 import Hero from "../../components/Hero.astro";
 import Insights from "../../components/Insights.astro";
+import LandingDownloadAnalytics from "../../components/LandingDownloadAnalytics.astro";
 import Screenshots from "../../components/Screenshots.astro";
 import Usage from "../../components/Usage.astro";
 import { fetchLatestRelease } from "../../funcs/fetchReleaseData.ts";
@@ -114,4 +115,5 @@ const softwareJsonLd = {
     <FAQPreview />
   </main>
   <Footer />
+  <LandingDownloadAnalytics />
 </Layout>

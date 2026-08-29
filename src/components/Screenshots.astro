@@ -12,6 +12,10 @@ import slide05 from "../assets/screenshots/slide-5.png";
 import slideLight05 from "../assets/screenshots/slide-5-l.png";
 import slide06 from "../assets/screenshots/slide-6.png";
 import slideLight06 from "../assets/screenshots/slide-6-l.png";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const slides = [
   {
@@ -22,7 +26,7 @@ const slides = [
   },
   {
     key: "slide-2",
-    alt: "HardwareVisualizer Insights - long-term historical CPU and GPU usage data visualization",
+    alt: t("screenshots.insightsAlt"),
     light: slideLight02,
     dark: slide02,
   },
