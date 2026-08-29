@@ -64,16 +64,15 @@ const softwareJsonLd = {
   downloadUrl: githubAllReleasesUrl(),
   softwareVersion: release.version,
   ...(release.published_at ? { dateModified: release.published_at } : {}),
-  description:
-    "CPU and GPU monitor for Windows that stores configurable long-term CPU, GPU, temperature, and sampled process history locally, helping you review what happened after gaming or heavy workloads. Also available for macOS and Linux.",
+  description: t("seo.home.softwareDescription"),
   featureList: [
-    "Configurable long-term CPU, GPU, temperature, and sampled process history stored locally",
-    "Review performance after gaming and heavy workloads",
-    "Real-time CPU, GPU, temperature, and memory monitoring",
-    "No account and no outbound telemetry",
-    "Authenticode-signed Windows release installer",
-    "Open-source MIT-licensed software",
-    "Windows, macOS, and Linux support",
+    t("seo.home.feature1"),
+    t("seo.home.feature2"),
+    t("seo.home.feature3"),
+    t("seo.home.feature4"),
+    t("seo.home.feature5"),
+    t("seo.home.feature6"),
+    t("seo.home.feature7"),
   ],
   screenshot: "https://hardviz.com/screenshots/slide-1.png",
   author: personRef,
@@ -88,10 +87,10 @@ const softwareJsonLd = {
 ---
 
 <Layout
-  title="HardwareVisualizer – CPU & GPU Monitor with Long-Term History"
+  title={t("seo.home.title")}
   lang={lang}
-  description="CPU & GPU monitoring for Windows with configurable long-term CPU, GPU, temperature, and process history stored locally. Review gaming or heavy workloads afterward."
-  ogImageAlt="HardwareVisualizer CPU and GPU monitor with configurable long-term local history"
+  description={t("seo.home.description")}
+  ogImageAlt={t("seo.ogImageAlt")}
   jsonLd={softwareJsonLd}
 >
   <Header />

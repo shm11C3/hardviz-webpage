@@ -22,9 +22,12 @@ const {
   title,
   lang,
   description = "Monitor your CPU, GPU, and memory with HardwareVisualizer — lightweight, open-source, and efficient.",
-  ogImageAlt = "HardwareVisualizer - Lightweight CPU, GPU, and Memory Monitoring Tool",
+  ogImageAlt,
   jsonLd,
 } = Astro.props;
+
+const t = useTranslations(lang);
+const resolvedOgImageAlt = ogImageAlt ?? t("seo.ogImageAlt");
 
 // URLs & i18n-aware paths for canonical/alternate
 const { noTranslatePath } = useTranslatedPath(lang);
@@ -52,8 +55,6 @@ const ogLocale = lang === "ja" ? "ja_JP" : "en_US";
 // which links back to these entities by @id.
 const pageJsonLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 const structuredData = [...buildBaseGraph(lang), ...pageJsonLd];
-
-const t = useTranslations(lang);
 ---
 
 <!doctype html>
@@ -89,7 +90,7 @@ const t = useTranslations(lang);
       property="og:locale:alternate"
       content={ogLocale === "ja_JP" ? "en_US" : "ja_JP"}
     >
-    <meta property="og:image:alt" content={ogImageAlt}>
+    <meta property="og:image:alt" content={resolvedOgImageAlt}>
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
@@ -97,7 +98,7 @@ const t = useTranslations(lang);
     <meta name="twitter:title" content={title}>
     <meta name="twitter:description" content={description}>
     <meta name="twitter:image" content={ogImageAbs}>
-    <meta name="twitter:image:alt" content={ogImageAlt}>
+    <meta name="twitter:image:alt" content={resolvedOgImageAlt}>
 
     <!-- UX -->
     <meta name="theme-color" content="#0f172a">

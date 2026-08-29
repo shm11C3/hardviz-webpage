@@ -61,7 +61,7 @@ test("EN home OG meta tags", async ({ page }) => {
   );
   await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute(
     "content",
-    "HardwareVisualizer CPU and GPU monitor with configurable long-term local history",
+    "HardwareVisualizer logo over a dashboard showing CPU, GPU, RAM, and process metrics",
   );
   await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute(
     "content",
@@ -86,6 +86,10 @@ test("Twitter card meta tags", async ({ page }) => {
   await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute(
     "content",
     /og-image\.png/,
+  );
+  await expect(page.locator('meta[name="twitter:image:alt"]')).toHaveAttribute(
+    "content",
+    "HardwareVisualizer logo over a dashboard showing CPU, GPU, RAM, and process metrics",
   );
 });
 
@@ -133,6 +137,14 @@ test("JA home metadata and JSON-LD use the same history positioning", async ({
   await expect(page.locator('meta[property="og:description"]')).toHaveAttribute(
     "content",
     expectedDescription,
+  );
+  await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute(
+    "content",
+    "CPU、GPU、RAM、プロセス情報のダッシュボードに重なるHardwareVisualizerのロゴ",
+  );
+  await expect(page.locator('meta[name="twitter:image:alt"]')).toHaveAttribute(
+    "content",
+    "CPU、GPU、RAM、プロセス情報のダッシュボードに重なるHardwareVisualizerのロゴ",
   );
 
   const jsonLd = await page.evaluate(() => {

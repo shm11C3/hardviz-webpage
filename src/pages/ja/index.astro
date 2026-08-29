@@ -64,16 +64,15 @@ const softwareJsonLd = {
   downloadUrl: githubAllReleasesUrl(),
   softwareVersion: release.version,
   ...(release.published_at ? { dateModified: release.published_at } : {}),
-  description:
-    "CPU、GPU、温度、プロセスの長期履歴をPC内に保存し、ゲームや重い処理のあとに何が起きていたか振り返れるWindows向けCPU・GPUモニター。保存期間は変更可能で、macOS・Linuxにも対応。",
+  description: t("seo.home.softwareDescription"),
   featureList: [
-    "保存期間を変更できるCPU、GPU、温度、プロセスの長期履歴をPC内に保存",
-    "ゲームや重い処理のあとのパフォーマンス確認",
-    "CPU、GPU、温度、メモリのリアルタイム監視",
-    "アカウント不要・外部テレメトリなし",
-    "Authenticode署名済みWindowsリリースインストーラ",
-    "MITライセンスのオープンソースソフトウェア",
-    "Windows、macOS、Linux対応",
+    t("seo.home.feature1"),
+    t("seo.home.feature2"),
+    t("seo.home.feature3"),
+    t("seo.home.feature4"),
+    t("seo.home.feature5"),
+    t("seo.home.feature6"),
+    t("seo.home.feature7"),
   ],
   screenshot: "https://hardviz.com/screenshots/slide-1.png",
   author: personRef,
@@ -88,10 +87,10 @@ const softwareJsonLd = {
 ---
 
 <Layout
-  title="HardwareVisualizer – 長期履歴対応CPU・GPUモニター"
+  title={t("seo.home.title")}
   lang={lang}
-  description="Windows向けCPU・GPUモニター。CPU、GPU、温度、プロセスの長期履歴をPC内に保存し、ゲームや重い処理のあとに振り返れます。保存期間は変更可能で、macOS・Linuxにも対応。"
-  ogImageAlt="CPU・GPUなどの長期履歴をPC内に保存するHardwareVisualizer"
+  description={t("seo.home.description")}
+  ogImageAlt={t("seo.ogImageAlt")}
   jsonLd={softwareJsonLd}
 >
   <Header />
