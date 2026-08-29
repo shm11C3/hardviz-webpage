@@ -65,15 +65,17 @@ const softwareJsonLd = {
   softwareVersion: release.version,
   ...(release.published_at ? { dateModified: release.published_at } : {}),
   description:
-    "CPU and GPU monitor for Windows that stores configurable long-term CPU, GPU, temperature, and sampled process history locally, helping you review what happened after gaming or heavy workloads. Also available for macOS and Linux.",
+    "Free, lightweight, and open-source hardware monitoring tool. Track CPU temperature, GPU usage, memory allocation, and system performance in real-time with beautiful graphs.",
   featureList: [
-    "Configurable long-term CPU, GPU, temperature, and sampled process history stored locally",
-    "Review performance after gaming and heavy workloads",
-    "Real-time CPU, GPU, temperature, and memory monitoring",
-    "No account and no outbound telemetry",
-    "Authenticode-signed Windows release installer",
-    "Open-source MIT-licensed software",
-    "Windows, macOS, and Linux support",
+    "Real-time CPU monitoring with per-core statistics",
+    "GPU temperature and utilization tracking",
+    "Memory usage analysis",
+    "Full system specifications view",
+    "30-day historical data and trend visualization",
+    "CPU temperature history and cooling insights",
+    "Process tracking for high CPU/GPU usage",
+    "Custom dashboard with wallpaper support",
+    "Lightweight Tauri/Rust architecture",
   ],
   screenshot: "https://hardviz.com/screenshots/slide-1.png",
   author: personRef,
@@ -88,10 +90,9 @@ const softwareJsonLd = {
 ---
 
 <Layout
-  title="HardwareVisualizer – CPU & GPU Monitor with Long-Term History"
+  title="HardwareVisualizer - Free Lightweight CPU, GPU & Memory Monitor for Windows, macOS & Linux"
   lang={lang}
-  description="CPU & GPU monitoring for Windows with configurable long-term CPU, GPU, temperature, and process history stored locally. Review gaming or heavy workloads afterward."
-  ogImageAlt="HardwareVisualizer CPU and GPU monitor with configurable long-term local history"
+  description="Free open-source hardware monitoring tool for Windows, macOS, and Linux. Real-time CPU, GPU & memory monitoring, full system specifications, and 30-day history in one lightweight alternative to HWiNFO and Task Manager."
   jsonLd={softwareJsonLd}
 >
   <Header />

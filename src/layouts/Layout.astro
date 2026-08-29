@@ -12,8 +12,6 @@ interface Props {
   title: string;
   lang: keyof typeof ui;
   description?: string;
-  /** Accessible description for the Open Graph image */
-  ogImageAlt?: string;
   /** JSON-LD structured data to inject */
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
@@ -22,7 +20,6 @@ const {
   title,
   lang,
   description = "Monitor your CPU, GPU, and memory with HardwareVisualizer — lightweight, open-source, and efficient.",
-  ogImageAlt = "HardwareVisualizer - Lightweight CPU, GPU, and Memory Monitoring Tool",
   jsonLd,
 } = Astro.props;
 
@@ -89,7 +86,10 @@ const t = useTranslations(lang);
       property="og:locale:alternate"
       content={ogLocale === "ja_JP" ? "en_US" : "ja_JP"}
     >
-    <meta property="og:image:alt" content={ogImageAlt}>
+    <meta
+      property="og:image:alt"
+      content="HardwareVisualizer - Lightweight CPU, GPU, and Memory Monitoring Tool"
+    >
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
@@ -97,7 +97,10 @@ const t = useTranslations(lang);
     <meta name="twitter:title" content={title}>
     <meta name="twitter:description" content={description}>
     <meta name="twitter:image" content={ogImageAbs}>
-    <meta name="twitter:image:alt" content={ogImageAlt}>
+    <meta
+      name="twitter:image:alt"
+      content="HardwareVisualizer - Lightweight CPU, GPU, and Memory Monitoring Tool"
+    >
 
     <!-- UX -->
     <meta name="theme-color" content="#0f172a">
