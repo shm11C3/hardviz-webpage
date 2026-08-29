@@ -65,18 +65,15 @@ const softwareJsonLd = {
   downloadUrl: githubAllReleasesUrl(),
   softwareVersion: release.version,
   ...(release.published_at ? { dateModified: release.published_at } : {}),
-  description:
-    "CPU温度・GPU使用率・メモリをリアルタイムで監視する無料の軽量オープンソースハードウェアモニタリングツール。美しいグラフでシステムパフォーマンスを追跡。",
+  description: t("seo.home.softwareDescription"),
   featureList: [
-    "CPU使用率・温度・周波数のリアルタイムモニタリング",
-    "GPU温度・使用率・VRAMの追跡",
-    "メモリ使用量の分析",
-    "システム仕様の一覧表示",
-    "30日間の履歴データとトレンド可視化",
-    "CPU温度履歴と冷却分析",
-    "高負荷プロセスの特定と追跡",
-    "カスタム壁紙対応のダッシュボード",
-    "Tauri/Rust製の超軽量アーキテクチャ",
+    t("seo.home.feature1"),
+    t("seo.home.feature2"),
+    t("seo.home.feature3"),
+    t("seo.home.feature4"),
+    t("seo.home.feature5"),
+    t("seo.home.feature6"),
+    t("seo.home.feature7"),
   ],
   screenshot: "https://hardviz.com/screenshots/slide-1.png",
   author: personRef,
@@ -91,9 +88,10 @@ const softwareJsonLd = {
 ---
 
 <Layout
-  title="HardwareVisualizer - 無料の軽量CPU・GPU・メモリモニター | Windows・macOS・Linux対応"
+  title={t("seo.home.title")}
   lang={lang}
-  description="CPU温度・GPU使用率・メモリのリアルタイム監視、システム仕様の確認、30日間の履歴分析を一つで行える無料オープンソースツール。タスクマネージャーやHWiNFOの軽量代替として最適。"
+  description={t("seo.home.description")}
+  ogImageAlt={t("seo.ogImageAlt")}
   jsonLd={softwareJsonLd}
 >
   <Header />
