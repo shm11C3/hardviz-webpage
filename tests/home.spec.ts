@@ -135,6 +135,7 @@ test("hero loads only the screenshot for the active theme", async ({
 
   await page.locator("#themeToggle").click();
   await expect(heroImages).toHaveCount(1);
+  await expect(heroImages.first()).toHaveAttribute("src", /.+/);
   await expect(heroImages.first()).not.toHaveAttribute("src", initialSrc ?? "");
 });
 
