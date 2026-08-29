@@ -1,8 +1,6 @@
 <script is:inline>
 (() => {
-  if (window.__landingDownloadTrackingInitialized) return;
-  window.__landingDownloadTrackingInitialized = true;
-
+  const pendingEventKey = "landing-download-click";
   const downloadPaths = new Set(["/download/", "/ja/download/"]);
   const locations = [
     ["#hero", "hero"],
@@ -11,6 +9,48 @@
     ["header", "header"],
     ["footer", "footer"],
   ];
+
+  const readPendingEvent = () => {
+    try {
+      const value = sessionStorage.getItem(pendingEventKey);
+      return value ? JSON.parse(value) : null;
+    } catch {
+      return null;
+    }
+  };
+
+  const clearPendingEvent = () => {
+    try {
+      sessionStorage.removeItem(pendingEventKey);
+    } catch {
+      // Keep navigation and analytics non-blocking when storage is unavailable.
+    }
+  };
+
+  if (downloadPaths.has(window.location.pathname)) {
+    const pendingEvent = readPendingEvent();
+    if (!pendingEvent) return;
+
+    const sendPendingEvent = () => {
+      if (!window.__analyticsLoaded || typeof window.gtag !== "function") {
+        return false;
+      }
+
+      window.gtag("event", "landing_download_click", pendingEvent);
+      clearPendingEvent();
+      return true;
+    };
+
+    if (!sendPendingEvent()) {
+      window.addEventListener("analytics:loaded", sendPendingEvent, {
+        once: true,
+      });
+    }
+    return;
+  }
+
+  if (window.__landingDownloadTrackingInitialized) return;
+  window.__landingDownloadTrackingInitialized = true;
 
   document.addEventListener("click", (event) => {
     if (!(event.target instanceof Element)) return;
@@ -26,15 +66,22 @@
       return;
     }
 
-    if (!window.__analyticsLoaded || typeof window.gtag !== "function") return;
+    if (!window.__analyticsLoaded) return;
 
     const ctaLocation =
       locations.find(([selector]) => link.closest(selector))?.[1] ?? "other";
 
-    window.gtag("event", "landing_download_click", {
-      cta_location: ctaLocation,
-      page_language: document.documentElement.lang,
-    });
+    try {
+      sessionStorage.setItem(
+        pendingEventKey,
+        JSON.stringify({
+          cta_location: ctaLocation,
+          page_language: document.documentElement.lang,
+        }),
+      );
+    } catch {
+      // Never interfere with download navigation when storage is unavailable.
+    }
   });
 })();
 </script>

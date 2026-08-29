@@ -2,6 +2,7 @@
 import DownloadPage from "../../components/DownloadPage.astro";
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
+import LandingDownloadAnalytics from "../../components/LandingDownloadAnalytics.astro";
 import { fetchLatestRelease } from "../../funcs/fetchReleaseData.ts";
 import {
   getLangFromUrl,
@@ -69,4 +70,5 @@ const softwareJsonLd = {
     />
   </main>
   <Footer />
+  <LandingDownloadAnalytics />
 </Layout>

@@ -183,17 +183,11 @@ test("landing download navigation is measured after analytics consent", async ({
   page,
 }) => {
   await page.goto("/");
-  const events = await page.evaluate(() => {
+  const pendingEvent = await page.evaluate(() => {
     const analyticsWindow = window as typeof window & {
       __analyticsLoaded: boolean;
-      __gtagEvents: unknown[][];
-      gtag: (...args: unknown[]) => void;
     };
     analyticsWindow.__analyticsLoaded = true;
-    analyticsWindow.__gtagEvents = [];
-    analyticsWindow.gtag = (...args: unknown[]) => {
-      analyticsWindow.__gtagEvents.push(args);
-    };
 
     const heroDownload = document.querySelector<HTMLAnchorElement>(
       '#hero a[href="/download/"]',
@@ -206,6 +200,27 @@ test("landing download navigation is measured after analytics consent", async ({
       new MouseEvent("click", { bubbles: true, cancelable: true }),
     );
 
+    return sessionStorage.getItem("landing-download-click");
+  });
+  expect(JSON.parse(pendingEvent ?? "null")).toEqual({
+    cta_location: "hero",
+    page_language: "en",
+  });
+
+  await page.goto("/download/");
+  const events = await page.evaluate(() => {
+    const analyticsWindow = window as typeof window & {
+      __analyticsLoaded: boolean;
+      __gtagEvents: unknown[][];
+      gtag: (...args: unknown[]) => void;
+    };
+    analyticsWindow.__analyticsLoaded = true;
+    analyticsWindow.__gtagEvents = [];
+    analyticsWindow.gtag = (...args: unknown[]) => {
+      analyticsWindow.__gtagEvents.push(args);
+    };
+    window.dispatchEvent(new CustomEvent("analytics:loaded"));
+
     return analyticsWindow.__gtagEvents;
   });
   expect(events).toContainEqual([
@@ -213,6 +228,9 @@ test("landing download navigation is measured after analytics consent", async ({
     "landing_download_click",
     { cta_location: "hero", page_language: "en" },
   ]);
+  expect(
+    await page.evaluate(() => sessionStorage.getItem("landing-download-click")),
+  ).toBeNull();
 });
 
 test("hero loads only the screenshot for the active theme", async ({
