@@ -157,6 +157,28 @@ test("insights cards explain what users can learn after a workload", async ({
   await expect(page.locator("#insights")).not.toContainText("履歴はPC内に保存");
 });
 
+test("Insights screenshot alternative text follows the page language", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.locator(".swiper-container").scrollIntoViewIfNeeded();
+  await expect(
+    page.locator('.screenshot-slot[data-screenshot="slide-2"] img'),
+  ).toHaveAttribute(
+    "alt",
+    "HardwareVisualizer Insights - review historical CPU and GPU usage after a workload",
+  );
+
+  await page.goto("/ja/");
+  await page.locator(".swiper-container").scrollIntoViewIfNeeded();
+  await expect(
+    page.locator('.screenshot-slot[data-screenshot="slide-2"] img'),
+  ).toHaveAttribute(
+    "alt",
+    "処理後にCPUとGPUの使用履歴を振り返るHardwareVisualizerのInsights画面",
+  );
+});
+
 test("landing download navigation is measured after analytics consent", async ({
   page,
 }) => {

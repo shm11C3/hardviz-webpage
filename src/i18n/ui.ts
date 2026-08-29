@@ -43,6 +43,8 @@ export const ui = {
     "hero.retention": "30 days by default",
     "hero.screenshotAlt":
       "HardwareVisualizer Insights showing CPU and memory usage history over time",
+    "screenshots.insightsAlt":
+      "HardwareVisualizer Insights - review historical CPU and GPU usage after a workload",
     "hero.trustLabel": "Privacy and distribution assurances",
     "hero.trust.noAccount": "No account",
     "hero.trust.noTelemetry": "No telemetry",
@@ -313,6 +315,8 @@ export const ui = {
     "hero.retention": "初期設定30日",
     "hero.screenshotAlt":
       "CPUとメモリの使用履歴を時系列で表示するHardwareVisualizerのInsights画面",
+    "screenshots.insightsAlt":
+      "処理後にCPUとGPUの使用履歴を振り返るHardwareVisualizerのInsights画面",
     "hero.trustLabel": "プライバシーと配布の信頼性",
     "hero.trust.noAccount": "アカウント不要",
     "hero.trust.noTelemetry": "テレメトリなし",
