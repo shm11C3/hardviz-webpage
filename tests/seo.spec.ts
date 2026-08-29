@@ -165,7 +165,7 @@ test("JA home metadata and JSON-LD use the same monitor positioning", async ({
   expect(jsonLd.description).toContain("ハードウェアモニター");
   expect(jsonLd.description).toContain("何が起きていたか振り返れる");
   expect(jsonLd.featureList).toContain(
-    "CPU、GPU、温度、プロセスの履歴をPC内に保存",
+    "CPU、GPU、温度、サンプリングされたプロセスの履歴をPC内に保存",
   );
   expect(jsonLd.featureList).toContain(
     "ゲームや重い処理のあとに何が起きていたか確認",

@@ -294,7 +294,8 @@ export const ui = {
       "Windows、macOS、Linux対応のハードウェアモニター。CPU、GPU、温度、プロセスをリアルタイムで確認し、ゲームや重い処理のあとに何が起きていたか振り返れます。",
     "seo.home.softwareDescription":
       "CPU、GPU、温度、メモリ、プロセスをリアルタイムで確認し、PC内に保存した履歴から、ゲームや重い処理のあとに何が起きていたか振り返れるクロスプラットフォーム対応ハードウェアモニター。",
-    "seo.home.feature1": "CPU、GPU、温度、プロセスの履歴をPC内に保存",
+    "seo.home.feature1":
+      "CPU、GPU、温度、サンプリングされたプロセスの履歴をPC内に保存",
     "seo.home.feature2": "ゲームや重い処理のあとに何が起きていたか確認",
     "seo.home.feature3": "CPU、GPU、温度、メモリのリアルタイム監視",
     "seo.home.feature4": "アカウント不要・外部テレメトリなし",
