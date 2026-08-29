@@ -34,17 +34,34 @@ test("JA home canonical URL", async ({ page }) => {
 
 test("EN home OG meta tags", async ({ page }) => {
   await page.goto("/");
+  const expectedTitle =
+    "HardwareVisualizer – CPU & GPU Monitor with Long-Term History";
+  const expectedDescription =
+    "CPU & GPU monitoring for Windows with configurable long-term CPU, GPU, temperature, and process history stored locally. Review gaming or heavy workloads afterward.";
+  await expect(page).toHaveTitle(expectedTitle);
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+    "content",
+    expectedDescription,
+  );
   await expect(page.locator('meta[property="og:type"]')).toHaveAttribute(
     "content",
     "website",
   );
-  const ogTitle = await page
-    .locator('meta[property="og:title"]')
-    .getAttribute("content");
-  expect(ogTitle).toBeTruthy();
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+    "content",
+    expectedTitle,
+  );
+  await expect(page.locator('meta[property="og:description"]')).toHaveAttribute(
+    "content",
+    expectedDescription,
+  );
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
     "content",
     /og-image\.png/,
+  );
+  await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute(
+    "content",
+    "HardwareVisualizer CPU and GPU monitor with configurable long-term local history",
   );
   await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute(
     "content",
@@ -86,6 +103,53 @@ test("home page JSON-LD has SoftwareApplication", async ({ page }) => {
   });
   expect(jsonLd).not.toBeNull();
   expect(jsonLd.name).toBe("HardwareVisualizer");
+  expect(jsonLd.description).toContain("sampled process history locally");
+  expect(jsonLd.featureList).toContain(
+    "Configurable long-term CPU, GPU, temperature, and sampled process history stored locally",
+  );
+  expect(jsonLd.featureList).toContain("No account and no outbound telemetry");
+  expect(jsonLd.featureList).toContain(
+    "Authenticode-signed Windows release installer",
+  );
+});
+
+test("JA home metadata and JSON-LD use the same history positioning", async ({
+  page,
+}) => {
+  await page.goto("/ja/");
+  const expectedTitle = "HardwareVisualizer – 長期履歴対応CPU・GPUモニター";
+  const expectedDescription =
+    "Windows向けCPU・GPUモニター。CPU、GPU、温度、プロセスの長期履歴をPC内に保存し、ゲームや重い処理のあとに振り返れます。保存期間は変更可能で、macOS・Linuxにも対応。";
+
+  await expect(page).toHaveTitle(expectedTitle);
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+    "content",
+    expectedDescription,
+  );
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+    "content",
+    expectedTitle,
+  );
+  await expect(page.locator('meta[property="og:description"]')).toHaveAttribute(
+    "content",
+    expectedDescription,
+  );
+
+  const jsonLd = await page.evaluate(() => {
+    const scripts = document.querySelectorAll(
+      'script[type="application/ld+json"]',
+    );
+    for (const script of scripts) {
+      const data = JSON.parse(script.textContent || "{}");
+      if (data["@type"] === "SoftwareApplication") return data;
+    }
+    return null;
+  });
+  expect(jsonLd).not.toBeNull();
+  expect(jsonLd.description).toContain(
+    "CPU、GPU、温度、プロセスの長期履歴をPC内に保存",
+  );
+  expect(jsonLd.featureList).toContain("アカウント不要・外部テレメトリなし");
 });
 
 test("FAQ page JSON-LD has FAQPage type", async ({ page }) => {

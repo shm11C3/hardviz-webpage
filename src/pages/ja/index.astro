@@ -65,17 +65,15 @@ const softwareJsonLd = {
   softwareVersion: release.version,
   ...(release.published_at ? { dateModified: release.published_at } : {}),
   description:
-    "CPU温度・GPU使用率・メモリをリアルタイムで監視する無料の軽量オープンソースハードウェアモニタリングツール。美しいグラフでシステムパフォーマンスを追跡。",
+    "CPU、GPU、温度、プロセスの長期履歴をPC内に保存し、ゲームや重い処理のあとに何が起きていたか振り返れるWindows向けCPU・GPUモニター。保存期間は変更可能で、macOS・Linuxにも対応。",
   featureList: [
-    "CPU使用率・温度・周波数のリアルタイムモニタリング",
-    "GPU温度・使用率・VRAMの追跡",
-    "メモリ使用量の分析",
-    "システム仕様の一覧表示",
-    "30日間の履歴データとトレンド可視化",
-    "CPU温度履歴と冷却分析",
-    "高負荷プロセスの特定と追跡",
-    "カスタム壁紙対応のダッシュボード",
-    "Tauri/Rust製の超軽量アーキテクチャ",
+    "保存期間を変更できるCPU、GPU、温度、プロセスの長期履歴をPC内に保存",
+    "ゲームや重い処理のあとのパフォーマンス確認",
+    "CPU、GPU、温度、メモリのリアルタイム監視",
+    "アカウント不要・外部テレメトリなし",
+    "Authenticode署名済みWindowsリリースインストーラ",
+    "MITライセンスのオープンソースソフトウェア",
+    "Windows、macOS、Linux対応",
   ],
   screenshot: "https://hardviz.com/screenshots/slide-1.png",
   author: personRef,
@@ -90,9 +88,10 @@ const softwareJsonLd = {
 ---
 
 <Layout
-  title="HardwareVisualizer - 無料の軽量CPU・GPU・メモリモニター | Windows・macOS・Linux対応"
+  title="HardwareVisualizer – 長期履歴対応CPU・GPUモニター"
   lang={lang}
-  description="CPU温度・GPU使用率・メモリのリアルタイム監視、システム仕様の確認、30日間の履歴分析を一つで行える無料オープンソースツール。タスクマネージャーやHWiNFOの軽量代替として最適。"
+  description="Windows向けCPU・GPUモニター。CPU、GPU、温度、プロセスの長期履歴をPC内に保存し、ゲームや重い処理のあとに振り返れます。保存期間は変更可能で、macOS・Linuxにも対応。"
+  ogImageAlt="CPU・GPUなどの長期履歴をPC内に保存するHardwareVisualizer"
   jsonLd={softwareJsonLd}
 >
   <Header />
