@@ -29,7 +29,7 @@ export const ui = {
       "Real-time CPU, GPU, temperature, and memory monitoring",
     "seo.home.feature4": "No account and no outbound telemetry",
     "seo.home.feature5": "Authenticode-signed Windows release installer",
-    "seo.home.feature6": "Open-source MIT-licensed software",
+    "seo.home.feature6": "Open-source software licensed under GPL-3.0-or-later",
     "seo.home.feature7": "Windows, macOS, and Linux support",
     "hero.eyebrow": "Cross-platform CPU & GPU hardware monitor",
     "hero.title": "See what made your PC hot or slow.",
@@ -100,7 +100,7 @@ export const ui = {
       "Built with Tauri for minimal resource usage, ensuring the monitor itself doesn't impact system performance.",
     "features.card6.title": "Cross-Platform & Open Source",
     "features.card6.description":
-      "Built in the open for Windows, macOS, and Linux under the MIT license.",
+      "Built in the open for Windows, macOS, and Linux under the GPL-3.0-or-later license.",
     "download.title": "Download HardwareVisualizer",
     "download.description":
       "Available for Windows, macOS, and Linux OS. Free and open source.",
@@ -238,7 +238,7 @@ export const ui = {
       "HardwareVisualizer is a free, open-source, cross-platform hardware monitoring tool. It lets you track CPU temperature, GPU usage, memory allocation, and system performance in real-time with beautiful graphs and minimal system impact.",
     "faq.q2": "Is HardwareVisualizer free?",
     "faq.a2":
-      "Yes, HardwareVisualizer is completely free and open-source under the MIT license. Download it only from hardviz.com, GitHub Releases, or Winget on Windows where available; third-party mirrors, file-sharing links, YouTube description links, and password-protected archives are not official.",
+      "Yes, HardwareVisualizer is completely free and open-source under the GNU General Public License v3.0 or later (GPL-3.0-or-later). Versions released before the relicense remain available under the MIT license. Download it only from hardviz.com, GitHub Releases, or Winget on Windows where available; third-party mirrors, file-sharing links, YouTube description links, and password-protected archives are not official.",
     "faq.q3": "Which operating systems are supported?",
     "faq.a3":
       "HardwareVisualizer supports Windows 10, Windows 11, macOS (Apple Silicon officially supported, Intel experimental), and major Linux distributions (Debian/Ubuntu, RPM-based distros, AppImage).",
@@ -302,7 +302,8 @@ export const ui = {
     "seo.home.feature3": "CPU、GPU、温度、メモリのリアルタイム監視",
     "seo.home.feature4": "アカウント不要・外部テレメトリなし",
     "seo.home.feature5": "Authenticode署名済みWindowsリリースインストーラ",
-    "seo.home.feature6": "MITライセンスのオープンソースソフトウェア",
+    "seo.home.feature6":
+      "GPL-3.0-or-laterライセンスのオープンソースソフトウェア",
     "seo.home.feature7": "Windows、macOS、Linux対応",
     "hero.eyebrow": "クロスプラットフォーム対応CPU・GPUハードウェアモニター",
     "hero.title": "See what made your PC hot or slow.",
@@ -372,7 +373,7 @@ export const ui = {
       "Rust製でリソース消費が最小限。モニター自体がシステムに負荷をかけません。",
     "features.card6.title": "クロスプラットフォーム・OSS",
     "features.card6.description":
-      "Windows、macOS、Linux向けにMITライセンスで公開・開発されています。",
+      "Windows、macOS、Linux向けにGPL-3.0-or-laterライセンスで公開・開発されています。",
     "download.title": "HardwareVisualizerをダウンロード",
     "download.description":
       "Windows、macOS、Linux OSで利用可能。無料でオープンソース。",
@@ -508,7 +509,7 @@ export const ui = {
       "HardwareVisualizerは、マルチプラットフォーム対応の無料オープンソースのハードウェアモニタリングツールです。CPU温度、GPU使用率、メモリ割り当て、システムパフォーマンスを美しいグラフでリアルタイムに追跡でき、システムへの影響も最小限です。",
     "faq.q2": "HardwareVisualizerは無料ですか？",
     "faq.a2":
-      "はい、HardwareVisualizerは完全に無料で、MITライセンスのオープンソースです。ダウンロードは hardviz.com、GitHub Releases、または利用可能な場合はWindowsのWingetのみを利用してください。第三者のダウンロードサイト、ファイル共有リンク、YouTube概要欄のリンク、パスワード付きZIPは公式ではありません。",
+      "はい、HardwareVisualizerは完全に無料で、GNU General Public License v3.0以降（GPL-3.0-or-later）のオープンソースです。ライセンス変更前にリリースされたバージョンは引き続きMITライセンスで利用できます。ダウンロードは hardviz.com、GitHub Releases、または利用可能な場合はWindowsのWingetのみを利用してください。第三者のダウンロードサイト、ファイル共有リンク、YouTube概要欄のリンク、パスワード付きZIPは公式ではありません。",
     "faq.q3": "どのOSに対応していますか？",
     "faq.a3":
       "HardwareVisualizerはWindows 10、Windows 11、macOS（Apple Silicon正式対応、Intel実験的）、および主要なLinuxディストリビューション（Debian/Ubuntu、RPM系、AppImage）に対応しています。",
