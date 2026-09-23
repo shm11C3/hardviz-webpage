@@ -174,7 +174,7 @@ export const ui = {
     "footer.product": "Product",
     "footer.features": "Features",
     "footer.download": "Download",
-    "footer.specs": "Specs",
+    "footer.specs": "Compatibility",
     "footer.changelog": "Changelog",
     "footer.resources": "Resources",
     "footer.faq": "FAQ",
@@ -186,43 +186,225 @@ export const ui = {
     "footer.about": "About",
     "footer.privacy": "Privacy",
 
-    "specs.title": "System Requirements & Limitations",
-    "specs.supportedOS.title": "Supported OS & Architecture",
-    "specs.supportedOS.os": "OS",
-    "specs.supportedOS.architecture": "Architecture",
-    "specs.supportedOS.status": "Status",
-    "specs.supportedOS.notes": "Notes",
-    "specs.supportedOS.windows.notes": "Latest updates recommended",
-    "specs.supportedOS.linux.notes": "Some limitations on Wayland environments",
-    "specs.supportedOS.macos.notes": "Under development / Experimental",
-    "specs.supportedOS.macos.appleSilicon.notes": "Officially supported",
-    "specs.supportedOS.macos.intel.notes":
-      "Experimental - please report issues on GitHub if you encounter problems",
-    "specs.supportedHardware.title": "Supported CPU/GPU",
-    "specs.supportedHardware.component": "Component",
-    "specs.supportedHardware.supported": "Supported",
-    "specs.supportedHardware.cpu.notes":
-      "Embedded/virtual environments may not be fully supported",
-    "specs.supportedHardware.nvidia.notes": "Mainstream drivers required.",
-    "specs.supportedHardware.amd.notes":
-      "Mainstream drivers required. Some features may be limited or values may be less accurate. Support for AMD GPUs is currently under improvement.",
-    "specs.supportedHardware.intel.notes":
-      "Mainstream drivers required. Some features may be limited or values may be less accurate. Support for Intel GPUs is currently under improvement.",
-    "specs.supportedLanguages.title": "Supported Languages",
-    "specs.supportedLanguages.language": "Language",
-    "specs.supportedLanguages.status": "Status",
-    "specs.supportedLanguages.russian": "Русский (Russian)",
-    "specs.supportedLanguages.howToAdd":
-      "If you want to add a supported language, please create an issue on GitHub to suggest it.",
-    "specs.limitations.title": "Known Limitations & Notes",
-    "specs.limitations.item1":
-      "Some older or special hardware may not be fully supported.",
-    "specs.limitations.item2":
-      "Some features are limited on Linux Wayland environments.",
-    "specs.limitations.item3":
-      "Administrator/root privileges may be required in some cases.",
-    "specs.limitations.item4":
-      "Specifications may change without notice in beta/development versions.",
+    "specs.title": "Compatibility Notes",
+    "specs.docs.eyebrow": "Compatibility notes",
+    "specs.docs.title": "HardwareVisualizer compatibility notes",
+    "specs.docs.description":
+      "A practical reference for what HardwareVisualizer can show, where coverage is best effort, how the app can be customized, and how to verify official downloads before installing.",
+    "specs.docs.primaryCta": "Download from official sources",
+    "specs.docs.secondaryCta": "Verify release files",
+    "specs.nav.ariaLabel": "Compatibility page sections",
+    "specs.nav.title": "On this page",
+    "specs.nav.overview": "Overview",
+    "specs.nav.operatingSystems": "Operating systems",
+    "specs.nav.signals": "Signals",
+    "specs.nav.appearance": "Appearance",
+    "specs.nav.storageComponents": "Storage Health",
+    "specs.nav.privacyVerification": "Privacy and verification",
+    "specs.section.overview.eyebrow": "Before you install",
+    "specs.section.overview.title": "What the app is built to keep visible",
+    "specs.section.overview.description":
+      "HardwareVisualizer is a free, open-source desktop monitor for people who want live hardware state, short-window graphs, and recent history in one readable surface.",
+    "specs.overview.distribution.label": "Official distribution",
+    "specs.overview.distribution.value":
+      "GitHub Releases, hardviz.com, and Winget where available.",
+    "specs.overview.os.label": "Desktop coverage",
+    "specs.overview.os.value":
+      "Windows 10/11, macOS builds for Apple Silicon and Intel, plus Linux packages for common desktop distributions.",
+    "specs.overview.history.label": "Historical insight",
+    "specs.overview.history.value":
+      "CPU, memory, GPU, and process history are kept for up to 30 days by default.",
+    "specs.overview.privacy.label": "Privacy posture",
+    "specs.overview.privacy.value":
+      "No outbound telemetry for collected hardware data.",
+    "specs.overview.customization.label": "Customization",
+    "specs.overview.customization.value":
+      "Color themes, graph colors, background images, transparent UI, glass blur, and tray widget preferences.",
+    "specs.overview.languages.label": "Languages",
+    "specs.overview.languages.value":
+      "The app supports English, Japanese, and Russian.",
+    "specs.overview.visual.title": "Dashboard reference.",
+    "specs.overview.visual.caption":
+      "The interface is designed for a glanceable hardware overview rather than a dense diagnostics console.",
+    "specs.section.compat.eyebrow": "Platform fit",
+    "specs.os.title": "Operating systems and installers",
+    "specs.os.description":
+      "The app targets desktop operating systems, but sensor depth can vary by OS APIs, device files, drivers, and vendor SDKs.",
+    "specs.section.signals.eyebrow": "Hardware coverage",
+    "specs.signals.title": "Signals and feature coverage",
+    "specs.signals.description":
+      "The matrix separates always-useful dashboard surfaces from best-effort sensor paths and planned monitoring work by operating system.",
+    "specs.matrix.feature": "Signal / feature",
+    "specs.matrix.cpu.label": "CPU / RAM",
+    "specs.matrix.cpuTemperature.label": "CPU / sensor temperature",
+    "specs.matrix.storage.label": "Storage Health",
+    "specs.matrix.fan.label": "Fan",
+    "specs.matrix.language.label": "Language",
+    "specs.matrix.cpu.windows":
+      "Live usage, memory details, and history are core supported surfaces.",
+    "specs.matrix.cpu.macos":
+      "Live usage, memory details, and history are core supported surfaces.",
+    "specs.matrix.cpu.linux":
+      "Live usage, memory details, and history are core supported surfaces.",
+    "specs.matrix.gpu.windows":
+      "Deepest coverage, especially NVIDIA; AMD and Intel depend on driver and API availability.",
+    "specs.matrix.gpu.macos":
+      "Partial coverage through macOS APIs; visible counters vary by device.",
+    "specs.matrix.gpu.linux":
+      "Partial coverage through NVIDIA and DRM paths; permissions and drivers matter.",
+    "specs.matrix.cpuTemperature.windows":
+      "ACPI thermal zones are best effort; PawnIO can improve CPU package temperature on supported CPUs.",
+    "specs.matrix.cpuTemperature.macos":
+      "Best effort. Sensor exposure depends on the machine and macOS APIs.",
+    "specs.matrix.cpuTemperature.linux":
+      "Best effort. Sensor access can depend on device files, drivers, and privileges.",
+    "specs.matrix.storage.windows":
+      "Native and fallback paths can expose SMART or NVMe health fields when available.",
+    "specs.matrix.storage.macos":
+      "Native paths can expose storage summary and selected health fields when available.",
+    "specs.matrix.storage.linux":
+      "Native paths and smartctl can improve SMART or NVMe health coverage.",
+    "specs.matrix.network.windows":
+      "Interface, IP, subnet, and gateway data are available; traffic usage is planned.",
+    "specs.matrix.network.macos":
+      "Interface, IP, subnet, and gateway data are available; traffic usage is planned.",
+    "specs.matrix.network.linux":
+      "Interface, IP, subnet, and gateway data are available; traffic usage is planned.",
+    "specs.matrix.process.windows":
+      "Live Process Table and Process Insight connect current load with history.",
+    "specs.matrix.process.macos":
+      "Live Process Table and Process Insight connect current load with history.",
+    "specs.matrix.process.linux":
+      "Live Process Table and Process Insight connect current load with history.",
+    "specs.matrix.fan.windows":
+      "Cross-vendor fan monitoring remains roadmap and research work.",
+    "specs.matrix.fan.macos":
+      "Cross-vendor fan monitoring remains roadmap and research work.",
+    "specs.matrix.fan.linux":
+      "Cross-vendor fan monitoring remains roadmap and research work.",
+    "specs.matrix.language.windows":
+      "English, Japanese, and Russian are supported in the app.",
+    "specs.matrix.language.macos":
+      "English, Japanese, and Russian are supported in the app.",
+    "specs.matrix.language.linux":
+      "English, Japanese, and Russian are supported in the app.",
+    "specs.signals.cpuTemperature.coverage":
+      "CPU package and thermal-zone temperature where available",
+    "specs.section.appearance.eyebrow": "Readable on your desk",
+    "specs.appearance.title": "Appearance and customization",
+    "specs.appearance.description":
+      "HardwareVisualizer is meant to stay open, so visual settings are part of the product surface rather than a decorative afterthought.",
+    "specs.appearance.colorMode.name": "Color themes",
+    "specs.appearance.colorMode.value":
+      "System, Light, Dark, Dark+, Sky, Grove, Sunset, Nebula, Orbit, Cappuccino, Espresso.",
+    "specs.appearance.colorMode.notes":
+      "Theme choices cover neutral, bright, dark, and warm setups without forcing a single visual personality.",
+    "specs.appearance.graphColors.name": "Graph colors",
+    "specs.appearance.graphColors.value":
+      "Per-metric line colors for CPU, memory, and GPU graphs.",
+    "specs.appearance.graphColors.notes":
+      "Useful when the app is kept on a side display and the important metric needs to be recognizable immediately.",
+    "specs.appearance.background.name": "Background images",
+    "specs.appearance.background.value":
+      "Local background image selection with opacity control.",
+    "specs.appearance.background.notes":
+      "Background assets stay local and can be toned down so metrics remain readable.",
+    "specs.appearance.transparent.name": "Transparent UI",
+    "specs.appearance.transparent.value":
+      "Transparent window surfaces with adjustable glass blur.",
+    "specs.appearance.transparent.notes":
+      "The glass effect is configurable, and interactive controls keep opaque enough contrast for day-to-day use.",
+    "specs.appearance.tray.name": "Tray widget",
+    "specs.appearance.tray.value":
+      "CPU, GPU, and GPU temperature metrics, with ordering and visibility preferences.",
+    "specs.appearance.tray.notes":
+      "Close-to-tray behavior and compact metric access help the monitor stay available without occupying the full desktop.",
+    "specs.appearance.preferences.name": "Display preferences",
+    "specs.appearance.preferences.value":
+      "Language, temperature unit, dashboard visibility, and chart display settings.",
+    "specs.appearance.preferences.notes":
+      "These settings make the app more useful across regions, Celsius/Fahrenheit habits, and different monitoring workflows.",
+    "specs.section.storage.eyebrow": "Deeper hardware paths",
+    "specs.storage.title": "Storage Health and optional components",
+    "specs.storage.description":
+      "Optional components are not bundled, downloaded, installed, or enabled automatically. The app only explains them when a fallback path still leaves visible hardware data unavailable.",
+    "specs.storage.live.title": "Live Storage Health",
+    "specs.storage.live.body":
+      "A cheap native read path refreshes focused storage information without running smartctl on the live polling cadence.",
+    "specs.storage.record.title": "Storage Health Record",
+    "specs.storage.record.body":
+      "Daily health records can include SMART overall health, temperature, NVMe percentage used, available spare, reallocated sectors, pending sectors, offline uncorrectable sectors, and NVMe media errors when available.",
+    "specs.storage.pawnio.title": "PawnIO for CPU package temperature",
+    "specs.storage.pawnio.body":
+      "On Windows, supported Intel and AMD CPUs can expose package temperature through PawnIO modules when the user provides the driver/runtime and sufficient privileges.",
+    "specs.storage.smartctl.title": "smartctl for richer storage signals",
+    "specs.storage.smartctl.body":
+      "smartmontools can improve Storage Health when native OS paths cannot read important SMART or NVMe health fields.",
+    "specs.section.verification.eyebrow": "Trust model",
+    "specs.verification.title": "Privacy and download verification",
+    "specs.verification.description":
+      "HardwareVisualizer is open source, avoids outbound telemetry for collected hardware data, and documents how to verify official release files.",
+    "specs.verification.official.name": "Official sources",
+    "specs.verification.official.detail":
+      "Use GitHub Releases, hardviz.com, or Winget where available. Third-party mirrors and password-protected archives are not official.",
+    "specs.verification.checksums.name": "SHA-256 checksums",
+    "specs.verification.checksums.detail":
+      "SHA256SUMS.txt is published for release assets from v1.8.1 onward.",
+    "specs.verification.attestations.name": "GitHub Artifact Attestations",
+    "specs.verification.attestations.detail":
+      "Release artifacts include GitHub Artifact Attestations from v1.8.1 onward where available.",
+    "specs.verification.windows.name": "Windows signing",
+    "specs.verification.windows.detail":
+      "Windows installers are Authenticode signed from v1.9.0 onward.",
+    "specs.verification.macos.name": "macOS signing",
+    "specs.verification.macos.detail":
+      "macOS downloads are signed with Apple Developer ID and notarized.",
+    "specs.verification.linux.name": "Linux packages",
+    "specs.verification.linux.detail":
+      "Linux package signing is not currently provided through GPG, Sigstore, or repository metadata; use checksums and attestations instead.",
+    "specs.hero.imageAlt":
+      "HardwareVisualizer dashboard showing live hardware metrics",
+    "specs.sources.readme": "GitHub README",
+    "specs.sources.externalComponents": "Optional components",
+    "specs.sources.devStory": "Development story",
+    "specs.sources.verification": "Verification guide",
+    "specs.signal.gpu.label": "GPU",
+    "specs.signal.process.label": "Process",
+    "specs.signal.network.label": "Network",
+    "specs.compat.name": "Area",
+    "specs.compat.coverage": "Coverage",
+    "specs.compat.status": "Status",
+    "specs.compat.notes": "Notes",
+    "specs.compat.status.supported": "Supported",
+    "specs.compat.status.partial": "Partial",
+    "specs.compat.status.bestEffort": "Best effort",
+    "specs.compat.status.planned": "Planned",
+    "specs.compat.status.experimental": "Experimental",
+    "specs.compat.windows.coverage": "Windows 10/11, x64",
+    "specs.compat.windows.notes":
+      "MSI and setup installers are available, and Winget is an official Windows installation path where available.",
+    "specs.compat.linux.coverage": "Debian/Ubuntu, RPM-based distros, AppImage",
+    "specs.compat.linux.notes":
+      "Some device files and sensors may require elevated privileges. Desktop-environment limitations can apply.",
+    "specs.compat.macos.appleSilicon.name": "macOS (Apple Silicon)",
+    "specs.compat.macos.appleSilicon.coverage": "Apple Silicon (ARM64)",
+    "specs.compat.macos.appleSilicon.notes":
+      "macOS releases are signed and notarized. Sensor coverage depends on the machine and OS API availability.",
+    "specs.compat.macos.intel.name": "macOS (Intel)",
+    "specs.compat.macos.intel.coverage": "Intel (x64)",
+    "specs.compat.macos.intel.notes":
+      "Intel macOS builds are experimental. Sensor coverage depends on the machine and OS API availability.",
+    "specs.compat.cpu.coverage": "CPU and RAM usage, memory details, history",
+    "specs.compat.gpu.coverage":
+      "NVIDIA full path, AMD and Intel partial paths",
+    "specs.compat.storage.coverage":
+      "Storage summary, Storage Health records, Live Storage Health",
+    "specs.compat.network.coverage": "Interface, IP, subnet, and gateway data",
+    "specs.compat.process.coverage": "Live Process Table and Process Insight",
+    "specs.compat.fan.coverage": "Fan monitoring",
+    "specs.compat.language.coverage": "English, Japanese, Russian",
+    "specs.cta.download": "Go to downloads",
+    "specs.cta.verify": "Open verification guide",
 
     "a11y.skipToMain": "Skip to main content",
 
@@ -254,7 +436,7 @@ export const ui = {
     "faq.q7": "Can I request new features or contribute?",
     "faq.a7":
       "Absolutely! You can request new hardware support, themes, languages, and other features by creating an issue on GitHub. Contributions are always welcome — feel free to submit pull requests or join the discussions.",
-    "faq.specsLink": "View system requirements",
+    "faq.specsLink": "Compatibility",
     "faq.githubLink": "Create an issue on GitHub",
     "faq.verificationGuideLink": "Installer verification",
     "faq.viewAll": "View all FAQs",
@@ -445,7 +627,7 @@ export const ui = {
     "footer.product": "製品",
     "footer.features": "機能",
     "footer.download": "ダウンロード",
-    "footer.specs": "仕様",
+    "footer.specs": "対応環境",
     "footer.changelog": "変更履歴",
     "footer.resources": "リソース",
     "footer.faq": "FAQ",
@@ -457,43 +639,226 @@ export const ui = {
     "footer.about": "About",
     "footer.privacy": "プライバシー",
 
-    "specs.title": "システム要件と制限事項",
-    "specs.supportedOS.title": "対応OS・アーキテクチャ",
-    "specs.supportedOS.os": "OS",
-    "specs.supportedOS.architecture": "アーキテクチャ",
-    "specs.supportedOS.status": "状態",
-    "specs.supportedOS.notes": "備考",
-    "specs.supportedOS.windows.notes": "最新のアップデートを推奨",
-    "specs.supportedOS.linux.notes": "Wayland環境では一部制限あり",
-    "specs.supportedOS.macos.notes": "開発中 / 実験的",
-    "specs.supportedOS.macos.appleSilicon.notes": "正式サポート",
-    "specs.supportedOS.macos.intel.notes":
-      "実験的サポート - 問題があればGitHubでIssueを作成してください",
-    "specs.supportedHardware.title": "対応CPU/GPU",
-    "specs.supportedHardware.component": "コンポーネント",
-    "specs.supportedHardware.supported": "対応状況",
-    "specs.supportedHardware.cpu.notes":
-      "組み込み環境・仮想環境では完全に対応していない場合があります",
-    "specs.supportedHardware.nvidia.notes": "主流ドライバーが必要です。",
-    "specs.supportedHardware.amd.notes":
-      "主流ドライバーが必要です。一部機能が制限されるか、値の精度が低下する場合があります。AMD GPU対応は現在改善中です。",
-    "specs.supportedHardware.intel.notes":
-      "主流ドライバーが必要です。一部機能が制限されるか、値の精度が低下する場合があります。Intel GPU対応は現在改善中です。",
-    "specs.supportedLanguages.title": "対応言語",
-    "specs.supportedLanguages.language": "言語",
-    "specs.supportedLanguages.status": "状態",
-    "specs.supportedLanguages.russian": "Русский (ロシア語)",
-    "specs.supportedLanguages.howToAdd":
-      "対応言語を追加したい場合は、GitHubでIssueを作成して提案してください。",
-    "specs.limitations.title": "既知の制限事項・注意点",
-    "specs.limitations.item1":
-      "一部の古いハードウェアや特殊なハードウェアは完全に対応していない場合があります。",
-    "specs.limitations.item2":
-      "Linux Wayland環境では一部機能に制限があります。",
-    "specs.limitations.item3":
-      "場合によっては管理者権限/root権限が必要になることがあります。",
-    "specs.limitations.item4":
-      "ベータ版・開発版では仕様が予告なく変更される場合があります。",
+    "specs.title": "対応環境ノート",
+    "specs.docs.eyebrow": "対応環境について",
+    "specs.docs.title": "対応環境ノート",
+    "specs.docs.description":
+      "HardwareVisualizerが表示できる情報、ベストエフォートになる範囲、見た目のカスタマイズ、公式ダウンロードの検証方法を、インストール前に確認できるリファレンスです。",
+    "specs.docs.primaryCta": "公式導線からダウンロード",
+    "specs.docs.secondaryCta": "リリースファイルを検証",
+    "specs.nav.ariaLabel": "対応環境ページのセクション",
+    "specs.nav.title": "このページの内容",
+    "specs.nav.overview": "概要",
+    "specs.nav.operatingSystems": "対応OS",
+    "specs.nav.signals": "計測項目",
+    "specs.nav.appearance": "外観",
+    "specs.nav.storageComponents": "ストレージ",
+    "specs.nav.privacyVerification": "プライバシーと検証",
+    "specs.section.overview.eyebrow": "インストール前に",
+    "specs.section.overview.title":
+      "見える場所に置いておくためのハードウェア情報",
+    "specs.section.overview.description":
+      "HardwareVisualizerは、ライブのハードウェア状態、短い時間窓のグラフ、直近の履歴を一つの読みやすい画面にまとめる、無料・オープンソースのデスクトップモニターです。",
+    "specs.overview.distribution.label": "公式配布元",
+    "specs.overview.distribution.value":
+      "GitHub Releases、hardviz.com、利用可能な場合はWinget。",
+    "specs.overview.os.label": "対応OS",
+    "specs.overview.os.value":
+      "Windows 10/11、Apple Silicon/Intel向けmacOSビルド、主要Linuxデスクトップ向けパッケージ。",
+    "specs.overview.history.label": "履歴データ",
+    "specs.overview.history.value":
+      "CPU、メモリ、GPU、プロセスの履歴は標準で最大30日分保存されます。",
+    "specs.overview.privacy.label": "プライバシー",
+    "specs.overview.privacy.value":
+      "収集したハードウェア情報の外部テレメトリはありません。",
+    "specs.overview.customization.label": "カスタマイズ",
+    "specs.overview.customization.value":
+      "カラーテーマ、グラフ色、背景画像、透明UI、ガラスぼかし、トレイウィジェット設定。",
+    "specs.overview.languages.label": "対応言語",
+    "specs.overview.languages.value":
+      "アプリは英語、日本語、ロシア語に対応しています。",
+    "specs.overview.visual.title": "ダッシュボードの例。",
+    "specs.overview.visual.caption":
+      "細かい診断コンソールではなく、ひと目で読めるハードウェア概要を重視したUIです。",
+    "specs.section.compat.eyebrow": "対応プラットフォーム",
+    "specs.os.title": "OSとインストーラ",
+    "specs.os.description":
+      "デスクトップOSを対象にしていますが、センサーの深さはOS API、デバイスファイル、ドライバー、ベンダーSDKによって変わります。",
+    "specs.section.signals.eyebrow": "計測項目",
+    "specs.signals.title": "取得できる情報と機能カバー範囲",
+    "specs.signals.description":
+      "常に役に立つダッシュボード情報、ベストエフォートのセンサー経路、今後の監視対象をOS別のマトリクスで整理しています。",
+    "specs.matrix.feature": "項目 / 機能",
+    "specs.matrix.cpu.label": "CPU・RAM",
+    "specs.matrix.cpuTemperature.label": "CPU／センサー温度",
+    "specs.matrix.storage.label": "ストレージの状態",
+    "specs.matrix.fan.label": "ファン",
+    "specs.matrix.language.label": "言語",
+    "specs.matrix.cpu.windows":
+      "ライブ使用率、メモリ詳細、履歴は主要な対応領域です。",
+    "specs.matrix.cpu.macos":
+      "ライブ使用率、メモリ詳細、履歴は主要な対応領域です。",
+    "specs.matrix.cpu.linux":
+      "ライブ使用率、メモリ詳細、履歴は主要な対応領域です。",
+    "specs.matrix.gpu.windows":
+      "特にNVIDIAが最も深く対応します。AMDとIntelはドライバーやAPIの可用性に依存します。",
+    "specs.matrix.gpu.macos":
+      "macOS API経由の部分対応です。表示できるカウンターはデバイスによって変わります。",
+    "specs.matrix.gpu.linux":
+      "NVIDIAやDRM経路による部分対応です。権限とドライバーが影響します。",
+    "specs.matrix.cpuTemperature.windows":
+      "ACPIサーマルゾーンはベストエフォートです。対応CPUではPawnIOでCPUパッケージ温度を改善できる場合があります。",
+    "specs.matrix.cpuTemperature.macos":
+      "ベストエフォートです。センサー公開範囲はマシンとmacOS APIに依存します。",
+    "specs.matrix.cpuTemperature.linux":
+      "ベストエフォートです。デバイスファイル、ドライバー、権限に左右される場合があります。",
+    "specs.matrix.storage.windows":
+      "ネイティブまたはフォールバック経路で、利用可能なSMART/NVMeヘルス項目を表示します。",
+    "specs.matrix.storage.macos":
+      "ネイティブ経路で、利用可能なストレージ概要と一部ヘルス項目を表示します。",
+    "specs.matrix.storage.linux":
+      "ネイティブ経路とsmartctlにより、SMART/NVMeヘルスの対応範囲を補える場合があります。",
+    "specs.matrix.network.windows":
+      "インターフェース、IP、サブネット、ゲートウェイに対応します。通信量の監視は計画中です。",
+    "specs.matrix.network.macos":
+      "インターフェース、IP、サブネット、ゲートウェイに対応します。通信量の監視は計画中です。",
+    "specs.matrix.network.linux":
+      "インターフェース、IP、サブネット、ゲートウェイに対応します。通信量の監視は計画中です。",
+    "specs.matrix.process.windows":
+      "Live Process TableとProcess Insightで、現在の負荷と履歴をつなげて確認できます。",
+    "specs.matrix.process.macos":
+      "Live Process TableとProcess Insightで、現在の負荷と履歴をつなげて確認できます。",
+    "specs.matrix.process.linux":
+      "Live Process TableとProcess Insightで、現在の負荷と履歴をつなげて確認できます。",
+    "specs.matrix.fan.windows":
+      "クロスベンダーのファン監視はロードマップと調査段階です。",
+    "specs.matrix.fan.macos":
+      "クロスベンダーのファン監視はロードマップと調査段階です。",
+    "specs.matrix.fan.linux":
+      "クロスベンダーのファン監視はロードマップと調査段階です。",
+    "specs.matrix.language.windows":
+      "アプリは英語、日本語、ロシア語に対応しています。",
+    "specs.matrix.language.macos":
+      "アプリは英語、日本語、ロシア語に対応しています。",
+    "specs.matrix.language.linux":
+      "アプリは英語、日本語、ロシア語に対応しています。",
+    "specs.signals.cpuTemperature.coverage":
+      "利用可能な場合のCPUパッケージ温度とサーマルゾーン温度",
+    "specs.section.appearance.eyebrow": "見た目のカスタマイズ",
+    "specs.appearance.title": "見た目とカスタマイズ",
+    "specs.appearance.description":
+      "HardwareVisualizerは開いたまま使うことを想定しているため、見た目の設定も飾りではなく製品体験の一部です。",
+    "specs.appearance.colorMode.name": "カラーテーマ",
+    "specs.appearance.colorMode.value":
+      "System、Light、Dark、Dark+、Sky、Grove、Sunset、Nebula、Orbit、Cappuccino、Espresso。",
+    "specs.appearance.colorMode.notes":
+      "ニュートラル、明るめ、暗め、暖色系まで、特定の雰囲気に寄せすぎないテーマを選べます。",
+    "specs.appearance.graphColors.name": "グラフの色",
+    "specs.appearance.graphColors.value":
+      "CPU、メモリ、GPUグラフのライン色を個別に設定できます。",
+    "specs.appearance.graphColors.notes":
+      "サブディスプレイに常時表示する場合でも、重要なメトリクスをすぐ見分けやすくできます。",
+    "specs.appearance.background.name": "背景画像",
+    "specs.appearance.background.value":
+      "ローカル背景画像の選択と不透明度の調整。",
+    "specs.appearance.background.notes":
+      "背景アセットはローカルに留まり、メトリクスの読みやすさに合わせて薄くできます。",
+    "specs.appearance.transparent.name": "透過UI",
+    "specs.appearance.transparent.value":
+      "透明なウィンドウ面と調整可能なガラスぼかし。",
+    "specs.appearance.transparent.notes":
+      "ガラス効果は調整可能で、日常的に操作するコントロールは十分なコントラストを保ちます。",
+    "specs.appearance.tray.name": "トレイウィジェット",
+    "specs.appearance.tray.value":
+      "CPU、GPU、GPU温度の表示、並び順、表示/非表示を設定できます。",
+    "specs.appearance.tray.notes":
+      "閉じてもトレイに残す設定やコンパクトなメトリクス表示で、デスクトップを占有せずに確認できます。",
+    "specs.appearance.preferences.name": "表示設定",
+    "specs.appearance.preferences.value":
+      "言語、温度単位、ダッシュボード表示、チャート表示の設定。",
+    "specs.appearance.preferences.notes":
+      "地域、摂氏/華氏の好み、監視したい対象の違いに合わせて使いやすくできます。",
+    "specs.section.storage.eyebrow": "追加コンポーネント",
+    "specs.storage.title": "Storage Healthと任意コンポーネント",
+    "specs.storage.description":
+      "任意コンポーネントは同梱、ダウンロード、インストール、自動有効化されません。フォールバック後も表示可能なハードウェア情報が不足するときだけ、アプリ内で説明します。",
+    "specs.storage.live.title": "リアルタイムのストレージ情報",
+    "specs.storage.live.body":
+      "フォーカス中のストレージ情報は、smartctlをライブポーリング周期で実行せず、軽量なネイティブ読み取り経路で更新します。",
+    "specs.storage.record.title": "ストレージ健康状態の記録",
+    "specs.storage.record.body":
+      "日次のヘルス記録では、利用可能な場合にSMART総合ヘルス、温度、NVMe使用率、利用可能スペア、代替処理済みセクター、保留中セクター、オフライン訂正不能セクター、NVMeメディアエラーを扱います。",
+    "specs.storage.pawnio.title": "CPUパッケージ温度向けPawnIO",
+    "specs.storage.pawnio.body":
+      "Windowsでは、ユーザーがPawnIOのドライバー/ランタイムと十分な権限を用意した場合、対応するIntel/AMD CPUのパッケージ温度を取得できる場合があります。",
+    "specs.storage.smartctl.title": "より詳しいストレージ情報向けsmartctl",
+    "specs.storage.smartctl.body":
+      "ネイティブOS経路で重要なSMART/NVMeヘルス情報を読めない場合、smartmontoolsによってStorage Healthが改善されることがあります。",
+    "specs.section.verification.eyebrow": "プライバシーと検証",
+    "specs.verification.title": "プライバシーとダウンロード検証",
+    "specs.verification.description":
+      "HardwareVisualizerはオープンソースで、収集したハードウェア情報の外部テレメトリを行わず、公式リリースファイルの検証方法をドキュメント化しています。",
+    "specs.verification.official.name": "公式配布元",
+    "specs.verification.official.detail":
+      "GitHub Releases、hardviz.com、利用可能な場合はWingetを使用してください。第三者ミラーやパスワード付きアーカイブは公式ではありません。",
+    "specs.verification.checksums.name": "SHA-256チェックサム",
+    "specs.verification.checksums.detail":
+      "v1.8.1以降のリリース成果物ではSHA256SUMS.txtが公開されています。",
+    "specs.verification.attestations.name": "GitHubの成果物証明",
+    "specs.verification.attestations.detail":
+      "v1.8.1以降、利用可能な場合はリリース成果物にGitHub Artifact Attestationsが付きます。",
+    "specs.verification.windows.name": "Windowsの署名",
+    "specs.verification.windows.detail":
+      "Windowsインストーラはv1.9.0以降でAuthenticode署名されています。",
+    "specs.verification.macos.name": "macOSの署名",
+    "specs.verification.macos.detail":
+      "macOS版はApple Developer IDで署名され、公証されています。",
+    "specs.verification.linux.name": "Linuxパッケージ",
+    "specs.verification.linux.detail":
+      "Linuxパッケージは現在、GPG、Sigstore、リポジトリメタデータによる署名を提供していません。チェックサムとAttestationを利用してください。",
+    "specs.hero.imageAlt":
+      "ライブハードウェアメトリクスを表示するHardwareVisualizerのダッシュボード",
+    "specs.sources.readme": "README（GitHub）",
+    "specs.sources.externalComponents": "追加コンポーネント",
+    "specs.sources.devStory": "開発ストーリー",
+    "specs.sources.verification": "検証ガイド",
+    "specs.signal.gpu.label": "GPU",
+    "specs.signal.process.label": "プロセス",
+    "specs.signal.network.label": "ネットワーク",
+    "specs.compat.name": "項目",
+    "specs.compat.coverage": "対応範囲",
+    "specs.compat.status": "状態",
+    "specs.compat.notes": "補足",
+    "specs.compat.status.supported": "対応",
+    "specs.compat.status.partial": "一部対応",
+    "specs.compat.status.bestEffort": "ベストエフォート",
+    "specs.compat.status.planned": "予定",
+    "specs.compat.status.experimental": "実験的",
+    "specs.compat.windows.coverage": "Windows 10/11、x64",
+    "specs.compat.windows.notes":
+      "MSIとセットアップ形式のインストーラを提供し、利用可能な場合はWingetも公式インストール経路です。",
+    "specs.compat.linux.coverage": "Debian/Ubuntu、RPM系、AppImage",
+    "specs.compat.linux.notes":
+      "一部のデバイスファイルやセンサーには昇格権限が必要になる場合があります。デスクトップ環境による制限もあります。",
+    "specs.compat.macos.appleSilicon.name": "macOS（Apple Silicon）",
+    "specs.compat.macos.appleSilicon.coverage": "Apple Silicon（ARM64）",
+    "specs.compat.macos.appleSilicon.notes":
+      "macOS版は署名・公証済みです。センサーの表示範囲はマシンやOS APIの利用可否によって異なります。",
+    "specs.compat.macos.intel.name": "macOS（Intel）",
+    "specs.compat.macos.intel.coverage": "Intel（x64）",
+    "specs.compat.macos.intel.notes":
+      "Intel Mac版は実験的な提供です。センサーの表示範囲はマシンやOS APIの利用可否によって異なります。",
+    "specs.compat.cpu.coverage": "CPUとRAM使用率、メモリ詳細、履歴",
+    "specs.compat.gpu.coverage": "NVIDIAは深い対応、AMDとIntelは部分対応",
+    "specs.compat.storage.coverage":
+      "ストレージ概要、Storage Health Record、Live Storage Health",
+    "specs.compat.network.coverage":
+      "インターフェース、IP、サブネット、ゲートウェイ",
+    "specs.compat.process.coverage": "Live Process TableとProcess Insight",
+    "specs.compat.fan.coverage": "ファン監視",
+    "specs.compat.language.coverage": "英語、日本語、ロシア語",
+    "specs.cta.download": "ダウンロードへ",
+    "specs.cta.verify": "検証ガイドを開く",
 
     "a11y.skipToMain": "メインコンテンツへスキップ",
 
@@ -525,7 +890,7 @@ export const ui = {
     "faq.q7": "新しい機能をリクエストしたり貢献できますか？",
     "faq.a7":
       "もちろんです！対応ハードウェアの追加、テーマの追加、言語の追加などの機能リクエストはGitHubのIssueで受け付けています。プルリクエストやディスカッションへの参加も大歓迎です。",
-    "faq.specsLink": "システム要件を見る",
+    "faq.specsLink": "対応環境",
     "faq.githubLink": "GitHubでIssueを作成",
     "faq.verificationGuideLink": "インストーラの検証",
     "faq.viewAll": "すべてのFAQを見る",

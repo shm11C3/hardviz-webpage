@@ -1,199 +1,1029 @@
 ---
-import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { Image } from "astro:assets";
+import {
+  Activity,
+  CheckCircle2,
+  Database,
+  Download,
+  ExternalLink,
+  Gauge,
+  HardDrive,
+  LockKeyhole,
+  Monitor,
+  ShieldCheck,
+  SlidersHorizontal,
+  Thermometer,
+  Workflow,
+} from "lucide-react";
+import dashboardScreenshot from "../../assets/screenshots/slide-1-l.png";
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
+const isJa = lang === "ja";
+
+const downloadHref = translatePath("/download");
+const verificationHref = translatePath("/verification");
+
+const sourceLinks = [
+  {
+    label: t("specs.sources.readme"),
+    href: "https://github.com/shm11C3/HardwareVisualizer/blob/develop/README.md",
+  },
+  {
+    label: t("specs.sources.externalComponents"),
+    href: "https://github.com/shm11C3/HardwareVisualizer/blob/develop/docs/user/external-components.md",
+  },
+  {
+    label: t("specs.sources.verification"),
+    href: "https://github.com/shm11C3/HardwareVisualizer/blob/develop/docs/download-verification.md",
+  },
+  {
+    label: t("specs.sources.devStory"),
+    href: "https://zenn.dev/shm_7ec/articles/hardwarevisualizer-dev-story",
+  },
+];
+
+const navItems = [
+  { id: "overview", label: t("specs.nav.overview") },
+  { id: "operating-systems", label: t("specs.nav.operatingSystems") },
+  { id: "signals", label: t("specs.nav.signals") },
+  { id: "appearance", label: t("specs.nav.appearance") },
+  { id: "storage-components", label: t("specs.nav.storageComponents") },
+  { id: "privacy-verification", label: t("specs.nav.privacyVerification") },
+];
+
+const overviewItems = [
+  {
+    icon: Download,
+    label: t("specs.overview.distribution.label"),
+    value: t("specs.overview.distribution.value"),
+  },
+  {
+    icon: Monitor,
+    label: t("specs.overview.os.label"),
+    value: t("specs.overview.os.value"),
+  },
+  {
+    icon: Database,
+    label: t("specs.overview.history.label"),
+    value: t("specs.overview.history.value"),
+  },
+  {
+    icon: ShieldCheck,
+    label: t("specs.overview.privacy.label"),
+    value: t("specs.overview.privacy.value"),
+  },
+  {
+    icon: SlidersHorizontal,
+    label: t("specs.overview.customization.label"),
+    value: t("specs.overview.customization.value"),
+  },
+  {
+    icon: Workflow,
+    label: t("specs.overview.languages.label"),
+    value: t("specs.overview.languages.value"),
+  },
+];
+
+const statusLabels = {
+  supported: t("specs.compat.status.supported"),
+  partial: t("specs.compat.status.partial"),
+  bestEffort: t("specs.compat.status.bestEffort"),
+  planned: t("specs.compat.status.planned"),
+  experimental: t("specs.compat.status.experimental"),
+};
+
+const osRows = [
+  {
+    name: "Windows",
+    coverage: t("specs.compat.windows.coverage"),
+    status: statusLabels.supported,
+    tone: "supported",
+    notes: t("specs.compat.windows.notes"),
+  },
+  {
+    name: t("specs.compat.macos.appleSilicon.name"),
+    coverage: t("specs.compat.macos.appleSilicon.coverage"),
+    status: statusLabels.supported,
+    tone: "supported",
+    notes: t("specs.compat.macos.appleSilicon.notes"),
+  },
+  {
+    name: t("specs.compat.macos.intel.name"),
+    coverage: t("specs.compat.macos.intel.coverage"),
+    status: statusLabels.experimental,
+    tone: "experimental",
+    notes: t("specs.compat.macos.intel.notes"),
+  },
+  {
+    name: "Linux",
+    coverage: t("specs.compat.linux.coverage"),
+    status: statusLabels.supported,
+    tone: "supported",
+    notes: t("specs.compat.linux.notes"),
+  },
+];
+
+const signalMatrixRows = [
+  {
+    name: t("specs.matrix.cpu.label"),
+    summary: t("specs.compat.cpu.coverage"),
+    platforms: [
+      {
+        os: "Windows",
+        status: statusLabels.supported,
+        tone: "supported",
+        notes: t("specs.matrix.cpu.windows"),
+      },
+      {
+        os: "macOS",
+        status: statusLabels.supported,
+        tone: "supported",
+        notes: t("specs.matrix.cpu.macos"),
+      },
+      {
+        os: "Linux",
+        status: statusLabels.supported,
+        tone: "supported",
+        notes: t("specs.matrix.cpu.linux"),
+      },
+    ],
+  },
+  {
+    name: t("specs.signal.gpu.label"),
+    summary: t("specs.compat.gpu.coverage"),
+    platforms: [
+      {
+        os: "Windows",
+        status: statusLabels.partial,
+        tone: "partial",
+        notes: t("specs.matrix.gpu.windows"),
+      },
+      {
+        os: "macOS",
+        status: statusLabels.partial,
+        tone: "partial",
+        notes: t("specs.matrix.gpu.macos"),
+      },
+      {
+        os: "Linux",
+        status: statusLabels.partial,
+        tone: "partial",
+        notes: t("specs.matrix.gpu.linux"),
+      },
+    ],
+  },
+  {
+    name: t("specs.matrix.cpuTemperature.label"),
+    summary: t("specs.signals.cpuTemperature.coverage"),
+    platforms: [
+      {
+        os: "Windows",
+        status: statusLabels.bestEffort,
+        tone: "bestEffort",
+        notes: t("specs.matrix.cpuTemperature.windows"),
+      },
+      {
+        os: "macOS",
+        status: statusLabels.bestEffort,
+        tone: "bestEffort",
+        notes: t("specs.matrix.cpuTemperature.macos"),
+      },
+      {
+        os: "Linux",
+        status: statusLabels.bestEffort,
+        tone: "bestEffort",
+        notes: t("specs.matrix.cpuTemperature.linux"),
+      },
+    ],
+  },
+  {
+    name: t("specs.matrix.storage.label"),
+    summary: t("specs.compat.storage.coverage"),
+    platforms: [
+      {
+        os: "Windows",
+        status: statusLabels.bestEffort,
+        tone: "bestEffort",
+        notes: t("specs.matrix.storage.windows"),
+      },
+      {
+        os: "macOS",
+        status: statusLabels.bestEffort,
+        tone: "bestEffort",
+        notes: t("specs.matrix.storage.macos"),
+      },
+      {
+        os: "Linux",
+        status: statusLabels.bestEffort,
+        tone: "bestEffort",
+        notes: t("specs.matrix.storage.linux"),
+      },
+    ],
+  },
+  {
+    name: t("specs.signal.network.label"),
+    summary: t("specs.compat.network.coverage"),
+    platforms: [
+      {
+        os: "Windows",
+        status: statusLabels.partial,
+        tone: "partial",
+        notes: t("specs.matrix.network.windows"),
+      },
+      {
+        os: "macOS",
+        status: statusLabels.partial,
+        tone: "partial",
+        notes: t("specs.matrix.network.macos"),
+      },
+      {
+        os: "Linux",
+        status: statusLabels.partial,
+        tone: "partial",
+        notes: t("specs.matrix.network.linux"),
+      },
+    ],
+  },
+  {
+    name: t("specs.signal.process.label"),
+    summary: t("specs.compat.process.coverage"),
+    platforms: [
+      {
+        os: "Windows",
+        status: statusLabels.supported,
+        tone: "supported",
+        notes: t("specs.matrix.process.windows"),
+      },
+      {
+        os: "macOS",
+        status: statusLabels.supported,
+        tone: "supported",
+        notes: t("specs.matrix.process.macos"),
+      },
+      {
+        os: "Linux",
+        status: statusLabels.supported,
+        tone: "supported",
+        notes: t("specs.matrix.process.linux"),
+      },
+    ],
+  },
+  {
+    name: t("specs.matrix.fan.label"),
+    summary: t("specs.compat.fan.coverage"),
+    platforms: [
+      {
+        os: "Windows",
+        status: statusLabels.planned,
+        tone: "planned",
+        notes: t("specs.matrix.fan.windows"),
+      },
+      {
+        os: "macOS",
+        status: statusLabels.planned,
+        tone: "planned",
+        notes: t("specs.matrix.fan.macos"),
+      },
+      {
+        os: "Linux",
+        status: statusLabels.planned,
+        tone: "planned",
+        notes: t("specs.matrix.fan.linux"),
+      },
+    ],
+  },
+  {
+    name: t("specs.matrix.language.label"),
+    summary: t("specs.compat.language.coverage"),
+    platforms: [
+      {
+        os: "Windows",
+        status: statusLabels.supported,
+        tone: "supported",
+        notes: t("specs.matrix.language.windows"),
+      },
+      {
+        os: "macOS",
+        status: statusLabels.supported,
+        tone: "supported",
+        notes: t("specs.matrix.language.macos"),
+      },
+      {
+        os: "Linux",
+        status: statusLabels.supported,
+        tone: "supported",
+        notes: t("specs.matrix.language.linux"),
+      },
+    ],
+  },
+];
+
+const appearanceRows = [
+  {
+    name: t("specs.appearance.colorMode.name"),
+    value: t("specs.appearance.colorMode.value"),
+    notes: t("specs.appearance.colorMode.notes"),
+  },
+  {
+    name: t("specs.appearance.graphColors.name"),
+    value: t("specs.appearance.graphColors.value"),
+    notes: t("specs.appearance.graphColors.notes"),
+  },
+  {
+    name: t("specs.appearance.background.name"),
+    value: t("specs.appearance.background.value"),
+    notes: t("specs.appearance.background.notes"),
+  },
+  {
+    name: t("specs.appearance.transparent.name"),
+    value: t("specs.appearance.transparent.value"),
+    notes: t("specs.appearance.transparent.notes"),
+  },
+  {
+    name: t("specs.appearance.tray.name"),
+    value: t("specs.appearance.tray.value"),
+    notes: t("specs.appearance.tray.notes"),
+  },
+  {
+    name: t("specs.appearance.preferences.name"),
+    value: t("specs.appearance.preferences.value"),
+    notes: t("specs.appearance.preferences.notes"),
+  },
+];
+
+const storageCards = [
+  {
+    icon: HardDrive,
+    title: t("specs.storage.live.title"),
+    body: t("specs.storage.live.body"),
+  },
+  {
+    icon: Database,
+    title: t("specs.storage.record.title"),
+    body: t("specs.storage.record.body"),
+  },
+  {
+    icon: Thermometer,
+    title: t("specs.storage.pawnio.title"),
+    body: t("specs.storage.pawnio.body"),
+  },
+  {
+    icon: ShieldCheck,
+    title: t("specs.storage.smartctl.title"),
+    body: t("specs.storage.smartctl.body"),
+  },
+];
+
+const verificationRows = [
+  {
+    name: t("specs.verification.official.name"),
+    detail: t("specs.verification.official.detail"),
+  },
+  {
+    name: t("specs.verification.checksums.name"),
+    detail: t("specs.verification.checksums.detail"),
+  },
+  {
+    name: t("specs.verification.attestations.name"),
+    detail: t("specs.verification.attestations.detail"),
+  },
+  {
+    name: t("specs.verification.windows.name"),
+    detail: t("specs.verification.windows.detail"),
+  },
+  {
+    name: t("specs.verification.macos.name"),
+    detail: t("specs.verification.macos.detail"),
+  },
+  {
+    name: t("specs.verification.linux.name"),
+    detail: t("specs.verification.linux.detail"),
+  },
+];
+
+const statusClasses = {
+  supported:
+    "border-emerald-200 bg-emerald-50 text-emerald-800 dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-200",
+  partial:
+    "border-amber-200 bg-amber-50 text-amber-800 dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-200",
+  bestEffort:
+    "border-sky-200 bg-sky-50 text-sky-800 dark:border-sky-400/30 dark:bg-sky-400/10 dark:text-sky-200",
+  planned:
+    "border-slate-200 bg-slate-100 text-slate-700 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300",
+  experimental:
+    "border-violet-200 bg-violet-50 text-violet-800 dark:border-violet-400/30 dark:bg-violet-400/10 dark:text-violet-200",
+};
+
+const iconClasses = {
+  cyan: "border-cyan-100 bg-cyan-50 text-cyan-700 dark:border-cyan-400/30 dark:bg-cyan-400/10 dark:text-cyan-200",
+};
 ---
 
-<main id="main-content" class="mx-auto container px-4 py-16 pt-32">
-  <h1
-    class="text-3xl md:text-4xl font-bold mb-8 text-slate-900 dark:text-white"
-  >
-    {t("specs.title")}
-  </h1>
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-4 text-slate-800 dark:text-slate-200">
-      {t("specs.supportedOS.title")}
-    </h2>
-    <table
-      class="w-full max-w-2xl mb-6 border border-slate-300 dark:border-slate-700 rounded-lg overflow-hidden"
+<main
+  id="main-content"
+  class="min-h-screen bg-white text-slate-950 dark:bg-slate-900 dark:text-slate-100"
+>
+  <section class="bg-white pt-24 pb-12 dark:bg-slate-900 sm:pt-28 md:pt-32">
+    <div class="container mx-auto px-4">
+      <header class="mx-auto max-w-5xl">
+        <p
+          class="font-semibold text-cyan-700 text-sm uppercase tracking-wide dark:text-cyan-300"
+        >
+          {t("specs.docs.eyebrow")}
+        </p>
+        <h1
+          class:list={[
+            "mt-4 text-balance font-bold text-4xl text-slate-950 leading-tight sm:text-5xl dark:text-white",
+            isJa && "budoux-ja",
+          ]}
+        >
+          {t("specs.docs.title")}
+        </h1>
+        <p
+          class:list={[
+            "mt-5 max-w-3xl text-lg text-slate-700 leading-8 dark:text-slate-300",
+            isJa && "budoux-ja",
+          ]}
+        >
+          {t("specs.docs.description")}
+        </p>
+
+        <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+          <a
+            href={downloadHref}
+            class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-cyan-700 px-5 py-3 font-semibold text-sm text-white transition hover:bg-cyan-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500"
+          >
+            <Download aria-hidden="true" className="h-4 w-4" />
+            {t("specs.docs.primaryCta")}
+          </a>
+          <a
+            href={verificationHref}
+            class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 font-semibold text-slate-800 text-sm transition hover:border-cyan-300 hover:text-cyan-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-cyan-400 dark:hover:text-cyan-300"
+          >
+            <ShieldCheck aria-hidden="true" className="h-4 w-4" />
+            {t("specs.docs.secondaryCta")}
+          </a>
+        </div>
+
+        <div class="mt-6 flex flex-wrap gap-x-5 gap-y-2">
+          {sourceLinks.map((source) => (
+            <a
+              href={source.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1 py-1 font-medium text-slate-600 text-sm underline-offset-4 transition hover:text-cyan-700 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-500 dark:text-slate-300 dark:hover:text-cyan-300"
+            >
+              {source.label}
+              <ExternalLink aria-hidden="true" className="h-3.5 w-3.5" />
+            </a>
+          ))}
+        </div>
+      </header>
+    </div>
+  </section>
+
+  <div class="container mx-auto px-4">
+    <nav
+      aria-label={t("specs.nav.ariaLabel")}
+      class="mx-auto flex max-w-6xl flex-col gap-3 border-y border-slate-200 py-4 dark:border-slate-700 sm:flex-row sm:items-center sm:gap-6"
     >
-      <thead class="bg-cyan-50 dark:bg-slate-800">
-        <tr>
-          <th class="py-2 px-4 text-left text-slate-900 dark:text-white">
-            {t("specs.supportedOS.os")}
-          </th>
-          <th class="py-2 px-4 text-left text-slate-900 dark:text-white">
-            {t("specs.supportedOS.architecture")}
-          </th>
-          <th class="py-2 px-4 text-left text-slate-900 dark:text-white">
-            {t("specs.supportedOS.status")}
-          </th>
-          <th class="py-2 px-4 text-left text-slate-900 dark:text-white">
-            {t("specs.supportedOS.notes")}
-          </th>
-        </tr>
-      </thead>
-      <tbody class="bg-white dark:bg-slate-900">
-        <tr>
-          <td class="py-2 px-4 text-slate-800 dark:text-slate-200">
-            Windows 10/11
-          </td>
-          <td class="py-2 px-4 text-slate-800 dark:text-slate-200">x64</td>
-          <td class="py-2 px-4 text-2xl">✅</td>
-          <td class="py-2 px-4 text-slate-700 dark:text-slate-300">
-            {t("specs.supportedOS.windows.notes")}
-          </td>
-        </tr>
-        <tr>
-          <td class="py-2 px-4 text-slate-800 dark:text-slate-200">
-            Linux (Debian/Ubuntu, RPM-based, AppImage)
-          </td>
-          <td class="py-2 px-4 text-slate-800 dark:text-slate-200">x64</td>
-          <td class="py-2 px-4 text-2xl">🟡</td>
-          <td class="py-2 px-4 text-slate-700 dark:text-slate-300">
-            {t("specs.supportedOS.linux.notes")}
-          </td>
-        </tr>
-        <tr>
-          <td class="py-2 px-4 text-slate-800 dark:text-slate-200">macOS</td>
-          <td class="py-2 px-4 text-slate-800 dark:text-slate-200">
-            Apple Silicon (ARM64)
-          </td>
-          <td class="py-2 px-4 text-2xl">✅</td>
-          <td class="py-2 px-4 text-slate-700 dark:text-slate-300">
-            {t("specs.supportedOS.macos.appleSilicon.notes")}
-          </td>
-        </tr>
-        <tr>
-          <td class="py-2 px-4 text-slate-800 dark:text-slate-200">macOS</td>
-          <td class="py-2 px-4 text-slate-800 dark:text-slate-200">
-            Intel (x64)
-          </td>
-          <td class="py-2 px-4 text-2xl">🚧</td>
-          <td class="py-2 px-4 text-slate-700 dark:text-slate-300">
-            {t("specs.supportedOS.macos.intel.notes")}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-4 text-slate-800 dark:text-slate-200">
-      {t("specs.supportedHardware.title")}
-    </h2>
-    <table
-      class="w-full max-w-2xl mb-6 border border-slate-300 dark:border-slate-700 rounded-lg overflow-hidden"
-    >
-      <thead class="bg-cyan-50 dark:bg-slate-800">
-        <tr>
-          <th class="py-2 px-4 text-left text-slate-900 dark:text-white">
-            {t("specs.supportedHardware.component")}
-          </th>
-          <th class="py-2 px-4 text-left text-slate-900 dark:text-white">
-            {t("specs.supportedHardware.supported")}
-          </th>
-          <th class="py-2 px-4 text-left text-slate-900 dark:text-white">
-            {t("specs.supportedOS.status")}
-          </th>
-          <th class="py-2 px-4 text-left text-slate-900 dark:text-white">
-            {t("specs.supportedOS.notes")}
-          </th>
-        </tr>
-      </thead>
-      <tbody class="bg-white dark:bg-slate-900">
-        <tr>
-          <td class="py-2 px-4 text-slate-800 dark:text-slate-200">CPU</td>
-          <td class="py-2 px-4 text-slate-800 dark:text-slate-200">
-            Intel, AMD (x64)
-          </td>
-          <td class="py-2 px-4 text-2xl">✅</td>
-          <td class="py-2 px-4 text-slate-700 dark:text-slate-300">
-            {t("specs.supportedHardware.cpu.notes")}
-          </td>
-        </tr>
-        <tr>
-          <td class="py-2 px-4 text-slate-800 dark:text-slate-200">
-            GPU (NVIDIA)
-          </td>
-          <td class="py-2 px-4 text-slate-800 dark:text-slate-200">NVIDIA</td>
-          <td class="py-2 px-4 text-2xl">✅</td>
-          <td class="py-2 px-4 text-slate-700 dark:text-slate-300">
-            {t("specs.supportedHardware.nvidia.notes")}
-          </td>
-        </tr>
-        <tr>
-          <td class="py-2 px-4 text-slate-800 dark:text-slate-200">
-            GPU (AMD)
-          </td>
-          <td class="py-2 px-4 text-slate-800 dark:text-slate-200">AMD</td>
-          <td class="py-2 px-4 text-2xl">🟡</td>
-          <td class="py-2 px-4 text-slate-700 dark:text-slate-300">
-            {t("specs.supportedHardware.amd.notes")}
-          </td>
-        </tr>
-        <tr>
-          <td class="py-2 px-4 text-slate-800 dark:text-slate-200">
-            GPU (Intel)
-          </td>
-          <td class="py-2 px-4 text-slate-800 dark:text-slate-200">Intel</td>
-          <td class="py-2 px-4 text-2xl">🟡</td>
-          <td class="py-2 px-4 text-slate-700 dark:text-slate-300">
-            {t("specs.supportedHardware.intel.notes")}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-4 text-slate-800 dark:text-slate-200">
-      {t("specs.supportedLanguages.title")}
-    </h2>
-    <table
-      class="w-full my-4 max-w-2xl border border-slate-300 dark:border-slate-700 rounded-lg overflow-hidden"
-    >
-      <thead class="bg-cyan-50 dark:bg-slate-800">
-        <tr>
-          <th class="py-2 px-4 text-left text-slate-900 dark:text-white">
-            {t("specs.supportedLanguages.language")}
-          </th>
-          <th class="py-2 px-4 text-left text-slate-900 dark:text-white">
-            {t("specs.supportedLanguages.status")}
-          </th>
-        </tr>
-      </thead>
-      <tbody class="bg-white dark:bg-slate-900">
-        <tr>
-          <td class="py-2 px-4 text-slate-800 dark:text-slate-200">English</td>
-          <td class="py-2 px-4 text-2xl">✅</td>
-        </tr>
-        <tr>
-          <td class="py-2 px-4 text-slate-800 dark:text-slate-200">
-            日本語 (Japanese)
-          </td>
-          <td class="py-2 px-4 text-2xl">✅</td>
-        </tr>
-        <tr>
-          <td class="py-2 px-4 text-slate-800 dark:text-slate-200">
-            {t("specs.supportedLanguages.russian")}
-          </td>
-          <td class="py-2 px-4 text-2xl">✅</td>
-        </tr>
-      </tbody>
-    </table>
-    <p class="mb-6 text-slate-700 dark:text-slate-200">
-      {t("specs.supportedLanguages.howToAdd")}
-    </p>
-  </section>
-  <section>
-    <h2 class="text-2xl font-semibold mb-4 text-slate-800 dark:text-slate-200">
-      {t("specs.limitations.title")}
-    </h2>
-    <ul class="list-disc pl-6 space-y-2 text-slate-700 dark:text-slate-200">
-      <li>{t("specs.limitations.item1")}</li>
-      <li>{t("specs.limitations.item2")}</li>
-      <li>{t("specs.limitations.item3")}</li>
-      <li>{t("specs.limitations.item4")}</li>
-    </ul>
-  </section>
+      <p
+        class="shrink-0 font-semibold text-slate-500 text-xs uppercase tracking-wide dark:text-slate-400"
+      >
+        {t("specs.nav.title")}
+      </p>
+      <div class="flex flex-wrap gap-x-6 gap-y-2">
+        {navItems.map((item) => (
+          <a
+            class="whitespace-nowrap py-1 font-medium text-slate-600 text-sm underline-offset-4 transition hover:text-cyan-700 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-500 dark:text-slate-300 dark:hover:text-cyan-300"
+            href={`#${item.id}`}
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
+    </nav>
+  </div>
+
+  <div class="container mx-auto px-4 pb-12">
+    <article class="mx-auto max-w-6xl">
+      <section id="overview" class="scroll-mt-24 py-12 md:py-16">
+        <div class="grid gap-8 xl:grid-cols-[minmax(0,1fr)_24rem]">
+          <div>
+            <div class="flex items-center gap-3">
+              <span
+                class="rounded-lg bg-slate-100 p-2 text-cyan-700 dark:bg-slate-800 dark:text-cyan-300"
+              >
+                <Activity aria-hidden="true" className="h-5 w-5" />
+              </span>
+              <div>
+                <p
+                  class="font-semibold text-cyan-700 text-sm uppercase tracking-wide dark:text-cyan-300"
+                >
+                  {t("specs.section.overview.eyebrow")}
+                </p>
+                <h2
+                  class="mt-1 font-bold text-2xl text-slate-950 sm:text-3xl dark:text-white"
+                >
+                  {t("specs.section.overview.title")}
+                </h2>
+              </div>
+            </div>
+            <p
+              class:list={[
+                  "mt-4 max-w-3xl text-slate-700 leading-7 dark:text-slate-300",
+                  isJa && "budoux-ja",
+                ]}
+            >
+              {t("specs.section.overview.description")}
+            </p>
+
+            <div class="mt-8 grid gap-4 sm:grid-cols-2">
+              {overviewItems.map((item) => {
+                    const ItemIcon = item.icon;
+                    return (
+                      <div class="specs-card rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-800">
+                      <div class="flex items-start gap-3">
+                        <span class="rounded-md border border-slate-200 bg-slate-50 p-2 text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                          <ItemIcon aria-hidden="true" className="h-4 w-4" />
+                        </span>
+                        <div>
+                          <h3 class="font-semibold text-slate-950 text-sm dark:text-white">
+                            {item.label}
+                          </h3>
+                          <p class="mt-2 text-slate-700 text-sm leading-6 dark:text-slate-300">
+                            {item.value}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    );
+                  })}
+            </div>
+          </div>
+
+          <figure
+            class="specs-card rounded-xl border border-slate-200 bg-white p-3 shadow-sm dark:border-slate-700 dark:bg-slate-800"
+          >
+            <Image
+              src={dashboardScreenshot}
+              alt={t("specs.hero.imageAlt")}
+              class="aspect-[4/3] rounded-md object-cover object-left-top"
+              loading="eager"
+            />
+            <figcaption
+              class="px-1 pt-3 text-slate-600 text-sm leading-6 dark:text-slate-400"
+            >
+              <span class="font-semibold text-slate-800 dark:text-slate-200">
+                {t("specs.overview.visual.title")}
+              </span>
+              {` ${t("specs.overview.visual.caption")}`}
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section
+        id="operating-systems"
+        class="scroll-mt-24 border-t border-slate-200 py-12 dark:border-slate-800 md:py-16"
+      >
+        <div class="flex items-center gap-3">
+          <span
+            class="rounded-lg bg-slate-100 p-2 text-cyan-700 dark:bg-slate-800 dark:text-cyan-300"
+          >
+            <Monitor aria-hidden="true" className="h-5 w-5" />
+          </span>
+          <div>
+            <p
+              class="font-semibold text-cyan-700 text-sm uppercase tracking-wide dark:text-cyan-300"
+            >
+              {t("specs.section.compat.eyebrow")}
+            </p>
+            <h2
+              class="mt-1 font-bold text-2xl text-slate-950 sm:text-3xl dark:text-white"
+            >
+              {t("specs.os.title")}
+            </h2>
+          </div>
+        </div>
+        <p
+          class:list={[
+              "mt-4 max-w-3xl text-slate-700 leading-7 dark:text-slate-300",
+              isJa && "budoux-ja",
+            ]}
+        >
+          {t("specs.os.description")}
+        </p>
+        <div class="mt-8 grid gap-3 md:hidden">
+          {osRows.map((row) => (
+                <article class="specs-card rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800">
+                  <div class="flex items-start justify-between gap-3">
+                    <h3 class="font-semibold text-slate-950 dark:text-white">
+                      {row.name}
+                    </h3>
+                    <span
+                      class:list={[
+                        "inline-flex shrink-0 items-center rounded-full border px-2.5 py-1 font-semibold text-xs",
+                        statusClasses[row.tone as keyof typeof statusClasses],
+                      ]}
+                    >
+                      {row.status}
+                    </span>
+                  </div>
+                  <dl class="mt-4 space-y-3 text-sm">
+                    <div>
+                      <dt class="font-semibold text-slate-500 text-xs uppercase tracking-wide dark:text-slate-400">
+                        {t("specs.compat.coverage")}
+                      </dt>
+                      <dd class="mt-1 break-words text-slate-800 leading-6 dark:text-slate-200">
+                        {row.coverage}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt class="font-semibold text-slate-500 text-xs uppercase tracking-wide dark:text-slate-400">
+                        {t("specs.compat.notes")}
+                      </dt>
+                      <dd class="mt-1 break-words text-slate-700 leading-6 dark:text-slate-300">
+                        {row.notes}
+                      </dd>
+                    </div>
+                  </dl>
+                </article>
+              ))}
+        </div>
+        <div
+          class="specs-card mt-8 hidden overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm md:block dark:border-slate-700 dark:bg-slate-800"
+        >
+          <table class="min-w-[48rem] w-full border-collapse text-left text-sm">
+            <thead
+              class="bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300"
+            >
+              <tr>
+                <th scope="col" class="px-5 py-3 font-semibold">
+                  {t("specs.compat.name")}
+                </th>
+                <th scope="col" class="px-5 py-3 font-semibold">
+                  {t("specs.compat.coverage")}
+                </th>
+                <th scope="col" class="px-5 py-3 font-semibold">
+                  {t("specs.compat.status")}
+                </th>
+                <th scope="col" class="px-5 py-3 font-semibold">
+                  {t("specs.compat.notes")}
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+              {osRows.map((row) => (
+                    <tr class="align-top">
+                      <th scope="row" class="px-5 py-4 font-semibold text-slate-950 dark:text-white">
+                        {row.name}
+                      </th>
+                      <td class="px-5 py-4 text-slate-700 dark:text-slate-300">{row.coverage}</td>
+                      <td class="px-5 py-4">
+                        <span
+                          class:list={[
+                            "inline-flex items-center rounded-full border px-2.5 py-1 font-semibold text-xs",
+                            statusClasses[row.tone as keyof typeof statusClasses],
+                          ]}
+                        >
+                          {row.status}
+                        </span>
+                      </td>
+                      <td class="px-5 py-4 text-slate-700 leading-6 dark:text-slate-300">{row.notes}</td>
+                    </tr>
+                  ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section
+        id="signals"
+        class="scroll-mt-24 border-t border-slate-200 py-12 dark:border-slate-800 md:py-16"
+      >
+        <div class="flex items-center gap-3">
+          <span
+            class="rounded-lg bg-slate-100 p-2 text-cyan-700 dark:bg-slate-800 dark:text-cyan-300"
+          >
+            <Gauge aria-hidden="true" className="h-5 w-5" />
+          </span>
+          <div>
+            <p
+              class="font-semibold text-cyan-700 text-sm uppercase tracking-wide dark:text-cyan-300"
+            >
+              {t("specs.section.signals.eyebrow")}
+            </p>
+            <h2
+              class="mt-1 font-bold text-2xl text-slate-950 sm:text-3xl dark:text-white"
+            >
+              {t("specs.signals.title")}
+            </h2>
+          </div>
+        </div>
+        <p
+          class:list={[
+              "mt-4 max-w-3xl text-slate-700 leading-7 dark:text-slate-300",
+              isJa && "budoux-ja",
+            ]}
+        >
+          {t("specs.signals.description")}
+        </p>
+        <div
+          class="mt-8 grid gap-3 md:hidden"
+          data-testid="signals-table-mobile"
+        >
+          {signalMatrixRows.map((row) => (
+                <article class="specs-card rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800">
+                  <div>
+                    <h3 class="font-semibold text-slate-950 dark:text-white">
+                      {row.name}
+                    </h3>
+                    <p class="mt-1 break-words text-slate-700 text-sm leading-6 dark:text-slate-300">
+                      {row.summary}
+                    </p>
+                  </div>
+                  <div class="mt-4 divide-y divide-slate-200 rounded-md border border-slate-200 dark:divide-slate-800 dark:border-slate-800">
+                    {row.platforms.map((platform) => (
+                        <div class="grid gap-2 p-3">
+                          <div class="flex items-center justify-between gap-3">
+                            <span class="font-semibold text-slate-950 text-sm dark:text-white">
+                              {platform.os}
+                            </span>
+                            <span
+                              class:list={[
+                                "inline-flex shrink-0 items-center rounded-full border px-2.5 py-1 font-semibold text-xs",
+                                statusClasses[
+                                  platform.tone as keyof typeof statusClasses
+                                ],
+                              ]}
+                            >
+                              {platform.status}
+                            </span>
+                          </div>
+                          <p class="break-words text-slate-700 text-sm leading-6 dark:text-slate-300">
+                            {platform.notes}
+                          </p>
+                        </div>
+                      ))}
+                  </div>
+                </article>
+              ))}
+        </div>
+        <div
+          class="specs-card mt-8 hidden overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm md:block dark:border-slate-700 dark:bg-slate-800"
+          data-testid="signals-table"
+        >
+          <table class="w-full border-collapse text-left text-sm">
+            <thead
+              class="bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300"
+            >
+              <tr>
+                <th scope="col" class="w-[15rem] px-5 py-3 font-semibold">
+                  {t("specs.matrix.feature")}
+                </th>
+                <th scope="col" class="px-5 py-3 font-semibold">Windows</th>
+                <th scope="col" class="px-5 py-3 font-semibold">macOS</th>
+                <th scope="col" class="px-5 py-3 font-semibold">Linux</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+              {signalMatrixRows.map((row) => (
+                    <tr class="align-top">
+                      <th scope="row" class="px-5 py-4 font-semibold text-slate-950 dark:text-white">
+                        <span>{row.name}</span>
+                        <span class="mt-1 block font-normal text-slate-600 text-xs leading-5 dark:text-slate-400">
+                          {row.summary}
+                        </span>
+                      </th>
+                      {row.platforms.map((platform) => (
+                          <td class="px-5 py-4 text-slate-700 leading-6 dark:text-slate-300">
+                            <span
+                              class:list={[
+                                "inline-flex items-center rounded-full border px-2.5 py-1 font-semibold text-xs",
+                                statusClasses[
+                                  platform.tone as keyof typeof statusClasses
+                                ],
+                              ]}
+                            >
+                              {platform.status}
+                            </span>
+                            <p class="mt-2 leading-6">{platform.notes}</p>
+                          </td>
+                        ))}
+                    </tr>
+                  ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section
+        id="appearance"
+        class="scroll-mt-24 border-t border-slate-200 py-12 dark:border-slate-800 md:py-16"
+      >
+        <div class="flex items-center gap-3">
+          <span
+            class="rounded-lg bg-slate-100 p-2 text-cyan-700 dark:bg-slate-800 dark:text-cyan-300"
+          >
+            <SlidersHorizontal aria-hidden="true" className="h-5 w-5" />
+          </span>
+          <div>
+            <p
+              class="font-semibold text-cyan-700 text-sm uppercase tracking-wide dark:text-cyan-300"
+            >
+              {t("specs.section.appearance.eyebrow")}
+            </p>
+            <h2
+              class="mt-1 font-bold text-2xl text-slate-950 sm:text-3xl dark:text-white"
+            >
+              {t("specs.appearance.title")}
+            </h2>
+          </div>
+        </div>
+        <p
+          class:list={[
+              "mt-4 max-w-3xl text-slate-700 leading-7 dark:text-slate-300",
+              isJa && "budoux-ja",
+            ]}
+        >
+          {t("specs.appearance.description")}
+        </p>
+
+        <div class="mt-8 grid gap-4">
+          {appearanceRows.map((row) => (
+                <div class="specs-card rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-800">
+                  <div class="grid gap-4 md:grid-cols-[11rem_minmax(0,1fr)]">
+                    <div>
+                      <span
+                        class:list={[
+                          "inline-flex rounded-md border p-2",
+                          iconClasses.cyan,
+                        ]}
+                      >
+                        <SlidersHorizontal
+                          aria-hidden="true"
+                          className="h-4 w-4"
+                        />
+                      </span>
+                      <h3 class="mt-3 font-semibold text-slate-950 dark:text-white">
+                        {row.name}
+                      </h3>
+                    </div>
+                    <div>
+                      <p class="font-medium text-slate-900 leading-6 dark:text-slate-100">
+                        {row.value}
+                      </p>
+                      <p
+                        class:list={[
+                          "mt-2 text-slate-700 text-sm leading-6 dark:text-slate-300",
+                          isJa && "budoux-ja",
+                        ]}
+                      >
+                        {row.notes}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+        </div>
+      </section>
+
+      <section
+        id="storage-components"
+        class="scroll-mt-24 border-t border-slate-200 py-12 dark:border-slate-800 md:py-16"
+      >
+        <div class="flex items-center gap-3">
+          <span
+            class="rounded-lg bg-slate-100 p-2 text-cyan-700 dark:bg-slate-800 dark:text-cyan-300"
+          >
+            <HardDrive aria-hidden="true" className="h-5 w-5" />
+          </span>
+          <div>
+            <p
+              class="font-semibold text-cyan-700 text-sm uppercase tracking-wide dark:text-cyan-300"
+            >
+              {t("specs.section.storage.eyebrow")}
+            </p>
+            <h2
+              class="mt-1 font-bold text-2xl text-slate-950 sm:text-3xl dark:text-white"
+            >
+              {t("specs.storage.title")}
+            </h2>
+          </div>
+        </div>
+        <p
+          class:list={[
+              "mt-4 max-w-3xl text-slate-700 leading-7 dark:text-slate-300",
+              isJa && "budoux-ja",
+            ]}
+        >
+          {t("specs.storage.description")}
+        </p>
+
+        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+          {storageCards.map((card) => {
+                const CardIcon = card.icon;
+                return (
+                  <div class="specs-card rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-800">
+                  <span
+                    class:list={[
+                      "inline-flex rounded-md border p-2",
+                      iconClasses.cyan,
+                    ]}
+                  >
+                    <CardIcon aria-hidden="true" className="h-4 w-4" />
+                  </span>
+                  <h3 class="mt-4 font-semibold text-slate-950 dark:text-white">
+                    {card.title}
+                  </h3>
+                  <p
+                    class:list={[
+                      "mt-2 text-slate-700 text-sm leading-6 dark:text-slate-300",
+                      isJa && "budoux-ja",
+                    ]}
+                  >
+                    {card.body}
+                  </p>
+                </div>
+                );
+              })}
+        </div>
+      </section>
+
+      <section
+        id="privacy-verification"
+        class="scroll-mt-24 border-t border-slate-200 py-12 dark:border-slate-800 md:py-16"
+      >
+        <div class="flex items-center gap-3">
+          <span
+            class="rounded-lg bg-slate-100 p-2 text-cyan-700 dark:bg-slate-800 dark:text-cyan-300"
+          >
+            <LockKeyhole aria-hidden="true" className="h-5 w-5" />
+          </span>
+          <div>
+            <p
+              class="font-semibold text-cyan-700 text-sm uppercase tracking-wide dark:text-cyan-300"
+            >
+              {t("specs.section.verification.eyebrow")}
+            </p>
+            <h2
+              class="mt-1 font-bold text-2xl text-slate-950 sm:text-3xl dark:text-white"
+            >
+              {t("specs.verification.title")}
+            </h2>
+          </div>
+        </div>
+        <p
+          class:list={[
+              "mt-4 max-w-3xl text-slate-700 leading-7 dark:text-slate-300",
+              isJa && "budoux-ja",
+            ]}
+        >
+          {t("specs.verification.description")}
+        </p>
+
+        <div
+          class="specs-card mt-8 rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-800"
+        >
+          <dl class="divide-y divide-slate-200 dark:divide-slate-800">
+            {verificationRows.map((row) => (
+                  <div class="grid gap-2 px-5 py-4 sm:grid-cols-[13rem_minmax(0,1fr)]">
+                    <dt class="font-semibold text-slate-950 dark:text-white">
+                      {row.name}
+                    </dt>
+                    <dd class="text-slate-700 text-sm leading-6 dark:text-slate-300">
+                      {row.detail}
+                    </dd>
+                  </div>
+                ))}
+          </dl>
+        </div>
+
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a
+            href={downloadHref}
+            class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-cyan-700 px-5 py-3 font-semibold text-sm text-white transition hover:bg-cyan-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500"
+          >
+            <Download aria-hidden="true" className="h-4 w-4" />
+            {t("specs.cta.download")}
+          </a>
+          <a
+            href={verificationHref}
+            class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 font-semibold text-slate-800 text-sm transition hover:border-cyan-300 hover:text-cyan-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-cyan-400 dark:hover:text-cyan-300"
+          >
+            <CheckCircle2 aria-hidden="true" className="h-4 w-4" />
+            {t("specs.cta.verify")}
+          </a>
+        </div>
+      </section>
+    </article>
+  </div>
 </main>
