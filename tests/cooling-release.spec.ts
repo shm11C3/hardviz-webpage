@@ -15,12 +15,12 @@ for (const lang of ["en", "ja"] as const) {
     await expect(page.locator("main h1")).toHaveCount(1);
     const heading =
       lang === "ja"
-        ? "Cooling Insight：CPUの温度を、負荷と履歴から読み解く。"
+        ? "Cooling InsightでCPU温度を負荷と履歴から読み解く"
         : "Cooling Insight: understand CPU temperature through load and history.";
     await expect(page.locator("main h1")).toHaveText(heading);
     await expect(page).toHaveTitle(
       lang === "ja"
-        ? "Cooling Insight：CPU温度を負荷と履歴から比較 | HardwareVisualizer"
+        ? "Cooling InsightでCPU温度を負荷と履歴から比較 | HardwareVisualizer"
         : "Cooling Insight: CPU Temperature vs Load and History | HardwareVisualizer",
     );
     await expect(page.locator(".release-status")).toContainText(
