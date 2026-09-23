@@ -1,10 +1,11 @@
 ---
 import CoolingRelease from "../../../components/releases/CoolingRelease.astro";
-import { useTranslations } from "../../../i18n/utils";
+import { useTranslatedPath, useTranslations } from "../../../i18n/utils";
 import ReleaseLayout from "../../../layouts/ReleaseLayout.astro";
 
 const lang = "ja";
 const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
 ---
 
 <ReleaseLayout
@@ -16,6 +17,7 @@ const t = useTranslations(lang);
   intro={t("release.hero.body")}
   downloadLabel={t("release.hero.cta")}
   changelogLabel={t("release.hero.secondary")}
+  changelogHref={translatePath("/changelog/1.11.0")}
   contentsLabel={t("release.contents")}
   sections={[
     { id: "cooling", label: t("release.cooling.name") },

@@ -12,15 +12,72 @@ const bands = [
   { key: "mid", baseline: 56, recent: 62 },
   { key: "high", baseline: 75, recent: 83 },
 ] as const;
-const readings = ["temperature", "load", "power", "fan"] as const;
+const readings = [
+  {
+    key: "temperature",
+    supportedOnly: false,
+    path: "M0 28L16 27L28 28L40 23L52 16L64 12L80 10L98 12L110 11L124 20L140 25L160 26",
+  },
+  {
+    key: "load",
+    supportedOnly: false,
+    path: "M0 30L24 30L32 28L40 6L55 8L64 4L82 8L98 5L112 7L122 28L144 30L160 30",
+  },
+  {
+    key: "power",
+    supportedOnly: true,
+    path: "M0 29L24 28L34 25L42 9L60 10L76 7L96 11L112 9L124 26L142 28L160 29",
+  },
+  {
+    key: "fan",
+    supportedOnly: true,
+    path: "M0 30L28 30L42 28L56 20L70 10L92 9L112 10L126 16L144 23L160 28",
+  },
+] as const;
 const questions = ["available", "control", "setup"] as const;
 // Stable Process/Ambient fixtures; not the complete application database.
 // Source and replacement criteria: docs/next-release-drafts.md.
 const storageBenchmark = (["30d", "90d", "1y"] as const).map((period) => ({
   period,
+  reduction: benchmark.cases[period].reduction_percent,
   sqlite: (benchmark.cases[period].sqlite_bytes / 1048576).toFixed(1),
   duckdb: (benchmark.cases[period].duckdb_bytes / 1048576).toFixed(1),
 }));
+const reductions = storageBenchmark.map(({ reduction }) =>
+  Math.round(reduction),
+);
+const reductionMin = Math.min(...reductions);
+const reductionMax = Math.max(...reductions);
+const benchmarkNote = t("release.duck.benchmark.note").replace(
+  "{reduction}",
+  reductionMin === reductionMax
+    ? String(reductionMin)
+    : `${reductionMin}–${reductionMax}`,
+);
+const measuredDate = new Intl.DateTimeFormat(
+  lang === "ja" ? "ja-JP" : "en-US",
+  {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "UTC",
+  },
+).format(new Date(`${benchmark.measured_at}T00:00:00Z`));
+const benchmarkConditions = t("release.duck.benchmark.conditions")
+  .replace("{date}", measuredDate)
+  .replace("{workload}", benchmark.method.workload)
+  .replace(
+    "{samples}",
+    String(benchmark.method.process_observations_per_minute),
+  )
+  .replace("{cpu}", benchmark.environment.cpu.brand)
+  .replace(
+    "{memory}",
+    String(benchmark.environment.physical_memory_bytes / 1024 ** 3),
+  )
+  .replace("{macos}", benchmark.environment.macos)
+  .replace("{sqlite}", benchmark.environment.sqlite)
+  .replace("{duckdb}", benchmark.environment.duckdb);
 const benchmarkSource = "/benchmarks/history-storage-2026-09-23.json";
 ---
 
@@ -75,21 +132,16 @@ const benchmarkSource = "/benchmarks/history-storage-2026-09-23.json";
       <p class="small-note">{t("release.reading.note")}</p>
     </div>
     <div class="readings-list">
-      {readings.map((reading, i) => (
+      {readings.map(({ key, supportedOnly, path }) => (
             <div class="reading-row">
-              <div><span>{t(`release.reading.${reading}`)}</span>{i > 1 && <small>{t("release.reading.available")}</small>}</div>
+              <div><span>{t(`release.reading.${key}`)}</span>{supportedOnly && <small>{t("release.reading.available")}</small>}</div>
               <svg viewBox="0 0 160 36" fill="none" aria-hidden="true">
                 <path class="reading-grid" d="M0 32H160M40 0V36M80 0V36M120 0V36" />
-                <path class:list={["reading-wave", `wave-${i}`]} d={[
-                  "M0 28L16 27L28 28L40 23L52 16L64 12L80 10L98 12L110 11L124 20L140 25L160 26",
-                  "M0 30L24 30L32 28L40 6L55 8L64 4L82 8L98 5L112 7L122 28L144 30L160 30",
-                  "M0 29L24 28L34 25L42 9L60 10L76 7L96 11L112 9L124 26L142 28L160 29",
-                  "M0 30L28 30L42 28L56 20L70 10L92 9L112 10L126 16L144 23L160 28",
-                ][i]} />
+                <path class:list={["reading-wave", `wave-${key}`]} d={path} />
               </svg>
             </div>
           ))}
-      <p class="small-note">{t("release.figure.caption")}</p>
+      <p class="small-note">{t("release.reading.caption")}</p>
     </div>
   </div>
   <div class="feature-row long-feature">
@@ -158,12 +210,12 @@ const benchmarkSource = "/benchmarks/history-storage-2026-09-23.json";
             ))}
           </tbody>
         </table>
-        <p id="storage-benchmark-note">{t("release.duck.benchmark.note")}</p>
+        <p id="storage-benchmark-note">{benchmarkNote}</p>
       </div>
       <details>
         <summary>{t("release.duck.detail.title")}</summary>
         <p>{t("release.duck.detail.body")}</p>
-        <p>{t("release.duck.benchmark.conditions")}</p>
+        <p>{benchmarkConditions}</p>
         <p>
           <a href={benchmarkSource}>{t("release.duck.benchmark.source")}</a>
         </p>
@@ -370,8 +422,8 @@ figcaption {
   stroke: var(--blue);
   stroke-width: 2.5;
 }
-.wave-0,
-.wave-3 {
+.wave-temperature,
+.wave-fan {
   stroke: var(--violet);
 }
 .long-feature {

@@ -58,6 +58,8 @@ export const ui = {
     "release.reading.load": "CPU load",
     "release.reading.power": "CPU package power",
     "release.reading.fan": "Fan speed",
+    "release.reading.caption":
+      "Illustrative timeline. Not an application screenshot or measured data.",
     "release.reading.available": "On supported hardware",
     "release.reading.note":
       "Available readings depend on the OS and hardware. Unsupported sensors and periods without recorded data are identified separately.",
@@ -87,9 +89,9 @@ export const ui = {
     "release.duck.benchmark.90d": "90 days",
     "release.duck.benchmark.1y": "1 year",
     "release.duck.benchmark.note":
-      "Synthetic-data comparison: about 76–77% smaller across all three periods. These are not whole-application database sizes.",
+      "Synthetic-data comparison: about {reduction}% smaller across all three periods. These are not whole-application database sizes.",
     "release.duck.benchmark.conditions":
-      "Measured on September 23, 2026, using synthetic Process Stats and Ambient histories (stable cases, 15 process samples per minute). File sizes were measured after closing and checkpointing: SQLite includes indexes; DuckDB includes metadata and WAL, with no explicit indexes or primary-key constraints in this fixture. Apple M4, 24 GiB RAM, macOS 26.6.2; SQLite 3.46.0 / DuckDB 1.5.5. This reruns the historical engine experiment; it does not measure final application storage or migration overhead.",
+      "Measured on {date}, using synthetic Process Stats and Ambient histories ({workload} cases, {samples} process samples per minute). File sizes were measured after closing and checkpointing: SQLite includes indexes; DuckDB includes metadata and WAL, with no explicit indexes or primary-key constraints in this fixture. {cpu}, {memory} GiB RAM, macOS {macos}; SQLite {sqlite} / DuckDB {duckdb}. This reruns the historical engine experiment; it does not measure final application storage or migration overhead.",
     "release.duck.benchmark.source":
       "Measurement conditions and results (JSON)",
     "release.duck.detail.title": "About the storage update",
@@ -115,7 +117,6 @@ export const ui = {
     "release.final.title": "Review your CPU’s thermal history.",
     "release.final.body":
       "Use Cooling Insight to review CPU temperature alongside load and compare it with past readings. DuckDB history storage and optional PawnIO setup support this update.",
-    "release.final.download": "Download HardwareVisualizer",
     "nav.home": "Home",
     "nav.Features": "Features",
     "nav.Download": "Download",
@@ -439,6 +440,8 @@ export const ui = {
     "release.reading.load": "CPU負荷",
     "release.reading.power": "CPUパッケージ電力",
     "release.reading.fan": "ファン回転数",
+    "release.reading.caption":
+      "説明用の時系列イメージ図です。製品のスクリーンショットや実測データではありません。",
     "release.reading.available": "取得できる環境で表示",
     "release.reading.note":
       "取得できる項目はOSやハードウェアによって異なります。センサーが非対応の場合と、その期間に記録がない場合は分けて表示します。",
@@ -468,9 +471,9 @@ export const ui = {
     "release.duck.benchmark.90d": "90日",
     "release.duck.benchmark.1y": "1年",
     "release.duck.benchmark.note":
-      "合成データでの比較では、いずれの期間も約76〜77%削減。製品全体の保存容量を示すものではありません。",
+      "合成データでの比較では、いずれの期間も約{reduction}%削減。製品全体の保存容量を示すものではありません。",
     "release.duck.benchmark.conditions":
-      "2026年9月23日測定。プロセス統計と環境温度の合成履歴（stableケース、1分あたり15件のプロセスサンプル）を使用。終了・チェックポイント後のファイル容量で、SQLiteは索引を含み、DuckDBはメタデータ・WALを含みます。この検証用DuckDBには明示的な索引・主キー制約を付けていません。環境はApple M4、メモリ24 GiB、macOS 26.6.2、SQLite 3.46.0 / DuckDB 1.5.5。過去のエンジン比較を同じ条件で再実行したもので、最終製品の保存容量や移行時の一時容量は測定対象外です。",
+      "{date}測定。プロセス統計と環境温度の合成履歴（{workload}ケース、1分あたり{samples}件のプロセスサンプル）を使用。終了・チェックポイント後のファイル容量で、SQLiteは索引を含み、DuckDBはメタデータ・WALを含みます。この検証用DuckDBには明示的な索引・主キー制約を付けていません。環境は{cpu}、メモリ{memory} GiB、macOS {macos}、SQLite {sqlite} / DuckDB {duckdb}。過去のエンジン比較を同じ条件で再実行したもので、最終製品の保存容量や移行時の一時容量は測定対象外です。",
     "release.duck.benchmark.source": "測定条件と結果を確認する（JSON）",
     "release.duck.detail.title": "保存基盤の変更について",
     "release.duck.detail.body":
@@ -495,7 +498,6 @@ export const ui = {
     "release.final.title": "CPUの温度を、履歴から確かめる。",
     "release.final.body":
       "冷却Insightで、CPU温度を負荷の推移とあわせて確認し、過去の記録と比較できます。DuckDBによる履歴の保存と、PawnIOの導入支援もあわせて利用できます。",
-    "release.final.download": "HardwareVisualizerをダウンロード",
     "nav.home": "ホーム",
     "nav.Features": "機能",
     "nav.Download": "ダウンロード",

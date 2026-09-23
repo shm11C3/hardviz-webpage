@@ -42,6 +42,30 @@ for (const lang of ["en", "ja"] as const) {
       "href",
       `${prefix}/download/`,
     );
+    for (const section of [".release-hero", ".final-section"]) {
+      await expect(page.locator(`${section} .text-link`)).toHaveAttribute(
+        "href",
+        `${prefix}/changelog/1.11.0/`,
+      );
+    }
+    await expect(page.locator(".readings-list > .small-note")).toContainText(
+      lang === "ja" ? "時系列イメージ図" : "Illustrative timeline",
+    );
+    await expect(page.locator("#storage-benchmark-note")).toContainText(
+      "76–77%",
+    );
+    await expect(page.locator(".storage-benchmark tbody tr")).toHaveCount(3);
+    await expect(
+      page.locator(".storage-benchmark tbody tr").first(),
+    ).toContainText("72.0MiB");
+    const storageDetails = page.locator("#foundation details").first();
+    await expect(storageDetails).toContainText(
+      lang === "ja" ? "2026年9月23日" : "September 23, 2026",
+    );
+    await expect(storageDetails).toContainText("Apple M4");
+    await expect(storageDetails).toContainText("24 GiB");
+    await expect(storageDetails).toContainText("SQLite 3.46.0 / DuckDB 1.5.5");
+    await expect(page.locator("#foundation")).not.toContainText(/\{\w+\}/);
     await page.locator(".final-section .primary-link").click();
     await expect(page).toHaveURL(new RegExp(`${prefix}/download/$`));
   });
@@ -66,6 +90,7 @@ for (const lang of ["en", "ja"] as const) {
     await page.keyboard.press("Enter");
     await expect(details).not.toHaveAttribute("open", "");
     await page.goto(`${prefix}/`);
+    await expect(page.locator(`footer a[href="${route}"]`)).toHaveCount(1);
     await page.locator(".release-announcement a").click();
     await expect(page).toHaveURL(new RegExp(`${route}$`));
   });

@@ -1,4 +1,5 @@
 ---
+import { currentRelease } from "../../data/currentRelease";
 import {
   getLangFromUrl,
   useTranslatedPath,
@@ -11,8 +12,8 @@ const { translatePath } = useTranslatedPath(lang);
 ---
 
 <aside class="release-announcement">
-  <a href={translatePath("/releases/cooling-insight")}
-    >{t("release.announcement")}</a
+  <a href={translatePath(`/releases/${currentRelease.slug}`)}
+    >{t(currentRelease.announcementKey)}</a
   >
 </aside>
 <style>

@@ -218,9 +218,6 @@
   justify-content: flex-start;
 }
 @media (max-width: 900px) {
-  .release-page .release-hero {
-    gap: 28px;
-  }
   .release-page .release-wrap {
     padding: 0 24px;
   }
@@ -237,7 +234,6 @@
   .release-page .release-wrap {
     padding: 0 20px;
   }
-  .release-page .release-hero,
   .release-page .feature-row,
   .release-page .foundation-grid,
   .release-page .faq-section,
@@ -245,7 +241,6 @@
     grid-template-columns: 1fr;
   }
   .release-page .release-hero {
-    gap: 32px;
     padding-bottom: 36px;
   }
   .release-page h1 {
