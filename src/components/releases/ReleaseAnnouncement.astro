@@ -1,5 +1,6 @@
 ---
 import { currentRelease } from "../../data/currentRelease";
+import { releaseArticles } from "../../data/releases";
 import {
   getLangFromUrl,
   useTranslatedPath,
@@ -9,12 +10,13 @@ import {
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const { translatePath } = useTranslatedPath(lang);
+const { version } = releaseArticles[currentRelease.slug];
 ---
 
 <aside class="release-announcement">
   <a
     href={translatePath(`/releases/${currentRelease.slug}`)}
-    data-release-version={currentRelease.version}
+    data-release-version={version}
     >{t(currentRelease.announcementKey)}</a
   >
 </aside>

@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
-import { currentRelease } from "../src/data/currentRelease";
+import { releaseArticles } from "../src/data/releases";
+
+const releaseMeta = releaseArticles["cooling-insight"];
 
 for (const lang of ["en", "ja"] as const) {
   const prefix = lang === "ja" ? "/ja" : "";
@@ -25,14 +27,14 @@ for (const lang of ["en", "ja"] as const) {
       "HardwareVisualizer v1.11.0",
     );
     const publishedTime = page.locator(".release-status time");
-    if (currentRelease.publishedAt) {
+    if (releaseMeta.publishedAt) {
       await expect(publishedTime).toHaveAttribute(
         "datetime",
-        currentRelease.publishedAt,
+        releaseMeta.publishedAt,
       );
       await expect(
         page.locator('meta[property="article:published_time"]'),
-      ).toHaveAttribute("content", currentRelease.publishedAt);
+      ).toHaveAttribute("content", releaseMeta.publishedAt);
     } else {
       await expect(publishedTime).toHaveCount(0);
     }
@@ -52,7 +54,7 @@ for (const lang of ["en", "ja"] as const) {
     expect(article.inLanguage).toBe(lang);
     expect(article.about.softwareVersion).toBe("1.11.0");
     expect(article.author["@id"]).toBe("https://hardviz.com/#person");
-    expect(article.datePublished).toBe(currentRelease.publishedAt ?? undefined);
+    expect(article.datePublished).toBe(releaseMeta.publishedAt ?? undefined);
     const breadcrumb = jsonLd.find(
       (node) => node["@type"] === "BreadcrumbList",
     );

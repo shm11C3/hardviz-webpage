@@ -1,20 +1,18 @@
 import type { ui } from "../i18n/ui";
+import type { ReleaseSlug } from "./releases";
 
 type TranslationKey = keyof typeof ui.en;
 
+/**
+ * Pointer to the article the homepage announcement and footer link to.
+ * Per-article metadata (version, publication date) lives in ./releases.ts.
+ */
 export const currentRelease = {
   slug: "cooling-insight",
-  version: "1.11.0",
-  // ISO date (YYYY-MM-DD) of the article's publication. Set it when the
-  // release ships: it drives the visible date, JSON-LD datePublished,
-  // article:published_time and the sitemap lastmod. Leave null until then.
-  publishedAt: null,
   navKey: "release.nav",
   announcementKey: "release.announcement",
 } as const satisfies {
-  slug: string;
-  version: string;
-  publishedAt: string | null;
+  slug: ReleaseSlug;
   navKey: TranslationKey;
   announcementKey: TranslationKey;
 };
