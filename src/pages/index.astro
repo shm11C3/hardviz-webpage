@@ -7,6 +7,7 @@ import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
 import Insights from "../components/Insights.astro";
 import LandingDownloadAnalytics from "../components/LandingDownloadAnalytics.astro";
+import ReleaseAnnouncement from "../components/releases/ReleaseAnnouncement.astro";
 import Screenshots from "../components/Screenshots.astro";
 import Usage from "../components/Usage.astro";
 import { fetchLatestRelease } from "../funcs/fetchReleaseData.ts";
@@ -97,6 +98,7 @@ const softwareJsonLd = {
   <Header />
   <main id="main-content">
     <Hero />
+    <ReleaseAnnouncement />
     <Screenshots />
     <Insights />
     <Features />

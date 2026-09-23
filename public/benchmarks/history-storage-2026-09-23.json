@@ -1,0 +1,153 @@
+{
+  "format": "hardviz-public-history-storage-v1",
+  "scope": "Historical engine experiment; synthetic Process Stats and Ambient stable fixtures. Not the final application's complete database.",
+  "measured_at": "2026-09-23",
+  "started_at_utc": "2026-09-23T08:09:13.885769+00:00",
+  "completed_at_utc": "2026-09-23T08:18:03.567688+00:00",
+  "provenance": {
+    "generator_commit": "7fae38b38116d82d771d6fc3705f67f618218732",
+    "engine_commit": "75db64c972b39d94205800cafb6ccb15d6d6029a",
+    "binary_sha256": "a62fca205d98ddd506b2dcbd549b8fe2b29c031b61c2b54574adcde33eb22a60",
+    "runner_sha256": "64ba13e4b0a5785b8643d638c1b3635594965b0d28536497e47963e299c51e45",
+    "engine_script_sha256": "ba5ae657ddbc3ca7d874ae8f4c80bb6e5df9ecf3f36d4fc367a47a18d5bba851",
+    "engine_matrix_script_sha256": "52456cb6f74ac235223eed904d8ee78f85798b3fb94b8c45ae0039046b531d61",
+    "engine_method_url": "https://github.com/shm11C3/HardwareVisualizer/blob/75db64c972b39d94205800cafb6ccb15d6d6029a/docs/development/hardware-archive-g1-engine-comparison.md"
+  },
+  "environment": {
+    "cpu": {
+      "logical_count": 10,
+      "platform_processor": "arm",
+      "machine": "arm64",
+      "brand": "Apple M4"
+    },
+    "physical_memory_bytes": 25769803776,
+    "macos": "26.6.2",
+    "python": "3.14.5 (v3.14.5:5607950ef23, May 10 2026, 07:38:09) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "sqlite": "3.46.0",
+    "duckdb": "1.5.5"
+  },
+  "method": {
+    "continuous_history": true,
+    "process_observations_per_minute": 15,
+    "seed": 2052,
+    "workload": "stable",
+    "duckdb_threads": 2,
+    "duckdb_memory_limit": "128MB; engine-managed limit, not process RSS cap",
+    "query_repetitions": 7,
+    "size_measurement": "Logical file lengths after close/checkpoint, SQLite including indexes; DuckDB including metadata and WAL.",
+    "duckdb_fixture_indexes": "No explicit secondary indexes or primary-key constraints.",
+    "round_trip": "Every row after reopen; integer/text/null exact, real bitwise.",
+    "matrix_all_passed": true,
+    "query_caches": "Primed and uncontrolled; query times are not used as a product performance claim."
+  },
+  "cases": {
+    "30d": {
+      "days": 30,
+      "sqlite_bytes": 75526144,
+      "duckdb_bytes": 17838080,
+      "sqlite_mib": 72.02734375,
+      "duckdb_mib": 17.01171875,
+      "reduction_percent": 76.38158251532079,
+      "process_rows": 648446,
+      "ambient_rows": 78546,
+      "source_sha256": "c6e6248329a562e61688a7051380ed1f98de418ec6ac15995325ed96a032c525",
+      "source_unchanged_after_all_queries": true,
+      "native_sha256": "2696b527bc64463e79fe329b259def7a9b7e9be0f0c20b04bf1a7c577a9d138c",
+      "round_trip": {
+        "all_passed": true,
+        "comparison": "bounded 500-row streaming; integers/text/null exact and REAL bitwise",
+        "storage_class_scope": "normal generated fixture types; adversarial SQLite storage classes are covered separately",
+        "families": {
+          "process": {
+            "passed": true,
+            "rows": 648446,
+            "source_sha256": "03169cfd1f7c8fc027f44198b32e69d189ba5608a834c61759134d47ad6f751a",
+            "duckdb_sha256": "03169cfd1f7c8fc027f44198b32e69d189ba5608a834c61759134d47ad6f751a",
+            "parquet_sha256": "03169cfd1f7c8fc027f44198b32e69d189ba5608a834c61759134d47ad6f751a"
+          },
+          "ambient": {
+            "passed": true,
+            "rows": 78546,
+            "source_sha256": "6ead4ae4fb55414035d375cc7cdb4bb880d0278160ccd02f21eeb72fc373fbdc",
+            "duckdb_sha256": "6ead4ae4fb55414035d375cc7cdb4bb880d0278160ccd02f21eeb72fc373fbdc",
+            "parquet_sha256": "6ead4ae4fb55414035d375cc7cdb4bb880d0278160ccd02f21eeb72fc373fbdc"
+          }
+        }
+      },
+      "started_at_utc": "2026-09-23T08:15:33.998943+00:00",
+      "completed_at_utc": "2026-09-23T08:15:40.337345+00:00"
+    },
+    "90d": {
+      "days": 90,
+      "sqlite_bytes": 226770944,
+      "duckdb_bytes": 53227520,
+      "sqlite_mib": 216.265625,
+      "duckdb_mib": 50.76171875,
+      "reduction_percent": 76.52806878115743,
+      "process_rows": 1945337,
+      "ambient_rows": 235636,
+      "source_sha256": "af4506025dd29520647934f31ce7a31b1a75d44e50310c0a8eeaab1063cedcdb",
+      "source_unchanged_after_all_queries": true,
+      "native_sha256": "67bb609a861f9ad4117fdf07eb991cb6313c59cce52df18f88d7fd07ba9953fc",
+      "round_trip": {
+        "all_passed": true,
+        "comparison": "bounded 500-row streaming; integers/text/null exact and REAL bitwise",
+        "storage_class_scope": "normal generated fixture types; adversarial SQLite storage classes are covered separately",
+        "families": {
+          "process": {
+            "passed": true,
+            "rows": 1945337,
+            "source_sha256": "2a94a09d288b4ce2506460d9833e64e9642edc35a462faffd51ce2b99e040e30",
+            "duckdb_sha256": "2a94a09d288b4ce2506460d9833e64e9642edc35a462faffd51ce2b99e040e30",
+            "parquet_sha256": "2a94a09d288b4ce2506460d9833e64e9642edc35a462faffd51ce2b99e040e30"
+          },
+          "ambient": {
+            "passed": true,
+            "rows": 235636,
+            "source_sha256": "e99fe86c03beefdf2aabb0d00d56bd3afb585ca6c8a00bb46b28c0a32df47615",
+            "duckdb_sha256": "e99fe86c03beefdf2aabb0d00d56bd3afb585ca6c8a00bb46b28c0a32df47615",
+            "parquet_sha256": "e99fe86c03beefdf2aabb0d00d56bd3afb585ca6c8a00bb46b28c0a32df47615"
+          }
+        }
+      },
+      "started_at_utc": "2026-09-23T08:15:43.563351+00:00",
+      "completed_at_utc": "2026-09-23T08:16:02.653778+00:00"
+    },
+    "1y": {
+      "days": 365,
+      "sqlite_bytes": 926257152,
+      "duckdb_bytes": 212086784,
+      "sqlite_mib": 883.34765625,
+      "duckdb_mib": 202.26171875,
+      "reduction_percent": 77.10281820312466,
+      "process_rows": 7889419,
+      "ambient_rows": 955636,
+      "source_sha256": "97803757685d304bb5c6ddae5765d2195f44696004e4558c6992a73067132e2f",
+      "source_unchanged_after_all_queries": true,
+      "native_sha256": "2d960cd3183956316da3164ffc90fcba05e48160854469041df2a5db0b737eab",
+      "round_trip": {
+        "all_passed": true,
+        "comparison": "bounded 500-row streaming; integers/text/null exact and REAL bitwise",
+        "storage_class_scope": "normal generated fixture types; adversarial SQLite storage classes are covered separately",
+        "families": {
+          "process": {
+            "passed": true,
+            "rows": 7889419,
+            "source_sha256": "0f47068d1ac38226ab8498bc6d719168b035e0425c6b81b6467fe9cfc191b4bc",
+            "duckdb_sha256": "0f47068d1ac38226ab8498bc6d719168b035e0425c6b81b6467fe9cfc191b4bc",
+            "parquet_sha256": "0f47068d1ac38226ab8498bc6d719168b035e0425c6b81b6467fe9cfc191b4bc"
+          },
+          "ambient": {
+            "passed": true,
+            "rows": 955636,
+            "source_sha256": "969d548aca775fcc13abba6a28afcb6ae0ee325b4273758e858d0c31ad7e3b2d",
+            "duckdb_sha256": "969d548aca775fcc13abba6a28afcb6ae0ee325b4273758e858d0c31ad7e3b2d",
+            "parquet_sha256": "969d548aca775fcc13abba6a28afcb6ae0ee325b4273758e858d0c31ad7e3b2d"
+          }
+        }
+      },
+      "started_at_utc": "2026-09-23T08:16:11.575962+00:00",
+      "completed_at_utc": "2026-09-23T08:17:28.439430+00:00"
+    }
+  }
+}

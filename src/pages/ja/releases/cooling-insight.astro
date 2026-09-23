@@ -1,0 +1,27 @@
+---
+import CoolingRelease from "../../../components/releases/CoolingRelease.astro";
+import { useTranslations } from "../../../i18n/utils";
+import ReleaseLayout from "../../../layouts/ReleaseLayout.astro";
+
+const lang = "ja";
+const t = useTranslations(lang);
+---
+
+<ReleaseLayout
+  lang={lang}
+  title={t("release.meta.title")}
+  description={t("release.meta.description")}
+  heading={t("release.hero.title")}
+  intro={t("release.hero.body")}
+  downloadLabel={t("release.hero.cta")}
+  changelogLabel={t("release.hero.secondary")}
+  contentsLabel={t("release.contents")}
+  sections={[
+    { id: "cooling", label: t("release.cooling.name") },
+    { id: "foundation", label: t("release.foundation.name") },
+    { id: "questions", label: t("release.faq.name") },
+  ]}
+  closing={{ title: t("release.final.title"), body: t("release.final.body") }}
+>
+  <CoolingRelease />
+</ReleaseLayout>

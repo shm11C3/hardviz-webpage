@@ -1,0 +1,68 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  caption: string;
+  placeholder?: boolean;
+}
+
+const { src, alt, caption, placeholder = false } = Astro.props;
+const Frame = placeholder ? "div" : "a";
+---
+
+<figure class="release-screenshot">
+  <Frame
+    class="screenshot-frame"
+    href={placeholder ? undefined : src.src}
+    aria-label={placeholder ? undefined : alt}
+  >
+    <Image
+      src={src}
+      alt={alt}
+      widths={[640, 960, 1280, 1600]}
+      sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 1160px) calc(100vw - 64px), 1096px"
+      loading="lazy"
+      decoding="async"
+    />
+    {placeholder && <span class="placeholder-label" aria-hidden="true">{caption}</span>}
+  </Frame>
+  <figcaption>{caption}</figcaption>
+</figure>
+
+<style>
+.release-screenshot {
+  margin: 32px 0 48px;
+}
+.screenshot-frame {
+  position: relative;
+  display: block;
+  border: 1px solid var(--line, #d2dfeb);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.release-screenshot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.release-screenshot figcaption {
+  margin-top: 12px;
+  color: var(--muted, #4d6076);
+  font-size: 0.82rem;
+  line-height: 1.85;
+}
+.placeholder-label {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  color: #58616d;
+  text-align: center;
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  line-height: 1.8;
+}
+</style>
