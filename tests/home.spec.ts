@@ -103,17 +103,18 @@ test("history value appears before live features and customization", async ({
   ]);
 });
 
-test("hero shows the product category and trust assurances in both languages", async ({
+test("hero explains its purpose and trust assurances in both languages", async ({
   page,
 }) => {
   await page.goto("/");
   const hero = page.locator("#hero");
-  await expect(hero).toContainText("Cross-platform CPU & GPU hardware monitor");
+  await expect(hero).toContainText(
+    "After a game or heavy workload, review the temperature and CPU/GPU graphs to see which processes were active.",
+  );
   await expect(hero).toContainText("30 days by default");
-  await expect(hero).toContainText("No account");
-  await expect(hero).toContainText("No telemetry");
-  await expect(hero).toContainText("Open source");
-  await expect(hero).toContainText("Signed Windows installer");
+  await expect(hero).toContainText(
+    "HardwareVisualizer is free and open source. It doesn’t require an account or send telemetry, and the Windows installer is digitally signed.",
+  );
   await expect(page.locator("footer")).toContainText(
     "cross-platform hardware monitor",
   );
@@ -121,13 +122,12 @@ test("hero shows the product category and trust assurances in both languages", a
   await page.goto("/ja/");
   const jaHero = page.locator("#hero");
   await expect(jaHero).toContainText(
-    "クロスプラットフォーム対応CPU・GPUハードウェアモニター",
+    "ゲームや負荷の高い作業のあとに、温度やCPU・GPUのグラフを見返し、どのプロセスが動いていたか確認できます。",
   );
   await expect(jaHero).toContainText("初期設定30日");
-  await expect(jaHero).toContainText("アカウント不要");
-  await expect(jaHero).toContainText("テレメトリなし");
-  await expect(jaHero).toContainText("オープンソース");
-  await expect(jaHero).toContainText("署名済みWindowsインストーラ");
+  await expect(jaHero).toContainText(
+    "HardwareVisualizerは無料のオープンソースソフトウェアです。アカウント登録は不要で、テレメトリを外部に送信しません。Windows版インストーラは電子署名済みです。",
+  );
   await expect(page.locator("footer")).toContainText(
     "クロスプラットフォーム対応ハードウェアモニター",
   );
