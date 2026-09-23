@@ -15,6 +15,7 @@ const { translatePath } = useTranslatedPath(lang);
   lang={lang}
   title={t("release.NEW.meta.title")}
   description={t("release.NEW.meta.description")}
+  releaseLabel={t("release.NEW.label")}
   heading={t("release.NEW.heading")}
   intro={t("release.NEW.intro")}
   downloadLabel={t("release.NEW.download")}

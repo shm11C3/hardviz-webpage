@@ -11,7 +11,7 @@ v1.11.0で採用した構成を、次回以降のリリースでも利用する�
 - `src/components/releases/CoolingRelease.astro`: v1.11.0固有の本文・説明図。今後の記事が冷却Insightの構成や図に依存する必要はない。
 - `docs/templates/release-page.astro.txt`: 次の記事の出発点。公開ルート外に置いた編集用テンプレート。
 
-`ReleaseLayout`は文字列と目次の項目を受け取り、本文を通常のAstroのslotで挿入する。独自のデータ形式や汎用セクション定義は増やさず、各記事で必要なHTMLを書けるようにしている。
+`ReleaseLayout`は製品名・バージョンを示す`releaseLabel`、見出しなどの文字列と目次の項目を受け取り、本文を通常のAstroのslotで挿入する。独自のデータ形式や汎用セクション定義は増やさず、各記事で必要なHTMLを書けるようにしている。
 
 ## 新しい記事を作る
 
@@ -24,7 +24,7 @@ v1.11.0で採用した構成を、次回以降のリリースでも利用する�
 
 ## 内容の基本形
 
-- Hero: `vX.Y.Z アップデート情報`。導入文は主な変更を2〜3文で説明する。
+- Hero: 製品名・バージョン（例: `HardwareVisualizer v1.11.0`）をラベルにし、主な機能の価値が伝わる見出しを置く。導入文は主な変更を2〜3文で説明する。
 - メイン機能: 何ができるか、どんな場面で役立つか。必要なら画面を添える。
 - 補助的な変更: 主役より短く扱う。
 - 技術詳細: `details` / `summary`で折りたたむ。
@@ -41,10 +41,12 @@ v1.11.0で採用した構成を、次回以降のリリースでも利用する�
 2. `ui.ts`に日英の`alt`と`caption`を追加する。画面の見どころを簡潔に説明し、テストデータの場合はその旨をcaptionに明記する。
 3. 記事のAstro frontmatterで画像をimportする。既存の仮画像の`src`とalt/captionを差し替え、`placeholder`属性を削除する。新しい箇所には以下の例で追加できる。
 
+以下は`src/pages/releases/<slug>.astro`に直接追加する場合の例。
+
 ```astro
 ---
 import screenshot from "../../assets/releases/1.11.0/cooling-ja.png";
-import ReleaseScreenshot from "./ReleaseScreenshot.astro";
+import ReleaseScreenshot from "../../components/releases/ReleaseScreenshot.astro";
 // lang / t は記事で既に定義されているものを使用する。
 ---
 
@@ -54,6 +56,8 @@ import ReleaseScreenshot from "./ReleaseScreenshot.astro";
   caption={t("release.screenshot.caption")}
 />
 ```
+
+`src/pages/ja/releases/<slug>.astro`では、画像を`../../../assets/releases/1.11.0/cooling-ja.png`、部品を`../../../components/releases/ReleaseScreenshot.astro`からimportする。`CoolingRelease.astro`のように`src/components/releases/`内の部品へ追加する場合は、画像が`../../assets/releases/1.11.0/cooling-ja.png`、部品が`./ReleaseScreenshot.astro`になる。
 
 上記の画像パスと翻訳キーは追加時に作成する例であり、現時点では存在しない。日本語・英語の画像を用意する場合は両方をimportし、`src={lang === "ja" ? screenshotJa : screenshotEn}`で切り替える。片方の言語の画面を共用する場合はcaptionでその言語を伝える。
 

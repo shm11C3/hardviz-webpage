@@ -11,10 +11,12 @@ for (const lang of ["en", "ja"] as const) {
     await expect(page.locator("html")).toHaveAttribute("lang", lang);
     await expect(page.locator("main h1")).toHaveCount(1);
     await expect(page.locator("main h1")).toHaveText(
-      lang === "ja" ? "v1.11.0 アップデート情報" : "v1.11.0 Update",
+      lang === "ja"
+        ? "CPUの温度を、負荷と履歴から読み解く。"
+        : "Understand CPU temperature through load and history.",
     );
-    await expect(page.locator(".release-status")).toContainText(
-      "HardwareVisualizer",
+    await expect(page.locator(".release-status")).toHaveText(
+      "HardwareVisualizer v1.11.0",
     );
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       "href",

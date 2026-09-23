@@ -10,6 +10,7 @@ interface Props {
   lang: keyof typeof ui;
   title: string;
   description: string;
+  releaseLabel: string;
   heading: string;
   intro: string;
   downloadLabel: string;
@@ -25,6 +26,7 @@ const {
   lang,
   title,
   description,
+  releaseLabel,
   heading,
   intro,
   downloadLabel,
@@ -45,7 +47,7 @@ const notesHref = changelogHref ?? translatePath("/changelog");
     <div class="release-wrap">
       <section class="release-hero" aria-labelledby="release-title">
         <div>
-          <p class="release-status">HardwareVisualizer</p>
+          <p class="release-status">{releaseLabel}</p>
           <h1 id="release-title">{heading}</h1>
           <p class="hero-copy">{intro}</p>
           <div class="actions">

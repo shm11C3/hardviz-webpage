@@ -119,7 +119,7 @@
 
 ## Heroの調整
 
-ユーザー指定により対象をv1.11.0と明記。Heroは「HardwareVisualizer」「v1.11.0 アップデート情報」と、冷却Insight・DuckDB・PawnIOの変更概要で構成する。比較図は冷却Insightの説明セクションへ移動し、ページの位置づけを説明してから個別機能に進む。日英のSEOとホーム・フッターのリンク文言にもバージョンを反映。
+ユーザー指定により対象をv1.11.0と明記。Heroは「HardwareVisualizer v1.11.0」をラベルにし、「CPUの温度を、負荷と履歴から読み解く。」を主見出しにする。英語は「Understand CPU temperature through load and history.」。導入文で冷却Insight・DuckDB・PawnIOを紹介し、URLから直接訪れた人にも機能の価値を伝える。比較図は冷却Insightの説明セクションに配置。日英のSEOとホーム・フッターのリンク文言にもバージョンを反映。
 
 ## 保存容量の比較表
 

@@ -13,7 +13,7 @@ export const ui = {
       "Gray placeholder for a Cooling Insight screenshot",
     "release.screenshot.cooling.caption":
       "Cooling Insight — screenshot to be added",
-    "release.status": "HardwareVisualizer",
+    "release.status": "HardwareVisualizer v1.11.0",
     "release.nav": "v1.11.0 update",
     "release.announcement":
       "HardwareVisualizer v1.11.0: Cooling Insight, DuckDB history storage and PawnIO setup.",
@@ -21,9 +21,10 @@ export const ui = {
       "v1.11.0 Update: Cooling Insight | HardwareVisualizer",
     "release.meta.description":
       "What’s new in HardwareVisualizer v1.11.0: Cooling Insight for comparing CPU temperature with load and history, DuckDB history storage, and optional PawnIO installation on Windows.",
-    "release.hero.title": "v1.11.0 Update",
+    "release.hero.title":
+      "Understand CPU temperature through load and history.",
     "release.hero.body":
-      "HardwareVisualizer v1.11.0 adds Cooling Insight to help you review CPU temperature alongside load and history. This release also moves history storage to DuckDB and adds optional PawnIO installation from Settings on Windows.",
+      "Cooling Insight now lets you compare CPU temperature with load and past readings. This release also moves history storage to DuckDB and lets you install PawnIO from Settings on Windows.",
     "release.hero.cta": "Download HardwareVisualizer",
     "release.hero.secondary": "View release notes",
     "release.figure.title": "Compare within each CPU load band",
@@ -394,7 +395,7 @@ export const ui = {
       "冷却Insightのスクリーンショットに差し替えるグレーの仮画像",
     "release.screenshot.cooling.caption":
       "冷却Insightの画面（スクリーンショット追加予定）",
-    "release.status": "HardwareVisualizer",
+    "release.status": "HardwareVisualizer v1.11.0",
     "release.nav": "v1.11.0 アップデート",
     "release.announcement":
       "HardwareVisualizer v1.11.0：冷却Insight、DuckDBへの移行、PawnIOの導入支援。",
@@ -402,9 +403,9 @@ export const ui = {
       "v1.11.0 アップデート情報：冷却Insight | HardwareVisualizer",
     "release.meta.description":
       "HardwareVisualizer v1.11.0のアップデート情報。CPU温度を負荷や履歴とあわせて確認する冷却Insight、DuckDBへの移行、Windows向けPawnIOの導入支援を紹介します。",
-    "release.hero.title": "v1.11.0 アップデート情報",
+    "release.hero.title": "CPUの温度を、負荷と履歴から読み解く。",
     "release.hero.body":
-      "v1.11.0では、CPU温度を負荷や履歴とあわせて確認できる「冷却Insight」を追加しました。履歴の保存基盤をDuckDBへ移行し、Windowsでは設定画面からPawnIOを導入できるようになりました。",
+      "CPU温度を負荷や過去の記録と比較できる「冷却Insight」を追加しました。あわせて、履歴保存をDuckDBへ移行し、Windowsでは設定画面からPawnIOを導入できるようになりました。",
     "release.hero.cta": "HardwareVisualizerをダウンロード",
     "release.hero.secondary": "更新履歴を見る",
     "release.figure.title": "CPUの負荷帯ごとに比較",
