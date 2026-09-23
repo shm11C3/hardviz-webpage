@@ -36,6 +36,7 @@ export const ui = {
     "hero.description":
       "After a game or heavy workload, review the temperature and CPU/GPU graphs to see which processes were active.",
     "hero.download": "Download for Windows",
+    "hero.viewGitHub": "View on GitHub",
     "hero.availability":
       "For Windows 10 and 11. Also available on macOS and Linux.",
     "hero.screenshotLabel": "Insights: review what happened",
@@ -489,6 +490,7 @@ export const ui = {
     "hero.description":
       "ゲームや負荷の高い作業のあとに、温度やCPU・GPUのグラフを見返し、どのプロセスが動いていたか確認できます。",
     "hero.download": "Windows版をダウンロード",
+    "hero.viewGitHub": "GitHubを閲覧",
     "hero.availability": "Windows 10・11に対応。macOS・Linux版も利用できます。",
     "hero.screenshotLabel": "Insightsで振り返る",
     "hero.retention": "初期設定30日",
