@@ -8,7 +8,7 @@ v1.11.0で採用した構成を、次回以降のリリースでも利用する�
 - `src/layouts/ReleaseLayout.astro`: サイトのヘッダー・フッター、Hero、目次、末尾CTA、SEOの共通枠。`version`と`publishedAt`から公開日の表示、`TechArticle` / `BreadcrumbList`のJSON-LD、`og:type=article`、GitHubリリースへのリンクを生成し、ダウンロードCTAのクリック計測（`LandingDownloadAnalytics`）を含む。
 - `src/styles/release-article.css`: リリース記事内に限定した文字組み・余白・日英/モバイル/ダーク表示。
 - `src/components/releases/ReleaseScreenshot.astro`: 任意のスクリーンショット。`placeholder`を指定すると、リンクなしの仮画像と説明を表示する。
-- `src/components/releases/CoolingRelease.astro`: v1.11.0固有の本文・説明図。今後の記事が冷却Insightの構成や図に依存する必要はない。
+- `src/components/releases/CoolingRelease.astro`: v1.11.0固有の本文・説明図。今後の記事がCooling Insightの構成や図に依存する必要はない。
 - `docs/templates/release-page.astro.txt`: 次の記事の出発点。公開ルート外に置いた編集用テンプレート。
 
 `ReleaseLayout`は製品名・バージョンを示す`releaseLabel`、見出しなどの文字列と目次の項目を受け取り、本文を通常のAstroのslotで挿入する。独自のデータ形式や汎用セクション定義は増やさず、各記事で必要なHTMLを書けるようにしている。
@@ -44,7 +44,7 @@ v1.11.0で採用した構成を、次回以降のリリースでも利用する�
 
 ## スクリーンショットの追加
 
-スクリーンショットはユーザーが必要に応じて追加する。現在は冷却Insightの比較説明の直後に、グレーの仮画像を配置している。製品画面の画像取得・生成はしていない。
+スクリーンショットはユーザーが必要に応じて追加する。現在はCooling Insightの比較説明の直後に、グレーの仮画像を配置している。製品画面の画像取得・生成はしていない。
 
 1. 画像を`src/assets/releases/<version>/`へ置く。画像内のユーザー名・ファイルパス・シリアル番号など、公開しない情報を確認する。
 2. `ui.ts`に日英の`alt`と`caption`を追加する。画面の見どころを簡潔に説明し、テストデータの場合はその旨をcaptionに明記する。
@@ -70,7 +70,7 @@ import ReleaseScreenshot from "../../components/releases/ReleaseScreenshot.astro
 
 上記の画像パスと翻訳キーは追加時に作成する例であり、現時点では存在しない。日本語・英語の画像を用意する場合は両方をimportし、`src={lang === "ja" ? screenshotJa : screenshotEn}`で切り替える。片方の言語の画面を共用する場合はcaptionでその言語を伝える。
 
-画像はAstroで最適化し、縦横比を保持して表示する。画像を押すと元画像を表示する。主な機能の説明直後に、`.feature-row`の外で横幅を使って配置すると文字が読みやすい。v1.11.0なら冷却Insightの最初の比較説明の直後が候補。説明図を置き換えるか併用するかは、画像が伝える内容に応じて判断する。
+画像はAstroで最適化し、縦横比を保持して表示する。画像を押すと元画像を表示する。主な機能の説明直後に、`.feature-row`の外で横幅を使って配置すると文字が読みやすい。v1.11.0ならCooling Insightの最初の比較説明の直後が候補。説明図を置き換えるか併用するかは、画像が伝える内容に応じて判断する。
 
 ## 表示用クラス
 

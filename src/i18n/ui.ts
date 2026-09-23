@@ -397,20 +397,20 @@ export const ui = {
   },
   ja: {
     "release.screenshot.cooling.alt":
-      "冷却Insightのスクリーンショットに差し替えるグレーの仮画像",
+      "Cooling Insightのスクリーンショットに差し替えるグレーの仮画像",
     "release.screenshot.cooling.caption":
-      "冷却Insightの画面（スクリーンショット追加予定）",
+      "Cooling Insightの画面（スクリーンショット追加予定）",
     "release.status": "HardwareVisualizer v1.11.0",
     "release.nav": "v1.11.0 アップデート",
     "release.announcement":
-      "HardwareVisualizer v1.11.0：冷却Insight、DuckDBへの移行、PawnIOの導入支援。",
+      "HardwareVisualizer v1.11.0：Cooling Insight、DuckDBへの移行、PawnIOの導入支援。",
     "release.meta.title":
-      "冷却Insight：CPU温度を負荷と履歴から比較 | HardwareVisualizer",
+      "Cooling Insight：CPU温度を負荷と履歴から比較 | HardwareVisualizer",
     "release.meta.description":
-      "HardwareVisualizer v1.11.0のアップデート情報。CPU温度を負荷や履歴とあわせて確認する冷却Insight、DuckDBへの移行、Windows向けPawnIOの導入支援を紹介します。",
-    "release.hero.title": "冷却Insight：CPUの温度を、負荷と履歴から読み解く。",
+      "HardwareVisualizer v1.11.0のアップデート情報。CPU温度を負荷や履歴とあわせて確認するCooling Insight、DuckDBへの移行、Windows向けPawnIOの導入支援を紹介します。",
+    "release.hero.title": "Cooling Insight：CPUの温度を、負荷と履歴から読み解く。",
     "release.hero.body":
-      "CPU温度を負荷や過去の記録と比較できる「冷却Insight」を追加しました。あわせて、履歴保存をDuckDBへ移行し、Windowsでは設定画面からPawnIOを導入できるようになりました。",
+      "CPU温度を負荷や過去の記録と比較できる「Cooling Insight」を追加しました。あわせて、履歴保存をDuckDBへ移行し、Windowsでは設定画面からPawnIOを導入できるようになりました。",
     "release.hero.cta": "HardwareVisualizerをダウンロード",
     "release.hero.secondary": "更新履歴を見る",
     "release.figure.title": "CPUの負荷帯ごとに比較",
@@ -426,12 +426,12 @@ export const ui = {
     "release.figure.caption":
       "比較方法を示す説明図です。製品のスクリーンショットや実測データではありません。",
     "release.contents": "このページの内容",
-    "release.cooling.name": "冷却Insight",
+    "release.cooling.name": "Cooling Insight",
     "release.foundation.name": "履歴とセットアップ",
     "release.faq.name": "よくある質問",
     "release.comparison.title": "同じくらいの負荷で、温度は変わったか。",
     "release.comparison.body":
-      "CPUが熱くなったとき、単に処理が増えたのかもしれません。冷却Insightはアイドル・低負荷・中負荷・高負荷に分けて、基準期間と直近期間の温度を比較します。",
+      "CPUが熱くなったとき、単に処理が増えたのかもしれません。Cooling Insightはアイドル・低負荷・中負荷・高負荷に分けて、基準期間と直近期間の温度を比較します。",
     "release.comparison.note":
       "比較には十分な記録が必要です。データが足りない負荷帯は、推測で補わず「比較保留」として表示します。",
     "release.comparison.detail.title": "負荷と温度を詳しく見る",
@@ -460,10 +460,10 @@ export const ui = {
       "表示されるのは蓄積された記録です。1年表示を選んでも、記録前のデータが補われることはありません。",
     "release.limits.title": "変化に気づき、確認するために。",
     "release.limits.body":
-      "室温・電源プラン・BIOS設定・ソフトウェア構成の変化も、CPU温度に影響します。冷却Insightは記録を確認するための機能です。温度の上昇だけで、部品の劣化や冷却の故障を断定するものではありません。",
-    "release.foundation.title": "冷却Insightを支える、2つの変更。",
+      "室温・電源プラン・BIOS設定・ソフトウェア構成の変化も、CPU温度に影響します。Cooling Insightは記録を確認するための機能です。温度の上昇だけで、部品の劣化や冷却の故障を断定するものではありません。",
+    "release.foundation.title": "Cooling Insightを支える、2つの変更。",
     "release.foundation.body":
-      "今回のリリースでは冷却Insightの追加とあわせて、履歴の保存基盤と、Windowsでセンサーを利用するための導入手順も改善しました。",
+      "今回のリリースではCooling Insightの追加とあわせて、履歴の保存基盤と、Windowsでセンサーを利用するための導入手順も改善しました。",
     "release.duck.title": "履歴の保存基盤をDuckDBへ",
     "release.duck.body":
       "履歴の保存基盤にDuckDBを採用しました。蓄積する履歴データと、長い期間の集計を扱うための基盤を更新しています。",
@@ -481,7 +481,7 @@ export const ui = {
     "release.duck.benchmark.source": "測定条件と結果を確認する（JSON）",
     "release.duck.detail.title": "保存基盤の変更について",
     "release.duck.detail.body":
-      "DuckDBは、データの集計や分析に適した列指向のデータベースです。冷却Insightで利用する記録を含め、HardwareVisualizer内で履歴の保存と集計を担います。別途データベースサーバーを用意する必要はありません。",
+      "DuckDBは、データの集計や分析に適した列指向のデータベースです。Cooling Insightで利用する記録を含め、HardwareVisualizer内で履歴の保存と集計を担います。別途データベースサーバーを用意する必要はありません。",
     "release.pawn.title": "PawnIOを設定画面から導入",
     "release.pawn.body":
       "Windowsでは、HardwareVisualizerの設定画面からPawnIOの導入を開始できます。ランタイムと必要なモジュールをダウンロードし、対応するCPUの温度・電力やマザーボードセンサーを利用するための手作業を減らします。",
@@ -493,7 +493,7 @@ export const ui = {
     "release.faq.available.q": "比較結果が出るまで、記録の蓄積は必要ですか？",
     "release.faq.available.a":
       "はい。基準期間を確立し、最近の状態と比較するために記録の蓄積が必要です。基準期間の確立状況を表示し、サンプルが不足している場合は比較保留として扱います。",
-    "release.faq.control.q": "冷却Insightでファンを制御できますか？",
+    "release.faq.control.q": "Cooling Insightでファンを制御できますか？",
     "release.faq.control.a":
       "ここで紹介している機能は、記録した値の表示と比較を行います。ファンカーブや冷却設定を変更する機能ではありません。",
     "release.faq.setup.q": "どのOSでもPawnIOが必要ですか？",
@@ -501,7 +501,7 @@ export const ui = {
       "いいえ。PawnIOの導入はWindowsの対応センサー向けです。macOSやLinuxでの導入手順ではなく、インストールによってすべてのセンサーが使えるようになるわけでもありません。",
     "release.final.title": "CPUの温度を、履歴から確かめる。",
     "release.final.body":
-      "冷却Insightで、CPU温度を負荷の推移とあわせて確認し、過去の記録と比較できます。DuckDBによる履歴の保存と、PawnIOの導入支援もあわせて利用できます。",
+      "Cooling Insightで、CPU温度を負荷の推移とあわせて確認し、過去の記録と比較できます。DuckDBによる履歴の保存と、PawnIOの導入支援もあわせて利用できます。",
     "release.related.title": "関連ページ",
     "release.related.github": "GitHubのリリースページ",
     "release.related.features": "機能一覧",
