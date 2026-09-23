@@ -13,6 +13,7 @@ export const ui = {
     "nav.Features": "Features",
     "nav.Download": "Download",
     "nav.faq": "FAQ",
+    "nav.githubStarsBadgeAlt": "GitHub stars",
     "nav.changelog": "Changelog",
     "seo.ogImageAlt":
       "HardwareVisualizer logo over a dashboard showing CPU, GPU, RAM, and process metrics",
@@ -35,7 +36,6 @@ export const ui = {
     "hero.description":
       "After a game or heavy workload, review the temperature and CPU/GPU graphs to see which processes were active.",
     "hero.download": "Download for Windows",
-    "hero.starOnGitHub": "Star on GitHub",
     "hero.availability":
       "For Windows 10 and 11. Also available on macOS and Linux.",
     "hero.screenshotLabel": "Insights: review what happened",
@@ -467,6 +467,7 @@ export const ui = {
     "nav.Features": "機能",
     "nav.Download": "ダウンロード",
     "nav.faq": "FAQ",
+    "nav.githubStarsBadgeAlt": "GitHubのスター数",
     "nav.changelog": "変更履歴",
     "seo.ogImageAlt":
       "CPU、GPU、RAM、プロセス情報のダッシュボードに重なるHardwareVisualizerのロゴ",
@@ -488,7 +489,6 @@ export const ui = {
     "hero.description":
       "ゲームや負荷の高い作業のあとに、温度やCPU・GPUのグラフを見返し、どのプロセスが動いていたか確認できます。",
     "hero.download": "Windows版をダウンロード",
-    "hero.starOnGitHub": "GitHubでスターする",
     "hero.availability": "Windows 10・11に対応。macOS・Linux版も利用できます。",
     "hero.screenshotLabel": "Insightsで振り返る",
     "hero.retention": "初期設定30日",

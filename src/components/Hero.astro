@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import { ArrowDownToLine, Star } from "lucide-react";
+import { ArrowDownToLine } from "lucide-react";
 import insightsDark from "../assets/screenshots/slide-2.png";
 import insightsLight from "../assets/screenshots/slide-2-l.png";
 import {
@@ -8,7 +8,6 @@ import {
   useTranslatedPath,
   useTranslations,
 } from "../i18n/utils";
-import { githubRepoUrl } from "../lib/github";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -56,15 +55,6 @@ const { translatePath } = useTranslatedPath(lang);
               <ArrowDownToLine className="w-5 h-5" />
               {t("hero.download")}
             </div>
-          </a>
-          <a
-            href={githubRepoUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center gap-1.5 self-center rounded-full border border-slate-300 bg-white/70 px-3 py-1.5 font-medium text-slate-700 text-sm transition-colors hover:border-amber-400 hover:text-amber-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-600 sm:self-auto dark:border-slate-600 dark:bg-slate-900/70 dark:text-slate-300 dark:hover:border-amber-400 dark:hover:text-amber-300"
-          >
-            <Star size={15} aria-hidden="true" />
-            {t("hero.starOnGitHub")}
           </a>
         </div>
         <p class="mt-4 text-slate-600 text-sm dark:text-slate-400">
