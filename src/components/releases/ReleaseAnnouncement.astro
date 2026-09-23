@@ -1,5 +1,6 @@
 ---
 import { currentRelease } from "../../data/currentRelease";
+import { releaseArticles } from "../../data/releases";
 import {
   getLangFromUrl,
   useTranslatedPath,
@@ -9,13 +10,31 @@ import {
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const { translatePath } = useTranslatedPath(lang);
+const { version } = releaseArticles[currentRelease.slug];
 ---
 
 <aside class="release-announcement">
-  <a href={translatePath(`/releases/${currentRelease.slug}`)}
+  <a
+    href={translatePath(`/releases/${currentRelease.slug}`)}
+    data-release-version={version}
     >{t(currentRelease.announcementKey)}</a
   >
 </aside>
+<script is:inline>
+// Report clicks on the homepage announcement so the release article's reach can
+// be compared with the download CTAs tracked by LandingDownloadAnalytics.
+document.addEventListener("click", (event) => {
+  if (!(event.target instanceof Element)) return;
+  const link = event.target.closest(".release-announcement a");
+  if (!(link instanceof HTMLAnchorElement)) return;
+  if (!window.__analyticsLoaded || typeof window.gtag !== "function") return;
+  window.gtag("event", "release_announcement_click", {
+    release_version: link.dataset.releaseVersion,
+    page_language: document.documentElement.lang,
+    transport_type: "beacon",
+  });
+});
+</script>
 <style>
 .release-announcement {
   padding: 18px 24px;

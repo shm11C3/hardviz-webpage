@@ -3,12 +3,17 @@
 // Japanese copy: lang = "ja", imports start with ../../../.
 // Add release.NEW.* keys in both languages in src/i18n/ui.ts,
 // then replace NEW with the release-specific namespace.
+// Add a "<slug>" entry with version and publishedAt to src/data/releases.ts.
+// Once a real 1200×630 share image exists in public/, add these props to ReleaseLayout:
+// ogImage="/releases/NEW-og.png" ogImageAlt={t("release.NEW.ogImageAlt")}
+import { releaseArticles } from "../../data/releases";
 import { useTranslatedPath, useTranslations } from "../../i18n/utils";
 import ReleaseLayout from "../../layouts/ReleaseLayout.astro";
 
 const lang = "en";
 const t = useTranslations(lang);
 const { translatePath } = useTranslatedPath(lang);
+const article = releaseArticles["<slug>"];
 ---
 
 <ReleaseLayout
@@ -20,7 +25,9 @@ const { translatePath } = useTranslatedPath(lang);
   intro={t("release.NEW.intro")}
   downloadLabel={t("release.NEW.download")}
   changelogLabel={t("release.NEW.changelog")}
-  changelogHref={translatePath("/changelog")}
+  changelogHref={translatePath(`/changelog/${article.version}`)}
+  version={article.version}
+  publishedAt={article.publishedAt}
   contentsLabel={t("release.NEW.contents")}
   sections={[
     { id: "main-feature", label: t("release.NEW.main.label") },

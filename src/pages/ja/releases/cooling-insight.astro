@@ -1,11 +1,13 @@
 ---
 import CoolingRelease from "../../../components/releases/CoolingRelease.astro";
+import { releaseArticles } from "../../../data/releases";
 import { useTranslatedPath, useTranslations } from "../../../i18n/utils";
 import ReleaseLayout from "../../../layouts/ReleaseLayout.astro";
 
 const lang = "ja";
 const t = useTranslations(lang);
 const { translatePath } = useTranslatedPath(lang);
+const article = releaseArticles["cooling-insight"];
 ---
 
 <ReleaseLayout
@@ -17,7 +19,9 @@ const { translatePath } = useTranslatedPath(lang);
   intro={t("release.hero.body")}
   downloadLabel={t("release.hero.cta")}
   changelogLabel={t("release.hero.secondary")}
-  changelogHref={translatePath("/changelog/1.11.0")}
+  changelogHref={translatePath(`/changelog/${article.version}`)}
+  version={article.version}
+  publishedAt={article.publishedAt}
   contentsLabel={t("release.contents")}
   sections={[
     { id: "cooling", label: t("release.cooling.name") },
