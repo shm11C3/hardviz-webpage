@@ -1,8 +1,11 @@
 ---
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import LandingDownloadAnalytics from "../components/LandingDownloadAnalytics.astro";
 import type { ui } from "../i18n/ui";
-import { useTranslatedPath } from "../i18n/utils";
+import { useTranslatedPath, useTranslations } from "../i18n/utils";
+import { githubReleaseTagUrl } from "../lib/github";
+import { buildReleaseArticle } from "../lib/structuredData";
 import "../styles/release-article.css";
 import Layout from "./Layout.astro";
 
@@ -18,8 +21,15 @@ interface Props {
   contentsLabel: string;
   sections: { id: string; label: string }[];
   closing: { title: string; body: string };
+  /** Product version the article announces, e.g. "1.11.0". */
+  version: string;
+  /** ISO date (YYYY-MM-DD). Null until the article is published. */
+  publishedAt: string | null;
   /** Pin to the localized release notes when the entry exists. */
   changelogHref?: string;
+  /** Site-relative path of a 1200×630 share image; falls back to the site image. */
+  ogImage?: string;
+  ogImageAlt?: string;
 }
 
 const {
@@ -34,20 +44,64 @@ const {
   contentsLabel,
   sections,
   closing,
+  version,
+  publishedAt,
   changelogHref,
+  ogImage,
+  ogImageAlt,
 } = Astro.props;
+const t = useTranslations(lang);
 const { translatePath } = useTranslatedPath(lang);
 const downloadHref = translatePath("/download");
 const notesHref = changelogHref ?? translatePath("/changelog");
+const githubReleaseHref = githubReleaseTagUrl(version);
+const relatedLinks = [
+  { href: translatePath("/#features"), label: t("release.related.features") },
+  { href: translatePath("/specs"), label: t("release.related.specs") },
+];
+
+const siteUrl = import.meta.env.SITE ?? "https://hardviz.com";
+const canonical = new URL(Astro.url.pathname, siteUrl).href;
+const ogImageAbs = ogImage ? new URL(ogImage, siteUrl).href : undefined;
+const publishedDate = publishedAt
+  ? new Intl.DateTimeFormat(lang === "ja" ? "ja-JP" : "en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      timeZone: "UTC",
+    }).format(new Date(`${publishedAt}T00:00:00Z`))
+  : null;
+const jsonLd = buildReleaseArticle(lang, {
+  url: canonical,
+  headline: heading,
+  description,
+  version,
+  datePublished: publishedAt,
+  image: ogImageAbs,
+});
 ---
 
-<Layout lang={lang} title={title} description={description}>
+<Layout
+  lang={lang}
+  title={title}
+  description={description}
+  ogType="article"
+  ogImage={ogImage}
+  ogImageAlt={ogImageAlt}
+  publishedTime={publishedAt ?? undefined}
+  jsonLd={jsonLd}
+>
   <Header />
   <main id="main-content" class="release-page">
     <div class="release-wrap">
       <section class="release-hero" aria-labelledby="release-title">
         <div>
-          <p class="release-status">{releaseLabel}</p>
+          <p class="release-status">
+            <span>{releaseLabel}</span>
+            {publishedDate && (
+              <time datetime={publishedAt}>{publishedDate}</time>
+            )}
+          </p>
           <h1 id="release-title">{heading}</h1>
           <p class="hero-copy">{intro}</p>
           <div class="actions">
@@ -67,12 +121,24 @@ const notesHref = changelogHref ?? translatePath("/changelog");
           <h2 id="final-heading">{closing.title}</h2>
           <p>{closing.body}</p>
         </div>
-        <div class="actions">
-          <a class="primary-link" href={downloadHref}>{downloadLabel}</a>
-          <a class="text-link" href={notesHref}>{changelogLabel}</a>
+        <div>
+          <div class="actions">
+            <a class="primary-link" href={downloadHref}>{downloadLabel}</a>
+            <a class="text-link" href={notesHref}>{changelogLabel}</a>
+          </div>
+          <nav class="related-links" aria-label={t("release.related.title")}>
+            <a
+              href={githubReleaseHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              >{t("release.related.github")}</a
+            >
+            {relatedLinks.map(link => <a href={link.href}>{link.label}</a>)}
+          </nav>
         </div>
       </section>
     </div>
   </main>
   <Footer />
+  <LandingDownloadAnalytics />
 </Layout>

@@ -3,6 +3,7 @@
 // Japanese copy: lang = "ja", imports start with ../../../.
 // Add release.NEW.* keys in both languages in src/i18n/ui.ts,
 // then replace NEW with the release-specific namespace.
+import { currentRelease } from "../../data/currentRelease";
 import { useTranslatedPath, useTranslations } from "../../i18n/utils";
 import ReleaseLayout from "../../layouts/ReleaseLayout.astro";
 
@@ -20,7 +21,10 @@ const { translatePath } = useTranslatedPath(lang);
   intro={t("release.NEW.intro")}
   downloadLabel={t("release.NEW.download")}
   changelogLabel={t("release.NEW.changelog")}
-  changelogHref={translatePath("/changelog")}
+  changelogHref={translatePath(`/changelog/${currentRelease.version}`)}
+  version={currentRelease.version}
+  publishedAt={currentRelease.publishedAt}
+  // Optional 1200×630 share image in public/: ogImage="/releases/NEW-og.png" ogImageAlt={t("release.NEW.ogImageAlt")}
   contentsLabel={t("release.NEW.contents")}
   sections={[
     { id: "main-feature", label: t("release.NEW.main.label") },

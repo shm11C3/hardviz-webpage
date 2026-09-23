@@ -5,7 +5,7 @@ v1.11.0で採用した構成を、次回以降のリリースでも利用する�
 
 ## 共通部分と記事ごとの部分
 
-- `src/layouts/ReleaseLayout.astro`: サイトのヘッダー・フッター、Hero、目次、末尾CTA、SEOの共通枠。
+- `src/layouts/ReleaseLayout.astro`: サイトのヘッダー・フッター、Hero、目次、末尾CTA、SEOの共通枠。`version`と`publishedAt`から公開日の表示、`TechArticle` / `BreadcrumbList`のJSON-LD、`og:type=article`、GitHubリリースへのリンクを生成し、ダウンロードCTAのクリック計測（`LandingDownloadAnalytics`）を含む。
 - `src/styles/release-article.css`: リリース記事内に限定した文字組み・余白・日英/モバイル/ダーク表示。
 - `src/components/releases/ReleaseScreenshot.astro`: 任意のスクリーンショット。`placeholder`を指定すると、リンクなしの仮画像と説明を表示する。
 - `src/components/releases/CoolingRelease.astro`: v1.11.0固有の本文・説明図。今後の記事が冷却Insightの構成や図に依存する必要はない。
@@ -20,7 +20,15 @@ v1.11.0で採用した構成を、次回以降のリリースでも利用する�
 3. 記事が長い場合は本文を`src/components/releases/<ReleaseName>.astro`へ分離し、日英のページから共有する。v1.11.0の2ページを実例として参照できる。
 4. `sections`の`id`と本文のsection IDを一致させる。記事ごとに項目を増減してよい。空配列なら目次を表示しない。
 5. 対象の更新履歴ができたら、`changelogHref={translatePath("/changelog/<version>")}`を指定する。省略時は日英の更新履歴一覧につながる。ダウンロードは共通のダウンロードページにつながる。
-6. 公開時に`src/data/currentRelease.ts`の`slug`・`navKey`・`announcementKey`を、新記事のスラッグと専用翻訳キーへ更新する。ホーム告知とフッターはこの設定を共有する。以前の記事は残す。サイトマップ・canonical・hreflangは既存のサイト設定と共通Layoutから生成される。
+6. 公開時に`src/data/currentRelease.ts`の`slug`・`version`・`publishedAt`・`navKey`・`announcementKey`を、新記事のスラッグ・バージョン・公開日・専用翻訳キーへ更新する。ホーム告知・フッター・記事ページはこの設定を共有する。以前の記事は残す。サイトマップ・canonical・hreflangは既存のサイト設定と共通Layoutから生成され、`publishedAt`を設定するとサイトマップの`lastmod`にも反映される。
+7. 共有用の画像（1200×630）を用意できたら、`public/`に置いて`ogImage="/path.png"`と`ogImageAlt`を`ReleaseLayout`へ渡す。省略時はサイト共通の`og-image.png`が使われる。
+
+## SEOと計測
+
+- `<title>`とH1には機能名と検索されやすい語（例: CPU temperature, load, history）を含め、バージョン番号を先頭に置かない。英語のmeta descriptionは160文字前後に収める。
+- 公開日は`currentRelease.publishedAt`だけで管理する。Heroの`<time>`、JSON-LDの`datePublished`、`article:published_time`、サイトマップの`lastmod`がこの値から生成される。
+- 末尾CTAの下にGitHubリリース・機能一覧・システム要件へのリンクが出る。対象の更新履歴（MDX）からも記事へリンクし、双方向にする。
+- 記事内のダウンロードCTAは`landing_download_click`イベントの`cta_location`が`release_hero` / `release_final`として、ホームの告知バーは`release_announcement_click`として計測される。
 
 ## 内容の基本形
 

@@ -86,7 +86,26 @@ function buildChangelogLastmodMap() {
   return map;
 }
 
-const changelogLastmod = buildChangelogLastmodMap();
+/**
+ * Release article lastmod from src/data/currentRelease.ts. The file is TypeScript,
+ * so read the two literals with regexes (as the changelog map does for MDX)
+ * instead of importing it. Nothing is added while publishedAt is null.
+ */
+function addReleaseLastmod(map) {
+  const source = fs.readFileSync(
+    path.resolve("src/data/currentRelease.ts"),
+    "utf-8",
+  );
+  const slug = source.match(/^\s*slug:\s*"([^"]+)"/m)?.[1];
+  const publishedAt = source.match(/^\s*publishedAt:\s*"([^"]+)"/m)?.[1];
+  if (!slug || !publishedAt) return map;
+  const date = new Date(publishedAt);
+  map.set(`/releases/${slug}/`, date);
+  map.set(`/ja/releases/${slug}/`, date);
+  return map;
+}
+
+const changelogLastmod = addReleaseLastmod(buildChangelogLastmodMap());
 
 /** Post-build: inject <lastmod> into sitemap-index.xml */
 function sitemapIndexLastmod() {
