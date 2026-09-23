@@ -4,6 +4,7 @@
 // Add release.NEW.* keys in both languages in src/i18n/ui.ts,
 // then replace NEW with the release-specific namespace.
 // Add a "<slug>" entry with version and publishedAt to src/data/releases.ts.
+// Japanese Hero/H1/H2 copy: omit sentence-final punctuation and avoid unnecessary commas.
 // Once a real 1200×630 share image exists in public/, add these props to ReleaseLayout:
 // ogImage="/releases/NEW-og.png" ogImageAlt={t("release.NEW.ogImageAlt")}
 import { releaseArticles } from "../../data/releases";

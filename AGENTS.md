@@ -45,4 +45,5 @@ npx playwright test -g "test name"               # Run tests matching a pattern
 - Package manager is **pnpm** exclusively (npm is blocked via engine config)
 - Astro components (`.astro`) for static content; React (`.tsx`) only for interactive islands
 - All new user-facing text must have translations in both `en` and `ja` in `src/i18n/ui.ts`
+- Japanese headings (Hero/H1/H2) should normally omit sentence-final punctuation. Keep `、` only where it makes the meaning clearer; prefer a shorter, direct phrase over comma-heavy copy.
 - E2E tests in `tests/` run against the preview server on port 4321
