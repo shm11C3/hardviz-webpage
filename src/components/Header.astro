@@ -1,6 +1,5 @@
 ---
 import { Image } from "astro:assets";
-import { SquareArrowOutUpRight } from "lucide-react";
 import logo from "../assets/app-icon.png";
 import {
   getLangFromUrl,
@@ -65,10 +64,15 @@ function isCurrentPage(href: string): boolean {
         href="https://github.com/shm11C3/HardwareVisualizer"
         target="_blank"
         rel="noopener noreferrer"
-        class="font-medium transition-colors hover:text-cyan-500 text-slate-600 dark:text-slate-300 hidden md:flex items-center"
+        class="hidden items-center transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-500 md:flex"
       >
-        GitHub
-        <SquareArrowOutUpRight size={16} className="ml-1" />
+        <img
+          src="https://img.shields.io/github/stars/shm11C3/HardwareVisualizer?style=social"
+          alt={t("nav.githubStarsBadgeAlt")}
+          class="h-5 w-auto"
+          loading="lazy"
+          decoding="async"
+        >
       </a>
       <LanguagePicker />
       <ThemeIcon id="themeIconDesktop" />
