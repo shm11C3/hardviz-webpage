@@ -277,7 +277,7 @@ export const ui = {
     "specs.matrix.process.linux":
       "Live Process Table and Process Insight connect current load with history.",
     "specs.matrix.fan.windows":
-      "Cross-vendor fan monitoring remains roadmap and research work.",
+      "Fan-speed reads are implemented for supported Super I/O sensors through the optional PawnIO LpcIO module. Coverage varies by motherboard, and this read-only path does not support fan control.",
     "specs.matrix.fan.macos":
       "Cross-vendor fan monitoring remains roadmap and research work.",
     "specs.matrix.fan.linux":
@@ -401,7 +401,8 @@ export const ui = {
       "Storage summary, Storage Health records, Live Storage Health",
     "specs.compat.network.coverage": "Interface, IP, subnet, and gateway data",
     "specs.compat.process.coverage": "Live Process Table and Process Insight",
-    "specs.compat.fan.coverage": "Fan monitoring",
+    "specs.compat.fan.coverage":
+      "Windows fan speed on supported Super I/O sensors",
     "specs.compat.language.coverage": "English, Japanese, Russian",
     "specs.cta.download": "Go to downloads",
     "specs.cta.verify": "Open verification guide",
@@ -731,7 +732,7 @@ export const ui = {
     "specs.matrix.process.linux":
       "Live Process TableとProcess Insightで、現在の負荷と履歴をつなげて確認できます。",
     "specs.matrix.fan.windows":
-      "クロスベンダーのファン監視はロードマップと調査段階です。",
+      "Windowsでは、任意コンポーネントのPawnIO LpcIO経由で、対応するSuper I/Oセンサーのファン速度を取得できます。対応範囲はマザーボードにより異なり、この読み取り専用の経路ではファン制御に対応しません。",
     "specs.matrix.fan.macos":
       "クロスベンダーのファン監視はロードマップと調査段階です。",
     "specs.matrix.fan.linux":
@@ -855,7 +856,7 @@ export const ui = {
     "specs.compat.network.coverage":
       "インターフェース、IP、サブネット、ゲートウェイ",
     "specs.compat.process.coverage": "Live Process TableとProcess Insight",
-    "specs.compat.fan.coverage": "ファン監視",
+    "specs.compat.fan.coverage": "Windowsの対応Super I/Oセンサーのファン速度",
     "specs.compat.language.coverage": "英語、日本語、ロシア語",
     "specs.cta.download": "ダウンロードへ",
     "specs.cta.verify": "検証ガイドを開く",

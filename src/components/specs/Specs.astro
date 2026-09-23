@@ -281,8 +281,8 @@ const signalMatrixRows = [
     platforms: [
       {
         os: "Windows",
-        status: statusLabels.planned,
-        tone: "planned",
+        status: statusLabels.partial,
+        tone: "partial",
         notes: t("specs.matrix.fan.windows"),
       },
       {
@@ -325,36 +325,67 @@ const signalMatrixRows = [
   },
 ];
 
+const themePreviewColors: Record<string, { light: string; dark: string }> = {
+  System: { light: "#475569", dark: "#cbd5e1" },
+  Light: { light: "#334155", dark: "#e2e8f0" },
+  Dark: { light: "#0f172a", dark: "#94a3b8" },
+  "Dark+": { light: "#4338ca", dark: "#a5b4fc" },
+  Sky: { light: "#0369a1", dark: "#7dd3fc" },
+  Grove: { light: "#047857", dark: "#6ee7b7" },
+  Sunset: { light: "#c2410c", dark: "#fdba74" },
+  Nebula: { light: "#7e22ce", dark: "#d8b4fe" },
+  Orbit: { light: "#475569", dark: "#94a3b8" },
+  Cappuccino: { light: "#854d0e", dark: "#fcd34d" },
+  Espresso: { light: "#78350f", dark: "#fcd5b1" },
+};
+const themeListValue = t("specs.appearance.colorMode.value");
+const themePreviewChoices = themeListValue
+  .replace(/[.。]$/, "")
+  .split(isJa ? "、" : ", ")
+  .map((name) => ({
+    name,
+    colors: themePreviewColors[name] ?? {
+      light: "#334155",
+      dark: "#e2e8f0",
+    },
+  }));
+
 const appearanceRows = [
   {
     name: t("specs.appearance.colorMode.name"),
     value: t("specs.appearance.colorMode.value"),
     notes: t("specs.appearance.colorMode.notes"),
+    themePreview: true,
   },
   {
     name: t("specs.appearance.graphColors.name"),
     value: t("specs.appearance.graphColors.value"),
     notes: t("specs.appearance.graphColors.notes"),
+    themePreview: false,
   },
   {
     name: t("specs.appearance.background.name"),
     value: t("specs.appearance.background.value"),
     notes: t("specs.appearance.background.notes"),
+    themePreview: false,
   },
   {
     name: t("specs.appearance.transparent.name"),
     value: t("specs.appearance.transparent.value"),
     notes: t("specs.appearance.transparent.notes"),
+    themePreview: false,
   },
   {
     name: t("specs.appearance.tray.name"),
     value: t("specs.appearance.tray.value"),
     notes: t("specs.appearance.tray.notes"),
+    themePreview: false,
   },
   {
     name: t("specs.appearance.preferences.name"),
     value: t("specs.appearance.preferences.value"),
     notes: t("specs.appearance.preferences.notes"),
+    themePreview: false,
   },
 ];
 
@@ -630,7 +661,7 @@ const iconClasses = {
                     </h3>
                     <span
                       class:list={[
-                        "inline-flex shrink-0 items-center rounded-full border px-2.5 py-1 font-semibold text-xs",
+                        "inline-flex shrink-0 items-center rounded-full border px-2.5 py-1 font-semibold text-xs whitespace-nowrap",
                         statusClasses[row.tone as keyof typeof statusClasses],
                       ]}
                     >
@@ -690,7 +721,7 @@ const iconClasses = {
                       <td class="px-5 py-4">
                         <span
                           class:list={[
-                            "inline-flex items-center rounded-full border px-2.5 py-1 font-semibold text-xs",
+                            "inline-flex items-center rounded-full border px-2.5 py-1 font-semibold text-xs whitespace-nowrap",
                             statusClasses[row.tone as keyof typeof statusClasses],
                           ]}
                         >
@@ -759,7 +790,7 @@ const iconClasses = {
                             </span>
                             <span
                               class:list={[
-                                "inline-flex shrink-0 items-center rounded-full border px-2.5 py-1 font-semibold text-xs",
+                                "inline-flex shrink-0 items-center rounded-full border px-2.5 py-1 font-semibold text-xs whitespace-nowrap",
                                 statusClasses[
                                   platform.tone as keyof typeof statusClasses
                                 ],
@@ -807,7 +838,7 @@ const iconClasses = {
                           <td class="px-5 py-4 text-slate-700 leading-6 dark:text-slate-300">
                             <span
                               class:list={[
-                                "inline-flex items-center rounded-full border px-2.5 py-1 font-semibold text-xs",
+                                "inline-flex items-center rounded-full border px-2.5 py-1 font-semibold text-xs whitespace-nowrap",
                                 statusClasses[
                                   platform.tone as keyof typeof statusClasses
                                 ],
@@ -879,7 +910,31 @@ const iconClasses = {
                     </div>
                     <div>
                       <p class="font-medium text-slate-900 leading-6 dark:text-slate-100">
-                        {row.value}
+                        {row.themePreview ? (
+                          <span
+                            class="theme-preview-list"
+                            tabindex="0"
+                          >
+                            {themePreviewChoices.map((theme, index) => (
+                              <>
+                                <span
+                                  class="theme-preview-name whitespace-nowrap"
+                                  style={`--theme-preview-color: ${theme.colors.light}; --theme-preview-color-dark: ${theme.colors.dark}`}
+                                >
+                                  {theme.name}
+                                </span>
+                                {index < themePreviewChoices.length - 1
+                                  ? isJa
+                                    ? "、"
+                                    : ", "
+                                  : ""}
+                              </>
+                            ))}
+                            {isJa ? "。" : "."}
+                          </span>
+                        ) : (
+                          row.value
+                        )}
                       </p>
                       <p
                         class:list={[
@@ -1027,3 +1082,32 @@ const iconClasses = {
     </article>
   </div>
 </main>
+
+<style>
+.theme-preview-name {
+  border-radius: 0.125rem;
+  transition: color 150ms ease-out;
+}
+
+.theme-preview-name:hover,
+.theme-preview-list:focus-visible .theme-preview-name {
+  color: var(--theme-preview-color);
+}
+
+:global(html.dark) .theme-preview-name:hover,
+:global(html.dark) .theme-preview-list:focus-visible .theme-preview-name {
+  color: var(--theme-preview-color-dark);
+}
+
+.theme-preview-list:focus-visible {
+  border-radius: 0.125rem;
+  outline: 2px solid #0891b2;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-preview-name {
+    transition: none;
+  }
+}
+</style>
