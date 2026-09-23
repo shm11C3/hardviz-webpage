@@ -50,7 +50,7 @@ test.describe("Header", () => {
 
   test("GitHub link opens in new tab", async ({ page }) => {
     await page.goto("/");
-    const githubLink = page.locator("header a", { hasText: "GitHub" });
+    const githubLink = page.getByRole("link", { name: "GitHub stars" });
     await expect(githubLink).toHaveAttribute("target", "_blank");
     await expect(githubLink).toHaveAttribute(
       "href",
