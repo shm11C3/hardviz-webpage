@@ -26,6 +26,42 @@ test("entries link to detail pages", async ({ page }) => {
   await expect(page.locator('a[href="/changelog/1.6.0/"]')).toHaveCount(1);
 });
 
+test("v1.11.0 changelog links to the Cooling Insight article", async ({
+  page,
+}) => {
+  await page.goto("/changelog/");
+  await expect(
+    page.locator(
+      'main a[href="https://hardviz.com/releases/cooling-insight/"]',
+    ),
+  ).toBeVisible();
+
+  await page.goto("/changelog/1.11.0/");
+  await expect(
+    page.locator(
+      'main a[href="https://hardviz.com/releases/cooling-insight/"]',
+    ),
+  ).toBeVisible();
+});
+
+test("JA v1.11.0 changelog links to the Cooling Insight article", async ({
+  page,
+}) => {
+  await page.goto("/ja/changelog/");
+  await expect(
+    page.locator(
+      'main a[href="https://hardviz.com/ja/releases/cooling-insight/"]',
+    ),
+  ).toBeVisible();
+
+  await page.goto("/ja/changelog/1.11.0/");
+  await expect(
+    page.locator(
+      'main a[href="https://hardviz.com/ja/releases/cooling-insight/"]',
+    ),
+  ).toBeVisible();
+});
+
 test("entries have GitHub release external links", async ({ page }) => {
   await page.goto("/changelog/");
   const githubLinks = page.locator(

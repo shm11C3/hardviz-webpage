@@ -1,0 +1,34 @@
+---
+import CoolingRelease from "../../components/releases/CoolingRelease.astro";
+import { releaseArticles } from "../../data/releases";
+import { useTranslatedPath, useTranslations } from "../../i18n/utils";
+import ReleaseLayout from "../../layouts/ReleaseLayout.astro";
+
+const lang = "en";
+const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
+const article = releaseArticles["cooling-insight"];
+---
+
+<ReleaseLayout
+  lang={lang}
+  title={t("release.meta.title")}
+  description={t("release.meta.description")}
+  releaseLabel={t("release.status")}
+  heading={t("release.hero.title")}
+  intro={t("release.hero.body")}
+  downloadLabel={t("release.hero.cta")}
+  changelogLabel={t("release.hero.secondary")}
+  changelogHref={translatePath(`/changelog/${article.version}`)}
+  version={article.version}
+  publishedAt={article.publishedAt}
+  contentsLabel={t("release.contents")}
+  sections={[
+    { id: "cooling", label: t("release.cooling.name") },
+    { id: "foundation", label: t("release.foundation.name") },
+    { id: "questions", label: t("release.faq.name") },
+  ]}
+  closing={{ title: t("release.final.title"), body: t("release.final.body") }}
+>
+  <CoolingRelease />
+</ReleaseLayout>

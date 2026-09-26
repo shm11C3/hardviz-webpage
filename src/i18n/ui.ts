@@ -9,6 +9,118 @@ export const showDefaultLang = false;
 
 export const ui = {
   en: {
+    "release.screenshot.cooling.alt":
+      "Gray placeholder for a Cooling Insight screenshot",
+    "release.screenshot.cooling.caption":
+      "Cooling Insight — screenshot to be added",
+    "release.status": "HardwareVisualizer v1.11.0",
+    "release.nav": "v1.11.0 update",
+    "release.announcement":
+      "HardwareVisualizer v1.11.0: Cooling Insight, DuckDB history storage and PawnIO setup.",
+    "release.meta.title":
+      "Cooling Insight: CPU Temperature vs Load and History | HardwareVisualizer",
+    "release.meta.description":
+      "Cooling Insight in HardwareVisualizer v1.11.0 compares CPU temperature with load and past readings. Also new: DuckDB history storage and PawnIO setup on Windows.",
+    "release.hero.title":
+      "Cooling Insight: understand CPU temperature through load and history.",
+    "release.hero.body":
+      "Cooling Insight now lets you compare CPU temperature with load and past readings. This release also moves history storage to DuckDB and lets you install PawnIO from Settings on Windows.",
+    "release.hero.cta": "Download HardwareVisualizer",
+    "release.hero.secondary": "View release notes",
+    "release.figure.title": "Compare within each CPU load band",
+    "release.figure.baseline": "Baseline period",
+    "release.figure.recent": "Recent period",
+    "release.figure.idle": "Idle",
+    "release.figure.low": "Low load",
+    "release.figure.mid": "Medium load",
+    "release.figure.high": "High load",
+    "release.figure.axis": "CPU temperature",
+    "release.figure.lower": "Lower",
+    "release.figure.higher": "Higher",
+    "release.figure.caption":
+      "Illustration of the comparison method. Not an application screenshot or measured data.",
+    "release.contents": "On this page",
+    "release.cooling.name": "Cooling Insight",
+    "release.foundation.name": "History & setup",
+    "release.faq.name": "Questions & answers",
+    "release.comparison.title": "Was it warmer at a similar load?",
+    "release.comparison.body":
+      "A hotter CPU may simply be doing more work. Cooling Insight groups readings into idle, low, medium and high load, then compares temperatures between the baseline and recent periods.",
+    "release.comparison.note":
+      "Comparisons need enough recorded data. When samples are insufficient, the view shows that the comparison is not yet available.",
+    "release.comparison.detail.title": "A closer look at load and temperature",
+    "release.comparison.detail.body":
+      "The Load × Temperature Explorer plots hourly average CPU load against hourly average CPU temperature. It separates the baseline and recent periods and shows medians by load band. Bands with too few recorded hours remain unassessed.",
+    "release.reading.title": "Follow what changed at the same time.",
+    "release.reading.body":
+      "After gaming or a long rendering job, review CPU temperature and load on a shared timeline. Available CPU package power and fan-speed readings add context to those changes.",
+    "release.reading.temperature": "CPU temperature",
+    "release.reading.load": "CPU load",
+    "release.reading.power": "CPU package power",
+    "release.reading.fan": "Fan speed",
+    "release.reading.caption":
+      "Illustrative timeline. Not an application screenshot or measured data.",
+    "release.reading.available": "On supported hardware",
+    "release.reading.note":
+      "Available readings depend on the OS and hardware. Unsupported sensors and periods without recorded data are identified separately.",
+    "release.long.title": "See changes across days and months.",
+    "release.long.body":
+      "Switch between 24 hours, 7 days and 30 days of archive history, or 90-day and one-year views built from daily summaries. Compare recent idle temperatures with the established baseline to see sustained changes.",
+    "release.long.short": "Archive history",
+    "release.long.short.periods": "24 hours / 7 days / 30 days",
+    "release.long.daily": "Daily summaries",
+    "release.long.daily.periods": "90 days / 1 year",
+    "release.long.note":
+      "Views show the data you have recorded; a one-year view does not create a year of past readings.",
+    "release.limits.title": "An observation to investigate.",
+    "release.limits.body":
+      "Room temperature, power plans, BIOS settings and software changes can also affect CPU temperature. Cooling Insight helps you review observations; a rise in temperature alone does not diagnose hardware wear or a cooling fault.",
+    "release.foundation.title": "Two updates to support that history.",
+    "release.foundation.body":
+      "This release adds Cooling Insight, updates history storage and makes optional sensor setup easier on Windows.",
+    "release.duck.title": "History storage moves to DuckDB",
+    "release.duck.body":
+      "History storage now uses DuckDB. This update addresses the growing volume of recorded history and the work involved in aggregating data over longer periods.",
+    "release.duck.benchmark.caption": "History file size",
+    "release.duck.benchmark.period": "History length",
+    "release.duck.benchmark.sqliteVersion": "(before v1.11.0)",
+    "release.duck.benchmark.duckdbVersion": "(v1.11.0)",
+    "release.duck.benchmark.30d": "30 days",
+    "release.duck.benchmark.90d": "90 days",
+    "release.duck.benchmark.1y": "1 year",
+    "release.duck.benchmark.note":
+      "Synthetic-data comparison: the DuckDB column shows the median across {runs} builds, about {reduction}% smaller. These are not whole-application database sizes.",
+    "release.duck.benchmark.conditions":
+      "Measured on {date}, using synthetic Process Stats and Ambient histories ({workload} cases, {samples} process samples per minute). The table shows the median DuckDB file size across {runs} independent builds; observed ranges: {ranges}. File sizes were measured after closing and checkpointing: SQLite includes indexes; DuckDB includes metadata and WAL, with no explicit indexes or primary-key constraints in this fixture. Environment: macOS {macos}; SQLite {sqlite} / DuckDB {duckdb}. This reruns the historical engine experiment; it does not measure final application storage or migration overhead.",
+    "release.duck.benchmark.source":
+      "Measurement conditions and results (JSON)",
+    "release.duck.detail.title": "About the storage update",
+    "release.duck.detail.body":
+      "DuckDB is a column-oriented database designed for analytical queries. It handles history storage and aggregation inside HardwareVisualizer, including the records used by Cooling Insight. It does not require a separate database server.",
+    "release.pawn.title": "Install PawnIO from Settings",
+    "release.pawn.body":
+      "On Windows, start optional PawnIO installation from HardwareVisualizer. The app downloads the runtime and required modules, reducing manual setup for supported CPU temperature, power and motherboard sensor readings.",
+    "release.pawn.note":
+      "Optional, Windows only. Requires an internet connection and Windows administrator approval. Sensor availability depends on the hardware.",
+    "release.pawn.detail.title": "What happens during installation?",
+    "release.pawn.detail.body":
+      "In Settings → Advanced → Optional component setup, choose Install. Downloads come from the official GitHub releases and are checked against recorded sizes and SHA-256 hashes. The app requests Windows administrator approval, installs a missing runtime and adds missing modules without overwriting existing files. Restart HardwareVisualizer afterward; restart Windows first if requested. PawnIO is downloaded during setup, not bundled with HardwareVisualizer.",
+    "release.faq.available.q": "Do comparisons need time to collect data?",
+    "release.faq.available.a":
+      "Yes. Cooling Insight needs recorded data to establish a baseline and compare it with recent readings. It shows baseline progress and leaves comparisons unavailable when there are not enough samples.",
+    "release.faq.control.q": "Does Cooling Insight adjust my fans?",
+    "release.faq.control.a":
+      "The features introduced here display and compare recorded readings. They do not change fan curves or cooling settings.",
+    "release.faq.setup.q": "Is PawnIO required on every OS?",
+    "release.faq.setup.a":
+      "No. PawnIO setup is for supported sensor paths on Windows. It is not a setup step for macOS or Linux, and installing it does not make every sensor available.",
+    "release.final.title": "Review your CPU’s thermal history.",
+    "release.final.body":
+      "Use Cooling Insight to review CPU temperature alongside load and compare it with past readings. DuckDB history storage and optional PawnIO setup support this update.",
+    "release.related.title": "Related pages",
+    "release.related.github": "Release on GitHub",
+    "release.related.features": "All features",
+    "release.related.specs": "System requirements",
     "nav.home": "Home",
     "nav.Features": "Features",
     "nav.Download": "Download",
@@ -460,6 +572,116 @@ export const ui = {
     "consent.decline": "Decline",
   },
   ja: {
+    "release.screenshot.cooling.alt":
+      "Cooling Insightのスクリーンショットに差し替えるグレーの仮画像",
+    "release.screenshot.cooling.caption":
+      "Cooling Insightの画面（スクリーンショット追加予定）",
+    "release.status": "HardwareVisualizer v1.11.0",
+    "release.nav": "v1.11.0 アップデート",
+    "release.announcement":
+      "HardwareVisualizer v1.11.0：Cooling Insight、DuckDBへの移行、PawnIOの導入支援。",
+    "release.meta.title":
+      "Cooling InsightでCPU温度を負荷と履歴から比較 | HardwareVisualizer",
+    "release.meta.description":
+      "HardwareVisualizer v1.11.0の更新内容を紹介。CPU温度を負荷や過去の記録と比べるCooling Insightを追加しました。履歴保存をDuckDBへ移し、Windowsでは設定画面からPawnIOを導入できます。",
+    "release.hero.title": "Cooling InsightでCPU温度を負荷と履歴から読み解く",
+    "release.hero.body":
+      "CPU温度を負荷や過去の記録と比べられる「Cooling Insight」を追加しました。履歴保存をDuckDBへ移し、Windowsでは設定画面からPawnIOを導入できるようになりました。",
+    "release.hero.cta": "HardwareVisualizerをダウンロード",
+    "release.hero.secondary": "更新履歴を見る",
+    "release.figure.title": "CPUの負荷帯ごとに比較",
+    "release.figure.baseline": "基準期間",
+    "release.figure.recent": "直近期間",
+    "release.figure.idle": "アイドル",
+    "release.figure.low": "低負荷",
+    "release.figure.mid": "中負荷",
+    "release.figure.high": "高負荷",
+    "release.figure.axis": "CPU温度",
+    "release.figure.lower": "低い",
+    "release.figure.higher": "高い",
+    "release.figure.caption":
+      "比較方法を示す説明図です。製品のスクリーンショットや実測データではありません。",
+    "release.contents": "このページの内容",
+    "release.cooling.name": "Cooling Insight",
+    "release.foundation.name": "履歴とセットアップ",
+    "release.faq.name": "よくある質問",
+    "release.comparison.title": "同じ負荷で温度を比べる",
+    "release.comparison.body":
+      "CPUが熱くなったとき、単に処理が増えたのかもしれません。Cooling Insightはアイドル・低負荷・中負荷・高負荷に分けて、基準期間と直近期間の温度を比較します。",
+    "release.comparison.note":
+      "比較には十分な記録が必要です。データが足りない負荷帯は、推測で補わず「比較保留」として表示します。",
+    "release.comparison.detail.title": "負荷と温度を詳しく見る",
+    "release.comparison.detail.body":
+      "「負荷 × 温度 Explorer」では、1時間ごとの平均CPU負荷と平均CPU温度を散布図で表示します。基準期間と直近期間を分け、負荷帯ごとの中央値も確認できます。記録時間が少ない帯域は比較保留になります。",
+    "release.reading.title": "同じ時間の変化を確かめる",
+    "release.reading.body":
+      "ゲームや長時間のレンダリングのあとに、CPU温度と負荷を同じ時間軸で振り返れます。CPUパッケージ電力やファン回転数を取得できる環境では、その変化もあわせて確認できます。",
+    "release.reading.temperature": "CPU温度",
+    "release.reading.load": "CPU負荷",
+    "release.reading.power": "CPUパッケージ電力",
+    "release.reading.fan": "ファン回転数",
+    "release.reading.caption":
+      "説明用の時系列イメージ図です。製品のスクリーンショットや実測データではありません。",
+    "release.reading.available": "取得できる環境で表示",
+    "release.reading.note":
+      "取得できる項目はOSやハードウェアによって異なります。センサーが非対応の場合と、その期間に記録がない場合は分けて表示します。",
+    "release.long.title": "数日から数か月の温度変化を見る",
+    "release.long.body":
+      "24時間・7日・30日の履歴に加え、日次集計による90日・1年の推移を表示できます。最近のアイドル時温度を確立済みの基準期間と比較し、持続的な変化を確認できます。",
+    "release.long.short": "履歴データ",
+    "release.long.short.periods": "24時間 / 7日 / 30日",
+    "release.long.daily": "日次集計",
+    "release.long.daily.periods": "90日 / 1年",
+    "release.long.note":
+      "表示されるのは蓄積された記録です。1年表示を選んでも、記録前のデータが補われることはありません。",
+    "release.limits.title": "温度の変化を見るときに",
+    "release.limits.body":
+      "室温・電源プラン・BIOS設定・ソフトウェア構成の変化も、CPU温度に影響します。Cooling Insightは記録を確認するための機能です。温度の上昇だけで、部品の劣化や冷却の故障を断定するものではありません。",
+    "release.foundation.title": "Cooling Insightを支える2つの変更",
+    "release.foundation.body":
+      "今回のリリースではCooling Insightの追加とあわせて、履歴の保存基盤と、Windowsでセンサーを利用するための導入手順も改善しました。",
+    "release.duck.title": "履歴の保存基盤をDuckDBへ",
+    "release.duck.body":
+      "履歴の保存基盤にDuckDBを採用しました。蓄積する履歴データと、長い期間の集計を扱うための基盤を更新しています。",
+    "release.duck.benchmark.caption": "履歴ファイルの保存容量",
+    "release.duck.benchmark.period": "履歴の期間",
+    "release.duck.benchmark.sqliteVersion": "（v1.11.0未満）",
+    "release.duck.benchmark.duckdbVersion": "（v1.11.0）",
+    "release.duck.benchmark.30d": "30日",
+    "release.duck.benchmark.90d": "90日",
+    "release.duck.benchmark.1y": "1年",
+    "release.duck.benchmark.note":
+      "合成データでの比較です。DuckDBの欄は{runs}回測定の中央値で、各期間約{reduction}%削減。製品全体の保存容量ではありません。",
+    "release.duck.benchmark.conditions":
+      "{date}測定。プロセス統計と環境温度の合成履歴（{workload}ケース、1分あたり{samples}件のプロセスサンプル）を使用。表のDuckDB容量は独立した{runs}回の作成結果の中央値です。各期間の実測範囲: {ranges}。終了・チェックポイント後のファイル容量で、SQLiteは索引を含み、DuckDBはメタデータ・WALを含みます。この検証用DuckDBには明示的な索引・主キー制約を付けていません。実行環境はmacOS {macos}、SQLite {sqlite} / DuckDB {duckdb}。過去のエンジン比較を同じ条件で再実行したもので、最終製品の保存容量や移行時の一時容量は測定対象外です。",
+    "release.duck.benchmark.source": "測定条件と結果を確認する（JSON）",
+    "release.duck.detail.title": "保存基盤の変更について",
+    "release.duck.detail.body":
+      "DuckDBは、データの集計や分析に適した列指向のデータベースです。Cooling Insightで利用する記録を含め、HardwareVisualizer内で履歴の保存と集計を担います。別途データベースサーバーを用意する必要はありません。",
+    "release.pawn.title": "PawnIOを設定画面から導入",
+    "release.pawn.body":
+      "Windowsでは、HardwareVisualizerの設定画面からPawnIOの導入を開始できます。ランタイムと必要なモジュールをダウンロードし、対応するCPUの温度・電力やマザーボードセンサーを利用するための手作業を減らします。",
+    "release.pawn.note":
+      "Windows向けの任意導入です。インターネット接続とWindowsの管理者承認が必要です。利用できるセンサーはハードウェアによって異なります。",
+    "release.pawn.detail.title": "導入時に行われること",
+    "release.pawn.detail.body":
+      "「設定 → 詳細設定 → 任意コンポーネントのセットアップ」からインストールを選びます。公式GitHubリリースから取得し、サイズとSHA-256ハッシュを検証します。Windowsの管理者承認後、未導入のランタイムと不足するモジュールを追加し、既存ファイルは上書きしません。完了後はアプリを再起動し、Windowsから再起動を求められた場合は先にOSを再起動します。PawnIOは同梱せず、セットアップ時に取得します。",
+    "release.faq.available.q": "比較結果が出るまで、記録の蓄積は必要ですか？",
+    "release.faq.available.a":
+      "はい。基準期間を確立し、最近の状態と比較するために記録の蓄積が必要です。基準期間の確立状況を表示し、サンプルが不足している場合は比較保留として扱います。",
+    "release.faq.control.q": "Cooling Insightでファンを制御できますか？",
+    "release.faq.control.a":
+      "ここで紹介している機能は、記録した値の表示と比較を行います。ファンカーブや冷却設定を変更する機能ではありません。",
+    "release.faq.setup.q": "どのOSでもPawnIOが必要ですか？",
+    "release.faq.setup.a":
+      "いいえ。PawnIOの導入はWindowsの対応センサー向けです。macOSやLinuxでの導入手順ではなく、インストールによってすべてのセンサーが使えるようになるわけでもありません。",
+    "release.final.title": "CPU温度の履歴を振り返る",
+    "release.final.body":
+      "Cooling Insightで、CPU温度を負荷の推移とあわせて確認し、過去の記録と比較できます。DuckDBによる履歴の保存と、PawnIOの導入支援もあわせて利用できます。",
+    "release.related.title": "関連ページ",
+    "release.related.github": "GitHubのリリースページ",
+    "release.related.features": "機能一覧",
+    "release.related.specs": "システム要件",
     "nav.home": "ホーム",
     "nav.Features": "機能",
     "nav.Download": "ダウンロード",

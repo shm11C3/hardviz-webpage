@@ -122,3 +122,80 @@ export function buildAboutPage(lang: keyof typeof ui) {
     about: [organizationRef, personRef],
   };
 }
+
+const breadcrumbHome = {
+  en: "Home",
+  ja: "ホーム",
+};
+
+export interface ReleaseArticleInput {
+  /** Absolute canonical URL of the article. */
+  url: string;
+  headline: string;
+  description: string;
+  /** Product version the article announces, e.g. "1.11.0". */
+  version: string;
+  /** ISO date (YYYY-MM-DD); omitted from the node when not yet published. */
+  datePublished?: string | null;
+  /** Absolute URL of the article's share image. */
+  image?: string;
+}
+
+/**
+ * TechArticle + BreadcrumbList for a release article page. The article links back
+ * to the central Person / Organization / WebSite entities by `@id` and names the
+ * product it is about, so search engines file it under the same entity graph as
+ * the homepage SoftwareApplication node.
+ */
+export function buildReleaseArticle(
+  lang: keyof typeof ui,
+  input: ReleaseArticleInput,
+) {
+  const isJa = lang === "ja";
+  const { url, headline, description, version, datePublished, image } = input;
+
+  const article = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "@id": `${url}#article`,
+    url,
+    mainEntityOfPage: url,
+    headline,
+    description,
+    inLanguage: isJa ? "ja" : "en",
+    ...(datePublished ? { datePublished, dateModified: datePublished } : {}),
+    ...(image ? { image } : {}),
+    author: personRef,
+    publisher: organizationRef,
+    isPartOf: { "@id": WEBSITE_ID },
+    about: {
+      "@type": "SoftwareApplication",
+      name: "HardwareVisualizer",
+      url: `${SITE_URL}/`,
+      softwareVersion: version,
+      publisher: organizationRef,
+    },
+  };
+
+  const homeUrl = isJa ? `${SITE_URL}/ja/` : `${SITE_URL}/`;
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: isJa ? breadcrumbHome.ja : breadcrumbHome.en,
+        item: homeUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: headline,
+        item: url,
+      },
+    ],
+  };
+
+  return [article, breadcrumb];
+}

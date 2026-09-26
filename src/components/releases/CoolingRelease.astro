@@ -1,0 +1,477 @@
+---
+import benchmark from "../../../public/benchmarks/history-storage-2026-09-27.json";
+import screenshotPlaceholder from "../../assets/releases/screenshot-placeholder.svg";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import ReleaseScreenshot from "./ReleaseScreenshot.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const bands = [
+  { key: "idle", baseline: 16, recent: 25 },
+  { key: "low", baseline: 34, recent: 43 },
+  { key: "mid", baseline: 56, recent: 62 },
+  { key: "high", baseline: 75, recent: 83 },
+] as const;
+const readings = [
+  {
+    key: "temperature",
+    supportedOnly: false,
+    path: "M0 28L16 27L28 28L40 23L52 16L64 12L80 10L98 12L110 11L124 20L140 25L160 26",
+  },
+  {
+    key: "load",
+    supportedOnly: false,
+    path: "M0 30L24 30L32 28L40 6L55 8L64 4L82 8L98 5L112 7L122 28L144 30L160 30",
+  },
+  {
+    key: "power",
+    supportedOnly: true,
+    path: "M0 29L24 28L34 25L42 9L60 10L76 7L96 11L112 9L124 26L142 28L160 29",
+  },
+  {
+    key: "fan",
+    supportedOnly: true,
+    path: "M0 30L28 30L42 28L56 20L70 10L92 9L112 10L126 16L144 23L160 28",
+  },
+] as const;
+const questions = ["available", "control", "setup"] as const;
+// Stable Process/Ambient fixtures; not the complete application database.
+// Source and replacement criteria: docs/next-release-drafts.md.
+const storageBenchmark = (["30d", "90d", "1y"] as const).map((period) => ({
+  period,
+  reduction: benchmark.cases[period].reduction_percent,
+  sqlite: (benchmark.cases[period].sqlite_bytes / 1048576).toFixed(1),
+  duckdb: (benchmark.cases[period].duckdb_bytes / 1048576).toFixed(1),
+}));
+const benchmarkRanges = (["30d", "90d", "1y"] as const)
+  .map((period) => {
+    const [minimum, maximum] = benchmark.cases[period].duckdb_mib_range;
+    return `${t(`release.duck.benchmark.${period}`)} ${minimum.toFixed(1)}–${maximum.toFixed(1)}MiB`;
+  })
+  .join(lang === "ja" ? " / " : "; ");
+const reductions = storageBenchmark.map(({ reduction }) =>
+  Math.round(reduction),
+);
+const reductionMin = Math.min(...reductions);
+const reductionMax = Math.max(...reductions);
+const benchmarkNote = t("release.duck.benchmark.note")
+  .replace(
+    "{reduction}",
+    reductionMin === reductionMax
+      ? String(reductionMin)
+      : `${reductionMin}–${reductionMax}`,
+  )
+  .replace("{runs}", String(benchmark.method.duckdb_size_repetitions));
+const measuredDate = new Intl.DateTimeFormat(
+  lang === "ja" ? "ja-JP" : "en-US",
+  {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "UTC",
+  },
+).format(new Date(`${benchmark.measured_at}T00:00:00Z`));
+const benchmarkConditions = t("release.duck.benchmark.conditions")
+  .replace("{date}", measuredDate)
+  .replace("{workload}", benchmark.method.workload)
+  .replace(
+    "{samples}",
+    String(benchmark.method.process_observations_per_minute),
+  )
+  .replace("{runs}", String(benchmark.method.duckdb_size_repetitions))
+  .replace("{ranges}", benchmarkRanges)
+  .replace("{macos}", benchmark.environment.macos)
+  .replace("{sqlite}", benchmark.environment.sqlite)
+  .replace("{duckdb}", benchmark.environment.duckdb);
+const benchmarkSource = "/benchmarks/history-storage-2026-09-27.json";
+---
+
+<section id="cooling" class="release-section" aria-labelledby="cooling-heading">
+  <p class="section-name">{t("release.cooling.name")}</p>
+  <div class="feature-row">
+    <div class="feature-copy">
+      <h2 id="cooling-heading">{t("release.comparison.title")}</h2>
+      <p>{t("release.comparison.body")}</p>
+      <p class="small-note">{t("release.comparison.note")}</p>
+      <details>
+        <summary>{t("release.comparison.detail.title")}</summary>
+        <p>{t("release.comparison.detail.body")}</p>
+      </details>
+    </div>
+    <figure class="comparison-figure">
+      <div class="figure-heading">{t("release.figure.title")}</div>
+      <div class="legend">
+        <span class="baseline-legend">{t("release.figure.baseline")}</span>
+        <span class="recent-legend">{t("release.figure.recent")}</span>
+      </div>
+      <div class="comparison-chart" aria-hidden="true">
+        {bands.map(({key, baseline, recent}) => (
+            <div class="band-row">
+              <span>{t(`release.figure.${key}`)}</span>
+              <div class="band-track">
+                <span class="range-line" style={`left:${baseline}%;width:${recent - baseline}%`}></span>
+                <i class="baseline-dot" style={`left:${baseline}%`}></i>
+                <i class="recent-dot" style={`left:${recent}%`}></i>
+              </div>
+            </div>
+          ))}
+        <div class="chart-axis">
+          <span>{t("release.figure.lower")}</span
+          ><span>{t("release.figure.axis")}</span
+          ><span>{t("release.figure.higher")}</span>
+        </div>
+      </div>
+      <figcaption>{t("release.figure.caption")}</figcaption>
+    </figure>
+  </div>
+  <ReleaseScreenshot
+    src={screenshotPlaceholder}
+    alt={t("release.screenshot.cooling.alt")}
+    caption={t("release.screenshot.cooling.caption")}
+    placeholder
+  />
+  <div class="feature-row timeline-feature">
+    <div class="feature-copy">
+      <h2>{t("release.reading.title")}</h2>
+      <p>{t("release.reading.body")}</p>
+      <p class="small-note">{t("release.reading.note")}</p>
+    </div>
+    <div class="readings-list">
+      {readings.map(({ key, supportedOnly, path }) => (
+            <div class="reading-row">
+              <div><span>{t(`release.reading.${key}`)}</span>{supportedOnly && <small>{t("release.reading.available")}</small>}</div>
+              <svg viewBox="0 0 160 36" fill="none" aria-hidden="true">
+                <path class="reading-grid" d="M0 32H160M40 0V36M80 0V36M120 0V36" />
+                <path class:list={["reading-wave", `wave-${key}`]} d={path} />
+              </svg>
+            </div>
+          ))}
+      <p class="small-note">{t("release.reading.caption")}</p>
+    </div>
+  </div>
+  <div class="feature-row long-feature">
+    <div class="feature-copy">
+      <h2>{t("release.long.title")}</h2>
+      <p>{t("release.long.body")}</p>
+    </div>
+    <div>
+      <dl class="periods">
+        <div>
+          <dt>{t("release.long.short")}</dt>
+          <dd>{t("release.long.short.periods")}</dd>
+        </div>
+        <div>
+          <dt>{t("release.long.daily")}</dt>
+          <dd>{t("release.long.daily.periods")}</dd>
+        </div>
+      </dl>
+      <p class="small-note">{t("release.long.note")}</p>
+    </div>
+  </div>
+  <aside class="observation-note">
+    <h3>{t("release.limits.title")}</h3>
+    <p>{t("release.limits.body")}</p>
+  </aside>
+</section>
+
+<section
+  id="foundation"
+  class="supporting-section"
+  aria-labelledby="foundation-heading"
+>
+  <h2 id="foundation-heading">{t("release.foundation.title")}</h2>
+  <p class="section-intro">{t("release.foundation.body")}</p>
+  <div class="foundation-grid">
+    <article>
+      <h3>{t("release.duck.title")}</h3>
+      <p>{t("release.duck.body")}</p>
+      <div class="storage-benchmark">
+        <table aria-describedby="storage-benchmark-note">
+          <caption>
+            {t("release.duck.benchmark.caption")}
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">{t("release.duck.benchmark.period")}</th>
+              <th scope="col">
+                SQLite<span class="benchmark-version"
+                  >{t("release.duck.benchmark.sqliteVersion")}</span
+                >
+              </th>
+              <th scope="col">
+                DuckDB<span class="benchmark-version"
+                  >{t("release.duck.benchmark.duckdbVersion")}</span
+                >
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {storageBenchmark.map(row => (
+              <tr>
+                <th scope="row">{t(`release.duck.benchmark.${row.period}`)}</th>
+                <td>{row.sqlite}MiB</td>
+                <td>{row.duckdb}MiB</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p id="storage-benchmark-note">{benchmarkNote}</p>
+      </div>
+      <details>
+        <summary>{t("release.duck.detail.title")}</summary>
+        <p>{t("release.duck.detail.body")}</p>
+        <p>{benchmarkConditions}</p>
+        <p>
+          <a href={benchmarkSource}>{t("release.duck.benchmark.source")}</a>
+        </p>
+      </details>
+    </article>
+    <article>
+      <h3>{t("release.pawn.title")}</h3>
+      <p>{t("release.pawn.body")}</p>
+      <p class="small-note">{t("release.pawn.note")}</p>
+      <details>
+        <summary>{t("release.pawn.detail.title")}</summary>
+        <p>{t("release.pawn.detail.body")}</p>
+      </details>
+    </article>
+  </div>
+</section>
+
+<section id="questions" class="faq-section" aria-labelledby="questions-heading">
+  <h2 id="questions-heading">{t("release.faq.name")}</h2>
+  <div>
+    {questions.map(question => (
+        <details><summary>{t(`release.faq.${question}.q`)}</summary><p>{t(`release.faq.${question}.a`)}</p></details>
+      ))}
+  </div>
+</section>
+
+<style>
+.foundation-grid > article {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.foundation-grid > article > details {
+  margin-top: auto;
+}
+.foundation-grid > article > .small-note {
+  margin-bottom: 24px;
+}
+.storage-benchmark {
+  margin: 20px 0 24px;
+}
+.storage-benchmark table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+.storage-benchmark caption {
+  text-align: left;
+  color: var(--ink);
+  font-weight: 600;
+  padding-bottom: 8px;
+}
+.storage-benchmark th,
+.storage-benchmark td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--line);
+  text-align: right;
+}
+.storage-benchmark th:first-child {
+  text-align: left;
+}
+.storage-benchmark thead {
+  background: var(--surface);
+  color: var(--muted);
+}
+.storage-benchmark th {
+  font-weight: 500;
+}
+.benchmark-version {
+  display: block;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+.storage-benchmark td:last-child {
+  color: var(--blue);
+  font-weight: 600;
+}
+.storage-benchmark > p {
+  margin-top: 10px;
+  font-size: 0.75rem;
+  line-height: 1.7;
+}
+.comparison-figure {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 28px;
+  border: 1px solid var(--line);
+}
+.figure-heading {
+  font-size: 1rem;
+  font-weight: 650;
+}
+.legend {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 16px 0 32px;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+.legend span {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+.baseline-dot,
+.recent-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.baseline-dot {
+  border: 2px solid var(--blue);
+  background: var(--surface);
+}
+.recent-dot {
+  background: var(--violet);
+  border: 2px solid var(--violet);
+}
+.band-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 26px;
+  font-size: 0.78rem;
+}
+.band-track {
+  position: relative;
+  height: 32px;
+  background: repeating-linear-gradient(
+    to right,
+    var(--line) 0,
+    var(--line) 1px,
+    transparent 1px,
+    transparent 25%
+  );
+  border-bottom: 1px solid var(--line);
+}
+.band-track i {
+  position: absolute;
+  top: 10px;
+  transform: translateX(-50%);
+}
+.range-line {
+  position: absolute;
+  top: 14px;
+  height: 3px;
+  background: var(--violet);
+  opacity: 0.65;
+}
+.chart-axis {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-left: 90px;
+  color: var(--muted);
+  font-size: 0.67rem;
+}
+figcaption {
+  font-size: 0.72rem;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.timeline-feature {
+  padding-top: 40px;
+  align-items: center;
+}
+.readings-list {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 16px 24px 24px;
+}
+.reading-row {
+  display: grid;
+  grid-template-columns: 1fr 130px;
+  gap: 16px;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.82rem;
+}
+.reading-row small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.65rem;
+  margin-top: 4px;
+}
+.reading-row svg {
+  width: 100%;
+  height: 36px;
+}
+.reading-grid {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+.reading-wave {
+  stroke: var(--blue);
+  stroke-width: 2.5;
+}
+.wave-temperature,
+.wave-fan {
+  stroke: var(--violet);
+}
+.long-feature {
+  padding-top: 32px;
+}
+.periods > div {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+.periods dt {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.periods dd {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+@media (max-width: 900px) {
+  .comparison-figure {
+    padding: 20px;
+  }
+}
+@media (max-width: 700px) {
+  .comparison-figure {
+    max-width: 520px;
+    width: 100%;
+  }
+  .timeline-feature,
+  .long-feature {
+    padding-top: 16px;
+  }
+}
+.legend span::before {
+  content: "";
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+.baseline-legend::before {
+  border: 2px solid var(--blue);
+}
+.recent-legend::before {
+  background: var(--violet);
+}
+</style>

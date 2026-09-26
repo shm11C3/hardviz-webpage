@@ -1,0 +1,57 @@
+---
+lang: ja
+version: 1.11.0
+date: 2026-09-26
+title: "v1.11.0"
+summary: "Cooling Insightで温度と負荷の履歴を確認できるようになりました。履歴保存にDuckDBを導入し、既存データの移行フローや電力・センサー対応も追加しています。"
+highlights:
+  - "Cooling Insightで温度・負荷・ファン・電力・周囲温度の履歴を確認"
+  - "新規インストールでDuckDBを使用。既存のSQLiteデータには明示的な移行フローを追加"
+  - "WindowsのExternal Component SetupからPawnIOを導入可能に"
+  - "Apple Siliconの電力表示や周囲温度センサーなどに対応"
+tags:
+  - リリース
+  - Cooling Insight
+  - DuckDB
+  - PawnIO
+  - センサー
+links:
+  - label: "Cooling Insightの紹介記事を見る"
+    url: "https://hardviz.com/ja/releases/cooling-insight/"
+---
+
+## 主な変更
+
+v1.11.0では、温度と負荷の変化を記録した履歴から確認できる**Cooling Insight**を追加しました。
+新規インストールでは履歴保存にDuckDBを使い、既存のSQLiteデータ向けには明示的な移行フローを追加しています。
+
+メイン機能の詳細は[Cooling Insightの紹介記事](https://hardviz.com/ja/releases/cooling-insight/)をご覧ください。
+
+## Cooling Insight
+
+- 温度、負荷、ファン回転数、対応する電力情報を時系列で確認できるCoolingビューを追加しました。
+- アイドル状態の検出と冷却ベースライン、長期間の表示に使う日次サマリーを追加しました。
+- 負荷帯ごとの比較と、負荷と温度の関係を調べるビューを追加しました。
+- 対応する環境センサーのデータがある場合に、周囲温度を考慮した表示や相関ビューを利用できます。
+
+## 履歴データ
+
+- 新規インストールではネイティブDuckDBアーカイブを使用します。
+- 既存のSQLiteデータは、明示的なデータベース移行フローで移行できます。
+- ネイティブアーカイブのクエリ、差分反映、保持期間の管理、Storage Health表示に対応しました。
+
+## 電力とセンサー
+
+- Apple Siliconの電力情報と、電力表示先の選択に対応しました。
+- 電力のサマリーを履歴に記録し、Performance画面の表示方法を追加しました。
+- 対応環境でのWindows CPUパッケージ電力とIntelパッケージの熱状態表示に対応しました。
+- 対応するITEセンサーで、実験的なマザーボード温度取得に対応しました。
+- SwitchBot Meter BLEとHubファミリーの周囲温度を取得でき、使用するセンサーを選べるようになりました。
+
+## セットアップと修正
+
+- WindowsのExternal Component SetupからPawnIOを導入できるようになりました。MSIインストーラーにもPawnIOのセットアップ項目を追加しました。
+- キャンセルまたは失敗した後の再試行を含め、データベース移行と復旧の動作を改善しました。
+- ハードウェア情報の取得、Windowsのインストール手順、アプリの安定性に関する修正を含みます。
+
+すべての変更は[GitHubのv1.11.0リリースノート](https://github.com/shm11C3/HardwareVisualizer/releases/tag/v1.11.0)をご覧ください。

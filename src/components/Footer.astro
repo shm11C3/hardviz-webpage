@@ -4,6 +4,7 @@ import { ChevronRight, ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import appIcon from "../assets/app-icon.png";
+import { currentRelease } from "../data/currentRelease";
 import {
   getLangFromUrl,
   useTranslatedPath,
@@ -24,6 +25,11 @@ const footerLinks = [
   {
     title: t("footer.product"),
     links: [
+      {
+        name: t(currentRelease.navKey),
+        href: translatePath(`/releases/${currentRelease.slug}`),
+        external: false,
+      },
       {
         name: t("footer.features"),
         href: translatePath("/#features"),

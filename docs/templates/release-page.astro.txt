@@ -1,0 +1,56 @@
+---
+// Copy to src/pages/releases/<slug>.astro.
+// Japanese copy: lang = "ja", imports start with ../../../.
+// Add release.NEW.* keys in both languages in src/i18n/ui.ts,
+// then replace NEW with the release-specific namespace.
+// Add a "<slug>" entry with version and publishedAt to src/data/releases.ts.
+// Japanese Hero/H1/H2 copy: omit sentence-final punctuation and avoid unnecessary commas.
+// Once a real 1200×630 share image exists in public/, add these props to ReleaseLayout:
+// ogImage="/releases/NEW-og.png" ogImageAlt={t("release.NEW.ogImageAlt")}
+import { releaseArticles } from "../../data/releases";
+import { useTranslatedPath, useTranslations } from "../../i18n/utils";
+import ReleaseLayout from "../../layouts/ReleaseLayout.astro";
+
+const lang = "en";
+const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
+const article = releaseArticles["<slug>"];
+---
+
+<ReleaseLayout
+  lang={lang}
+  title={t("release.NEW.meta.title")}
+  description={t("release.NEW.meta.description")}
+  releaseLabel={t("release.NEW.label")}
+  heading={t("release.NEW.heading")}
+  intro={t("release.NEW.intro")}
+  downloadLabel={t("release.NEW.download")}
+  changelogLabel={t("release.NEW.changelog")}
+  changelogHref={translatePath(`/changelog/${article.version}`)}
+  version={article.version}
+  publishedAt={article.publishedAt}
+  contentsLabel={t("release.NEW.contents")}
+  sections={[
+    { id: "main-feature", label: t("release.NEW.main.label") },
+    { id: "other-changes", label: t("release.NEW.other.title") },
+  ]}
+  closing={{
+    title: t("release.NEW.closing.title"),
+    body: t("release.NEW.closing.body"),
+  }}
+>
+  <section id="main-feature" class="release-section" aria-labelledby="main-feature-heading">
+    <p class="section-name">{t("release.NEW.main.label")}</p>
+    <h2 id="main-feature-heading">{t("release.NEW.main.title")}</h2>
+    <p class="section-intro">{t("release.NEW.main.body")}</p>
+    <!-- Optional: ReleaseScreenshot, after adding a real image and localized caption. -->
+    <details>
+      <summary>{t("release.NEW.main.details.title")}</summary>
+      <p>{t("release.NEW.main.details.body")}</p>
+    </details>
+  </section>
+  <section id="other-changes" class="supporting-section" aria-labelledby="other-heading">
+    <h2 id="other-heading">{t("release.NEW.other.title")}</h2>
+    <p class="section-intro">{t("release.NEW.other.body")}</p>
+  </section>
+</ReleaseLayout>

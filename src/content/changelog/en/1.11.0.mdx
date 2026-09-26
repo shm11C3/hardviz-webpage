@@ -1,0 +1,56 @@
+---
+lang: en
+version: 1.11.0
+date: 2026-09-26
+title: "v1.11.0"
+summary: "Adds Cooling Insight for exploring thermal behavior over time, moves hardware history to DuckDB with a guided conversion flow, and adds new power and sensor support."
+highlights:
+  - "Cooling Insight connects temperature, load, fan, power, and ambient readings across recorded history"
+  - "Fresh installs use the native DuckDB archive, with an explicit conversion flow for existing SQLite data"
+  - "PawnIO can be installed from External Component Setup on Windows"
+  - "Adds Apple Silicon power readings, ambient sensors, and further hardware-specific data"
+tags:
+  - Release
+  - Cooling Insight
+  - DuckDB
+  - PawnIO
+  - Sensors
+links:
+  - label: "Read the Cooling Insight release article"
+    url: "https://hardviz.com/releases/cooling-insight/"
+---
+
+## What's New
+
+v1.11.0 adds **Cooling Insight**, a new place to review how temperatures change alongside workload and recorded history. It also moves fresh installations to the native DuckDB archive and adds an explicit conversion flow for existing SQLite data.
+
+For a closer look at the main feature, read the [Cooling Insight release article](https://hardviz.com/releases/cooling-insight/).
+
+## Cooling Insight
+
+- Added a Cooling view with synchronized history for temperature, workload, fan speed, and supported power readings.
+- Added idle detection and a cooling baseline, plus daily summaries for longer-range views.
+- Added load-band comparisons and a load-versus-temperature explorer.
+- Added ambient-aware readings and a correlation view when compatible environmental sensor data is available.
+
+## Hardware history
+
+- Fresh installations use the native DuckDB archive.
+- Existing SQLite data can be moved through the explicit database conversion flow.
+- Added native archive queries, reconciliation, retention handling, and Storage Health reporting.
+
+## Power and sensors
+
+- Added Apple Silicon power draw readings and selectable power display targets.
+- Added power summaries to recorded history and additional power views.
+- Added Windows CPU package power and Intel package thermal status where supported.
+- Added experimental motherboard temperature readings for supported ITE sensors.
+- Added SwitchBot Meter BLE and Hub-family ambient readings, with explicit sensor selection.
+
+## Setup and fixes
+
+- Added PawnIO setup through External Component Setup on Windows. The MSI installer also offers PawnIO setup.
+- Improved database conversion and recovery behavior, including after a cancelled or failed conversion.
+- Includes further fixes for hardware readings, Windows installation flows, and application stability.
+
+See the [full v1.11.0 release notes on GitHub](https://github.com/shm11C3/HardwareVisualizer/releases/tag/v1.11.0) for every change.
