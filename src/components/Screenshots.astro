@@ -1,11 +1,15 @@
 ---
 import { Image } from "astro:assets";
-import slide01 from "../assets/screenshots/slide-1.png";
-import slideLight01 from "../assets/screenshots/slide-1-l.png";
+import coolingScreenshotEn from "../assets/releases/cooling-insight-en.png";
+import coolingScreenshotJa from "../assets/releases/cooling-insight-ja.png";
+import coolingScreenshotLightEn from "../assets/releases/cooling-insight-light-en.png";
+import coolingScreenshotLightJa from "../assets/releases/cooling-insight-light-ja.png";
+import dashboardEn from "../assets/screenshots/dashboard-performance-en.png";
+import dashboardJa from "../assets/screenshots/dashboard-performance-ja.png";
+import dashboardLightEn from "../assets/screenshots/dashboard-performance-light-en.png";
+import dashboardLightJa from "../assets/screenshots/dashboard-performance-light-ja.png";
 import slide02 from "../assets/screenshots/slide-2.png";
 import slideLight02 from "../assets/screenshots/slide-2-l.png";
-import slide03 from "../assets/screenshots/slide-3.png";
-import slideLight03 from "../assets/screenshots/slide-3-l.png";
 import slide04 from "../assets/screenshots/slide-4.png";
 import slideLight04 from "../assets/screenshots/slide-4-l.png";
 import slide05 from "../assets/screenshots/slide-5.png";
@@ -20,21 +24,15 @@ const t = useTranslations(lang);
 const slides = [
   {
     key: "slide-1",
-    alt: "HardwareVisualizer Dashboard - Real-time CPU, GPU, and memory monitoring with usage graphs",
-    light: slideLight01,
-    dark: slide01,
+    alt: t("screenshots.dashboardAlt"),
+    light: lang === "ja" ? dashboardLightJa : dashboardLightEn,
+    dark: lang === "ja" ? dashboardJa : dashboardEn,
   },
   {
     key: "slide-2",
     alt: t("screenshots.insightsAlt"),
     light: slideLight02,
     dark: slide02,
-  },
-  {
-    key: "slide-3",
-    alt: "HardwareVisualizer CPU Monitor - Per-core CPU usage, temperature, and frequency tracking",
-    light: slideLight03,
-    dark: slide03,
   },
   {
     key: "slide-4",
@@ -53,6 +51,12 @@ const slides = [
     alt: "HardwareVisualizer GPU Metrics - NVIDIA GPU temperature, VRAM, and clock speed monitoring",
     light: slideLight06,
     dark: slide06,
+  },
+  {
+    key: "cooling-insight",
+    alt: t("screenshots.coolingInsightAlt"),
+    light: lang === "ja" ? coolingScreenshotLightJa : coolingScreenshotLightEn,
+    dark: lang === "ja" ? coolingScreenshotJa : coolingScreenshotEn,
   },
 ] as const;
 ---

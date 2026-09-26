@@ -154,6 +154,10 @@ export const ui = {
       "HardwareVisualizer Insights showing CPU and memory usage history over time",
     "screenshots.insightsAlt":
       "HardwareVisualizer Insights - review historical CPU and GPU usage after a workload",
+    "screenshots.dashboardAlt":
+      "HardwareVisualizer dashboard showing CPU, memory, GPU, process, and sensor monitoring",
+    "screenshots.coolingInsightAlt":
+      "Cooling Insight dashboard comparing CPU temperature and showing temperature, load, power, and fan history",
     "usage.title": "Customize the Live View",
     "usage.description":
       "Keep the real-time dashboard readable your way with adjustable charts, colors, and a local background image.",
@@ -712,6 +716,10 @@ export const ui = {
       "CPUとメモリの使用履歴を時系列で表示するHardwareVisualizerのInsights画面",
     "screenshots.insightsAlt":
       "処理後にCPUとGPUの使用履歴を振り返るHardwareVisualizerのInsights画面",
+    "screenshots.dashboardAlt":
+      "CPU、メモリ、GPU、プロセス、センサーの状態を表示するHardwareVisualizerのダッシュボード",
+    "screenshots.coolingInsightAlt":
+      "CPU温度の比較と温度、負荷、電力、ファンの履歴を表示するCooling Insight画面",
     "usage.title": "リアルタイム表示を自分好みに",
     "usage.description":
       "チャート、色、PC内の背景画像を調整し、今の状態を見やすいダッシュボードにできます。",

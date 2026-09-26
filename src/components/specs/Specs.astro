@@ -15,7 +15,8 @@ import {
   Thermometer,
   Workflow,
 } from "lucide-react";
-import dashboardScreenshot from "../../assets/screenshots/slide-1-l.png";
+import dashboardScreenshotEn from "../../assets/screenshots/system-specifications-en.png";
+import dashboardScreenshotJa from "../../assets/screenshots/system-specifications-ja.png";
 import {
   getLangFromUrl,
   useTranslatedPath,
@@ -26,6 +27,9 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const { translatePath } = useTranslatedPath(lang);
 const isJa = lang === "ja";
+const dashboardScreenshot = isJa
+  ? dashboardScreenshotJa
+  : dashboardScreenshotEn;
 
 const downloadHref = translatePath("/download");
 const verificationHref = translatePath("/verification");
