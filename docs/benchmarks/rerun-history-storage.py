@@ -11,6 +11,7 @@ import hashlib
 import importlib.util
 import json
 from pathlib import Path
+import shutil
 import sys
 
 NATIVE_DEFAULT_BLOCK_SIZE_BYTES = 65_536
@@ -47,29 +48,60 @@ if args.fixture_source:
 if args.output.exists():
     parser.error("--output must be a new directory")
 
-# The pinned Python engine predates the production block-size tuning. Apply
-# that one production setting only when it creates the native archive fixture.
-engine_script = args.engine / "engine_benchmark.py"
+# The pinned Python engine predates the production block-size tuning. Patch a
+# copy so the caller's supplied engine checkout remains unchanged. Validate the
+# complete function body to reject a partial or nested prior patch.
+args.output.mkdir(parents=True)
+engine_workspace = args.output / "patched-engine"
+shutil.copytree(args.engine, engine_workspace)
+engine_script = engine_workspace / "engine_benchmark.py"
 engine_source = engine_script.read_text()
-old_connection = 'connection = duckdb.connect(str(path) if path else ":memory:", read_only=read_only)'
-new_connection = (
-    'if path is not None and path.name == "archive.duckdb" and not read_only:\n'
-    '        connection = duckdb.connect(\n'
-    '            str(path), read_only=read_only, config={"default_block_size": "65536"}\n'
-    '        )\n'
-    '    else:\n'
-    '        connection = duckdb.connect(str(path) if path else ":memory:", read_only=read_only)'
-)
-if engine_source.count(old_connection) != 1:
+old_open_duckdb = '''def open_duckdb(
+    path: Path | None,
+    temp_dir: Path,
+    threads: int,
+    memory_limit: str,
+    read_only: bool = False,
+) -> duckdb.DuckDBPyConnection:
+    temp_dir.mkdir(parents=True, exist_ok=True)
+    connection = duckdb.connect(str(path) if path else ":memory:", read_only=read_only)
+    connection.execute(f"SET threads = {int(threads)}")
+    connection.execute("SET memory_limit = ?", [memory_limit])
+    connection.execute("SET temp_directory = ?", [str(temp_dir)])
+    return connection
+'''
+new_open_duckdb = '''def open_duckdb(
+    path: Path | None,
+    temp_dir: Path,
+    threads: int,
+    memory_limit: str,
+    read_only: bool = False,
+) -> duckdb.DuckDBPyConnection:
+    temp_dir.mkdir(parents=True, exist_ok=True)
+    if path is not None and path.name == "archive.duckdb" and not read_only:
+        connection = duckdb.connect(
+            str(path), read_only=read_only, config={"default_block_size": "65536"}
+        )
+    else:
+        connection = duckdb.connect(str(path) if path else ":memory:", read_only=read_only)
+    connection.execute(f"SET threads = {int(threads)}")
+    connection.execute("SET memory_limit = ?", [memory_limit])
+    connection.execute("SET temp_directory = ?", [str(temp_dir)])
+    return connection
+'''
+if engine_source.count(old_open_duckdb) == 1 and new_open_duckdb not in engine_source:
+    engine_source = engine_source.replace(old_open_duckdb, new_open_duckdb)
+elif old_open_duckdb not in engine_source and engine_source.count(new_open_duckdb) == 1:
+    pass
+else:
     parser.error("pinned engine open_duckdb implementation did not match the expected source")
-engine_script.write_text(engine_source.replace(old_connection, new_connection))
+engine_script.write_text(engine_source)
 
-spec = importlib.util.spec_from_file_location("engine_matrix", args.engine / "run_matrix.py")
+spec = importlib.util.spec_from_file_location("engine_matrix", engine_workspace / "run_matrix.py")
 engine = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(engine)
 engine.assert_versions()
 cases = (("30d-stable", 30), ("90d-stable", 90), ("1y-stable", 365))
-args.output.mkdir(parents=True)
 if args.fixture_source:
     fixtures = args.fixture_source
     source_manifest = json.loads((fixtures / "matrix.json").read_text())
@@ -107,10 +139,22 @@ else:
     }
     for name, days in cases:
         print(f"Generating {name}", flush=True)
-        command = [str(args.binary), "--output", str(fixtures / name), "--days", str(days),
-                   "--query-experiment", "--process-workload", "stable",
-                   "--process-lifetime-minutes", "30", "--repetitions", "7",
-                   "--group-cap", "1000000"]
+        command = [
+            str(args.binary),
+            "--output",
+            str(fixtures / name),
+            "--days",
+            str(days),
+            "--query-experiment",
+            "--process-workload",
+            "stable",
+            "--process-lifetime-minutes",
+            "30",
+            "--repetitions",
+            "7",
+            "--group-cap",
+            "1000000",
+        ]
         phase = engine.run_phase(command, logs / f"{name}.stdout", logs / f"{name}.stderr")
         engine.attach_artifact(phase, fixtures / name / "report.json")
         source_manifest["cases"].append({"name": name, "generation": phase})
@@ -166,7 +210,7 @@ report = {
         "binary_sha256": manifest["binary_sha256"],
         "runner_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "engine_script_sha256": digest(engine_script),
-        "engine_matrix_script_sha256": digest(args.engine / "run_matrix.py"),
+        "engine_matrix_script_sha256": digest(engine_workspace / "run_matrix.py"),
         "source_fixture_generated_at_utc": source_manifest["started_at_utc"],
         "source_fixtures_reused": bool(args.fixture_source),
         "engine_method_url": f"https://github.com/shm11C3/HardwareVisualizer/blob/{ENGINE_COMMIT}/docs/development/hardware-archive-g1-engine-comparison.md",
@@ -181,6 +225,14 @@ report = {
         "duckdb": matrix["environment"]["duckdb_version"],
     },
     "method": {
+        "fixture_build": {
+            "sampling_mode": "continuous",
+            "process_workload": "stable",
+            "process_lifetime_minutes": 30,
+            "generator_repetitions": 7,
+            "group_cap": 1000000,
+            "query_experiment": True,
+        },
         "continuous_history": True,
         "process_observations_per_minute": 15,
         "seed": 2052,

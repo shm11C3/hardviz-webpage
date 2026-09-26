@@ -38,6 +38,14 @@
     "duckdb": "1.5.5"
   },
   "method": {
+    "fixture_build": {
+      "sampling_mode": "continuous",
+      "process_workload": "stable",
+      "process_lifetime_minutes": 30,
+      "generator_repetitions": 7,
+      "group_cap": 1000000,
+      "query_experiment": true
+    },
     "continuous_history": true,
     "process_observations_per_minute": 15,
     "seed": 2052,

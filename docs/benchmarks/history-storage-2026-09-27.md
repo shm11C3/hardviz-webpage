@@ -65,9 +65,10 @@ python /path/to/hardviz-webpage/docs/benchmarks/aggregate-history-storage.py \
   --output /path/to/history-storage-2026-09-27.json
 ```
 
-The aggregator requires matching engine versions, environment, SQLite sizes,
-and source hashes. It rejects failed row comparisons and keeps the median
-DuckDB size plus all three exact sizes and file hashes. Each engine matrix uses
+The aggregator requires matching measurement and fixture-build settings,
+engine versions, environment, SQLite sizes, and source hashes. It rejects
+failed row comparisons and keeps the median DuckDB size plus all three exact
+sizes and file hashes. Each engine matrix uses
 two DuckDB threads, a 128 MB engine-managed memory limit, and seven query
 repetitions. The harness also prepares and checks its Parquet control; the
 website compares only SQLite and native DuckDB.

@@ -24,8 +24,13 @@ for report in reports:
         parser.error("all input reports must be public history-storage measurements")
     if not report["method"].get("matrix_all_passed"):
         parser.error("all engine matrices must pass")
+    if not isinstance(report["method"].get("fixture_build"), dict):
+        parser.error("all reports must record their fixture-build settings")
 if len({report["measured_at"] for report in reports}) != 1:
     parser.error("all measurements must have the same local measurement date")
+
+if len({json.dumps(report["method"], sort_keys=True) for report in reports}) != 1:
+    parser.error("measurements differ in method or fixture-build settings")
 
 compatibility_keys = (
     "generator_commit",
@@ -60,7 +65,7 @@ for period in ("30d", "90d", "1y"):
         parser.error(f"{period} measurements use different SQLite sources")
     if samples[0]["source_sha256"] != expected_sources[period]:
         parser.error(f"{period} SQLite source hash does not match the pinned fixture")
-    for key in ("sqlite_bytes", "source_sha256", "process_rows", "ambient_rows"):
+    for key in ("days", "sqlite_bytes", "source_sha256", "process_rows", "ambient_rows"):
         if len({sample[key] for sample in samples}) != 1:
             parser.error(f"{period} measurements differ in {key}")
     if not all(

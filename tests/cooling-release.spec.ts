@@ -104,10 +104,9 @@ for (const lang of ["en", "ja"] as const) {
     ).toContainText("72.0MiB");
     const storageDetails = page.locator("#foundation details").first();
     await expect(storageDetails).toContainText(
-      lang === "ja" ? "2026年9月23日" : "September 23, 2026",
+      lang === "ja" ? "2026年9月27日" : "September 27, 2026",
     );
-    await expect(storageDetails).toContainText("Apple M4");
-    await expect(storageDetails).toContainText("24 GiB");
+    await expect(storageDetails).toContainText("macOS 26.6.2");
     await expect(storageDetails).toContainText("SQLite 3.46.0 / DuckDB 1.5.5");
     await expect(page.locator("#foundation")).not.toContainText(/\{\w+\}/);
     const related = page.locator(".final-section .related-links a");

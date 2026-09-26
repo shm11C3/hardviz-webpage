@@ -10,7 +10,7 @@ export const releaseArticles = {
     // ISO date (YYYY-MM-DD) of the article's publication. Set it when the
     // release ships: it drives the visible date, JSON-LD datePublished,
     // article:published_time and the sitemap lastmod. Leave null until then.
-    publishedAt: null,
+    publishedAt: "2026-09-26",
   },
 } as const satisfies Record<
   string,
