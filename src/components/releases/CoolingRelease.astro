@@ -2,6 +2,8 @@
 import benchmark from "../../../public/benchmarks/history-storage-2026-09-27.json";
 import coolingScreenshotEn from "../../assets/releases/cooling-insight-en.png";
 import coolingScreenshotJa from "../../assets/releases/cooling-insight-ja.png";
+import coolingScreenshotLightEn from "../../assets/releases/cooling-insight-light-en.png";
+import coolingScreenshotLightJa from "../../assets/releases/cooling-insight-light-ja.png";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import ReleaseScreenshot from "./ReleaseScreenshot.astro";
 
@@ -127,6 +129,7 @@ const benchmarkSource = "/benchmarks/history-storage-2026-09-27.json";
   </div>
   <ReleaseScreenshot
     src={lang === "ja" ? coolingScreenshotJa : coolingScreenshotEn}
+    lightSrc={lang === "ja" ? coolingScreenshotLightJa : coolingScreenshotLightEn}
     alt={t("release.screenshot.cooling.alt")}
     caption={t("release.screenshot.cooling.caption")}
   />

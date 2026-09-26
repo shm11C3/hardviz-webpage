@@ -2,8 +2,12 @@
 import { Image } from "astro:assets";
 import coolingScreenshotEn from "../assets/releases/cooling-insight-en.png";
 import coolingScreenshotJa from "../assets/releases/cooling-insight-ja.png";
+import coolingScreenshotLightEn from "../assets/releases/cooling-insight-light-en.png";
+import coolingScreenshotLightJa from "../assets/releases/cooling-insight-light-ja.png";
 import dashboardEn from "../assets/screenshots/dashboard-performance-en.png";
 import dashboardJa from "../assets/screenshots/dashboard-performance-ja.png";
+import dashboardLightEn from "../assets/screenshots/dashboard-performance-light-en.png";
+import dashboardLightJa from "../assets/screenshots/dashboard-performance-light-ja.png";
 import slide02 from "../assets/screenshots/slide-2.png";
 import slideLight02 from "../assets/screenshots/slide-2-l.png";
 import slide04 from "../assets/screenshots/slide-4.png";
@@ -21,7 +25,7 @@ const slides = [
   {
     key: "slide-1",
     alt: t("screenshots.dashboardAlt"),
-    light: lang === "ja" ? dashboardJa : dashboardEn,
+    light: lang === "ja" ? dashboardLightJa : dashboardLightEn,
     dark: lang === "ja" ? dashboardJa : dashboardEn,
   },
   {
@@ -51,7 +55,7 @@ const slides = [
   {
     key: "cooling-insight",
     alt: t("screenshots.coolingInsightAlt"),
-    light: lang === "ja" ? coolingScreenshotJa : coolingScreenshotEn,
+    light: lang === "ja" ? coolingScreenshotLightJa : coolingScreenshotLightEn,
     dark: lang === "ja" ? coolingScreenshotJa : coolingScreenshotEn,
   },
 ] as const;
