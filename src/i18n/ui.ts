@@ -11,8 +11,7 @@ export const ui = {
   en: {
     "release.screenshot.cooling.alt":
       "Cooling Insight dashboard showing temperature, load, power, and fan trends",
-    "release.screenshot.cooling.caption":
-      "Cooling Insight",
+    "release.screenshot.cooling.caption": "Cooling Insight",
     "release.status": "HardwareVisualizer v1.11.0",
     "release.nav": "v1.11.0 update",
     "release.announcement":
@@ -574,8 +573,7 @@ export const ui = {
   ja: {
     "release.screenshot.cooling.alt":
       "温度、負荷、電力、ファンの推移を表示するCooling Insightの画面",
-    "release.screenshot.cooling.caption":
-      "Cooling Insightの画面",
+    "release.screenshot.cooling.caption": "Cooling Insightの画面",
     "release.status": "HardwareVisualizer v1.11.0",
     "release.nav": "v1.11.0 アップデート",
     "release.announcement":
