@@ -32,21 +32,17 @@ export const ui = {
     "seo.home.feature5": "Authenticode-signed Windows release installer",
     "seo.home.feature6": "Open-source software licensed under GPL-3.0-or-later",
     "seo.home.feature7": "Windows, macOS, and Linux support",
-    "hero.title": "See what made your PC hot or slow.",
+    "hero.title": "Live PC monitoring with history",
     "hero.description":
-      "After a game or heavy workload, review the temperature and CPU/GPU graphs to see which processes were active.",
+      "Track CPU and GPU usage and temperatures in real time. Review the history later to see how they changed and which processes were active.",
     "hero.download": "Download for Windows",
     "hero.viewGitHub": "View on GitHub",
     "hero.availability":
       "For Windows 10 and 11. Also available on macOS and Linux.",
-    "hero.screenshotLabel": "Insights: review what happened",
-    "hero.retention": "30 days by default",
     "hero.screenshotAlt":
       "HardwareVisualizer Insights showing CPU and memory usage history over time",
     "screenshots.insightsAlt":
       "HardwareVisualizer Insights - review historical CPU and GPU usage after a workload",
-    "hero.trustSummary":
-      "HardwareVisualizer is free and open source. It doesn’t require an account or send telemetry, and the Windows installer is digitally signed.",
     "usage.title": "Customize the Live View",
     "usage.description":
       "Keep the real-time dashboard readable your way with adjustable charts, colors, and a local background image.",
@@ -486,20 +482,16 @@ export const ui = {
     "seo.home.feature6":
       "GPL-3.0-or-laterライセンスのオープンソースソフトウェア",
     "seo.home.feature7": "Windows、macOS、Linux対応",
-    "hero.title": "See what made your PC hot or slow.",
+    "hero.title": "PCの今と、これまでの変化を見る。",
     "hero.description":
-      "ゲームや負荷の高い作業のあとに、温度やCPU・GPUのグラフを見返し、どのプロセスが動いていたか確認できます。",
+      "CPU・GPUの使用率や温度をリアルタイムで表示し、負荷の変化や動いていたアプリも履歴から確認できます。",
     "hero.download": "Windows版をダウンロード",
     "hero.viewGitHub": "GitHubを閲覧",
     "hero.availability": "Windows 10・11に対応。macOS・Linux版も利用できます。",
-    "hero.screenshotLabel": "Insightsで振り返る",
-    "hero.retention": "初期設定30日",
     "hero.screenshotAlt":
       "CPUとメモリの使用履歴を時系列で表示するHardwareVisualizerのInsights画面",
     "screenshots.insightsAlt":
       "処理後にCPUとGPUの使用履歴を振り返るHardwareVisualizerのInsights画面",
-    "hero.trustSummary":
-      "HardwareVisualizerは無料のオープンソースソフトウェアです。アカウント登録は不要で、テレメトリを外部に送信しません。Windows版インストーラは電子署名済みです。",
     "usage.title": "リアルタイム表示を自分好みに",
     "usage.description":
       "チャート、色、PC内の背景画像を調整し、今の状態を見やすいダッシュボードにできます。",
