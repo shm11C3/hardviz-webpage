@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
-import slide01 from "../assets/screenshots/slide-1.png";
-import slideLight01 from "../assets/screenshots/slide-1-l.png";
+import dashboardEn from "../assets/screenshots/dashboard-performance-en.png";
+import dashboardJa from "../assets/screenshots/dashboard-performance-ja.png";
 import slide02 from "../assets/screenshots/slide-2.png";
 import slideLight02 from "../assets/screenshots/slide-2-l.png";
 import slide03 from "../assets/screenshots/slide-3.png";
@@ -22,9 +22,9 @@ const t = useTranslations(lang);
 const slides = [
   {
     key: "slide-1",
-    alt: "HardwareVisualizer Dashboard - Real-time CPU, GPU, and memory monitoring with usage graphs",
-    light: slideLight01,
-    dark: slide01,
+    alt: t("screenshots.dashboardAlt"),
+    light: lang === "ja" ? dashboardJa : dashboardEn,
+    dark: lang === "ja" ? dashboardJa : dashboardEn,
   },
   {
     key: "slide-2",
