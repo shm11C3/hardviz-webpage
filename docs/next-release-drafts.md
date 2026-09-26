@@ -124,9 +124,9 @@
 
 ユーザー指定の30日・90日・1年を行、SQLite・DuckDBを列とする表を、保存基盤の技術詳細の上に配置。各値にMiBを付ける。左右の記事は同じ高さに伸ばし、DuckDBとPawnIOのアコーディオンを下端で揃える。
 
-2026-09-23に3期間を同条件で再測定。既存の[エンジン比較](https://github.com/shm11C3/HardwareVisualizer/blob/75db64c972b39d94205800cafb6ccb15d6d6029a/docs/development/hardware-archive-g1-engine-comparison.md)の手順とstableケースを用い、30日・90日・365日の入力データを新規生成した。全行の一致を検証してから保存容量を掲載する。数値は`public/benchmarks/history-storage-2026-09-23.json`を直接読み、小数1桁で表示する。
+2026-09-27に3期間を再測定。DuckDBを新規作成するときの既定ブロックサイズを、製品側の64 KiB設定に合わせた。30日・90日・365日の入力は2026-09-23生成分を再利用し、生成バイナリ・条件・SQLiteバージョンと各ファイルのハッシュが一致することを確認した。DuckDBは各期間3回作り直し、すべての全行比較を検証。表にはDuckDB容量の中央値を小数1桁で表示し、技術詳細とJSONに実測範囲を残した。
 
-[再現手順と範囲](benchmarks/history-storage-2026-09-23.md)、[実行用ドライバー](benchmarks/rerun-history-storage.py)を保存。表の折りたたみから、測定日時・環境・件数・バイト数・ダイジェストを記録したJSONへリンクする。
+[再現手順と範囲](benchmarks/history-storage-2026-09-27.md)、[実行用ドライバー](benchmarks/rerun-history-storage.py)、[3回分を集計するスクリプト](benchmarks/aggregate-history-storage.py)を保存。表の折りたたみから、測定日時・環境・件数・バイト数・ダイジェストを記録したJSONへリンクする。
 
 これはプロセス統計・環境温度の合成データによる歴史的なエンジン検証の再実行で、リリース実装の製品全体のDB容量や移行コストの測定ではない。表の直下に対象の制約を明記し、環境・索引条件・測定時点・出典をアコーディオンに格納する。
 

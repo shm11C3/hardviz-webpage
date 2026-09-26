@@ -1,0 +1,243 @@
+{
+  "format": "hardviz-public-history-storage-v1",
+  "scope": "Historical engine experiment; synthetic Process Stats and Ambient stable fixtures. Not the final application's complete database.",
+  "measured_at": "2026-09-27",
+  "started_at_utc": "2026-09-26T15:25:06.156148+00:00",
+  "completed_at_utc": "2026-09-26T15:53:00.086474+00:00",
+  "provenance": {
+    "generator_commit": "7fae38b38116d82d771d6fc3705f67f618218732",
+    "engine_commit": "75db64c972b39d94205800cafb6ccb15d6d6029a",
+    "duckdb_tuning_commit": "69a41e63f4002ce4254bb594d524f7896004e8ca",
+    "binary_sha256": "a62fca205d98ddd506b2dcbd549b8fe2b29c031b61c2b54574adcde33eb22a60",
+    "runner_sha256": "5462bd324f1c45c9b42118215c46304fea5519bd4720d267b9bc9519c5f312a3",
+    "engine_script_sha256": "b7c38a96a8c3262bfb3ee8b4d8bfea23683aed228afbf0be6d70ff283ec7a578",
+    "engine_matrix_script_sha256": "52456cb6f74ac235223eed904d8ee78f85798b3fb94b8c45ae0039046b531d61",
+    "source_fixture_generated_at_utc": "2026-09-23T08:09:13.885769+00:00",
+    "source_fixtures_reused": true,
+    "engine_method_url": "https://github.com/shm11C3/HardwareVisualizer/blob/75db64c972b39d94205800cafb6ccb15d6d6029a/docs/development/hardware-archive-g1-engine-comparison.md",
+    "duckdb_tuning_url": "https://github.com/shm11C3/HardwareVisualizer/blob/69a41e63f4002ce4254bb594d524f7896004e8ca/core/src/infrastructure/database/mod.rs",
+    "measurement_replicates": 3,
+    "runner_sha256_by_replicate": [
+      "11b7893a951804be638f88d5bd9bb3c29ca8e84b85019d46f5fc136895501a36",
+      "11b7893a951804be638f88d5bd9bb3c29ca8e84b85019d46f5fc136895501a36",
+      "5462bd324f1c45c9b42118215c46304fea5519bd4720d267b9bc9519c5f312a3"
+    ]
+  },
+  "environment": {
+    "cpu": {
+      "logical_count": 10,
+      "platform_processor": "arm",
+      "machine": "arm64",
+      "brand": null,
+      "brand_error": "sysctl: sysctl fmt -1 1024 1: Operation not permitted"
+    },
+    "physical_memory_bytes": null,
+    "macos": "26.6.2",
+    "python": "3.14.5 (v3.14.5:5607950ef23, May 10 2026, 07:38:09) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "sqlite": "3.46.0",
+    "duckdb": "1.5.5"
+  },
+  "method": {
+    "continuous_history": true,
+    "process_observations_per_minute": 15,
+    "seed": 2052,
+    "workload": "stable",
+    "duckdb_threads": 2,
+    "duckdb_memory_limit": "128MB; engine-managed limit, not process RSS cap",
+    "duckdb_default_block_size_bytes": 65536,
+    "query_repetitions": 7,
+    "size_measurement": "Logical file lengths after close/checkpoint, SQLite including indexes; DuckDB including metadata and WAL.",
+    "duckdb_fixture_indexes": "No explicit secondary indexes or primary-key constraints.",
+    "round_trip": "Every row after reopen; integer/text/null exact, real bitwise.",
+    "matrix_all_passed": true,
+    "query_caches": "Primed and uncontrolled; query times are not used as a product performance claim.",
+    "duckdb_size_repetitions": 3,
+    "duckdb_size_aggregation": "Median across independent native DuckDB fixture builds; observed byte values are retained per case.",
+    "all_replication_matrices_passed": true
+  },
+  "cases": {
+    "30d": {
+      "days": 30,
+      "sqlite_bytes": 75526144,
+      "duckdb_bytes": 17772544,
+      "sqlite_mib": 72.02734375,
+      "duckdb_mib": 16.94921875,
+      "reduction_percent": 76.46835511687185,
+      "process_rows": 648446,
+      "ambient_rows": 78546,
+      "source_sha256": "c6e6248329a562e61688a7051380ed1f98de418ec6ac15995325ed96a032c525",
+      "source_unchanged_after_all_queries": true,
+      "native_sha256": "7e697a50542686ac9c559c44daa7c1d47627515ce1d1e29769d023bea8404b1a",
+      "round_trip": {
+        "all_passed": true,
+        "comparison": "bounded 500-row streaming; integers/text/null exact and REAL bitwise",
+        "storage_class_scope": "normal generated fixture types; adversarial SQLite storage classes are covered separately",
+        "families": {
+          "process": {
+            "passed": true,
+            "rows": 648446,
+            "source_sha256": "03169cfd1f7c8fc027f44198b32e69d189ba5608a834c61759134d47ad6f751a",
+            "duckdb_sha256": "03169cfd1f7c8fc027f44198b32e69d189ba5608a834c61759134d47ad6f751a",
+            "parquet_sha256": "03169cfd1f7c8fc027f44198b32e69d189ba5608a834c61759134d47ad6f751a"
+          },
+          "ambient": {
+            "passed": true,
+            "rows": 78546,
+            "source_sha256": "6ead4ae4fb55414035d375cc7cdb4bb880d0278160ccd02f21eeb72fc373fbdc",
+            "duckdb_sha256": "6ead4ae4fb55414035d375cc7cdb4bb880d0278160ccd02f21eeb72fc373fbdc",
+            "parquet_sha256": "6ead4ae4fb55414035d375cc7cdb4bb880d0278160ccd02f21eeb72fc373fbdc"
+          }
+        }
+      },
+      "started_at_utc": "2026-09-26T15:25:06.218504+00:00",
+      "completed_at_utc": "2026-09-26T15:50:52.968563+00:00",
+      "duckdb_size_range_bytes": [17707008, 17903616],
+      "duckdb_mib_range": [16.88671875, 17.07421875],
+      "duckdb_replicates": [
+        {
+          "duckdb_bytes": 17903616,
+          "native_sha256": "4372a785bbbf2371498a80db63a0dfd59cbbf7c95400faaca610aee8134ee726",
+          "runner_sha256": "11b7893a951804be638f88d5bd9bb3c29ca8e84b85019d46f5fc136895501a36",
+          "started_at_utc": "2026-09-26T15:25:06.218504+00:00",
+          "completed_at_utc": "2026-09-26T15:25:11.674895+00:00"
+        },
+        {
+          "duckdb_bytes": 17772544,
+          "native_sha256": "7e697a50542686ac9c559c44daa7c1d47627515ce1d1e29769d023bea8404b1a",
+          "runner_sha256": "11b7893a951804be638f88d5bd9bb3c29ca8e84b85019d46f5fc136895501a36",
+          "started_at_utc": "2026-09-26T15:28:07.173654+00:00",
+          "completed_at_utc": "2026-09-26T15:28:12.616450+00:00"
+        },
+        {
+          "duckdb_bytes": 17707008,
+          "native_sha256": "fc23509a003cbef8e2c8349267774a3e994b29b451e00758a8ef195a30f3066d",
+          "runner_sha256": "5462bd324f1c45c9b42118215c46304fea5519bd4720d267b9bc9519c5f312a3",
+          "started_at_utc": "2026-09-26T15:50:47.452743+00:00",
+          "completed_at_utc": "2026-09-26T15:50:52.968563+00:00"
+        }
+      ]
+    },
+    "90d": {
+      "days": 90,
+      "sqlite_bytes": 226770944,
+      "duckdb_bytes": 52572160,
+      "sqlite_mib": 216.265625,
+      "duckdb_mib": 50.13671875,
+      "reduction_percent": 76.8170652409508,
+      "process_rows": 1945337,
+      "ambient_rows": 235636,
+      "source_sha256": "af4506025dd29520647934f31ce7a31b1a75d44e50310c0a8eeaab1063cedcdb",
+      "source_unchanged_after_all_queries": true,
+      "native_sha256": "190f3b3eadebf6e6e2c935134852fec32c4b7a1432ed50d07735029693ba850a",
+      "round_trip": {
+        "all_passed": true,
+        "comparison": "bounded 500-row streaming; integers/text/null exact and REAL bitwise",
+        "storage_class_scope": "normal generated fixture types; adversarial SQLite storage classes are covered separately",
+        "families": {
+          "process": {
+            "passed": true,
+            "rows": 1945337,
+            "source_sha256": "2a94a09d288b4ce2506460d9833e64e9642edc35a462faffd51ce2b99e040e30",
+            "duckdb_sha256": "2a94a09d288b4ce2506460d9833e64e9642edc35a462faffd51ce2b99e040e30",
+            "parquet_sha256": "2a94a09d288b4ce2506460d9833e64e9642edc35a462faffd51ce2b99e040e30"
+          },
+          "ambient": {
+            "passed": true,
+            "rows": 235636,
+            "source_sha256": "e99fe86c03beefdf2aabb0d00d56bd3afb585ca6c8a00bb46b28c0a32df47615",
+            "duckdb_sha256": "e99fe86c03beefdf2aabb0d00d56bd3afb585ca6c8a00bb46b28c0a32df47615",
+            "parquet_sha256": "e99fe86c03beefdf2aabb0d00d56bd3afb585ca6c8a00bb46b28c0a32df47615"
+          }
+        }
+      },
+      "started_at_utc": "2026-09-26T15:25:14.445098+00:00",
+      "completed_at_utc": "2026-09-26T15:51:12.985795+00:00",
+      "duckdb_size_range_bytes": [52506624, 52637696],
+      "duckdb_mib_range": [50.07421875, 50.19921875],
+      "duckdb_replicates": [
+        {
+          "duckdb_bytes": 52506624,
+          "native_sha256": "5f06312354335b223eadc70981de2fb7145fe02574f58ea277d48dec821d538f",
+          "runner_sha256": "11b7893a951804be638f88d5bd9bb3c29ca8e84b85019d46f5fc136895501a36",
+          "started_at_utc": "2026-09-26T15:25:14.445098+00:00",
+          "completed_at_utc": "2026-09-26T15:25:31.041848+00:00"
+        },
+        {
+          "duckdb_bytes": 52637696,
+          "native_sha256": "903b9fdd7c6479664471c7587de0f5718fc6617b83733287cd33d40c9692abdd",
+          "runner_sha256": "11b7893a951804be638f88d5bd9bb3c29ca8e84b85019d46f5fc136895501a36",
+          "started_at_utc": "2026-09-26T15:28:15.475279+00:00",
+          "completed_at_utc": "2026-09-26T15:28:31.766824+00:00"
+        },
+        {
+          "duckdb_bytes": 52572160,
+          "native_sha256": "190f3b3eadebf6e6e2c935134852fec32c4b7a1432ed50d07735029693ba850a",
+          "runner_sha256": "5462bd324f1c45c9b42118215c46304fea5519bd4720d267b9bc9519c5f312a3",
+          "started_at_utc": "2026-09-26T15:50:56.007222+00:00",
+          "completed_at_utc": "2026-09-26T15:51:12.985795+00:00"
+        }
+      ]
+    },
+    "1y": {
+      "days": 365,
+      "sqlite_bytes": 926257152,
+      "duckdb_bytes": 212545536,
+      "sqlite_mib": 883.34765625,
+      "duckdb_mib": 202.69921875,
+      "reduction_percent": 77.05329070430757,
+      "process_rows": 7889419,
+      "ambient_rows": 955636,
+      "source_sha256": "97803757685d304bb5c6ddae5765d2195f44696004e4558c6992a73067132e2f",
+      "source_unchanged_after_all_queries": true,
+      "native_sha256": "8565102d6a59fd03b6399244fe935eb848510771fe4c8dc0be58412ea1677c8b",
+      "round_trip": {
+        "all_passed": true,
+        "comparison": "bounded 500-row streaming; integers/text/null exact and REAL bitwise",
+        "storage_class_scope": "normal generated fixture types; adversarial SQLite storage classes are covered separately",
+        "families": {
+          "process": {
+            "passed": true,
+            "rows": 7889419,
+            "source_sha256": "0f47068d1ac38226ab8498bc6d719168b035e0425c6b81b6467fe9cfc191b4bc",
+            "duckdb_sha256": "0f47068d1ac38226ab8498bc6d719168b035e0425c6b81b6467fe9cfc191b4bc",
+            "parquet_sha256": "0f47068d1ac38226ab8498bc6d719168b035e0425c6b81b6467fe9cfc191b4bc"
+          },
+          "ambient": {
+            "passed": true,
+            "rows": 955636,
+            "source_sha256": "969d548aca775fcc13abba6a28afcb6ae0ee325b4273758e858d0c31ad7e3b2d",
+            "duckdb_sha256": "969d548aca775fcc13abba6a28afcb6ae0ee325b4273758e858d0c31ad7e3b2d",
+            "parquet_sha256": "969d548aca775fcc13abba6a28afcb6ae0ee325b4273758e858d0c31ad7e3b2d"
+          }
+        }
+      },
+      "started_at_utc": "2026-09-26T15:25:38.753667+00:00",
+      "completed_at_utc": "2026-09-26T15:52:29.330124+00:00",
+      "duckdb_size_range_bytes": [212348928, 212611072],
+      "duckdb_mib_range": [202.51171875, 202.76171875],
+      "duckdb_replicates": [
+        {
+          "duckdb_bytes": 212611072,
+          "native_sha256": "f2ebac901e47ced690158e405a9e1318257d912beac93976dc7b9405959a65ca",
+          "runner_sha256": "11b7893a951804be638f88d5bd9bb3c29ca8e84b85019d46f5fc136895501a36",
+          "started_at_utc": "2026-09-26T15:25:38.753667+00:00",
+          "completed_at_utc": "2026-09-26T15:26:47.669431+00:00"
+        },
+        {
+          "duckdb_bytes": 212348928,
+          "native_sha256": "9b6862e8026401c71b9a590cf328e0758839a133cbd97d1fc22ebcf498a082b5",
+          "runner_sha256": "11b7893a951804be638f88d5bd9bb3c29ca8e84b85019d46f5fc136895501a36",
+          "started_at_utc": "2026-09-26T15:28:39.598497+00:00",
+          "completed_at_utc": "2026-09-26T15:29:47.663772+00:00"
+        },
+        {
+          "duckdb_bytes": 212545536,
+          "native_sha256": "8565102d6a59fd03b6399244fe935eb848510771fe4c8dc0be58412ea1677c8b",
+          "runner_sha256": "5462bd324f1c45c9b42118215c46304fea5519bd4720d267b9bc9519c5f312a3",
+          "started_at_utc": "2026-09-26T15:51:20.747935+00:00",
+          "completed_at_utc": "2026-09-26T15:52:29.330124+00:00"
+        }
+      ]
+    }
+  }
+}

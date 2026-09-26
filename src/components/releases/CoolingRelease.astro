@@ -1,5 +1,5 @@
 ---
-import benchmark from "../../../public/benchmarks/history-storage-2026-09-23.json";
+import benchmark from "../../../public/benchmarks/history-storage-2026-09-27.json";
 import screenshotPlaceholder from "../../assets/releases/screenshot-placeholder.svg";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import ReleaseScreenshot from "./ReleaseScreenshot.astro";
@@ -43,17 +43,25 @@ const storageBenchmark = (["30d", "90d", "1y"] as const).map((period) => ({
   sqlite: (benchmark.cases[period].sqlite_bytes / 1048576).toFixed(1),
   duckdb: (benchmark.cases[period].duckdb_bytes / 1048576).toFixed(1),
 }));
+const benchmarkRanges = (["30d", "90d", "1y"] as const)
+  .map((period) => {
+    const [minimum, maximum] = benchmark.cases[period].duckdb_mib_range;
+    return `${t(`release.duck.benchmark.${period}`)} ${minimum.toFixed(1)}–${maximum.toFixed(1)}MiB`;
+  })
+  .join(lang === "ja" ? " / " : "; ");
 const reductions = storageBenchmark.map(({ reduction }) =>
   Math.round(reduction),
 );
 const reductionMin = Math.min(...reductions);
 const reductionMax = Math.max(...reductions);
-const benchmarkNote = t("release.duck.benchmark.note").replace(
-  "{reduction}",
-  reductionMin === reductionMax
-    ? String(reductionMin)
-    : `${reductionMin}–${reductionMax}`,
-);
+const benchmarkNote = t("release.duck.benchmark.note")
+  .replace(
+    "{reduction}",
+    reductionMin === reductionMax
+      ? String(reductionMin)
+      : `${reductionMin}–${reductionMax}`,
+  )
+  .replace("{runs}", String(benchmark.method.duckdb_size_repetitions));
 const measuredDate = new Intl.DateTimeFormat(
   lang === "ja" ? "ja-JP" : "en-US",
   {
@@ -70,15 +78,12 @@ const benchmarkConditions = t("release.duck.benchmark.conditions")
     "{samples}",
     String(benchmark.method.process_observations_per_minute),
   )
-  .replace("{cpu}", benchmark.environment.cpu.brand)
-  .replace(
-    "{memory}",
-    String(benchmark.environment.physical_memory_bytes / 1024 ** 3),
-  )
+  .replace("{runs}", String(benchmark.method.duckdb_size_repetitions))
+  .replace("{ranges}", benchmarkRanges)
   .replace("{macos}", benchmark.environment.macos)
   .replace("{sqlite}", benchmark.environment.sqlite)
   .replace("{duckdb}", benchmark.environment.duckdb);
-const benchmarkSource = "/benchmarks/history-storage-2026-09-23.json";
+const benchmarkSource = "/benchmarks/history-storage-2026-09-27.json";
 ---
 
 <section id="cooling" class="release-section" aria-labelledby="cooling-heading">

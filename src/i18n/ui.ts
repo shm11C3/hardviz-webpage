@@ -89,9 +89,9 @@ export const ui = {
     "release.duck.benchmark.90d": "90 days",
     "release.duck.benchmark.1y": "1 year",
     "release.duck.benchmark.note":
-      "Synthetic-data comparison: about {reduction}% smaller across all three periods. These are not whole-application database sizes.",
+      "Synthetic-data comparison: the DuckDB column shows the median across {runs} builds, about {reduction}% smaller. These are not whole-application database sizes.",
     "release.duck.benchmark.conditions":
-      "Measured on {date}, using synthetic Process Stats and Ambient histories ({workload} cases, {samples} process samples per minute). File sizes were measured after closing and checkpointing: SQLite includes indexes; DuckDB includes metadata and WAL, with no explicit indexes or primary-key constraints in this fixture. {cpu}, {memory} GiB RAM, macOS {macos}; SQLite {sqlite} / DuckDB {duckdb}. This reruns the historical engine experiment; it does not measure final application storage or migration overhead.",
+      "Measured on {date}, using synthetic Process Stats and Ambient histories ({workload} cases, {samples} process samples per minute). The table shows the median DuckDB file size across {runs} independent builds; observed ranges: {ranges}. File sizes were measured after closing and checkpointing: SQLite includes indexes; DuckDB includes metadata and WAL, with no explicit indexes or primary-key constraints in this fixture. Environment: macOS {macos}; SQLite {sqlite} / DuckDB {duckdb}. This reruns the historical engine experiment; it does not measure final application storage or migration overhead.",
     "release.duck.benchmark.source":
       "Measurement conditions and results (JSON)",
     "release.duck.detail.title": "About the storage update",
@@ -475,9 +475,9 @@ export const ui = {
     "release.duck.benchmark.90d": "90日",
     "release.duck.benchmark.1y": "1年",
     "release.duck.benchmark.note":
-      "合成データでの比較では、いずれの期間も約{reduction}%削減。製品全体の保存容量を示すものではありません。",
+      "合成データでの比較です。DuckDBの欄は{runs}回測定の中央値で、各期間約{reduction}%削減。製品全体の保存容量ではありません。",
     "release.duck.benchmark.conditions":
-      "{date}測定。プロセス統計と環境温度の合成履歴（{workload}ケース、1分あたり{samples}件のプロセスサンプル）を使用。終了・チェックポイント後のファイル容量で、SQLiteは索引を含み、DuckDBはメタデータ・WALを含みます。この検証用DuckDBには明示的な索引・主キー制約を付けていません。環境は{cpu}、メモリ{memory} GiB、macOS {macos}、SQLite {sqlite} / DuckDB {duckdb}。過去のエンジン比較を同じ条件で再実行したもので、最終製品の保存容量や移行時の一時容量は測定対象外です。",
+      "{date}測定。プロセス統計と環境温度の合成履歴（{workload}ケース、1分あたり{samples}件のプロセスサンプル）を使用。表のDuckDB容量は独立した{runs}回の作成結果の中央値です。各期間の実測範囲: {ranges}。終了・チェックポイント後のファイル容量で、SQLiteは索引を含み、DuckDBはメタデータ・WALを含みます。この検証用DuckDBには明示的な索引・主キー制約を付けていません。実行環境はmacOS {macos}、SQLite {sqlite} / DuckDB {duckdb}。過去のエンジン比較を同じ条件で再実行したもので、最終製品の保存容量や移行時の一時容量は測定対象外です。",
     "release.duck.benchmark.source": "測定条件と結果を確認する（JSON）",
     "release.duck.detail.title": "保存基盤の変更について",
     "release.duck.detail.body":
