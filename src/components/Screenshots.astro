@@ -12,6 +12,8 @@ import slide05 from "../assets/screenshots/slide-5.png";
 import slideLight05 from "../assets/screenshots/slide-5-l.png";
 import slide06 from "../assets/screenshots/slide-6.png";
 import slideLight06 from "../assets/screenshots/slide-6-l.png";
+import coolingScreenshotEn from "../assets/releases/cooling-insight-en.png";
+import coolingScreenshotJa from "../assets/releases/cooling-insight-ja.png";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
@@ -53,6 +55,12 @@ const slides = [
     alt: "HardwareVisualizer GPU Metrics - NVIDIA GPU temperature, VRAM, and clock speed monitoring",
     light: slideLight06,
     dark: slide06,
+  },
+  {
+    key: "cooling-insight",
+    alt: t("screenshots.coolingInsightAlt"),
+    light: lang === "ja" ? coolingScreenshotJa : coolingScreenshotEn,
+    dark: lang === "ja" ? coolingScreenshotJa : coolingScreenshotEn,
   },
 ] as const;
 ---
