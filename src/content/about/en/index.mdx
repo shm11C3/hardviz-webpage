@@ -15,12 +15,12 @@ It started with a PC build. I wanted to fit a small screen inside the case and s
 | --- | --- |
 | Frontend | React / TypeScript / Jotai / Vite / Tailwind CSS / shadcn/ui / Recharts |
 | Backend | Tauri / Rust |
-| Storage | SQLite |
+| Storage | DuckDB for new installs; existing SQLite history can be converted |
 
 | OS | Hardware data sources |
 | --- | --- |
 | Common | sysinfo |
-| Windows | WMI / PDH / NVAPI / ADL / DXGI |
+| Windows | WMI / PDH / NVAPI / ADL / DXGI / optional PawnIO |
 | Linux | procfs / DRM / hwmon |
 | macOS | IOKit |
 
@@ -33,6 +33,7 @@ It started with a PC build. I wanted to fit a small screen inside the case and s
 | 2025 | Linux support |
 | 2026.02 | Official macOS support (v1.6.0) |
 | 2026 | Wider GPU coverage and background monitoring (v1.7, v1.8) |
+| 2026.09 | Cooling Insight, DuckDB history for new installs, and optional PawnIO setup (v1.11.0) |
 | Next | Filling out sensor data so anyone can see their PC's state at a glance |
 
 The full history is in the [changelog](/changelog/).

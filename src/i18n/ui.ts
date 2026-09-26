@@ -19,11 +19,11 @@ export const ui = {
     "release.meta.title":
       "Cooling Insight: CPU Temperature vs Load and History | HardwareVisualizer",
     "release.meta.description":
-      "Cooling Insight in HardwareVisualizer v1.11.0 compares CPU temperature with load and past readings. Also new: DuckDB history storage and PawnIO setup on Windows.",
+      "Cooling Insight in HardwareVisualizer v1.11.0 compares CPU temperature with load and past readings. Fresh installs use DuckDB history; Windows users can set up PawnIO.",
     "release.hero.title":
       "Cooling Insight: understand CPU temperature through load and history.",
     "release.hero.body":
-      "Cooling Insight now lets you compare CPU temperature with load and past readings. This release also moves history storage to DuckDB and lets you install PawnIO from Settings on Windows.",
+      "Cooling Insight now lets you compare CPU temperature with load and past readings. Fresh installs use DuckDB for history, existing SQLite data can be converted, and Windows users can install PawnIO from Settings.",
     "release.hero.cta": "Download HardwareVisualizer",
     "release.hero.secondary": "View release notes",
     "release.figure.title": "Compare within each CPU load band",
@@ -77,13 +77,13 @@ export const ui = {
     "release.foundation.title": "Two updates to support that history.",
     "release.foundation.body":
       "This release adds Cooling Insight, updates history storage and makes optional sensor setup easier on Windows.",
-    "release.duck.title": "History storage moves to DuckDB",
+    "release.duck.title": "New installs use DuckDB for history",
     "release.duck.body":
-      "History storage now uses DuckDB. This update addresses the growing volume of recorded history and the work involved in aggregating data over longer periods.",
+      "Fresh installs use DuckDB for history. Existing SQLite data can be moved through an explicit conversion flow. This update supports growing histories and longer-range aggregation.",
     "release.duck.benchmark.caption": "History file size",
     "release.duck.benchmark.period": "History length",
-    "release.duck.benchmark.sqliteVersion": "(before v1.11.0)",
-    "release.duck.benchmark.duckdbVersion": "(v1.11.0)",
+    "release.duck.benchmark.sqliteVersion": "(legacy format)",
+    "release.duck.benchmark.duckdbVersion": "(new installs)",
     "release.duck.benchmark.30d": "30 days",
     "release.duck.benchmark.90d": "90 days",
     "release.duck.benchmark.1y": "1 year",
@@ -95,7 +95,7 @@ export const ui = {
       "Measurement conditions and results (JSON)",
     "release.duck.detail.title": "About the storage update",
     "release.duck.detail.body":
-      "DuckDB is a column-oriented database designed for analytical queries. It handles history storage and aggregation inside HardwareVisualizer, including the records used by Cooling Insight. It does not require a separate database server.",
+      "DuckDB is a column-oriented database designed for analytical queries. On new installs and after conversion, it stores and aggregates HardwareVisualizer history, including records used by Cooling Insight. It does not require a separate database server.",
     "release.pawn.title": "Install PawnIO from Settings",
     "release.pawn.body":
       "On Windows, start optional PawnIO installation from HardwareVisualizer. The app downloads the runtime and required modules, reducing manual setup for supported CPU temperature, power and motherboard sensor readings.",
@@ -103,7 +103,7 @@ export const ui = {
       "Optional, Windows only. Requires an internet connection and Windows administrator approval. Sensor availability depends on the hardware.",
     "release.pawn.detail.title": "What happens during installation?",
     "release.pawn.detail.body":
-      "In Settings → Advanced → Optional component setup, choose Install. Downloads come from the official GitHub releases and are checked against recorded sizes and SHA-256 hashes. The app requests Windows administrator approval, installs a missing runtime and adds missing modules without overwriting existing files. Restart HardwareVisualizer afterward; restart Windows first if requested. PawnIO is downloaded during setup, not bundled with HardwareVisualizer.",
+      "In Settings → Advanced → Optional component setup, choose Install. Downloads come from the official GitHub releases and are checked against recorded sizes and SHA-256 hashes. The app requests Windows administrator approval, installs a missing runtime, and adds or updates required modules. Restart HardwareVisualizer afterward; restart Windows first if requested. PawnIO is downloaded during setup, not bundled with HardwareVisualizer.",
     "release.faq.available.q": "Do comparisons need time to collect data?",
     "release.faq.available.a":
       "Yes. Cooling Insight needs recorded data to establish a baseline and compare it with recent readings. It shows baseline progress and leaves comparisons unavailable when there are not enough samples.",
@@ -331,9 +331,9 @@ export const ui = {
     "specs.overview.languages.label": "Languages",
     "specs.overview.languages.value":
       "The app supports English, Japanese, and Russian.",
-    "specs.overview.visual.title": "Dashboard reference.",
+    "specs.overview.visual.title": "System Specifications preview.",
     "specs.overview.visual.caption":
-      "The interface is designed for a glanceable hardware overview rather than a dense diagnostics console.",
+      "See CPU, GPU, memory, storage, and available health details together.",
     "specs.section.compat.eyebrow": "Platform fit",
     "specs.os.title": "Operating systems and installers",
     "specs.os.description":
@@ -435,7 +435,7 @@ export const ui = {
     "specs.section.storage.eyebrow": "Deeper hardware paths",
     "specs.storage.title": "Storage Health and optional components",
     "specs.storage.description":
-      "Optional components are not bundled, downloaded, installed, or enabled automatically. The app only explains them when a fallback path still leaves visible hardware data unavailable.",
+      "Optional components are not bundled with the app. On Windows, you can choose PawnIO during MSI setup or install it later from Settings with administrator approval.",
     "specs.storage.live.title": "Live Storage Health",
     "specs.storage.live.body":
       "A cheap native read path refreshes focused storage information without running smartctl on the live polling cadence.",
@@ -444,7 +444,7 @@ export const ui = {
       "Daily health records can include SMART overall health, temperature, NVMe percentage used, available spare, reallocated sectors, pending sectors, offline uncorrectable sectors, and NVMe media errors when available.",
     "specs.storage.pawnio.title": "PawnIO for CPU package temperature",
     "specs.storage.pawnio.body":
-      "On Windows, supported Intel and AMD CPUs can expose package temperature through PawnIO modules when the user provides the driver/runtime and sufficient privileges.",
+      "On Windows, Settings → Advanced → Optional component setup can download and install PawnIO with administrator approval. Supported CPUs and motherboards may then expose package temperature, power, and sensor readings.",
     "specs.storage.smartctl.title": "smartctl for richer storage signals",
     "specs.storage.smartctl.body":
       "smartmontools can improve Storage Health when native OS paths cannot read important SMART or NVMe health fields.",
@@ -471,7 +471,7 @@ export const ui = {
     "specs.verification.linux.detail":
       "Linux package signing is not currently provided through GPG, Sigstore, or repository metadata; use checksums and attestations instead.",
     "specs.hero.imageAlt":
-      "HardwareVisualizer dashboard showing live hardware metrics",
+      "HardwareVisualizer System Specifications showing CPU, GPU, memory, and storage details",
     "specs.sources.readme": "GitHub README",
     "specs.sources.externalComponents": "Optional components",
     "specs.sources.devStory": "Development story",
@@ -535,7 +535,7 @@ export const ui = {
       "HardwareVisualizer supports Windows 10, Windows 11, macOS (Apple Silicon officially supported, Intel experimental), and major Linux distributions (Debian/Ubuntu, RPM-based distros, AppImage).",
     "faq.q4": "How is it different from Task Manager or HWiNFO?",
     "faq.a4":
-      "HardwareVisualizer is designed to be lightweight with a modern UI. Unlike Task Manager, it provides detailed graphs and configurable long-term history, kept for 30 days by default and extendable in settings. Its always-on monitoring is optimized to minimize background CPU and memory use — when minimized to the system tray it uses only around 32 MB of memory — and the interface stays fully customizable.",
+      "HardwareVisualizer is designed to be lightweight with a modern UI. Unlike Task Manager, it provides detailed graphs and configurable long-term history, kept for 30 days by default and extendable in settings. It pauses hidden-window updates while in the system tray, and the interface stays customizable.",
     "faq.q5": "Can I monitor hardware while gaming?",
     "faq.a5":
       "Yes! HardwareVisualizer runs in the background with minimal resource usage, making it perfect for monitoring CPU usage and memory during gaming sessions. GPU temperature monitoring is fully supported on NVIDIA GPUs, with partial support for AMD and Intel GPUs. You can also check historical data to see how your system performed.",
@@ -585,10 +585,10 @@ export const ui = {
     "release.meta.title":
       "Cooling InsightでCPU温度を負荷と履歴から比較 | HardwareVisualizer",
     "release.meta.description":
-      "HardwareVisualizer v1.11.0の更新内容を紹介。CPU温度を負荷や過去の記録と比べるCooling Insightを追加しました。履歴保存をDuckDBへ移し、Windowsでは設定画面からPawnIOを導入できます。",
+      "HardwareVisualizer v1.11.0の更新内容を紹介。Cooling Insightを追加し、新規インストールの履歴保存にDuckDBを採用。Windowsでは設定画面からPawnIOを導入できます。",
     "release.hero.title": "Cooling InsightでCPU温度を負荷と履歴から読み解く",
     "release.hero.body":
-      "CPU温度を負荷や過去の記録と比べられる「Cooling Insight」を追加しました。履歴保存をDuckDBへ移し、Windowsでは設定画面からPawnIOを導入できるようになりました。",
+      "CPU温度を負荷や過去の記録と比べられる「Cooling Insight」を追加しました。新規インストールでは履歴をDuckDBに保存し、既存のSQLite履歴には移行フローを用意しています。Windowsでは設定画面からPawnIOを導入できます。",
     "release.hero.cta": "HardwareVisualizerをダウンロード",
     "release.hero.secondary": "更新履歴を見る",
     "release.figure.title": "CPUの負荷帯ごとに比較",
@@ -642,13 +642,13 @@ export const ui = {
     "release.foundation.title": "Cooling Insightを支える2つの変更",
     "release.foundation.body":
       "今回のリリースではCooling Insightの追加とあわせて、履歴の保存基盤と、Windowsでセンサーを利用するための導入手順も改善しました。",
-    "release.duck.title": "履歴の保存基盤をDuckDBへ",
+    "release.duck.title": "新規インストールの履歴にDuckDBを採用",
     "release.duck.body":
-      "履歴の保存基盤にDuckDBを採用しました。蓄積する履歴データと、長い期間の集計を扱うための基盤を更新しています。",
+      "新規インストールでは履歴をDuckDBに保存します。既存のSQLite履歴は明示的な移行フローで移せます。蓄積するデータと長い期間の集計を扱うための更新です。",
     "release.duck.benchmark.caption": "履歴ファイルの保存容量",
     "release.duck.benchmark.period": "履歴の期間",
-    "release.duck.benchmark.sqliteVersion": "（v1.11.0未満）",
-    "release.duck.benchmark.duckdbVersion": "（v1.11.0）",
+    "release.duck.benchmark.sqliteVersion": "（旧形式）",
+    "release.duck.benchmark.duckdbVersion": "（新規導入時）",
     "release.duck.benchmark.30d": "30日",
     "release.duck.benchmark.90d": "90日",
     "release.duck.benchmark.1y": "1年",
@@ -659,7 +659,7 @@ export const ui = {
     "release.duck.benchmark.source": "測定条件と結果を確認する（JSON）",
     "release.duck.detail.title": "保存基盤の変更について",
     "release.duck.detail.body":
-      "DuckDBは、データの集計や分析に適した列指向のデータベースです。Cooling Insightで利用する記録を含め、HardwareVisualizer内で履歴の保存と集計を担います。別途データベースサーバーを用意する必要はありません。",
+      "DuckDBは、データの集計や分析に適した列指向のデータベースです。新規インストールと移行後の環境では、Cooling Insightで利用する記録を含め、履歴の保存と集計を担います。別途データベースサーバーを用意する必要はありません。",
     "release.pawn.title": "PawnIOを設定画面から導入",
     "release.pawn.body":
       "Windowsでは、HardwareVisualizerの設定画面からPawnIOの導入を開始できます。ランタイムと必要なモジュールをダウンロードし、対応するCPUの温度・電力やマザーボードセンサーを利用するための手作業を減らします。",
@@ -667,7 +667,7 @@ export const ui = {
       "Windows向けの任意導入です。インターネット接続とWindowsの管理者承認が必要です。利用できるセンサーはハードウェアによって異なります。",
     "release.pawn.detail.title": "導入時に行われること",
     "release.pawn.detail.body":
-      "「設定 → 詳細設定 → 任意コンポーネントのセットアップ」からインストールを選びます。公式GitHubリリースから取得し、サイズとSHA-256ハッシュを検証します。Windowsの管理者承認後、未導入のランタイムと不足するモジュールを追加し、既存ファイルは上書きしません。完了後はアプリを再起動し、Windowsから再起動を求められた場合は先にOSを再起動します。PawnIOは同梱せず、セットアップ時に取得します。",
+      "「設定 → 詳細設定 → 任意コンポーネントのセットアップ」からインストールを選びます。公式GitHubリリースから取得し、サイズとSHA-256ハッシュを検証します。Windowsの管理者承認後、未導入のランタイムをインストールし、必要なモジュールを追加または更新します。完了後はアプリを再起動し、Windowsから再起動を求められた場合は先にOSを再起動します。PawnIOは同梱せず、セットアップ時に取得します。",
     "release.faq.available.q": "比較結果が出るまで、記録の蓄積は必要ですか？",
     "release.faq.available.a":
       "はい。基準期間を確立し、最近の状態と比較するために記録の蓄積が必要です。基準期間の確立状況を表示し、サンプルが不足している場合は比較保留として扱います。",
@@ -892,9 +892,9 @@ export const ui = {
     "specs.overview.languages.label": "対応言語",
     "specs.overview.languages.value":
       "アプリは英語、日本語、ロシア語に対応しています。",
-    "specs.overview.visual.title": "ダッシュボードの例。",
+    "specs.overview.visual.title": "システム仕様の画面",
     "specs.overview.visual.caption":
-      "細かい診断コンソールではなく、ひと目で読めるハードウェア概要を重視したUIです。",
+      "CPU、GPU、メモリ、ストレージと、取得できる健康状態をまとめて確認できます。",
     "specs.section.compat.eyebrow": "対応プラットフォーム",
     "specs.os.title": "OSとインストーラ",
     "specs.os.description":
@@ -996,7 +996,7 @@ export const ui = {
     "specs.section.storage.eyebrow": "追加コンポーネント",
     "specs.storage.title": "Storage Healthと任意コンポーネント",
     "specs.storage.description":
-      "任意コンポーネントは同梱、ダウンロード、インストール、自動有効化されません。フォールバック後も表示可能なハードウェア情報が不足するときだけ、アプリ内で説明します。",
+      "任意コンポーネントはアプリに同梱していません。WindowsではMSIのセットアップ時にPawnIOを選ぶか、後から設定画面で管理者承認のうえ導入できます。",
     "specs.storage.live.title": "リアルタイムのストレージ情報",
     "specs.storage.live.body":
       "フォーカス中のストレージ情報は、smartctlをライブポーリング周期で実行せず、軽量なネイティブ読み取り経路で更新します。",
@@ -1005,7 +1005,7 @@ export const ui = {
       "日次のヘルス記録では、利用可能な場合にSMART総合ヘルス、温度、NVMe使用率、利用可能スペア、代替処理済みセクター、保留中セクター、オフライン訂正不能セクター、NVMeメディアエラーを扱います。",
     "specs.storage.pawnio.title": "CPUパッケージ温度向けPawnIO",
     "specs.storage.pawnio.body":
-      "Windowsでは、ユーザーがPawnIOのドライバー/ランタイムと十分な権限を用意した場合、対応するIntel/AMD CPUのパッケージ温度を取得できる場合があります。",
+      "Windowsでは「設定 → 詳細設定 → 任意コンポーネントのセットアップ」からPawnIOを取得・導入できます。管理者承認後、対応するCPUやマザーボードの温度・電力・センサー情報を取得できる場合があります。",
     "specs.storage.smartctl.title": "より詳しいストレージ情報向けsmartctl",
     "specs.storage.smartctl.body":
       "ネイティブOS経路で重要なSMART/NVMeヘルス情報を読めない場合、smartmontoolsによってStorage Healthが改善されることがあります。",
@@ -1032,7 +1032,7 @@ export const ui = {
     "specs.verification.linux.detail":
       "Linuxパッケージは現在、GPG、Sigstore、リポジトリメタデータによる署名を提供していません。チェックサムとAttestationを利用してください。",
     "specs.hero.imageAlt":
-      "ライブハードウェアメトリクスを表示するHardwareVisualizerのダッシュボード",
+      "CPU、GPU、メモリ、ストレージの情報を表示するHardwareVisualizerのシステム仕様画面",
     "specs.sources.readme": "README（GitHub）",
     "specs.sources.externalComponents": "追加コンポーネント",
     "specs.sources.devStory": "開発ストーリー",
@@ -1095,7 +1095,7 @@ export const ui = {
       "HardwareVisualizerはWindows 10、Windows 11、macOS（Apple Silicon正式対応、Intel実験的）、および主要なLinuxディストリビューション（Debian/Ubuntu、RPM系、AppImage）に対応しています。",
     "faq.q4": "タスクマネージャーやHWiNFOとの違いは？",
     "faq.a4":
-      "HardwareVisualizerは軽量でモダンなUIを重視しています。タスクマネージャーと異なり、詳細なグラフと、初期設定で30日間・設定から延長できる長期履歴を提供します。常駐監視はバックグラウンドでのCPU・メモリ使用を最小限に抑えるよう最適化されており（トレイ格納中のメモリ使用量は約32MB）、インターフェースも自由にカスタマイズできます。",
+      "HardwareVisualizerは軽量でモダンなUIを重視しています。タスクマネージャーと異なり、詳細なグラフと、初期設定で30日間・設定から延長できる長期履歴を提供します。トレイに格納している間は非表示ウィンドウの更新を停止し、表示もカスタマイズできます。",
     "faq.q5": "ゲーム中でも監視できますか？",
     "faq.a5":
       "はい！HardwareVisualizerは最小限のリソース使用でバックグラウンドで実行されるため、ゲームセッション中のCPU使用率やメモリの監視に最適です。GPU温度の監視はNVIDIA GPUにフル対応しており、AMD・Intel GPUにも部分的に対応しています。履歴データでシステムのパフォーマンスを後から確認することもできます。",

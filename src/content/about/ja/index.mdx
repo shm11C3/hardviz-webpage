@@ -15,12 +15,12 @@ HardwareVisualizer は、CPU や GPU、メモリの状態をリアルタイム�
 | --- | --- |
 | フロントエンド | React / TypeScript / Jotai / Vite / Tailwind CSS / shadcn/ui / Recharts |
 | バックエンド | Tauri / Rust |
-| データ保存 | SQLite |
+| データ保存 | 新規インストールはDuckDB。既存のSQLite履歴は移行可能 |
 
 | OS | ハードウェア情報の取得元 |
 | --- | --- |
 | 共通 | sysinfo |
-| Windows | WMI / PDH / NVAPI / ADL / DXGI |
+| Windows | WMI / PDH / NVAPI / ADL / DXGI / 任意導入のPawnIO |
 | Linux | procfs / DRM / hwmon |
 | macOS | IOKit |
 
@@ -33,6 +33,7 @@ HardwareVisualizer は、CPU や GPU、メモリの状態をリアルタイム�
 | 2025 | Linux 対応 |
 | 2026.02 | macOS 正式対応（v1.6.0） |
 | 2026 | GPU 対応を拡大、バックグラウンド監視を追加（v1.7〜v1.8） |
+| 2026.09 | Cooling Insight、新規インストール向けDuckDB履歴、PawnIO導入支援（v1.11.0） |
 | これから | センサー情報を充実させ、誰でも PC の状態がパッと分かるソフトへ |
 
 細かい変更は[変更履歴](/ja/changelog/)にまとめています。
