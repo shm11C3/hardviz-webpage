@@ -1,6 +1,7 @@
 ---
 import benchmark from "../../../public/benchmarks/history-storage-2026-09-27.json";
-import screenshotPlaceholder from "../../assets/releases/screenshot-placeholder.svg";
+import coolingScreenshotEn from "../../assets/releases/cooling-insight-en.png";
+import coolingScreenshotJa from "../../assets/releases/cooling-insight-ja.png";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import ReleaseScreenshot from "./ReleaseScreenshot.astro";
 
@@ -125,10 +126,9 @@ const benchmarkSource = "/benchmarks/history-storage-2026-09-27.json";
     </figure>
   </div>
   <ReleaseScreenshot
-    src={screenshotPlaceholder}
+    src={lang === "ja" ? coolingScreenshotJa : coolingScreenshotEn}
     alt={t("release.screenshot.cooling.alt")}
     caption={t("release.screenshot.cooling.caption")}
-    placeholder
   />
   <div class="feature-row timeline-feature">
     <div class="feature-copy">
