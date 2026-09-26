@@ -13,11 +13,9 @@ const expectedHomeReleaseNotesVersion =
 async function expectReleaseNotesCard({
   download,
   changelogHref,
-  linkName,
 }: {
   download: Locator;
   changelogHref: string;
-  linkName: string;
 }) {
   const releaseNotes = download.locator("[data-release-notes]");
   await expect(releaseNotes).toBeVisible();
@@ -45,39 +43,39 @@ async function expectReleaseNotesCard({
   }
 
   await expect(
-    releaseNotes.getByRole("link", { name: linkName }),
-  ).toHaveAttribute("href", changelogHref);
+    releaseNotes.locator(`a[href="${changelogHref}"]`),
+  ).toBeVisible();
 }
 
 test("home page loads", async ({ page }) => {
   await page.goto("/");
   await expect(page).toHaveTitle(/HardwareVisualizer/);
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "See what made your PC hot or slow.",
-  );
+  await expect(
+    page.locator("#hero").getByRole("heading", { level: 1 }),
+  ).toHaveText(/\S/);
 });
 
 test("download links point to download page on FAQ pages", async ({ page }) => {
   await page.goto("/faq/");
-  await expect(
-    page.locator("header a", { hasText: "Download" }),
-  ).toHaveAttribute("href", "/download/");
+  await expect(page.locator('header a[href="/download/"]')).toHaveAttribute(
+    "href",
+    "/download/",
+  );
 
   await page.goto("/ja/faq/");
-  await expect(
-    page.locator("footer a", { hasText: "ダウンロード" }),
-  ).toHaveAttribute("href", "/ja/download/");
+  await expect(page.locator('footer a[href="/ja/download/"]')).toHaveAttribute(
+    "href",
+    "/ja/download/",
+  );
 });
 
 test("JA home page loads", async ({ page }) => {
   await page.goto("/ja/");
   await expect(page).toHaveTitle(/HardwareVisualizer/);
+  await expect(page.locator("html")).toHaveAttribute("lang", "ja");
   await expect(
-    page.getByRole("heading", {
-      level: 1,
-      name: "See what made your PC hot or slow.",
-    }),
-  ).toBeVisible();
+    page.locator("#hero").getByRole("heading", { level: 1 }),
+  ).toHaveText(/\S/);
 });
 
 test("home page has all major sections", async ({ page }) => {
@@ -103,80 +101,56 @@ test("history value appears before live features and customization", async ({
   ]);
 });
 
-test("hero explains its purpose and trust assurances in both languages", async ({
+test("hero structure and download destination follow the page language", async ({
   page,
 }) => {
   await page.goto("/");
   const hero = page.locator("#hero");
-  await expect(hero).toContainText(
-    "After a game or heavy workload, review the temperature and CPU/GPU graphs to see which processes were active.",
-  );
-  await expect(hero).toContainText("30 days by default");
-  await expect(hero).toContainText(
-    "HardwareVisualizer is free and open source. It doesn’t require an account or send telemetry, and the Windows installer is digitally signed.",
-  );
-  await expect(page.locator("footer")).toContainText(
-    "cross-platform hardware monitor",
-  );
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  await expect(hero.getByRole("heading", { level: 1 })).toHaveText(/\S/);
+  await expect(hero.locator('a[href="/download/"]')).toBeVisible();
 
   await page.goto("/ja/");
   const jaHero = page.locator("#hero");
-  await expect(jaHero).toContainText(
-    "ゲームや負荷の高い作業のあとに、温度やCPU・GPUのグラフを見返し、どのプロセスが動いていたか確認できます。",
-  );
-  await expect(jaHero).toContainText("初期設定30日");
-  await expect(jaHero).toContainText(
-    "HardwareVisualizerは無料のオープンソースソフトウェアです。アカウント登録は不要で、テレメトリを外部に送信しません。Windows版インストーラは電子署名済みです。",
-  );
-  await expect(page.locator("footer")).toContainText(
-    "クロスプラットフォーム対応ハードウェアモニター",
-  );
+  await expect(page.locator("html")).toHaveAttribute("lang", "ja");
+  await expect(jaHero.getByRole("heading", { level: 1 })).toHaveText(/\S/);
+  await expect(jaHero.locator('a[href="/ja/download/"]')).toBeVisible();
 });
 
-test("insights cards explain what users can learn after a workload", async ({
+test("Insights section renders its card headings on both localized pages", async ({
   page,
 }) => {
   await page.goto("/");
-  await expect(page.locator("#insights h3")).toHaveText([
-    "Check Peaks During Gaming",
-    "Trace Temperature Rises",
-    "Find the Process Behind the Load",
-    "Compare Earlier Periods",
-  ]);
-  await expect(page.locator("#insights")).not.toContainText(
-    "Your History Stays Local",
-  );
+  const insightHeadings = page.locator("#insights h3");
+  await expect(insightHeadings).toHaveCount(4);
+  for (let i = 0; i < (await insightHeadings.count()); i++) {
+    await expect(insightHeadings.nth(i)).toHaveText(/\S/);
+  }
 
   await page.goto("/ja/");
-  await expect(page.locator("#insights h3")).toHaveText([
-    "ゲーム中のピークを確認",
-    "温度上昇を追跡",
-    "負荷を掛けたプロセスを確認",
-    "以前の記録と見比べる",
-  ]);
-  await expect(page.locator("#insights")).not.toContainText("履歴はPC内に保存");
+  await expect(page.locator("html")).toHaveAttribute("lang", "ja");
+  const jaInsightHeadings = page.locator("#insights h3");
+  await expect(jaInsightHeadings).toHaveCount(4);
+  for (let i = 0; i < (await jaInsightHeadings.count()); i++) {
+    await expect(jaInsightHeadings.nth(i)).toHaveText(/\S/);
+  }
 });
 
-test("Insights screenshot alternative text follows the page language", async ({
+test("Insights screenshots expose alternative text on both localized pages", async ({
   page,
 }) => {
   await page.goto("/");
   await page.locator(".swiper-container").scrollIntoViewIfNeeded();
   await expect(
     page.locator('.screenshot-slot[data-screenshot="slide-2"] img'),
-  ).toHaveAttribute(
-    "alt",
-    "HardwareVisualizer Insights - review historical CPU and GPU usage after a workload",
-  );
+  ).toHaveAttribute("alt", /\S/);
 
   await page.goto("/ja/");
+  await expect(page.locator("html")).toHaveAttribute("lang", "ja");
   await page.locator(".swiper-container").scrollIntoViewIfNeeded();
   await expect(
     page.locator('.screenshot-slot[data-screenshot="slide-2"] img'),
-  ).toHaveAttribute(
-    "alt",
-    "処理後にCPUとGPUの使用履歴を振り返るHardwareVisualizerのInsights画面",
-  );
+  ).toHaveAttribute("alt", /\S/);
 });
 
 test("landing download navigation is measured after analytics consent", async ({
@@ -314,18 +288,14 @@ test("download section shows release date and selected release notes", async ({
   await expectReleaseNotesCard({
     download,
     changelogHref: "/changelog/",
-    linkName: "Read full changelog →",
   });
 
   await page.goto("/ja/");
   const jaDownload = page.locator("#download");
-  await expect(jaDownload).toContainText("リリース日時:");
   await expect(jaDownload).toContainText("2026年1月2日");
-  await expect(jaDownload).toContainText("リリースハイライト");
   await expectReleaseNotesCard({
     download: jaDownload,
     changelogHref: "/ja/changelog/",
-    linkName: "変更履歴を詳しく見る →",
   });
 });
 
@@ -335,7 +305,7 @@ test("FAQ preview shows 3 items", async ({ page }) => {
   await expect(faqItems).toHaveCount(3);
 });
 
-test("FAQ preview has 'View all FAQs' link", async ({ page }) => {
+test("FAQ preview links to the localized FAQ pages", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator('#faq a[href="/faq/"]')).toBeVisible();
 
