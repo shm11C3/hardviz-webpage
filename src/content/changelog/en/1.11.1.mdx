@@ -1,0 +1,54 @@
+---
+lang: en
+version: 1.11.1
+date: 2026-10-03
+title: "v1.11.1"
+summary: "Fixes Windows tray reopening, database recovery and conversion, Cooling Insight legend colors, and PawnIO setup guidance. Also corrects automated WinGet license metadata submission."
+highlights:
+  - "Reopen an elevated Windows tray-resident app from Start or the taskbar"
+  - "Retry temporary database access failures before considering Reset, with further conversion fixes"
+  - "Restore Cooling Insight legend colors and label baseline and recent sample minutes"
+  - "Avoid repeated PawnIO guidance after successful setup"
+tags:
+  - Release
+  - Bug Fixes
+  - Windows
+  - Database
+  - Cooling Insight
+  - PawnIO
+---
+
+## What's Changed
+
+v1.11.1 is a fixes release following v1.11.0. It improves Windows window reopening, database recovery and conversion, and the clarity of Cooling Insight and external-component guidance.
+
+## Windows and setup
+
+- Fixed reopening an elevated Windows app that is resident in the tray when launched again from Start or the taskbar.
+- Suppressed external-component guidance during uninstallation started by the installer.
+- After successful PawnIO setup, defer its guidance for the rest of the session instead of repeatedly asking you to install it before restarting.
+
+## Database recovery and conversion
+
+- Offer **Retry** first when the selected native database cannot be opened or inspected and the issue may clear on retry. Reset remains available through **More Options**.
+- Refuse conversion when the SQLite compatibility check fails.
+- Support placing the converted native database on file systems that do not support hard links.
+- Pause cooling baseline pin writes during conversion to preserve their establishment time.
+- Show the conversion completion notice even after navigating away from Settings and returning.
+- Handle conversion task panics without leaving the operation pending.
+- Make the default Process Stats ordering consistent across database engines.
+
+## Cooling Insight
+
+- Restored the colored swatches in timeline legends so readings can be matched to their chart colors.
+- Label sample durations as **baseline minutes** and **recent minutes** in the Data State panel.
+
+See the [full v1.11.1 release notes on GitHub](https://github.com/shm11C3/HardwareVisualizer/releases/tag/v1.11.1) for every change.
+
+---
+
+<h2 id="winget-license-notice">Addendum: WinGet license display</h2>
+
+We confirmed that WinGet displayed MIT for version 1.11.0, while the [source for that release](https://github.com/shm11C3/HardwareVisualizer/blob/v1.11.0/package.json) declares GPL-3.0-or-later. The submission workflow inherited metadata from an earlier manifest. Starting with 1.11.1, the [corrected workflow](https://github.com/shm11C3/HardwareVisualizer/pull/2329) uses the license declared at the target release tag. This workflow change does not update the existing 1.11.0 manifest.
+
+If the MIT display affected your use of the software, please contact us through the [dedicated Discussion](https://github.com/shm11C3/HardwareVisualizer/discussions/2337).
