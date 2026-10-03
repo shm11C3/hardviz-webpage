@@ -20,14 +20,6 @@ links:
     url: "https://hardviz.com/ja/releases/cooling-insight/"
 ---
 
-<h2 id="winget-license-notice">WinGetでのライセンス表示について</h2>
-
-WinGetでHardwareVisualizer 1.11.0のライセンスがMITと表示される状態を確認しました。対象の[ソース](https://github.com/shm11C3/HardwareVisualizer/blob/v1.11.0/package.json)ではGPL-3.0-or-laterを宣言しており、表示に不一致がありました。
-
-原因は、リリース時の自動提出処理が以前のWinGetマニフェストのライセンス情報を引き継いでいたことです。[自動提出処理を修正](https://github.com/shm11C3/HardwareVisualizer/pull/2329)し、次回リリースから対象リリースタグのライセンス情報を反映するようにしました。この修正は1.11.0の既存マニフェストには反映されません。
-
-MITの表示を前提にソースの再利用や再配布を行った方、またはその表示が利用判断に影響した方は、[専用Discussionのお問い合わせ窓口](https://github.com/shm11C3/HardwareVisualizer/discussions/2337)で、差し支えない範囲で利用時期と利用状況をお知らせください。状況を確認したうえで、個別にご相談します。
-
 ## 主な変更
 
 v1.11.0では、温度と負荷の変化を記録した履歴から確認できる**Cooling Insight**を追加しました。
@@ -63,3 +55,13 @@ v1.11.0では、温度と負荷の変化を記録した履歴から確認でき�
 - ハードウェア情報の取得、Windowsのインストール手順、アプリの安定性に関する修正を含みます。
 
 すべての変更は[GitHubのv1.11.0リリースノート](https://github.com/shm11C3/HardwareVisualizer/releases/tag/v1.11.0)をご覧ください。
+
+---
+
+<h2 id="winget-license-notice">追記：WinGetでのライセンス表示について（2026年10月3日）</h2>
+
+WinGetでHardwareVisualizer 1.11.0のライセンスがMITと表示される状態を確認しました。対象の[ソース](https://github.com/shm11C3/HardwareVisualizer/blob/v1.11.0/package.json)ではGPL-3.0-or-laterを宣言しており、表示に不一致がありました。
+
+原因は、リリース時の自動提出処理が以前のWinGetマニフェストのライセンス情報を引き継いでいたことです。[自動提出処理を修正](https://github.com/shm11C3/HardwareVisualizer/pull/2329)し、次回リリースから対象リリースタグのライセンス情報を反映するようにしました。この修正は1.11.0の既存マニフェストには反映されません。
+
+MITの表示を前提にソースの再利用や再配布を行った方、またはその表示が利用判断に影響した方は、[専用Discussionのお問い合わせ窓口](https://github.com/shm11C3/HardwareVisualizer/discussions/2337)で、差し支えない範囲で利用時期と利用状況をお知らせください。状況を確認したうえで、個別にご相談します。
