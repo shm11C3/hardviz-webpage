@@ -20,6 +20,14 @@ links:
     url: "https://hardviz.com/releases/cooling-insight/"
 ---
 
+<h2 id="winget-license-notice">WinGet license display</h2>
+
+We confirmed that WinGet displayed MIT for HardwareVisualizer 1.11.0. The [source for that release](https://github.com/shm11C3/HardwareVisualizer/blob/v1.11.0/package.json) declares GPL-3.0-or-later, so the displayed license did not match the source declaration.
+
+The automated release submission inherited the license metadata from an earlier WinGet manifest. We have [corrected the workflow](https://github.com/shm11C3/HardwareVisualizer/pull/2329) to use the license declared at the target release tag for future submissions. This workflow change does not update the existing 1.11.0 manifest.
+
+If you reused or redistributed source code based on the MIT display, or that display affected your use of the software, please contact us through the [dedicated Discussion](https://github.com/shm11C3/HardwareVisualizer/discussions/2337). Share when and how you used it, to the extent you are comfortable sharing. We will review the circumstances and discuss your situation individually.
+
 ## What's New
 
 v1.11.0 adds **Cooling Insight**, a new place to review how temperatures change alongside workload and recorded history. It also moves fresh installations to the native DuckDB archive and adds an explicit conversion flow for existing SQLite data.
