@@ -1,0 +1,59 @@
+---
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
+---
+
+<aside class="license-notice" aria-labelledby="winget-license-notice-title">
+  <h2 id="winget-license-notice-title">{t("licenseNotice.title")}</h2>
+  <p>{t("licenseNotice.body")}</p>
+  <a href={`${translatePath("/changelog/1.11.0")}#winget-license-notice`}>
+    {t("licenseNotice.link")}
+  </a>
+</aside>
+
+<style>
+.license-notice {
+  max-width: 72rem;
+  margin: 24px auto;
+  padding: 20px 24px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #334155;
+  font: 400 0.9rem / 1.8 var(--font-sans);
+}
+h2 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+p {
+  margin: 0 0 8px;
+}
+a {
+  color: #1768ac;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+:global(.dark) .license-notice {
+  border-color: #475569;
+  background: #192c42;
+  color: #e2e8f0;
+}
+:global(.dark) a {
+  color: #a0cef5;
+}
+@media (max-width: 768px) {
+  .license-notice {
+    margin: 20px 16px;
+    padding: 16px;
+  }
+}
+</style>

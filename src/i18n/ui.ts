@@ -9,6 +9,10 @@ export const showDefaultLang = false;
 
 export const ui = {
   en: {
+    "licenseNotice.title": "WinGet license display for version 1.11.0",
+    "licenseNotice.body":
+      "We confirmed that WinGet displayed MIT for HardwareVisualizer 1.11.0, while the source for that release declares GPL-3.0-or-later. We have corrected the automated submission workflow for the next release.",
+    "licenseNotice.link": "Details and contact information",
     "release.screenshot.cooling.alt":
       "Cooling Insight dashboard showing temperature, load, power, and fan trends",
     "release.screenshot.cooling.caption": "Cooling Insight",
@@ -575,6 +579,10 @@ export const ui = {
     "consent.decline": "Decline",
   },
   ja: {
+    "licenseNotice.title": "WinGetでの1.11.0のライセンス表示について",
+    "licenseNotice.body":
+      "WinGetでHardwareVisualizer 1.11.0のライセンスがMITと表示される状態を確認しました。対象のソースではGPL-3.0-or-laterを宣言しています。次回リリース向けに自動提出処理を修正しました。",
+    "licenseNotice.link": "詳細とお問い合わせ窓口",
     "release.screenshot.cooling.alt":
       "温度、負荷、電力、ファンの推移を表示するCooling Insightの画面",
     "release.screenshot.cooling.caption": "Cooling Insightの画面",
