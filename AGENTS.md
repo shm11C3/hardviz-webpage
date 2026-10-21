@@ -4,7 +4,7 @@ This file provides guidance to Codex (Codex.ai/code) when working with code in t
 
 ## Project Overview
 
-Official website for [HardwareVisualizer](https://github.com/shm11C3/HardwareVisualizer), a free open-source hardware monitoring tool. Built with Astro (static site generation) + React islands, deployed to Cloudflare Workers.
+Official website for [HardwareVisualizer](https://github.com/shm11C3/HardwareVisualizer), a free open-source hardware monitoring tool. Built with Astro (static site generation) + React islands, deployed to Cloudflare Pages.
 
 ## Commands
 
@@ -38,7 +38,7 @@ npx playwright test -g "test name"               # Run tests matching a pattern
 
 **Code Quality**: Biome handles both linting and formatting (2-space indent). Some lint rules are relaxed for `.astro` files (see `biome.json` overrides). No unused imports/variables allowed in `.ts`/`.tsx` files.
 
-**Deployment**: Cloudflare Workers via Wrangler. Build produces static assets in `dist/` with a `_worker.js` asset ignore marker.
+**Deployment**: Cloudflare Pages (project `hardviz-webpage`) via its Git integration: pushes to `master` deploy to production at hardviz.com, and other branches get preview deployments. Pages runs `pnpm build` and serves the static `dist/` output. Response headers and redirects are configured in `public/_headers` and `public/_redirects` (Pages syntax); `astro preview` does not apply them, so check them on a Pages preview deployment.
 
 ## Key Conventions
 
