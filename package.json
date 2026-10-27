@@ -42,8 +42,8 @@
     "@biomejs/biome": "2.4.4",
     "@playwright/test": "^1.64.1",
     "@types/node": "^26.6.5",
-    "budoux": "^0.10.0",
-    "wrangler": "^4.151.3"
+    "budoux": "^0.10.1",
+    "wrangler": "^4.153.0"
   },
   "engines": {
     "node": ">=24",
