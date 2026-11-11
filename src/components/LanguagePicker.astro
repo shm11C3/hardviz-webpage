@@ -22,16 +22,21 @@ const currentPath =
     <Languages size={18} />
   </button>
 
+  <!-- The top padding joins the menu to the button, so the pointer never
+       leaves the hover area on its way down. -->
   <div
     id="langDropdown"
-    role="menu"
-    class="invisible absolute top-full right-0 z-50 mt-1 w-32 rounded-xl border border-border bg-popover p-1 text-popover-foreground opacity-0 transition-opacity duration-150 group-hover:visible group-hover:opacity-100"
+    class="invisible absolute top-full right-0 z-50 pt-4 opacity-0 transition-opacity duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100"
   >
-    {Object.entries(languages).map(([langCode, label]) => (
+    <div
+      role="menu"
+      class="w-32 rounded-2xl border border-border bg-popover p-1 text-popover-foreground shadow-xl"
+    >
+      {Object.entries(languages).map(([langCode, label]) => (
         <a
           href={translatePath(currentPath, langCode)}
           role="menuitem"
-          class={`block rounded-md px-3 py-2 text-sm transition-colors hover:bg-muted ${
+          class={`block rounded-full px-3 py-2 text-sm transition-colors hover:bg-muted ${
             langCode === lang ? "font-medium" : "text-muted-foreground"
           }`}
           aria-current={langCode === lang ? "true" : undefined}
@@ -40,6 +45,7 @@ const currentPath =
           {label}
         </a>
       ))}
+    </div>
   </div>
 </div>
 
@@ -52,7 +58,12 @@ if (!prefersHover) {
   const wrapper = document.getElementById("language-menu");
 
   // group-hover クラスの無効化と表示制御を JS に移譲
-  dropdown.classList.remove("group-hover:opacity-100", "group-hover:visible");
+  dropdown.classList.remove(
+    "group-hover:opacity-100",
+    "group-hover:visible",
+    "group-focus-within:opacity-100",
+    "group-focus-within:visible",
+  );
   dropdown.classList.remove("opacity-0", "invisible");
   dropdown.classList.add("hidden");
 

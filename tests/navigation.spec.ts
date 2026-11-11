@@ -64,7 +64,9 @@ test.describe("Header", () => {
   test("GitHub link opens in new tab", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/");
-    const githubLink = page.getByRole("link", { name: "GitHub stars" });
+    const githubLink = page
+      .locator("header")
+      .getByRole("link", { name: "GitHub", exact: true });
     await expect(githubLink).toHaveAttribute("target", "_blank");
     await expect(githubLink).toHaveAttribute(
       "href",

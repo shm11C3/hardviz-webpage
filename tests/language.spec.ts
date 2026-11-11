@@ -70,3 +70,29 @@ test("html lang attribute is correct", async ({ page }) => {
   await page.goto("/ja/");
   await expect(page.locator("html")).toHaveAttribute("lang", "ja");
 });
+
+test("menu stays open while the pointer travels from the button to an item", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const toggle = page.locator("#langToggle");
+  const jaLink = page.locator('#langDropdown a[href="/ja/"]');
+  const from = await toggle.boundingBox();
+  if (!from) throw new Error("Language toggle has no box");
+  await page.mouse.move(from.x + from.width / 2, from.y + from.height / 2);
+  await expect(jaLink).toBeVisible();
+
+  const to = await jaLink.boundingBox();
+  if (!to) throw new Error("Language link has no box");
+  // Straight down from the button, one pixel at a time, then across.
+  const steps = Math.ceil(to.y + to.height / 2 - (from.y + from.height / 2));
+  await page.mouse.move(from.x + from.width / 2, to.y + to.height / 2, {
+    steps,
+  });
+  await expect(jaLink).toBeVisible();
+  await page.mouse.move(to.x + to.width / 2, to.y + to.height / 2, {
+    steps: 10,
+  });
+  await jaLink.click();
+  await expect(page).toHaveURL(/\/ja\/$/);
+});

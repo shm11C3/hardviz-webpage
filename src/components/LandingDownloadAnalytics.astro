@@ -4,7 +4,6 @@
   const downloadPaths = new Set(["/download/", "/ja/download/"]);
   const locations = [
     ["#hero", "hero"],
-    ["#notice", "after_workload"],
     ["#download", "download_section"],
     [".release-hero", "release_hero"],
     [".final-section", "release_final"],
@@ -59,6 +58,24 @@
 
     const link = event.target.closest("a");
     if (!(link instanceof HTMLAnchorElement)) return;
+
+    // A button that downloads an installer directly is reported at once:
+    // there is no download page to arrive at.
+    const directTarget = link.dataset.directDownload;
+    if (directTarget) {
+      if (!window.__analyticsLoaded || typeof window.gtag !== "function") {
+        return;
+      }
+      window.gtag("event", "landing_download_click", {
+        cta_location:
+          locations.find(([selector]) => link.closest(selector))?.[1] ??
+          "other",
+        page_language: document.documentElement.lang,
+        download_target: directTarget,
+        transport_type: "beacon",
+      });
+      return;
+    }
 
     const destination = new URL(link.href, window.location.href);
     if (

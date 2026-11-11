@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { FaGithub } from "react-icons/fa";
 import coolingEn from "../assets/releases/cooling-insight-en.png";
 import coolingJa from "../assets/releases/cooling-insight-ja.png";
 import coolingLightEn from "../assets/releases/cooling-insight-light-en.png";
@@ -15,14 +16,18 @@ import {
   useTranslatedPath,
   useTranslations,
 } from "../i18n/utils";
+import { githubRepoUrl } from "../lib/github";
 import { addJapaneseLineBreaks } from "../lib/japaneseLineBreaks";
+import type { Platform, PlatformDownload } from "../types/platform";
 
 interface Props {
   /** Latest released version, without the leading "v". */
   version: string | null;
+  /** The release's installers, with their direct download URLs. */
+  downloads: PlatformDownload[];
 }
 
-const { version } = Astro.props;
+const { version, downloads } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -31,6 +36,16 @@ const tf = (key: Parameters<typeof t>[0]) =>
   addJapaneseLineBreaks(lang, t(key));
 const { translatePath } = useTranslatedPath(lang);
 const isJa = lang === "ja";
+
+// The main button downloads the installer itself. Windows has one installer.
+// A Mac gets the Apple Silicon build, and the label says so. Linux has three
+// package formats, so its button goes to the download section to choose one.
+const installerUrl = (type: Platform) =>
+  downloads
+    .flatMap((platform) => platform.versions)
+    .find((version) => version.type === type)?.url ?? null;
+const windowsUrl = installerUrl("windows") ?? translatePath("/download");
+const macUrl = installerUrl("macOSAppleSilicon") ?? "#download";
 
 // The three screens the tabs switch between, named as the application names
 // them.
@@ -86,20 +101,78 @@ const facts = [
     <h1 id="hero-heading" class="hero-title">{tf("hero.title")}</h1>
     <p class="hero-lead">{tf("hero.description")}</p>
     <div class="hero-cta">
-      <a href={translatePath("/download")} class="btn btn-lg btn-primary">
+      <a
+        href={windowsUrl}
+        class="btn btn-lg btn-primary"
+        data-os-download
+        data-direct-download="windows"
+        data-label-macos={t("hero.downloadMac")}
+        data-href-macos={macUrl}
+        data-direct-macos="macOSAppleSilicon"
+        data-label-linux={t("hero.downloadLinux")}
+        data-href-linux="#download"
+        data-direct-linux=""
+      >
         {t("hero.download")}
       </a>
       <a
-        href={`${translatePath("/download")}#download`}
+        href={githubRepoUrl()}
+        target="_blank"
+        rel="noopener noreferrer"
         class="btn btn-lg btn-outline"
       >
-        {t("hero.otherPlatforms")}
+        <FaGithub className="h-5 w-5" aria-hidden="true" />
+        GitHub
       </a>
     </div>
-    <p class="hero-winget">
-      {t("hero.winget")}
-      <code>winget install shm11C3.HardwareVisualizer</code>
-    </p>
+    <div class="hero-notes">
+      <p class="hero-winget" data-winget>
+        {t("hero.winget")}
+        <code>winget install shm11C3.HardwareVisualizer</code>
+      </p>
+      <p class="hero-links">
+        <a href={translatePath("/guide")} class="link" data-astro-prefetch>
+          {t("matrix.linkGuide")}
+        </a>
+        <a
+          href="#download"
+          class="link"
+          data-os-others
+          data-label-macos={t("hero.otherPlatformsMac")}
+          data-label-linux={t("hero.otherPlatformsLinux")}
+        >
+          {t("hero.otherPlatforms")}
+        </a>
+      </p>
+    </div>
+    <script is:inline>
+    // The main button downloads the installer for the visitor's OS and the
+    // link below it names the others. The page is built for Windows, the main
+    // audience, and phones keep that. On a Mac or a Linux desktop the labels
+    // and the download target change and the Winget line, a Windows tool, is
+    // removed. This runs before the first paint, so nothing shifts.
+    (() => {
+      const ua = navigator.userAgent;
+      const os = /Macintosh/.test(ua)
+        ? "Macos"
+        : /Linux/.test(ua) && !/Android/.test(ua)
+          ? "Linux"
+          : null;
+      if (!os) return;
+      document.querySelector("[data-winget]")?.remove();
+      for (const link of document.querySelectorAll(
+        "[data-os-download], [data-os-others]",
+      )) {
+        const label = link.dataset[`label${os}`];
+        if (label) link.textContent = label;
+        const href = link.dataset[`href${os}`];
+        if (href) {
+          link.setAttribute("href", href);
+          link.dataset.directDownload = link.dataset[`direct${os}`] ?? "";
+        }
+      }
+    })();
+    </script>
 
     <figure data-screens>
       <div class="window panel">
@@ -297,14 +370,40 @@ const facts = [
   gap: 0.9rem;
   margin-top: 2.25rem;
 }
-.hero-winget {
+/* The longest label ("… (Apple Silicon)") must fit a narrow window. */
+@media (max-width: 30rem) {
+  .hero-cta :global(.btn) {
+    max-width: 100%;
+    height: auto;
+    min-height: 3.4rem;
+    padding-inline: 1.1rem;
+    line-height: 1.4;
+    text-align: center;
+    white-space: normal;
+  }
+}
+.hero-notes {
+  display: grid;
+  gap: 0.6rem;
   margin-top: 1.4rem;
   color: var(--muted-foreground);
   font-size: 0.8125rem;
 }
+.hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem 1.5rem;
+}
+.hero-notes .link {
+  color: var(--muted-foreground);
+}
+.hero-notes .link:hover {
+  color: var(--foreground);
+}
 .hero-winget code {
   display: inline-block;
-  margin: 0.5rem 0 0 0.5rem;
+  margin: 0.4rem 0 0 0.5rem;
   padding: 0.2rem 0.8rem;
   border: 1px solid var(--border);
   border-radius: 9999px;

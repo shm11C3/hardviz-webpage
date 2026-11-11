@@ -128,7 +128,6 @@ export const ui = {
     "nav.Features": "Features",
     "nav.Download": "Download",
     "nav.faq": "FAQ",
-    "nav.githubStarsBadgeAlt": "GitHub stars",
     "nav.changelog": "Changelog",
     "seo.ogImageAlt":
       "HardwareVisualizer logo over a dashboard showing CPU, GPU, RAM, and process metrics",
@@ -145,6 +144,8 @@ export const ui = {
     "seo.home.feature6": "Open-source software licensed under GPL-3.0-or-later",
     "seo.home.feature7": "Windows, macOS, and Linux support",
     "hero.download": "Download for Windows",
+    "hero.downloadMac": "Download for macOS (Apple silicon)",
+    "hero.downloadLinux": "Download for Linux",
     "hero.facts.version": "Version",
     "hero.facts.platforms": "Platforms",
     "hero.facts.platformsValue": "Windows 10/11, macOS, Linux",
@@ -170,7 +171,10 @@ export const ui = {
     "hero.title": "Records your PC's state while you are not watching",
     "hero.description":
       "A hardware monitor that saves CPU, GPU, and memory readings every minute",
-    "hero.otherPlatforms": "macOS and Linux",
+    "hero.otherPlatforms": "Also available for macOS and Linux",
+    "hero.otherPlatformsMac":
+      "Also available for Intel Macs, Windows, and Linux",
+    "hero.otherPlatformsLinux": "Also available for Windows and macOS",
     "hero.winget": "Also available through Winget",
     "hero.tabsLabel": "Switch screens",
     "screens.title": "Three screens",
@@ -795,7 +799,6 @@ export const ui = {
     "nav.Features": "機能",
     "nav.Download": "ダウンロード",
     "nav.faq": "FAQ",
-    "nav.githubStarsBadgeAlt": "GitHubのスター数",
     "nav.changelog": "変更履歴",
     "seo.ogImageAlt":
       "CPU、GPU、RAM、プロセス情報のダッシュボードに重なるHardwareVisualizerのロゴ",
@@ -811,6 +814,8 @@ export const ui = {
       "GPL-3.0-or-laterライセンスのオープンソースソフトウェア",
     "seo.home.feature7": "Windows、macOS、Linux対応",
     "hero.download": "Windows版をダウンロード",
+    "hero.downloadMac": "macOS版をダウンロード（Apple Silicon）",
+    "hero.downloadLinux": "Linux版をダウンロード",
     "hero.facts.version": "バージョン",
     "hero.facts.platforms": "対応OS",
     "hero.facts.platformsValue": "Windows 10・11、macOS、Linux",
@@ -836,7 +841,9 @@ export const ui = {
     "hero.title": "見ていない間もPCの状態を記録",
     "hero.description":
       "CPU・GPU・メモリを1分ごとに保存するハードウェアモニター",
-    "hero.otherPlatforms": "macOS・Linux版",
+    "hero.otherPlatforms": "macOS・Linux版もあります",
+    "hero.otherPlatformsMac": "Intel Mac・Windows・Linux版もあります",
+    "hero.otherPlatformsLinux": "Windows・macOS版もあります",
     "hero.winget": "Wingetでも導入できます",
     "hero.tabsLabel": "画面を切り替える",
     "screens.title": "3つの画面",

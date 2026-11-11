@@ -98,7 +98,10 @@ const softwareJsonLd = {
   <Header />
   <main id="main-content" class="pt-20">
     <ReleaseAnnouncement />
-    <Hero version={release.version} />
+    <Hero
+      version={release.version}
+      downloads={createPlatformDownloads(release)}
+    />
     <Screens />
     <PlatformMatrix />
     <Trust />

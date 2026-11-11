@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { ArrowDownToLine, Menu } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 import logo from "../assets/app-icon.png";
 import {
   getLangFromUrl,
@@ -80,16 +81,11 @@ const navLinks = [
           href={githubRepoUrl()}
           target="_blank"
           rel="noopener noreferrer"
-          class="mx-1 hidden items-center xl:flex"
+          class="hidden h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground xl:flex"
+          aria-label="GitHub"
+          title="GitHub"
         >
-          <img
-            src="https://img.shields.io/github/stars/shm11C3/HardwareVisualizer?style=flat-square&label=GitHub&labelColor=0a0f22&color=28304a"
-            alt={t("nav.githubStarsBadgeAlt")}
-            class="h-5 w-auto rounded-full"
-            height="20"
-            loading="lazy"
-            decoding="async"
-          >
+          <FaGithub className="h-[18px] w-[18px]" aria-hidden="true" />
         </a>
         <LanguagePicker />
         <ThemeIcon />

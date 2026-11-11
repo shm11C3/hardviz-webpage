@@ -101,20 +101,20 @@ test("sections follow the page order", async ({ page }) => {
   ]);
 });
 
-test("hero structure and download destination follow the page language", async ({
-  page,
-}) => {
+test("hero links follow the page language", async ({ page }) => {
   await page.goto("/");
   const hero = page.locator("#hero");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(hero.getByRole("heading", { level: 1 })).toHaveText(/\S/);
-  await expect(hero.locator('a[href="/download/"]')).toBeVisible();
+  await expect(hero.locator('a[href="/guide/"]')).toBeVisible();
+  await expect(hero.locator('a[href="#download"]')).toBeVisible();
 
   await page.goto("/ja/");
   const jaHero = page.locator("#hero");
   await expect(page.locator("html")).toHaveAttribute("lang", "ja");
   await expect(jaHero.getByRole("heading", { level: 1 })).toHaveText(/\S/);
-  await expect(jaHero.locator('a[href="/ja/download/"]')).toBeVisible();
+  await expect(jaHero.locator('a[href="/ja/guide/"]')).toBeVisible();
+  await expect(jaHero.locator('a[href="#download"]')).toBeVisible();
 });
 
 test("the three screens are described on both localized pages", async ({
@@ -256,21 +256,21 @@ test("landing download navigation is measured after analytics consent", async ({
     };
     analyticsWindow.__analyticsLoaded = true;
 
-    const heroDownload = document.querySelector<HTMLAnchorElement>(
-      '#hero a[href="/download/"]',
+    const navDownload = document.querySelector<HTMLAnchorElement>(
+      'header a[href="/download/"]',
     );
-    if (!heroDownload) throw new Error("Hero download link not found");
-    heroDownload.addEventListener("click", (event) => event.preventDefault(), {
+    if (!navDownload) throw new Error("Header download link not found");
+    navDownload.addEventListener("click", (event) => event.preventDefault(), {
       once: true,
     });
-    heroDownload.dispatchEvent(
+    navDownload.dispatchEvent(
       new MouseEvent("click", { bubbles: true, cancelable: true }),
     );
 
     return sessionStorage.getItem("landing-download-click");
   });
   expect(JSON.parse(pendingEvent ?? "null")).toEqual({
-    cta_location: "hero",
+    cta_location: "header",
     page_language: "en",
   });
 
@@ -293,7 +293,7 @@ test("landing download navigation is measured after analytics consent", async ({
   expect(events).toContainEqual([
     "event",
     "landing_download_click",
-    { cta_location: "hero", page_language: "en" },
+    { cta_location: "header", page_language: "en" },
   ]);
   expect(
     await page.evaluate(() => sessionStorage.getItem("landing-download-click")),
@@ -318,10 +318,11 @@ test("hero loads only the screenshot for the active theme", async ({
 
 test("hero has download and GitHub buttons", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator('a[href="/download/"]').first()).toBeVisible();
-  const githubLink = page
-    .locator('a[href*="github.com/shm11C3/HardwareVisualizer"]')
-    .first();
+  await expect(page.locator("#hero [data-os-download]")).toBeVisible();
+  const githubLink = page.locator(
+    '#hero a.btn[href*="github.com/shm11C3/HardwareVisualizer"]',
+  );
+  await expect(githubLink).toBeVisible();
   await expect(githubLink).toHaveAttribute("target", "_blank");
 });
 
@@ -404,4 +405,118 @@ test("FAQ preview links to the localized FAQ pages", async ({ page }) => {
 
   await page.goto("/ja/");
   await expect(page.locator('#faq a[href="/ja/faq/"]')).toBeVisible();
+});
+
+for (const [os, userAgent, shownOs, label, jaLabel, href, winget] of [
+  [
+    "Windows",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
+    "Windows",
+    "Download for Windows",
+    "Windows版をダウンロード",
+    mockReleaseData.platforms.windows?.browser_download_url ?? "",
+    true,
+  ],
+  [
+    "macOS",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
+    "macOS",
+    "Download for macOS (Apple silicon)",
+    "macOS版をダウンロード（Apple Silicon）",
+    mockReleaseData.platforms.macOSAppleSilicon?.browser_download_url ?? "",
+    false,
+  ],
+  [
+    "Linux",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
+    "Linux",
+    "Download for Linux",
+    "Linux版をダウンロード",
+    "#download",
+    false,
+  ],
+  [
+    "Android",
+    "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36",
+    "Windows",
+    "Download for Windows",
+    "Windows版をダウンロード",
+    mockReleaseData.platforms.windows?.browser_download_url ?? "",
+    true,
+  ],
+] as const) {
+  test.describe(`hero on ${os}`, () => {
+    test.use({ userAgent });
+
+    test("names the visitor's OS on the main button", async ({ page }) => {
+      await page.goto("/");
+      await expect(page.locator("#hero [data-os-download]")).toHaveText(label);
+      await expect(page.locator("#hero [data-os-download]")).toHaveAttribute(
+        "href",
+        href,
+      );
+      const others = page.locator("#hero [data-os-others]");
+      await expect(others).toHaveAttribute("href", "#download");
+      await expect(others).toHaveText(/\S/);
+      if (shownOs !== "macOS") {
+        await expect(others).not.toContainText(shownOs);
+      }
+
+      await page.goto("/ja/");
+      await expect(page.locator("#hero [data-os-download]")).toHaveText(
+        jaLabel,
+      );
+    });
+
+    test(`${winget ? "shows" : "does not show"} the Winget command`, async ({
+      page,
+    }) => {
+      await page.goto("/");
+      await expect(page.locator("#hero h1")).toBeVisible();
+      await expect(
+        page.locator("#hero").getByText("winget install"),
+      ).toHaveCount(winget ? 1 : 0);
+    });
+  });
+}
+
+test("a direct download from the hero is reported at once", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const events = await page.evaluate(() => {
+    const analyticsWindow = window as typeof window & {
+      __analyticsLoaded: boolean;
+      __gtagEvents: unknown[][];
+      gtag: (...args: unknown[]) => void;
+    };
+    analyticsWindow.__analyticsLoaded = true;
+    analyticsWindow.__gtagEvents = [];
+    analyticsWindow.gtag = (...args: unknown[]) => {
+      analyticsWindow.__gtagEvents.push(args);
+    };
+
+    const link = document.querySelector<HTMLAnchorElement>(
+      "#hero [data-os-download]",
+    );
+    if (!link) throw new Error("Hero download link not found");
+    link.dataset.directDownload = "windows";
+    link.addEventListener("click", (event) => event.preventDefault(), {
+      once: true,
+    });
+    link.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    );
+    return analyticsWindow.__gtagEvents;
+  });
+  expect(events).toContainEqual([
+    "event",
+    "landing_download_click",
+    {
+      cta_location: "hero",
+      page_language: "en",
+      download_target: "windows",
+      transport_type: "beacon",
+    },
+  ]);
 });
