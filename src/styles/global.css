@@ -9,6 +9,8 @@
  * The application lets its user put a wallpaper behind translucent panels.
  * The site is built the same way: one wallpaper, drawn with gradients, stays
  * fixed behind the page, and the content sits on translucent panels above it.
+ * The wallpaper is kept faint: the ground colour leads, and the three hues
+ * only tint the corners.
  * Headings are centred, and buttons and tabs are pills.
  *
  * Colour comes from the wallpaper. The three series colours of the
@@ -81,10 +83,10 @@
     --live: #0b7d7d;
     --record: #c2244c;
     --notice: #8a5a00;
-    --wall-1: rgb(124 102 232 / 0.36);
-    --wall-2: rgb(60 180 195 / 0.3);
-    --wall-3: rgb(236 120 165 / 0.28);
-    --glow: rgb(92 64 205 / 0.28);
+    --wall-1: rgb(124 102 232 / 0.14);
+    --wall-2: rgb(60 180 195 / 0.12);
+    --wall-3: rgb(236 120 165 / 0.1);
+    --glow: rgb(92 64 205 / 0.14);
     /* Background of the light-theme application screenshots */
     --stage: #e4e4e7;
     color-scheme: light;
@@ -108,10 +110,10 @@
     --live: #4bc0c0;
     --record: #ff6384;
     --notice: #ffce56;
-    --wall-1: rgb(92 64 205 / 0.62);
-    --wall-2: rgb(28 150 165 / 0.4);
-    --wall-3: rgb(200 62 124 / 0.36);
-    --glow: rgb(92 64 205 / 0.55);
+    --wall-1: rgb(92 64 205 / 0.24);
+    --wall-2: rgb(28 150 165 / 0.16);
+    --wall-3: rgb(200 62 124 / 0.13);
+    --glow: rgb(92 64 205 / 0.28);
     /* Background of the dark-theme application screenshots */
     --stage: #101828;
     color-scheme: dark;
