@@ -116,23 +116,16 @@ const facts = [
         <a href={translatePath("/guide")} class="link" data-astro-prefetch>
           {t("matrix.linkGuide")}
         </a>
-        <a
-          href="#download"
-          class="link"
-          data-os-others
-          data-label-macos={t("hero.otherPlatformsMac")}
-          data-label-linux={t("hero.otherPlatformsLinux")}
-        >
+        <a href="#download" class="link" data-os-others>
           {t("hero.otherPlatforms")}
         </a>
       </p>
     </div>
     <script is:inline>
-    // The main button names the visitor's OS and the link below it names the
-    // others. The page is built for Windows, the main audience, and phones
-    // keep that. On a Mac or a Linux desktop both labels change and the Winget
-    // line, a Windows tool, is removed. This runs before the first paint, so
-    // nothing shifts.
+    // The main button names the visitor's OS. The page is built for Windows,
+    // the main audience, and phones keep that. On a Mac or a Linux desktop the
+    // label changes and the Winget line, a Windows tool, is removed. This runs
+    // before the first paint, so nothing shifts.
     (() => {
       const ua = navigator.userAgent;
       const os = /Macintosh/.test(ua)
@@ -142,9 +135,7 @@ const facts = [
           : null;
       if (!os) return;
       document.querySelector("[data-winget]")?.remove();
-      for (const link of document.querySelectorAll(
-        "[data-os-download], [data-os-others]",
-      )) {
+      for (const link of document.querySelectorAll("[data-os-download]")) {
         const label = link.dataset[`label${os}`];
         if (label) link.textContent = label;
       }

@@ -9,17 +9,13 @@ export const showDefaultLang = false;
 
 export const ui = {
   en: {
-    "licenseNotice.title": "WinGet license display for version 1.11.0",
-    "licenseNotice.body":
-      "We confirmed that WinGet displayed MIT for HardwareVisualizer 1.11.0, while the source for that release declares GPL-3.0-or-later. We have corrected the automated submission workflow for the next release.",
-    "licenseNotice.link": "Details and contact information",
     "release.screenshot.cooling.alt":
       "Cooling Insight dashboard showing temperature, load, power, and fan trends",
     "release.screenshot.cooling.caption": "Cooling Insight",
     "release.status": "HardwareVisualizer v1.11.0",
     "release.nav": "v1.11.0 update",
     "release.announcement":
-      "HardwareVisualizer v1.11.0: Cooling Insight, DuckDB history storage and PawnIO setup.",
+      "HardwareVisualizer v1.11.0: Cooling Insight, DuckDB history storage and PawnIO setup",
     "release.meta.title":
       "Cooling Insight: CPU Temperature vs Load and History | HardwareVisualizer",
     "release.meta.description":
@@ -160,7 +156,7 @@ export const ui = {
     "scale.live.screen": "Performance",
     "scale.record.screen": "Insights",
     "scale.notice.screen": "Cooling Insight",
-    "doc.basedOn": "Describes v{version}. Last updated {date}.",
+    "doc.basedOn": "Last updated {date} (v{version})",
     "nav.coolingInsight": "Cooling Insight",
     "nav.guide": "Guide",
     "nav.compatibility": "Compatibility",
@@ -171,9 +167,7 @@ export const ui = {
     "hero.title": "Records your PC's state while you are not watching",
     "hero.description":
       "A hardware monitor that saves CPU, GPU, and memory readings every minute",
-    "hero.otherPlatforms": "Also available for macOS and Linux",
-    "hero.otherPlatformsMac": "Also available for Windows and Linux",
-    "hero.otherPlatformsLinux": "Also available for Windows and macOS",
+    "hero.otherPlatforms": "Other platforms",
     "hero.winget": "Also available through Winget",
     "hero.tabsLabel": "Switch screens",
     "screens.title": "Screens and features",
@@ -391,7 +385,6 @@ export const ui = {
     "footer.faq": "FAQ",
     "footer.github": "GitHub",
     "footer.reportIssue": "Report an Issue",
-    "footer.deepwiki": "DeepWiki (AI Docs)",
     "footer.community": "Community",
     "footer.discussions": "GitHub Discussions",
     "footer.about": "About",
@@ -681,17 +674,13 @@ export const ui = {
     "consent.decline": "Decline",
   },
   ja: {
-    "licenseNotice.title": "WinGetでの1.11.0のライセンス表示について",
-    "licenseNotice.body":
-      "WinGetでHardwareVisualizer 1.11.0のライセンスがMITと表示される状態を確認しました。対象のソースではGPL-3.0-or-laterを宣言しています。次回リリース向けに自動提出処理を修正しました。",
-    "licenseNotice.link": "詳細とお問い合わせ窓口",
     "release.screenshot.cooling.alt":
       "温度、負荷、電力、ファンの推移を表示するCooling Insightの画面",
     "release.screenshot.cooling.caption": "Cooling Insightの画面",
     "release.status": "HardwareVisualizer v1.11.0",
     "release.nav": "v1.11.0 アップデート",
     "release.announcement":
-      "HardwareVisualizer v1.11.0：Cooling Insight、DuckDBへの移行、PawnIOの導入支援。",
+      "HardwareVisualizer v1.11.0：Cooling Insight、DuckDBへの移行、PawnIOの導入支援",
     "release.meta.title":
       "Cooling InsightでCPU温度を負荷と履歴から比較 | HardwareVisualizer",
     "release.meta.description":
@@ -829,7 +818,7 @@ export const ui = {
     "scale.live.screen": "パフォーマンス",
     "scale.record.screen": "インサイト",
     "scale.notice.screen": "Cooling Insight",
-    "doc.basedOn": "v{version}時点の内容です。最終更新：{date}",
+    "doc.basedOn": "最終更新：{date}（v{version}）",
     "nav.coolingInsight": "Cooling Insight",
     "nav.guide": "ガイド",
     "nav.compatibility": "対応状況",
@@ -840,9 +829,7 @@ export const ui = {
     "hero.title": "見ていない間もPCの状態を記録",
     "hero.description":
       "CPU・GPU・メモリを1分ごとに保存するハードウェアモニター",
-    "hero.otherPlatforms": "macOS・Linux版もあります",
-    "hero.otherPlatformsMac": "Windows・Linux版もあります",
-    "hero.otherPlatformsLinux": "Windows・macOS版もあります",
+    "hero.otherPlatforms": "その他のOSはこちら",
     "hero.winget": "Wingetでも導入できます",
     "hero.tabsLabel": "画面を切り替える",
     "screens.title": "画面と機能",
@@ -882,9 +869,9 @@ export const ui = {
       "Cooling InsightはWindows版の機能で、CPU温度を取得できる環境が必要です。温度の上昇は詳しく調べるきっかけであり、それだけで故障や劣化を断定するものではありません。",
     "notice.cta": "Cooling Insightのしくみ",
     "notice.cond1.term": "基準",
-    "notice.cond1.value": "アイドル時の記録が30分以上ある日の、最初の7日ぶん",
+    "notice.cond1.value": "アイドル時の記録が30分以上ある日の、最初の7日分",
     "notice.cond2.term": "最近",
-    "notice.cond2.value": "過去30日以内で、記録のある直近7日ぶん",
+    "notice.cond2.value": "過去30日以内で、記録のある直近7日分",
     "matrix.title": "OS別の対応状況",
     "matrix.lead":
       "対応範囲が最も広いのはWindowsです。macOSとLinuxでは、まだ取得できないセンサーがあります。「—」は、そのOSでは取得できないことを示します。",
@@ -1056,7 +1043,6 @@ export const ui = {
     "footer.faq": "FAQ",
     "footer.github": "GitHub",
     "footer.reportIssue": "問題を報告",
-    "footer.deepwiki": "DeepWiki（AIドキュメント）",
     "footer.community": "コミュニティ",
     "footer.discussions": "GitHubディスカッション",
     "footer.about": "About",

@@ -7,7 +7,6 @@ import {
 } from "../i18n/utils";
 import { githubRepoUrl } from "../lib/github";
 import { addJapaneseLineBreaks } from "../lib/japaneseLineBreaks";
-import LicenseNotice from "./LicenseNotice.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -80,6 +79,5 @@ const items = [
           </li>
         ))}
     </ul>
-    <div class="mt-3"><LicenseNotice /></div>
   </div>
 </section>

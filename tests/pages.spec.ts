@@ -11,7 +11,7 @@ for (const slug of pages) {
       "content",
       /\S/,
     );
-    await expect(page.locator("main")).toContainText("Describes v");
+    await expect(page.locator("main")).toContainText(/Last updated .+ \(v\d/);
     await expect(
       page.locator(`#langDropdown a[href="/ja/${slug}/"]`),
     ).toHaveCount(1);
@@ -19,7 +19,7 @@ for (const slug of pages) {
     await page.goto(`/ja/${slug}/`);
     await expect(page.locator("html")).toHaveAttribute("lang", "ja");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(/\S/);
-    await expect(page.locator("main")).toContainText("時点の内容です");
+    await expect(page.locator("main")).toContainText(/最終更新：.+（v\d/);
     await expect(page.locator(`#langDropdown a[href="/${slug}/"]`)).toHaveCount(
       1,
     );

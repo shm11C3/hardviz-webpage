@@ -9,7 +9,6 @@ import type { LatestReleaseDetails } from "../lib/latestRelease";
 import type { PlatformDownload } from "../types/platform";
 import Download from "./Download.tsx";
 import DownloadGuideNav from "./DownloadGuideNav.astro";
-import LicenseNotice from "./LicenseNotice.astro";
 
 interface Props {
   lang: keyof typeof ui;
@@ -107,8 +106,6 @@ const pageTitleSeparator = t("download.pageTitleSeparator");
             </a>
           </div>
         </div>
-
-        <div class="mt-8"><LicenseNotice /></div>
 
         <div class="mt-12 max-w-6xl min-w-0" id="download">
           <h2 class="font-semibold text-2xl text-foreground md:text-3xl">
