@@ -176,7 +176,7 @@ export const ui = {
     "hero.otherPlatformsLinux": "Also available for Windows and macOS",
     "hero.winget": "Also available through Winget",
     "hero.tabsLabel": "Switch screens",
-    "screens.title": "Three screens",
+    "screens.title": "Screens and features",
     "screens.live.body":
       "CPU, memory, and GPU gauges sit beside graphs of the last 60 seconds.",
     "screens.live.row1.term": "Panels",
@@ -193,7 +193,7 @@ export const ui = {
     "screens.record.note":
       "Recording runs while the app is running. To keep it going after you close the window, set the app to stay in the tray in Settings.",
     "screens.notice.body":
-      "Groups readings by CPU load and compares recent temperatures with your PC's own baseline. A CPU runs hotter when it works harder, so readings are compared within the same load band.",
+      "Found in the Cooling tab of the Insights screen. It groups readings by CPU load and compares recent temperatures with your PC's own baseline. A CPU runs hotter when it works harder, so readings are compared within the same load band.",
     "screens.notice.bands.term": "Load bands",
     "screens.notice.bands.value": "Idle, Low, Mid, High",
     "scale.live.caption":
@@ -201,7 +201,7 @@ export const ui = {
     "scale.record.caption":
       "The Insights screen. It charts recorded usage and temperatures over periods from 10 minutes to 30 days.",
     "scale.notice.caption":
-      "The Cooling Insight screen. It puts temperature, load, power, fan speed, and room temperature on one timeline, over periods from 24 hours to 1 year. Windows only.",
+      "Cooling Insight (the Cooling tab of the Insights screen). It puts temperature, load, power, fan speed, and room temperature on one timeline, over periods from 24 hours to 1 year. Windows only.",
     "record.fact1.term": "Saved",
     "record.fact1.value": "Every minute",
     "record.fact2.term": "Kept for",
@@ -845,7 +845,7 @@ export const ui = {
     "hero.otherPlatformsLinux": "Windows・macOS版もあります",
     "hero.winget": "Wingetでも導入できます",
     "hero.tabsLabel": "画面を切り替える",
-    "screens.title": "3つの画面",
+    "screens.title": "画面と機能",
     "screens.live.body":
       "CPU・メモリ・GPUのゲージと、直近60秒のグラフが並びます。",
     "screens.live.row1.term": "選べるパネル",
@@ -861,7 +861,7 @@ export const ui = {
     "screens.record.note":
       "記録されるのはアプリが動いている間です。ウィンドウを閉じても続けるには、設定でトレイに常駐させます。",
     "screens.notice.body":
-      "CPU負荷ごとに記録を分け、最近の温度をそのPC自身の基準と比べます。CPUは負荷が高いほど熱くなるので、同じ負荷どうしで比べます。",
+      "「インサイト」画面の「冷却」タブにあります。CPU負荷ごとに記録を分け、最近の温度をそのPC自身の基準と比べます。CPUは負荷が高いほど熱くなるので、同じ負荷どうしで比べます。",
     "screens.notice.bands.term": "負荷帯",
     "screens.notice.bands.value": "アイドル、低負荷、中負荷、高負荷",
     "scale.live.caption":
@@ -869,7 +869,7 @@ export const ui = {
     "scale.record.caption":
       "「インサイト」画面。記録した使用率や温度を、10分から30日までの期間で振り返ります。",
     "scale.notice.caption":
-      "「Cooling Insight」画面。温度・負荷・電力・ファン・室温を同じ時間軸に並べ、24時間から1年までの期間で比べます。Windows版の機能です。",
+      "Cooling Insight（「インサイト」画面の「冷却」タブ）。温度・負荷・電力・ファン・室温を同じ時間軸に並べ、24時間から1年までの期間で比べます。Windows版の機能です。",
     "record.fact1.term": "保存の間隔",
     "record.fact1.value": "1分ごと",
     "record.fact2.term": "保存期間",
@@ -978,7 +978,7 @@ export const ui = {
     "screenshots.dashboardAlt":
       "CPU、メモリ、GPU、プロセス、センサーの状態を表示するHardwareVisualizerのダッシュボード",
     "screenshots.coolingInsightAlt":
-      "CPU温度の比較と温度、負荷、電力、ファンの履歴を表示するCooling Insight画面",
+      "CPU温度の比較と温度、負荷、電力、ファンの履歴を表示するCooling Insight",
     "usage.screenshotAlt":
       "PC内の背景画像を設定したHardwareVisualizerのダッシュボード",
     "download.title": "ダウンロード",
