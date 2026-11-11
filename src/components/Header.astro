@@ -62,7 +62,7 @@ const navLinks = [
 
       <div class="flex items-center gap-0 min-[360px]:gap-1.5">
         <nav
-          class="mr-2 hidden items-center lg:flex"
+          class="mr-1 hidden items-center lg:flex xl:mr-2"
           aria-label={t("nav.primaryLabel")}
           data-site-nav
         >
@@ -81,7 +81,7 @@ const navLinks = [
           href={githubRepoUrl()}
           target="_blank"
           rel="noopener noreferrer"
-          class="hidden h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground xl:flex"
+          class="hidden h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground lg:flex"
           aria-label="GitHub"
           title="GitHub"
         >
@@ -174,13 +174,20 @@ const navLinks = [
     padding-inline: 0.75rem 0.25rem;
   }
 }
+/* Between the two desktop breakpoints the links sit closer together, so the
+   GitHub icon fits in the bar as soon as the menu button goes away. */
 .site-nav-link {
-  padding: 0.3rem 0.8rem;
+  padding: 0.3rem 0.5rem;
   border-radius: 9999px;
   color: var(--muted-foreground);
   font-size: 0.9375rem;
   white-space: nowrap;
   transition: color 150ms;
+}
+@media (min-width: 80rem) {
+  .site-nav-link {
+    padding-inline: 0.8rem;
+  }
 }
 .site-nav-link:hover {
   color: var(--foreground);

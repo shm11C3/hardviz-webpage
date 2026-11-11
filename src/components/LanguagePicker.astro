@@ -79,5 +79,19 @@ if (!prefersHover) {
       toggleBtn?.setAttribute("aria-expanded", "false");
     }
   });
+} else {
+  // On a hover device CSS opens the menu, on hover or on keyboard focus.
+  // Keep the button's state in step with what is shown.
+  const toggleBtn = document.getElementById("langToggle");
+  const wrapper = document.getElementById("language-menu");
+  const sync = () => {
+    toggleBtn?.setAttribute(
+      "aria-expanded",
+      String(Boolean(wrapper?.matches(":hover, :focus-within"))),
+    );
+  };
+  for (const type of ["mouseenter", "mouseleave", "focusin", "focusout"]) {
+    wrapper?.addEventListener(type, () => requestAnimationFrame(sync));
+  }
 }
 </script>
