@@ -39,7 +39,8 @@ const homeReleaseNotesDetails = await getHomeReleaseNotesDetails({
   latestReleaseDetails,
 });
 
-const downloads = createPlatformDownloads(release, translatePath("/download"));
+// The download section links straight to the installers.
+const downloads = createPlatformDownloads(release);
 
 const downloadTranslations = {
   title: t("download.title"),
@@ -50,6 +51,7 @@ const downloadTranslations = {
   changelogLink: t("download.changelogLink"),
   githubDownloadButton: t("download.githubDownloadButton"),
   installationLink: t("download.installationLink"),
+  verificationLink: t("trust.item2.link"),
   releaseDate: t("download.releaseDate"),
   latestChanges: t("download.latestChanges"),
   latestChangesLink: t("download.latestChangesLink"),
@@ -98,10 +100,7 @@ const softwareJsonLd = {
   <Header />
   <main id="main-content" class="pt-20">
     <ReleaseAnnouncement />
-    <Hero
-      version={release.version}
-      downloads={createPlatformDownloads(release)}
-    />
+    <Hero version={release.version} />
     <Screens />
     <PlatformMatrix />
     <Trust />
@@ -115,6 +114,7 @@ const softwareJsonLd = {
       changelogHref={translatePath("/changelog")}
       githubLatestReleaseHref={githubLatestReleaseUrl()}
       installationHref={`${translatePath("/download")}#installation`}
+      verificationHref={translatePath("/verification")}
     />
     <Feedback />
     <FAQPreview />

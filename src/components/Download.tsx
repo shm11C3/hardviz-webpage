@@ -33,6 +33,7 @@ interface DownloadTranslations extends Partial<DownloadChecksumTranslations> {
   changelogLink?: string;
   githubDownloadButton?: string;
   installationLink?: string;
+  verificationLink?: string;
   releaseDate?: string;
   latestChanges?: string;
   latestChangesLink?: string;
@@ -65,6 +66,7 @@ const Download = ({
   releaseNotesHref,
   githubLatestReleaseHref,
   installationHref,
+  verificationHref,
   embedded = false,
   showHeader = true,
   showLatestChanges = true,
@@ -79,6 +81,7 @@ const Download = ({
   releaseNotesHref?: string;
   githubLatestReleaseHref?: string;
   installationHref?: string;
+  verificationHref?: string;
   embedded?: boolean;
   showHeader?: boolean;
   showLatestChanges?: boolean;
@@ -183,7 +186,12 @@ const Download = ({
                           platform.primary ? "btn-primary" : "btn-outline",
                         )}
                         {...(version.url.startsWith("http")
-                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          ? {
+                              target: "_blank",
+                              rel: "noopener noreferrer",
+                              // Lets the landing page report the click.
+                              "data-direct-download": version.type,
+                            }
                           : { "data-astro-prefetch": "hover" })}
                       >
                         {translations.button}
@@ -283,7 +291,7 @@ const Download = ({
       </div>
 
       {installationHref && translations.installationLink ? (
-        <p className="mt-5 text-center text-sm">
+        <p className="mt-5 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
           <a
             href={installationHref}
             className="link"
@@ -291,6 +299,15 @@ const Download = ({
           >
             {translations.installationLink}
           </a>
+          {verificationHref && translations.verificationLink ? (
+            <a
+              href={verificationHref}
+              className="link"
+              data-astro-prefetch="hover"
+            >
+              {translations.verificationLink}
+            </a>
+          ) : null}
         </p>
       ) : null}
 

@@ -336,33 +336,31 @@ test("download section renders platform cards", async ({ page }) => {
   await expect(headings.nth(2)).toContainText("Linux");
 });
 
-test("home download section links to dedicated download page", async ({
+test("home download section downloads the installers directly", async ({
   page,
 }) => {
-  await page.goto("/");
-  const download = page.locator("#download");
+  const windowsUrl =
+    mockReleaseData.platforms.windows?.browser_download_url ?? "";
 
-  await expect(
-    download.locator('[aria-labelledby="download-authenticity-title"]'),
-  ).toHaveCount(0);
-  expect(
-    await download.locator('a[href="/download/"]').count(),
-  ).toBeGreaterThan(0);
-  await expect(
-    download.locator('a[href="/download/#installation"]'),
-  ).toBeVisible();
-
-  await page.goto("/ja/");
-  const jaDownload = page.locator("#download");
-  await expect(
-    jaDownload.locator('[aria-labelledby="download-authenticity-title"]'),
-  ).toHaveCount(0);
-  expect(
-    await jaDownload.locator('a[href="/ja/download/"]').count(),
-  ).toBeGreaterThan(0);
-  await expect(
-    jaDownload.locator('a[href="/ja/download/#installation"]'),
-  ).toBeVisible();
+  for (const [path, prefix] of [
+    ["/", ""],
+    ["/ja/", "/ja"],
+  ] as const) {
+    await page.goto(path);
+    const download = page.locator("#download");
+    const installer = download.locator(`a[href="${windowsUrl}"]`);
+    await expect(installer).toBeVisible();
+    await expect(installer).toHaveAttribute("target", "_blank");
+    await expect(
+      download.locator(`a.btn[href="${prefix}/download/"]`),
+    ).toHaveCount(0);
+    await expect(
+      download.locator(`a[href="${prefix}/download/#installation"]`),
+    ).toBeVisible();
+    await expect(
+      download.locator(`a[href="${prefix}/verification/"]`),
+    ).toBeVisible();
+  }
 });
 
 test("download section shows mock version", async ({ page }) => {
@@ -407,23 +405,21 @@ test("FAQ preview links to the localized FAQ pages", async ({ page }) => {
   await expect(page.locator('#faq a[href="/ja/faq/"]')).toBeVisible();
 });
 
-for (const [os, userAgent, shownOs, label, jaLabel, href, winget] of [
+for (const [os, userAgent, shownOs, label, jaLabel, winget] of [
   [
     "Windows",
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
     "Windows",
     "Download for Windows",
     "Windows版をダウンロード",
-    mockReleaseData.platforms.windows?.browser_download_url ?? "",
     true,
   ],
   [
     "macOS",
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
     "macOS",
-    "Download for macOS (Apple silicon)",
-    "macOS版をダウンロード（Apple Silicon）",
-    mockReleaseData.platforms.macOSAppleSilicon?.browser_download_url ?? "",
+    "Download for macOS",
+    "macOS版をダウンロード",
     false,
   ],
   [
@@ -432,7 +428,6 @@ for (const [os, userAgent, shownOs, label, jaLabel, href, winget] of [
     "Linux",
     "Download for Linux",
     "Linux版をダウンロード",
-    "#download",
     false,
   ],
   [
@@ -441,7 +436,6 @@ for (const [os, userAgent, shownOs, label, jaLabel, href, winget] of [
     "Windows",
     "Download for Windows",
     "Windows版をダウンロード",
-    mockReleaseData.platforms.windows?.browser_download_url ?? "",
     true,
   ],
 ] as const) {
@@ -453,14 +447,12 @@ for (const [os, userAgent, shownOs, label, jaLabel, href, winget] of [
       await expect(page.locator("#hero [data-os-download]")).toHaveText(label);
       await expect(page.locator("#hero [data-os-download]")).toHaveAttribute(
         "href",
-        href,
+        "/download/",
       );
       const others = page.locator("#hero [data-os-others]");
       await expect(others).toHaveAttribute("href", "#download");
       await expect(others).toHaveText(/\S/);
-      if (shownOs !== "macOS") {
-        await expect(others).not.toContainText(shownOs);
-      }
+      await expect(others).not.toContainText(shownOs);
 
       await page.goto("/ja/");
       await expect(page.locator("#hero [data-os-download]")).toHaveText(
@@ -480,7 +472,7 @@ for (const [os, userAgent, shownOs, label, jaLabel, href, winget] of [
   });
 }
 
-test("a direct download from the hero is reported at once", async ({
+test("a direct download from the home page is reported at once", async ({
   page,
 }) => {
   await page.goto("/");
@@ -497,10 +489,9 @@ test("a direct download from the hero is reported at once", async ({
     };
 
     const link = document.querySelector<HTMLAnchorElement>(
-      "#hero [data-os-download]",
+      '#download a[data-direct-download="windows"]',
     );
-    if (!link) throw new Error("Hero download link not found");
-    link.dataset.directDownload = "windows";
+    if (!link) throw new Error("Windows installer link not found");
     link.addEventListener("click", (event) => event.preventDefault(), {
       once: true,
     });
@@ -513,7 +504,7 @@ test("a direct download from the hero is reported at once", async ({
     "event",
     "landing_download_click",
     {
-      cta_location: "hero",
+      cta_location: "download_section",
       page_language: "en",
       download_target: "windows",
       transport_type: "beacon",

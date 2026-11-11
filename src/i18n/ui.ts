@@ -144,7 +144,7 @@ export const ui = {
     "seo.home.feature6": "Open-source software licensed under GPL-3.0-or-later",
     "seo.home.feature7": "Windows, macOS, and Linux support",
     "hero.download": "Download for Windows",
-    "hero.downloadMac": "Download for macOS (Apple silicon)",
+    "hero.downloadMac": "Download for macOS",
     "hero.downloadLinux": "Download for Linux",
     "hero.facts.version": "Version",
     "hero.facts.platforms": "Platforms",
@@ -172,8 +172,7 @@ export const ui = {
     "hero.description":
       "A hardware monitor that saves CPU, GPU, and memory readings every minute",
     "hero.otherPlatforms": "Also available for macOS and Linux",
-    "hero.otherPlatformsMac":
-      "Also available for Intel Macs, Windows, and Linux",
+    "hero.otherPlatformsMac": "Also available for Windows and Linux",
     "hero.otherPlatformsLinux": "Also available for Windows and macOS",
     "hero.winget": "Also available through Winget",
     "hero.tabsLabel": "Switch screens",
@@ -814,7 +813,7 @@ export const ui = {
       "GPL-3.0-or-laterライセンスのオープンソースソフトウェア",
     "seo.home.feature7": "Windows、macOS、Linux対応",
     "hero.download": "Windows版をダウンロード",
-    "hero.downloadMac": "macOS版をダウンロード（Apple Silicon）",
+    "hero.downloadMac": "macOS版をダウンロード",
     "hero.downloadLinux": "Linux版をダウンロード",
     "hero.facts.version": "バージョン",
     "hero.facts.platforms": "対応OS",
@@ -842,7 +841,7 @@ export const ui = {
     "hero.description":
       "CPU・GPU・メモリを1分ごとに保存するハードウェアモニター",
     "hero.otherPlatforms": "macOS・Linux版もあります",
-    "hero.otherPlatformsMac": "Intel Mac・Windows・Linux版もあります",
+    "hero.otherPlatformsMac": "Windows・Linux版もあります",
     "hero.otherPlatformsLinux": "Windows・macOS版もあります",
     "hero.winget": "Wingetでも導入できます",
     "hero.tabsLabel": "画面を切り替える",
