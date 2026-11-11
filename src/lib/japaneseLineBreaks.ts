@@ -5,6 +5,8 @@ const japaneseTextPattern = /[ぁ-んァ-ヶ一-龠々]/u;
 const zeroWidthSpace = "\u200B";
 
 const clausePunctuation = /[、。]/u;
+// Set phrases that BudouX splits but that read as one unit.
+const keepTogether = ["よくある質問"];
 // Opening brackets keep what follows them on the same line.
 const noBreakAfter = /[（「『【〔(]/u;
 // A boundary never falls inside a Latin word or a number.
@@ -41,6 +43,15 @@ export function japanesePhraseBoundaries(text: string): Set<number> {
       (latin.test(text[index - 1]) && latin.test(text[index]))
     ) {
       boundaries.delete(index);
+    }
+  }
+  for (const phrase of keepTogether) {
+    let start = text.indexOf(phrase);
+    while (start !== -1) {
+      for (let index = start + 1; index < start + phrase.length; index += 1) {
+        boundaries.delete(index);
+      }
+      start = text.indexOf(phrase, start + phrase.length);
     }
   }
   boundaries.delete(0);

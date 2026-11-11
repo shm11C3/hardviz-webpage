@@ -214,7 +214,7 @@ export const ui = {
     "notice.cond2.value": "The latest 7 recorded days within the past 30 days",
     "matrix.title": "Support by OS",
     "matrix.lead":
-      "Windows has the widest coverage. On macOS and Linux, some sensors are not available yet. A dash means the reading is not available on that OS.",
+      "Windows has the widest coverage. On macOS and Linux, some sensors are not available yet.",
     "matrix.caption": "Feature availability by operating system",
     "matrix.col.feature": "Feature",
     "matrix.row1.feature": "CPU and memory usage, processes",
@@ -874,7 +874,7 @@ export const ui = {
     "notice.cond2.value": "過去30日以内で、記録のある直近7日分",
     "matrix.title": "OS別の対応状況",
     "matrix.lead":
-      "対応範囲が最も広いのはWindowsです。macOSとLinuxでは、まだ取得できないセンサーがあります。「—」は、そのOSでは取得できないことを示します。",
+      "対応範囲が最も広いのはWindowsです。macOSとLinuxでは、まだ取得できないセンサーがあります。",
     "matrix.caption": "OS別の対応状況",
     "matrix.col.feature": "項目",
     "matrix.row1.feature": "CPU・メモリ使用率、プロセス",
