@@ -83,10 +83,10 @@
     --live: #0b7d7d;
     --record: #c2244c;
     --notice: #8a5a00;
-    --wall-1: rgb(124 102 232 / 0.14);
-    --wall-2: rgb(60 180 195 / 0.12);
-    --wall-3: rgb(236 120 165 / 0.1);
-    --glow: rgb(92 64 205 / 0.14);
+    --wall-1: rgb(124 102 232 / 0.19);
+    --wall-2: rgb(60 180 195 / 0.16);
+    --wall-3: rgb(236 120 165 / 0.14);
+    --glow: rgb(92 64 205 / 0.17);
     /* Background of the light-theme application screenshots */
     --stage: #e4e4e7;
     color-scheme: light;
@@ -110,10 +110,10 @@
     --live: #4bc0c0;
     --record: #ff6384;
     --notice: #ffce56;
-    --wall-1: rgb(92 64 205 / 0.24);
-    --wall-2: rgb(28 150 165 / 0.16);
-    --wall-3: rgb(200 62 124 / 0.13);
-    --glow: rgb(92 64 205 / 0.28);
+    --wall-1: rgb(92 64 205 / 0.32);
+    --wall-2: rgb(28 150 165 / 0.21);
+    --wall-3: rgb(200 62 124 / 0.175);
+    --glow: rgb(92 64 205 / 0.34);
     /* Background of the dark-theme application screenshots */
     --stage: #101828;
     color-scheme: dark;
