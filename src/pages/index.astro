@@ -20,6 +20,7 @@ import {
 import Layout from "../layouts/Layout.astro";
 import { githubAllReleasesUrl, githubLatestReleaseUrl } from "../lib/github";
 import { getHomeReleaseNotesDetails } from "../lib/homeReleaseNotes";
+import { addJapaneseLineBreaks } from "../lib/japaneseLineBreaks";
 import { getLatestReleaseDetails } from "../lib/latestRelease";
 import { createPlatformDownloads } from "../lib/platformDownloads";
 import { organizationRef, personRef } from "../lib/structuredData";
@@ -34,10 +35,21 @@ const latestReleaseDetails = await getLatestReleaseDetails({
   lang,
   publishedAt: release.published_at,
 });
-const homeReleaseNotesDetails = await getHomeReleaseNotesDetails({
+const selectedReleaseNotes = await getHomeReleaseNotesDetails({
   lang,
   latestReleaseDetails,
 });
+// Japanese release notes get phrase boundaries, so a line never breaks in the
+// middle of a word.
+const homeReleaseNotesDetails = {
+  ...selectedReleaseNotes,
+  changesSummary:
+    selectedReleaseNotes.changesSummary &&
+    addJapaneseLineBreaks(lang, selectedReleaseNotes.changesSummary),
+  highlights: selectedReleaseNotes.highlights.map((highlight) =>
+    addJapaneseLineBreaks(lang, highlight),
+  ),
+};
 
 // The download section links straight to the installers.
 const downloads = createPlatformDownloads(release);

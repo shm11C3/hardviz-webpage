@@ -5,6 +5,7 @@ import {
   useTranslations,
 } from "../i18n/utils";
 import { addJapaneseLineBreaks } from "../lib/japaneseLineBreaks";
+import ClauseText from "./ClauseText.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -36,7 +37,7 @@ const cellClass = (value: string) => (value === "—" ? undefined : "yes");
   <div class="shell">
     <div class="section-head">
       <h2 id="platforms-heading" class="section-title">{tf("matrix.title")}</h2>
-      <p class="lead">{tf("matrix.lead")}</p>
+      <p class="lead"><ClauseText lang={lang} text={t("matrix.lead")} /></p>
     </div>
     <div class="panel mt-[clamp(2rem,4vw,3rem)]">
       <div class="table-wrap">

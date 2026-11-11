@@ -337,7 +337,7 @@ const Download = ({
           </div>
           {displayedReleaseDetails.highlights.length ? (
             <ul
-              className="mt-3 max-w-[68ch] list-disc space-y-1.5 pl-5 text-[0.9375rem] text-foreground marker:text-muted-foreground"
+              className="budoux-ja mt-3 list-disc space-y-1.5 pl-5 text-[0.9375rem] text-foreground marker:text-muted-foreground"
               data-release-notes-highlights=""
             >
               {displayedReleaseDetails.highlights.map((highlight) => (
@@ -346,7 +346,7 @@ const Download = ({
             </ul>
           ) : displayedReleaseDetails.changesSummary ? (
             <p
-              className="mt-3 max-w-[68ch] text-[0.9375rem] text-foreground"
+              className="budoux-ja mt-3 text-[0.9375rem] text-foreground"
               data-release-notes-summary=""
             >
               {displayedReleaseDetails.changesSummary}

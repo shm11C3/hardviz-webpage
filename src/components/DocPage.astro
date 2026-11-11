@@ -8,6 +8,7 @@ import coolingLightJa from "../assets/releases/cooling-insight-light-ja.png";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import { addJapaneseLineBreaks } from "../lib/japaneseLineBreaks";
 import type { PageEntry } from "../lib/pages";
+import ClauseText from "./ClauseText.astro";
 import ThemedImage from "./ThemedImage.astro";
 
 interface Props {
@@ -41,7 +42,7 @@ const basis = t("doc.basedOn")
     <header>
       <h1 class="doc-title">{addJapaneseLineBreaks(lang, entry.data.title)}</h1>
       <p class="lead doc-lead mt-5">
-        {addJapaneseLineBreaks(lang, entry.data.lead)}
+        <ClauseText lang={lang} text={entry.data.lead} />
       </p>
       <p class="mt-5"><span class="badge whitespace-normal">{basis}</span></p>
     </header>
@@ -132,6 +133,7 @@ const basis = t("doc.basedOn")
 }
 /* The lead's lines are evened out, so the last line is not a stray word. */
 .doc-lead {
+  max-width: 46em;
   text-wrap: balance;
 }
 </style>

@@ -7,6 +7,7 @@ import {
 } from "../i18n/utils";
 import { githubRepoUrl } from "../lib/github";
 import { addJapaneseLineBreaks } from "../lib/japaneseLineBreaks";
+import ClauseText from "./ClauseText.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -27,7 +28,7 @@ const discussions = `${githubRepoUrl()}/discussions`;
       <h2 id="feedback-heading" class="section-title">
         {tf("feedback.title")}
       </h2>
-      <p class="lead">{tf("feedback.lead")}</p>
+      <p class="lead"><ClauseText lang={lang} text={t("feedback.lead")} /></p>
     </div>
     <div class="mt-[clamp(2rem,4vw,3rem)] grid gap-5 md:grid-cols-2">
       <div class="panel flex flex-col">

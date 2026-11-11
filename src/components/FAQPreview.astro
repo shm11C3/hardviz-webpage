@@ -5,6 +5,7 @@ import {
   useTranslations,
 } from "../i18n/utils";
 import { addJapaneseLineBreaks } from "../lib/japaneseLineBreaks";
+import ClauseText from "./ClauseText.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -57,7 +58,7 @@ const faqJsonLd = {
   <div class="shell">
     <div class="section-head">
       <h2 id="faq-heading" class="section-title">{tf("faq.title")}</h2>
-      <p class="lead">{tf("faq.description")}</p>
+      <p class="lead"><ClauseText lang={lang} text={t("faq.description")} /></p>
     </div>
     <div class="mx-auto mt-[clamp(2rem,4vw,3rem)] max-w-3xl">
       <div class="min-w-0 text-center">

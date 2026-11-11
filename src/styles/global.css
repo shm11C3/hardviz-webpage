@@ -659,6 +659,27 @@ pre.astro-code {
   overflow-wrap: anywhere;
 }
 
+/* Lead paragraphs (see ClauseText.astro): the marked boundaries decide where
+   the text breaks, not the browser's own phrase detection. */
+.lead:has(wbr) {
+  word-break: keep-all;
+}
+
+/* Where a line is long enough to hold a clause, a clause stays on one line,
+   so Japanese text breaks only after 、 and 。. On a narrow screen it may
+   also break between phrases. */
+@media (min-width: 48rem) {
+  .clause {
+    white-space: nowrap;
+  }
+
+  /* A <wbr> breaks even inside nowrap text, so the ones inside a clause are
+     taken out. */
+  .clause wbr {
+    display: none;
+  }
+}
+
 .budoux-ja :where(pre, pre code) {
   word-break: normal;
   overflow-wrap: normal;
