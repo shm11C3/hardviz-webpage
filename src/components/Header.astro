@@ -55,12 +55,12 @@ const navLinks = [
           loading="eager"
         />
         <span
-          class="font-bold text-[0.9375rem] text-foreground sm:text-[1.0625rem]"
+          class="font-bold text-[0.8125rem] text-foreground min-[360px]:text-[0.9375rem] sm:text-[1.0625rem]"
           >HardwareVisualizer</span
         >
       </a>
 
-      <div class="flex items-center gap-1.5">
+      <div class="flex items-center gap-0 min-[360px]:gap-1.5">
         <nav
           class="mr-2 hidden items-center lg:flex"
           aria-label={t("nav.primaryLabel")}
@@ -166,6 +166,13 @@ const navLinks = [
   -webkit-backdrop-filter: blur(22px) saturate(1.35);
   backdrop-filter: blur(22px) saturate(1.35);
   pointer-events: auto;
+}
+/* On the narrowest phones the bar keeps every control by tightening up. */
+@media (max-width: 359px) {
+  .site-bar {
+    gap: 0.25rem;
+    padding-inline: 0.75rem 0.25rem;
+  }
 }
 .site-nav-link {
   padding: 0.3rem 0.8rem;

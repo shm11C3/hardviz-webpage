@@ -189,9 +189,13 @@ const Download = ({
                         {translations.button}
                       </a>
                     ) : (
-                      <div className="btn btn-sm btn-outline shrink-0 opacity-60">
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-outline shrink-0 cursor-not-allowed opacity-60"
+                        disabled
+                      >
                         {translations.button}
-                      </div>
+                      </button>
                     )}
                   </div>
                   {checksumLabels && version.url ? (

@@ -200,16 +200,18 @@ const facts = [
           aria-labelledby={`screen-tab-${initial.key}`}
           class="screen"
           data-screenshot={initial.key}
-        ></div>
-        <noscript>
-          <Image
-            src={initial.light}
-            alt={initial.alt}
-            class="block h-auto w-full rounded-2xl"
-            widths={imageWidths}
-            sizes={imageSizes}
-          />
-        </noscript>
+        >
+          <!-- Without JavaScript the frame shows the first screen. The script
+               below replaces this with the image for the active theme. -->
+          <noscript>
+            <Image
+              src={initial.light}
+              alt={initial.alt}
+              widths={imageWidths}
+              sizes={imageSizes}
+            />
+          </noscript>
+        </div>
       </div>
 
       {screens.map((screen, index) => (
@@ -403,14 +405,17 @@ const facts = [
 }
 .hero-winget code {
   display: inline-block;
+  max-width: calc(100% - 0.5rem);
   margin: 0.4rem 0 0 0.5rem;
   padding: 0.2rem 0.8rem;
   border: 1px solid var(--border);
-  border-radius: 9999px;
+  border-radius: 1rem;
   background: var(--card);
   color: var(--foreground);
   font-family: var(--font-mono);
-  white-space: nowrap;
+  /* One line where it fits; on a very narrow screen it wraps instead of
+     running past the edge. */
+  overflow-wrap: anywhere;
 }
 
 /* The application screen, in a translucent frame of its own. */
@@ -422,6 +427,7 @@ const facts = [
 }
 .window-bar {
   display: flex;
+  min-width: 0;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem;
@@ -435,9 +441,13 @@ const facts = [
 }
 .seg {
   display: inline-flex;
+  max-width: 100%;
   padding: 0.22rem;
   border-radius: 9999px;
   background: var(--muted);
+  /* The three tabs scroll sideways if a very narrow screen cannot hold them. */
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 .seg button {
   padding: 0.4rem 0.7rem;
