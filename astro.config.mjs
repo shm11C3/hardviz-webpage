@@ -163,20 +163,25 @@ export default defineConfig({
     sitemapIndexLastmod(),
   ],
   output: "static",
+  // Noto Sans JP for both languages, so the two share one typeface. Every
+  // page loads its Latin subset; Japanese pages add the Japanese glyphs, which
+  // Google Fonts splits into unicode-range slices so a page fetches only the
+  // slices it uses. The files are downloaded at build time and self-hosted.
   fonts: [
     {
       provider: fontProviders.fontsource(),
-      name: "Geist",
-      cssVariable: "--font-geist",
-      weights: [400, 500, 600, 700, 800],
+      name: "Noto Sans JP",
+      cssVariable: "--font-noto",
+      weights: [400, 500, 700],
       styles: ["normal"],
       subsets: ["latin"],
     },
     {
-      provider: fontProviders.fontsource(),
+      provider: fontProviders.google(),
       name: "Noto Sans JP",
-      cssVariable: "--font-noto-sans-jp",
-      weights: [400, 500, 700],
+      cssVariable: "--font-noto-jp",
+      // One variable file per slice covers every weight in this range.
+      weights: ["400 700"],
       styles: ["normal"],
       subsets: ["japanese"],
     },

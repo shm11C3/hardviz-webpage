@@ -1,0 +1,94 @@
+---
+lang: en
+page: cooling-insight
+title: "Cooling Insight"
+metaTitle: "Cooling Insight: Compare CPU Temperature by Load Over Months | HardwareVisualizer"
+metaDescription: "Cooling Insight compares CPU temperature with your PC's own baseline under similar load, with power, fan speed, and room temperature on one timeline, for up to a year. Windows only."
+lead: "A CPU that is hotter today may simply be working harder, or the room may be warmer. Cooling Insight compares CPU temperature with your PC's own baseline under similar load, over periods of up to a year."
+basedOn: "1.11.3"
+updated: 2026-11-11
+---
+
+## What it answers
+
+- **Was it warmer at a similar load?** Readings are grouped by CPU load, so idle is compared with idle and heavy work with heavy work.
+- **What else changed at the same time?** CPU load, package power, fan speed, and room temperature sit on the same timeline as CPU temperature.
+- **Has it stayed that way?** A single hot day is not reported as a change. A rise has to hold for several days.
+
+Cooling Insight is part of the **Insights** screen in the Windows version of HardwareVisualizer.
+
+## How the comparison works
+
+**1. A baseline is fixed from your own PC.** The baseline is taken from the first 7 days that each contain at least 30 minutes of idle readings. Until then, the app shows "Establishing baseline" with the number of days collected so far.
+
+**2. Recent days are compared with it.** The recent window is the latest 7 recorded days within the past 30 days. Days when the PC was off do not count.
+
+**3. Each load band is compared separately.**
+
+<div class="table-scroll">
+
+| Load band | CPU usage |
+| --- | --- |
+| Idle | under 10% |
+| Low | 10% to under 30% |
+| Mid | 30% to under 60% |
+| High | 60% and over |
+
+</div>
+
+**4. The result is stated plainly.** The app reports one of the following:
+
+- no sustained rise above the baseline;
+- idle temperature has been above the baseline for a number of days, when the rise is 5 °C or more for 3 days in a row;
+- idle temperature has been substantially higher than the baseline, when the rise is 10 °C or more;
+- not comparable, when recent idle readings are too few.
+
+When a band does not have enough readings, it is shown as "Not enough samples to compare" instead of being estimated.
+
+## The views
+
+- **Thermal Timeline.** CPU temperature as an average with its minimum–maximum range and the baseline, above lanes for CPU load, CPU package power, fan speed, and ambient temperature. Choose 24 hours, 7 days, 30 days, 90 days, or 1 year. The 90-day and 1-year views are built from daily summaries.
+- **Load-Band Comparison.** Baseline and recent temperature side by side for each load band, both as CPU temperature and as temperature above ambient.
+- **What moved with it.** For one load band, whether package power, fan speed, the share of time in that band, and ambient temperature moved along with the temperature.
+- **Load × Temperature Explorer.** Each dot is one recorded hour: its average CPU load against its average CPU temperature, with a median for each band.
+- **Data State.** How many minutes of readings each band holds for the baseline and recent windows, and which temperature and ambient sources were used.
+
+## Room temperature
+
+A warmer room raises CPU temperature without anything being wrong with the cooling. With a SwitchBot Meter or Meter Plus nearby, HardwareVisualizer records room temperature over Bluetooth and adds two things:
+
+- an ambient temperature lane on the timeline;
+- a second comparison of how far the CPU sits above room temperature, with its own baseline.
+
+No SwitchBot account, internet connection, or pairing is needed. Turn it on under **Settings → Insights**.
+
+## What you need
+
+<div class="table-scroll">
+
+| Requirement | Details |
+| --- | --- |
+| Operating system | Windows 10 or 11 |
+| CPU temperature | Through PawnIO with administrator access, or through ACPI thermal zones |
+| Recording | Insights recording turned on, which is the default |
+| Time | 7 days with idle readings before the first comparison |
+| Power lane (optional) | CPU package power through PawnIO |
+| Fan lane (optional) | A supported Super I/O chip, through PawnIO |
+| Ambient lane (optional) | A SwitchBot Meter or Meter Plus |
+
+</div>
+
+When power or fan readings are not supported on your hardware, or have not been collected for the period, those lanes are left out and the app says so. See the [setup guide](/guide/#pawnio) for PawnIO.
+
+## What it does not do
+
+- **It does not diagnose a fault.** The app states this alongside the result: "Room temperature, power plan, BIOS settings, or software changes can produce the same pattern. This alone cannot confirm component wear."
+- **It suggests where to look, not what is broken.** When a sustained rise appears, the app lists things worth checking: dust in intake vents, filters, or the heatsink; case airflow; recent fan or fan-curve changes; and thermal paste and cooler condition after extended use. It labels these as "observation-based points to check, not a fault diagnosis."
+- **It does not control fans** or change any cooling setting.
+- **It covers CPU temperature.** GPU cooling is not part of the comparison.
+
+## Read more
+
+- [The v1.11.0 release article](/releases/cooling-insight/), which introduced Cooling Insight.
+- [Setup guide](/guide/) for PawnIO and room temperature.
+- [Download HardwareVisualizer](/download/).

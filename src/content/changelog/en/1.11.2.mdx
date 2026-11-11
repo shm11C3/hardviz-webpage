@@ -1,0 +1,44 @@
+---
+lang: en
+version: 1.11.2
+date: 2026-10-12
+title: "v1.11.2"
+summary: "Reports failed reads and failed actions inside the app instead of in system dialogs, refines how Cooling Insight chooses its comparison windows, and refreshes outdated PawnIO modules when the MSI is upgraded."
+highlights:
+  - "Failed reads and failed actions are reported in place instead of in OS dialogs"
+  - "Cooling Insight compares recorded days and says why a load band is withheld"
+  - "MSI upgrades refresh outdated PawnIO module files"
+tags:
+  - Release
+  - Bug Fixes
+  - Cooling Insight
+  - PawnIO
+  - Windows
+---
+
+## What's Changed
+
+v1.11.2 is a fixes release following v1.11.1. It changes how errors are reported in the app and refines the comparison windows used by Cooling Insight.
+
+## Error reporting
+
+- A failed read is now reported in the place where the data would appear, instead of in an operating-system dialog.
+- A failed action is now reported under the control that started it, instead of in an operating-system dialog.
+
+## Cooling Insight
+
+- The recent window is anchored to recorded days instead of the last 7 calendar days.
+- A load band's baseline window is extended until it holds enough sample minutes.
+- The recent ambient-adjusted window is measured against its own sensor's baseline.
+- When a load band is withheld, the app says why and how many minutes it still needs.
+
+## Windows and setup
+
+- MSI upgrades now refresh outdated PawnIO module files.
+
+## Maintenance
+
+- Updated Tauri to 2.12.1.
+- Reduced unnecessary re-rendering of live metrics.
+
+See the [full v1.11.2 release notes on GitHub](https://github.com/shm11C3/HardwareVisualizer/releases/tag/v1.11.2) for every change.

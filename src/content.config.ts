@@ -52,7 +52,29 @@ const privacy = defineCollection({
   }),
 });
 
+/**
+ * Long-form pages written as prose: the guide, the security and data page,
+ * the Cooling Insight explainer, and the comparison. `basedOn` names the
+ * application release the page describes.
+ */
+const pages = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "src/content/pages" }),
+  schema: z.object({
+    lang: z.enum(["en", "ja"]),
+    // Named `page`, not `slug`: the loader reserves `slug` for the entry id,
+    // which would make the two languages collide.
+    page: z.enum(["guide", "security", "cooling-insight", "compare"]),
+    title: z.string().min(1),
+    metaTitle: z.string().min(1),
+    metaDescription: z.string().min(1),
+    lead: z.string().min(1),
+    basedOn: z.string().min(1),
+    updated: z.coerce.date(),
+  }),
+});
+
 export const collections = {
+  pages,
   changelog,
   downloadGuide,
   about,

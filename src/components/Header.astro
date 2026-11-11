@@ -1,11 +1,13 @@
 ---
 import { Image } from "astro:assets";
+import { ArrowDownToLine, Menu } from "lucide-react";
 import logo from "../assets/app-icon.png";
 import {
   getLangFromUrl,
   useTranslatedPath,
   useTranslations,
 } from "../i18n/utils";
+import { githubRepoUrl } from "../lib/github";
 import LanguagePicker from "./LanguagePicker.astro";
 import ThemeIcon from "./ThemeIcon.astro";
 
@@ -14,68 +16,188 @@ const t = useTranslations(lang);
 const { translatePath } = useTranslatedPath(lang);
 
 const pathname = Astro.url.pathname;
-const downloadHref = translatePath("/download");
-function isCurrentPage(href: string): boolean {
-  const target = new URL(href, Astro.url).pathname;
-  return pathname === target || pathname === `${target}/`;
+const normalize = (path: string) => (path.endsWith("/") ? path : `${path}/`);
+function isCurrent(href: string, section = false): boolean {
+  const target = normalize(new URL(href, Astro.url).pathname);
+  const current = normalize(pathname);
+  return section ? current.startsWith(target) : current === target;
 }
+
+const downloadHref = translatePath("/download");
+const navLinks = [
+  { href: translatePath("/cooling-insight"), label: t("nav.coolingInsight") },
+  { href: translatePath("/guide"), label: t("nav.guide") },
+  { href: translatePath("/specs"), label: t("nav.compatibility") },
+  {
+    href: translatePath("/changelog"),
+    label: t("nav.changelog"),
+    section: true,
+  },
+  { href: translatePath("/faq"), label: t("nav.faq") },
+].map((link) => ({ ...link, current: isCurrent(link.href, link.section) }));
 ---
 
-<header
-  class="fixed top-0 right-0 left-0 z-50 bg-gradient-to-b from-white/90 via-white/60 to-white/0 shadow-sm backdrop-blur-sm dark:from-slate-900/90 dark:via-slate-900/60 dark:to-slate-900/0"
->
-  <div
-    class="container mx-auto px-4 flex justify-between items-center h-16 md:h-20"
-  >
-    <a
-      href={translatePath("/")}
-      class="flex items-center gap-2"
-      data-astro-prefetch
-    >
-      <Image
-        src={logo}
-        alt="Logo"
-        width={32}
-        height={32}
-        class="h-8 w-8"
-        loading="eager"
-      />
-      <span class="font-bold text-xl text-slate-900 dark:text-white"
-        >HardwareVisualizer</span
-      >
-    </a>
-
-    <nav class="flex gap-6 items-center">
+<header class="site-header">
+  <div class="shell">
+    <div class="site-bar">
       <a
-        href={downloadHref}
-        class="font-medium transition-colors hover:text-cyan-500 text-slate-600 dark:text-slate-300 hidden md:block"
+        href={translatePath("/")}
+        class="flex shrink-0 items-center gap-2.5"
         data-astro-prefetch
-        aria-current={isCurrentPage(downloadHref) ? "page" : undefined}
-        >{t("nav.Download")}</a
       >
-      <a
-        href={translatePath("/faq")}
-        class="font-medium transition-colors hover:text-cyan-500 text-slate-600 dark:text-slate-300 hidden md:block"
-        data-astro-prefetch
-        aria-current={isCurrentPage(translatePath("/faq")) ? "page" : undefined}
-        >{t("nav.faq")}</a
-      >
-      <a
-        href="https://github.com/shm11C3/HardwareVisualizer"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="hidden items-center transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-500 md:flex"
-      >
-        <img
-          src="https://img.shields.io/github/stars/shm11C3/HardwareVisualizer?style=social"
-          alt={t("nav.githubStarsBadgeAlt")}
-          class="h-5 w-auto"
-          loading="lazy"
-          decoding="async"
+        <Image
+          src={logo}
+          alt=""
+          width={28}
+          height={28}
+          class="h-7 w-7"
+          loading="eager"
+        />
+        <span
+          class="font-bold text-[0.9375rem] text-foreground sm:text-[1.0625rem]"
+          >HardwareVisualizer</span
         >
       </a>
-      <LanguagePicker />
-      <ThemeIcon id="themeIconDesktop" />
-    </nav>
+
+      <div class="flex items-center gap-1.5">
+        <nav
+          class="mr-2 hidden items-center lg:flex"
+          aria-label={t("nav.primaryLabel")}
+          data-site-nav
+        >
+          {navLinks.map((link) => (
+            <a
+              href={link.href}
+              class="site-nav-link"
+              data-astro-prefetch
+              aria-current={link.current ? "page" : undefined}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+        <a
+          href={githubRepoUrl()}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mx-1 hidden items-center xl:flex"
+        >
+          <img
+            src="https://img.shields.io/github/stars/shm11C3/HardwareVisualizer?style=flat-square&label=GitHub&labelColor=0a0f22&color=28304a"
+            alt={t("nav.githubStarsBadgeAlt")}
+            class="h-5 w-auto rounded-full"
+            height="20"
+            loading="lazy"
+            decoding="async"
+          >
+        </a>
+        <LanguagePicker />
+        <ThemeIcon />
+        <a
+          href={downloadHref}
+          class="btn btn-sm btn-primary ml-1 hidden sm:inline-flex"
+          data-astro-prefetch
+          data-nav-download
+          aria-current={isCurrent(downloadHref) ? "page" : undefined}
+        >
+          <ArrowDownToLine className="h-4 w-4" aria-hidden="true" />
+          {t("nav.Download")}
+        </a>
+
+        <details class="site-menu relative lg:hidden">
+          <summary
+            class="flex h-9 w-9 cursor-pointer list-none items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground"
+            aria-label={t("nav.menu")}
+          >
+            <Menu className="h-5 w-5" aria-hidden="true" />
+          </summary>
+          <nav
+            class="absolute top-full right-0 mt-4 w-56 rounded-3xl border border-border bg-popover p-2 text-popover-foreground shadow-xl"
+            aria-label={t("nav.menu")}
+          >
+            <a
+              href={downloadHref}
+              class="site-menu-link sm:hidden"
+              data-astro-prefetch
+            >
+              {t("nav.Download")}
+            </a>
+            {navLinks.map((link) => (
+              <a
+                href={link.href}
+                class="site-menu-link"
+                data-astro-prefetch
+                aria-current={link.current ? "page" : undefined}
+              >
+                {link.label}
+              </a>
+            ))}
+            <a
+              href={githubRepoUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="site-menu-link"
+            >
+              GitHub
+            </a>
+          </nav>
+        </details>
+      </div>
+    </div>
   </div>
 </header>
+
+<style>
+/* The bar floats over the wallpaper as one translucent pill. */
+.site-header {
+  position: fixed;
+  top: 0.75rem;
+  right: 0;
+  left: 0;
+  z-index: 50;
+  pointer-events: none;
+}
+.site-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  height: 3.5rem;
+  padding-inline: 1rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  background: var(--card);
+  -webkit-backdrop-filter: blur(22px) saturate(1.35);
+  backdrop-filter: blur(22px) saturate(1.35);
+  pointer-events: auto;
+}
+.site-nav-link {
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  color: var(--muted-foreground);
+  font-size: 0.9375rem;
+  white-space: nowrap;
+  transition: color 150ms;
+}
+.site-nav-link:hover {
+  color: var(--foreground);
+}
+.site-nav-link[aria-current="page"] {
+  background: var(--muted);
+  color: var(--foreground);
+}
+.site-menu > summary::-webkit-details-marker {
+  display: none;
+}
+.site-menu-link {
+  display: block;
+  padding: 0.5rem 0.9rem;
+  border-radius: 9999px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+.site-menu-link:hover,
+.site-menu-link[aria-current="page"] {
+  background: var(--muted);
+}
+</style>

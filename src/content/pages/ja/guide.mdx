@@ -1,0 +1,140 @@
+---
+lang: ja
+page: guide
+title: "導入ガイド"
+metaTitle: "導入ガイド：インストール、センサー、履歴の設定 | HardwareVisualizer"
+metaDescription: "HardwareVisualizerのインストール方法、WindowsでCPU温度やマザーボードセンサーを有効にするPawnIOの導入、smartctlの準備、履歴の保存期間の設定をまとめました。"
+lead: "インストールから、センサーの有効化、履歴の記録まで。HardwareVisualizerを使い始めるときに必要なことと、任意のコンポーネントで何が増えるのかをまとめました。"
+basedOn: "1.11.3"
+updated: 2026-11-11
+---
+
+## インストール
+
+[ダウンロードページ](/ja/download/)から、お使いのOS向けのインストーラーを入手してください。Windows・macOS・Linuxそれぞれの手順は[インストール方法](/ja/download/#installation)にあります。実行前にファイルを確かめたい場合は[インストーラーの検証](/ja/verification/)をご覧ください。
+
+Windowsでは、Windowsパッケージマネージャーでもインストールできます。
+
+```powershell
+winget install shm11C3.HardwareVisualizer
+```
+
+公式の配布元は、hardviz.com、GitHub Releases、Wingetだけです。詳しくは[安全性とデータ](/ja/security/#official-sources)をご覧ください。
+
+## 初回起動
+
+1. サイドメニューから**設定**を開きます。
+2. テーマと言語を選びます。アプリは英語・日本語・ロシア語に対応しています。
+3. 必要に応じて壁紙（背景画像）を設定します。画像はお使いのデバイスにだけ保存されます。
+4. Windowsでは、必要に応じて**設定 → 高度な設定**からPawnIOを導入します。下の[PawnIO](#pawnio)をご覧ください。
+
+基本的なモニタリングに管理者権限は要りません。CPU・メモリの使用率、プロセス、GPU使用率が該当します。
+
+## 追加の準備が必要なもの
+
+<div class="table-scroll">
+
+| 項目 | Windows | macOS | Linux |
+| --- | --- | --- | --- |
+| CPU温度 | PawnIOと管理者権限、またはACPIサーマルゾーン | 非対応 | 非対応 |
+| CPUパッケージ電力 | PawnIOと管理者権限 | Apple Siliconで対応（準備不要） | 非対応 |
+| マザーボードの温度とファン | PawnIO、管理者権限、対応するSuper I/Oチップ | 非対応 | 非対応 |
+| ストレージヘルス（SMART） | 準備不要 | smartmontools | smartmontools |
+| メモリの詳細情報 | 準備不要 | 準備不要 | polkitでの認証 |
+| IntelのGPU使用率 | 準備不要 | — | `intel_gpu_top` |
+| 室温 | SwitchBot 温湿度計とBluetooth | 非対応 | 非対応 |
+
+</div>
+
+対応状況の全体は、[トップページの対応表](/ja/#platforms)と[対応状況の詳細](/ja/specs/)にあります。
+
+## PawnIO
+
+[PawnIO](https://pawnio.eu/)は、HardwareVisualizerとは別のWindows用ドライバーです。HardwareVisualizerは、次の値を読み取るためだけにPawnIOを使います。
+
+- IntelのCPUパッケージ温度とパッケージ電力
+- AMD Family 17h・Family 19hのパッケージ温度と、AMDのパッケージ電力
+- 対応するSuper I/Oチップでの、マザーボードの温度とファン回転数。対応チップはNuvoton NCT6799Dで、NCT6796DとITE IT8728F（温度のみ）は試験的な対応です
+
+PawnIOがなくても、WindowsがACPIサーマルゾーンとして温度を公開していれば、CPU温度を表示できる場合があります。
+
+### 導入する
+
+方法は2つあります。
+
+- **インストール時に導入する。** `.msi`インストーラーには、PawnIOを導入するオプションがあります。標準で選択されていて、外すこともできます。このオプションは、HardwareVisualizerを既定の場所であるProgram Filesにインストールする場合に表示されます。
+- **アプリから導入する。** **設定 → 高度な設定 → 任意コンポーネントのセットアップ**を開いて、インストールを選びます。`.exe`インストーラーやWingetではPawnIOは導入されないので、その場合はこちらを使います。
+
+どちらの場合も、HardwareVisualizerは次の順で処理します。
+
+1. 固定されたバージョンのPawnIOランタイムのインストーラーと、PawnIO.Modulesのリリースを、それぞれの公式GitHubリリースからダウンロードします。
+2. ダウンロードしたファイルを、アプリに記録されたサイズとSHA-256ハッシュで検証します。一致しなければ破棄します。
+3. Windowsの管理者権限の承認を求めたうえで、ランタイムが未導入であればインストールします。
+4. 不足しているモジュールファイルをコピーします。
+
+完了したらHardwareVisualizerを再起動してください。Windowsから再起動を求められた場合は、先にWindowsを再起動します。
+
+サイレントインストールでは、明示的に指定しない限りPawnIOは導入されません。
+
+```powershell
+msiexec /i HardwareVisualizer_x.x.x_x64_en-US.msi /qn EXTERNAL_COMPONENT_PAWNIO=1
+```
+
+### 管理者権限
+
+PawnIOを通じて読み取るセンサーには、管理者権限が必要です。**設定 → 高度な設定 → 管理者として起動**をオンにしてください。この設定は、`.msi`でProgram Filesにインストールしている場合に使えます。
+
+### 削除する
+
+HardwareVisualizerをアンインストールしても、PawnIOとそのモジュールファイルは削除されません。不要になった場合は、Windowsの「アプリと機能」からPawnIOを削除してください。
+
+PawnIOのランタイムは[github.com/namazso/PawnIO](https://github.com/namazso/PawnIO)、モジュールは[github.com/namazso/PawnIO.Modules](https://github.com/namazso/PawnIO.Modules/releases)で公開されています。
+
+## smartctl
+
+`smartctl`は[smartmontools](https://www.smartmontools.org/)に含まれるツールです。macOSとLinuxでは、ストレージヘルスの情報をこのツールで取得します。Windowsではアプリが直接取得し、`smartctl`は補助的な取得元として使われます。
+
+使うには、お使いのOSにsmartmontoolsをインストールし、`smartctl`に`PATH`が通っていることを確認します。そのうえで**ストレージを再検出**を実行するか、HardwareVisualizerを再起動してください。
+
+ドライブやOSによっては、SMARTの読み取りに高い権限が必要です。Linuxでは、`smartctl`と`intel_gpu_top`は通常root権限を必要とします。次のようにsudoで起動し直すと使えるようになります。
+
+```bash
+sudo hardware-visualizer
+```
+
+## Linuxでの注意点
+
+- メモリの詳細情報を表示するとき、polkitによる認証を求められます（`pkexec dmidecode`）。
+- NVIDIAのGPUは一覧に表示されますが、値の取得にはまだ対応していません。
+- CPU温度、消費電力、マザーボードセンサーは、Linuxではまだ取得できません。
+
+## 履歴
+
+記録は標準でオンになっています。アプリは1分ごとに、その1分間に取得した値の平均・最大・最小を保存します。
+
+- **保存先。** アプリのデータフォルダー内のデータベースファイルです。Windowsでは`%APPDATA%\HardwareVisualizer`、macOSでは`~/Library/Application Support/HardwareVisualizer`、Linuxでは`~/.config/HardwareVisualizer`です。
+- **保存期間。** 標準で365日です。**設定 → インサイト**で変更できます。
+- **ストレージヘルス。** ドライブごとに1日1件を記録し、標準で3年間保存します。
+- **記録を止める。** **設定 → インサイト**に、記録の停止と開始を切り替えるスイッチがあります。
+
+v1.11.0より前に作成したプロファイルは、**設定 → インサイト**で変換するまで、以前のデータベース（標準30日）を使い続けます。変換すると既存のデータは引き継がれ、保存期間の設定も維持されます。
+
+## 室温
+
+Windowsでは、近くにあるSwitchBot 温湿度計または温湿度計プラスから、Bluetoothで室温と湿度を読み取れます。SwitchBotのアカウント、インターネット接続、ペアリングは不要です。
+
+**設定 → インサイト**でオンにします。標準ではオフです。室温はインサイトの記録と一緒に保存されるため、記録をオンにしておく必要があります。
+
+## トレイと常駐
+
+**設定 → 一般**で、ウィンドウを閉じてもシステムトレイに常駐させる設定と、トレイウィジェットをオンにできます。トレイウィジェットには、CPU使用率とGPU使用率、対応環境ではGPU温度が表示されます。
+
+## 更新
+
+アプリは起動時にGitHub Releasesで新しいバージョンを確認し、見つかった場合は更新を案内します。
+
+## うまくいかないとき
+
+- [FAQ](/ja/faq/)と[対応状況の詳細](/ja/specs/)を確認してください。
+- [GitHubのIssue](https://github.com/shm11C3/HardwareVisualizer/issues)を検索するか、新しく報告してください。
+- [GitHub Discussions](https://github.com/shm11C3/HardwareVisualizer/discussions)で質問するか、[匿名アンケート](/ja/survey/?source=web)をご利用ください。

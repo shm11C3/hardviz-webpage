@@ -14,11 +14,13 @@ const { version } = releaseArticles[currentRelease.slug];
 ---
 
 <aside class="release-announcement">
-  <a
-    href={translatePath(`/releases/${currentRelease.slug}`)}
-    data-release-version={version}
-    >{t(currentRelease.announcementKey)}</a
-  >
+  <div class="shell">
+    <a
+      href={translatePath(`/releases/${currentRelease.slug}`)}
+      data-release-version={version}
+      >{t(currentRelease.announcementKey)}</a
+    >
+  </div>
 </aside>
 <script is:inline>
 // Report clicks on the homepage announcement so the release article's reach can
@@ -37,18 +39,19 @@ document.addEventListener("click", (event) => {
 </script>
 <style>
 .release-announcement {
-  padding: 18px 24px;
+  padding-block: 0.5rem;
   text-align: center;
-  background: #f0f5fa;
-  color: #1768ac;
-  font: 500 0.9rem / 1.8 var(--font-sans);
+  color: var(--muted-foreground);
+  font-size: 0.8125rem;
+  line-height: 1.6;
 }
 a {
   text-decoration: underline;
-  text-underline-offset: 5px;
+  text-decoration-color: var(--input);
+  text-underline-offset: 4px;
+  transition: color 150ms;
 }
-:global(.dark) .release-announcement {
-  background: #192c42;
-  color: #a0cef5;
+a:hover {
+  color: var(--foreground);
 }
 </style>

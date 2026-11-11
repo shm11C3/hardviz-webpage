@@ -4,9 +4,13 @@ import {
   useTranslatedPath,
   useTranslations,
 } from "../i18n/utils";
+import { addJapaneseLineBreaks } from "../lib/japaneseLineBreaks";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+// Japanese copy gets BudouX phrase boundaries so lines break between phrases.
+const tf = (key: Parameters<typeof t>[0]) =>
+  addJapaneseLineBreaks(lang, t(key));
 const { translatePath } = useTranslatedPath(lang);
 
 interface FAQItem {
@@ -45,38 +49,28 @@ const faqJsonLd = {
 };
 ---
 
-<section id="faq" class="py-20 bg-slate-50 dark:bg-slate-800/50">
-  <div class="container mx-auto px-4">
-    <div class="text-center mb-12">
-      <h2
-        class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4"
-      >
-        {t("faq.title")}
-      </h2>
-      <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-        {t("faq.description")}
-      </p>
+<section
+  id="faq"
+  class:list={["section", lang === "ja" && "budoux-ja"]}
+  aria-labelledby="faq-heading"
+>
+  <div class="shell">
+    <div class="section-head">
+      <h2 id="faq-heading" class="section-title">{tf("faq.title")}</h2>
+      <p class="lead">{tf("faq.description")}</p>
     </div>
-
-    <div class="max-w-3xl mx-auto space-y-4">
-      {faqs.map((faq, index) => (
-          <details
-            class="group rounded-lg border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900"
-            id={`faq-${index + 1}`}
-          >
-            <summary class="flex cursor-pointer items-center justify-between p-6 text-left">
-              <span class="flex items-start gap-3">
-                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cyan-100 font-bold text-cyan-600 text-sm dark:bg-cyan-900/50 dark:text-cyan-400">
-                  Q
+    <div class="mx-auto mt-[clamp(2rem,4vw,3rem)] max-w-3xl">
+      <div class="min-w-0 text-center">
+        <div class="panel ruled text-left">
+          {faqs.map((faq, index) => (
+            <details class="faq-item group" id={`faq-${index + 1}`}>
+              <summary>
+                <span class="item-title">
+                  {addJapaneseLineBreaks(lang, faq.question)}
                 </span>
-                <span class="pr-4 font-semibold text-lg text-slate-900 dark:text-white">
-                  {faq.question}
-                </span>
-              </span>
-              <span class="ml-2 shrink-0 text-slate-500 transition-transform duration-200 group-open:rotate-180 dark:text-slate-400">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5"
+                  class="faq-chevron"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -86,48 +80,25 @@ const faqJsonLd = {
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    stroke-width="2"
+                    stroke-width="1.75"
                     d="M19 9l-7 7-7-7"
                   />
                 </svg>
-              </span>
-            </summary>
-            <div class="px-6 pb-6 text-slate-600 dark:text-slate-300">
-              <div class="ml-0 flex items-start gap-3">
-                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-violet-100 font-bold text-sm text-violet-600 dark:bg-violet-900/50 dark:text-violet-400">
-                  A
-                </span>
-                <p class="pt-1">{faq.answer}</p>
+              </summary>
+              <div class="faq-answer">
+                <p>{addJapaneseLineBreaks(lang, faq.answer)}</p>
               </div>
-            </div>
-          </details>
-        ))}
-    </div>
-
-    <div class="text-center mt-8">
-      <a
-        href={translatePath("/faq")}
-        class="inline-flex items-center gap-2 text-slate-700 dark:text-white hover:text-slate-900 dark:hover:text-slate-200 font-medium transition-colors"
-        data-astro-prefetch
-      >
-        {t("faq.viewAll")}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-4 w-4"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          aria-hidden="true"
-          focusable="false"
+            </details>
+          ))}
+        </div>
+        <a
+          href={translatePath("/faq")}
+          class="btn btn-outline mt-6"
+          data-astro-prefetch
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9 5l7 7-7 7"
-          ></path>
-        </svg>
-      </a>
+          {tf("faq.viewAll")}
+        </a>
+      </div>
     </div>
   </div>
 

@@ -1,0 +1,37 @@
+---
+lang: en
+version: 1.11.3
+date: 2026-11-01
+title: "v1.11.3"
+summary: "A maintenance release with dependency security updates, a safer read path for some ITE motherboard chips, and a macOS transparency fix."
+highlights:
+  - "Dependency updates that resolve open Rust security alerts"
+  - "Safer handling of some ITE embedded-controller chips on Windows"
+  - "macOS window opacity follows the Transparent UI setting"
+tags:
+  - Release
+  - Security
+  - Bug Fixes
+  - Windows
+  - macOS
+---
+
+## What's Changed
+
+v1.11.3 is a maintenance release on the 1.11 line. It updates dependencies and fixes two platform-specific issues.
+
+## Security and dependencies
+
+- Updated Rust dependencies to resolve open security alerts.
+- Updated the webpki crates, which removes the distrusted emSign root certificates.
+- Updated tokio to 1.53.3.
+
+## Windows sensors
+
+- On some ITE embedded-controller chips, the app now skips a configuration-mode exit write that has caused errors or hangs on two-chip Gigabyte motherboards.
+
+## macOS
+
+- The native window opacity now matches the Transparent UI setting.
+
+See the [changes between v1.11.2 and v1.11.3 on GitHub](https://github.com/shm11C3/HardwareVisualizer/compare/v1.11.2...v1.11.3) for every change.

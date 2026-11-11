@@ -1,0 +1,120 @@
+---
+lang: ja
+page: security
+title: "安全性とデータ"
+metaTitle: "安全性とデータ：公式の配布元、署名、通信先 | HardwareVisualizer"
+metaDescription: "HardwareVisualizerの公式の配布元、インストーラーの署名状況、アプリが通信する相手、履歴の保存先、脆弱性の報告方法をまとめました。"
+lead: "どこで公式に配布しているか、インストーラーがどう署名されているか、アプリが何と通信するか、データがどこに保存されるか。このページの内容は、ソースコードやリンク先の文書で確かめられます。"
+basedOn: "1.11.3"
+updated: 2026-11-11
+---
+
+<a id="official-sources"></a>
+
+## 公式の配布元
+
+公式に配布・インストールできるのは、次の3つだけです。
+
+- このサイト、[hardviz.com](/ja/download/)
+- [GitHub Releases](https://github.com/shm11C3/HardwareVisualizer/releases)
+- WindowsのWinget：`winget install shm11C3.HardwareVisualizer`
+
+サードパーティのミラー、ダウンロードサイト、ファイル共有リンク、YouTubeの概要欄のリンク、短縮URL、パスワード付きアーカイブは、公式の配布経路ではありません。
+
+### なりすまし
+
+- `HardwareVisualizer_1.3.1.zip`のような名前で、HardwareVisualizerになりすますマルウェアが確認されています。
+- SourceForgeにある「Hardware Visualizer」というプロジェクトは、開発者が関与せずに作成されたものです。そこで公開されているアーカイブが本物か、安全かは確認できません。
+
+ダウンロードの前にドメインを確かめ、実行の前に[インストーラーを検証](/ja/verification/)してください。
+
+## 署名と検証
+
+<div class="table-scroll">
+
+| OS | 署名の状況 | 検証方法 |
+| --- | --- | --- |
+| Windows | 署名あり（v1.9.0以降のインストーラー） | Authenticode、Winget、SHA-256、アテステーション |
+| macOS | 署名・公証済み | Gatekeeper、`codesign`、SHA-256、アテステーション |
+| Linux | パッケージは未署名 | SHA-256、アテステーション |
+| アプリ内アップデーター | 更新用ファイルに署名あり | 更新経路だけが対象 |
+
+</div>
+
+- Windowsの`.exe`と`.msi`のインストーラーは、v1.9.0以降Authenticode署名付きです。それより前のWindows版は未署名の場合があります。
+- SHA-256チェックサムとGitHub Artifact Attestationsは、v1.8.1以降のリリースで公開しています。
+- 正しく署名されたインストーラーでも、発行元やファイルの評価が定まるまでは、WindowsのSmartScreenが警告を表示することがあります。署名の検証とSmartScreenの評価は別のしくみです。
+
+手順は[インストーラーの検証](/ja/verification/)にあります。方針の全文はリポジトリの[コード署名ポリシー](https://github.com/shm11C3/HardwareVisualizer/blob/develop/CODE_SIGNING_POLICY.md)（英語）をご覧ください。
+
+<a id="network"></a>
+
+## アプリの通信先
+
+HardwareVisualizerにはテレメトリーもアカウントもありません。ハードウェアの値や履歴を外部へ送信することはありません。v1.11.3の時点で、アプリ本体が行う通信は次のとおりです。
+
+<div class="table-scroll">
+
+| タイミング | 通信先 | 目的 |
+| --- | --- | --- |
+| 起動時 | GitHub Releases（`github.com`） | 新しいバージョンがあるかを確認します |
+| PawnIOの導入を選んだとき | PawnIOの公式GitHubリリース | 固定されたバージョンのPawnIO 2.2.0のランタイムインストーラーとPawnIO.Modules 0.2.11をダウンロードし、記録済みのサイズとSHA-256ハッシュで検証します |
+| 画面の読み込み時 | Google Fonts（`fonts.googleapis.com`） | アプリのスタイルシートがNoto Sansフォントを読み込みます |
+
+</div>
+
+フォントの読み込みは、アプリのREADMEには記載されていません。フォントをアプリに同梱してこの通信をなくす変更を予定しています。対応したバージョンが公開されたら、このページを更新します。
+
+SwitchBot 温湿度計の読み取りは、インターネットではなくPCのBluetoothを使い、設定でオンにした場合だけ行われます。この一覧はアプリ本体についてのもので、インストーラーの動作は含みません。
+
+## データの保存先
+
+履歴は、アプリのデータフォルダー内のデータベースファイルに保存されます。
+
+- Windows：`%APPDATA%\HardwareVisualizer`
+- macOS：`~/Library/Application Support/HardwareVisualizer`
+- Linux：`~/.config/HardwareVisualizer`
+
+ハードウェアの履歴は標準で365日、ストレージヘルスの記録は標準で3年間保存されます。どちらも**設定 → インサイト**で変更でき、記録そのものを止めることもできます。
+
+アプリからコピーできるハードウェアレポートは、クリップボードに書き込まれるだけです。MACアドレスやIPアドレスなどのネットワーク情報が含まれるので、公開の場に貼り付ける前に内容を確認してください。
+
+## 使用する権限
+
+<div class="table-scroll">
+
+| 対象 | 用途 |
+| --- | --- |
+| WindowsのWMI | メモリ・システム・ストレージの詳細、ACPIサーマルゾーン |
+| WindowsのPDH | GPUエンジンの使用率 |
+| Windowsの管理者権限（PawnIO） | CPUの温度と電力、マザーボードの温度とファン |
+| WindowsのBluetooth | SwitchBot 温湿度計の読み取り（設定でオンにした場合のみ） |
+| Linuxのpolkit（`pkexec`） | `dmidecode`によるメモリの詳細情報 |
+| Linuxのsudo | ストレージヘルス用の`smartctl`、IntelのGPU使用率用の`intel_gpu_top` |
+
+</div>
+
+基本的なモニタリングに管理者権限は要りません。
+
+## センサーは読み取り専用
+
+Windowsの低い層のセンサーは、任意で導入する別のドライバー[PawnIO](https://pawnio.eu/)を通じて読み取ります。導入と削除の方法は[導入ガイド](/ja/guide/#pawnio)をご覧ください。
+
+- センサーの経路は読み取り専用です。ファンの制御、PWMの書き込み、電圧の読み取りは行いません。
+- プロジェクトのセンサー仕様は、レジスターの読み取りを対象としています。チップの設定、ファン制御、制限値、電源状態を変える書き込みは認めていません。
+- WindowsでのPawnIOによるCPU温度の実装は、ほかのモニタリングツールを移植したものではなく、リポジトリ内のクリーンルームのセンサー仕様にもとづいて書かれています。
+
+## 脆弱性の報告
+
+セキュリティ上の脆弱性は、公開のIssueには書かないでください。GitHubの[Report a vulnerability](https://github.com/shm11C3/HardwareVisualizer/security/advisories/new)から、非公開で報告できます。
+
+- 受け取りの連絡は7日以内に行います。
+- セキュリティ修正の対象は、最新の安定版のみです。
+
+方針は[SECURITY.md](https://github.com/shm11C3/HardwareVisualizer/blob/develop/SECURITY.md)（英語）にあります。
+
+## ライセンスとソース
+
+HardwareVisualizerは、v1.11.0以降GPL-3.0-or-laterでライセンスされています。それより前のバージョン（v1.10.1と1.10.x系を含む）は、引き続きMITライセンスで利用できます。サードパーティのライセンス表記は、アプリの**設定 → ライセンス**で確認できます。
+
+ソースコードは[GitHub](https://github.com/shm11C3/HardwareVisualizer)で公開しています。

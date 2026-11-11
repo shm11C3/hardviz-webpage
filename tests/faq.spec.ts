@@ -7,7 +7,7 @@ test("FAQ page loads with correct title", async ({ page }) => {
 
 test("page heading contains Frequently Asked Questions", async ({ page }) => {
   await page.goto("/faq/");
-  await expect(page.locator("h2").first()).toContainText(
+  await expect(page.locator("h1").first()).toContainText(
     "Frequently Asked Questions",
   );
 });

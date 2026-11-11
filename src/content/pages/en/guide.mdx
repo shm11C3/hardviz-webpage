@@ -1,0 +1,140 @@
+---
+lang: en
+page: guide
+title: "Setup guide"
+metaTitle: "Setup Guide: Install, Sensors, and History | HardwareVisualizer"
+metaDescription: "How to install HardwareVisualizer, enable CPU temperature and motherboard sensors with PawnIO on Windows, set up smartctl, and choose how long history is kept."
+lead: "From installation to sensors and history: what you need to start using HardwareVisualizer, and what each optional component adds."
+basedOn: "1.11.3"
+updated: 2026-11-11
+---
+
+## Install
+
+Download the installer for your OS from the [download page](/download/). Step-by-step instructions for Windows, macOS, and Linux are under [Installation](/download/#installation). To check a file before you run it, see [Installer verification](/verification/).
+
+On Windows you can also install with Windows Package Manager:
+
+```powershell
+winget install shm11C3.HardwareVisualizer
+```
+
+Official downloads are available only from hardviz.com, GitHub Releases, and Winget. See [Security and data](/security/#official-sources).
+
+## First launch
+
+1. Open **Settings** from the side menu.
+2. Choose a theme and a language. The app is available in English, Japanese, and Russian.
+3. Optionally set a background image. The image is saved only on your device.
+4. On Windows, optionally set up PawnIO under **Settings → Advanced**. See [PawnIO](#pawnio) below.
+
+Basic monitoring does not require administrator rights. That covers CPU and memory usage, processes, and GPU usage.
+
+## What needs extra setup
+
+<div class="table-scroll">
+
+| Reading | Windows | macOS | Linux |
+| --- | --- | --- | --- |
+| CPU temperature | PawnIO and administrator access, or ACPI thermal zones | Not available | Not available |
+| CPU package power | PawnIO and administrator access | Apple Silicon, no setup | Not available |
+| Motherboard temperatures and fans | PawnIO, administrator access, and a supported Super I/O chip | Not available | Not available |
+| Storage Health (SMART) | No setup | smartmontools | smartmontools |
+| Detailed memory information | No setup | No setup | Authorization through polkit |
+| Intel GPU usage | No setup | — | `intel_gpu_top` |
+| Room temperature | A SwitchBot Meter and Bluetooth | Not available | Not available |
+
+</div>
+
+The full matrix is on the [home page](/#platforms) and in the [compatibility notes](/specs/).
+
+## PawnIO
+
+[PawnIO](https://pawnio.eu/) is a separate Windows driver. HardwareVisualizer uses it, read-only, for these readings:
+
+- Intel CPU package temperature and package power
+- AMD Family 17h and Family 19h package temperature, and AMD package power
+- Motherboard temperatures and fan speeds on supported Super I/O chips: Nuvoton NCT6799D, with NCT6796D and ITE IT8728F (temperatures only) as experimental
+
+Without PawnIO, the app can still show a CPU temperature when Windows exposes one through ACPI thermal zones.
+
+### Set it up
+
+There are two ways:
+
+- **During installation.** The `.msi` installer offers to set up PawnIO. The option is selected by default and you can deselect it. It is available when HardwareVisualizer is installed under Program Files, which is the default location.
+- **From the app.** Open **Settings → Advanced → Optional component setup** and choose to install. Use this after installing with the `.exe` installer or with Winget, which do not set up PawnIO.
+
+In both cases HardwareVisualizer:
+
+1. downloads the pinned PawnIO runtime installer and the pinned PawnIO.Modules release from their official GitHub releases;
+2. verifies each download against the size and SHA-256 digest recorded in the app, and discards it on a mismatch;
+3. asks Windows for administrator approval, then installs the runtime if it is not installed yet;
+4. copies the module files that are missing.
+
+Restart HardwareVisualizer afterwards. If Windows reports that a restart is required, restart Windows first.
+
+Silent MSI installs do not set up PawnIO unless you opt in:
+
+```powershell
+msiexec /i HardwareVisualizer_x.x.x_x64_en-US.msi /qn EXTERNAL_COMPONENT_PAWNIO=1
+```
+
+### Administrator access
+
+Sensors read through PawnIO need administrator access. Turn on **Settings → Advanced → Run as administrator on startup** to use them. This setting requires the `.msi` installation under Program Files.
+
+### Removing it
+
+Uninstalling HardwareVisualizer does not remove PawnIO or its module files. Remove PawnIO from Windows "Apps & features" if you no longer want it.
+
+The PawnIO runtime is published at [github.com/namazso/PawnIO](https://github.com/namazso/PawnIO), and the modules at [github.com/namazso/PawnIO.Modules](https://github.com/namazso/PawnIO.Modules/releases).
+
+## smartctl
+
+`smartctl` is part of [smartmontools](https://www.smartmontools.org/). On macOS and Linux, Storage Health is collected through it. On Windows the app reads storage health natively and can use `smartctl` as an additional source.
+
+To use it, install smartmontools for your operating system and make sure the `smartctl` executable is on `PATH`. Then run **Re-detect storage devices**, or restart HardwareVisualizer.
+
+Some drives and operating systems need elevated privileges to read SMART data. On Linux, `smartctl` and `intel_gpu_top` usually need root access. Restart with sudo to let them run:
+
+```bash
+sudo hardware-visualizer
+```
+
+## Linux notes
+
+- Detailed memory information asks for authorization through polkit (`pkexec dmidecode`).
+- NVIDIA GPUs are listed, but their readings are not available yet.
+- CPU temperature, power draw, and motherboard sensors are not available on Linux yet.
+
+## History
+
+Recording is on by default. Every minute, the app saves the average, maximum, and minimum of the readings it took during that minute.
+
+- **Where.** In a database file in the app's data folder: `%APPDATA%\HardwareVisualizer` on Windows, `~/Library/Application Support/HardwareVisualizer` on macOS, and `~/.config/HardwareVisualizer` on Linux.
+- **How long.** 365 days by default. Change it under **Settings → Insights**.
+- **Storage Health.** One record per drive per day, kept for 3 years by default.
+- **Stopping.** **Settings → Insights** has a switch to stop and start recording.
+
+Profiles created before v1.11.0 keep their earlier database, with a 30-day default, until you convert it under **Settings → Insights**. Existing data is converted, and retention settings are kept.
+
+## Room temperature
+
+On Windows, the app can read room temperature and humidity from a nearby SwitchBot Meter or Meter Plus over Bluetooth. It needs no SwitchBot account, no internet connection, and no pairing.
+
+Turn it on under **Settings → Insights**. It is off by default, and room readings are recorded together with Insights, so recording must be on.
+
+## Tray and background
+
+Under **Settings → General** you can keep the app running in the system tray when the window is closed, and turn on the tray widget, which shows CPU usage, GPU usage, and GPU temperature where available.
+
+## Updates
+
+The app checks GitHub Releases for a newer version when it starts, and offers to update when one is available.
+
+## If something is missing
+
+- Check the [FAQ](/faq/) and the [compatibility notes](/specs/).
+- Search or open an issue on [GitHub](https://github.com/shm11C3/HardwareVisualizer/issues).
+- Ask in [GitHub Discussions](https://github.com/shm11C3/HardwareVisualizer/discussions), or use the [anonymous survey](/survey/?source=web).

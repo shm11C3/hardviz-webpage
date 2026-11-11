@@ -44,7 +44,7 @@ const { Content: InstallationContent } = await render(
 const { Content: SourceCheckContent } = await render(sourceCheckEntry as never);
 
 const guideArticleClass =
-  "prose prose-sm prose-slate mx-auto max-w-full min-w-0 sm:prose-base dark:prose-invert sm:max-w-3xl prose-a:text-cyan-700 dark:prose-a:text-cyan-300 prose-blockquote:border-cyan-500 prose-code:break-words prose-pre:max-w-full prose-pre:overflow-x-auto prose-pre:whitespace-pre prose-pre:rounded-none prose-pre:border-slate-800 prose-pre:border-l-4 prose-pre:bg-slate-950 prose-pre:text-cyan-100 prose-pre:text-[0.8125rem] sm:prose-pre:text-sm";
+  "doc prose prose-sm max-w-full min-w-0 sm:prose-base sm:max-w-3xl prose-code:break-words prose-pre:max-w-full prose-pre:overflow-x-auto prose-pre:whitespace-pre prose-pre:text-[0.8125rem] sm:prose-pre:text-sm";
 
 const downloadTranslations = {
   button: t("download.button"),
@@ -58,8 +58,8 @@ const downloadTranslations = {
 const pageTitleSeparator = t("download.pageTitleSeparator");
 ---
 
-<section class="bg-white pt-16 pb-20 dark:bg-slate-800">
-  <div class="container mx-auto px-4">
+<section class="pt-16 pb-20">
+  <div class="shell">
     <div
       class="mx-auto grid max-w-7xl min-w-0 gap-8 lg:grid-cols-[minmax(0,13rem)_minmax(0,1fr)] lg:gap-10"
     >
@@ -73,7 +73,7 @@ const pageTitleSeparator = t("download.pageTitleSeparator");
       <div class="min-w-0">
         <div class:list={["max-w-6xl min-w-0", lang === "ja" && "budoux-ja"]}>
           <h1
-            class="font-bold text-3xl text-slate-950 leading-tight md:text-5xl dark:text-white"
+            class="font-semibold text-3xl text-foreground leading-tight tracking-tight md:text-4xl"
           >
             <span class="inline-block"
               >{t("download.pageTitleBeforeBreak")}</span
@@ -85,13 +85,11 @@ const pageTitleSeparator = t("download.pageTitleSeparator");
             >
           </h1>
           <p
-            class="mt-4 max-w-3xl text-base text-slate-600 leading-7 md:text-lg dark:text-slate-300"
+            class="mt-4 max-w-3xl text-base text-muted-foreground leading-7 md:text-lg"
           >
             {formatText(t("download.pageDescription"))}
           </p>
-          <div
-            class="mt-5 space-y-2 text-slate-500 text-sm dark:text-slate-400"
-          >
+          <div class="mt-5 space-y-2 text-muted-foreground text-sm">
             <p>
               {latestVersion ? `${t("download.currentVersion")} v${latestVersion}` : t("download.currentVersion")}
             </p>
@@ -102,7 +100,7 @@ const pageTitleSeparator = t("download.pageTitleSeparator");
             ) : null}
             <a
               href={changelogHref}
-              class="inline-flex font-medium text-slate-700 hover:text-slate-950 hover:underline dark:text-slate-200 dark:hover:text-white"
+              class="inline-flex font-medium text-foreground hover:text-foreground hover:underline"
               data-astro-prefetch
             >
               {t("download.latestChangesLink")}
@@ -110,31 +108,25 @@ const pageTitleSeparator = t("download.pageTitleSeparator");
           </div>
         </div>
 
-        <LicenseNotice />
+        <div class="mt-8"><LicenseNotice /></div>
 
         <div class="mt-12 max-w-6xl min-w-0" id="download">
-          <h2
-            class="font-bold text-2xl text-slate-950 md:text-3xl dark:text-white"
-          >
+          <h2 class="font-semibold text-2xl text-foreground md:text-3xl">
             {t("download.sectionTitle")}
           </h2>
 
-          <div
-            class="mt-6 rounded-lg border border-slate-200 bg-slate-50/80 p-5 dark:border-slate-700 dark:bg-slate-900/30"
-          >
+          <div class="rounded-2xl border border-border mt-6 p-5">
             <div class="flex items-start gap-3">
               <ShieldCheck
-                className="mt-0.5 h-5 w-5 shrink-0 text-slate-500 dark:text-slate-300"
+                className="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground"
                 aria-hidden="true"
               />
               <div class:list={["min-w-0", lang === "ja" && "budoux-ja"]}>
-                <h3
-                  class="font-semibold text-slate-950 text-sm sm:text-base dark:text-white"
-                >
+                <h3 class="font-semibold text-foreground text-sm sm:text-base">
                   {formatText(sourceCheckEntry.data.title)}
                 </h3>
                 <div
-                  class="mt-2 text-slate-700 text-sm leading-6 sm:text-base sm:leading-7 dark:text-slate-200 [&_a]:font-medium [&_a]:text-slate-900 [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-slate-950 [&_code]:break-words [&_code]:rounded [&_code]:bg-slate-100 [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-slate-900 [&_p]:m-0 [&_p+p]:mt-3 dark:[&_a]:text-white dark:[&_code]:bg-slate-800 dark:[&_code]:text-slate-100"
+                  class="mt-2 text-foreground text-sm leading-6 sm:text-base sm:leading-7 [&_a]:font-medium [&_a]:underline [&_a]:underline-offset-4 [&_code]:break-words [&_code]:rounded-sm [&_code]:bg-muted [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.875em] [&_p+p]:mt-3 [&_p]:m-0"
                 >
                   <SourceCheckContent />
                 </div>
@@ -144,7 +136,7 @@ const pageTitleSeparator = t("download.pageTitleSeparator");
 
           <div class="mt-8">
             <Download
-              client:visible
+              client:load
               embedded
               showHeader={false}
               showLatestChanges={false}
@@ -159,7 +151,7 @@ const pageTitleSeparator = t("download.pageTitleSeparator");
 
         <div
           id="installation"
-          class="mt-16 min-w-0 border-slate-200 border-t pt-12 md:mt-20 md:pt-16 dark:border-slate-700"
+          class="mt-16 min-w-0 border-border border-t pt-12 md:mt-20 md:pt-16"
         >
           <article
             class:list={[guideArticleClass, lang === "ja" && "budoux-ja"]}

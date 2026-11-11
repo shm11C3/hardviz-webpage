@@ -2,16 +2,15 @@
 import dashboardScreenshot from "../assets/screenshots/dashboard-performance-en.png";
 import Download from "../components/Download.tsx";
 import FAQPreview from "../components/FAQPreview.astro";
-import Features from "../components/Features.astro";
+import Feedback from "../components/Feedback.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
-import Insights from "../components/Insights.astro";
 import LandingDownloadAnalytics from "../components/LandingDownloadAnalytics.astro";
-import LicenseNotice from "../components/LicenseNotice.astro";
+import PlatformMatrix from "../components/PlatformMatrix.astro";
 import ReleaseAnnouncement from "../components/releases/ReleaseAnnouncement.astro";
-import Screenshots from "../components/Screenshots.astro";
-import Usage from "../components/Usage.astro";
+import Screens from "../components/Screens.astro";
+import Trust from "../components/Trust.astro";
 import { fetchLatestRelease } from "../funcs/fetchReleaseData.ts";
 import {
   getLangFromUrl,
@@ -44,7 +43,6 @@ const downloads = createPlatformDownloads(release, translatePath("/download"));
 
 const downloadTranslations = {
   title: t("download.title"),
-  description: t("download.description"),
   currentVersion: t("download.currentVersion"),
   button: t("download.button"),
   noDownloads: t("download.noDownloads"),
@@ -98,14 +96,12 @@ const softwareJsonLd = {
   jsonLd={softwareJsonLd}
 >
   <Header />
-  <main id="main-content">
-    <Hero />
+  <main id="main-content" class="pt-20">
     <ReleaseAnnouncement />
-    <LicenseNotice />
-    <Screenshots />
-    <Insights />
-    <Features />
-    <Usage />
+    <Hero version={release.version} />
+    <Screens />
+    <PlatformMatrix />
+    <Trust />
     <Download
       client:visible
       downloads={downloads}
@@ -117,6 +113,7 @@ const softwareJsonLd = {
       githubLatestReleaseHref={githubLatestReleaseUrl()}
       installationHref={`${translatePath("/download")}#installation`}
     />
+    <Feedback />
     <FAQPreview />
   </main>
   <Footer />

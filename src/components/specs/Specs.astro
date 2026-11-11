@@ -99,7 +99,7 @@ const statusLabels = {
   supported: t("specs.compat.status.supported"),
   partial: t("specs.compat.status.partial"),
   bestEffort: t("specs.compat.status.bestEffort"),
-  planned: t("specs.compat.status.planned"),
+  unavailable: t("specs.compat.status.unavailable"),
   experimental: t("specs.compat.status.experimental"),
 };
 
@@ -195,14 +195,14 @@ const signalMatrixRows = [
       },
       {
         os: "macOS",
-        status: statusLabels.bestEffort,
-        tone: "bestEffort",
+        status: statusLabels.unavailable,
+        tone: "unavailable",
         notes: t("specs.matrix.cpuTemperature.macos"),
       },
       {
         os: "Linux",
-        status: statusLabels.bestEffort,
-        tone: "bestEffort",
+        status: statusLabels.unavailable,
+        tone: "unavailable",
         notes: t("specs.matrix.cpuTemperature.linux"),
       },
     ],
@@ -291,14 +291,14 @@ const signalMatrixRows = [
       },
       {
         os: "macOS",
-        status: statusLabels.planned,
-        tone: "planned",
+        status: statusLabels.unavailable,
+        tone: "unavailable",
         notes: t("specs.matrix.fan.macos"),
       },
       {
         os: "Linux",
-        status: statusLabels.planned,
-        tone: "planned",
+        status: statusLabels.unavailable,
+        tone: "unavailable",
         notes: t("specs.matrix.fan.linux"),
       },
     ],
@@ -450,32 +450,26 @@ const statusClasses = {
     "border-amber-200 bg-amber-50 text-amber-800 dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-200",
   bestEffort:
     "border-sky-200 bg-sky-50 text-sky-800 dark:border-sky-400/30 dark:bg-sky-400/10 dark:text-sky-200",
-  planned:
-    "border-slate-200 bg-slate-100 text-slate-700 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300",
+  unavailable: "border-border bg-muted text-foreground",
   experimental:
     "border-violet-200 bg-violet-50 text-violet-800 dark:border-violet-400/30 dark:bg-violet-400/10 dark:text-violet-200",
 };
 
 const iconClasses = {
-  cyan: "border-cyan-100 bg-cyan-50 text-cyan-700 dark:border-cyan-400/30 dark:bg-cyan-400/10 dark:text-cyan-200",
+  cyan: "border-input bg-muted text-foreground",
 };
 ---
 
-<main
-  id="main-content"
-  class="min-h-screen bg-white text-slate-950 dark:bg-slate-900 dark:text-slate-100"
->
-  <section class="bg-white pt-24 pb-12 dark:bg-slate-900 sm:pt-28 md:pt-32">
-    <div class="container mx-auto px-4">
+<main id="main-content" class="min-h-screen bg-background text-foreground">
+  <section class="pt-24 pb-12 sm:pt-28 md:pt-32">
+    <div class="shell">
       <header class="mx-auto max-w-6xl">
-        <p
-          class="font-semibold text-cyan-700 text-sm uppercase tracking-wide dark:text-cyan-300"
-        >
+        <p class="font-semibold text-foreground text-sm">
           {t("specs.docs.eyebrow")}
         </p>
         <h1
           class:list={[
-            "mt-4 text-balance font-bold text-4xl text-slate-950 leading-tight sm:text-5xl dark:text-white",
+            "mt-4 text-balance font-semibold text-4xl text-foreground leading-tight sm:text-5xl",
             isJa && "budoux-ja",
           ]}
         >
@@ -483,7 +477,7 @@ const iconClasses = {
         </h1>
         <p
           class:list={[
-            "mt-5 max-w-3xl text-lg text-slate-700 leading-8 dark:text-slate-300",
+            "mt-5 max-w-3xl text-lg text-foreground leading-8",
             isJa && "budoux-ja",
           ]}
         >
@@ -491,17 +485,11 @@ const iconClasses = {
         </p>
 
         <div class="mt-7 flex flex-col gap-3 sm:flex-row">
-          <a
-            href={downloadHref}
-            class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-cyan-700 px-5 py-3 font-semibold text-sm text-white transition hover:bg-cyan-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500"
-          >
+          <a href={downloadHref} class="btn btn-lg btn-primary">
             <Download aria-hidden="true" className="h-4 w-4" />
             {t("specs.docs.primaryCta")}
           </a>
-          <a
-            href={verificationHref}
-            class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 font-semibold text-slate-800 text-sm transition hover:border-cyan-300 hover:text-cyan-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-cyan-400 dark:hover:text-cyan-300"
-          >
+          <a href={verificationHref} class="btn btn-lg btn-outline">
             <ShieldCheck aria-hidden="true" className="h-4 w-4" />
             {t("specs.docs.secondaryCta")}
           </a>
@@ -513,7 +501,7 @@ const iconClasses = {
               href={source.href}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-1 py-1 font-medium text-slate-600 text-sm underline-offset-4 transition hover:text-cyan-700 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-500 dark:text-slate-300 dark:hover:text-cyan-300"
+              class="inline-flex items-center gap-1 py-1 font-medium text-muted-foreground text-sm underline-offset-4 transition hover:text-foreground hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-500"
             >
               {source.label}
               <ExternalLink aria-hidden="true" className="h-3.5 w-3.5" />
@@ -524,20 +512,18 @@ const iconClasses = {
     </div>
   </section>
 
-  <div class="container mx-auto px-4">
+  <div class="shell">
     <nav
       aria-label={t("specs.nav.ariaLabel")}
-      class="mx-auto flex max-w-6xl flex-col gap-3 border-y border-slate-200 py-4 dark:border-slate-700 sm:flex-row sm:items-center sm:gap-6"
+      class="mx-auto flex max-w-6xl flex-col gap-3 border-y border-border py-4 sm:flex-row sm:items-center sm:gap-6"
     >
-      <p
-        class="shrink-0 font-semibold text-slate-500 text-xs uppercase tracking-wide dark:text-slate-400"
-      >
+      <p class="shrink-0 font-semibold text-muted-foreground text-xs">
         {t("specs.nav.title")}
       </p>
       <div class="flex flex-wrap gap-x-6 gap-y-2">
         {navItems.map((item) => (
           <a
-            class="whitespace-nowrap py-1 font-medium text-slate-600 text-sm underline-offset-4 transition hover:text-cyan-700 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-500 dark:text-slate-300 dark:hover:text-cyan-300"
+            class="whitespace-nowrap py-1 font-medium text-muted-foreground text-sm underline-offset-4 transition hover:text-foreground hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-500"
             href={`#${item.id}`}
           >
             {item.label}
@@ -547,25 +533,21 @@ const iconClasses = {
     </nav>
   </div>
 
-  <div class="container mx-auto px-4 pb-12">
+  <div class="shell pb-12">
     <article class="mx-auto max-w-6xl">
       <section id="overview" class="scroll-mt-24 py-12 md:py-16">
         <div class="grid gap-8 xl:grid-cols-[minmax(0,1fr)_24rem]">
           <div>
             <div class="flex items-center gap-3">
-              <span
-                class="rounded-lg bg-slate-100 p-2 text-cyan-700 dark:bg-slate-800 dark:text-cyan-300"
-              >
+              <span class="rounded-lg bg-muted p-2 text-foreground">
                 <Activity aria-hidden="true" className="h-5 w-5" />
               </span>
               <div>
-                <p
-                  class="font-semibold text-cyan-700 text-sm uppercase tracking-wide dark:text-cyan-300"
-                >
+                <p class="font-semibold text-foreground text-sm">
                   {t("specs.section.overview.eyebrow")}
                 </p>
                 <h2
-                  class="mt-1 font-bold text-2xl text-slate-950 sm:text-3xl dark:text-white"
+                  class="mt-1 font-semibold text-2xl text-foreground sm:text-3xl"
                 >
                   {t("specs.section.overview.title")}
                 </h2>
@@ -573,7 +555,7 @@ const iconClasses = {
             </div>
             <p
               class:list={[
-                  "mt-4 max-w-3xl text-slate-700 leading-7 dark:text-slate-300",
+                  "mt-4 max-w-3xl text-foreground leading-7",
                   isJa && "budoux-ja",
                 ]}
             >
@@ -584,16 +566,16 @@ const iconClasses = {
               {overviewItems.map((item) => {
                     const ItemIcon = item.icon;
                     return (
-                      <div class="specs-card rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-800">
+                      <div class="specs-card rounded-2xl border border-border p-5">
                       <div class="flex items-start gap-3">
-                        <span class="rounded-md border border-slate-200 bg-slate-50 p-2 text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                        <span class="rounded-2xl border border-border p-2 text-foreground">
                           <ItemIcon aria-hidden="true" className="h-4 w-4" />
                         </span>
                         <div>
-                          <h3 class="font-semibold text-slate-950 text-sm dark:text-white">
+                          <h3 class="font-semibold text-foreground text-sm">
                             {item.label}
                           </h3>
-                          <p class="mt-2 text-slate-700 text-sm leading-6 dark:text-slate-300">
+                          <p class="mt-2 text-foreground text-sm leading-6">
                             {item.value}
                           </p>
                         </div>
@@ -604,9 +586,7 @@ const iconClasses = {
             </div>
           </div>
 
-          <figure
-            class="specs-card rounded-xl border border-slate-200 bg-white p-3 shadow-sm dark:border-slate-700 dark:bg-slate-800"
-          >
+          <figure class="rounded-2xl border border-border specs-card p-3">
             <Image
               src={dashboardScreenshot}
               alt={t("specs.hero.imageAlt")}
@@ -614,9 +594,9 @@ const iconClasses = {
               loading="eager"
             />
             <figcaption
-              class="px-1 pt-3 text-slate-600 text-sm leading-6 dark:text-slate-400"
+              class="px-1 pt-3 text-muted-foreground text-sm leading-6"
             >
-              <span class="font-semibold text-slate-800 dark:text-slate-200">
+              <span class="font-semibold text-foreground">
                 {t("specs.overview.visual.title")}
               </span>
               {` ${t("specs.overview.visual.caption")}`}
@@ -627,30 +607,24 @@ const iconClasses = {
 
       <section
         id="operating-systems"
-        class="scroll-mt-24 border-t border-slate-200 py-12 dark:border-slate-800 md:py-16"
+        class="scroll-mt-24 border-t border-border py-12 md:py-16"
       >
         <div class="flex items-center gap-3">
-          <span
-            class="rounded-lg bg-slate-100 p-2 text-cyan-700 dark:bg-slate-800 dark:text-cyan-300"
-          >
+          <span class="rounded-lg bg-muted p-2 text-foreground">
             <Monitor aria-hidden="true" className="h-5 w-5" />
           </span>
           <div>
-            <p
-              class="font-semibold text-cyan-700 text-sm uppercase tracking-wide dark:text-cyan-300"
-            >
+            <p class="font-semibold text-foreground text-sm">
               {t("specs.section.compat.eyebrow")}
             </p>
-            <h2
-              class="mt-1 font-bold text-2xl text-slate-950 sm:text-3xl dark:text-white"
-            >
+            <h2 class="mt-1 font-semibold text-2xl text-foreground sm:text-3xl">
               {t("specs.os.title")}
             </h2>
           </div>
         </div>
         <p
           class:list={[
-              "mt-4 max-w-3xl text-slate-700 leading-7 dark:text-slate-300",
+              "mt-4 max-w-3xl text-foreground leading-7",
               isJa && "budoux-ja",
             ]}
         >
@@ -658,9 +632,9 @@ const iconClasses = {
         </p>
         <div class="mt-8 grid gap-3 md:hidden">
           {osRows.map((row) => (
-                <article class="specs-card rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800">
+                <article class="specs-card rounded-2xl border border-border p-4">
                   <div class="flex items-start justify-between gap-3">
-                    <h3 class="font-semibold text-slate-950 dark:text-white">
+                    <h3 class="font-semibold text-foreground">
                       {row.name}
                     </h3>
                     <span
@@ -674,18 +648,18 @@ const iconClasses = {
                   </div>
                   <dl class="mt-4 space-y-3 text-sm">
                     <div>
-                      <dt class="font-semibold text-slate-500 text-xs uppercase tracking-wide dark:text-slate-400">
+                      <dt class="font-semibold text-muted-foreground text-xs">
                         {t("specs.compat.coverage")}
                       </dt>
-                      <dd class="mt-1 break-words text-slate-800 leading-6 dark:text-slate-200">
+                      <dd class="mt-1 break-words text-foreground leading-6">
                         {row.coverage}
                       </dd>
                     </div>
                     <div>
-                      <dt class="font-semibold text-slate-500 text-xs uppercase tracking-wide dark:text-slate-400">
+                      <dt class="font-semibold text-muted-foreground text-xs">
                         {t("specs.compat.notes")}
                       </dt>
-                      <dd class="mt-1 break-words text-slate-700 leading-6 dark:text-slate-300">
+                      <dd class="mt-1 break-words text-foreground leading-6">
                         {row.notes}
                       </dd>
                     </div>
@@ -694,12 +668,10 @@ const iconClasses = {
               ))}
         </div>
         <div
-          class="specs-card mt-8 hidden overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm md:block dark:border-slate-700 dark:bg-slate-800"
+          class="rounded-2xl border border-border specs-card mt-8 hidden overflow-x-auto md:block"
         >
           <table class="min-w-[48rem] w-full border-collapse text-left text-sm">
-            <thead
-              class="bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300"
-            >
+            <thead class="bg-muted text-foreground">
               <tr>
                 <th scope="col" class="px-5 py-3 font-semibold">
                   {t("specs.compat.name")}
@@ -718,10 +690,10 @@ const iconClasses = {
             <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
               {osRows.map((row) => (
                     <tr class="align-top">
-                      <th scope="row" class="px-5 py-4 font-semibold text-slate-950 dark:text-white">
+                      <th scope="row" class="px-5 py-4 font-semibold text-foreground">
                         {row.name}
                       </th>
-                      <td class="px-5 py-4 text-slate-700 dark:text-slate-300">{row.coverage}</td>
+                      <td class="px-5 py-4 text-foreground">{row.coverage}</td>
                       <td class="px-5 py-4">
                         <span
                           class:list={[
@@ -732,7 +704,7 @@ const iconClasses = {
                           {row.status}
                         </span>
                       </td>
-                      <td class="px-5 py-4 text-slate-700 leading-6 dark:text-slate-300">{row.notes}</td>
+                      <td class="px-5 py-4 text-foreground leading-6">{row.notes}</td>
                     </tr>
                   ))}
             </tbody>
@@ -742,30 +714,24 @@ const iconClasses = {
 
       <section
         id="signals"
-        class="scroll-mt-24 border-t border-slate-200 py-12 dark:border-slate-800 md:py-16"
+        class="scroll-mt-24 border-t border-border py-12 md:py-16"
       >
         <div class="flex items-center gap-3">
-          <span
-            class="rounded-lg bg-slate-100 p-2 text-cyan-700 dark:bg-slate-800 dark:text-cyan-300"
-          >
+          <span class="rounded-lg bg-muted p-2 text-foreground">
             <Gauge aria-hidden="true" className="h-5 w-5" />
           </span>
           <div>
-            <p
-              class="font-semibold text-cyan-700 text-sm uppercase tracking-wide dark:text-cyan-300"
-            >
+            <p class="font-semibold text-foreground text-sm">
               {t("specs.section.signals.eyebrow")}
             </p>
-            <h2
-              class="mt-1 font-bold text-2xl text-slate-950 sm:text-3xl dark:text-white"
-            >
+            <h2 class="mt-1 font-semibold text-2xl text-foreground sm:text-3xl">
               {t("specs.signals.title")}
             </h2>
           </div>
         </div>
         <p
           class:list={[
-              "mt-4 max-w-3xl text-slate-700 leading-7 dark:text-slate-300",
+              "mt-4 max-w-3xl text-foreground leading-7",
               isJa && "budoux-ja",
             ]}
         >
@@ -776,20 +742,20 @@ const iconClasses = {
           data-testid="signals-table-mobile"
         >
           {signalMatrixRows.map((row) => (
-                <article class="specs-card rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800">
+                <article class="specs-card rounded-2xl border border-border p-4">
                   <div>
-                    <h3 class="font-semibold text-slate-950 dark:text-white">
+                    <h3 class="font-semibold text-foreground">
                       {row.name}
                     </h3>
-                    <p class="mt-1 break-words text-slate-700 text-sm leading-6 dark:text-slate-300">
+                    <p class="mt-1 break-words text-foreground text-sm leading-6">
                       {row.summary}
                     </p>
                   </div>
-                  <div class="mt-4 divide-y divide-slate-200 rounded-md border border-slate-200 dark:divide-slate-800 dark:border-slate-800">
+                  <div class="mt-4 divide-y divide-slate-200 rounded-md border border-border dark:divide-slate-800">
                     {row.platforms.map((platform) => (
                         <div class="grid gap-2 p-3">
                           <div class="flex items-center justify-between gap-3">
-                            <span class="font-semibold text-slate-950 text-sm dark:text-white">
+                            <span class="font-semibold text-foreground text-sm">
                               {platform.os}
                             </span>
                             <span
@@ -803,7 +769,7 @@ const iconClasses = {
                               {platform.status}
                             </span>
                           </div>
-                          <p class="break-words text-slate-700 text-sm leading-6 dark:text-slate-300">
+                          <p class="break-words text-foreground text-sm leading-6">
                             {platform.notes}
                           </p>
                         </div>
@@ -813,13 +779,11 @@ const iconClasses = {
               ))}
         </div>
         <div
-          class="specs-card mt-8 hidden overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm md:block dark:border-slate-700 dark:bg-slate-800"
+          class="rounded-2xl border border-border specs-card mt-8 hidden overflow-x-auto md:block"
           data-testid="signals-table"
         >
           <table class="w-full border-collapse text-left text-sm">
-            <thead
-              class="bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300"
-            >
+            <thead class="bg-muted text-foreground">
               <tr>
                 <th scope="col" class="w-[15rem] px-5 py-3 font-semibold">
                   {t("specs.matrix.feature")}
@@ -832,14 +796,14 @@ const iconClasses = {
             <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
               {signalMatrixRows.map((row) => (
                     <tr class="align-top">
-                      <th scope="row" class="px-5 py-4 font-semibold text-slate-950 dark:text-white">
+                      <th scope="row" class="px-5 py-4 font-semibold text-foreground">
                         <span>{row.name}</span>
-                        <span class="mt-1 block font-normal text-slate-600 text-xs leading-5 dark:text-slate-400">
+                        <span class="mt-1 block font-normal text-muted-foreground text-xs leading-5">
                           {row.summary}
                         </span>
                       </th>
                       {row.platforms.map((platform) => (
-                          <td class="px-5 py-4 text-slate-700 leading-6 dark:text-slate-300">
+                          <td class="px-5 py-4 text-foreground leading-6">
                             <span
                               class:list={[
                                 "inline-flex items-center rounded-full border px-2.5 py-1 font-semibold text-xs whitespace-nowrap",
@@ -862,30 +826,24 @@ const iconClasses = {
 
       <section
         id="appearance"
-        class="scroll-mt-24 border-t border-slate-200 py-12 dark:border-slate-800 md:py-16"
+        class="scroll-mt-24 border-t border-border py-12 md:py-16"
       >
         <div class="flex items-center gap-3">
-          <span
-            class="rounded-lg bg-slate-100 p-2 text-cyan-700 dark:bg-slate-800 dark:text-cyan-300"
-          >
+          <span class="rounded-lg bg-muted p-2 text-foreground">
             <SlidersHorizontal aria-hidden="true" className="h-5 w-5" />
           </span>
           <div>
-            <p
-              class="font-semibold text-cyan-700 text-sm uppercase tracking-wide dark:text-cyan-300"
-            >
+            <p class="font-semibold text-foreground text-sm">
               {t("specs.section.appearance.eyebrow")}
             </p>
-            <h2
-              class="mt-1 font-bold text-2xl text-slate-950 sm:text-3xl dark:text-white"
-            >
+            <h2 class="mt-1 font-semibold text-2xl text-foreground sm:text-3xl">
               {t("specs.appearance.title")}
             </h2>
           </div>
         </div>
         <p
           class:list={[
-              "mt-4 max-w-3xl text-slate-700 leading-7 dark:text-slate-300",
+              "mt-4 max-w-3xl text-foreground leading-7",
               isJa && "budoux-ja",
             ]}
         >
@@ -894,7 +852,7 @@ const iconClasses = {
 
         <div class="mt-8 grid gap-4">
           {appearanceRows.map((row) => (
-                <div class="specs-card rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-800">
+                <div class="specs-card rounded-2xl border border-border p-5">
                   <div class="grid gap-4 md:grid-cols-[11rem_minmax(0,1fr)]">
                     <div>
                       <span
@@ -908,12 +866,12 @@ const iconClasses = {
                           className="h-4 w-4"
                         />
                       </span>
-                      <h3 class="mt-3 font-semibold text-slate-950 dark:text-white">
+                      <h3 class="mt-3 font-semibold text-foreground">
                         {row.name}
                       </h3>
                     </div>
                     <div>
-                      <p class="font-medium text-slate-900 leading-6 dark:text-slate-100">
+                      <p class="font-medium text-foreground leading-6">
                         {row.themePreview ? (
                           <span
                             class="theme-preview-list"
@@ -942,7 +900,7 @@ const iconClasses = {
                       </p>
                       <p
                         class:list={[
-                          "mt-2 text-slate-700 text-sm leading-6 dark:text-slate-300",
+                          "mt-2 text-foreground text-sm leading-6",
                           isJa && "budoux-ja",
                         ]}
                       >
@@ -957,30 +915,24 @@ const iconClasses = {
 
       <section
         id="storage-components"
-        class="scroll-mt-24 border-t border-slate-200 py-12 dark:border-slate-800 md:py-16"
+        class="scroll-mt-24 border-t border-border py-12 md:py-16"
       >
         <div class="flex items-center gap-3">
-          <span
-            class="rounded-lg bg-slate-100 p-2 text-cyan-700 dark:bg-slate-800 dark:text-cyan-300"
-          >
+          <span class="rounded-lg bg-muted p-2 text-foreground">
             <HardDrive aria-hidden="true" className="h-5 w-5" />
           </span>
           <div>
-            <p
-              class="font-semibold text-cyan-700 text-sm uppercase tracking-wide dark:text-cyan-300"
-            >
+            <p class="font-semibold text-foreground text-sm">
               {t("specs.section.storage.eyebrow")}
             </p>
-            <h2
-              class="mt-1 font-bold text-2xl text-slate-950 sm:text-3xl dark:text-white"
-            >
+            <h2 class="mt-1 font-semibold text-2xl text-foreground sm:text-3xl">
               {t("specs.storage.title")}
             </h2>
           </div>
         </div>
         <p
           class:list={[
-              "mt-4 max-w-3xl text-slate-700 leading-7 dark:text-slate-300",
+              "mt-4 max-w-3xl text-foreground leading-7",
               isJa && "budoux-ja",
             ]}
         >
@@ -991,7 +943,7 @@ const iconClasses = {
           {storageCards.map((card) => {
                 const CardIcon = card.icon;
                 return (
-                  <div class="specs-card rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-800">
+                  <div class="specs-card rounded-2xl border border-border p-5">
                   <span
                     class:list={[
                       "inline-flex rounded-md border p-2",
@@ -1000,12 +952,12 @@ const iconClasses = {
                   >
                     <CardIcon aria-hidden="true" className="h-4 w-4" />
                   </span>
-                  <h3 class="mt-4 font-semibold text-slate-950 dark:text-white">
+                  <h3 class="mt-4 font-semibold text-foreground">
                     {card.title}
                   </h3>
                   <p
                     class:list={[
-                      "mt-2 text-slate-700 text-sm leading-6 dark:text-slate-300",
+                      "mt-2 text-foreground text-sm leading-6",
                       isJa && "budoux-ja",
                     ]}
                   >
@@ -1019,46 +971,38 @@ const iconClasses = {
 
       <section
         id="privacy-verification"
-        class="scroll-mt-24 border-t border-slate-200 py-12 dark:border-slate-800 md:py-16"
+        class="scroll-mt-24 border-t border-border py-12 md:py-16"
       >
         <div class="flex items-center gap-3">
-          <span
-            class="rounded-lg bg-slate-100 p-2 text-cyan-700 dark:bg-slate-800 dark:text-cyan-300"
-          >
+          <span class="rounded-lg bg-muted p-2 text-foreground">
             <LockKeyhole aria-hidden="true" className="h-5 w-5" />
           </span>
           <div>
-            <p
-              class="font-semibold text-cyan-700 text-sm uppercase tracking-wide dark:text-cyan-300"
-            >
+            <p class="font-semibold text-foreground text-sm">
               {t("specs.section.verification.eyebrow")}
             </p>
-            <h2
-              class="mt-1 font-bold text-2xl text-slate-950 sm:text-3xl dark:text-white"
-            >
+            <h2 class="mt-1 font-semibold text-2xl text-foreground sm:text-3xl">
               {t("specs.verification.title")}
             </h2>
           </div>
         </div>
         <p
           class:list={[
-              "mt-4 max-w-3xl text-slate-700 leading-7 dark:text-slate-300",
+              "mt-4 max-w-3xl text-foreground leading-7",
               isJa && "budoux-ja",
             ]}
         >
           {t("specs.verification.description")}
         </p>
 
-        <div
-          class="specs-card mt-8 rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-800"
-        >
+        <div class="rounded-2xl border border-border specs-card mt-8">
           <dl class="divide-y divide-slate-200 dark:divide-slate-800">
             {verificationRows.map((row) => (
                   <div class="grid gap-2 px-5 py-4 sm:grid-cols-[13rem_minmax(0,1fr)]">
-                    <dt class="font-semibold text-slate-950 dark:text-white">
+                    <dt class="font-semibold text-foreground">
                       {row.name}
                     </dt>
-                    <dd class="text-slate-700 text-sm leading-6 dark:text-slate-300">
+                    <dd class="text-foreground text-sm leading-6">
                       {row.detail}
                     </dd>
                   </div>
@@ -1067,17 +1011,11 @@ const iconClasses = {
         </div>
 
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-          <a
-            href={downloadHref}
-            class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-cyan-700 px-5 py-3 font-semibold text-sm text-white transition hover:bg-cyan-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500"
-          >
+          <a href={downloadHref} class="btn btn-lg btn-primary">
             <Download aria-hidden="true" className="h-4 w-4" />
             {t("specs.cta.download")}
           </a>
-          <a
-            href={verificationHref}
-            class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 font-semibold text-slate-800 text-sm transition hover:border-cyan-300 hover:text-cyan-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-cyan-400 dark:hover:text-cyan-300"
-          >
+          <a href={verificationHref} class="btn btn-lg btn-outline">
             <CheckCircle2 aria-hidden="true" className="h-4 w-4" />
             {t("specs.cta.verify")}
           </a>

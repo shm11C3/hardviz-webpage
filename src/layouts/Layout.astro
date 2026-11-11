@@ -74,8 +74,8 @@ const structuredData = [...buildBaseGraph(lang), ...pageJsonLd];
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="alternate icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <Font cssVariable="--font-geist" preload />
-    {lang === "ja" && <Font cssVariable="--font-noto-sans-jp" preload />}
+    <Font cssVariable="--font-noto" preload />
+    {lang === "ja" && <Font cssVariable="--font-noto-jp" />}
     <title>{title}</title>
     <meta name="description" content={description}>
 
@@ -84,6 +84,17 @@ const structuredData = [...buildBaseGraph(lang), ...pageJsonLd];
     <link rel="alternate" hreflang="x-default" href={altEn}>
     <link rel="alternate" hreflang="en" href={altEn}>
     <link rel="alternate" hreflang="ja" href={altJa}>
+
+    <!-- Release feed -->
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={t("changelog.feedTitle")}
+      href={new URL(
+        lang === "ja" ? "/ja/changelog/rss.xml" : "/changelog/rss.xml",
+        siteUrl,
+      ).href}
+    >
 
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content={ogType}>
@@ -113,7 +124,7 @@ const structuredData = [...buildBaseGraph(lang), ...pageJsonLd];
     <meta name="twitter:image:alt" content={resolvedOgImageAlt}>
 
     <!-- UX -->
-    <meta name="theme-color" content="#0f172a">
+    <meta name="theme-color" content="#0a0f22">
     <link rel="apple-touch-icon" href="/app-icon.png">
 
     <!-- JSON-LD Structured Data -->
@@ -128,7 +139,7 @@ const structuredData = [...buildBaseGraph(lang), ...pageJsonLd];
     <!-- Page-level additions -->
     <slot name="head" />
   </head>
-  <body class="dark:bg-slate-900 bg-white transition-colors duration-300">
+  <body class="bg-background text-foreground antialiased">
     <a href="#main-content" class="skip-link"> {t("a11y.skipToMain")} </a>
     <slot />
     <CodeBlockCopyController
@@ -138,8 +149,3 @@ const structuredData = [...buildBaseGraph(lang), ...pageJsonLd];
     <ConsentBanner />
   </body>
 </html>
-<style>
-@import "tailwindcss";
-
-@custom-variant dark (&:where(.dark, .dark *));
-</style>

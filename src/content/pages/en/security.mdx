@@ -1,0 +1,118 @@
+---
+lang: en
+page: security
+title: "Security and data"
+metaTitle: "Security and Data: Official Sources, Signing, and Network Use | HardwareVisualizer"
+metaDescription: "Where HardwareVisualizer is officially distributed, how its installers are signed, what the app connects to over the network, where history is stored, and how to report a vulnerability."
+lead: "Where the app is officially distributed, how installers are signed, what it connects to, and where your data is kept. Each statement here can be checked against the source code or the linked document."
+basedOn: "1.11.3"
+updated: 2026-11-11
+---
+
+## Official sources
+
+Official downloads and installations are available only from:
+
+- this website, [hardviz.com](/download/);
+- [GitHub Releases](https://github.com/shm11C3/HardwareVisualizer/releases);
+- Winget for Windows: `winget install shm11C3.HardwareVisualizer`.
+
+Third-party mirrors, download sites, file-sharing links, YouTube description links, shortened URLs, and password-protected archives are not official distribution channels.
+
+### Impersonation
+
+- Malware impersonating HardwareVisualizer has been observed under names such as `HardwareVisualizer_1.3.1.zip`.
+- A SourceForge project named "Hardware Visualizer" was created without the developer's involvement. The authenticity and safety of the archives published there cannot be verified.
+
+Check the domain before you download, and [verify the installer](/verification/) before you run it.
+
+## Signing and verification
+
+<div class="table-scroll">
+
+| Platform | Signing status | How to verify |
+| --- | --- | --- |
+| Windows | Signed, for installers from v1.9.0 | Authenticode, Winget, SHA-256, attestation |
+| macOS | Signed and notarized | Gatekeeper, `codesign`, SHA-256, attestation |
+| Linux | Unsigned packages | SHA-256, attestation |
+| In-app updater | Signed updater assets | Applies to the update path only |
+
+</div>
+
+- Windows `.exe` and `.msi` installers are Authenticode-signed from v1.9.0. Earlier Windows releases may be unsigned.
+- SHA-256 checksums and GitHub Artifact Attestations are published for v1.8.1 and later.
+- Windows SmartScreen may still show a warning for a validly signed installer while publisher or file reputation is being established. Signature validation and SmartScreen reputation are separate checks.
+
+The steps are on the [Installer verification](/verification/) page. The full policy is in the repository's [code signing policy](https://github.com/shm11C3/HardwareVisualizer/blob/develop/CODE_SIGNING_POLICY.md).
+
+<a id="network"></a>
+
+## What the app connects to
+
+HardwareVisualizer has no telemetry and no account. Hardware readings and history are not sent anywhere. As of v1.11.3, the app itself makes these connections:
+
+<div class="table-scroll">
+
+| When | Destination | Purpose |
+| --- | --- | --- |
+| At startup | GitHub Releases (`github.com`) | Checks whether a newer version exists |
+| When you choose to set up PawnIO | Official GitHub releases of PawnIO | Downloads the pinned PawnIO 2.2.0 runtime installer and PawnIO.Modules 0.2.11, then checks each against a recorded size and SHA-256 digest |
+| When the interface loads | Google Fonts (`fonts.googleapis.com`) | The app's stylesheet imports the Noto Sans font |
+
+</div>
+
+The font request is not mentioned in the app's README. A change that bundles the font with the app, so that this request is no longer made, is planned. This page will be updated when that release is published.
+
+Reading a SwitchBot Meter uses Bluetooth on your PC, not the internet, and only when you turn it on. This list covers the app itself, not the installers.
+
+## Where your data is stored
+
+History is saved in a database file in the app's data folder:
+
+- Windows: `%APPDATA%\HardwareVisualizer`
+- macOS: `~/Library/Application Support/HardwareVisualizer`
+- Linux: `~/.config/HardwareVisualizer`
+
+Hardware history is kept for 365 days by default, and Storage Health records for 3 years. Both can be changed under **Settings → Insights**, where recording can also be stopped.
+
+The hardware report that you can copy from the app is written to the clipboard only. It includes network details such as MAC and IP addresses, so check it before you paste it somewhere public.
+
+## Permissions
+
+<div class="table-scroll">
+
+| Context | Used for |
+| --- | --- |
+| Windows WMI | Memory, system, and storage details; ACPI thermal zones |
+| Windows PDH | GPU engine utilization |
+| Windows administrator (PawnIO) | CPU temperature and power; motherboard temperatures and fans |
+| Windows Bluetooth | SwitchBot Meter readings, only when turned on in Settings |
+| Linux polkit (`pkexec`) | Detailed memory information through `dmidecode` |
+| Linux sudo | `smartctl` for Storage Health; `intel_gpu_top` for Intel GPU usage |
+
+</div>
+
+Basic monitoring does not require administrator rights.
+
+## Read-only sensor access
+
+Low-level Windows sensors are read through [PawnIO](https://pawnio.eu/), a separate driver that is optional. See the [setup guide](/guide/#pawnio) for how it is installed and removed.
+
+- The sensor path is read-only. It does not enable fan control, PWM writes, or voltage readings.
+- The project's sensor specifications allow register reads and rule out writes that alter chip configuration, fan control, limits, or power state.
+- The Windows PawnIO CPU temperature implementation is written from the repository's own clean-room sensor specifications, not by porting other monitoring tools.
+
+## Reporting a vulnerability
+
+Do not open a public GitHub issue for a security vulnerability. Use [Report a vulnerability](https://github.com/shm11C3/HardwareVisualizer/security/advisories/new) on GitHub, which sends a private report.
+
+- Receipt is acknowledged within 7 days.
+- Security fixes are provided for the latest stable release only.
+
+The policy is in [SECURITY.md](https://github.com/shm11C3/HardwareVisualizer/blob/develop/SECURITY.md).
+
+## Licence and source
+
+HardwareVisualizer is licensed under GPL-3.0-or-later from v1.11.0. Versions released before that, including v1.10.1 and the 1.10.x line, remain available under the MIT License. Third-party notices are shown in the app under **Settings → License**.
+
+The source code is on [GitHub](https://github.com/shm11C3/HardwareVisualizer).

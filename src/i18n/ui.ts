@@ -133,8 +133,6 @@ export const ui = {
     "seo.ogImageAlt":
       "HardwareVisualizer logo over a dashboard showing CPU, GPU, RAM, and process metrics",
     "seo.home.title": "HardwareVisualizer – CPU & GPU Monitor with History",
-    "seo.home.description":
-      "Hardware monitor for Windows, macOS, and Linux. See CPU, GPU, temperature, and processes live, then review what happened after gaming or heavy workloads.",
     "seo.home.softwareDescription":
       "Cross-platform hardware monitor with real-time CPU, GPU, temperature, memory, and process details plus locally stored history to help you understand what happened after gaming or heavy workloads.",
     "seo.home.feature1":
@@ -143,79 +141,177 @@ export const ui = {
       "Review what happened after gaming and heavy workloads",
     "seo.home.feature3":
       "Real-time CPU, GPU, temperature, and memory monitoring",
-    "seo.home.feature4": "No account and no outbound telemetry",
     "seo.home.feature5": "Authenticode-signed Windows release installer",
     "seo.home.feature6": "Open-source software licensed under GPL-3.0-or-later",
     "seo.home.feature7": "Windows, macOS, and Linux support",
-    "hero.title": "Live PC monitoring with history",
-    "hero.description":
-      "Track CPU and GPU usage and temperatures in real time. Review the history later to see how they changed and which processes were active.",
     "hero.download": "Download for Windows",
-    "hero.viewGitHub": "View on GitHub",
-    "hero.availability":
-      "For Windows 10 and 11. Also available on macOS and Linux.",
-    "hero.screenshotAlt":
-      "HardwareVisualizer Insights showing CPU and memory usage history over time",
+    "hero.facts.version": "Version",
+    "hero.facts.platforms": "Platforms",
+    "hero.facts.platformsValue": "Windows 10/11, macOS, Linux",
+    "hero.facts.license": "License",
+    "hero.facts.price": "Price",
+    "hero.facts.priceValue": "Free",
+    "scale.live.span": "1 second to 60 seconds",
+    "scale.record.span": "10 minutes to 30 days",
+    "scale.notice.span": "24 hours to 1 year",
+    "matrix.notesLabel": "Notes",
+    "hero.facts.label": "Release",
+    "scale.live.screen": "Performance",
+    "scale.record.screen": "Insights",
+    "scale.notice.screen": "Cooling Insight",
+    "doc.basedOn": "Describes v{version}. Last updated {date}.",
+    "nav.coolingInsight": "Cooling Insight",
+    "nav.guide": "Guide",
+    "nav.compatibility": "Compatibility",
+    "nav.primaryLabel": "Primary",
+    "nav.menu": "Menu",
+    "footer.compare": "Comparison",
+    "footer.security": "Security and data",
+    "hero.title": "Records your PC's state while you are not watching",
+    "hero.description":
+      "A hardware monitor that saves CPU, GPU, and memory readings every minute",
+    "hero.otherPlatforms": "macOS and Linux",
+    "hero.winget": "Also available through Winget",
+    "hero.tabsLabel": "Switch screens",
+    "screens.title": "Three screens",
+    "screens.live.body":
+      "CPU, memory, and GPU gauges sit beside graphs of the last 60 seconds.",
+    "screens.live.row1.term": "Panels",
+    "screens.live.row1.value": "5 kinds; hide and reorder them",
+    "screens.live.row2.term": "Views",
+    "screens.live.row2.value": "Panels, Compact, Monitor",
+    "screens.live.row3.term": "Tray",
+    "screens.live.row3.value":
+      "CPU and GPU usage; GPU temperature where available",
+    "screens.live.row4.term": "Appearance",
+    "screens.live.row4.value": "Theme, graph colors, wallpaper, °C/°F",
+    "screens.record.body":
+      "Shows recorded usage and temperatures over periods from 10 minutes to 30 days. Readings are taken every second, and the average, maximum, and minimum of each minute are saved to a database on your PC.",
+    "screens.record.note":
+      "Recording runs while the app is running. To keep it going after you close the window, set the app to stay in the tray in Settings.",
+    "screens.notice.body":
+      "Groups readings by CPU load and compares recent temperatures with your PC's own baseline. A CPU runs hotter when it works harder, so readings are compared within the same load band.",
+    "screens.notice.bands.term": "Load bands",
+    "screens.notice.bands.value": "Idle, Low, Mid, High",
+    "scale.live.caption":
+      "The Performance screen shows the current state of the CPU, memory, and GPU with per-core usage, running processes, motherboard sensors and fans, and power draw. Which readings appear depends on the OS and hardware.",
+    "scale.record.caption":
+      "The Insights screen. It charts recorded usage and temperatures over periods from 10 minutes to 30 days.",
+    "scale.notice.caption":
+      "The Cooling Insight screen. It puts temperature, load, power, fan speed, and room temperature on one timeline, over periods from 24 hours to 1 year. Windows only.",
+    "record.fact1.term": "Saved",
+    "record.fact1.value": "Every minute",
+    "record.fact2.term": "Kept for",
+    "record.fact2.value": "365 days by default (adjustable)",
+    "record.fact3.term": "Insights periods",
+    "record.fact3.value": "10 minutes to 30 days",
+    "record.fact4.term": "Stored in",
+    "record.fact4.value": "A database file on your PC",
+    "notice.note":
+      "Cooling Insight is a Windows feature and needs a CPU temperature reading. A rise in temperature is a prompt to look closer. On its own it does not confirm a fault or wear.",
+    "notice.cta": "How Cooling Insight works",
+    "notice.cond1.term": "Baseline",
+    "notice.cond1.value":
+      "The first 7 days that each hold at least 30 minutes of idle readings",
+    "notice.cond2.term": "Recent",
+    "notice.cond2.value": "The latest 7 recorded days within the past 30 days",
+    "matrix.title": "Support by OS",
+    "matrix.lead":
+      "Windows has the widest coverage. On macOS and Linux, some sensors are not available yet. A dash means the reading is not available on that OS.",
+    "matrix.caption": "Feature availability by operating system",
+    "matrix.col.feature": "Feature",
+    "matrix.row1.feature": "CPU and memory usage, processes",
+    "matrix.row1.windows": "Available",
+    "matrix.row1.macos": "Available",
+    "matrix.row1.linux": "Available",
+    "matrix.row2.feature": "GPU usage",
+    "matrix.row2.windows": "NVIDIA, AMD; others through PDH",
+    "matrix.row2.macos": "Available",
+    "matrix.row2.linux": "AMD, Intel ¹",
+    "matrix.row3.feature": "GPU temperature",
+    "matrix.row3.windows": "NVIDIA, AMD",
+    "matrix.row3.macos": "—",
+    "matrix.row3.linux": "AMD",
+    "matrix.row4.feature": "CPU temperature",
+    "matrix.row4.windows": "PawnIO ² or ACPI thermal zones",
+    "matrix.row4.macos": "—",
+    "matrix.row4.linux": "—",
+    "matrix.row5.feature": "Power draw",
+    "matrix.row5.windows": "CPU package ²",
+    "matrix.row5.macos": "CPU, GPU, ANE, package (Apple Silicon)",
+    "matrix.row5.linux": "—",
+    "matrix.row6.feature": "Motherboard temperatures and fans",
+    "matrix.row6.windows": "Supported Super I/O chips ²",
+    "matrix.row6.macos": "—",
+    "matrix.row6.linux": "—",
+    "matrix.row7.feature": "Storage Health (SMART)",
+    "matrix.row7.windows": "Available",
+    "matrix.row7.macos": "With smartctl ³",
+    "matrix.row7.linux": "With smartctl ³",
+    "matrix.row8.feature": "Network interface details",
+    "matrix.row8.windows": "Available",
+    "matrix.row8.macos": "Available",
+    "matrix.row8.linux": "Available",
+    "matrix.row9.feature": "Room temperature (SwitchBot)",
+    "matrix.row9.windows": "Available",
+    "matrix.row9.macos": "—",
+    "matrix.row9.linux": "—",
+    "matrix.row10.feature": "Cooling Insight",
+    "matrix.row10.windows": "Available ⁴",
+    "matrix.row10.macos": "—",
+    "matrix.row10.linux": "—",
+    "matrix.row11.feature": "Tray widget",
+    "matrix.row11.windows": "Flyout",
+    "matrix.row11.macos": "Menu bar",
+    "matrix.row11.linux": "Tray title",
+    "matrix.note1":
+      "NVIDIA GPUs are listed on Linux, but their readings are not available yet. Intel GPU usage requires intel_gpu_top.",
+    "matrix.note2":
+      "Requires PawnIO and administrator access. Motherboard sensors support Nuvoton NCT6799D. NCT6796D and ITE IT8728F (temperatures only) are experimental.",
+    "matrix.note3": "Requires smartmontools.",
+    "matrix.note4":
+      "Requires CPU temperature. Power, fan, and room-temperature lanes appear when those sensors are available.",
+    "matrix.linkSpecs": "Full compatibility notes",
+    "matrix.linkGuide": "Setup guide",
+    "matrix.linkCompare": "Compare with other monitors",
+    "trust.title": "Security and data",
+    "trust.item1.title": "Three official sources",
+    "trust.item1.body":
+      "hardviz.com, GitHub Releases, and Winget. Other download sites and mirrors are not official, and malware has been distributed under this app's name.",
+    "trust.item1.link": "Official sources and impersonation",
+    "trust.item2.title": "Signed and verifiable",
+    "trust.item2.body":
+      "Windows installers are Authenticode-signed from v1.9.0. macOS builds are signed and notarized. Linux packages are unsigned; verify them with SHA-256 checksums and GitHub Artifact Attestations.",
+    "trust.item2.link": "Verify a download",
+    "trust.item3.title": "Your data stays on your PC",
+    "trust.item3.body":
+      "No account and no telemetry. The app connects to the internet to check GitHub Releases for updates, to download PawnIO if you choose to set it up, and to load its interface font from Google Fonts.",
+    "trust.item3.link": "What the app connects to",
+    "trust.item4.title": "Open source",
+    "trust.item4.body":
+      "Licensed under GPL-3.0-or-later. Low-level sensors are read through PawnIO, an optional driver. The app does not control fans or change hardware settings.",
+    "trust.item4.link": "Source on GitHub",
+    "feedback.title": "Feedback",
+    "feedback.lead":
+      "HardwareVisualizer is developed by one person. Reports and requests are welcome on GitHub Discussions or through the anonymous survey.",
+    "feedback.discussions.title": "GitHub Discussions",
+    "feedback.discussions.body":
+      "Post in public, where others can read and reply. A GitHub account is required.",
+    "feedback.discussions.ui": "UI feedback",
+    "feedback.discussions.ideas": "Feature ideas",
+    "feedback.survey.title": "Anonymous survey",
+    "feedback.survey.body":
+      "Takes about 2 to 3 minutes, with no account. Most questions are optional.",
+    "feedback.survey.cta": "Open the survey",
     "screenshots.insightsAlt":
       "HardwareVisualizer Insights - review historical CPU and GPU usage after a workload",
     "screenshots.dashboardAlt":
       "HardwareVisualizer dashboard showing CPU, memory, GPU, process, and sensor monitoring",
     "screenshots.coolingInsightAlt":
       "Cooling Insight dashboard comparing CPU temperature and showing temperature, load, power, and fan history",
-    "usage.title": "Customize the Live View",
-    "usage.description":
-      "Keep the real-time dashboard readable your way with adjustable charts, colors, and a local background image.",
-    "usage.customization.title1": "Readable Live Charts",
-    "usage.customization.description1":
-      "Line charts show current CPU, RAM, and GPU usage at a glance.",
-    "usage.customization.title2": "Custom Appearance",
-    "usage.customization.description2":
-      "Tweak colors, borders, and legends with flexible visual settings.",
-    "usage.customization.title3": "Custom Wallpaper",
-    "usage.customization.description3":
-      "Make your dashboard truly yours with a background image you love.",
     "usage.screenshotAlt":
       "HardwareVisualizer dashboard using a custom local background image",
-    "insights.title": "Look Back After the Workload Ends",
-    "insights.description":
-      "You do not have to watch a live graph while you play, render, compile, or run another demanding task. Open Insights afterward to see when load peaked, temperatures rose, or a process used more resources. History is kept for 30 days by default, and retention is configurable.",
-    "insights.card1.title": "Check Peaks During Gaming",
-    "insights.card1.description":
-      "See when CPU or GPU load peaked and how long demanding activity continued.",
-    "insights.card2.title": "Trace Temperature Rises",
-    "insights.card2.description":
-      "Follow temperature changes over time and see how they relate to CPU or GPU load.",
-    "insights.card3.title": "Find the Process Behind the Load",
-    "insights.card3.description":
-      "Review sampled process activity to see which applications used CPU or memory.",
-    "insights.card4.title": "Compare Earlier Periods",
-    "insights.card4.description":
-      "Return to an earlier period and compare the same CPU, GPU, and temperature metrics with what you see now.",
-    "insights.download": "Download HardwareVisualizer",
-    "features.title": "Live Details When You Need Them",
-    "features.description":
-      "Use real-time CPU, GPU, temperature, and memory details when you need to inspect what your PC is doing right now.",
-    "features.card1.title": "CPU Monitoring",
-    "features.card1.description":
-      "Track CPU usage, temperature, and frequency in real-time with detailed per-core statistics.",
-    "features.card2.title": "GPU Metrics",
-    "features.card2.description":
-      "View GPU utilization, temperature, memory usage, and clock speeds for supported graphics cards.",
-    "features.card3.title": "Memory Analysis",
-    "features.card3.description":
-      "Monitor RAM usage, available memory, and memory allocation across applications.",
-    "features.card4.title": "System Specifications",
-    "features.card4.description":
-      "Look up CPU, GPU, memory, storage, and operating system details in one place.",
-    "features.card5.title": "Lightweight",
-    "features.card5.description":
-      "Built with Tauri for minimal resource usage, ensuring the monitor itself doesn't impact system performance.",
-    "features.card6.title": "Cross-Platform & Open Source",
-    "features.card6.description":
-      "Built in the open for Windows, macOS, and Linux under the GPL-3.0-or-later license.",
-    "download.title": "Download HardwareVisualizer",
-    "download.description":
-      "Available for Windows, macOS, and Linux OS. Free and open source.",
+    "download.title": "Download",
     "download.pageTitle": "Download HardwareVisualizer",
     "download.pageTitleBeforeBreak": "Download",
     "download.pageTitleSeparator": " ",
@@ -245,13 +341,13 @@ export const ui = {
     "download.button": "Download",
     "download.noDownloads": "No downloads available for {platform} yet.",
     "download.otherVersions": "Looking for other versions or platforms?",
-    "download.githubLink": "View all releases on GitHub →",
+    "download.githubLink": "View all releases on GitHub",
     "download.githubDownloadButton": "Download from GitHub",
-    "download.changelogLink": "View past versions →",
+    "download.changelogLink": "View past versions",
     "download.installationLink": "See detailed installation instructions",
     "download.releaseDate": "Released:",
     "download.latestChanges": "Release highlights",
-    "download.latestChangesLink": "Read full changelog →",
+    "download.latestChangesLink": "Read full changelog",
     "download.verify.summary": "Verify this download",
     "download.verify.artifact": "Artifact",
     "download.verify.fileSize": "File size",
@@ -280,9 +376,9 @@ export const ui = {
       "Release notes are now available on the official website.",
     "changelog.back": "Back to Changelog",
     "changelog.githubRelease": "View on GitHub",
+    "changelog.rss": "RSS feed",
+    "changelog.feedTitle": "HardwareVisualizer changelog",
 
-    "footer.description":
-      "HardwareVisualizer is a cross-platform hardware monitor with real-time CPU and GPU monitoring plus history to help you understand what happened.",
     "footer.product": "Product",
     "footer.features": "Features",
     "footer.download": "Download",
@@ -314,7 +410,7 @@ export const ui = {
     "specs.nav.storageComponents": "Storage Health",
     "specs.nav.privacyVerification": "Privacy and verification",
     "specs.section.overview.eyebrow": "Before you install",
-    "specs.section.overview.title": "What the app is built to keep visible",
+    "specs.section.overview.title": "Overview",
     "specs.section.overview.description":
       "HardwareVisualizer is a free, open-source desktop monitor for people who want live hardware state, short-window graphs, and recent history in one readable surface.",
     "specs.overview.distribution.label": "Official distribution",
@@ -324,8 +420,6 @@ export const ui = {
     "specs.overview.os.value":
       "Windows 10/11, macOS builds for Apple Silicon and Intel, plus Linux packages for common desktop distributions.",
     "specs.overview.history.label": "Historical insight",
-    "specs.overview.history.value":
-      "CPU, memory, GPU, and process history are kept for up to 30 days by default.",
     "specs.overview.privacy.label": "Privacy posture",
     "specs.overview.privacy.value":
       "No outbound telemetry for collected hardware data.",
@@ -344,8 +438,6 @@ export const ui = {
       "The app targets desktop operating systems, but sensor depth can vary by OS APIs, device files, drivers, and vendor SDKs.",
     "specs.section.signals.eyebrow": "Hardware coverage",
     "specs.signals.title": "Signals and feature coverage",
-    "specs.signals.description":
-      "The matrix separates always-useful dashboard surfaces from best-effort sensor paths and planned monitoring work by operating system.",
     "specs.matrix.feature": "Signal / feature",
     "specs.matrix.cpu.label": "CPU / RAM",
     "specs.matrix.cpuTemperature.label": "CPU / sensor temperature",
@@ -358,30 +450,10 @@ export const ui = {
       "Live usage, memory details, and history are core supported surfaces.",
     "specs.matrix.cpu.linux":
       "Live usage, memory details, and history are core supported surfaces.",
-    "specs.matrix.gpu.windows":
-      "Deepest coverage, especially NVIDIA; AMD and Intel depend on driver and API availability.",
-    "specs.matrix.gpu.macos":
-      "Partial coverage through macOS APIs; visible counters vary by device.",
-    "specs.matrix.gpu.linux":
-      "Partial coverage through NVIDIA and DRM paths; permissions and drivers matter.",
     "specs.matrix.cpuTemperature.windows":
       "ACPI thermal zones are best effort; PawnIO can improve CPU package temperature on supported CPUs.",
-    "specs.matrix.cpuTemperature.macos":
-      "Best effort. Sensor exposure depends on the machine and macOS APIs.",
-    "specs.matrix.cpuTemperature.linux":
-      "Best effort. Sensor access can depend on device files, drivers, and privileges.",
     "specs.matrix.storage.windows":
       "Native and fallback paths can expose SMART or NVMe health fields when available.",
-    "specs.matrix.storage.macos":
-      "Native paths can expose storage summary and selected health fields when available.",
-    "specs.matrix.storage.linux":
-      "Native paths and smartctl can improve SMART or NVMe health coverage.",
-    "specs.matrix.network.windows":
-      "Interface, IP, subnet, and gateway data are available; traffic usage is planned.",
-    "specs.matrix.network.macos":
-      "Interface, IP, subnet, and gateway data are available; traffic usage is planned.",
-    "specs.matrix.network.linux":
-      "Interface, IP, subnet, and gateway data are available; traffic usage is planned.",
     "specs.matrix.process.windows":
       "Live Process Table and Process Insight connect current load with history.",
     "specs.matrix.process.macos":
@@ -390,10 +462,6 @@ export const ui = {
       "Live Process Table and Process Insight connect current load with history.",
     "specs.matrix.fan.windows":
       "Fan-speed reads are implemented for supported Super I/O sensors through the optional PawnIO LpcIO module. Coverage varies by motherboard, and this read-only path does not support fan control.",
-    "specs.matrix.fan.macos":
-      "Cross-vendor fan monitoring remains roadmap and research work.",
-    "specs.matrix.fan.linux":
-      "Cross-vendor fan monitoring remains roadmap and research work.",
     "specs.matrix.language.windows":
       "English, Japanese, and Russian are supported in the app.",
     "specs.matrix.language.macos":
@@ -490,7 +558,6 @@ export const ui = {
     "specs.compat.status.supported": "Supported",
     "specs.compat.status.partial": "Partial",
     "specs.compat.status.bestEffort": "Best effort",
-    "specs.compat.status.planned": "Planned",
     "specs.compat.status.experimental": "Experimental",
     "specs.compat.windows.coverage": "Windows 10/11, x64",
     "specs.compat.windows.notes":
@@ -507,8 +574,6 @@ export const ui = {
     "specs.compat.macos.intel.notes":
       "Intel macOS builds are experimental. Sensor coverage depends on the machine and OS API availability.",
     "specs.compat.cpu.coverage": "CPU and RAM usage, memory details, history",
-    "specs.compat.gpu.coverage":
-      "NVIDIA full path, AMD and Intel partial paths",
     "specs.compat.storage.coverage":
       "Storage summary, Storage Health records, Live Storage Health",
     "specs.compat.network.coverage": "Interface, IP, subnet, and gateway data",
@@ -529,8 +594,6 @@ export const ui = {
     "faq.description":
       "Common questions about HardwareVisualizer and hardware monitoring.",
     "faq.q1": "What is HardwareVisualizer?",
-    "faq.a1":
-      "HardwareVisualizer is a free, open-source, cross-platform hardware monitoring tool. It lets you track CPU temperature, GPU usage, memory allocation, and system performance in real-time with beautiful graphs and minimal system impact.",
     "faq.q2": "Is HardwareVisualizer free?",
     "faq.a2":
       "Yes, HardwareVisualizer is completely free and open-source under the GNU General Public License v3.0 or later (GPL-3.0-or-later). Versions released before the relicense remain available under the MIT license. Download it only from hardviz.com, GitHub Releases, or Winget on Windows where available; third-party mirrors, file-sharing links, YouTube description links, and password-protected archives are not official.",
@@ -538,14 +601,8 @@ export const ui = {
     "faq.a3":
       "HardwareVisualizer supports Windows 10, Windows 11, macOS (Apple Silicon officially supported, Intel experimental), and major Linux distributions (Debian/Ubuntu, RPM-based distros, AppImage).",
     "faq.q4": "How is it different from Task Manager or HWiNFO?",
-    "faq.a4":
-      "HardwareVisualizer is designed to be lightweight with a modern UI. Unlike Task Manager, it provides detailed graphs and configurable long-term history, kept for 30 days by default and extendable in settings. It pauses hidden-window updates while in the system tray, and the interface stays customizable.",
     "faq.q5": "Can I monitor hardware while gaming?",
-    "faq.a5":
-      "Yes! HardwareVisualizer runs in the background with minimal resource usage, making it perfect for monitoring CPU usage and memory during gaming sessions. GPU temperature monitoring is fully supported on NVIDIA GPUs, with partial support for AMD and Intel GPUs. You can also check historical data to see how your system performed.",
     "faq.q6": "Which GPUs are supported?",
-    "faq.a6":
-      "HardwareVisualizer fully supports NVIDIA GPUs. AMD and Intel GPUs are partially supported — core metrics such as usage and temperature work, though some readings may be limited or less accurate.",
     "faq.q7": "Can I request new features or contribute?",
     "faq.a7":
       "Absolutely! You can request new hardware support, themes, languages, and other features by creating an issue on GitHub. Contributions are always welcome — feel free to submit pull requests or join the discussions.",
@@ -553,22 +610,64 @@ export const ui = {
     "faq.githubLink": "Create an issue on GitHub",
     "faq.verificationGuideLink": "Installer verification",
     "faq.viewAll": "View all FAQs",
+    "faq.compareLink": "See the sourced comparison",
+    "faq.a1":
+      "HardwareVisualizer is a free, open-source hardware monitor for Windows, macOS, and Linux. It shows CPU, memory, and GPU readings in real time and keeps a history on your PC, so you can review afterwards what happened.",
+    "faq.a4":
+      "HardwareVisualizer records readings every minute and charts them inside the app: up to 30 days in Insights and up to 1 year in Cooling Insight, with history kept for 365 days by default. On Windows, Cooling Insight compares CPU temperature with its own baseline at a similar load. HWiNFO reads more kinds of sensors, such as voltages, and offers an on-screen display. The comparison page lists the differences with sources.",
+    "faq.a5":
+      "Yes. Recording continues in the background, and with Close to tray the app stays in the system tray after you close its window. Afterwards, Insights shows how CPU and GPU usage and temperatures changed and which processes were active. There is no in-game overlay.",
+    "faq.a6":
+      "On Windows, NVIDIA and AMD GPUs report usage and temperature, and other GPUs report usage. On Linux, AMD GPUs report usage and temperature, Intel GPUs report usage with intel_gpu_top, and NVIDIA GPUs are listed without readings for now. On macOS, GPU usage is available and GPU temperature is not.",
+    "seo.home.description":
+      "Free, open-source hardware monitor for Windows, macOS, and Linux. See CPU, GPU, and temperatures live, keep a year of history on your PC, and compare how cooling changes over months.",
+    "seo.home.feature4": "No account and no telemetry",
+    "footer.description":
+      "A free, open-source hardware monitor that shows CPU, GPU, and memory readings and records them on your PC every minute.",
+    "specs.overview.history.value":
+      "Hardware history is kept for 365 days by default on new installs. Insights charts up to 30 days, and Cooling Insight up to 1 year.",
+    "specs.signals.description":
+      "The matrix separates the readings available everywhere from best-effort sensor paths, and marks what is not available on each operating system.",
+    "specs.matrix.gpu.windows":
+      "NVIDIA and AMD report usage and temperature. Other GPUs report usage through Windows performance counters (PDH).",
+    "specs.matrix.gpu.macos": "GPU usage is available. GPU temperature is not.",
+    "specs.matrix.gpu.linux":
+      "AMD reports usage and temperature. Intel reports usage with intel_gpu_top. NVIDIA GPUs are listed, but their readings are not available yet.",
+    "specs.matrix.cpuTemperature.macos":
+      "CPU temperature is not available on macOS.",
+    "specs.matrix.cpuTemperature.linux":
+      "CPU temperature is not available on Linux yet.",
+    "specs.matrix.storage.macos":
+      "Storage Health is collected through smartctl, which requires smartmontools.",
+    "specs.matrix.storage.linux":
+      "Storage Health is collected through smartctl, which requires smartmontools and usually root access.",
+    "specs.matrix.network.windows":
+      "Interface, IP, subnet, and gateway details are available. Network traffic is not measured.",
+    "specs.matrix.network.macos":
+      "Interface, IP, subnet, and gateway details are available. Network traffic is not measured.",
+    "specs.matrix.network.linux":
+      "Interface, IP, subnet, and gateway details are available. Network traffic is not measured.",
+    "specs.matrix.fan.macos": "Fan speeds are not available on macOS.",
+    "specs.matrix.fan.linux": "Fan speeds are not available on Linux yet.",
+    "specs.compat.gpu.coverage":
+      "Usage on all three; temperature for NVIDIA and AMD on Windows and for AMD on Linux",
+    "specs.compat.status.unavailable": "Not available",
     "about.heading": "About HardwareVisualizer",
     "about.contact.emailLabel": "Email",
-    "about.feedback.heading": "Have feedback?",
+    "about.feedback.heading": "Feedback",
     "about.feedback.body":
-      "HardwareVisualizer is shaped by the people who use it. A short, anonymous survey helps decide what to build next.",
+      "A short, anonymous survey collects reports and requests.",
     "about.feedback.cta": "Answer the survey",
     "footer.survey": "Survey",
-    "survey.metaTitle": "Survey - HardwareVisualizer | Share Your Feedback",
+    "survey.metaTitle": "Survey | HardwareVisualizer",
     "survey.metaDescription":
       "Share your feedback on HardwareVisualizer — which features you use, what's missing, and how we can improve. Anonymous and takes about 2–3 minutes.",
-    "survey.heading": "Help shape HardwareVisualizer",
+    "survey.heading": "Survey",
     "survey.description":
-      "Your feedback directly guides what we build next. This survey is anonymous and takes about 2–3 minutes.",
+      "This survey is anonymous and takes about 2–3 minutes.",
     "survey.privacyNote":
       "Responses are anonymous. We attach some non-identifying context so we can group feedback — your entry point and language, plus your app version and OS when you open the survey from the app — never your hardware details or anything that identifies you. The form is hosted by Tally.",
-    "survey.privacyNoteLink": "Read our Privacy Policy →",
+    "survey.privacyNoteLink": "Read our Privacy Policy",
     "survey.preparing":
       "The survey is being prepared and will be available here shortly. Thanks for your interest!",
     "survey.backHome": "Back to home",
@@ -701,87 +800,182 @@ export const ui = {
     "seo.ogImageAlt":
       "CPU、GPU、RAM、プロセス情報のダッシュボードに重なるHardwareVisualizerのロゴ",
     "seo.home.title": "HardwareVisualizer – あとから振り返れるCPU・GPUモニター",
-    "seo.home.description":
-      "Windows、macOS、Linux対応のハードウェアモニター。CPU、GPU、温度、プロセスをリアルタイムで確認し、ゲームや重い処理のあとに何が起きていたか振り返れます。",
     "seo.home.softwareDescription":
       "CPU、GPU、温度、メモリ、プロセスをリアルタイムで確認し、PC内に保存した履歴から、ゲームや重い処理のあとに何が起きていたか振り返れるクロスプラットフォーム対応ハードウェアモニター。",
     "seo.home.feature1":
       "CPU、GPU、温度、サンプリングされたプロセスの履歴をPC内に保存",
     "seo.home.feature2": "ゲームや重い処理のあとに何が起きていたか確認",
     "seo.home.feature3": "CPU、GPU、温度、メモリのリアルタイム監視",
-    "seo.home.feature4": "アカウント不要・外部テレメトリなし",
     "seo.home.feature5": "Authenticode署名済みWindowsリリースインストーラ",
     "seo.home.feature6":
       "GPL-3.0-or-laterライセンスのオープンソースソフトウェア",
     "seo.home.feature7": "Windows、macOS、Linux対応",
-    "hero.title": "PCの今と、これまでの変化を見る。",
-    "hero.description":
-      "CPU・GPUの使用率や温度をリアルタイムで表示し、負荷の変化や動いていたアプリも履歴から確認できます。",
     "hero.download": "Windows版をダウンロード",
-    "hero.viewGitHub": "GitHubを閲覧",
-    "hero.availability": "Windows 10・11に対応。macOS・Linux版も利用できます。",
-    "hero.screenshotAlt":
-      "CPUとメモリの使用履歴を時系列で表示するHardwareVisualizerのInsights画面",
+    "hero.facts.version": "バージョン",
+    "hero.facts.platforms": "対応OS",
+    "hero.facts.platformsValue": "Windows 10・11、macOS、Linux",
+    "hero.facts.license": "ライセンス",
+    "hero.facts.price": "価格",
+    "hero.facts.priceValue": "無料",
+    "scale.live.span": "1秒〜60秒",
+    "scale.record.span": "10分〜30日",
+    "scale.notice.span": "24時間〜1年",
+    "matrix.notesLabel": "補足",
+    "hero.facts.label": "リリース情報",
+    "scale.live.screen": "パフォーマンス",
+    "scale.record.screen": "インサイト",
+    "scale.notice.screen": "Cooling Insight",
+    "doc.basedOn": "v{version}時点の内容です。最終更新：{date}",
+    "nav.coolingInsight": "Cooling Insight",
+    "nav.guide": "ガイド",
+    "nav.compatibility": "対応状況",
+    "nav.primaryLabel": "メイン",
+    "nav.menu": "メニュー",
+    "footer.compare": "他ツールとの比較",
+    "footer.security": "安全性とデータ",
+    "hero.title": "見ていない間もPCの状態を記録",
+    "hero.description":
+      "CPU・GPU・メモリを1分ごとに保存するハードウェアモニター",
+    "hero.otherPlatforms": "macOS・Linux版",
+    "hero.winget": "Wingetでも導入できます",
+    "hero.tabsLabel": "画面を切り替える",
+    "screens.title": "3つの画面",
+    "screens.live.body":
+      "CPU・メモリ・GPUのゲージと、直近60秒のグラフが並びます。",
+    "screens.live.row1.term": "選べるパネル",
+    "screens.live.row1.value": "5種類。表示と順番を変更可",
+    "screens.live.row2.term": "表示",
+    "screens.live.row2.value": "パネル、コンパクト、モニター",
+    "screens.live.row3.term": "トレイ",
+    "screens.live.row3.value": "CPU・GPU使用率、対応環境ではGPU温度",
+    "screens.live.row4.term": "見た目",
+    "screens.live.row4.value": "テーマ、グラフの色、壁紙、°C／°F",
+    "screens.record.body":
+      "記録した使用率や温度を、10分から30日までの期間で表示します。値は1秒ごとに取得し、1分ごとの平均・最大・最小をPC内のデータベースに保存します。",
+    "screens.record.note":
+      "記録されるのはアプリが動いている間です。ウィンドウを閉じても続けるには、設定でトレイに常駐させます。",
+    "screens.notice.body":
+      "CPU負荷ごとに記録を分け、最近の温度をそのPC自身の基準と比べます。CPUは負荷が高いほど熱くなるので、同じ負荷どうしで比べます。",
+    "screens.notice.bands.term": "負荷帯",
+    "screens.notice.bands.value": "アイドル、低負荷、中負荷、高負荷",
+    "scale.live.caption":
+      "「パフォーマンス」画面。CPU・メモリ・GPUの現在の状態に加えて、コアごとの使用率、動作中のプロセス、マザーボードのセンサーとファン、消費電力を表示します。表示できる項目はOSとハードウェアによって異なります。",
+    "scale.record.caption":
+      "「インサイト」画面。記録した使用率や温度を、10分から30日までの期間で振り返ります。",
+    "scale.notice.caption":
+      "「Cooling Insight」画面。温度・負荷・電力・ファン・室温を同じ時間軸に並べ、24時間から1年までの期間で比べます。Windows版の機能です。",
+    "record.fact1.term": "保存の間隔",
+    "record.fact1.value": "1分ごと",
+    "record.fact2.term": "保存期間",
+    "record.fact2.value": "標準365日（変更可）",
+    "record.fact3.term": "インサイトの表示期間",
+    "record.fact3.value": "10分〜30日",
+    "record.fact4.term": "保存先",
+    "record.fact4.value": "PC内のデータベースファイル",
+    "notice.note":
+      "Cooling InsightはWindows版の機能で、CPU温度を取得できる環境が必要です。温度の上昇は詳しく調べるきっかけであり、それだけで故障や劣化を断定するものではありません。",
+    "notice.cta": "Cooling Insightのしくみ",
+    "notice.cond1.term": "基準",
+    "notice.cond1.value": "アイドル時の記録が30分以上ある日の、最初の7日ぶん",
+    "notice.cond2.term": "最近",
+    "notice.cond2.value": "過去30日以内で、記録のある直近7日ぶん",
+    "matrix.title": "OS別の対応状況",
+    "matrix.lead":
+      "対応範囲が最も広いのはWindowsです。macOSとLinuxでは、まだ取得できないセンサーがあります。「—」は、そのOSでは取得できないことを示します。",
+    "matrix.caption": "OS別の対応状況",
+    "matrix.col.feature": "項目",
+    "matrix.row1.feature": "CPU・メモリ使用率、プロセス",
+    "matrix.row1.windows": "対応",
+    "matrix.row1.macos": "対応",
+    "matrix.row1.linux": "対応",
+    "matrix.row2.feature": "GPU使用率",
+    "matrix.row2.windows": "NVIDIA、AMD。その他はPDH経由",
+    "matrix.row2.macos": "対応",
+    "matrix.row2.linux": "AMD、Intel ¹",
+    "matrix.row3.feature": "GPU温度",
+    "matrix.row3.windows": "NVIDIA、AMD",
+    "matrix.row3.macos": "—",
+    "matrix.row3.linux": "AMD",
+    "matrix.row4.feature": "CPU温度",
+    "matrix.row4.windows": "PawnIO ² またはACPIサーマルゾーン",
+    "matrix.row4.macos": "—",
+    "matrix.row4.linux": "—",
+    "matrix.row5.feature": "消費電力",
+    "matrix.row5.windows": "CPUパッケージ ²",
+    "matrix.row5.macos": "CPU、GPU、ANE、パッケージ（Apple Silicon）",
+    "matrix.row5.linux": "—",
+    "matrix.row6.feature": "マザーボードの温度とファン",
+    "matrix.row6.windows": "対応するSuper I/Oチップ ²",
+    "matrix.row6.macos": "—",
+    "matrix.row6.linux": "—",
+    "matrix.row7.feature": "ストレージヘルス（SMART）",
+    "matrix.row7.windows": "対応",
+    "matrix.row7.macos": "smartctlが必要 ³",
+    "matrix.row7.linux": "smartctlが必要 ³",
+    "matrix.row8.feature": "ネットワークインターフェースの情報",
+    "matrix.row8.windows": "対応",
+    "matrix.row8.macos": "対応",
+    "matrix.row8.linux": "対応",
+    "matrix.row9.feature": "室温（SwitchBot）",
+    "matrix.row9.windows": "対応",
+    "matrix.row9.macos": "—",
+    "matrix.row9.linux": "—",
+    "matrix.row10.feature": "Cooling Insight",
+    "matrix.row10.windows": "対応 ⁴",
+    "matrix.row10.macos": "—",
+    "matrix.row10.linux": "—",
+    "matrix.row11.feature": "トレイウィジェット",
+    "matrix.row11.windows": "フライアウト",
+    "matrix.row11.macos": "メニューバー",
+    "matrix.row11.linux": "トレイのタイトル表示",
+    "matrix.note1":
+      "LinuxではNVIDIAのGPUは一覧に表示されますが、値の取得にはまだ対応していません。IntelのGPU使用率にはintel_gpu_topが必要です。",
+    "matrix.note2":
+      "PawnIOと管理者権限が必要です。マザーボードセンサーはNuvoton NCT6799Dに対応しています。NCT6796DとITE IT8728F（温度のみ）は試験的な対応です。",
+    "matrix.note3": "smartmontoolsが必要です。",
+    "matrix.note4":
+      "CPU温度の取得が必要です。電力・ファン・室温は、それぞれのセンサーを使える場合に表示されます。",
+    "matrix.linkSpecs": "対応状況の詳細",
+    "matrix.linkGuide": "導入ガイド",
+    "matrix.linkCompare": "ほかのモニターとの比較",
+    "trust.title": "安全性とデータ",
+    "trust.item1.title": "公式の配布元は3つ",
+    "trust.item1.body":
+      "hardviz.com、GitHub Releases、Wingetです。それ以外のダウンロードサイトやミラーは公式ではありません。このアプリの名前をかたるマルウェアも確認されています。",
+    "trust.item1.link": "公式の配布元となりすまし",
+    "trust.item2.title": "署名と検証",
+    "trust.item2.body":
+      "Windowsのインストーラーはv1.9.0以降Authenticode署名付きで、macOS版は署名と公証を受けています。Linuxのパッケージは未署名のため、SHA-256とGitHub Artifact Attestationsで検証してください。",
+    "trust.item2.link": "ダウンロードを検証する",
+    "trust.item3.title": "データはPCの中に",
+    "trust.item3.body":
+      "アカウントは不要で、テレメトリーもありません。アプリが通信するのは、GitHub Releasesでの更新確認、導入を選んだ場合のPawnIOの取得、Google Fontsからの表示用フォントの読み込みです。",
+    "trust.item3.link": "アプリの通信先",
+    "trust.item4.title": "オープンソース",
+    "trust.item4.body":
+      "ライセンスはGPL-3.0-or-laterです。低い層のセンサーは、任意で導入するドライバーPawnIOを通じて読み取ります。ファンの制御やハードウェア設定の変更は行いません。",
+    "trust.item4.link": "GitHubでソースを見る",
+    "feedback.title": "フィードバック",
+    "feedback.lead":
+      "HardwareVisualizerは個人で開発しています。動作の報告や要望は、GitHub Discussionsか匿名アンケートで受け付けています。",
+    "feedback.discussions.title": "GitHub Discussions",
+    "feedback.discussions.body":
+      "公開の場に書き込めます。ほかの人も読んだり返信したりできます。GitHubアカウントが必要です。",
+    "feedback.discussions.ui": "UIへの感想",
+    "feedback.discussions.ideas": "機能のアイデア",
+    "feedback.survey.title": "匿名アンケート",
+    "feedback.survey.body":
+      "2〜3分で回答できます。アカウントは不要で、ほとんどの設問は任意です。",
+    "feedback.survey.cta": "アンケートを開く",
     "screenshots.insightsAlt":
       "処理後にCPUとGPUの使用履歴を振り返るHardwareVisualizerのInsights画面",
     "screenshots.dashboardAlt":
       "CPU、メモリ、GPU、プロセス、センサーの状態を表示するHardwareVisualizerのダッシュボード",
     "screenshots.coolingInsightAlt":
       "CPU温度の比較と温度、負荷、電力、ファンの履歴を表示するCooling Insight画面",
-    "usage.title": "リアルタイム表示を自分好みに",
-    "usage.description":
-      "チャート、色、PC内の背景画像を調整し、今の状態を見やすいダッシュボードにできます。",
-    "usage.customization.title1": "見やすいリアルタイムグラフ",
-    "usage.customization.description1":
-      "CPU、RAM、GPUの現在の使用状況をラインチャートですぐに確認できます。",
-    "usage.customization.title2": "カスタム外観",
-    "usage.customization.description2":
-      "色、境界線、凡例を柔軟に設定して、視覚的な外観を調整できます。",
-    "usage.customization.title3": "カスタム壁紙",
-    "usage.customization.description3":
-      "好きな背景画像でダッシュボードをあなたのものにできます。",
     "usage.screenshotAlt":
       "PC内の背景画像を設定したHardwareVisualizerのダッシュボード",
-    "insights.title": "処理が終わったあとに振り返る",
-    "insights.description":
-      "ゲーム、レンダリング、ビルドなどの最中にグラフを見続ける必要はありません。終了後にInsightsを開き、負荷のピーク、温度上昇、プロセスの動きを確認できます。履歴は初期設定で30日間保存され、保存期間は変更できます。",
-    "insights.card1.title": "ゲーム中のピークを確認",
-    "insights.card1.description":
-      "CPUやGPUの負荷がいつ最大になり、高負荷がどのくらい続いたか確認できます。",
-    "insights.card2.title": "温度上昇を追跡",
-    "insights.card2.description":
-      "温度の変化を時系列で追い、CPUやGPUの負荷との関係を確認できます。",
-    "insights.card3.title": "負荷を掛けたプロセスを確認",
-    "insights.card3.description":
-      "サンプリングされたプロセスの動きから、CPUやメモリを使ったアプリを確認できます。",
-    "insights.card4.title": "以前の記録と見比べる",
-    "insights.card4.description":
-      "以前の期間に戻り、CPU、GPU、温度の同じ指標を現在の状態と見比べられます。",
-    "insights.download": "HardwareVisualizerをダウンロード",
-    "features.title": "必要なときは、今の状態も詳しく見る",
-    "features.description":
-      "CPU、GPU、温度、メモリの詳細をリアルタイムで確認し、PCが今どう動いているか詳しく見られます。",
-    "features.card1.title": "CPUモニタリング",
-    "features.card1.description":
-      "CPU使用率、温度、周波数をリアルタイムでコアごとに詳細にモニタリングします。",
-    "features.card2.title": "GPUメトリクス",
-    "features.card2.description":
-      "対応GPUの使用率、温度、メモリ使用量、クロックスピードを表示します。",
-    "features.card3.title": "メモリ監視",
-    "features.card3.description":
-      "RAM使用量、空きメモリ、アプリごとのメモリ割り当てをモニタリングします。",
-    "features.card4.title": "システム仕様",
-    "features.card4.description":
-      "CPU、GPU、メモリ、ストレージ、OSの詳細を一か所で確認できます。",
-    "features.card5.title": "超軽量",
-    "features.card5.description":
-      "Rust製でリソース消費が最小限。モニター自体がシステムに負荷をかけません。",
-    "features.card6.title": "クロスプラットフォーム・OSS",
-    "features.card6.description":
-      "Windows、macOS、Linux向けにGPL-3.0-or-laterライセンスで公開・開発されています。",
-    "download.title": "HardwareVisualizerをダウンロード",
-    "download.description":
-      "Windows、macOS、Linux OSで利用可能。無料でオープンソース。",
+    "download.title": "ダウンロード",
     "download.pageTitle": "HardwareVisualizerをダウンロードする",
     "download.pageTitleBeforeBreak": "HardwareVisualizerを",
     "download.pageTitleSeparator": "",
@@ -812,13 +1006,13 @@ export const ui = {
     "download.noDownloads": "{platform}用のダウンロードはまだ利用できません。",
     "download.otherVersions":
       "他のバージョンやプラットフォームをお探しですか？",
-    "download.githubLink": "GitHubですべてのリリースを表示 →",
+    "download.githubLink": "GitHubですべてのリリースを表示",
     "download.githubDownloadButton": "GitHubからダウンロード",
-    "download.changelogLink": "過去のリリースを見る →",
+    "download.changelogLink": "過去のリリースを見る",
     "download.installationLink": "詳細なインストール方法はこちら",
     "download.releaseDate": "リリース日時:",
     "download.latestChanges": "リリースハイライト",
-    "download.latestChangesLink": "変更履歴を詳しく見る →",
+    "download.latestChangesLink": "変更履歴を詳しく見る",
     "download.verify.summary": "このダウンロードを検証する",
     "download.verify.artifact": "アーティファクト",
     "download.verify.fileSize": "ファイルサイズ",
@@ -844,9 +1038,9 @@ export const ui = {
     "changelog.announcement": "リリースノートを公式サイトに追加しました。",
     "changelog.back": "変更履歴へ戻る",
     "changelog.githubRelease": "GitHubで見る",
+    "changelog.rss": "RSSフィード",
+    "changelog.feedTitle": "HardwareVisualizer 変更履歴",
 
-    "footer.description":
-      "HardwareVisualizerは、CPU・GPUのリアルタイム監視と履歴から、PCで何が起きていたか確認できるクロスプラットフォーム対応ハードウェアモニターです。",
     "footer.product": "製品",
     "footer.features": "機能",
     "footer.download": "ダウンロード",
@@ -878,8 +1072,7 @@ export const ui = {
     "specs.nav.storageComponents": "ストレージ",
     "specs.nav.privacyVerification": "プライバシーと検証",
     "specs.section.overview.eyebrow": "インストール前に",
-    "specs.section.overview.title":
-      "見える場所に置いておくためのハードウェア情報",
+    "specs.section.overview.title": "概要",
     "specs.section.overview.description":
       "HardwareVisualizerは、ライブのハードウェア状態、短い時間窓のグラフ、直近の履歴を一つの読みやすい画面にまとめる、無料・オープンソースのデスクトップモニターです。",
     "specs.overview.distribution.label": "公式配布元",
@@ -889,8 +1082,6 @@ export const ui = {
     "specs.overview.os.value":
       "Windows 10/11、Apple Silicon/Intel向けmacOSビルド、主要Linuxデスクトップ向けパッケージ。",
     "specs.overview.history.label": "履歴データ",
-    "specs.overview.history.value":
-      "CPU、メモリ、GPU、プロセスの履歴は標準で最大30日分保存されます。",
     "specs.overview.privacy.label": "プライバシー",
     "specs.overview.privacy.value":
       "収集したハードウェア情報の外部テレメトリはありません。",
@@ -909,8 +1100,6 @@ export const ui = {
       "デスクトップOSを対象にしていますが、センサーの深さはOS API、デバイスファイル、ドライバー、ベンダーSDKによって変わります。",
     "specs.section.signals.eyebrow": "計測項目",
     "specs.signals.title": "取得できる情報と機能カバー範囲",
-    "specs.signals.description":
-      "常に役に立つダッシュボード情報、ベストエフォートのセンサー経路、今後の監視対象をOS別のマトリクスで整理しています。",
     "specs.matrix.feature": "項目 / 機能",
     "specs.matrix.cpu.label": "CPU・RAM",
     "specs.matrix.cpuTemperature.label": "CPU／センサー温度",
@@ -923,30 +1112,10 @@ export const ui = {
       "ライブ使用率、メモリ詳細、履歴は主要な対応領域です。",
     "specs.matrix.cpu.linux":
       "ライブ使用率、メモリ詳細、履歴は主要な対応領域です。",
-    "specs.matrix.gpu.windows":
-      "特にNVIDIAが最も深く対応します。AMDとIntelはドライバーやAPIの可用性に依存します。",
-    "specs.matrix.gpu.macos":
-      "macOS API経由の部分対応です。表示できるカウンターはデバイスによって変わります。",
-    "specs.matrix.gpu.linux":
-      "NVIDIAやDRM経路による部分対応です。権限とドライバーが影響します。",
     "specs.matrix.cpuTemperature.windows":
       "ACPIサーマルゾーンはベストエフォートです。対応CPUではPawnIOでCPUパッケージ温度を改善できる場合があります。",
-    "specs.matrix.cpuTemperature.macos":
-      "ベストエフォートです。センサー公開範囲はマシンとmacOS APIに依存します。",
-    "specs.matrix.cpuTemperature.linux":
-      "ベストエフォートです。デバイスファイル、ドライバー、権限に左右される場合があります。",
     "specs.matrix.storage.windows":
       "ネイティブまたはフォールバック経路で、利用可能なSMART/NVMeヘルス項目を表示します。",
-    "specs.matrix.storage.macos":
-      "ネイティブ経路で、利用可能なストレージ概要と一部ヘルス項目を表示します。",
-    "specs.matrix.storage.linux":
-      "ネイティブ経路とsmartctlにより、SMART/NVMeヘルスの対応範囲を補える場合があります。",
-    "specs.matrix.network.windows":
-      "インターフェース、IP、サブネット、ゲートウェイに対応します。通信量の監視は計画中です。",
-    "specs.matrix.network.macos":
-      "インターフェース、IP、サブネット、ゲートウェイに対応します。通信量の監視は計画中です。",
-    "specs.matrix.network.linux":
-      "インターフェース、IP、サブネット、ゲートウェイに対応します。通信量の監視は計画中です。",
     "specs.matrix.process.windows":
       "Live Process TableとProcess Insightで、現在の負荷と履歴をつなげて確認できます。",
     "specs.matrix.process.macos":
@@ -955,10 +1124,6 @@ export const ui = {
       "Live Process TableとProcess Insightで、現在の負荷と履歴をつなげて確認できます。",
     "specs.matrix.fan.windows":
       "Windowsでは、任意コンポーネントのPawnIO LpcIO経由で、対応するSuper I/Oセンサーのファン速度を取得できます。対応範囲はマザーボードにより異なり、この読み取り専用の経路ではファン制御に対応しません。",
-    "specs.matrix.fan.macos":
-      "クロスベンダーのファン監視はロードマップと調査段階です。",
-    "specs.matrix.fan.linux":
-      "クロスベンダーのファン監視はロードマップと調査段階です。",
     "specs.matrix.language.windows":
       "アプリは英語、日本語、ロシア語に対応しています。",
     "specs.matrix.language.macos":
@@ -1055,7 +1220,6 @@ export const ui = {
     "specs.compat.status.supported": "対応",
     "specs.compat.status.partial": "一部対応",
     "specs.compat.status.bestEffort": "ベストエフォート",
-    "specs.compat.status.planned": "予定",
     "specs.compat.status.experimental": "実験的",
     "specs.compat.windows.coverage": "Windows 10/11、x64",
     "specs.compat.windows.notes":
@@ -1072,7 +1236,6 @@ export const ui = {
     "specs.compat.macos.intel.notes":
       "Intel Mac版は実験的な提供です。センサーの表示範囲はマシンやOS APIの利用可否によって異なります。",
     "specs.compat.cpu.coverage": "CPUとRAM使用率、メモリ詳細、履歴",
-    "specs.compat.gpu.coverage": "NVIDIAは深い対応、AMDとIntelは部分対応",
     "specs.compat.storage.coverage":
       "ストレージ概要、Storage Health Record、Live Storage Health",
     "specs.compat.network.coverage":
@@ -1093,8 +1256,6 @@ export const ui = {
     "faq.description":
       "HardwareVisualizerとハードウェアモニタリングに関するよくある質問。",
     "faq.q1": "HardwareVisualizerとは何ですか？",
-    "faq.a1":
-      "HardwareVisualizerは、マルチプラットフォーム対応の無料オープンソースのハードウェアモニタリングツールです。CPU温度、GPU使用率、メモリ割り当て、システムパフォーマンスを美しいグラフでリアルタイムに追跡でき、システムへの影響も最小限です。",
     "faq.q2": "HardwareVisualizerは無料ですか？",
     "faq.a2":
       "はい、HardwareVisualizerは完全に無料で、GNU General Public License v3.0以降（GPL-3.0-or-later）のオープンソースです。ライセンス変更前にリリースされたバージョンは引き続きMITライセンスで利用できます。ダウンロードは hardviz.com、GitHub Releases、または利用可能な場合はWindowsのWingetのみを利用してください。第三者のダウンロードサイト、ファイル共有リンク、YouTube概要欄のリンク、パスワード付きZIPは公式ではありません。",
@@ -1102,14 +1263,8 @@ export const ui = {
     "faq.a3":
       "HardwareVisualizerはWindows 10、Windows 11、macOS（Apple Silicon正式対応、Intel実験的）、および主要なLinuxディストリビューション（Debian/Ubuntu、RPM系、AppImage）に対応しています。",
     "faq.q4": "タスクマネージャーやHWiNFOとの違いは？",
-    "faq.a4":
-      "HardwareVisualizerは軽量でモダンなUIを重視しています。タスクマネージャーと異なり、詳細なグラフと、初期設定で30日間・設定から延長できる長期履歴を提供します。トレイに格納している間は非表示ウィンドウの更新を停止し、表示もカスタマイズできます。",
     "faq.q5": "ゲーム中でも監視できますか？",
-    "faq.a5":
-      "はい！HardwareVisualizerは最小限のリソース使用でバックグラウンドで実行されるため、ゲームセッション中のCPU使用率やメモリの監視に最適です。GPU温度の監視はNVIDIA GPUにフル対応しており、AMD・Intel GPUにも部分的に対応しています。履歴データでシステムのパフォーマンスを後から確認することもできます。",
     "faq.q6": "どのGPUに対応していますか？",
-    "faq.a6":
-      "HardwareVisualizerはNVIDIA GPUにフル機能で対応しています。AMD・Intel GPUは部分対応で、使用率や温度などの主要な値は取得できますが、一部の値が制限されたり精度が低下する場合があります。",
     "faq.q7": "新しい機能をリクエストしたり貢献できますか？",
     "faq.a7":
       "もちろんです！対応ハードウェアの追加、テーマの追加、言語の追加などの機能リクエストはGitHubのIssueで受け付けています。プルリクエストやディスカッションへの参加も大歓迎です。",
@@ -1117,23 +1272,63 @@ export const ui = {
     "faq.githubLink": "GitHubでIssueを作成",
     "faq.verificationGuideLink": "インストーラの検証",
     "faq.viewAll": "すべてのFAQを見る",
+    "faq.compareLink": "出典付きの比較を見る",
+    "faq.a1":
+      "HardwareVisualizerは、Windows・macOS・Linuxで使える無料・オープンソースのハードウェアモニターです。CPU・メモリ・GPUの状態をリアルタイムに表示し、その履歴をPCの中に残すので、あとから何が起きていたかを確認できます。",
+    "faq.a4":
+      "HardwareVisualizerは、1分ごとに値を記録し、アプリの中でグラフにします。インサイトでは最長30日、Cooling Insightでは最長1年の期間を表示でき、履歴は標準で365日保存されます。Windowsでは、Cooling InsightがCPU温度を同じくらいの負荷だったときの基準と比べます。一方、HWiNFOは電圧など、より多くの種類のセンサーを読み取れ、オンスクリーン表示もあります。出典付きの違いは比較ページにまとめています。",
+    "faq.a5":
+      "はい。記録はバックグラウンドで続き、「閉じるボタンで終了せずトレイに格納する」をオンにすると、ウィンドウを閉じてもシステムトレイに常駐します。あとからインサイトで、CPU・GPUの使用率や温度の変化と、動いていたプロセスを確認できます。ゲーム画面に重ねて表示するオーバーレイはありません。",
+    "faq.a6":
+      "Windowsでは、NVIDIAとAMDのGPUで使用率と温度を、その他のGPUで使用率を取得できます。Linuxでは、AMDのGPUで使用率と温度を、IntelのGPUでintel_gpu_topを使って使用率を取得できます。NVIDIAのGPUは一覧に表示されますが、値はまだ取得できません。macOSでは、GPU使用率を取得でき、GPU温度は取得できません。",
+    "seo.home.description":
+      "Windows・macOS・Linux対応の無料・オープンソースのハードウェアモニター。CPU・GPU・温度をリアルタイムに表示し、標準で1年ぶんの履歴をPCに残して、冷却の変化を月単位で比べられます。",
+    "seo.home.feature4": "アカウント不要・テレメトリーなし",
+    "footer.description":
+      "CPU・GPU・メモリの状態を表示し、1分ごとにPC内へ記録する、無料・オープンソースのハードウェアモニターです。",
+    "specs.overview.history.value":
+      "ハードウェアの履歴は、新規インストールでは標準で365日保存されます。インサイトでは最長30日、Cooling Insightでは最長1年の期間を表示できます。",
+    "specs.signals.description":
+      "どのOSでも使える項目と、ベストエフォートのセンサー経路を分け、OSごとに取得できない項目も示しています。",
+    "specs.matrix.gpu.windows":
+      "NVIDIAとAMDは使用率と温度を取得できます。その他のGPUは、Windowsのパフォーマンスカウンター（PDH）で使用率を取得します。",
+    "specs.matrix.gpu.macos":
+      "GPU使用率を取得できます。GPU温度は取得できません。",
+    "specs.matrix.gpu.linux":
+      "AMDは使用率と温度を取得できます。Intelはintel_gpu_topで使用率を取得します。NVIDIAのGPUは一覧に表示されますが、値の取得にはまだ対応していません。",
+    "specs.matrix.cpuTemperature.macos": "macOSではCPU温度を取得できません。",
+    "specs.matrix.cpuTemperature.linux":
+      "LinuxではCPU温度をまだ取得できません。",
+    "specs.matrix.storage.macos":
+      "ストレージヘルスはsmartctlで取得します。smartmontoolsが必要です。",
+    "specs.matrix.storage.linux":
+      "ストレージヘルスはsmartctlで取得します。smartmontoolsが必要で、通常はroot権限も必要です。",
+    "specs.matrix.network.windows":
+      "インターフェース、IP、サブネット、ゲートウェイの情報を取得できます。通信量は計測しません。",
+    "specs.matrix.network.macos":
+      "インターフェース、IP、サブネット、ゲートウェイの情報を取得できます。通信量は計測しません。",
+    "specs.matrix.network.linux":
+      "インターフェース、IP、サブネット、ゲートウェイの情報を取得できます。通信量は計測しません。",
+    "specs.matrix.fan.macos": "macOSではファン回転数を取得できません。",
+    "specs.matrix.fan.linux": "Linuxではファン回転数をまだ取得できません。",
+    "specs.compat.gpu.coverage":
+      "使用率は3つのOSで対応。温度はWindowsのNVIDIA・AMDと、LinuxのAMDで対応",
+    "specs.compat.status.unavailable": "非対応",
     "about.heading": "HardwareVisualizer について",
     "about.contact.emailLabel": "メール",
-    "about.feedback.heading": "ご意見・ご要望はありますか？",
+    "about.feedback.heading": "フィードバック",
     "about.feedback.body":
-      "HardwareVisualizer は使ってくださる方々によって形作られています。短い匿名アンケートが、次に作るものを決める助けになります。",
+      "短い匿名アンケートで、動作の報告や要望を受け付けています。",
     "about.feedback.cta": "アンケートに回答する",
     "footer.survey": "アンケート",
-    "survey.metaTitle":
-      "アンケート - HardwareVisualizer | ご意見をお聞かせください",
+    "survey.metaTitle": "アンケート | HardwareVisualizer",
     "survey.metaDescription":
       "HardwareVisualizerへのご意見をお聞かせください。よく使う機能、足りない機能、改善してほしい点など。匿名で約2〜3分です。",
-    "survey.heading": "HardwareVisualizer をより良くする",
-    "survey.description":
-      "あなたの声が次に作るものを直接決めます。アンケートは匿名で、約2〜3分で回答できます。",
+    "survey.heading": "アンケート",
+    "survey.description": "アンケートは匿名で、約2〜3分で回答できます。",
     "survey.privacyNote":
       "回答は匿名です。フィードバックを分類するため、非識別の文脈（流入元・言語、およびアプリから開いた場合はアプリのバージョン・OS）を付与します。ハードウェア構成やあなたを特定する情報は含みません。フォームはTallyがホストしています。",
-    "survey.privacyNoteLink": "プライバシーポリシーを読む →",
+    "survey.privacyNoteLink": "プライバシーポリシーを読む",
     "survey.preparing":
       "アンケートは準備中です。まもなくこちらで公開します。ご関心ありがとうございます！",
     "survey.backHome": "TOPへ戻る",

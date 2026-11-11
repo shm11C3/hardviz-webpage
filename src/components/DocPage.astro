@@ -1,0 +1,128 @@
+---
+import { render } from "astro:content";
+import { ListTree } from "lucide-react";
+import coolingEn from "../assets/releases/cooling-insight-en.png";
+import coolingJa from "../assets/releases/cooling-insight-ja.png";
+import coolingLightEn from "../assets/releases/cooling-insight-light-en.png";
+import coolingLightJa from "../assets/releases/cooling-insight-light-ja.png";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { addJapaneseLineBreaks } from "../lib/japaneseLineBreaks";
+import type { PageEntry } from "../lib/pages";
+import ThemedImage from "./ThemedImage.astro";
+
+interface Props {
+  entry: PageEntry;
+}
+
+const { entry } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const isJa = lang === "ja";
+
+const { Content, headings } = await render(entry);
+const sections = headings.filter((heading) => heading.depth === 2);
+// The comparison is one wide table, so it takes the full column and the
+// section list sits above it instead of beside it.
+const wide = entry.data.page === "compare";
+
+const updated = new Intl.DateTimeFormat(isJa ? "ja-JP" : "en-US", {
+  year: "numeric",
+  month: isJa ? "long" : "short",
+  day: "numeric",
+  timeZone: "UTC",
+}).format(entry.data.updated);
+const basis = t("doc.basedOn")
+  .replace("{version}", entry.data.basedOn)
+  .replace("{date}", updated);
+---
+
+<article class:list={["pt-28 pb-16", isJa && "budoux-ja"]}>
+  <div class="shell">
+    <header class="max-w-3xl">
+      <h1 class="doc-title">{addJapaneseLineBreaks(lang, entry.data.title)}</h1>
+      <p class="lead mt-5">{addJapaneseLineBreaks(lang, entry.data.lead)}</p>
+      <p class="mt-5"><span class="badge whitespace-normal">{basis}</span></p>
+    </header>
+
+    {entry.data.page === "cooling-insight" && (
+        <div class="mt-10">
+          <ThemedImage
+            light={isJa ? coolingLightJa : coolingLightEn}
+            dark={isJa ? coolingJa : coolingEn}
+            alt={t("screenshots.coolingInsightAlt")}
+            caption={t("release.screenshot.cooling.caption")}
+          />
+        </div>
+      )}
+
+    {wide ? (
+        <div class="mt-10">
+          <nav class="panel text-sm" aria-label={t("release.contents")}>
+            <p class="panel-label">
+              <ListTree aria-hidden="true" />
+              {t("release.contents")}
+            </p>
+            <ul class="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+              {sections.map((section) => (
+                <li>
+                  <a
+                    href={`#${section.slug}`}
+                    class="text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    {section.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div class="doc doc-wide prose mt-10 min-w-0 max-w-none">
+            <Content />
+          </div>
+        </div>
+      ) : (
+        <div class="mt-10 grid grid-cols-[minmax(0,1fr)] gap-x-12 gap-y-8 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)]">
+          {sections.length > 1 ? (
+            <nav
+              class="panel self-start text-sm lg:sticky lg:top-24"
+              aria-label={t("release.contents")}
+            >
+              <p class="panel-label">
+                <ListTree aria-hidden="true" />
+                {t("release.contents")}
+              </p>
+              <ul class="mt-3 space-y-2">
+                {sections.map((section) => (
+                  <li>
+                    <a
+                      href={`#${section.slug}`}
+                      class="block text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {section.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ) : (
+            <div class="hidden lg:block" />
+          )}
+
+          <div class="doc prose min-w-0 max-w-[46rem]">
+            <Content />
+          </div>
+        </div>
+      )}
+  </div>
+</article>
+
+<style>
+.doc-title {
+  color: var(--foreground);
+  font-size: clamp(2rem, 1.3rem + 2.6vw, 3rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+:lang(ja) .doc-title {
+  line-height: 1.35;
+}
+</style>

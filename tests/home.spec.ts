@@ -57,7 +57,7 @@ test("home page loads", async ({ page }) => {
 
 test("download links point to download page on FAQ pages", async ({ page }) => {
   await page.goto("/faq/");
-  await expect(page.locator('header a[href="/download/"]')).toHaveAttribute(
+  await expect(page.locator("header [data-nav-download]")).toHaveAttribute(
     "href",
     "/download/",
   );
@@ -85,19 +85,19 @@ test("home page has all major sections", async ({ page }) => {
   await expect(page.locator("#faq")).toBeVisible();
 });
 
-test("history value appears before live features and customization", async ({
-  page,
-}) => {
+test("sections follow the page order", async ({ page }) => {
   await page.goto("/");
   const sectionOrder = await page
-    .locator("#insights, #features, #customization, #download")
+    .locator("#features, #platforms, #trust, #download, #feedback, #faq")
     .evaluateAll((sections) => sections.map((section) => section.id));
 
   expect(sectionOrder).toEqual([
-    "insights",
     "features",
-    "customization",
+    "platforms",
+    "trust",
     "download",
+    "feedback",
+    "faq",
   ]);
 });
 
@@ -117,40 +117,133 @@ test("hero structure and download destination follow the page language", async (
   await expect(jaHero.locator('a[href="/ja/download/"]')).toBeVisible();
 });
 
-test("Insights section renders its card headings on both localized pages", async ({
+test("the three screens are described on both localized pages", async ({
   page,
 }) => {
-  await page.goto("/");
-  const insightHeadings = page.locator("#insights h3");
-  await expect(insightHeadings).toHaveCount(4);
-  for (let i = 0; i < (await insightHeadings.count()); i++) {
-    await expect(insightHeadings.nth(i)).toHaveText(/\S/);
-  }
-
-  await page.goto("/ja/");
-  await expect(page.locator("html")).toHaveAttribute("lang", "ja");
-  const jaInsightHeadings = page.locator("#insights h3");
-  await expect(jaInsightHeadings).toHaveCount(4);
-  for (let i = 0; i < (await jaInsightHeadings.count()); i++) {
-    await expect(jaInsightHeadings.nth(i)).toHaveText(/\S/);
+  for (const [path, lang] of [
+    ["/", "en"],
+    ["/ja/", "ja"],
+  ] as const) {
+    await page.goto(path);
+    await expect(page.locator("html")).toHaveAttribute("lang", lang);
+    const section = page.locator("#features");
+    await expect(section.locator("h2")).toHaveText(/\S/);
+    for (const [id, rows] of [
+      ["performance", 4],
+      ["insights", 4],
+      ["cooling-insight", 3],
+    ] as const) {
+      const screen = section.locator(`#${id}`);
+      await expect(screen.locator("h3")).toHaveText(/\S/);
+      await expect(screen.locator("dl > div")).toHaveCount(rows);
+      await expect(screen.locator("img:visible")).toHaveCount(1);
+    }
   }
 });
 
-test("Insights screenshots expose alternative text on both localized pages", async ({
+test("Cooling Insight row links to its page", async ({ page }) => {
+  await page.goto("/");
+  await expect(
+    page.locator('#cooling-insight a[href="/cooling-insight/"]'),
+  ).toBeVisible();
+
+  await page.goto("/ja/");
+  await expect(
+    page.locator('#cooling-insight a[href="/ja/cooling-insight/"]'),
+  ).toBeVisible();
+});
+
+test("platform matrix lists every feature for three operating systems", async ({
   page,
 }) => {
   await page.goto("/");
-  await page.locator(".swiper-container").scrollIntoViewIfNeeded();
+  const matrix = page.locator("#platforms table");
+  await expect(matrix.locator("thead th")).toHaveText([
+    "Feature",
+    "Windows",
+    "macOS",
+    "Linux",
+  ]);
+  await expect(matrix.locator("tbody tr")).toHaveCount(11);
+  for (const cell of await matrix.locator("tbody td").all()) {
+    await expect(cell).toHaveText(/\S/);
+  }
+  await expect(page.locator('#platforms a[href="/specs/"]')).toBeVisible();
+  await expect(page.locator('#platforms a[href="/compare/"]')).toBeVisible();
+});
+
+test("trust section links each claim to its evidence", async ({ page }) => {
+  await page.goto("/");
+  const trust = page.locator("#trust");
+  await expect(trust.locator("h3")).toHaveCount(4);
   await expect(
-    page.locator('.screenshot-slot[data-screenshot="slide-2"] img'),
-  ).toHaveAttribute("alt", /\S/);
+    trust.locator('a[href="/security/#official-sources"]'),
+  ).toBeVisible();
+  await expect(trust.locator('a[href="/verification/"]')).toBeVisible();
+  await expect(trust.locator('a[href="/security/#network"]')).toBeVisible();
+});
+
+test("feedback section offers Discussions and the anonymous survey", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const feedback = page.locator("#feedback");
+  await expect(
+    feedback.locator('a[href*="/discussions/"]').first(),
+  ).toHaveAttribute("target", "_blank");
+  await expect(feedback.locator('a[href="/survey/?source=web"]')).toBeVisible();
 
   await page.goto("/ja/");
-  await expect(page.locator("html")).toHaveAttribute("lang", "ja");
-  await page.locator(".swiper-container").scrollIntoViewIfNeeded();
   await expect(
-    page.locator('.screenshot-slot[data-screenshot="slide-2"] img'),
-  ).toHaveAttribute("alt", /\S/);
+    page.locator('#feedback a[href="/ja/survey/?source=web"]'),
+  ).toBeVisible();
+});
+
+test("hero screenshots expose alternative text on both localized pages", async ({
+  page,
+}) => {
+  for (const path of ["/", "/ja/"]) {
+    await page.goto(path);
+    await page.locator('[data-screenshot-tab="record"]').click();
+    await expect(
+      page.locator('#screen-panel[data-screenshot="record"] img'),
+    ).toHaveAttribute("alt", /\S/);
+  }
+});
+
+test("hero tabs switch the displayed application screenshot", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const slot = page.locator("#hero #screen-panel");
+  const images = page.locator("#hero figure img");
+  await expect(slot).toHaveAttribute("data-screenshot", "live");
+  await expect(images).toHaveCount(1);
+  const initialSrc = await images.first().getAttribute("src");
+  await expect(
+    page.locator('#hero [data-screenshot-caption="live"]'),
+  ).toBeVisible();
+
+  const noticeTab = page.locator('[data-screenshot-tab="notice"]');
+  await noticeTab.click();
+  await expect(noticeTab).toHaveAttribute("aria-selected", "true");
+  await expect(slot).toHaveAttribute("data-screenshot", "notice");
+  await expect(images).toHaveCount(1);
+  await expect(images.first()).toHaveAttribute("alt", /\S/);
+  await expect(images.first()).not.toHaveAttribute("src", initialSrc ?? "");
+  await expect(
+    page.locator('#hero [data-screenshot-caption="notice"]'),
+  ).toBeVisible();
+  await expect(
+    page.locator('#hero [data-screenshot-caption="live"]'),
+  ).toBeHidden();
+
+  await noticeTab.press("ArrowLeft");
+  await expect(page.locator('[data-screenshot-tab="record"]')).toHaveAttribute(
+    "aria-selected",
+    "true",
+  );
+  await expect(slot).toHaveAttribute("data-screenshot", "record");
 });
 
 test("landing download navigation is measured after analytics consent", async ({
@@ -311,10 +404,4 @@ test("FAQ preview links to the localized FAQ pages", async ({ page }) => {
 
   await page.goto("/ja/");
   await expect(page.locator('#faq a[href="/ja/faq/"]')).toBeVisible();
-});
-
-test("features section shows 6 cards", async ({ page }) => {
-  await page.goto("/");
-  const featureCards = page.locator("#features h3");
-  await expect(featureCards).toHaveCount(6);
 });
