@@ -36,7 +36,7 @@ test("EN home OG meta tags", async ({ page }) => {
   await page.goto("/");
   const expectedTitle = "HardwareVisualizer – CPU & GPU Monitor with History";
   const expectedDescription =
-    "Hardware monitor for Windows, macOS, and Linux. See CPU, GPU, temperature, and processes live, then review what happened after gaming or heavy workloads.";
+    "Free, open-source hardware monitor for Windows, macOS, and Linux. See CPU, GPU, and temperatures live, keep a year of history on your PC, and compare how cooling changes over months.";
   await expect(page).toHaveTitle(expectedTitle);
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
     "content",
@@ -114,7 +114,7 @@ test("home page JSON-LD has SoftwareApplication", async ({ page }) => {
   expect(jsonLd.featureList).toContain(
     "Review what happened after gaming and heavy workloads",
   );
-  expect(jsonLd.featureList).toContain("No account and no outbound telemetry");
+  expect(jsonLd.featureList).toContain("No account and no telemetry");
   expect(jsonLd.featureList).toContain(
     "Authenticode-signed Windows release installer",
   );
@@ -127,7 +127,7 @@ test("JA home metadata and JSON-LD use the same monitor positioning", async ({
   const expectedTitle =
     "HardwareVisualizer – あとから振り返れるCPU・GPUモニター";
   const expectedDescription =
-    "Windows、macOS、Linux対応のハードウェアモニター。CPU、GPU、温度、プロセスをリアルタイムで確認し、ゲームや重い処理のあとに何が起きていたか振り返れます。";
+    "Windows・macOS・Linux対応の無料・オープンソースのハードウェアモニター。CPU・GPU・温度をリアルタイムに表示し、標準で1年ぶんの履歴をPCに残して、冷却の変化を月単位で比べられます。";
 
   await expect(page).toHaveTitle(expectedTitle);
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
@@ -170,7 +170,7 @@ test("JA home metadata and JSON-LD use the same monitor positioning", async ({
   expect(jsonLd.featureList).toContain(
     "ゲームや重い処理のあとに何が起きていたか確認",
   );
-  expect(jsonLd.featureList).toContain("アカウント不要・外部テレメトリなし");
+  expect(jsonLd.featureList).toContain("アカウント不要・テレメトリーなし");
 });
 
 test("FAQ page JSON-LD has FAQPage type", async ({ page }) => {

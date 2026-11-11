@@ -3,157 +3,590 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/*
+ * Design language: wallpaper and glass.
+ *
+ * The application lets its user put a wallpaper behind translucent panels.
+ * The site is built the same way: one wallpaper, drawn with gradients, stays
+ * fixed behind the page, and the content sits on translucent panels above it.
+ * The wallpaper is kept faint: the ground colour leads, and the three hues
+ * only tint the corners.
+ * Headings are centred, and buttons and tabs are pills.
+ *
+ * Colour comes from the wallpaper. The three series colours of the
+ * application's charts mark the three views the home page describes:
+ *
+ *   live   teal    Performance      (1 second to 60 seconds)
+ *   record pink    Insights         (10 minutes to 30 days)
+ *   notice yellow  Cooling Insight  (24 hours to 1 year)
+ */
 @theme {
+  --font-sans: var(--font-noto), var(--font-noto-jp, sans-serif), sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-
+  --color-soft: var(--soft);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-
+  --color-secondary: var(--muted);
+  --color-secondary-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-
-  --color-modal: var(--modal);
-
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-
   --color-card: var(--card);
-  --color-card-overlay: var(--card-overlay);
-  --color-card-foreground: var(--card-foreground);
-  --color-card-non-transparent: var(--card-non-transparent);
+  --color-card-foreground: var(--foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--foreground);
 
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-sm: calc(var(--radius) - 4px);
+  --color-live: var(--live);
+  --color-record: var(--record);
+  --color-notice: var(--notice);
 
-  --background-image-hardviz: linear-gradient(
-    90deg,
-    rgba(120, 120, 125, 0.55) 0%,
-    rgba(40, 40, 45, 0.65) 45%,
-    rgba(10, 14, 35, 0.95) 100%
-  );
+  /* Remaining `cyan` utilities resolve to the live hue. */
+  --color-cyan-50: #e8f8f8;
+  --color-cyan-100: #c9eeee;
+  --color-cyan-200: #9be0e0;
+  --color-cyan-300: #6dd0d0;
+  --color-cyan-400: #4bc0c0;
+  --color-cyan-500: #2fa3a3;
+  --color-cyan-600: #0b7d7d;
+  --color-cyan-700: #096565;
+  --color-cyan-800: #085151;
+  --color-cyan-900: #064242;
+  --color-cyan-950: #032727;
 
-  --background-image-hardviz-glow:
-    radial-gradient(
-      ellipse at 18% 55%,
-      rgba(255, 255, 255, 0.22) 0%,
-      transparent 58%
-    ),
-    radial-gradient(ellipse at 55% 40%, rgba(0, 0, 0, 0.5) 0%, transparent 55%),
-    radial-gradient(
-      ellipse at 82% 52%,
-      rgba(99, 102, 241, 0.38) 0%,
-      transparent 55%
-    ),
-    radial-gradient(
-      ellipse at 92% 62%,
-      rgba(139, 92, 246, 0.28) 0%,
-      transparent 60%
-    );
+  --radius-lg: 1.6rem;
+  --radius-md: 1rem;
+  --radius-sm: 0.5rem;
 }
 
 @layer base {
   :root {
-    --background: oklch(92% 0.004 286.32);
-    --foreground: hsl(222.2 84% 4.9%);
-    --card: oklch(87.1% 0.006 286.286);
-    --card-non-transparent: oklch(0.8711 0.0055 286.29);
-    --popover: hsl(0 0% 100%);
-    --popover-foreground: hsl(222.2 84% 4.9%);
-    --primary: hsl(222.2 47.4% 11.2%);
-    --primary-foreground: hsl(210 40% 98%);
-    --secondary: hsl(210 40% 96.1%);
-    --secondary-foreground: hsl(222.2 47.4% 11.2%);
-    --muted: hsl(210 40% 96.1%);
-    --muted-foreground: hsl(215.4 16.3% 46.9%);
-    --modal: oklch(0.8954 0.0041 286.32);
-    --accent: hsl(210 40% 96.1%);
-    --accent-foreground: hsl(222.2 47.4% 11.2%);
-    --destructive: hsl(0 84.2% 60.2%);
-    --destructive-foreground: hsl(210 40% 98%);
-    --border: hsl(214.3 31.8% 91.4%);
-    --input: hsl(214.3 31.8% 91.4%);
-    --ring: hsl(222.2 84% 4.9%);
-    --radius: 1rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --chart-base: oklch(92% 0.004 286.32 / 50%);
-
-    --color-storage: oklch(70% 0.12 250);
-    --color-process: oklch(65% 0.16 320);
-
-    --font-sans:
-      var(--font-geist), var(--font-noto-sans-jp), ui-sans-serif, system-ui,
-      sans-serif;
+    --background: #e8eaf2;
+    --foreground: #0d1326;
+    --soft: #2b3349;
+    --card: rgb(255 255 255 / 0.62);
+    --popover: #ffffff;
+    --muted: rgb(13 19 38 / 0.06);
+    --muted-hover: rgb(13 19 38 / 0.11);
+    --muted-foreground: #525b71;
+    --border: rgb(13 19 38 / 0.1);
+    --input: rgb(13 19 38 / 0.28);
+    --ring: #0d1326;
+    --primary: #0d1326;
+    --primary-hover: #262f4b;
+    --primary-foreground: #f5f7fc;
+    --live: #0b7d7d;
+    --record: #c2244c;
+    --notice: #8a5a00;
+    --wall-1: rgb(124 102 232 / 0.19);
+    --wall-2: rgb(60 180 195 / 0.16);
+    --wall-3: rgb(236 120 165 / 0.14);
+    --glow: rgb(92 64 205 / 0.17);
+    /* Background of the light-theme application screenshots */
+    --stage: #e4e4e7;
+    color-scheme: light;
   }
 
   .dark {
-    --background: oklch(21% 0.034 264.665);
-    --foreground: hsl(210 40% 98%);
-    --card: oklch(12.9% 0.042 264.695 / 80%);
-    --card-foreground: hsl(210 40% 98%);
-    --card-non-transparent: oklch(0.1501 0.0378 267.11);
-    --popover: hsl(222.2 84% 4.9%);
-    --popover-foreground: hsl(210 40% 98%);
-    --primary: hsl(210 40% 98%);
-    --primary-foreground: hsl(222.2 47.4% 11.2%);
-    --secondary: hsl(217.2 32.6% 17.5%);
-    --secondary-foreground: hsl(210 40% 98%);
-    --muted: hsl(217.2 32.6% 17.5%);
-    --muted-foreground: hsl(215 20.2% 65.1%);
-    --modal: oklch(0.1727 0.0367 267.72);
-    --accent: hsl(217.2 32.6% 17.5%);
-    --accent-foreground: hsl(210 40% 98%);
-    --destructive: hsl(0 62.8% 30.6%);
-    --destructive-foreground: hsl(210 40% 98%);
-    --border: hsl(217.2 32.6% 17.5%);
-    --input: oklch(51% 0.034 264.665);
-    --ring: hsl(212.7 26.8% 83.9);
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --chart-base: oklch(12.9% 0.042 264.695 / 70%);
+    --background: #0a0f22;
+    --foreground: #eef1f8;
+    --soft: #cfd6e6;
+    --card: rgb(8 12 28 / 0.56);
+    --popover: #0e1429;
+    --muted: rgb(255 255 255 / 0.08);
+    --muted-hover: rgb(255 255 255 / 0.14);
+    --muted-foreground: #a6b0c6;
+    --border: rgb(255 255 255 / 0.1);
+    --input: rgb(255 255 255 / 0.22);
+    --ring: #ffffff;
+    --primary: #f5f7fc;
+    --primary-hover: #ffffff;
+    --primary-foreground: #0d1326;
+    --live: #4bc0c0;
+    --record: #ff6384;
+    --notice: #ffce56;
+    --wall-1: rgb(92 64 205 / 0.32);
+    --wall-2: rgb(28 150 165 / 0.21);
+    --wall-3: rgb(200 62 124 / 0.175);
+    --glow: rgb(92 64 205 / 0.34);
+    /* Background of the dark-theme application screenshots */
+    --stage: #101828;
+    color-scheme: dark;
+  }
 
-    --color-storage: oklch(80% 0.12 250);
-    --color-process: oklch(85% 0.12 320);
+  *,
+  ::after,
+  ::before {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    line-height: 1.7;
+    overflow-x: clip;
+  }
+
+  /* The wallpaper: drawn here, not an image file. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(70rem 46rem at 12% -6%, var(--wall-1), transparent 62%),
+      radial-gradient(56rem 40rem at 98% 16%, var(--wall-2), transparent 62%),
+      radial-gradient(64rem 44rem at 62% 108%, var(--wall-3), transparent 62%);
+    pointer-events: none;
+  }
+
+  :lang(ja) body {
+    line-height: 1.9;
+  }
+
+  ::selection {
+    background-color: var(--foreground);
+    color: var(--background);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  /* Japanese text breaks only between phrases. The boundaries are zero-width
+     spaces added to every text node at build time (src/middleware.ts), so
+     every browser breaks at the same places. Small kana and long-vowel marks
+     never start a line, and a paragraph's last line is not left with a
+     single short phrase where the browser can avoid it. */
+  :lang(ja) body {
+    line-break: strict;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+    text-wrap: pretty;
+  }
+
+  /* Short texts in cells and small headings are split evenly. */
+  :lang(ja) :is(th, td, dt, h4) {
+    text-wrap: balance;
+  }
+
+  /* Inline code may break at any character. Otherwise a long path that ends
+     at the edge of a line pushes the 、 or ） after it to the next line. */
+  :lang(ja) :is(code, kbd, samp) {
+    word-break: break-all;
+  }
+
+  :lang(ja) :is(pre, pre code) {
+    word-break: normal;
+    overflow-wrap: normal;
+  }
+
+  /* A table column is at least as wide as its longest phrase, so a cell
+     never has to split a word; a wide table scrolls inside its wrapper. */
+  :lang(ja) :is(td, th) {
+    overflow-wrap: break-word;
+  }
+}
+
+@layer components {
+  /* Page column. */
+  .shell {
+    width: 100%;
+    max-width: 82rem;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 3.5rem);
+  }
+
+  .section {
+    padding-block: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .section-title {
+    font-size: clamp(1.7rem, 1.1rem + 2vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--foreground);
+  }
+
+  :lang(ja) .section-title {
+    line-height: 1.45;
+  }
+
+  /* A centred heading above a home-page section. */
+  .section-head {
+    text-align: center;
+  }
+
+  .section-head .lead {
+    margin: 1rem auto 0;
+    text-wrap: balance;
+  }
+
+  .lead {
+    max-width: 38em;
+    color: var(--soft);
+    font-size: 1.0625rem;
+  }
+
+  @media (min-width: 768px) {
+    .lead {
+      font-size: 1.125rem;
+    }
+  }
+
+  .measure {
+    max-width: 40em;
+  }
+
+  /* A translucent panel over the wallpaper. */
+  .panel,
+  .panel-outline {
+    min-width: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    background: var(--card);
+    -webkit-backdrop-filter: blur(22px) saturate(1.35);
+    backdrop-filter: blur(22px) saturate(1.35);
+  }
+
+  @media (min-width: 640px) {
+    .panel,
+    .panel-outline {
+      padding: 1.75rem;
+    }
+  }
+
+  /* The label at the top of a panel. */
+  .panel-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--foreground);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .panel-label > svg {
+    flex: none;
+    width: 1.125rem;
+    height: 1.125rem;
+    color: var(--muted-foreground);
+  }
+
+  .panel-body {
+    margin-top: 0.5rem;
+    color: var(--soft);
+    font-size: 0.9375rem;
+  }
+
+  .text-live {
+    color: var(--live);
+  }
+
+  .text-record {
+    color: var(--record);
+  }
+
+  .text-notice {
+    color: var(--notice);
+  }
+
+  /* A reading: version, period, size. */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    padding: 0.125rem 0.75rem;
+    background: var(--muted);
+    color: var(--foreground);
+    font-size: 0.8125rem;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.7;
+    white-space: nowrap;
+  }
+
+  /* Label and reading on one row, separated by hairlines. */
+  .rows > * {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 0.625rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.9375rem;
+  }
+
+  .rows dt {
+    flex: none;
+    color: var(--muted-foreground);
+  }
+
+  .rows dd {
+    color: var(--foreground);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+
+  /* Buttons are pills: filled for the one main action, glass otherwise. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 2.75rem;
+    padding: 0.5rem 1.35rem;
+    border: 1px solid transparent;
+    border-radius: 9999px;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    line-height: 1.25;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      background-color 150ms,
+      border-color 150ms,
+      color 150ms;
+  }
+
+  .btn-sm {
+    height: 2.5rem;
+    padding-inline: 1.15rem;
+    font-size: 0.875rem;
+  }
+
+  .btn-lg {
+    height: 3.4rem;
+    padding-inline: 1.75rem;
+    font-size: 1rem;
+  }
+
+  .btn-primary {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  .btn-primary:hover {
+    background: var(--primary-hover);
+  }
+
+  .btn-outline {
+    border-color: var(--input);
+    background: var(--muted);
+    color: var(--foreground);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  .btn-outline:hover {
+    background: var(--muted-hover);
+  }
+
+  .btn-ghost {
+    color: var(--muted-foreground);
+  }
+
+  .btn-ghost:hover {
+    color: var(--foreground);
+  }
+
+  /* An inline text link. */
+  .link {
+    color: var(--foreground);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: var(--input);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 5px;
+  }
+
+  .link:hover {
+    text-decoration-color: var(--foreground);
+  }
+
+  /* A qualifying note. */
+  .note {
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1rem;
+    background: var(--muted);
+    color: var(--muted-foreground);
+    font-size: 0.8125rem;
+  }
+
+  /* Tables: a small header, hairlines between rows. */
+  .table-wrap {
+    overflow-x: auto;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 0.75rem 1.25rem 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .data-table thead th {
+    border-bottom-color: var(--input);
+    color: var(--muted-foreground);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .data-table tbody th {
+    color: var(--foreground);
+    font-weight: 700;
+  }
+
+  .data-table td {
+    color: var(--muted-foreground);
+  }
+
+  .data-table .yes {
+    color: var(--foreground);
+  }
+
+  .data-table tbody tr:last-child :is(th, td) {
+    border-bottom: 0;
+  }
+
+  /* Index-style pages: a heading column beside the content. */
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .split {
+      grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+      gap: 4rem;
+    }
+  }
+
+  /* Items separated by hairlines. */
+  .ruled > * {
+    border-bottom: 1px solid var(--border);
+    padding-block: 1.125rem;
+  }
+
+  .ruled > *:first-child {
+    padding-top: 0;
+  }
+
+  .ruled > *:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .item-title {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--foreground);
+  }
+
+  .item-body {
+    margin-top: 0.25rem;
+    color: var(--soft);
+    font-size: 0.9375rem;
+  }
+
+  /* A question that opens to its answer. Sits inside a .ruled list. */
+  .faq-item > summary {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-item > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-chevron {
+    flex: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-top: 0.25rem;
+    color: var(--muted-foreground);
+    transition: transform 150ms;
+  }
+
+  .faq-item[open] .faq-chevron {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    max-width: 42em;
+    margin-top: 0.75rem;
+    color: var(--soft);
+    font-size: 0.9375rem;
   }
 }
 
 /* Skip navigation link */
 .skip-link {
-  @apply absolute left-1/2 z-[100] -translate-x-1/2 -translate-y-full rounded-b-lg bg-cyan-600 px-4 py-2 text-sm font-medium text-white transition-transform focus:translate-y-0;
+  @apply absolute left-1/2 z-[100] -translate-x-1/2 -translate-y-full rounded-b-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-transform focus:translate-y-0;
 }
 
 /* Global focus-visible styles for interactive elements */
 :focus-visible {
-  @apply outline-2 outline-offset-2 outline-cyan-500;
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
 }
 
-/* Prose (Typography) customizations for changelog */
+/* Prose pages and changelog entries */
+.prose {
+  --tw-prose-body: var(--foreground);
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-bold: var(--foreground);
+  --tw-prose-links: var(--foreground);
+  --tw-prose-counters: var(--muted-foreground);
+  --tw-prose-bullets: var(--muted-foreground);
+  --tw-prose-hr: var(--border);
+  --tw-prose-quotes: var(--foreground);
+  --tw-prose-quote-borders: var(--input);
+  --tw-prose-captions: var(--muted-foreground);
+  --tw-prose-code: var(--foreground);
+  --tw-prose-th-borders: var(--border);
+  --tw-prose-td-borders: var(--border);
+}
+
 .prose a {
-  @apply text-cyan-600 dark:text-cyan-400 no-underline hover:underline transition-colors;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--input);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+}
+
+.prose a:hover {
+  text-decoration-color: var(--foreground);
 }
 
 .prose code {
-  @apply bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded text-sm font-mono;
+  @apply rounded-sm bg-muted px-1.5 py-0.5 font-mono text-[0.8125em] font-normal;
 }
 
 .prose code::before,
@@ -162,7 +595,14 @@
 }
 
 .prose pre {
-  @apply bg-slate-900 dark:bg-slate-950 rounded-lg;
+  border-radius: 0.75rem;
+}
+
+/* Code blocks stay dark in both themes. */
+pre.astro-code {
+  border: 1px solid var(--border);
+  /* biome-ignore lint/complexity/noImportantStyles: Shiki sets the background inline */
+  background-color: #070c1c !important;
 }
 
 .prose pre code {
@@ -170,31 +610,83 @@
 }
 
 .prose h2 {
-  @apply text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700 pb-2;
+  font-weight: 700;
 }
 
 .prose h3 {
-  @apply text-slate-800 dark:text-slate-100;
+  font-weight: 600;
 }
 
-.prose ul {
-  @apply list-disc;
+/* Prose pages: tables sit in a panel and scroll sideways inside it. */
+.doc .table-scroll {
+  margin-block: 1.5rem;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 0.5rem 1.5rem;
+  background: var(--card);
+  -webkit-backdrop-filter: blur(22px) saturate(1.35);
+  backdrop-filter: blur(22px) saturate(1.35);
 }
 
-.prose li {
-  @apply text-slate-700 dark:text-slate-300;
+.doc .table-scroll table {
+  min-width: 36rem;
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
 }
 
-.prose strong {
-  @apply text-slate-900 dark:text-white;
+.doc .table-scroll.wide table {
+  min-width: 68rem;
 }
 
-.budoux-ja {
-  word-break: keep-all;
-  overflow-wrap: anywhere;
+/* A wide prose page keeps its text at reading width; only tables span it. */
+.doc-wide > :not(.table-scroll) {
+  max-width: 46rem;
 }
 
-.budoux-ja :where(pre, pre code) {
-  word-break: normal;
-  overflow-wrap: normal;
+.doc .table-scroll :is(th, td) {
+  padding: 0.625rem 1rem 0.625rem 0;
+  vertical-align: top;
+}
+
+.doc .table-scroll thead th {
+  color: var(--foreground);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.doc .table-scroll td {
+  color: var(--muted-foreground);
+}
+
+.doc .table-scroll tbody td:first-child {
+  min-width: 9.5rem;
+  color: var(--foreground);
+  font-weight: 500;
+}
+
+.doc .table-scroll tbody tr:last-child td {
+  border-bottom-width: 0;
+}
+
+/* Anchors placed before a heading so links work in both languages. */
+.doc a[id]:empty {
+  display: block;
+  scroll-margin-top: 6rem;
+}
+
+/* Where a line is long enough to hold a clause, a clause stays on one line,
+   so Japanese text breaks only after 、 and 。. On a narrow screen it may
+   also break between phrases. */
+@media (min-width: 48rem) {
+  .clause {
+    white-space: nowrap;
+  }
+
+  /* A <wbr> breaks even inside nowrap text, so the ones inside a clause are
+     taken out. */
+  .clause wbr {
+    display: none;
+  }
 }

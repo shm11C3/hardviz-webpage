@@ -41,150 +41,122 @@ const dateFormatter = new Intl.DateTimeFormat(isJa ? "ja-JP" : "en-US", {
 >
   <Header />
 
-  <main id="main-content" class="pt-24 md:pt-28 pb-16">
-    <div class="container mx-auto px-4">
-      <header class="max-w-3xl">
-        <h1
-          class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white"
-        >
+  <main id="main-content" class="pt-28 pb-20">
+    <div class="shell split">
+      <header>
+        <h1 class="font-bold text-3xl text-foreground md:text-4xl">
           {t("changelog.title")}
         </h1>
-        <p class="mt-3 text-slate-600 dark:text-slate-300">
-          {t("changelog.description")}
+        <p class="mt-4 text-muted-foreground">{t("changelog.description")}</p>
+        <a
+          href={githubAllReleasesUrl()}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-outline mt-6"
+        >
+          <FaGithub className="h-[18px] w-[18px]" aria-hidden="true" />
+          {t("download.githubLink")}
+        </a>
+        <p class="mt-4 text-sm">
+          <a href={`${translatePath("/changelog")}rss.xml`} class="link">
+            {t("changelog.rss")}
+          </a>
         </p>
       </header>
 
-      <div
-        class="mt-6 max-w-3xl rounded-2xl border border-cyan-200/70 dark:border-cyan-500/30 bg-cyan-50/70 dark:bg-cyan-500/10 backdrop-blur-sm px-5 py-4"
-      >
-        <p class="text-sm text-cyan-900/90 dark:text-cyan-100">
-          {t("changelog.announcement")}
-        </p>
-      </div>
+      <div class="min-w-0">
+        <p class="note mb-3">{t("changelog.announcement")}</p>
 
-      <section class="mt-10 grid grid-cols-1 gap-4">
         {entries.length ? (
-            entries.map(({ entry, untranslated }) => (
-              <article class="group relative rounded-2xl border border-slate-200/70 bg-white/70 p-5 shadow-sm backdrop-blur-sm transition-colors transition-shadow focus-within:border-slate-300/70 focus-within:bg-white/90 focus-within:shadow-md hover:border-slate-300/70 hover:bg-white/90 hover:shadow-md md:p-6 dark:border-slate-800 dark:bg-slate-900/40 dark:hover:border-slate-700 dark:hover:bg-slate-900/65 dark:focus-within:border-slate-700 dark:focus-within:bg-slate-900/65">
-                <a
-                  href={translatePath(`/changelog/${entry.data.version}`)}
-                  data-astro-prefetch
-                  aria-label={`${t("changelog.title")} v${entry.data.version}`}
-                  class="absolute inset-0 z-10 rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-950"
-                >
-                  <span class="sr-only">{t("changelog.title")} v{entry.data.version}</span>
-                </a>
-
-                <div
-                  aria-hidden="true"
-                  class="pointer-events-none absolute inset-0 z-0 rounded-2xl bg-white opacity-0 transition-opacity duration-200 group-focus-within:opacity-10 group-hover:opacity-10 dark:group-hover:opacity-5 dark:group-focus-within:opacity-5"
-                />
-
-                <div class="pointer-events-none relative z-20">
-                  <div class="flex items-start justify-between gap-4">
-                    <div>
-                      <p class="font-semibold text-slate-900 text-xl dark:text-white">
-                        {entry.data.title}
-                      </p>
-
-                      <div class="mt-2 flex flex-wrap items-center gap-2 text-slate-500 text-sm dark:text-slate-400">
-                        <span class="font-mono">v{entry.data.version}</span>
-                        <span aria-hidden="true">•</span>
-                        <time datetime={entry.data.date.toISOString()}>
-                          {dateFormatter.format(entry.data.date)}
-                        </time>
-                        {untranslated ? (
-                          <>
-                            <span aria-hidden="true">•</span>
-                            <span class="inline-flex items-center rounded-full border border-amber-200/80 bg-amber-50/80 px-2 py-0.5 text-amber-800 text-xs dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-200">
-                              {t("changelog.untranslatedBadge")}
-                            </span>
-                          </>
-                        ) : null}
-                      </div>
-                    </div>
-
-                    <a
-                      href={githubReleaseTagUrl(entry.data.version)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="pointer-events-auto relative z-30 shrink-0 font-medium text-slate-600 text-sm transition-colors hover:text-cyan-500 dark:text-slate-300 dark:hover:text-cyan-400"
-                    >
-                      {t("changelog.githubRelease")}
-                    </a>
-                  </div>
-
-                  {entry.data.tags?.length ? (
-                    <div class="mt-4 flex flex-wrap gap-2">
-                      {entry.data.tags.map((tag) => (
-                        <span class="inline-flex items-center rounded-full border border-slate-200 px-2.5 py-1 text-slate-600 text-xs dark:border-slate-700 dark:text-slate-300">
-                          {tag}
+            <ol class="panel ruled">
+              {entries.map(({ entry, untranslated }) => (
+                <li>
+                  <article class="changelog-row">
+                    <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1 text-muted-foreground text-sm">
+                      {entry.data.title !== `v${entry.data.version}` ? (
+                        <span class="font-mono text-foreground">v{entry.data.version}</span>
+                      ) : null}
+                      <time datetime={entry.data.date.toISOString()}>
+                        {dateFormatter.format(entry.data.date)}
+                      </time>
+                      {untranslated ? (
+                        <span class="rounded-sm border border-amber-300 px-1.5 py-0.5 text-amber-800 text-xs dark:border-amber-400/40 dark:text-amber-200">
+                          {t("changelog.untranslatedBadge")}
                         </span>
-                      ))}
+                      ) : null}
                     </div>
-                  ) : null}
 
-                  {entry.data.summary ? (
-                    <p class="mt-4 text-slate-700 dark:text-slate-200">
-                      {entry.data.summary}
-                    </p>
-                  ) : null}
+                    <h2 class="item-title mt-1.5">
+                      <a
+                        href={translatePath(`/changelog/${entry.data.version}`)}
+                        data-astro-prefetch
+                        aria-label={`${t("changelog.title")} v${entry.data.version}`}
+                        class="changelog-link"
+                      >
+                        {entry.data.title}
+                      </a>
+                    </h2>
 
-                  {entry.data.links?.length ? (
-                    <div class="mt-4 flex flex-wrap gap-4">
-                      {entry.data.links.map((link) => (
+                    {entry.data.summary ? (
+                      <p class="item-body max-w-[68ch]">{entry.data.summary}</p>
+                    ) : null}
+
+                    {entry.data.tags?.length ? (
+                      <div class="mt-3 flex flex-wrap gap-2">
+                        {entry.data.tags.map((tag) => (
+                          <span class="badge">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    ) : null}
+
+                    <div class="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm">
+                      <a
+                        href={githubReleaseTagUrl(entry.data.version)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="link"
+                      >
+                        {t("changelog.githubRelease")}
+                      </a>
+                      {entry.data.links?.map((link) => (
                         <a
                           href={link.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          class="pointer-events-auto relative z-30 text-cyan-600 text-sm hover:underline dark:text-cyan-400"
+                          class="link"
                         >
                           {link.label}
                         </a>
                       ))}
                     </div>
-                  ) : null}
-                </div>
-              </article>
-            ))
+                  </article>
+                </li>
+              ))}
+            </ol>
           ) : (
-            <div class="rounded-2xl border border-slate-200/70 bg-white/70 p-5 shadow-sm backdrop-blur-sm md:p-6 dark:border-slate-800 dark:bg-slate-900/40">
-              <p class="font-medium text-slate-700 dark:text-slate-200">
-                {t("changelog.emptyTitle")}
-              </p>
-              <p class="mt-2 text-slate-600 dark:text-slate-300">
-                {t("changelog.emptyDescription")}
-              </p>
-              <div class="mt-5 flex justify-center">
-                <a
-                  href={githubAllReleasesUrl()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex w-fit items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 font-semibold text-sm text-white hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200"
-                >
-                  <FaGithub className="h-5 w-5" />
-                  {t("download.githubLink")}
-                </a>
-              </div>
+            <div class="border-border border-t pt-5">
+              <p class="item-title">{t("changelog.emptyTitle")}</p>
+              <p class="item-body">{t("changelog.emptyDescription")}</p>
             </div>
           )}
-      </section>
-
-      {entries.length ? (
-          <div class="mt-10 flex justify-center">
-            <a
-              href={githubAllReleasesUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex w-fit items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 font-semibold text-sm text-white hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200"
-            >
-              <FaGithub className="h-5 w-5" />
-              {t("download.githubLink")}
-            </a>
-          </div>
-        ) : null}
+      </div>
     </div>
   </main>
 
   <Footer />
 </Layout>
+
+<style>
+.changelog-link {
+  text-decoration: underline;
+  text-decoration-color: var(--input);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+  transition: text-decoration-color 120ms;
+}
+.changelog-link:hover {
+  text-decoration-color: var(--foreground);
+}
+</style>

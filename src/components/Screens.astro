@@ -1,0 +1,247 @@
+---
+import { Image } from "astro:assets";
+import coolingEn from "../assets/releases/cooling-insight-en.png";
+import coolingJa from "../assets/releases/cooling-insight-ja.png";
+import coolingLightEn from "../assets/releases/cooling-insight-light-en.png";
+import coolingLightJa from "../assets/releases/cooling-insight-light-ja.png";
+import performanceEn from "../assets/screenshots/dashboard-performance-en.png";
+import performanceJa from "../assets/screenshots/dashboard-performance-ja.png";
+import performanceLightEn from "../assets/screenshots/dashboard-performance-light-en.png";
+import performanceLightJa from "../assets/screenshots/dashboard-performance-light-ja.png";
+import insights from "../assets/screenshots/slide-2.png";
+import insightsLight from "../assets/screenshots/slide-2-l.png";
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../i18n/utils";
+import { addJapaneseLineBreaks } from "../lib/japaneseLineBreaks";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
+type Key = Parameters<typeof t>[0];
+const tf = (key: Key) => addJapaneseLineBreaks(lang, t(key));
+const isJa = lang === "ja";
+
+const rows = (prefix: string, count: number) =>
+  Array.from({ length: count }, (_, i) => i + 1).map((n) => ({
+    term: t(`${prefix}${n}.term` as Key),
+    value: tf(`${prefix}${n}.value` as Key),
+  }));
+
+/**
+ * The Performance screen, the Insights screen, and Cooling Insight, which is
+ * the Cooling tab of the Insights screen. Each has the period it displays.
+ * The hue is the series colour the application's charts use for CPU, memory
+ * and GPU.
+ */
+const screens = [
+  {
+    id: "performance",
+    hue: "live",
+    span: t("scale.live.span"),
+    name: t("scale.live.screen"),
+    body: tf("screens.live.body"),
+    rows: rows("screens.live.row", 4),
+    alt: t("screenshots.dashboardAlt"),
+    light: isJa ? performanceLightJa : performanceLightEn,
+    dark: isJa ? performanceJa : performanceEn,
+    // The lower half of the screen: processes, sensors and power draw.
+    anchor: "left bottom",
+  },
+  {
+    id: "insights",
+    hue: "record",
+    span: t("scale.record.span"),
+    name: t("scale.record.screen"),
+    body: tf("screens.record.body"),
+    extra: tf("screens.record.note"),
+    rows: rows("record.fact", 4),
+    alt: t("screenshots.insightsAlt"),
+    light: insightsLight,
+    dark: insights,
+    anchor: "left top",
+  },
+  {
+    id: "cooling-insight",
+    hue: "notice",
+    span: t("scale.notice.span"),
+    name: t("scale.notice.screen"),
+    body: tf("screens.notice.body"),
+    rows: [
+      {
+        term: t("screens.notice.bands.term"),
+        value: tf("screens.notice.bands.value"),
+      },
+      ...rows("notice.cond", 2),
+    ],
+    note: tf("notice.note"),
+    link: { href: translatePath("/cooling-insight"), label: t("notice.cta") },
+    alt: t("screenshots.coolingInsightAlt"),
+    light: isJa ? coolingLightJa : coolingLightEn,
+    dark: isJa ? coolingJa : coolingEn,
+    anchor: "left top",
+  },
+];
+const imageWidths = [480, 720, 960, 1440];
+const imageSizes = "(max-width: 960px) 100vw, 680px";
+---
+
+<section
+  id="features"
+  aria-labelledby="screens-heading"
+  class:list={["section", isJa && "budoux-ja"]}
+>
+  <div class="shell">
+    <div class="section-head">
+      <h2 id="screens-heading" class="section-title">{t("screens.title")}</h2>
+    </div>
+    <div class="screens">
+      {screens.map((screen, index) => (
+          <article
+            id={screen.id}
+            class:list={["screen-row panel", index % 2 === 1 && "screen-row-rev"]}
+          >
+            <div class="min-w-0">
+              <p class="span">
+                <i style={`background:var(--${screen.hue})`}></i>
+                {screen.span}
+              </p>
+              <h3>{screen.name}</h3>
+              <p class="body">{screen.body}</p>
+              {screen.extra && <p class="fine">{screen.extra}</p>}
+              <dl class="rows">
+                {screen.rows.map((row) => (
+                  <div>
+                    <dt>{row.term}</dt>
+                    <dd>{row.value}</dd>
+                  </div>
+                ))}
+              </dl>
+              {screen.note && <p class="fine">{screen.note}</p>}
+              {screen.link && (
+                <p class="mt-5">
+                  <a
+                    href={screen.link.href}
+                    class="btn btn-sm btn-outline"
+                    data-astro-prefetch
+                  >
+                    {screen.link.label}
+                  </a>
+                </p>
+              )}
+            </div>
+            <div class="shot">
+              <Image
+                src={screen.light}
+                alt={screen.alt}
+                class="shot-light"
+                style={`object-position:${screen.anchor}`}
+                widths={imageWidths}
+                sizes={imageSizes}
+                loading="lazy"
+              />
+              <Image
+                src={screen.dark}
+                alt={screen.alt}
+                class="shot-dark"
+                style={`object-position:${screen.anchor}`}
+                widths={imageWidths}
+                sizes={imageSizes}
+                loading="lazy"
+              />
+            </div>
+          </article>
+        ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.screens {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+.screen-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+  align-items: center;
+  padding: clamp(1.25rem, 3.5vw, 3rem);
+}
+.span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.3rem 0.9rem 0.3rem 0.7rem;
+  border-radius: 9999px;
+  background: var(--muted);
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+.span i {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+}
+h3 {
+  margin-top: 1rem;
+  font-size: clamp(1.45rem, 2.4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.5;
+}
+.body {
+  margin-top: 0.9rem;
+  color: var(--soft);
+}
+.fine {
+  margin-top: 0.6rem;
+  color: var(--muted-foreground);
+  font-size: 0.8125rem;
+  line-height: 1.8;
+}
+.rows {
+  margin-top: 1.5rem;
+}
+.rows + .fine {
+  margin-top: 1rem;
+}
+.shot {
+  overflow: hidden;
+  aspect-ratio: 5 / 4;
+  border: 1px solid var(--border);
+  border-radius: 1.1rem;
+  background: var(--stage);
+}
+.shot :global(img) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Both themes' screenshots are in the document; the inactive one is not
+   displayed, and lazy loading keeps it from being fetched. */
+.shot :global(.shot-dark) {
+  display: none;
+}
+:global(.dark) .shot :global(.shot-light) {
+  display: none;
+}
+:global(.dark) .shot :global(.shot-dark) {
+  display: block;
+}
+
+@media (min-width: 60rem) {
+  .screen-row {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+  .screen-row-rev {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+  .screen-row-rev .shot {
+    order: -1;
+  }
+}
+</style>

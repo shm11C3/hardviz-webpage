@@ -114,3 +114,25 @@ test("JA version page has translated back link", async ({ page }) => {
   });
   await expect(backLink).toBeVisible();
 });
+
+test("changelog RSS feeds list releases in both languages", async ({
+  page,
+}) => {
+  for (const [feed, link] of [
+    ["/changelog/rss.xml", "https://hardviz.com/changelog/1.11.3/"],
+    ["/ja/changelog/rss.xml", "https://hardviz.com/ja/changelog/1.11.3/"],
+  ] as const) {
+    const response = await page.request.get(feed);
+    expect(response.ok()).toBe(true);
+    const xml = await response.text();
+    expect(xml).toContain('<rss version="2.0"');
+    expect(xml).toContain("HardwareVisualizer v1.11.3");
+    expect(xml).toContain(`<link>${link}</link>`);
+  }
+
+  await page.goto("/changelog/");
+  await expect(
+    page.locator('link[rel="alternate"][type="application/rss+xml"]'),
+  ).toHaveAttribute("href", "https://hardviz.com/changelog/rss.xml");
+  await expect(page.locator('main a[href="/changelog/rss.xml"]')).toBeVisible();
+});

@@ -1,0 +1,98 @@
+---
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../i18n/utils";
+import { addJapaneseLineBreaks } from "../lib/japaneseLineBreaks";
+import ClauseText from "./ClauseText.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
+const tf = (key: Parameters<typeof t>[0]) =>
+  addJapaneseLineBreaks(lang, t(key));
+type Key = Parameters<typeof t>[0];
+
+/**
+ * Platform support as published in the README of the release this site
+ * describes. A dash means the reading is not available on that OS.
+ */
+const rowCount = 11;
+const rows = Array.from({ length: rowCount }, (_, i) => i + 1).map((n) => ({
+  feature: tf(`matrix.row${n}.feature` as Key),
+  windows: tf(`matrix.row${n}.windows` as Key),
+  macos: tf(`matrix.row${n}.macos` as Key),
+  linux: tf(`matrix.row${n}.linux` as Key),
+}));
+const notes = [1, 2, 3, 4].map((n) => tf(`matrix.note${n}` as Key));
+const cellClass = (value: string) => (value === "—" ? undefined : "yes");
+---
+
+<section
+  id="platforms"
+  aria-labelledby="platforms-heading"
+  class:list={["section", lang === "ja" && "budoux-ja"]}
+>
+  <div class="shell">
+    <div class="section-head">
+      <h2 id="platforms-heading" class="section-title">{tf("matrix.title")}</h2>
+      <p class="lead"><ClauseText lang={lang} text={t("matrix.lead")} /></p>
+    </div>
+    <div class="panel mt-[clamp(2rem,4vw,3rem)]">
+      <div class="table-wrap">
+        <table class="data-table min-w-[44rem]">
+          <caption class="sr-only">
+            {t("matrix.caption")}
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">{t("matrix.col.feature")}</th>
+              <th scope="col">Windows</th>
+              <th scope="col">macOS</th>
+              <th scope="col">Linux</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+                <tr>
+                  <th scope="row">{row.feature}</th>
+                  <td class={cellClass(row.windows)}>{row.windows}</td>
+                  <td class={cellClass(row.macos)}>{row.macos}</td>
+                  <td class={cellClass(row.linux)}>{row.linux}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="note mt-3">
+      <ol class="list-decimal space-y-1 pl-4">
+        {notes.map((note) => <li>{note}</li>)}
+      </ol>
+    </div>
+    <div class="mt-6 flex flex-wrap justify-center gap-3">
+      <a
+        href={translatePath("/specs")}
+        class="btn btn-outline"
+        data-astro-prefetch
+      >
+        {t("matrix.linkSpecs")}
+      </a>
+      <a
+        href={translatePath("/guide")}
+        class="btn btn-outline"
+        data-astro-prefetch
+      >
+        {t("matrix.linkGuide")}
+      </a>
+      <a
+        href={translatePath("/compare")}
+        class="btn btn-outline"
+        data-astro-prefetch
+      >
+        {t("matrix.linkCompare")}
+      </a>
+    </div>
+  </div>
+</section>

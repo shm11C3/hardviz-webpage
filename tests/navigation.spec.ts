@@ -17,40 +17,56 @@ test.describe("Header", () => {
     await expect(page.locator("header")).toContainText("HardwareVisualizer");
   });
 
-  test("download link href from home and faq", async ({ page }) => {
+  test("download button href from home and faq", async ({ page }) => {
+    const download = page.locator("header [data-nav-download]");
+
     await page.goto("/");
-    await expect(
-      page.locator("header a", { hasText: "Download" }),
-    ).toHaveAttribute("href", "/download/");
+    await expect(download).toHaveAttribute("href", "/download/");
+    await expect(download).toContainText("Download");
 
     await page.goto("/faq/");
-    await expect(
-      page.locator("header a", { hasText: "Download" }),
-    ).toHaveAttribute("href", "/download/");
+    await expect(download).toHaveAttribute("href", "/download/");
 
     await page.goto("/download/");
+    await expect(download).toHaveAttribute("aria-current", "page");
+  });
+
+  test("primary navigation links", async ({ page }) => {
+    await page.goto("/");
+    const nav = page.locator("header [data-site-nav]");
+    for (const href of [
+      "/cooling-insight/",
+      "/guide/",
+      "/specs/",
+      "/changelog/",
+      "/faq/",
+    ]) {
+      await expect(nav.locator(`a[href="${href}"]`)).toBeVisible();
+    }
+
+    await page.goto("/ja/");
+    await expect(nav.locator('a[href="/ja/faq/"]')).toBeVisible();
+    await expect(nav.locator('a[href="/ja/guide/"]')).toBeVisible();
+  });
+
+  test("current page is marked in the primary navigation", async ({ page }) => {
+    await page.goto("/faq/");
     await expect(
-      page.locator("header a", { hasText: "Download" }),
+      page.locator('header [data-site-nav] a[href="/faq/"]'),
+    ).toHaveAttribute("aria-current", "page");
+
+    await page.goto("/changelog/1.6.0/");
+    await expect(
+      page.locator('header [data-site-nav] a[href="/changelog/"]'),
     ).toHaveAttribute("aria-current", "page");
   });
 
-  test("FAQ link href", async ({ page }) => {
-    await page.goto("/");
-    await expect(page.locator("header a", { hasText: "FAQ" })).toHaveAttribute(
-      "href",
-      "/faq/",
-    );
-
-    await page.goto("/ja/");
-    await expect(page.locator("header a", { hasText: "FAQ" })).toHaveAttribute(
-      "href",
-      "/ja/faq/",
-    );
-  });
-
   test("GitHub link opens in new tab", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/");
-    const githubLink = page.getByRole("link", { name: "GitHub stars" });
+    const githubLink = page
+      .locator("header")
+      .getByRole("link", { name: "GitHub", exact: true });
     await expect(githubLink).toHaveAttribute("target", "_blank");
     await expect(githubLink).toHaveAttribute(
       "href",
@@ -58,19 +74,23 @@ test.describe("Header", () => {
     );
   });
 
-  test("nav links hidden on mobile, visible on desktop", async ({ page }) => {
+  test("navigation collapses into a menu on mobile", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto("/");
-    await expect(
-      page.locator("header a", { hasText: "Download" }),
-    ).toBeHidden();
-    await expect(page.locator("header a", { hasText: "FAQ" })).toBeHidden();
+    const nav = page.locator("header [data-site-nav]");
+    const menu = page.locator("header details.site-menu");
+    await expect(nav).toBeHidden();
+    await expect(menu.locator("summary")).toBeVisible();
+    await expect(menu.locator('a[href="/faq/"]')).toBeHidden();
+
+    await menu.locator("summary").click();
+    await expect(menu.locator('a[href="/download/"]')).toBeVisible();
+    await expect(menu.locator('a[href="/guide/"]')).toBeVisible();
+    await expect(menu.locator('a[href="/faq/"]')).toBeVisible();
 
     await page.setViewportSize({ width: 1280, height: 800 });
-    await expect(
-      page.locator("header a", { hasText: "Download" }),
-    ).toBeVisible();
-    await expect(page.locator("header a", { hasText: "FAQ" })).toBeVisible();
+    await expect(nav).toBeVisible();
+    await expect(menu.locator("summary")).toBeHidden();
   });
 });
 

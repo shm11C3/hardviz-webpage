@@ -1,0 +1,36 @@
+---
+import { splitJapaneseClauses } from "../lib/japaneseLineBreaks";
+
+/**
+ * A lead paragraph's text with its line-break opportunities marked. On a wide
+ * screen Japanese text breaks only after 、 and 。: each clause is kept on one
+ * line (see `.clause` in global.css). On a narrow screen, or when a clause is
+ * too long to fit a line, it breaks between phrases. Other text is passed
+ * through unchanged.
+ */
+interface Props {
+  lang: string;
+  text: string;
+}
+
+const { lang, text } = Astro.props;
+const result = splitJapaneseClauses(lang, text);
+
+const escapeHtml = (value: string) =>
+  value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+// Built as one string: any whitespace between the pieces would show up as a
+// space inside the Japanese text.
+const html = result
+  ? result.clauses
+      .map(
+        (clause) =>
+          `<span${result.fits ? ' class="clause"' : ""}>${clause
+            .map(escapeHtml)
+            .join("<wbr>")}</span>`,
+      )
+      .join("<wbr>")
+  : null;
+---
+
+{html ? <Fragment set:html={html} /> : text}

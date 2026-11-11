@@ -13,35 +13,39 @@ const currentPath =
   <button
     id="langToggle"
     type="button"
-    class="flex items-center gap-1 px-2 py-1 rounded-md text-slate-600 dark:text-slate-300 hover:text-cyan-500 transition-colors"
+    class="flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground"
     aria-label="Select Language"
     aria-haspopup="true"
     aria-expanded="false"
     aria-controls="langDropdown"
   >
-    <Languages size={16} />
+    <Languages size={18} />
   </button>
 
+  <!-- The top padding joins the menu to the button, so the pointer never
+       leaves the hover area on its way down. -->
   <div
     id="langDropdown"
-    role="menu"
-    class="absolute right-0 top-full mt-2 py-2 w-32 bg-white dark:bg-slate-800 rounded-md shadow-lg border border-slate-200 dark:border-slate-700
-      opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
+    class="invisible absolute top-full right-0 z-50 pt-4 opacity-0 transition-opacity duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100"
   >
-    {Object.entries(languages).map(([langCode, label]) => (
+    <div
+      role="menu"
+      class="w-32 rounded-2xl border border-border bg-popover p-1 text-popover-foreground shadow-xl"
+    >
+      {Object.entries(languages).map(([langCode, label]) => (
         <a
           href={translatePath(currentPath, langCode)}
           role="menuitem"
-          class={`block px-3 py-2 text-sm transition-colors hover:bg-slate-100 dark:hover:bg-slate-700 ${
-            langCode === lang
-              ? "bg-cyan-50 text-cyan-600 dark:bg-slate-700/50 dark:text-cyan-400"
-              : "text-slate-700 dark:text-slate-300"
+          class={`block rounded-full px-3 py-2 text-sm transition-colors hover:bg-muted ${
+            langCode === lang ? "font-medium" : "text-muted-foreground"
           }`}
+          aria-current={langCode === lang ? "true" : undefined}
           data-astro-prefetch
         >
           {label}
         </a>
       ))}
+    </div>
   </div>
 </div>
 
@@ -54,7 +58,12 @@ if (!prefersHover) {
   const wrapper = document.getElementById("language-menu");
 
   // group-hover クラスの無効化と表示制御を JS に移譲
-  dropdown.classList.remove("group-hover:opacity-100", "group-hover:visible");
+  dropdown.classList.remove(
+    "group-hover:opacity-100",
+    "group-hover:visible",
+    "group-focus-within:opacity-100",
+    "group-focus-within:visible",
+  );
   dropdown.classList.remove("opacity-0", "invisible");
   dropdown.classList.add("hidden");
 
@@ -70,5 +79,19 @@ if (!prefersHover) {
       toggleBtn?.setAttribute("aria-expanded", "false");
     }
   });
+} else {
+  // On a hover device CSS opens the menu, on hover or on keyboard focus.
+  // Keep the button's state in step with what is shown.
+  const toggleBtn = document.getElementById("langToggle");
+  const wrapper = document.getElementById("language-menu");
+  const sync = () => {
+    toggleBtn?.setAttribute(
+      "aria-expanded",
+      String(Boolean(wrapper?.matches(":hover, :focus-within"))),
+    );
+  };
+  for (const type of ["mouseenter", "mouseleave", "focusin", "focusout"]) {
+    wrapper?.addEventListener(type, () => requestAnimationFrame(sync));
+  }
 }
 </script>

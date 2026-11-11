@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import { ChevronRight, ExternalLink } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import appIcon from "../assets/app-icon.png";
@@ -25,65 +25,49 @@ const footerLinks = [
   {
     title: t("footer.product"),
     links: [
+      { name: t("footer.features"), href: translatePath("/#features") },
+      {
+        name: t("nav.coolingInsight"),
+        href: translatePath("/cooling-insight"),
+      },
+      { name: t("footer.download"), href: downloadHref },
+      { name: t("footer.specs"), href: translatePath("/specs") },
+      { name: t("footer.compare"), href: translatePath("/compare") },
+      { name: t("footer.changelog"), href: translatePath("/changelog") },
       {
         name: t(currentRelease.navKey),
         href: translatePath(`/releases/${currentRelease.slug}`),
-        external: false,
-      },
-      {
-        name: t("footer.features"),
-        href: translatePath("/#features"),
-        external: false,
-      },
-      {
-        name: t("footer.download"),
-        href: downloadHref,
-        external: false,
-      },
-      {
-        name: t("footer.specs"),
-        href: translatePath("/specs"),
-        external: false,
-      },
-      { name: t("footer.faq"), href: translatePath("/faq"), external: false },
-      {
-        name: t("footer.changelog"),
-        href: translatePath("/changelog"),
-        external: false,
       },
     ],
   },
   {
     title: t("footer.resources"),
     links: [
+      { name: t("nav.guide"), href: translatePath("/guide") },
+      { name: t("footer.faq"), href: translatePath("/faq") },
+      { name: t("footer.security"), href: translatePath("/security") },
       {
-        name: t("footer.github"),
-        href: githubRepoUrl(),
-        external: true,
-      },
-      {
-        name: t("footer.reportIssue"),
-        href: `${githubRepoUrl()}/issues`,
-        external: true,
-      },
-      {
-        name: t("footer.deepwiki"),
-        href: "https://deepwiki.com/shm11C3/HardwareVisualizer",
-        external: true,
+        name: t("download.nav.verification"),
+        href: translatePath("/verification"),
       },
     ],
   },
   {
     title: t("footer.community"),
     links: [
-      {
-        name: t("footer.survey"),
-        href: `${translatePath("/survey")}?source=web`,
-        external: false,
-      },
+      { name: t("footer.github"), href: githubRepoUrl(), external: true },
       {
         name: t("footer.discussions"),
         href: `${githubRepoUrl()}/discussions`,
+        external: true,
+      },
+      {
+        name: t("footer.survey"),
+        href: `${translatePath("/survey")}?source=web`,
+      },
+      {
+        name: t("footer.reportIssue"),
+        href: `${githubRepoUrl()}/issues`,
         external: true,
       },
     ],
@@ -91,79 +75,68 @@ const footerLinks = [
 ];
 ---
 
-<footer
-  class="bg-white text-black dark:bg-slate-900 dark:text-white pt-16 pb-8"
->
-  <div class="container mx-auto px-4">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+<footer class="pt-[clamp(2rem,4vw,3.5rem)] pb-10">
+  <div class="shell">
+    <div
+      class="panel grid gap-10 md:p-10 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:gap-16"
+    >
       <div>
-        <div class="flex items-center gap-2 mb-4">
-          <Image src={appIcon} alt="Logo" class="h-8 w-8" />
-          <span class="font-bold text-xl text-black dark:text-white"
+        <div class="flex items-center gap-2.5">
+          <Image src={appIcon} alt="" class="h-7 w-7" />
+          <span class="font-bold text-foreground text-lg"
             >HardwareVisualizer</span
           >
         </div>
-        <p class="text-slate-600 dark:text-slate-400 mb-4">
+        <p class="mt-4 text-muted-foreground text-sm">
           {t("footer.description")}
         </p>
-        <div class="flex gap-4">
-          <a
-            href={githubRepoUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-slate-600 dark:text-slate-400 hover:text-black dark:hover:text-white transition-colors"
-            aria-label="HardwareVisualizer on GitHub"
-          >
-            <FaGithub className="w-5 h-5" />
-          </a>
-        </div>
       </div>
 
-      {footerLinks.map((section) => (
-          <div>
-            <h3 class="mb-4 font-semibold text-lg">{section.title}</h3>
-            <ul class="space-y-2">
-              {section.links.map((link) => (
-                <li>
-                  <a
-                    href={link.href}
-                    class="inline-flex items-center gap-1 text-slate-600 transition-colors hover:text-black dark:text-slate-400 dark:hover:text-white"
-                    {...(link.external
-                      ? { target: "_blank", rel: "noopener noreferrer" }
-                      : { "data-astro-prefetch": true })}
-                  >
-                    {link.name}
-                    {link.external ? (
-                      <ExternalLink className="h-3 w-3" />
-                    ) : (
-                      <ChevronRight className="h-3 w-3" />
-                    )}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+      <div class="grid grid-cols-2 gap-8 sm:grid-cols-3">
+        {footerLinks.map((section) => (
+            <div>
+              <h3 class="font-bold text-foreground text-sm">{section.title}</h3>
+              <ul class="mt-3 space-y-2 text-sm">
+                {section.links.map((link) => (
+                  <li>
+                    <a
+                      href={link.href}
+                      class="inline-flex items-center gap-1 text-muted-foreground transition-colors hover:text-foreground"
+                      {...("external" in link && link.external
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : { "data-astro-prefetch": true })}
+                    >
+                      {link.name}
+                      {"external" in link && link.external ? (
+                        <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                      ) : null}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+      </div>
     </div>
 
     <div
-      class="flex flex-col items-center justify-between gap-4 border-slate-200 border-t pt-8 sm:flex-row dark:border-slate-800"
+      class="flex flex-col items-start justify-between gap-4 px-2 pt-6 sm:flex-row sm:items-center"
     >
-      <p class="text-slate-500 text-sm dark:text-slate-400">
+      <p class="text-muted-foreground text-sm">
         © 2024–{currentYear}
         shm11C3 · HardwareVisualizer
       </p>
-      <div class="flex items-center gap-5">
+      <div class="flex items-center gap-5 text-sm">
         <a
           href={aboutHref}
-          class="text-slate-600 text-sm transition-colors hover:text-black dark:text-slate-400 dark:hover:text-white"
+          class="text-muted-foreground transition-colors hover:text-foreground"
           data-astro-prefetch
         >
           {t("footer.about")}
         </a>
         <a
           href={privacyHref}
-          class="text-slate-600 text-sm transition-colors hover:text-black dark:text-slate-400 dark:hover:text-white"
+          class="text-muted-foreground transition-colors hover:text-foreground"
           data-astro-prefetch
         >
           {t("footer.privacy")}
@@ -172,19 +145,19 @@ const footerLinks = [
           href={authorLinks.github}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-slate-600 transition-colors hover:text-black dark:text-slate-400 dark:hover:text-white"
+          class="text-muted-foreground transition-colors hover:text-foreground"
           aria-label="shm11C3 on GitHub"
         >
-          <FaGithub className="w-5 h-5" />
+          <FaGithub className="h-[18px] w-[18px]" />
         </a>
         <a
           href={authorLinks.x}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-slate-600 transition-colors hover:text-black dark:text-slate-400 dark:hover:text-white"
+          class="text-muted-foreground transition-colors hover:text-foreground"
           aria-label="X (Twitter)"
         >
-          <FaXTwitter className="w-5 h-5" />
+          <FaXTwitter className="h-[18px] w-[18px]" />
         </a>
       </div>
     </div>

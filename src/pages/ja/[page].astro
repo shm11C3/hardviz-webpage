@@ -1,0 +1,25 @@
+---
+import DocPage from "../../components/DocPage.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import { getLangFromUrl } from "../../i18n/utils";
+import Layout from "../../layouts/Layout.astro";
+import { getPageEntry, type PageSlug, pageSlugs } from "../../lib/pages";
+
+export function getStaticPaths() {
+  return pageSlugs.map((page) => ({ params: { page } }));
+}
+
+const lang = getLangFromUrl(Astro.url);
+const entry = await getPageEntry(lang, Astro.params.page as PageSlug);
+---
+
+<Layout
+  title={entry.data.metaTitle}
+  lang={lang}
+  description={entry.data.metaDescription}
+>
+  <Header />
+  <main id="main-content"><DocPage entry={entry} /></main>
+  <Footer />
+</Layout>

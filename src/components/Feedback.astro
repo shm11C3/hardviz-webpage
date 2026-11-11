@@ -1,0 +1,76 @@
+---
+import { ClipboardList, MessagesSquare } from "lucide-react";
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../i18n/utils";
+import { githubRepoUrl } from "../lib/github";
+import { addJapaneseLineBreaks } from "../lib/japaneseLineBreaks";
+import ClauseText from "./ClauseText.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
+const tf = (key: Parameters<typeof t>[0]) =>
+  addJapaneseLineBreaks(lang, t(key));
+
+const discussions = `${githubRepoUrl()}/discussions`;
+---
+
+<section
+  id="feedback"
+  aria-labelledby="feedback-heading"
+  class:list={["section", lang === "ja" && "budoux-ja"]}
+>
+  <div class="shell">
+    <div class="section-head">
+      <h2 id="feedback-heading" class="section-title">
+        {tf("feedback.title")}
+      </h2>
+      <p class="lead"><ClauseText lang={lang} text={t("feedback.lead")} /></p>
+    </div>
+    <div class="mt-[clamp(2rem,4vw,3rem)] grid gap-5 md:grid-cols-2">
+      <div class="panel flex flex-col">
+        <h3 class="panel-label">
+          <MessagesSquare aria-hidden="true" />
+          {t("feedback.discussions.title")}
+        </h3>
+        <p class="panel-body">{tf("feedback.discussions.body")}</p>
+        <div class="mt-auto flex flex-wrap gap-3 pt-4">
+          <a
+            href={`${discussions}/1699`}
+            class="btn btn-sm btn-outline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t("feedback.discussions.ui")}
+          </a>
+          <a
+            href={`${discussions}/1700`}
+            class="btn btn-sm btn-outline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t("feedback.discussions.ideas")}
+          </a>
+        </div>
+      </div>
+      <div class="panel flex flex-col">
+        <h3 class="panel-label">
+          <ClipboardList aria-hidden="true" />
+          {t("feedback.survey.title")}
+        </h3>
+        <p class="panel-body">{tf("feedback.survey.body")}</p>
+        <div class="mt-auto pt-4">
+          <a
+            href={`${translatePath("/survey")}?source=web`}
+            class="btn btn-sm btn-outline"
+          >
+            {t("feedback.survey.cta")}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

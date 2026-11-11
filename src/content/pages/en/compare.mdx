@@ -1,0 +1,88 @@
+---
+lang: en
+page: compare
+title: "How HardwareVisualizer compares with other hardware monitors"
+metaTitle: "HardwareVisualizer vs Task Manager, HWiNFO, HWMonitor, LibreHardwareMonitor, MSI Afterburner"
+metaDescription: "A sourced comparison of HardwareVisualizer with Windows Task Manager, HWiNFO, HWMonitor, LibreHardwareMonitor, and MSI Afterburner: platforms, licence, sensors, history, logging, overlay, and fan control."
+lead: "What each tool states about itself, side by side. Every cell about another tool comes from that tool's own website, documentation, or repository, and several of them do things HardwareVisualizer does not."
+basedOn: "1.11.3"
+updated: 2026-11-12
+---
+
+## How to read this table
+
+- Statements about other tools were taken from their official pages on 11 and 12 November 2026. The sources are listed [below](#sources).
+- A dash (—) means the official sources we read do not say. It does not mean the tool lacks the feature.
+- The HardwareVisualizer column describes v1.11.3.
+
+## Comparison
+
+<div class="table-scroll wide">
+
+| | HardwareVisualizer | Windows Task Manager | HWiNFO | HWMonitor | LibreHardwareMonitor | MSI Afterburner |
+| --- | --- | --- | --- | --- | --- | --- |
+| Platforms | Windows 10 and 11, macOS, Linux | Built into Windows | DOS, Windows 95 to Windows 11, WinPE | Windows, with separate x86/x64 and ARM64 builds | — (a Windows Forms application) | — |
+| Price and licence | Free, GPL-3.0-or-later | Part of Windows | Free for personal and non-commercial use; a paid Pro licence for commercial use of HWiNFO 64 and ARM64 | Free and proprietary; a separate PRO edition | Free, MPL 2.0 | Free |
+| Source code | Published | — | — | — | Published | — |
+| CPU temperature | Windows only | — | Yes | Yes | Yes; some sensors need administrator rights | States that it shows CPU statistics; temperature is not named |
+| GPU temperature | Windows (NVIDIA, AMD) and Linux (AMD) | Yes, with a dedicated GPU card | Yes | Yes | Yes | Yes |
+| Motherboard fan speeds | Windows, on supported Super I/O chips | — | Yes | Yes | Yes | — |
+| Voltages | No | — | Yes | Yes | Yes | — |
+| Charts of past days and months inside the app | Yes: up to 30 days in Insights and up to 1 year in Cooling Insight | — | — | — | — | — |
+| Logging to a file | No | — | CSV; JSON and YAML in HWiNFO 64/ARM64 | CSV | CSV | — |
+| In-game overlay | No | — | Its own on-screen display; in games through RTSS | — | — | Yes, through RivaTuner Statistics Server |
+| Fan control or overclocking | No | — | The changelog refers to a fan control feature | — | Fan control on specific motherboards | GPU overclocking and custom fan curves |
+| Low-level access on Windows | PawnIO, optional | — | Its own kernel driver | — | PawnIO, from v0.9.5 | — |
+| Stated data handling | No telemetry; [connections are listed](/security/#network) | — | States that it collects no personal information and contacts its servers only for version information | — | — | — |
+
+</div>
+
+## Where the other tools do more
+
+- **Voltages and motherboard coverage.** HWiNFO, HWMonitor, and LibreHardwareMonitor read voltages, which HardwareVisualizer does not. HardwareVisualizer reads motherboard temperatures and fans only on the chips listed in the [compatibility notes](/specs/).
+- **In-game overlay.** MSI Afterburner, with RivaTuner Statistics Server, and HWiNFO can show readings on screen while a game runs. HardwareVisualizer has no overlay.
+- **Fan control and overclocking.** MSI Afterburner adjusts GPU clocks, voltage, and fan curves. HardwareVisualizer reads sensors and does not change hardware settings.
+- **Log files.** HWiNFO, HWMonitor, and LibreHardwareMonitor can write readings to CSV files that you can open in other software. HardwareVisualizer keeps history in its own database and has no export.
+- **Nothing to install.** Task Manager is already part of Windows.
+
+## What HardwareVisualizer is built around
+
+- **History you can read inside the app.** Recording is on by default. Insights charts periods from 10 minutes to 30 days, Cooling Insight from 24 hours to 1 year, and history is kept for 365 days by default.
+- **Temperature compared at the same load.** [Cooling Insight](/cooling-insight/) compares CPU temperature with your PC's own baseline within each CPU-load band, and can take room temperature into account.
+- **One application on three operating systems.** Windows, macOS, and Linux, with [different sensor coverage on each](/#platforms).
+- **Open source, with signed Windows and macOS builds.** See [Security and data](/security/).
+
+## Sources
+
+All pages were read on 11 and 12 November 2026.
+
+**Windows Task Manager**
+
+- GPU temperature on the Performance tab: [What's new in Windows 10, version 2004](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/whats-new/whats-new-windows-10-version-2004) (Microsoft Learn)
+- Task Manager as a built-in tool: [System configuration tools in Windows](https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows) (Microsoft Support)
+
+**HWiNFO**
+
+- Platforms and data handling: [About HWiNFO](https://www.hwinfo.com/about-software/) and [Privacy policy](https://www.hwinfo.com/privacy-policy/)
+- Licence and on-screen display: [Licensing](https://www.hwinfo.com/licenses/)
+- Sensors, logging formats, fan control, and kernel driver: [Version history](https://www.hwinfo.com/version-history/)
+- Display in games through RTSS: [Add-ons](https://www.hwinfo.com/add-ons/)
+
+**HWMonitor**
+
+- Platforms, sensors, and CSV logging: [HWMonitor](https://www.cpuid.com/softwares/hwmonitor.html) and [HWMonitor for ARM64](https://www.cpuid.com/softwares/hwmonitor-arm64.html)
+- Licence: [HWMonitor usage guidelines (PDF)](https://download.cpuid.com/hwmonitor/hwm_readme.pdf)
+- PRO edition: [HWMonitor PRO](https://www.cpuid.com/softwares/hwmonitor-pro.html)
+
+**LibreHardwareMonitor**
+
+- Sensors, licence, and administrator rights: [README](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor)
+- PawnIO replacing WinRing0, and fan control on specific boards: [v0.9.5 release notes](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/releases/tag/v0.9.5)
+- CSV log files: [Logger.cs](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/blob/master/LibreHardwareMonitor.Windows.Forms/Utilities/Logger.cs)
+
+**MSI Afterburner**
+
+- Price, overclocking, fan curves, and on-screen display: [MSI Afterburner](https://www.msi.com/Landing/afterburner/graphics-cards)
+- CPU and GPU readings and RivaTuner Statistics Server: [MSI support article](https://www.msi.com/support/technical_details/VGA_MSI_Utility_AfterBurner)
+
+If something here is wrong or out of date, please [open an issue](https://github.com/shm11C3/HardwareVisualizer/issues) with a link to the source.

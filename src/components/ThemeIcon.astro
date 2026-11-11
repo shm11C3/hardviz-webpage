@@ -4,11 +4,12 @@
 <button
   id="themeToggle"
   type="button"
-  class="hover:cursor-pointer"
+  class="flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:cursor-pointer hover:bg-muted hover:text-foreground"
   aria-label="Toggle color theme"
 >
   <svg
-    width="24px"
+    width="20"
+    height="20"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     aria-hidden="true"
@@ -33,7 +34,7 @@
   background: none;
 }
 .sun {
-  fill: black;
+  fill: currentColor;
 }
 .moon {
   fill: transparent;
@@ -43,7 +44,7 @@
   fill: transparent;
 }
 :global(.dark) .moon {
-  fill: white;
+  fill: currentColor;
 }
 </style>
 

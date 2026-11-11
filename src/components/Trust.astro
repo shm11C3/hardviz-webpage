@@ -1,0 +1,83 @@
+---
+import { BadgeCheck, Code, FileCheck, HardDrive } from "lucide-react";
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../i18n/utils";
+import { githubRepoUrl } from "../lib/github";
+import { addJapaneseLineBreaks } from "../lib/japaneseLineBreaks";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
+const tf = (key: Parameters<typeof t>[0]) =>
+  addJapaneseLineBreaks(lang, t(key));
+
+// Each claim links to the page that backs it.
+const items = [
+  {
+    Icon: BadgeCheck,
+    title: t("trust.item1.title"),
+    body: tf("trust.item1.body"),
+    link: t("trust.item1.link"),
+    href: `${translatePath("/security")}#official-sources`,
+  },
+  {
+    Icon: FileCheck,
+    title: t("trust.item2.title"),
+    body: tf("trust.item2.body"),
+    link: t("trust.item2.link"),
+    href: translatePath("/verification"),
+  },
+  {
+    Icon: HardDrive,
+    title: t("trust.item3.title"),
+    body: tf("trust.item3.body"),
+    link: t("trust.item3.link"),
+    href: `${translatePath("/security")}#network`,
+  },
+  {
+    Icon: Code,
+    title: t("trust.item4.title"),
+    body: tf("trust.item4.body"),
+    link: t("trust.item4.link"),
+    href: githubRepoUrl(),
+    external: true,
+  },
+];
+---
+
+<section
+  id="trust"
+  aria-labelledby="trust-heading"
+  class:list={["section", lang === "ja" && "budoux-ja"]}
+>
+  <div class="shell">
+    <div class="section-head">
+      <h2 id="trust-heading" class="section-title">{tf("trust.title")}</h2>
+    </div>
+    <ul class="mt-[clamp(2rem,4vw,3rem)] grid gap-5 md:grid-cols-2">
+      {items.map((item) => (
+          <li class="panel flex flex-col">
+            <h3 class="panel-label">
+              <item.Icon aria-hidden="true" />
+              {item.title}
+            </h3>
+            <p class="panel-body">{item.body}</p>
+            <p class="mt-auto pt-4 text-sm">
+              <a
+                href={item.href}
+                class="link"
+                {...(item.external
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : { "data-astro-prefetch": true })}
+              >
+                {item.link}
+              </a>
+            </p>
+          </li>
+        ))}
+    </ul>
+  </div>
+</section>

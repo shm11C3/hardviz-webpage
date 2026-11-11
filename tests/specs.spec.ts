@@ -173,25 +173,24 @@ test("specs page supports dark mode surfaces", async ({ page }) => {
   });
   await page.goto("/specs/");
   await expect(page.locator("html")).toHaveClass(/dark/);
-  const main = page.locator("#main-content");
-  const darkBackground = await main.evaluate(
-    (element) => getComputedStyle(element).backgroundColor,
-  );
-  const darkCardBackground = await page
-    .locator(".specs-card")
-    .first()
-    .evaluate((element) => getComputedStyle(element).backgroundColor);
+  const body = page.locator("body");
+  const card = page.locator(".specs-card").first();
+  // Panels are translucent, so what follows the theme is the page ground
+  // and the panel's edge.
+  const readGround = () =>
+    body.evaluate((element) => getComputedStyle(element).backgroundColor);
+  const readFrame = () =>
+    card.evaluate((element) => getComputedStyle(element).borderTopColor);
+
+  const darkGround = await readGround();
+  const darkFrame = await readFrame();
 
   await page
     .locator("html")
     .evaluate((element) => element.classList.remove("dark"));
-  const lightBackground = await main.evaluate(
-    (element) => getComputedStyle(element).backgroundColor,
-  );
-  const lightCardBackground = await page
-    .locator(".specs-card")
-    .first()
-    .evaluate((element) => getComputedStyle(element).backgroundColor);
-  expect(darkBackground).not.toBe(lightBackground);
-  expect(darkCardBackground).not.toBe(lightCardBackground);
+  const lightGround = await readGround();
+  const lightFrame = await readFrame();
+
+  expect(darkGround).not.toBe(lightGround);
+  expect(darkFrame).not.toBe(lightFrame);
 });

@@ -2,16 +2,15 @@
 import dashboardScreenshot from "../../assets/screenshots/dashboard-performance-ja.png";
 import Download from "../../components/Download";
 import FAQPreview from "../../components/FAQPreview.astro";
-import Features from "../../components/Features.astro";
+import Feedback from "../../components/Feedback.astro";
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
 import Hero from "../../components/Hero.astro";
-import Insights from "../../components/Insights.astro";
 import LandingDownloadAnalytics from "../../components/LandingDownloadAnalytics.astro";
-import LicenseNotice from "../../components/LicenseNotice.astro";
+import PlatformMatrix from "../../components/PlatformMatrix.astro";
 import ReleaseAnnouncement from "../../components/releases/ReleaseAnnouncement.astro";
-import Screenshots from "../../components/Screenshots.astro";
-import Usage from "../../components/Usage.astro";
+import Screens from "../../components/Screens.astro";
+import Trust from "../../components/Trust.astro";
 import { fetchLatestRelease } from "../../funcs/fetchReleaseData.ts";
 import {
   getLangFromUrl,
@@ -21,6 +20,7 @@ import {
 import Layout from "../../layouts/Layout.astro";
 import { githubAllReleasesUrl, githubLatestReleaseUrl } from "../../lib/github";
 import { getHomeReleaseNotesDetails } from "../../lib/homeReleaseNotes";
+import { addJapaneseLineBreaks } from "../../lib/japaneseLineBreaks";
 import { getLatestReleaseDetails } from "../../lib/latestRelease";
 import { createPlatformDownloads } from "../../lib/platformDownloads";
 import { organizationRef, personRef } from "../../lib/structuredData";
@@ -35,27 +35,46 @@ const latestReleaseDetails = await getLatestReleaseDetails({
   lang,
   publishedAt: release.published_at,
 });
-const homeReleaseNotesDetails = await getHomeReleaseNotesDetails({
+const selectedReleaseNotes = await getHomeReleaseNotesDetails({
   lang,
   latestReleaseDetails,
 });
-
-const downloads = createPlatformDownloads(release, translatePath("/download"));
-
-const downloadTranslations = {
-  title: t("download.title"),
-  description: t("download.description"),
-  currentVersion: t("download.currentVersion"),
-  button: t("download.button"),
-  noDownloads: t("download.noDownloads"),
-  otherVersions: t("download.otherVersions"),
-  changelogLink: t("download.changelogLink"),
-  githubDownloadButton: t("download.githubDownloadButton"),
-  installationLink: t("download.installationLink"),
-  releaseDate: t("download.releaseDate"),
-  latestChanges: t("download.latestChanges"),
-  latestChangesLink: t("download.latestChangesLink"),
+// Japanese release notes get phrase boundaries, so a line never breaks in the
+// middle of a word.
+const homeReleaseNotesDetails = {
+  ...selectedReleaseNotes,
+  changesSummary:
+    selectedReleaseNotes.changesSummary &&
+    addJapaneseLineBreaks(lang, selectedReleaseNotes.changesSummary),
+  highlights: selectedReleaseNotes.highlights.map((highlight) =>
+    addJapaneseLineBreaks(lang, highlight),
+  ),
 };
+
+// The download section links straight to the installers.
+const downloads = createPlatformDownloads(release);
+
+// The download island renders its own text, so its Japanese strings get
+// their phrase boundaries here.
+const downloadTranslations = Object.fromEntries(
+  Object.entries({
+    title: t("download.title"),
+    currentVersion: t("download.currentVersion"),
+    button: t("download.button"),
+    noDownloads: t("download.noDownloads"),
+    otherVersions: t("download.otherVersions"),
+    changelogLink: t("download.changelogLink"),
+    githubDownloadButton: t("download.githubDownloadButton"),
+    installationLink: t("download.installationLink"),
+    verificationLink: t("trust.item2.link"),
+    releaseDate: t("download.releaseDate"),
+    latestChanges: t("download.latestChanges"),
+    latestChangesLink: t("download.latestChangesLink"),
+  }).map(([key, value]) => [
+    key,
+    key === "noDownloads" ? value : addJapaneseLineBreaks(lang, value),
+  ]),
+) as { button: string; noDownloads: string } & Record<string, string>;
 
 // SoftwareApplication JSON-LD for rich search results (Japanese)
 const softwareJsonLd = {
@@ -98,14 +117,12 @@ const softwareJsonLd = {
   jsonLd={softwareJsonLd}
 >
   <Header />
-  <main id="main-content">
-    <Hero />
+  <main id="main-content" class="pt-20">
     <ReleaseAnnouncement />
-    <LicenseNotice />
-    <Screenshots />
-    <Insights />
-    <Features />
-    <Usage />
+    <Hero version={release.version} />
+    <Screens />
+    <PlatformMatrix />
+    <Trust />
     <Download
       client:load
       downloads={downloads}
@@ -116,7 +133,9 @@ const softwareJsonLd = {
       changelogHref={translatePath("/changelog")}
       githubLatestReleaseHref={githubLatestReleaseUrl()}
       installationHref={`${translatePath("/download")}#installation`}
+      verificationHref={translatePath("/verification")}
     />
+    <Feedback />
     <FAQPreview />
   </main>
   <Footer />

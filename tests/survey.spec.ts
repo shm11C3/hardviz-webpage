@@ -3,9 +3,7 @@ import { expect, test } from "@playwright/test";
 test("survey page loads with heading and privacy note", async ({ page }) => {
   await page.goto("/survey/");
   await expect(page).toHaveTitle(/Survey/);
-  await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Help shape HardwareVisualizer",
-  );
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Survey");
   // Inline privacy note links to the privacy policy.
   await expect(page.locator('main a[href="/privacy/"]')).toBeVisible();
   // Either the embedded form (once a Tally form ID is configured) or the
@@ -21,8 +19,8 @@ test("JA survey page loads and links to JA privacy policy", async ({
   page,
 }) => {
   await page.goto("/ja/survey/");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "HardwareVisualizer",
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "アンケート",
   );
   await expect(page.locator('main a[href="/ja/privacy/"]')).toBeVisible();
 });

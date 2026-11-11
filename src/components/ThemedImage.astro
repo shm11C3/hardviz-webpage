@@ -1,0 +1,60 @@
+---
+import { Image } from "astro:assets";
+
+/**
+ * An application screenshot that follows the page theme. It has no frame: the
+ * page background is the app's background, so the screenshot's panels sit on
+ * the page like the page's own. Both variants are in the document and the
+ * inactive one is not displayed; lazy loading keeps it from being fetched.
+ */
+interface Props {
+  light: ImageMetadata;
+  dark: ImageMetadata;
+  alt: string;
+  caption?: string;
+  sizes?: string;
+}
+
+const {
+  light,
+  dark,
+  alt,
+  caption,
+  sizes = "(max-width: 1216px) 100vw, 1152px",
+} = Astro.props;
+const widths = [640, 960, 1280, 1920];
+---
+
+<figure>
+  <Image
+    src={light}
+    alt={alt}
+    class="themed-light h-auto w-full"
+    widths={widths}
+    sizes={sizes}
+    loading="lazy"
+  />
+  <Image
+    src={dark}
+    alt={alt}
+    class="themed-dark h-auto w-full"
+    widths={widths}
+    sizes={sizes}
+    loading="lazy"
+  />
+  {caption && (
+      <figcaption class="mt-2 text-muted-foreground text-xs">{caption}</figcaption>
+    )}
+</figure>
+
+<style>
+.themed-dark {
+  display: none;
+}
+:global(.dark) .themed-light {
+  display: none;
+}
+:global(.dark) .themed-dark {
+  display: block;
+}
+</style>
