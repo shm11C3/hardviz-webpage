@@ -1044,7 +1044,7 @@ export const ui = {
     "footer.github": "GitHub",
     "footer.reportIssue": "問題を報告",
     "footer.community": "コミュニティ",
-    "footer.discussions": "GitHubディスカッション",
+    "footer.discussions": "ディスカッション",
     "footer.about": "About",
     "footer.privacy": "プライバシー",
 

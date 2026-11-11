@@ -19,7 +19,12 @@ for (const slug of pages) {
     await page.goto(`/ja/${slug}/`);
     await expect(page.locator("html")).toHaveAttribute("lang", "ja");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(/\S/);
-    await expect(page.locator("main")).toContainText(/最終更新：.+（v\d/);
+    // Japanese pages carry zero-width spaces at phrase boundaries.
+    const japaneseText = (await page.locator("main").innerText()).replaceAll(
+      "\u200B",
+      "",
+    );
+    expect(japaneseText).toMatch(/最終更新：.+（v\d/);
     await expect(page.locator(`#langDropdown a[href="/${slug}/"]`)).toHaveCount(
       1,
     );

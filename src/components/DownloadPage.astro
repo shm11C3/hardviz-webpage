@@ -45,14 +45,21 @@ const { Content: SourceCheckContent } = await render(sourceCheckEntry as never);
 const guideArticleClass =
   "doc prose prose-sm max-w-full min-w-0 sm:prose-base sm:max-w-3xl prose-code:break-words prose-pre:max-w-full prose-pre:overflow-x-auto prose-pre:whitespace-pre prose-pre:text-[0.8125rem] sm:prose-pre:text-sm";
 
-const downloadTranslations = {
-  button: t("download.button"),
-  noDownloads: t("download.noDownloads"),
-  sha256: t("download.verify.sha256"),
-  copySha256: t("download.verify.copySha256"),
-  copied: t("download.verify.copied"),
-  checksumUnavailable: t("download.verify.checksumUnavailable"),
-};
+// The download island renders its own text, so its Japanese strings get
+// their phrase boundaries here.
+const downloadTranslations = Object.fromEntries(
+  Object.entries({
+    button: t("download.button"),
+    noDownloads: t("download.noDownloads"),
+    sha256: t("download.verify.sha256"),
+    copySha256: t("download.verify.copySha256"),
+    copied: t("download.verify.copied"),
+    checksumUnavailable: t("download.verify.checksumUnavailable"),
+  }).map(([key, value]) => [
+    key,
+    key === "noDownloads" ? value : addJapaneseLineBreaks(lang, value),
+  ]),
+) as { button: string; noDownloads: string } & Record<string, string>;
 
 const pageTitleSeparator = t("download.pageTitleSeparator");
 ---

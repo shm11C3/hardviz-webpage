@@ -54,20 +54,27 @@ const homeReleaseNotesDetails = {
 // The download section links straight to the installers.
 const downloads = createPlatformDownloads(release);
 
-const downloadTranslations = {
-  title: t("download.title"),
-  currentVersion: t("download.currentVersion"),
-  button: t("download.button"),
-  noDownloads: t("download.noDownloads"),
-  otherVersions: t("download.otherVersions"),
-  changelogLink: t("download.changelogLink"),
-  githubDownloadButton: t("download.githubDownloadButton"),
-  installationLink: t("download.installationLink"),
-  verificationLink: t("trust.item2.link"),
-  releaseDate: t("download.releaseDate"),
-  latestChanges: t("download.latestChanges"),
-  latestChangesLink: t("download.latestChangesLink"),
-};
+// The download island renders its own text, so its Japanese strings get
+// their phrase boundaries here.
+const downloadTranslations = Object.fromEntries(
+  Object.entries({
+    title: t("download.title"),
+    currentVersion: t("download.currentVersion"),
+    button: t("download.button"),
+    noDownloads: t("download.noDownloads"),
+    otherVersions: t("download.otherVersions"),
+    changelogLink: t("download.changelogLink"),
+    githubDownloadButton: t("download.githubDownloadButton"),
+    installationLink: t("download.installationLink"),
+    verificationLink: t("trust.item2.link"),
+    releaseDate: t("download.releaseDate"),
+    latestChanges: t("download.latestChanges"),
+    latestChangesLink: t("download.latestChangesLink"),
+  }).map(([key, value]) => [
+    key,
+    key === "noDownloads" ? value : addJapaneseLineBreaks(lang, value),
+  ]),
+) as { button: string; noDownloads: string } & Record<string, string>;
 
 // SoftwareApplication JSON-LD for rich search results (Japanese)
 const softwareJsonLd = {
