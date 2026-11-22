@@ -58,6 +58,7 @@ const githubReleaseHref = githubReleaseTagUrl(version);
 const relatedLinks = [
   { href: translatePath("/#features"), label: t("release.related.features") },
   { href: translatePath("/specs"), label: t("release.related.specs") },
+  { href: translatePath("/blog"), label: t("blog.backToIndex") },
 ];
 
 const siteUrl = import.meta.env.SITE ?? "https://hardviz.com";
@@ -75,6 +76,10 @@ const jsonLd = buildReleaseArticle(lang, {
   url: canonical,
   headline: heading,
   description,
+  blog: {
+    name: t("blog.title"),
+    url: new URL(translatePath("/blog"), siteUrl).href,
+  },
   version,
   datePublished: publishedAt,
   image: ogImageAbs,
@@ -94,6 +99,13 @@ const jsonLd = buildReleaseArticle(lang, {
   <Header />
   <main id="main-content" class="release-page">
     <div class="release-wrap">
+      <nav class="breadcrumb" aria-label={t("blog.breadcrumbLabel")}>
+        <ol>
+          <li><a href={translatePath("/")}>{t("nav.home")}</a></li>
+          <li><a href={translatePath("/blog")}>{t("blog.title")}</a></li>
+          <li><span aria-current="page">v{version}</span></li>
+        </ol>
+      </nav>
       <section class="release-hero" aria-labelledby="release-title">
         <div>
           <p class="release-status">
