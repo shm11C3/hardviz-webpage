@@ -1,0 +1,205 @@
+---
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
+const installs = ["msi", "winget", "exe", "other"] as const;
+const updates = ["admin", "modules", "downgrade"] as const;
+const periods = ["history", "process", "cooling"] as const;
+const sensors = ["cpu", "board", "linux", "gpu"] as const;
+const performance = ["process", "network", "layout", "report"] as const;
+const questions = ["pawnio", "repair", "analytics"] as const;
+const compatibilityUrl =
+  "https://github.com/shm11C3/HardwareVisualizer/blob/develop/docs/user/hardware-compatibility.md#compatibility-table";
+---
+
+<section id="service" class="release-section" aria-labelledby="service-heading">
+  <div class="feature-row">
+    <div class="feature-copy">
+      <h2 id="service-heading">{t("release.v1_12_0.service.title")}</h2>
+      <p>{t("release.v1_12_0.service.body")}</p>
+      <p class="small-note">{t("release.v1_12_0.service.note")}</p>
+      <details>
+        <summary>{t("release.v1_12_0.service.detail.title")}</summary>
+        <p>{t("release.v1_12_0.service.detail.body")}</p>
+      </details>
+    </div>
+    <div class="install-support">
+      <table>
+        <caption>
+          {t("release.v1_12_0.install.caption")}
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">{t("release.v1_12_0.install.method")}</th>
+            <th scope="col">{t("release.v1_12_0.install.service")}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {installs.map((key) => (
+            <tr>
+              <th scope="row">{t(`release.v1_12_0.install.${key}.name`)}</th>
+              <td>{t(`release.v1_12_0.install.${key}.value`)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p class="small-note">{t("release.v1_12_0.install.note")}</p>
+    </div>
+  </div>
+</section>
+
+<section
+  id="update"
+  class="supporting-section"
+  aria-labelledby="update-heading"
+>
+  <h2 id="update-heading">{t("release.v1_12_0.update.title")}</h2>
+  <div class="update-notes">
+    {updates.map((key) => (
+      <div class="observation-note">
+        <h3>{t(`release.v1_12_0.update.${key}.title`)}</h3>
+        <p>{t(`release.v1_12_0.update.${key}.body`)}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<section
+  id="insights"
+  class="supporting-section"
+  aria-labelledby="insights-heading"
+>
+  <div class="feature-row insights-row">
+    <div class="feature-copy">
+      <h2 id="insights-heading">{t("release.v1_12_0.insights.title")}</h2>
+      <p>{t("release.v1_12_0.insights.body")}</p>
+      <p class="small-note">{t("release.v1_12_0.insights.note")}</p>
+    </div>
+    <dl class="periods">
+      {periods.map((key) => (
+        <div>
+          <dt>{t(`release.v1_12_0.insights.${key}.name`)}</dt>
+          <dd>{t(`release.v1_12_0.insights.${key}.value`)}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
+
+<section
+  id="sensors"
+  class="supporting-section"
+  aria-labelledby="sensors-heading"
+>
+  <h2 id="sensors-heading">{t("release.v1_12_0.sensors.title")}</h2>
+  <p class="section-intro">{t("release.v1_12_0.sensors.body")}</p>
+  <div class="foundation-grid">
+    {sensors.map((key) => (
+      <article>
+        <h3>{t(`release.v1_12_0.sensors.${key}.title`)}</h3>
+        <p>{t(`release.v1_12_0.sensors.${key}.body`)}</p>
+      </article>
+    ))}
+  </div>
+  <p class="small-note">
+    <a
+      class="text-link"
+      href={compatibilityUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      >{t("release.v1_12_0.sensors.link")}</a
+    >
+  </p>
+</section>
+
+<section
+  id="performance"
+  class="supporting-section"
+  aria-labelledby="performance-heading"
+>
+  <h2 id="performance-heading">{t("release.v1_12_0.performance.title")}</h2>
+  <div class="foundation-grid">
+    {performance.map((key) => (
+      <article>
+        <h3>{t(`release.v1_12_0.performance.${key}.title`)}</h3>
+        <p>{t(`release.v1_12_0.performance.${key}.body`)}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<section id="questions" class="faq-section" aria-labelledby="questions-heading">
+  <h2 id="questions-heading">{t("release.faq.name")}</h2>
+  <div>
+    {questions.map((key) => (
+      <details>
+        <summary>{t(`release.v1_12_0.faq.${key}.q`)}</summary>
+        <p>{t(`release.v1_12_0.faq.${key}.a`)}</p>
+      </details>
+    ))}
+    <p class="small-note">
+      <a class="text-link" href={`${translatePath("/guide")}#sensor-service`}
+        >{t("release.v1_12_0.faq.guide")}</a
+      >
+    </p>
+  </div>
+</section>
+
+<style>
+.install-support {
+  min-width: 0;
+}
+.install-support table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+.install-support caption {
+  padding-bottom: 10px;
+  color: var(--ink);
+  font-weight: 600;
+  text-align: left;
+}
+.install-support th,
+.install-support td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+.install-support thead {
+  background: var(--surface);
+  color: var(--muted);
+}
+.install-support th {
+  font-weight: 500;
+}
+.update-notes {
+  display: grid;
+  gap: 28px;
+  margin-top: 32px;
+}
+.insights-row {
+  padding-bottom: 0;
+}
+.periods > div {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+.periods dt {
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.periods dd {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+</style>
