@@ -160,7 +160,9 @@ export const ui = {
       "Unsigned .amx files and module files the app does not recognize, including newer releases, are no longer loaded. Optional component setup under Settings → Advanced installs a compatible release but keeps unrecognized files, so remove those yourself first.",
     "release.v1_12_0.update.downgrade.title": "Returning to v1.11.x",
     "release.v1_12_0.update.downgrade.body":
-      "The first start of v1.12.0 upgrades the DuckDB database, and v1.11.x cannot open it. Resetting the data or saving settings in v1.11.x can lead to history being deleted. Back up the app’s data folder before updating if you might go back.",
+      "v1.11.x cannot open a DuckDB database that v1.12.0 has used, and resetting it there deletes the history. If no Retention Period is saved, v1.11.x can also save 30 days, so older history is deleted when you return to v1.12.0. Before going back, save the number of days you want in v1.12.0 and back up the data folder.",
+    "release.v1_12_0.update.downgrade.link":
+      "How to go back without losing history",
     "release.v1_12_0.insights.title": "Long-range Insights",
     "release.v1_12_0.insights.body":
       "Insights adds 90-day and 1-year periods for CPU, memory, and GPU history. You can look back over recorded usage and temperatures across seasons.",
@@ -934,7 +936,8 @@ export const ui = {
       "未署名の.amxと、新しいリリースを含むアプリが識別できないモジュールは読み込みません。「設定 → 高度な設定 → 任意コンポーネントのセットアップ」で対応版を導入できますが、未知のファイルは上書きしないため、先にご自身で取り除いてください。",
     "release.v1_12_0.update.downgrade.title": "v1.11.xへの差し戻し",
     "release.v1_12_0.update.downgrade.body":
-      "v1.12.0の初回起動でDuckDBのデータベースが更新され、v1.11.xでは開けなくなります。v1.11.xでデータをリセットしたり設定を保存したりすると、履歴の削除につながることがあります。戻す可能性がある場合は、更新前にアプリのデータフォルダーをバックアップしてください。",
+      "v1.12.0で使用したDuckDBのデータベースはv1.11.xでは開けず、そこでリセットすると履歴が削除されます。また、保持期間が未保存だとv1.11.xが30日を保存することがあり、v1.12.0へ戻ったときに古い履歴が削除されます。戻す前に、v1.12.0で希望の保持期間を保存し、データフォルダーをバックアップしてください。",
+    "release.v1_12_0.update.downgrade.link": "履歴を失わずに戻す手順",
     "release.v1_12_0.insights.title": "インサイトの長期表示",
     "release.v1_12_0.insights.body":
       "インサイトのCPU・メモリ・GPU履歴に、90日と1年の期間を追加しました。記録された使用率や温度を、季節をまたいで振り返れます。",

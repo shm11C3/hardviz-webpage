@@ -50,6 +50,8 @@ test("guide keeps the anchors the app links to", async ({ page }) => {
     await expect(page.locator("#pawnio")).toHaveCount(1);
     await expect(page.locator("#smartctl")).toHaveCount(1);
     await expect(page.locator("#sensor-service")).toHaveCount(1);
+    await expect(page.locator("#downgrade")).toHaveCount(1);
+    await expect(page.locator("#history")).toHaveCount(1);
   }
 });
 

@@ -65,6 +65,11 @@ const compatibilityUrl =
       <div class="observation-note">
         <h3>{t(`release.v1_12_0.update.${key}.title`)}</h3>
         <p>{t(`release.v1_12_0.update.${key}.body`)}</p>
+        {key === "downgrade" && (
+          <p>
+            <a class="text-link" href={`${translatePath("/guide")}#downgrade`}>{t("release.v1_12_0.update.downgrade.link")}</a>
+          </p>
+        )}
       </div>
     ))}
   </div>

@@ -33,6 +33,9 @@ for (const lang of ["en", "ja"] as const) {
     await expect(
       page.locator(`main a[href="${prefix}/guide/#sensor-service"]`),
     ).toHaveCount(1);
+    await expect(
+      page.locator(`main a[href="${prefix}/guide/#downgrade"]`),
+    ).toHaveCount(1);
 
     await page.goto(`${prefix}/changelog/${article.version}/`);
     await expect(

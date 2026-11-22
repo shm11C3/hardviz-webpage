@@ -155,15 +155,27 @@ Under **Settings → General** you can keep the app running in the system tray w
 
 The app checks GitHub Releases for a newer version when it starts and every 6 hours while it runs. An update found after startup appears in the side menu.
 
+<a id="downgrade"></a>
+
 ### Returning to v1.11.x
 
-The first start of v1.12.0 upgrades the native DuckDB database, and v1.11.x cannot open it. Back up the app's data folder before updating if you might go back.
+This applies when history is stored in DuckDB. v1.11.x cannot open the database after v1.12.0 has used it.
 
-If you already went back and see "Data Compatibility Issue":
+v1.12.0 saves a Retention Period only when you choose one. v1.11.x does not have [this fix](https://github.com/shm11C3/HardwareVisualizer/pull/2755). If no value is saved, changing a setting under **Settings → Insights** there saves 30 days. When you return to v1.12.0, it deletes older history at startup.
 
-- Do not choose **Reset and Restart**. It deletes the history.
-- Choose **Exit** and install v1.12.0 again.
-- If you chose to continue and changed a setting, set the Retention Period under **Settings → Insights** back to the number of days you want before you start v1.12.0. v1.11.x can save it as 30 days, and v1.12.0 then deletes older history at startup ([#2736](https://github.com/shm11C3/HardwareVisualizer/issues/2736)).
+**Before going back**, in v1.12.0:
+
+1. Under **Settings → Insights**, change **Retention Period (Days)** to the number you want. If it already shows that number, change it to another and back, for example 365 → 366 → 365. The value is saved only when it changes.
+2. Quit the app, including from the tray, and copy the app's [data folder](#history) as a backup.
+3. Install v1.11.x.
+
+**If you already went back** and see "Data Compatibility Issue":
+
+1. Do not choose **Reset and Restart**. It deletes the history.
+2. Choose **Continue Anyway**, and check **Retention Period (Days)** under **Settings → Insights**. If it shows 30 and you did not choose 30, change it to the number you want, such as 365. Do this before you install v1.12.0.
+3. Quit the app and install v1.12.0.
+
+History that has already been deleted can be restored only from a backup.
 
 ## If something is missing
 
