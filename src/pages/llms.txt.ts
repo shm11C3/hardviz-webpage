@@ -30,7 +30,10 @@ The main idea is "live monitoring with history": you do not need to watch a grap
 - [Home](${url("/")}): overview, screenshots, and downloads
 - [Download](${url("/download/")}): installers for Windows (MSI/EXE), macOS (Apple Silicon/Intel), and Linux (DEB/RPM/AppImage)
 - [Installer verification](${url("/verification/")}): official sources, SHA-256 checksums, GitHub Artifact Attestations, and code signing status
-- [Cooling Insight](${url("/releases/cooling-insight/")}): how Cooling Insight compares CPU temperature with load and past readings
+- [Setup guide](${url("/guide/")}): installation, sensors, and history
+- [Security and data](${url("/security/")}): official sources, network use, and permissions
+- [Comparison](${url("/compare/")}): sourced comparison with other hardware monitors
+- [Cooling Insight](${url("/cooling-insight/")}): how Cooling Insight compares CPU temperature with load and past readings
 - [Compatibility notes](${url("/specs/")}): supported OS, which sensors are available on each platform, and optional components such as PawnIO
 - [FAQ](${url("/faq/")}): common questions about the app
 - [Changelog](${url("/changelog/")}): release notes for each version

@@ -6,7 +6,7 @@ metaTitle: "Setup Guide: Install, Sensors, and History | HardwareVisualizer"
 metaDescription: "How to install HardwareVisualizer, enable CPU temperature and motherboard sensors with PawnIO on Windows, set up smartctl, and choose how long history is kept."
 lead: "From installation to sensors and history: what you need to start using HardwareVisualizer, and what each optional component adds."
 basedOn: "1.11.3"
-updated: 2026-11-11
+updated: 2026-11-22
 ---
 
 ## Install
@@ -53,7 +53,7 @@ The full matrix is on the [home page](/#platforms) and in the [compatibility not
 [PawnIO](https://pawnio.eu/) is a separate Windows driver. HardwareVisualizer uses it, read-only, for these readings:
 
 - Intel CPU package temperature and package power
-- AMD Family 17h and Family 19h package temperature, and AMD package power
+- AMD Family 17h and Family 19h package temperature (Family 1Ah is experimental), and AMD package power
 - Motherboard temperatures and fan speeds on supported Super I/O chips: Nuvoton NCT6799D, with NCT6796D and ITE IT8728F (temperatures only) as experimental
 
 Without PawnIO, the app can still show a CPU temperature when Windows exposes one through ACPI thermal zones.
@@ -70,7 +70,7 @@ In both cases HardwareVisualizer:
 1. downloads the pinned PawnIO runtime installer and the pinned PawnIO.Modules release from their official GitHub releases;
 2. verifies each download against the size and SHA-256 digest recorded in the app, and discards it on a mismatch;
 3. asks Windows for administrator approval, then installs the runtime if it is not installed yet;
-4. copies the module files that are missing.
+4. copies missing module files and replaces files that match an older release. Files it does not recognize are kept.
 
 Restart HardwareVisualizer afterwards. If Windows reports that a restart is required, restart Windows first.
 
