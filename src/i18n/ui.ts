@@ -13,7 +13,6 @@ export const ui = {
       "Cooling Insight dashboard showing temperature, load, power, and fan trends",
     "release.screenshot.cooling.caption": "Cooling Insight",
     "release.status": "HardwareVisualizer v1.11.0",
-    "release.nav": "v1.11.0 update",
     "release.announcement":
       "HardwareVisualizer v1.11.0: Cooling Insight, DuckDB history storage and PawnIO setup",
     "release.meta.title":
@@ -360,6 +359,14 @@ export const ui = {
     "download.verify.updaterSignatureAvailable":
       "Tauri updater signature for the in-app update path; not a platform signing substitute.",
 
+    "blog.title": "Blog",
+    "blog.metaTitle": "Blog | HardwareVisualizer",
+    "blog.description":
+      "Articles on the main features in HardwareVisualizer releases.",
+    "blog.changelogLink": "View the changelog",
+    "blog.backToIndex": "All blog articles",
+    "blog.breadcrumbLabel": "Breadcrumb",
+
     "changelog.title": "Changelog",
     "changelog.description":
       "Release notes and updates for HardwareVisualizer.",
@@ -678,7 +685,6 @@ export const ui = {
       "温度、負荷、電力、ファンの推移を表示するCooling Insightの画面",
     "release.screenshot.cooling.caption": "Cooling Insightの画面",
     "release.status": "HardwareVisualizer v1.11.0",
-    "release.nav": "v1.11.0 アップデート",
     "release.announcement":
       "HardwareVisualizer v1.11.0：Cooling Insight、DuckDBへの移行、PawnIOの導入支援",
     "release.meta.title":
@@ -1020,6 +1026,14 @@ export const ui = {
     "download.verify.signingStatus": "署名状態",
     "download.verify.updaterSignatureAvailable":
       "アプリ内アップデート経路向けのTauri updater署名です。プラットフォーム署名の代替ではありません。",
+
+    "blog.title": "ブログ",
+    "blog.metaTitle": "ブログ | HardwareVisualizer",
+    "blog.description":
+      "HardwareVisualizerの各リリースの主な機能を紹介する記事です。",
+    "blog.changelogLink": "変更履歴を見る",
+    "blog.backToIndex": "ブログ一覧へ",
+    "blog.breadcrumbLabel": "パンくずリスト",
 
     "changelog.title": "変更履歴",
     "changelog.description": "HardwareVisualizerのリリースノートと更新情報。",

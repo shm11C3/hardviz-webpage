@@ -1,0 +1,90 @@
+---
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../../i18n/utils";
+import Layout from "../../layouts/Layout.astro";
+import { getBlogPosts } from "../../lib/blog";
+import { buildBlogIndex } from "../../lib/structuredData";
+import Footer from "../Footer.astro";
+import Header from "../Header.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
+const posts = getBlogPosts(lang);
+
+const dateFormatter = new Intl.DateTimeFormat(
+  lang === "ja" ? "ja-JP" : "en-US",
+  { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" },
+);
+const jsonLd = buildBlogIndex(lang, {
+  name: t("blog.title"),
+  description: t("blog.description"),
+  posts,
+});
+---
+
+<Layout
+  title={t("blog.metaTitle")}
+  lang={lang}
+  description={t("blog.description")}
+  jsonLd={jsonLd}
+>
+  <Header />
+
+  <main id="main-content" class="pt-28 pb-20">
+    <div class="shell split">
+      <header>
+        <h1 class="font-bold text-3xl text-foreground md:text-4xl">
+          {t("blog.title")}
+        </h1>
+        <p class="mt-4 text-muted-foreground">{t("blog.description")}</p>
+        <a href={translatePath("/changelog")} class="btn btn-outline mt-6">
+          {t("blog.changelogLink")}
+        </a>
+      </header>
+
+      <div class="min-w-0">
+        <ol class="panel ruled" data-testid="blog-posts">
+          {posts.map((post) => (
+            <li>
+              <article>
+                <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1 text-muted-foreground text-sm">
+                  <span class="badge">v{post.version}</span>
+                  {post.publishedAt && (
+                    <time datetime={post.publishedAt}>
+                      {dateFormatter.format(new Date(`${post.publishedAt}T00:00:00Z`))}
+                    </time>
+                  )}
+                </div>
+                <h2 class="item-title mt-2">
+                  <a href={post.href} class="post-link" data-astro-prefetch>
+                    {post.title}
+                  </a>
+                </h2>
+                <p class="item-body max-w-[68ch]">{post.summary}</p>
+              </article>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+.post-link {
+  text-decoration: underline;
+  text-decoration-color: var(--input);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+  transition: text-decoration-color 120ms;
+}
+.post-link:hover {
+  text-decoration-color: var(--foreground);
+}
+</style>

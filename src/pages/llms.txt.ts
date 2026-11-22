@@ -37,6 +37,7 @@ The main idea is "live monitoring with history": you do not need to watch a grap
 - [Compatibility notes](${url("/specs/")}): supported OS, which sensors are available on each platform, and optional components such as PawnIO
 - [FAQ](${url("/faq/")}): common questions about the app
 - [Changelog](${url("/changelog/")}): release notes for each version
+- [Blog](${url("/blog/")}): articles on the main features in each release
 - [About](${url("/about/")}): why the project exists, tech stack, and developer
 
 ## Optional

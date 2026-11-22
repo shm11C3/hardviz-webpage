@@ -25,6 +25,26 @@
   padding: 0 2rem;
   margin: auto;
 }
+.release-page .breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.release-page .breadcrumb li + li::before {
+  content: "/" / "";
+  margin-right: 8px;
+}
+.release-page .breadcrumb a,
+.release-page .breadcrumb [aria-current] {
+  display: inline-block;
+  padding-block: 4px;
+}
+.release-page .breadcrumb a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
 .release-page .release-hero {
   padding: 32px 0 56px;
 }
