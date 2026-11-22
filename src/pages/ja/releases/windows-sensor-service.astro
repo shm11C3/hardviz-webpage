@@ -1,0 +1,40 @@
+---
+import SensorServiceRelease from "../../../components/releases/SensorServiceRelease.astro";
+import { releaseArticles } from "../../../data/releases";
+import { useTranslatedPath, useTranslations } from "../../../i18n/utils";
+import ReleaseLayout from "../../../layouts/ReleaseLayout.astro";
+
+const lang = "ja";
+const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
+const article = releaseArticles["windows-sensor-service"];
+---
+
+<ReleaseLayout
+  lang={lang}
+  title={t("release.v1_12_0.meta.title")}
+  description={t("release.v1_12_0.meta.description")}
+  releaseLabel={t("release.v1_12_0.status")}
+  heading={t("release.v1_12_0.hero.title")}
+  intro={t("release.v1_12_0.hero.body")}
+  downloadLabel={t("release.hero.cta")}
+  changelogLabel={t("release.hero.secondary")}
+  changelogHref={translatePath(`/changelog/${article.version}`)}
+  version={article.version}
+  publishedAt={article.publishedAt}
+  contentsLabel={t("release.contents")}
+  sections={[
+    { id: "service", label: t("release.v1_12_0.service.title") },
+    { id: "update", label: t("release.v1_12_0.update.title") },
+    { id: "insights", label: t("release.v1_12_0.insights.title") },
+    { id: "sensors", label: t("release.v1_12_0.sensors.title") },
+    { id: "performance", label: t("release.v1_12_0.performance.title") },
+    { id: "questions", label: t("release.faq.name") },
+  ]}
+  closing={{
+    title: t("release.v1_12_0.final.title"),
+    body: t("release.v1_12_0.final.body"),
+  }}
+>
+  <SensorServiceRelease />
+</ReleaseLayout>

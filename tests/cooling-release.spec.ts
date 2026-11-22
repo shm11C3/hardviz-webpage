@@ -58,8 +58,11 @@ for (const lang of ["en", "ja"] as const) {
     const breadcrumb = jsonLd.find(
       (node) => node["@type"] === "BreadcrumbList",
     );
-    expect(breadcrumb.itemListElement).toHaveLength(2);
+    expect(breadcrumb.itemListElement).toHaveLength(3);
     expect(breadcrumb.itemListElement[1].item).toBe(
+      `https://hardviz.com${prefix}/blog/`,
+    );
+    expect(breadcrumb.itemListElement[2].item).toBe(
       `https://hardviz.com${route}`,
     );
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
@@ -110,13 +113,14 @@ for (const lang of ["en", "ja"] as const) {
     await expect(storageDetails).toContainText("SQLite 3.46.0 / DuckDB 1.5.5");
     await expect(page.locator("#foundation")).not.toContainText(/\{\w+\}/);
     const related = page.locator(".final-section .related-links a");
-    await expect(related).toHaveCount(3);
+    await expect(related).toHaveCount(4);
     await expect(related.first()).toHaveAttribute(
       "href",
       "https://github.com/shm11C3/HardwareVisualizer/releases/tag/v1.11.0",
     );
     await expect(related.nth(1)).toHaveAttribute("href", `${prefix}/#features`);
     await expect(related.nth(2)).toHaveAttribute("href", `${prefix}/specs/`);
+    await expect(related.nth(3)).toHaveAttribute("href", `${prefix}/blog/`);
     await page.locator(".final-section .primary-link").click();
     await expect(page).toHaveURL(new RegExp(`${prefix}/download/$`));
   });
@@ -140,9 +144,5 @@ for (const lang of ["en", "ja"] as const) {
     ).toBe(true);
     await page.keyboard.press("Enter");
     await expect(details).not.toHaveAttribute("open", "");
-    await page.goto(`${prefix}/`);
-    await expect(page.locator(`footer a[href="${route}"]`)).toHaveCount(1);
-    await page.locator(".release-announcement a").click();
-    await expect(page).toHaveURL(new RegExp(`${route}$`));
   });
 }

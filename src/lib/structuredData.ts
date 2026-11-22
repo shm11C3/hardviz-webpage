@@ -133,6 +133,8 @@ export interface ReleaseArticleInput {
   url: string;
   headline: string;
   description: string;
+  /** The blog index the article is listed on. */
+  blog: { name: string; url: string };
   /** Product version the article announces, e.g. "1.11.0". */
   version: string;
   /** ISO date (YYYY-MM-DD); omitted from the node when not yet published. */
@@ -152,7 +154,8 @@ export function buildReleaseArticle(
   input: ReleaseArticleInput,
 ) {
   const isJa = lang === "ja";
-  const { url, headline, description, version, datePublished, image } = input;
+  const { url, headline, description, blog, version, datePublished, image } =
+    input;
 
   const article = {
     "@context": "https://schema.org",
@@ -191,6 +194,12 @@ export function buildReleaseArticle(
       {
         "@type": "ListItem",
         position: 2,
+        name: blog.name,
+        item: blog.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
         name: headline,
         item: url,
       },
@@ -198,4 +207,50 @@ export function buildReleaseArticle(
   };
 
   return [article, breadcrumb];
+}
+
+export interface BlogIndexInput {
+  name: string;
+  description: string;
+  /** In display order. `href` is site-relative. */
+  posts: { href: string; title: string }[];
+}
+
+/**
+ * CollectionPage for the blog index, listing each article by the same `@id`
+ * that the article's own TechArticle node uses.
+ */
+export function buildBlogIndex(lang: keyof typeof ui, input: BlogIndexInput) {
+  // useTranslatedPath is an i18n path helper, not a React hook.
+  // biome-ignore lint/correctness/useHookAtTopLevel: not a React hook
+  const { translatePath } = useTranslatedPath(lang);
+  const url = new URL(translatePath("/blog"), `${SITE_URL}/`).href;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${url}#blog`,
+    url,
+    name: input.name,
+    description: input.description,
+    inLanguage: lang,
+    isPartOf: { "@id": WEBSITE_ID },
+    publisher: organizationRef,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: input.posts.map(({ href, title }, index) => {
+        const postUrl = new URL(href, SITE_URL).href;
+        return {
+          "@type": "ListItem",
+          position: index + 1,
+          item: {
+            "@type": "TechArticle",
+            "@id": `${postUrl}#article`,
+            url: postUrl,
+            headline: title,
+          },
+        };
+      }),
+    },
+  };
 }

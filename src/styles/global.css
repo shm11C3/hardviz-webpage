@@ -17,7 +17,7 @@
  * application's charts mark the three views the home page describes:
  *
  *   live   teal    Performance      (1 second to 60 seconds)
- *   record pink    Insights         (10 minutes to 30 days)
+ *   record pink    Insights         (10 minutes to 1 year)
  *   notice yellow  Cooling Insight  (24 hours to 1 year)
  */
 @theme {

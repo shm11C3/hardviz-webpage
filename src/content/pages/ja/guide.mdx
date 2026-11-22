@@ -5,8 +5,8 @@ title: "導入ガイド"
 metaTitle: "導入ガイド：インストール、センサー、履歴の設定 | HardwareVisualizer"
 metaDescription: "HardwareVisualizerのインストール方法、WindowsでCPU温度やマザーボードセンサーを有効にするPawnIOの導入、smartctlの準備、履歴の保存期間の設定をまとめました。"
 lead: "インストールから、センサーの有効化、履歴の記録まで。HardwareVisualizerを使い始めるときに必要なことと、任意のコンポーネントで何が増えるのかをまとめました。"
-basedOn: "1.11.3"
-updated: 2026-11-11
+basedOn: "1.12.0"
+updated: 2026-11-22
 ---
 
 ## インストール
@@ -36,10 +36,12 @@ winget install shm11C3.HardwareVisualizer
 
 | 項目 | Windows | macOS | Linux |
 | --- | --- | --- | --- |
-| CPU温度 | PawnIOと管理者権限、またはACPIサーマルゾーン | 非対応 | 非対応 |
-| CPUパッケージ電力 | PawnIOと管理者権限 | Apple Siliconで対応（準備不要） | 非対応 |
-| マザーボードの温度とファン | PawnIO、管理者権限、対応するSuper I/Oチップ | 非対応 | 非対応 |
-| ストレージヘルス（SMART） | 準備不要 | smartmontools | smartmontools |
+| CPU温度 | PawnIOとセンサーサービス、またはACPIサーマルゾーン | 非対応 | 非対応 |
+| CPUパッケージ電力 | PawnIOとセンサーサービス | Apple Siliconで対応（準備不要） | 非対応 |
+| マザーボードの温度とファン | PawnIO、センサーサービス、対応するSuper I/Oチップ | 非対応 | 対応するMSI製基板とバインド済みのhwmonドライバー |
+| DIMM温度 | 非対応 | 非対応 | 対応する構成とバインド済みのhwmonドライバー |
+| NVIDIA GPUの値 | 準備不要 | — | NVIDIAドライバーとNVMLライブラリ |
+| ストレージヘルス（SMART） | 準備不要（一部の値は管理者権限が必要） | smartmontools | smartmontools |
 | メモリの詳細情報 | 準備不要 | 準備不要 | polkitでの認証 |
 | IntelのGPU使用率 | 準備不要 | — | `intel_gpu_top` |
 | 室温 | SwitchBot 温湿度計とBluetooth | 非対応 | 非対応 |
@@ -53,8 +55,11 @@ winget install shm11C3.HardwareVisualizer
 [PawnIO](https://pawnio.eu/)は、HardwareVisualizerとは別のWindows用ドライバーです。HardwareVisualizerは、次の値を読み取るためだけにPawnIOを使います。
 
 - IntelのCPUパッケージ温度とパッケージ電力
-- AMD Family 17h・Family 19hのパッケージ温度と、AMDのパッケージ電力
-- 対応するSuper I/Oチップでの、マザーボードの温度とファン回転数。対応チップはNuvoton NCT6799Dで、NCT6796DとITE IT8728F（温度のみ）は試験的な対応です
+- AMD Family 17h・Family 19hのパッケージ温度（Family 1Ahは実験的な対応）と、AMDのパッケージ電力
+- 対象のIntel製CPUのコア別温度と、対象のAMD製CPUのCCD別温度（実験的な対応、現在値のみ）
+- 対応するSuper I/Oチップでの、マザーボードの温度とファン回転数。対応チップはNuvoton NCT6799Dで、ほかのNuvoton NCT67xx系と一部のITE製チップは実験的な対応です
+
+対象の機種と項目は[互換性表](https://github.com/shm11C3/HardwareVisualizer/blob/develop/docs/user/hardware-compatibility.md#compatibility-table)（英語）にあります。
 
 PawnIOがなくても、WindowsがACPIサーマルゾーンとして温度を公開していれば、CPU温度を表示できる場合があります。
 
@@ -70,7 +75,7 @@ PawnIOがなくても、WindowsがACPIサーマルゾーンとして温度を公
 1. 固定されたバージョンのPawnIOランタイムのインストーラーと、PawnIO.Modulesのリリースを、それぞれの公式GitHubリリースからダウンロードします。
 2. ダウンロードしたファイルを、アプリに記録されたサイズとSHA-256ハッシュで検証します。一致しなければ破棄します。
 3. Windowsの管理者権限の承認を求めたうえで、ランタイムが未導入であればインストールします。
-4. 不足しているモジュールファイルをコピーします。
+4. 不足しているモジュールファイルをコピーし、古いリリースと一致するファイルは置き換えます。識別できないファイルはそのまま残します。
 
 完了したらHardwareVisualizerを再起動してください。Windowsから再起動を求められた場合は、先にWindowsを再起動します。
 
@@ -80,9 +85,23 @@ PawnIOがなくても、WindowsがACPIサーマルゾーンとして温度を公
 msiexec /i HardwareVisualizer_x.x.x_x64_en-US.msi /qn EXTERNAL_COMPONENT_PAWNIO=1
 ```
 
-### 管理者権限
+<a id="sensor-service"></a>
 
-PawnIOを通じて読み取るセンサーには、管理者権限が必要です。**設定 → 高度な設定 → 管理者として起動**をオンにしてください。この設定は、`.msi`でProgram Filesにインストールしている場合に使えます。
+### Windowsセンサーサービス
+
+v1.12.0以降は、HardwareVisualizer Sensorsという名前のサービスがアプリに代わってPawnIOを読み取るため、アプリは一般権限で動作できます。PawnIOの値の取得にはこのサービスが必要です。アプリを管理者として実行しても代用できません。
+
+- **MSIとWinget。** Program Filesへの新規インストールと更新に、サービスが含まれます。
+- **`.exe`インストーラー、ポータブル版、別の場所へのMSI。** サービスは導入されません。導入済みの互換サービスがあれば利用できます。
+- **モジュール。** サービスが読み込むのは、アプリが把握しているリリースの署名済み`.bin`だけです。`.amx`や未知のファイルは読み込みません。
+
+状態は**設定 → 高度な設定 → Windowsセンサーサービス**で確認できます。MSI版を修復するには、インストール済みのバージョンと同じMSIを入手し、管理者として開いたターミナルで次のコマンドを実行してから**再確認**を選びます。
+
+```powershell
+msiexec.exe /fomus "C:\path\to\HardwareVisualizer.msi"
+```
+
+これらのセンサーのためだけに**設定 → 高度な設定 → 管理者として起動**をオンにしていた場合は、オフにしてアプリを終了し、通常起動してください。一部のストレージヘルス情報など、ほかの値には引き続き必要な場合があります。
 
 ### 削除する
 
@@ -105,8 +124,11 @@ sudo hardware-visualizer
 ## Linuxでの注意点
 
 - メモリの詳細情報を表示するとき、polkitによる認証を求められます（`pkexec dmidecode`）。
-- NVIDIAのGPUは一覧に表示されますが、値の取得にはまだ対応していません。
-- CPU温度、消費電力、マザーボードセンサーは、Linuxではまだ取得できません。
+- NVIDIAのGPU使用率、温度、専用VRAM使用量の取得には、NVIDIAドライバーとNVMLライブラリが必要です。取得できる値はGPUによって異なります。
+- マザーボードとDIMMの値は、[対象の構成](https://github.com/shm11C3/HardwareVisualizer/blob/develop/docs/user/hardware-compatibility.md#compatibility-table)（英語）での実験的な対応です。対応するhwmonドライバーがバインド済みである必要があります。DIMM温度はクラシックナビゲーションのダッシュボードに表示されます。
+- CPU温度と消費電力は、Linuxではまだ取得できません。
+
+<a id="history"></a>
 
 ## 履歴
 
@@ -116,6 +138,8 @@ sudo hardware-visualizer
 - **保存期間。** 標準で365日です。**設定 → インサイト**で変更できます。
 - **ストレージヘルス。** ドライブごとに1日1件を記録し、標準で3年間保存します。
 - **記録を止める。** **設定 → インサイト**に、記録の停止と開始を切り替えるスイッチがあります。
+
+CPU・メモリ・GPUの履歴は最長1年、プロセスの履歴は最長30日の期間を表示できます。プロセス履歴のGPU使用率にはDuckDBのデータベースが必要で、v1.12.0以降の記録が対象です。
 
 v1.11.0より前に作成したプロファイルは、**設定 → インサイト**で変換するまで、以前のデータベース（標準30日）を使い続けます。変換すると既存のデータは引き継がれ、保存期間の設定も維持されます。
 
@@ -131,7 +155,29 @@ Windowsでは、近くにあるSwitchBot 温湿度計または温湿度計プラ
 
 ## 更新
 
-アプリは起動時にGitHub Releasesで新しいバージョンを確認し、見つかった場合は更新を案内します。
+アプリは起動時と、起動中は6時間ごとに、GitHub Releasesで新しいバージョンを確認します。起動後に見つかった更新はサイドメニューに表示します。
+
+<a id="downgrade"></a>
+
+### v1.11.xへの差し戻し
+
+履歴をDuckDBに保存している場合の注意です。v1.12.0で使用したデータベースは、v1.11.xでは開けません。
+
+v1.12.0は、保持期間を指定した場合にだけその値を保存します。v1.11.xには[この修正](https://github.com/shm11C3/HardwareVisualizer/pull/2755)がありません。値が保存されていないと、v1.11.xで**設定 → インサイト**の設定を変更したときに30日が保存されます。その後v1.12.0へ戻ると、起動時にそれより古い履歴が削除されます。
+
+**戻す前に**、v1.12.0で次の操作をしてください。
+
+1. **設定 → インサイト**の<strong>保持期間（日数）</strong>を、希望の日数に変更します。すでにその日数が表示されている場合は、365 → 366 → 365のように、別の日数に変えてから戻します。値は変更したときにだけ保存されます。
+2. トレイも含めてアプリを終了し、アプリの[データフォルダー](#history)をコピーしてバックアップします。
+3. v1.11.xをインストールします。
+
+**すでに戻していて**「Data Compatibility Issue」と表示された場合は、次の操作をしてください。
+
+1. **Reset and Restart**は選ばないでください。履歴が削除されます。
+2. **Continue Anyway**を選び、**設定 → インサイト**の<strong>保持期間（日数）</strong>を確認します。30と表示されていて、ご自身で30を指定していない場合は、365などの希望の日数に変更します。この操作はv1.12.0をインストールする前に行ってください。
+3. アプリを終了し、v1.12.0をインストールします。
+
+すでに削除された履歴は、バックアップからしか復元できません。
 
 ## うまくいかないとき
 

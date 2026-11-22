@@ -29,7 +29,9 @@ test("overview summarizes install-relevant product traits", async ({
   await page.goto("/specs/");
   await expect(page.getByText("Official distribution")).toBeVisible();
   await expect(page.getByText("Historical insight")).toBeVisible();
-  await expect(page.getByText("No outbound telemetry")).toBeVisible();
+  await expect(
+    page.getByText("No usage data is sent without consent"),
+  ).toBeVisible();
 });
 
 test("compatibility tables show OS and hardware coverage", async ({ page }) => {
@@ -148,7 +150,12 @@ test("JA specs page has translated h1 and CTA", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "カラーテーマ" }),
   ).toBeVisible();
-  await expect(page.getByText("外部テレメトリはありません")).toBeVisible();
+  // Japanese pages carry zero-width spaces at phrase boundaries.
+  const overview = (await page.locator("#overview").innerText()).replaceAll(
+    "\u200B",
+    "",
+  );
+  expect(overview).toContain("収集したハードウェア情報は外部に送信しません");
 });
 
 test("JA specs page uses readable mobile cards for compatibility data", async ({

@@ -5,8 +5,8 @@ title: "Cooling Insight"
 metaTitle: "Cooling Insight: Compare CPU Temperature by Load Over Months | HardwareVisualizer"
 metaDescription: "Cooling Insight compares CPU temperature with your PC's own baseline under similar load, with power, fan speed, and room temperature on one timeline, for up to a year. Windows only."
 lead: "A CPU that is hotter today may simply be working harder, or the room may be warmer. Cooling Insight compares CPU temperature with your PC's own baseline under similar load, over periods of up to a year."
-basedOn: "1.11.3"
-updated: 2026-11-11
+basedOn: "1.12.0"
+updated: 2026-11-22
 ---
 
 ## What it answers
@@ -69,16 +69,16 @@ No SwitchBot account, internet connection, or pairing is needed. Turn it on unde
 | Requirement | Details |
 | --- | --- |
 | Operating system | Windows 10 or 11 |
-| CPU temperature | Through PawnIO with administrator access, or through ACPI thermal zones |
+| CPU temperature | Through PawnIO and the Windows sensor service, or through ACPI thermal zones |
 | Recording | Insights recording turned on, which is the default |
 | Time | 7 days with idle readings before the first comparison |
-| Power lane (optional) | CPU package power through PawnIO |
-| Fan lane (optional) | A supported Super I/O chip, through PawnIO |
+| Power lane (optional) | CPU package power through PawnIO and the sensor service |
+| Fan lane (optional) | A supported Super I/O chip, through PawnIO and the sensor service |
 | Ambient lane (optional) | A SwitchBot Meter or Meter Plus |
 
 </div>
 
-When power or fan readings are not supported on your hardware, or have not been collected for the period, those lanes are left out and the app says so. See the [setup guide](/guide/#pawnio) for PawnIO.
+When power or fan readings are not supported on your hardware, or have not been collected for the period, those lanes are left out and the app says so. See the setup guide for [PawnIO](/guide/#pawnio) and the [sensor service](/guide/#sensor-service).
 
 ## What it does not do
 

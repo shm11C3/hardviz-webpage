@@ -1,0 +1,84 @@
+---
+lang: en
+version: 1.12.0
+date: 2026-11-22
+title: "v1.12.0"
+summary: "Adds a Windows sensor service that reads PawnIO sensors without elevating the app, extends Insights history charts to 1 year, and widens CPU, motherboard, and Linux GPU support."
+highlights:
+  - "With the Windows MSI, PawnIO sensors no longer need the app to run as administrator"
+  - "CPU, memory, and GPU history in Insights covers up to 1 year"
+  - "Per-core and per-CCD CPU temperatures on selected CPUs, and more motherboard chips"
+  - "Per-process GPU usage, network link speed, and NVIDIA GPU readings on Linux"
+tags:
+  - Release
+  - Windows
+  - Sensors
+  - Insights
+  - Linux
+links:
+  - label: "Read the v1.12.0 release article"
+    url: "https://hardviz.com/releases/windows-sensor-service/"
+---
+
+## What's New
+
+v1.12.0 adds the **Windows sensor service**, which reads PawnIO sensors while HardwareVisualizer itself runs with normal permissions. It also extends history charts in Insights to 1 year and adds support for more sensors.
+
+For a closer look at the main changes, read the [v1.12.0 release article](https://hardviz.com/releases/windows-sensor-service/).
+
+## Before you update
+
+- **PawnIO sensors now require the service.** Only the MSI installed under Program Files installs it. With the `.exe` installer, a portable copy, or an MSI installed elsewhere, these readings stop unless the service is already installed, even if you run the app as administrator. CPU temperature can still appear through ACPI thermal zones.
+- **Run as administrator on startup is left as it was.** If you enabled it only for PawnIO sensors, turn it off under Settings → Advanced, exit the app, and start it normally. Some other readings, including some Storage Health data, can still need administrator access.
+- **Only recognized PawnIO modules are loaded.** The service accepts signed `.bin` modules from releases the app knows. Unsigned `.amx` files and unrecognized files, including newer releases, are not loaded.
+- **Prepare before going back to v1.11.x.** v1.11.x cannot open a DuckDB database that v1.12.0 has used, and **Reset and Restart** there deletes the history. If you have never chosen a Retention Period, saving a setting under Settings → Insights in v1.11.x also stores 30 days, and v1.12.0 then deletes older history when you return. The fix in v1.12.0 does not change how v1.11.x behaves. [Save a Retention Period and back up the data folder](/guide/#downgrade) before going back.
+
+## Windows sensor service
+
+- Added a service, running as SYSTEM, for CPU temperature and power, and motherboard temperatures and fan speeds.
+- New MSI installs and updates under Program Files include it. PawnIO is still a separate, optional driver.
+- Added service status and a link to the repair steps under Settings → Advanced.
+- Replaced the sensor guidance dialog with a notice on the screen that lacks readings.
+
+## Insights
+
+- Added 90-day and 1-year periods for CPU, memory, and GPU history, with a note when the period is longer than the Retention Period.
+- Added an Avg GPU Usage column to process history on native DuckDB databases. Values exist only from when v1.12.0 started recording them, and older SQLite databases need converting first.
+- Process history still covers up to 30 days. Its chart now limits the entries drawn, and its table is split into pages.
+
+## Performance and System Specifications
+
+- Added GPU usage to the live process table. It totals all GPUs and engines, so it can exceed 100%.
+- Added a Network panel with each interface's link speed. It does not measure traffic.
+- New layouts show all panels. Saved layouts stay as they are, and Edit panels shows how many hidden panels you have not reviewed.
+- Side-by-side panels now share their row's height, and hidden panels are listed above the grid while editing.
+- Moved Copy specs to the page header of System Specifications.
+- Added the Hardware Compatibility Report. You can review, save, or copy it; the app does not post it for you.
+
+## Sensors and GPUs
+
+The new sensor paths are experimental and cover specific models only. See the [compatibility table](https://github.com/shm11C3/HardwareVisualizer/blob/develop/docs/user/hardware-compatibility.md#compatibility-table).
+
+- Added per-core temperatures on selected Intel CPUs and per-CCD temperatures on selected AMD CPUs, on Windows. They are live readings and are not recorded.
+- Added more Nuvoton NCT67xx chips, and ITE IT8620E, IT8628E, IT8716F D, and IT8772E FX channels, on Windows.
+- Added fan readings for IT8728F EX on the Gigabyte GA-B75M-D3H.
+- Added motherboard readings on four MSI B850 and X870E boards on Linux, through an already bound hwmon driver.
+- Added DIMM temperature on qualified ODROID-H4 and Protectli VP2430 configurations on Linux, shown on the Dashboard of Classic navigation.
+- Added NVIDIA GPU usage, temperature, and dedicated VRAM usage on Linux through the driver's NVML library.
+- Improved GPU detection on Windows with several adapters or virtual displays, and labeled shared GPU memory as shared.
+
+## Data and network
+
+- Native DuckDB databases now record per-process GPU usage with the process name while Insights recording is on.
+- Updated the bundled DuckDB to 2.0.0.
+- The app checks for updates every 6 hours in addition to at startup. Updates found later appear in the side menu without opening a dialog.
+- The app contains the client for the planned [opt-in product analytics](https://github.com/shm11C3/HardwareVisualizer/blob/develop/docs/user/product-analytics.md). This version has no screen to turn it on, and nothing is sent without recorded consent.
+
+## Fixes
+
+- Fixed the default Retention Period being saved as a chosen value when you save another Insights setting ([#2755](https://github.com/shm11C3/HardwareVisualizer/pull/2755)). Values that are already saved are not changed.
+- Fixed the auto-start setting staying in a loading state after a read failure, and showing the wrong state after rapid toggling.
+- Fixed memory being held by background image previews.
+- Removed the startup prompt about tray mode and the notice about the navigation change.
+
+**Full Changelog**: [v1.11.3...v1.12.0](https://github.com/shm11C3/HardwareVisualizer/compare/v1.11.3...v1.12.0)

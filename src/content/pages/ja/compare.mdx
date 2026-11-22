@@ -5,15 +5,15 @@ title: "ほかのハードウェアモニターとの比較"
 metaTitle: "HardwareVisualizerとタスクマネージャー、HWiNFO、HWMonitor、LibreHardwareMonitor、MSI Afterburnerの比較"
 metaDescription: "HardwareVisualizerを、Windowsのタスクマネージャー、HWiNFO、HWMonitor、LibreHardwareMonitor、MSI Afterburnerと出典付きで比較しました。対応OS、ライセンス、センサー、履歴、ログ出力、オーバーレイ、ファン制御を扱います。"
 lead: "それぞれのツールが自分について公表している内容を並べました。ほかのツールについての記述は、そのツールの公式サイト・文書・リポジトリから取っています。HardwareVisualizerにない機能を持つツールも多くあります。"
-basedOn: "1.11.3"
-updated: 2026-11-12
+basedOn: "1.12.0"
+updated: 2026-11-22
 ---
 
 ## 表の見方
 
 - ほかのツールについての記述は、2026年11月11日と12日に各ツールの公式ページで確認したものです。出典は[ページの下](#sources)にまとめています。
 - 「—」は、確認した公式情報に記載がなかったことを示します。その機能がないという意味ではありません。
-- HardwareVisualizerの列は、v1.11.3の内容です。
+- HardwareVisualizerの列は、v1.12.0の内容です。
 
 ## 比較表
 
@@ -25,29 +25,29 @@ updated: 2026-11-12
 | 価格とライセンス | 無料、GPL-3.0-or-later | Windowsの一部 | 個人・非商用は無料。HWiNFO 64・ARM64の商用利用には有償のProライセンス | 無料、プロプライエタリ。別に有償のPRO版 | 無料、MPL 2.0 | 無料 |
 | ソースコード | 公開 | — | — | — | 公開 | — |
 | CPU温度 | Windowsのみ | — | 対応 | 対応 | 対応（一部のセンサーは管理者権限が必要） | CPUの値を表示できると記載（温度の明記なし） |
-| GPU温度 | Windows（NVIDIA、AMD）、Linux（AMD） | 対応（専用GPUカードがある場合） | 対応 | 対応 | 対応 | 対応 |
-| マザーボードのファン回転数 | Windowsで、対応するSuper I/Oチップのみ | — | 対応 | 対応 | 対応 | — |
+| GPU温度 | WindowsとLinux（NVIDIA、AMD） | 対応（専用GPUカードがある場合） | 対応 | 対応 | 対応 | 対応 |
+| マザーボードのファン回転数 | Windowsの対応するSuper I/Oチップと、Linuxの一部のMSI製基板 | — | 対応 | 対応 | 対応 | — |
 | 電圧 | 非対応 | — | 対応 | 対応 | 対応 | — |
-| 過去の日・月単位のグラフをアプリ内で表示 | 対応。インサイトで最長30日、Cooling Insightで最長1年 | — | — | — | — | — |
+| 過去の日・月単位のグラフをアプリ内で表示 | 対応。インサイト（プロセスは最長30日）とCooling Insightで最長1年 | — | — | — | — | — |
 | ファイルへのログ出力 | 非対応 | — | CSV。HWiNFO 64/ARM64ではJSONとYAMLも | CSV | CSV | — |
 | ゲーム中のオーバーレイ | 非対応 | — | 独自のオンスクリーン表示。ゲーム内ではRTSS経由 | — | — | 対応（RivaTuner Statistics Server経由） |
 | ファン制御・オーバークロック | 非対応 | — | 変更履歴にファン制御機能の記載あり | — | 特定のマザーボードでファン制御 | GPUのオーバークロックとファンカーブの設定 |
-| Windowsでの低い層へのアクセス | PawnIO（任意） | — | 独自のカーネルドライバー | — | PawnIO（v0.9.5以降） | — |
-| データの扱いについての記載 | テレメトリーなし。[通信先を公開](/ja/security/#network) | — | 個人情報を収集せず、バージョン情報の取得以外でサーバーに接続しないと記載 | — | — | — |
+| Windowsでの低い層へのアクセス | PawnIO（任意）。アプリのセンサーサービス経由 | — | 独自のカーネルドライバー | — | PawnIO（v0.9.5以降） | — |
+| データの扱いについての記載 | 同意なしに利用状況を送信しない。[通信先を公開](/ja/security/#network) | — | 個人情報を収集せず、バージョン情報の取得以外でサーバーに接続しないと記載 | — | — | — |
 
 </div>
 
 ## ほかのツールのほうが得意なこと
 
-- **電圧とマザーボードの対応範囲。** HWiNFO、HWMonitor、LibreHardwareMonitorは電圧を読み取れますが、HardwareVisualizerは読み取れません。マザーボードの温度とファンも、[対応状況の詳細](/ja/specs/)に挙げたチップに限られます。
+- **電圧とマザーボードの対応範囲。** HWiNFO、HWMonitor、LibreHardwareMonitorは電圧を読み取れますが、HardwareVisualizerは読み取れません。マザーボードの温度とファンも、[対応するチップと基板](https://github.com/shm11C3/HardwareVisualizer/blob/develop/docs/user/hardware-compatibility.md#compatibility-table)（英語）に限られます。
 - **ゲーム中のオーバーレイ。** MSI Afterburner（RivaTuner Statistics Serverと併用）とHWiNFOは、ゲームの画面上に値を表示できます。HardwareVisualizerにオーバーレイはありません。
 - **ファン制御とオーバークロック。** MSI Afterburnerは、GPUのクロック、電圧、ファンカーブを調整できます。HardwareVisualizerはセンサーを読み取るだけで、ハードウェアの設定は変更しません。
-- **ログファイル。** HWiNFO、HWMonitor、LibreHardwareMonitorは、ほかのソフトで開けるCSVファイルに値を書き出せます。HardwareVisualizerは履歴を独自のデータベースに保存し、書き出し機能はありません。
+- **ログファイル。** HWiNFO、HWMonitor、LibreHardwareMonitorは、ほかのソフトで開けるCSVファイルに値を書き出せます。HardwareVisualizerは履歴を独自のデータベースに保存し、履歴の書き出し機能はありません。
 - **インストールが不要。** タスクマネージャーは最初からWindowsに入っています。
 
 ## HardwareVisualizerが重視していること
 
-- **アプリの中で読める履歴。** 記録は標準でオンです。インサイトでは10分から30日、Cooling Insightでは24時間から1年の期間をグラフで表示でき、履歴は標準で365日保存されます。
+- **アプリの中で読める履歴。** 記録は標準でオンです。インサイトでは10分から1年（プロセスは30日まで）、Cooling Insightでは24時間から1年の期間をグラフで表示でき、履歴は標準で365日保存されます。
 - **同じ負荷どうしで比べる温度。** [Cooling Insight](/ja/cooling-insight/)は、CPU負荷帯ごとに、CPU温度をそのPC自身の基準と比べます。室温も考慮に入れられます。
 - **3つのOSで動く1つのアプリ。** Windows、macOS、Linuxで動作します。[取得できるセンサーはOSごとに異なります](/ja/#platforms)。
 - **オープンソースで、WindowsとmacOS向けは署名付き。** 詳しくは[安全性とデータ](/ja/security/)をご覧ください。

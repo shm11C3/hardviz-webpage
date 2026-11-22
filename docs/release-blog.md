@@ -6,6 +6,7 @@ v1.11.0で採用した構成を、次回以降のリリースでも利用する�
 ## 共通部分と記事ごとの部分
 
 - `src/layouts/ReleaseLayout.astro`: サイトのヘッダー・フッター、Hero、目次、末尾CTA、SEOの共通枠。`version`と`publishedAt`から公開日の表示、`TechArticle` / `BreadcrumbList`のJSON-LD、`og:type=article`、GitHubリリースへのリンクを生成し、ダウンロードCTAのクリック計測（`LandingDownloadAnalytics`）を含む。
+- `src/components/blog/BlogIndexPage.astro`: `/blog/`と`/ja/blog/`の一覧。`src/data/releases.ts`の全記事を版の新しい順に表示する。見出しと概要の翻訳キーは`src/data/blogPosts.ts`で指定する。記事のURLは`/releases/<slug>/`のまま。
 - `src/styles/release-article.css`: リリース記事内に限定した文字組み・余白・日英/モバイル/ダーク表示。
 - `src/components/releases/ReleaseScreenshot.astro`: 任意のスクリーンショット。`placeholder`を指定すると、リンクなしの仮画像と説明を表示する。
 - `src/components/releases/CoolingRelease.astro`: v1.11.0固有の本文・説明図。今後の記事がCooling Insightの構成や図に依存する必要はない。
@@ -20,8 +21,8 @@ v1.11.0で採用した構成を、次回以降のリリースでも利用する�
 3. 記事が長い場合は本文を`src/components/releases/<ReleaseName>.astro`へ分離し、日英のページから共有する。v1.11.0の2ページを実例として参照できる。
 4. `sections`の`id`と本文のsection IDを一致させる。記事ごとに項目を増減してよい。空配列なら目次を表示しない。
 5. 対象の更新履歴ができたら、`changelogHref={translatePath("/changelog/<version>")}`を指定する。省略時は日英の更新履歴一覧につながる。ダウンロードは共通のダウンロードページにつながる。
-6. `src/data/releases.ts`に新記事のスラッグをキーとして`version`と`publishedAt`を追加する。既存のエントリは編集しない（過去の記事が自分のバージョン・公開日・更新履歴リンクを保つため）。記事ページはこのエントリから`version`・`publishedAt`・`changelogHref`を渡す。
-7. 公開時に`src/data/currentRelease.ts`の`slug`・`navKey`・`announcementKey`を、新記事のスラッグと専用翻訳キーへ更新する。ホーム告知とフッターはこの設定を共有する。以前の記事は残す。サイトマップ・canonical・hreflangは既存のサイト設定と共通Layoutから生成され、`publishedAt`を設定するとサイトマップの`lastmod`にも反映される。
+6. `src/data/releases.ts`に新記事のスラッグをキーとして`version`と`publishedAt`を追加する。既存のエントリは編集しない（過去の記事が自分のバージョン・公開日・更新履歴リンクを保つため）。同じスラッグで`src/data/blogPosts.ts`に見出しと概要のキーを追加すると、ブログ一覧に載る（追加しないと`pnpm check`とビルドが失敗する）。記事ページはこのエントリから`version`・`publishedAt`・`changelogHref`を渡す。
+7. 公開時に`src/data/currentRelease.ts`の`slug`・`announcementKey`を、新記事のスラッグと専用翻訳キーへ更新する。ホーム告知がこの設定を使う。フッターは個別の記事ではなくブログ一覧へリンクする。以前の記事は残す。サイトマップ・canonical・hreflangは既存のサイト設定と共通Layoutから生成され、`publishedAt`を設定するとサイトマップの`lastmod`にも反映される。
 8. 共有用の画像（1200×630）を用意できたら、`public/`に置いて`ogImage="/path.png"`と`ogImageAlt`を`ReleaseLayout`へ渡す。省略時はサイト共通の`og-image.png`が使われる。
 
 ## SEOと計測

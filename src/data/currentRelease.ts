@@ -4,15 +4,13 @@ import type { ReleaseSlug } from "./releases";
 type TranslationKey = keyof typeof ui.en;
 
 /**
- * Pointer to the article the homepage announcement and footer link to.
+ * Pointer to the article the homepage announcement links to.
  * Per-article metadata (version, publication date) lives in ./releases.ts.
  */
 export const currentRelease = {
-  slug: "cooling-insight",
-  navKey: "release.nav",
-  announcementKey: "release.announcement",
+  slug: "windows-sensor-service",
+  announcementKey: "release.v1_12_0.announcement",
 } as const satisfies {
   slug: ReleaseSlug;
-  navKey: TranslationKey;
   announcementKey: TranslationKey;
 };
