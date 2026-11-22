@@ -6,7 +6,7 @@ metaTitle: "導入ガイド：インストール、センサー、履歴の設�
 metaDescription: "HardwareVisualizerのインストール方法、WindowsでCPU温度やマザーボードセンサーを有効にするPawnIOの導入、smartctlの準備、履歴の保存期間の設定をまとめました。"
 lead: "インストールから、センサーの有効化、履歴の記録まで。HardwareVisualizerを使い始めるときに必要なことと、任意のコンポーネントで何が増えるのかをまとめました。"
 basedOn: "1.11.3"
-updated: 2026-11-11
+updated: 2026-11-22
 ---
 
 ## インストール
@@ -53,7 +53,7 @@ winget install shm11C3.HardwareVisualizer
 [PawnIO](https://pawnio.eu/)は、HardwareVisualizerとは別のWindows用ドライバーです。HardwareVisualizerは、次の値を読み取るためだけにPawnIOを使います。
 
 - IntelのCPUパッケージ温度とパッケージ電力
-- AMD Family 17h・Family 19hのパッケージ温度と、AMDのパッケージ電力
+- AMD Family 17h・Family 19hのパッケージ温度（Family 1Ahは実験的な対応）と、AMDのパッケージ電力
 - 対応するSuper I/Oチップでの、マザーボードの温度とファン回転数。対応チップはNuvoton NCT6799Dで、NCT6796DとITE IT8728F（温度のみ）は試験的な対応です
 
 PawnIOがなくても、WindowsがACPIサーマルゾーンとして温度を公開していれば、CPU温度を表示できる場合があります。
@@ -70,7 +70,7 @@ PawnIOがなくても、WindowsがACPIサーマルゾーンとして温度を公
 1. 固定されたバージョンのPawnIOランタイムのインストーラーと、PawnIO.Modulesのリリースを、それぞれの公式GitHubリリースからダウンロードします。
 2. ダウンロードしたファイルを、アプリに記録されたサイズとSHA-256ハッシュで検証します。一致しなければ破棄します。
 3. Windowsの管理者権限の承認を求めたうえで、ランタイムが未導入であればインストールします。
-4. 不足しているモジュールファイルをコピーします。
+4. 不足しているモジュールファイルをコピーし、古いリリースと一致するファイルは置き換えます。識別できないファイルはそのまま残します。
 
 完了したらHardwareVisualizerを再起動してください。Windowsから再起動を求められた場合は、先にWindowsを再起動します。
 
