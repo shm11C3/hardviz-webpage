@@ -14,7 +14,7 @@ export const releaseArticles = {
   },
   "windows-sensor-service": {
     version: "1.12.0",
-    publishedAt: null,
+    publishedAt: "2026-11-22",
   },
 } as const satisfies Record<
   string,
