@@ -13,7 +13,6 @@ export const ui = {
       "Cooling Insight dashboard showing temperature, load, power, and fan trends",
     "release.screenshot.cooling.caption": "Cooling Insight",
     "release.status": "HardwareVisualizer v1.11.0",
-    "release.nav": "v1.11.0 update",
     "release.announcement":
       "HardwareVisualizer v1.11.0: Cooling Insight, DuckDB history storage and PawnIO setup",
     "release.meta.title":
@@ -686,7 +685,6 @@ export const ui = {
       "温度、負荷、電力、ファンの推移を表示するCooling Insightの画面",
     "release.screenshot.cooling.caption": "Cooling Insightの画面",
     "release.status": "HardwareVisualizer v1.11.0",
-    "release.nav": "v1.11.0 アップデート",
     "release.announcement":
       "HardwareVisualizer v1.11.0：Cooling Insight、DuckDBへの移行、PawnIOの導入支援",
     "release.meta.title":

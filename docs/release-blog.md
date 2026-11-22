@@ -22,7 +22,7 @@ v1.11.0で採用した構成を、次回以降のリリースでも利用する�
 4. `sections`の`id`と本文のsection IDを一致させる。記事ごとに項目を増減してよい。空配列なら目次を表示しない。
 5. 対象の更新履歴ができたら、`changelogHref={translatePath("/changelog/<version>")}`を指定する。省略時は日英の更新履歴一覧につながる。ダウンロードは共通のダウンロードページにつながる。
 6. `src/data/releases.ts`に新記事のスラッグをキーとして`version`と`publishedAt`を追加する。既存のエントリは編集しない（過去の記事が自分のバージョン・公開日・更新履歴リンクを保つため）。同じスラッグで`src/data/blogPosts.ts`に見出しと概要のキーを追加すると、ブログ一覧に載る（追加しないと`pnpm check`とビルドが失敗する）。記事ページはこのエントリから`version`・`publishedAt`・`changelogHref`を渡す。
-7. 公開時に`src/data/currentRelease.ts`の`slug`・`navKey`・`announcementKey`を、新記事のスラッグと専用翻訳キーへ更新する。ホーム告知とフッターはこの設定を共有する。以前の記事は残す。サイトマップ・canonical・hreflangは既存のサイト設定と共通Layoutから生成され、`publishedAt`を設定するとサイトマップの`lastmod`にも反映される。
+7. 公開時に`src/data/currentRelease.ts`の`slug`・`announcementKey`を、新記事のスラッグと専用翻訳キーへ更新する。ホーム告知がこの設定を使う。フッターは個別の記事ではなくブログ一覧へリンクする。以前の記事は残す。サイトマップ・canonical・hreflangは既存のサイト設定と共通Layoutから生成され、`publishedAt`を設定するとサイトマップの`lastmod`にも反映される。
 8. 共有用の画像（1200×630）を用意できたら、`public/`に置いて`ogImage="/path.png"`と`ogImageAlt`を`ReleaseLayout`へ渡す。省略時はサイト共通の`og-image.png`が使われる。
 
 ## SEOと計測

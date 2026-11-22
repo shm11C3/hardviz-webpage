@@ -84,6 +84,18 @@ for (const lang of ["en", "ja"] as const) {
     }
   });
 
+  test(`${lang}: footer links to the blog, not to an article`, async ({
+    page,
+  }) => {
+    for (const path of [`${prefix}/`, route]) {
+      await page.goto(path);
+      await expect(page.locator(`footer a[href="${route}"]`)).toHaveCount(1);
+      await expect(
+        page.locator(`footer a[href^="${prefix}/releases/"]`),
+      ).toHaveCount(0);
+    }
+  });
+
   test(`${lang}: blog and breadcrumb fit a 320px screen`, async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 640 });
     for (const path of [route, `${prefix}/releases/${articles[0][0]}/`]) {
