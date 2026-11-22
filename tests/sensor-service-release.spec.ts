@@ -45,7 +45,10 @@ for (const lang of ["en", "ja"] as const) {
   }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(`${prefix}/`);
-    await expect(page.locator(`footer a[href="${route}"]`)).toHaveCount(1);
+    await expect(page.locator(`footer a[href="${route}"]`)).toHaveCount(0);
+    await expect(page.locator(`footer a[href="${prefix}/blog/"]`)).toHaveCount(
+      1,
+    );
     await page.locator(".release-announcement a").click();
     await expect(page).toHaveURL(new RegExp(`${route}$`));
     expect(

@@ -66,10 +66,12 @@ v1.11.3に含まれる修正（ITEの書き込み抑止、macOSの不透明度�
 
 ## 公開手順
 
+ブログ一覧とフッターの変更は[#454](https://github.com/shm11C3/hardviz-webpage/pull/454)で先行公開する。このブランチはその内容を取り込んだうえで、1.12.0の記事を一覧に登録している。
+
 このブランチは公開済みとして書いてある。**v1.12.0のリリース前にmasterへマージしない**（pushで本番に公開される）。プレビューデプロイも公開URLになる。
 
 1. `develop`の先端が`83c8530d`から進んでいれば、`git log 83c8530d..v1.12.0`を原稿に反映する。
 2. 仮の日付`2026-12-03`を公開日に置き換える: `rg '2026-12-03' src`。プライバシーポリシーの`December 3, 2026`と`2026年12月3日`、Aboutの`2026.12`も確認する。
-3. `src/data/releases.ts`の`windows-sensor-service`に`publishedAt`を設定する。
+3. `src/data/releases.ts`の`windows-sensor-service`に`publishedAt`を設定する。紹介記事とブログ一覧の日付に反映される（未設定の間は日付なしで一覧に載る）。
 4. 更新履歴のfrontmatterにある仮日付のコメントを削除する。
 5. GitHub Release、MSI、Wingetの公開後にマージし、ダウンロードページがv1.12.0を指すことを確認する。

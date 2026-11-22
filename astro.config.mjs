@@ -87,7 +87,8 @@ function buildChangelogLastmodMap() {
 }
 
 /**
- * Release article lastmod from src/data/releases.ts. The file is TypeScript,
+ * Release article and blog index lastmod from src/data/releases.ts; the index
+ * takes the newest article's date. The file is TypeScript,
  * so read each entry's slug and publishedAt with a regex (as the changelog map
  * does for MDX) instead of importing it. Entries with publishedAt: null are
  * skipped.
@@ -95,10 +96,16 @@ function buildChangelogLastmodMap() {
 function addReleaseLastmod(map) {
   const source = fs.readFileSync(path.resolve("src/data/releases.ts"), "utf-8");
   const entry = /^\s*"([^"]+)":\s*\{[^}]*?publishedAt:\s*"([^"]+)"/gms;
+  let newest = new Date(0);
   for (const [, slug, publishedAt] of source.matchAll(entry)) {
     const date = new Date(publishedAt);
+    if (date > newest) newest = date;
     map.set(`/releases/${slug}/`, date);
     map.set(`/ja/releases/${slug}/`, date);
+  }
+  if (newest.getTime() > 0) {
+    map.set("/blog/", newest);
+    map.set("/ja/blog/", newest);
   }
   return map;
 }
