@@ -194,7 +194,7 @@ export const ui = {
       "Performance and System Specifications",
     "release.v1_12_0.performance.process.title": "GPU usage by process",
     "release.v1_12_0.performance.process.body":
-      "The live process table has a GPU usage column. It totals all GPUs and engines, so it can exceed 100%. This history is also recorded on DuckDB databases, but this version has no screen that displays it.",
+      "The live process table has a GPU usage column. It totals all GPUs and engines, so it can exceed 100%. On DuckDB databases, process history in Insights also shows average GPU usage, from when v1.12.0 started recording it.",
     "release.v1_12_0.performance.network.title": "Network link speed",
     "release.v1_12_0.performance.network.body":
       "The Network panel shows the link speed reported by the OS for each interface. It does not measure traffic.",
@@ -554,11 +554,11 @@ export const ui = {
     "specs.matrix.storage.windows":
       "Native and fallback paths can expose SMART or NVMe health fields when available.",
     "specs.matrix.process.windows":
-      "The live process table shows CPU, memory, and GPU usage where available. Process history in Insights covers CPU and memory for up to 30 days.",
+      "The live process table shows CPU, memory, and GPU usage where available. Process history in Insights covers up to 30 days of CPU and memory usage, and of GPU usage on DuckDB databases.",
     "specs.matrix.process.macos":
-      "The live process table shows CPU, memory, and GPU usage where available. Process history in Insights covers CPU and memory for up to 30 days.",
+      "The live process table shows CPU, memory, and GPU usage where available. Process history in Insights covers up to 30 days of CPU and memory usage, and of GPU usage on DuckDB databases.",
     "specs.matrix.process.linux":
-      "The live process table shows CPU, memory, and GPU usage where available. Process history in Insights covers CPU and memory for up to 30 days.",
+      "The live process table shows CPU, memory, and GPU usage where available. Process history in Insights covers up to 30 days of CPU and memory usage, and of GPU usage on DuckDB databases.",
     "specs.matrix.fan.windows":
       "Fan-speed reads are implemented for supported Super I/O sensors through PawnIO and the Windows sensor service. Coverage varies by motherboard, and this read-only path does not support fan control.",
     "specs.matrix.language.windows":
@@ -961,7 +961,7 @@ export const ui = {
     "release.v1_12_0.performance.title": "パフォーマンスとシステム仕様",
     "release.v1_12_0.performance.process.title": "プロセス別のGPU使用率",
     "release.v1_12_0.performance.process.body":
-      "ライブプロセスの表にGPU使用率の列を追加しました。すべてのGPUとエンジンの合計のため、100%を超えることがあります。DuckDBを使う環境では履歴も記録しますが、この版に表示する画面はありません。",
+      "ライブプロセスの表にGPU使用率の列を追加しました。すべてのGPUとエンジンの合計のため、100%を超えることがあります。DuckDBを使う環境では、インサイトのプロセス履歴にも、v1.12.0で記録を始めた時点からの平均GPU使用率を表示します。",
     "release.v1_12_0.performance.network.title": "ネットワークのリンク速度",
     "release.v1_12_0.performance.network.body":
       "ネットワークパネルに、OSが報告する各インターフェースのリンク速度を表示します。通信量は計測しません。",
@@ -1316,11 +1316,11 @@ export const ui = {
     "specs.matrix.storage.windows":
       "ネイティブまたはフォールバック経路で、利用可能なSMART/NVMeヘルス項目を表示します。",
     "specs.matrix.process.windows":
-      "ライブプロセスの表にCPU・メモリと、取得できる場合はGPUの使用率を表示します。インサイトのプロセス履歴では、CPUとメモリを最長30日表示します。",
+      "ライブプロセスの表にCPU・メモリと、取得できる場合はGPUの使用率を表示します。インサイトのプロセス履歴では、CPU・メモリと、DuckDBを使う環境ではGPUの使用率を最長30日表示します。",
     "specs.matrix.process.macos":
-      "ライブプロセスの表にCPU・メモリと、取得できる場合はGPUの使用率を表示します。インサイトのプロセス履歴では、CPUとメモリを最長30日表示します。",
+      "ライブプロセスの表にCPU・メモリと、取得できる場合はGPUの使用率を表示します。インサイトのプロセス履歴では、CPU・メモリと、DuckDBを使う環境ではGPUの使用率を最長30日表示します。",
     "specs.matrix.process.linux":
-      "ライブプロセスの表にCPU・メモリと、取得できる場合はGPUの使用率を表示します。インサイトのプロセス履歴では、CPUとメモリを最長30日表示します。",
+      "ライブプロセスの表にCPU・メモリと、取得できる場合はGPUの使用率を表示します。インサイトのプロセス履歴では、CPU・メモリと、DuckDBを使う環境ではGPUの使用率を最長30日表示します。",
     "specs.matrix.fan.windows":
       "Windowsでは、PawnIOとWindowsセンサーサービスを通じて、対応するSuper I/Oセンサーのファン速度を取得できます。対応範囲はマザーボードにより異なり、この読み取り専用の経路ではファン制御に対応しません。",
     "specs.matrix.language.windows":

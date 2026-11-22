@@ -11,7 +11,7 @@ The main idea is "live monitoring with history": you do not need to watch a grap
 
 ## Key features
 
-- Insights: review CPU, memory, CPU temperature, and per-GPU usage, temperature, and memory history (average, maximum, minimum) for up to 1 year, plus up to 30 days of sampled process history showing which processes used CPU and memory.
+- Insights: review CPU, memory, CPU temperature, and per-GPU usage, temperature, and memory history (average, maximum, minimum) for up to 1 year, plus up to 30 days of sampled process history showing which processes used CPU and memory, and GPU on DuckDB databases.
 - Cooling Insight (v1.11.0, Windows): compares CPU temperature with its own baseline at similar CPU load (idle, low, medium, high), for up to one year. A shared timeline shows CPU temperature, load, package power, fan speed, and ambient temperature, to help tell whether cooling is getting worse or the room just got warmer. It displays and compares readings; it does not control fans or diagnose hardware faults.
 - Windows sensor service (v1.12.0): the MSI installs a service that reads CPU temperature and power, and motherboard sensors through the optional PawnIO driver, without running the app as administrator. The .exe installer does not install it.
 - Live performance views: CPU, GPU, and memory gauges and graphs, per-core usage, running processes, motherboard sensors, fans, power draw, and network link speed.

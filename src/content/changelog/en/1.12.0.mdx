@@ -44,6 +44,7 @@ For a closer look at the main changes, read the [v1.12.0 release article](https:
 ## Insights
 
 - Added 90-day and 1-year periods for CPU, memory, and GPU history, with a note when the period is longer than the Retention Period.
+- Added an Avg GPU Usage column to process history on native DuckDB databases. Values exist only from when v1.12.0 started recording them, and older SQLite databases need converting first.
 - Process history still covers up to 30 days. Its chart now limits the entries drawn, and its table is split into pages.
 
 ## Performance and System Specifications
@@ -69,7 +70,7 @@ The new sensor paths are experimental and cover specific models only. See the [c
 
 ## Data and network
 
-- Native DuckDB databases now record per-process GPU usage with the process name while Insights recording is on. This version has no screen that displays this history.
+- Native DuckDB databases now record per-process GPU usage with the process name while Insights recording is on.
 - Updated the bundled DuckDB to 2.0.0.
 - The app checks for updates every 6 hours in addition to at startup. Updates found later appear in the side menu without opening a dialog.
 - The app contains the client for the planned [opt-in product analytics](https://github.com/shm11C3/HardwareVisualizer/blob/develop/docs/user/product-analytics.md). This version has no screen to turn it on, and nothing is sent without recorded consent.
