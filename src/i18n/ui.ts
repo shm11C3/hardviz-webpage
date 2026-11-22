@@ -1377,7 +1377,7 @@ export const ui = {
       "日次のヘルス記録では、利用可能な場合にSMART総合ヘルス、温度、NVMe使用率、利用可能スペア、代替処理済みセクター、保留中セクター、オフライン訂正不能セクター、NVMeメディアエラーを扱います。",
     "specs.storage.pawnio.title": "CPUパッケージ温度向けPawnIO",
     "specs.storage.pawnio.body":
-      "Windowsでは「設定 → 高度な設定 → 任意コンポーネントのセットアップ」からPawnIOを取得・導入できます。MSI版のセンサーサービスとあわせて、対応するCPUやマザーボードの温度・電力・ファンの値を取得できる場合があります。",
+      "Windowsでは「設定 → 高度な設定 → 任意コンポーネントのセットアップ」から、管理者承認のうえでPawnIOを取得・導入できます。MSI版のセンサーサービスとあわせて、対応するCPUやマザーボードの温度・電力・ファンの値を取得できる場合があります。",
     "specs.storage.smartctl.title": "より詳しいストレージ情報向けsmartctl",
     "specs.storage.smartctl.body":
       "ネイティブOS経路で重要なSMART/NVMeヘルス情報を読めない場合、smartmontoolsによってStorage Healthが改善されることがあります。",
