@@ -144,9 +144,5 @@ for (const lang of ["en", "ja"] as const) {
     ).toBe(true);
     await page.keyboard.press("Enter");
     await expect(details).not.toHaveAttribute("open", "");
-    await page.goto(`${prefix}/`);
-    await expect(page.locator(`footer a[href="${route}"]`)).toHaveCount(0);
-    await page.locator(".release-announcement a").click();
-    await expect(page).toHaveURL(new RegExp(`${route}$`));
   });
 }

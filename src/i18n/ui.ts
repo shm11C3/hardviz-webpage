@@ -119,6 +119,104 @@ export const ui = {
     "release.related.github": "Release on GitHub",
     "release.related.features": "All features",
     "release.related.specs": "System requirements",
+    "release.v1_12_0.status": "HardwareVisualizer v1.12.0",
+    "release.v1_12_0.announcement":
+      "HardwareVisualizer v1.12.0: Windows sensor service, 1-year Insights and more sensors",
+    "release.v1_12_0.meta.title":
+      "Windows Sensor Service and 1-Year Insights | HardwareVisualizer",
+    "release.v1_12_0.meta.description":
+      "HardwareVisualizer v1.12.0 reads CPU temperature through a Windows sensor service without elevating the app, and extends Insights to 1 year.",
+    "release.v1_12_0.hero.title": "Windows sensor service and 1-year Insights",
+    "release.v1_12_0.hero.body":
+      "On Windows, the MSI now installs a service that reads CPU and motherboard sensors through PawnIO, so the app can run with normal permissions. Insights charts CPU, memory, and GPU history for up to 1 year, and more sensors and GPUs are supported.",
+    "release.v1_12_0.service.title": "Windows sensor service",
+    "release.v1_12_0.service.body":
+      "Until v1.11, the whole app had to run as administrator to read PawnIO sensors. In v1.12.0, a separate service reads CPU temperature and power, and motherboard temperatures and fan speeds. The app itself can start and stay in the tray with normal permissions.",
+    "release.v1_12_0.service.note":
+      "PawnIO is still a separate, optional driver. Installing or repairing the service requires administrator approval. Available readings depend on the hardware.",
+    "release.v1_12_0.service.detail.title": "How the service works",
+    "release.v1_12_0.service.detail.body":
+      "The service runs as SYSTEM, because PawnIO accepts only privileged callers. It answers read-only sensor requests from users signed in interactively on the same PC, rejects network and anonymous connections, and loads only signed modules it recognizes. It does not open the history database.",
+    "release.v1_12_0.install.caption": "Service by installation method",
+    "release.v1_12_0.install.method": "Installation",
+    "release.v1_12_0.install.service": "Sensor service",
+    "release.v1_12_0.install.msi.name": "MSI under Program Files",
+    "release.v1_12_0.install.msi.value": "Included in installs and updates",
+    "release.v1_12_0.install.winget.name": "Winget",
+    "release.v1_12_0.install.winget.value": "Included, as it installs the MSI",
+    "release.v1_12_0.install.exe.name": ".exe installer",
+    "release.v1_12_0.install.exe.value": "Not installed",
+    "release.v1_12_0.install.other.name":
+      "Portable, or MSI in another location",
+    "release.v1_12_0.install.other.value": "Not installed",
+    "release.v1_12_0.install.note":
+      "Without the service, PawnIO readings are unavailable, even when the app runs as administrator. An installation without it can use a compatible service that is already installed.",
+    "release.v1_12_0.update.title": "Before you update",
+    "release.v1_12_0.update.admin.title": "Run as administrator on startup",
+    "release.v1_12_0.update.admin.body":
+      "The update keeps your setting. If you enabled it only for PawnIO sensors, turn it off under Settings → Advanced, exit the app, and start it normally. Some other readings, including some Storage Health data, can still need administrator access.",
+    "release.v1_12_0.update.modules.title": "PawnIO modules",
+    "release.v1_12_0.update.modules.body":
+      "Unsigned .amx files and module files the app does not recognize, including newer releases, are no longer loaded. Optional component setup under Settings → Advanced installs a compatible release but keeps unrecognized files, so remove those yourself first.",
+    "release.v1_12_0.update.downgrade.title": "Returning to v1.11.x",
+    "release.v1_12_0.update.downgrade.body":
+      "v1.11.x cannot open a DuckDB database that v1.12.0 has used, and resetting it there deletes the history. If no Retention Period is saved, v1.11.x can also save 30 days, so older history is deleted when you return to v1.12.0. Before going back, save the number of days you want in v1.12.0 and back up the data folder.",
+    "release.v1_12_0.update.downgrade.link":
+      "How to go back without losing history",
+    "release.v1_12_0.insights.title": "Long-range Insights",
+    "release.v1_12_0.insights.body":
+      "Insights adds 90-day and 1-year periods for CPU, memory, and GPU history. You can look back over recorded usage and temperatures across seasons.",
+    "release.v1_12_0.insights.note":
+      "Only recorded data is shown. History older than the Retention Period is deleted, and the screen says so when you choose a longer period.",
+    "release.v1_12_0.insights.history.name": "CPU, memory, GPU",
+    "release.v1_12_0.insights.history.value": "10 minutes to 1 year",
+    "release.v1_12_0.insights.process.name": "Process",
+    "release.v1_12_0.insights.process.value": "10 minutes to 30 days",
+    "release.v1_12_0.insights.cooling.name": "Cooling Insight",
+    "release.v1_12_0.insights.cooling.value": "24 hours to 1 year (unchanged)",
+    "release.v1_12_0.sensors.title": "Supported hardware",
+    "release.v1_12_0.sensors.body":
+      "The new sensor paths are experimental and limited to specific models. They are not support for every product from a vendor.",
+    "release.v1_12_0.sensors.cpu.title": "CPU core and CCD temperatures",
+    "release.v1_12_0.sensors.cpu.body":
+      "On Windows, selected Intel CPUs show per-core temperatures and selected AMD CPUs show per-CCD temperatures. These are live readings and are not recorded in the history.",
+    "release.v1_12_0.sensors.board.title": "Motherboard sensors on Windows",
+    "release.v1_12_0.sensors.board.body":
+      "More Nuvoton NCT67xx chips and selected ITE chips can report temperatures or fan speeds. The available channels differ by chip and board.",
+    "release.v1_12_0.sensors.linux.title": "Motherboard and DIMM on Linux",
+    "release.v1_12_0.sensors.linux.body":
+      "Four MSI B850 and X870E boards report motherboard readings. Qualified ODROID-H4 and Protectli VP2430 configurations report DIMM temperature on the Dashboard of Classic navigation. The hwmon driver must already be bound.",
+    "release.v1_12_0.sensors.gpu.title": "NVIDIA GPUs on Linux",
+    "release.v1_12_0.sensors.gpu.body":
+      "Usage, temperature, and dedicated VRAM usage are read through the NVIDIA driver’s NVML library. Available values depend on the GPU and driver.",
+    "release.v1_12_0.sensors.link": "Compatibility table on GitHub",
+    "release.v1_12_0.performance.title":
+      "Performance and System Specifications",
+    "release.v1_12_0.performance.process.title": "GPU usage by process",
+    "release.v1_12_0.performance.process.body":
+      "The live process table has a GPU usage column. It totals all GPUs and engines, so it can exceed 100%. On DuckDB databases, process history in Insights also shows average GPU usage, from when v1.12.0 started recording it.",
+    "release.v1_12_0.performance.network.title": "Network link speed",
+    "release.v1_12_0.performance.network.body":
+      "The Network panel shows the link speed reported by the OS for each interface. It does not measure traffic.",
+    "release.v1_12_0.performance.layout.title": "Panel layout",
+    "release.v1_12_0.performance.layout.body":
+      "New layouts show all panels. Saved layouts stay as they are, so use Edit panels to add the Network panel to an existing layout.",
+    "release.v1_12_0.performance.report.title": "Hardware Compatibility Report",
+    "release.v1_12_0.performance.report.body":
+      "Create a report of hardware models and available sensors from System Specifications. Review it, then save it or copy it to post on GitHub yourself. It is not posted automatically.",
+    "release.v1_12_0.faq.pawnio.q": "Do I still need PawnIO?",
+    "release.v1_12_0.faq.pawnio.a":
+      "Yes, for the sensors this service reads. The service does not include the driver. Select PawnIO in the MSI, or install it from Settings → Advanced. Basic monitoring works without it.",
+    "release.v1_12_0.faq.repair.q": "What if the service is unavailable?",
+    "release.v1_12_0.faq.repair.a":
+      "Check its status under Settings → Advanced. If you use the .exe or a portable copy, install the MSI under Program Files. If you already use the MSI, repair it with the MSI of the same version.",
+    "release.v1_12_0.faq.analytics.q": "Does this version send usage data?",
+    "release.v1_12_0.faq.analytics.a":
+      "Not without recorded consent. The app contains the client for planned opt-in product analytics, but v1.12.0 has no screen to turn it on.",
+    "release.v1_12_0.faq.guide": "Sensor service setup and repair",
+    "release.v1_12_0.final.title": "HardwareVisualizer v1.12.0",
+    "release.v1_12_0.final.body":
+      "For the sensor service on Windows, use the MSI or Winget. See the release notes for every user-facing change.",
     "nav.home": "Home",
     "nav.Features": "Features",
     "nav.Download": "Download",
@@ -148,7 +246,7 @@ export const ui = {
     "hero.facts.price": "Price",
     "hero.facts.priceValue": "Free",
     "scale.live.span": "1 second to 60 seconds",
-    "scale.record.span": "10 minutes to 30 days",
+    "scale.record.span": "10 minutes to 1 year",
     "scale.notice.span": "24 hours to 1 year",
     "matrix.notesLabel": "Notes",
     "hero.facts.label": "Release",
@@ -173,7 +271,7 @@ export const ui = {
     "screens.live.body":
       "CPU, memory, and GPU gauges sit beside graphs of the last 60 seconds.",
     "screens.live.row1.term": "Panels",
-    "screens.live.row1.value": "5 kinds; hide and reorder them",
+    "screens.live.row1.value": "6 kinds; hide and reorder them",
     "screens.live.row2.term": "Views",
     "screens.live.row2.value": "Panels, Compact, Monitor",
     "screens.live.row3.term": "Tray",
@@ -182,7 +280,7 @@ export const ui = {
     "screens.live.row4.term": "Appearance",
     "screens.live.row4.value": "Theme, graph colors, wallpaper, °C/°F",
     "screens.record.body":
-      "Shows recorded usage and temperatures over periods from 10 minutes to 30 days. Readings are taken every second, and the average, maximum, and minimum of each minute are saved to a database on your PC.",
+      "Shows recorded usage and temperatures over periods from 10 minutes to 1 year, and process history over up to 30 days. Readings are taken every second, and the average, maximum, and minimum of each minute are saved to a database on your PC.",
     "screens.record.note":
       "Recording runs while the app is running. To keep it going after you close the window, set the app to stay in the tray in Settings.",
     "screens.notice.body":
@@ -190,9 +288,9 @@ export const ui = {
     "screens.notice.bands.term": "Load bands",
     "screens.notice.bands.value": "Idle, Low, Mid, High",
     "scale.live.caption":
-      "The Performance screen shows the current state of the CPU, memory, and GPU with per-core usage, running processes, motherboard sensors and fans, and power draw. Which readings appear depends on the OS and hardware.",
+      "The Performance screen shows the current state of the CPU, memory, and GPU with per-core usage, running processes, motherboard sensors and fans, power draw, and network link speed. Which readings appear depends on the OS and hardware.",
     "scale.record.caption":
-      "The Insights screen. It charts recorded usage and temperatures over periods from 10 minutes to 30 days.",
+      "The Insights screen. It charts recorded usage and temperatures over periods from 10 minutes to 1 year.",
     "scale.notice.caption":
       "Cooling Insight (the Cooling tab of the Insights screen). It puts temperature, load, power, fan speed, and room temperature on one timeline, over periods from 24 hours to 1 year. Windows only.",
     "record.fact1.term": "Saved",
@@ -200,7 +298,7 @@ export const ui = {
     "record.fact2.term": "Kept for",
     "record.fact2.value": "365 days by default (adjustable)",
     "record.fact3.term": "Insights periods",
-    "record.fact3.value": "10 minutes to 30 days",
+    "record.fact3.value": "10 minutes to 1 year (processes: up to 30 days)",
     "record.fact4.term": "Stored in",
     "record.fact4.value": "A database file on your PC",
     "notice.note":
@@ -223,11 +321,11 @@ export const ui = {
     "matrix.row2.feature": "GPU usage",
     "matrix.row2.windows": "NVIDIA, AMD; others through PDH",
     "matrix.row2.macos": "Available",
-    "matrix.row2.linux": "AMD, Intel ¹",
+    "matrix.row2.linux": "AMD, Intel, NVIDIA ¹",
     "matrix.row3.feature": "GPU temperature",
     "matrix.row3.windows": "NVIDIA, AMD",
     "matrix.row3.macos": "—",
-    "matrix.row3.linux": "AMD",
+    "matrix.row3.linux": "AMD, NVIDIA ¹",
     "matrix.row4.feature": "CPU temperature",
     "matrix.row4.windows": "PawnIO ² or ACPI thermal zones",
     "matrix.row4.macos": "—",
@@ -239,34 +337,40 @@ export const ui = {
     "matrix.row6.feature": "Motherboard temperatures and fans",
     "matrix.row6.windows": "Supported Super I/O chips ²",
     "matrix.row6.macos": "—",
-    "matrix.row6.linux": "—",
-    "matrix.row7.feature": "Storage Health (SMART)",
-    "matrix.row7.windows": "Available",
-    "matrix.row7.macos": "With smartctl ³",
-    "matrix.row7.linux": "With smartctl ³",
-    "matrix.row8.feature": "Network interface details",
+    "matrix.row6.linux": "Selected MSI boards ⁵",
+    "matrix.row7.feature": "DIMM temperature",
+    "matrix.row7.windows": "—",
+    "matrix.row7.macos": "—",
+    "matrix.row7.linux": "Selected configurations ⁵",
+    "matrix.row8.feature": "Storage Health (SMART)",
     "matrix.row8.windows": "Available",
-    "matrix.row8.macos": "Available",
-    "matrix.row8.linux": "Available",
-    "matrix.row9.feature": "Room temperature (SwitchBot)",
+    "matrix.row8.macos": "With smartctl ³",
+    "matrix.row8.linux": "With smartctl ³",
+    "matrix.row9.feature": "Network interface details",
     "matrix.row9.windows": "Available",
-    "matrix.row9.macos": "—",
-    "matrix.row9.linux": "—",
-    "matrix.row10.feature": "Cooling Insight",
-    "matrix.row10.windows": "Available ⁴",
+    "matrix.row9.macos": "Available",
+    "matrix.row9.linux": "Available",
+    "matrix.row10.feature": "Room temperature (SwitchBot)",
+    "matrix.row10.windows": "Available",
     "matrix.row10.macos": "—",
     "matrix.row10.linux": "—",
-    "matrix.row11.feature": "Tray widget",
-    "matrix.row11.windows": "Flyout",
-    "matrix.row11.macos": "Menu bar",
-    "matrix.row11.linux": "Tray title",
+    "matrix.row11.feature": "Cooling Insight",
+    "matrix.row11.windows": "Available ⁴",
+    "matrix.row11.macos": "—",
+    "matrix.row11.linux": "—",
+    "matrix.row12.feature": "Tray widget",
+    "matrix.row12.windows": "Flyout",
+    "matrix.row12.macos": "Menu bar",
+    "matrix.row12.linux": "Tray title",
     "matrix.note1":
-      "NVIDIA GPUs are listed on Linux, but their readings are not available yet. Intel GPU usage requires intel_gpu_top.",
+      "NVIDIA readings on Linux require the NVIDIA driver and its NVML library, and depend on the GPU. Intel GPU usage requires intel_gpu_top.",
     "matrix.note2":
-      "Requires PawnIO and administrator access. Motherboard sensors support Nuvoton NCT6799D. NCT6796D and ITE IT8728F (temperatures only) are experimental.",
+      "Requires PawnIO and the Windows sensor service, which the MSI installs under Program Files. Nuvoton NCT6799D is verified on one configuration. Other Nuvoton NCT67xx and selected ITE chips are experimental.",
     "matrix.note3": "Requires smartmontools.",
     "matrix.note4":
       "Requires CPU temperature. Power, fan, and room-temperature lanes appear when those sensors are available.",
+    "matrix.note5":
+      "Experimental on selected models, with the matching hwmon driver already bound.",
     "matrix.linkSpecs": "Full compatibility notes",
     "matrix.linkGuide": "Setup guide",
     "matrix.linkCompare": "Compare with other monitors",
@@ -281,7 +385,7 @@ export const ui = {
     "trust.item2.link": "Verify a download",
     "trust.item3.title": "Your data stays on your PC",
     "trust.item3.body":
-      "No account and no telemetry. The app connects to the internet to check GitHub Releases for updates, to download PawnIO if you choose to set it up, and to load its interface font from Google Fonts.",
+      "No account, and no usage data is sent without consent. The app connects to the internet to check GitHub Releases for updates, to download PawnIO if you choose to set it up, and to load its interface font from Google Fonts.",
     "trust.item3.link": "What the app connects to",
     "trust.item4.title": "Open source",
     "trust.item4.body":
@@ -425,7 +529,7 @@ export const ui = {
     "specs.overview.history.label": "Historical insight",
     "specs.overview.privacy.label": "Privacy posture",
     "specs.overview.privacy.value":
-      "No outbound telemetry for collected hardware data.",
+      "Collected hardware data stays on your PC. No usage data is sent without consent.",
     "specs.overview.customization.label": "Customization",
     "specs.overview.customization.value":
       "Color themes, graph colors, background images, transparent UI, glass blur, and tray widget preferences.",
@@ -454,17 +558,17 @@ export const ui = {
     "specs.matrix.cpu.linux":
       "Live usage, memory details, and history are core supported surfaces.",
     "specs.matrix.cpuTemperature.windows":
-      "ACPI thermal zones are best effort; PawnIO can improve CPU package temperature on supported CPUs.",
+      "ACPI thermal zones are best effort. With PawnIO and the Windows sensor service, supported CPUs report package temperature, and selected models also report live per-core or per-CCD temperatures (experimental).",
     "specs.matrix.storage.windows":
       "Native and fallback paths can expose SMART or NVMe health fields when available.",
     "specs.matrix.process.windows":
-      "Live Process Table and Process Insight connect current load with history.",
+      "The live process table shows CPU, memory, and GPU usage where available. Process history in Insights covers up to 30 days of CPU and memory usage, and of GPU usage on DuckDB databases.",
     "specs.matrix.process.macos":
-      "Live Process Table and Process Insight connect current load with history.",
+      "The live process table shows CPU, memory, and GPU usage where available. Process history in Insights covers up to 30 days of CPU and memory usage, and of GPU usage on DuckDB databases.",
     "specs.matrix.process.linux":
-      "Live Process Table and Process Insight connect current load with history.",
+      "The live process table shows CPU, memory, and GPU usage where available. Process history in Insights covers up to 30 days of CPU and memory usage, and of GPU usage on DuckDB databases.",
     "specs.matrix.fan.windows":
-      "Fan-speed reads are implemented for supported Super I/O sensors through the optional PawnIO LpcIO module. Coverage varies by motherboard, and this read-only path does not support fan control.",
+      "Fan-speed reads are implemented for supported Super I/O sensors through PawnIO and the Windows sensor service. Coverage varies by motherboard, and this read-only path does not support fan control.",
     "specs.matrix.language.windows":
       "English, Japanese, and Russian are supported in the app.",
     "specs.matrix.language.macos":
@@ -472,7 +576,7 @@ export const ui = {
     "specs.matrix.language.linux":
       "English, Japanese, and Russian are supported in the app.",
     "specs.signals.cpuTemperature.coverage":
-      "CPU package and thermal-zone temperature where available",
+      "CPU package, core, CCD, and thermal-zone temperature where available",
     "specs.section.appearance.eyebrow": "Readable on your desk",
     "specs.appearance.title": "Appearance and customization",
     "specs.appearance.description":
@@ -510,7 +614,7 @@ export const ui = {
     "specs.section.storage.eyebrow": "Deeper hardware paths",
     "specs.storage.title": "Storage Health and optional components",
     "specs.storage.description":
-      "Optional components are not bundled with the app. On Windows, you can choose PawnIO during MSI setup or install it later from Settings with administrator approval.",
+      "Optional components are not bundled with the app. On Windows, the MSI bundles the app's own sensor service, and PawnIO can be selected during MSI setup or installed later from Settings with administrator approval.",
     "specs.storage.live.title": "Live Storage Health",
     "specs.storage.live.body":
       "A cheap native read path refreshes focused storage information without running smartctl on the live polling cadence.",
@@ -519,14 +623,14 @@ export const ui = {
       "Daily health records can include SMART overall health, temperature, NVMe percentage used, available spare, reallocated sectors, pending sectors, offline uncorrectable sectors, and NVMe media errors when available.",
     "specs.storage.pawnio.title": "PawnIO for CPU package temperature",
     "specs.storage.pawnio.body":
-      "On Windows, Settings → Advanced → Optional component setup can download and install PawnIO with administrator approval. Supported CPUs and motherboards may then expose package temperature, power, and sensor readings.",
+      "On Windows, Settings → Advanced → Optional component setup can download and install PawnIO with administrator approval. With the sensor service from the MSI, supported CPUs and motherboards may then expose temperature, power, and fan readings.",
     "specs.storage.smartctl.title": "smartctl for richer storage signals",
     "specs.storage.smartctl.body":
       "smartmontools can improve Storage Health when native OS paths cannot read important SMART or NVMe health fields.",
     "specs.section.verification.eyebrow": "Trust model",
     "specs.verification.title": "Privacy and download verification",
     "specs.verification.description":
-      "HardwareVisualizer is open source, avoids outbound telemetry for collected hardware data, and documents how to verify official release files.",
+      "HardwareVisualizer is open source, does not send collected hardware data anywhere, and documents how to verify official release files.",
     "specs.verification.official.name": "Official sources",
     "specs.verification.official.detail":
       "Use GitHub Releases, hardviz.com, or Winget where available. Third-party mirrors and password-protected archives are not official.",
@@ -579,10 +683,11 @@ export const ui = {
     "specs.compat.cpu.coverage": "CPU and RAM usage, memory details, history",
     "specs.compat.storage.coverage":
       "Storage summary, Storage Health records, Live Storage Health",
-    "specs.compat.network.coverage": "Interface, IP, subnet, and gateway data",
-    "specs.compat.process.coverage": "Live Process Table and Process Insight",
+    "specs.compat.network.coverage":
+      "Interface, IP, subnet, gateway, and link speed",
+    "specs.compat.process.coverage": "Live processes and process history",
     "specs.compat.fan.coverage":
-      "Windows fan speed on supported Super I/O sensors",
+      "Supported Super I/O sensors on Windows, and selected MSI boards on Linux",
     "specs.compat.language.coverage": "English, Japanese, Russian",
     "specs.cta.download": "Go to downloads",
     "specs.cta.verify": "Open verification guide",
@@ -617,25 +722,25 @@ export const ui = {
     "faq.a1":
       "HardwareVisualizer is a free, open-source hardware monitor for Windows, macOS, and Linux. It shows CPU, memory, and GPU readings in real time and keeps a history on your PC, so you can review afterwards what happened.",
     "faq.a4":
-      "HardwareVisualizer records readings every minute and charts them inside the app: up to 30 days in Insights and up to 1 year in Cooling Insight, with history kept for 365 days by default. On Windows, Cooling Insight compares CPU temperature with its own baseline at a similar load. HWiNFO reads more kinds of sensors, such as voltages, and offers an on-screen display. The comparison page lists the differences with sources.",
+      "HardwareVisualizer records readings every minute and charts them inside the app: up to 1 year in Insights (30 days for processes) and Cooling Insight, with history kept for 365 days by default. On Windows, Cooling Insight compares CPU temperature with its own baseline at a similar load. HWiNFO reads more kinds of sensors, such as voltages, and offers an on-screen display. The comparison page lists the differences with sources.",
     "faq.a5":
       "Yes. Recording continues in the background, and with Close to tray the app stays in the system tray after you close its window. Afterwards, Insights shows how CPU and GPU usage and temperatures changed and which processes were active. There is no in-game overlay.",
     "faq.a6":
-      "On Windows, NVIDIA and AMD GPUs report usage and temperature, and other GPUs report usage. On Linux, AMD GPUs report usage and temperature, Intel GPUs report usage with intel_gpu_top, and NVIDIA GPUs are listed without readings for now. On macOS, GPU usage is available and GPU temperature is not.",
+      "On Windows, NVIDIA and AMD GPUs report usage and temperature, and other GPUs report usage. On Linux, AMD GPUs report usage and temperature, Intel GPUs report usage with intel_gpu_top, and NVIDIA GPUs report usage, temperature, and VRAM usage through the driver's NVML library, depending on the GPU. On macOS, GPU usage is available and GPU temperature is not.",
     "seo.home.description":
       "Free, open-source hardware monitor for Windows, macOS, and Linux. See CPU, GPU, and temperatures live, keep a year of history on your PC, and compare how cooling changes over months.",
-    "seo.home.feature4": "No account and no telemetry",
+    "seo.home.feature4": "No account, and no usage data sent without consent",
     "footer.description":
       "A free, open-source hardware monitor that shows CPU, GPU, and memory readings and records them on your PC every minute.",
     "specs.overview.history.value":
-      "Hardware history is kept for 365 days by default on new installs. Insights charts up to 30 days, and Cooling Insight up to 1 year.",
+      "Hardware history is kept for 365 days by default on new installs. Insights and Cooling Insight chart up to 1 year, and process history up to 30 days.",
     "specs.signals.description":
       "The matrix separates the readings available everywhere from best-effort sensor paths, and marks what is not available on each operating system.",
     "specs.matrix.gpu.windows":
       "NVIDIA and AMD report usage and temperature. Other GPUs report usage through Windows performance counters (PDH).",
     "specs.matrix.gpu.macos": "GPU usage is available. GPU temperature is not.",
     "specs.matrix.gpu.linux":
-      "AMD reports usage and temperature. Intel reports usage with intel_gpu_top. NVIDIA GPUs are listed, but their readings are not available yet.",
+      "AMD reports usage and temperature. Intel reports usage with intel_gpu_top. NVIDIA reports usage, temperature, and VRAM usage through the driver's NVML library, depending on the GPU.",
     "specs.matrix.cpuTemperature.macos":
       "CPU temperature is not available on macOS.",
     "specs.matrix.cpuTemperature.linux":
@@ -645,15 +750,16 @@ export const ui = {
     "specs.matrix.storage.linux":
       "Storage Health is collected through smartctl, which requires smartmontools and usually root access.",
     "specs.matrix.network.windows":
-      "Interface, IP, subnet, and gateway details are available. Network traffic is not measured.",
+      "Interface, IP, subnet, and gateway details are available, and link speed where the OS reports it. Network traffic is not measured.",
     "specs.matrix.network.macos":
-      "Interface, IP, subnet, and gateway details are available. Network traffic is not measured.",
+      "Interface, IP, subnet, and gateway details are available, and link speed where the OS reports it. Network traffic is not measured.",
     "specs.matrix.network.linux":
-      "Interface, IP, subnet, and gateway details are available. Network traffic is not measured.",
+      "Interface, IP, subnet, and gateway details are available, and link speed where the OS reports it. Network traffic is not measured.",
     "specs.matrix.fan.macos": "Fan speeds are not available on macOS.",
-    "specs.matrix.fan.linux": "Fan speeds are not available on Linux yet.",
+    "specs.matrix.fan.linux":
+      "Experimental on selected MSI B850 and X870E boards, with the hwmon driver already bound.",
     "specs.compat.gpu.coverage":
-      "Usage on all three; temperature for NVIDIA and AMD on Windows and for AMD on Linux",
+      "Usage on all three; temperature for NVIDIA and AMD on Windows and Linux",
     "specs.compat.status.unavailable": "Not available",
     "about.heading": "About HardwareVisualizer",
     "about.contact.emailLabel": "Email",
@@ -789,6 +895,102 @@ export const ui = {
     "release.related.github": "GitHubのリリースページ",
     "release.related.features": "機能一覧",
     "release.related.specs": "システム要件",
+    "release.v1_12_0.status": "HardwareVisualizer v1.12.0",
+    "release.v1_12_0.announcement":
+      "HardwareVisualizer v1.12.0：Windowsセンサーサービス、インサイトの1年表示、対応センサーの追加",
+    "release.v1_12_0.meta.title":
+      "Windowsセンサーサービスとインサイトの1年表示 | HardwareVisualizer",
+    "release.v1_12_0.meta.description":
+      "HardwareVisualizer v1.12.0の更新内容を紹介。アプリを管理者として起動せずにCPU温度などを取得するWindowsセンサーサービスを追加し、インサイトの履歴表示を最長1年に延長しました。",
+    "release.v1_12_0.hero.title":
+      "Windowsセンサーサービスとインサイトの1年表示",
+    "release.v1_12_0.hero.body":
+      "WindowsのMSI版に、PawnIOでCPUやマザーボードのセンサーを読み取るサービスが加わり、アプリを一般権限のまま使えるようになりました。インサイトではCPU・メモリ・GPUの履歴を最長1年表示でき、対応するセンサーとGPUも増えています。",
+    "release.v1_12_0.service.title": "Windowsセンサーサービス",
+    "release.v1_12_0.service.body":
+      "v1.11までは、PawnIOのセンサーを読み取るためにアプリ全体を管理者として実行する必要がありました。v1.12.0では、CPUの温度と電力、マザーボードの温度とファン回転数を別のサービスが取得します。アプリ本体は一般権限のまま起動し、トレイに常駐できます。",
+    "release.v1_12_0.service.note":
+      "PawnIOは引き続き任意で導入する別のドライバーです。サービスの導入と修復には管理者の承認が必要です。取得できる値はハードウェアによって異なります。",
+    "release.v1_12_0.service.detail.title": "サービスのしくみ",
+    "release.v1_12_0.service.detail.body":
+      "PawnIOが特権を持つ呼び出し元しか受け付けないため、サービスはSYSTEMで動作します。同じPCに対話的にサインインしているユーザーからの、読み取り専用の要求に応答します。ネットワーク経由と匿名の接続は拒否し、読み込むモジュールも識別できる署名済みのものに限ります。履歴のデータベースは開きません。",
+    "release.v1_12_0.install.caption": "インストール方法別のサービス導入",
+    "release.v1_12_0.install.method": "インストール方法",
+    "release.v1_12_0.install.service": "センサーサービス",
+    "release.v1_12_0.install.msi.name": "Program FilesへのMSI",
+    "release.v1_12_0.install.msi.value": "新規インストールと更新に含まれる",
+    "release.v1_12_0.install.winget.name": "Winget",
+    "release.v1_12_0.install.winget.value": "MSIを導入するため含まれる",
+    "release.v1_12_0.install.exe.name": ".exeインストーラー",
+    "release.v1_12_0.install.exe.value": "導入されない",
+    "release.v1_12_0.install.other.name": "ポータブル版、別の場所へのMSI",
+    "release.v1_12_0.install.other.value": "導入されない",
+    "release.v1_12_0.install.note":
+      "サービスがなければ、アプリを管理者として実行してもPawnIOの値は取得できません。サービスを導入しない形式でも、導入済みの互換サービスがあれば利用できます。",
+    "release.v1_12_0.update.title": "更新前の確認事項",
+    "release.v1_12_0.update.admin.title": "管理者として起動",
+    "release.v1_12_0.update.admin.body":
+      "更新しても設定は変わりません。PawnIOのセンサーのためだけに有効にしていた場合は、「設定 → 高度な設定」でオフにし、アプリを終了してから通常起動してください。一部のストレージヘルス情報など、引き続き管理者権限が必要な値もあります。",
+    "release.v1_12_0.update.modules.title": "PawnIOのモジュール",
+    "release.v1_12_0.update.modules.body":
+      "未署名の.amxと、新しいリリースを含むアプリが識別できないモジュールは読み込みません。「設定 → 高度な設定 → 任意コンポーネントのセットアップ」で対応版を導入できますが、未知のファイルは上書きしないため、先にご自身で取り除いてください。",
+    "release.v1_12_0.update.downgrade.title": "v1.11.xへの差し戻し",
+    "release.v1_12_0.update.downgrade.body":
+      "v1.12.0で使用したDuckDBのデータベースはv1.11.xでは開けず、そこでリセットすると履歴が削除されます。また、保持期間が未保存だとv1.11.xが30日を保存することがあり、v1.12.0へ戻ったときに古い履歴が削除されます。戻す前に、v1.12.0で希望の保持期間を保存し、データフォルダーをバックアップしてください。",
+    "release.v1_12_0.update.downgrade.link": "履歴を失わずに戻す手順",
+    "release.v1_12_0.insights.title": "インサイトの長期表示",
+    "release.v1_12_0.insights.body":
+      "インサイトのCPU・メモリ・GPU履歴に、90日と1年の期間を追加しました。記録された使用率や温度を、季節をまたいで振り返れます。",
+    "release.v1_12_0.insights.note":
+      "表示されるのは記録されたデータだけです。保持期間より古い履歴は削除されます。それより長い期間を選ぶと、画面にその旨を表示します。",
+    "release.v1_12_0.insights.history.name": "CPU・メモリ・GPU",
+    "release.v1_12_0.insights.history.value": "10分〜1年",
+    "release.v1_12_0.insights.process.name": "プロセス",
+    "release.v1_12_0.insights.process.value": "10分〜30日",
+    "release.v1_12_0.insights.cooling.name": "Cooling Insight",
+    "release.v1_12_0.insights.cooling.value": "24時間〜1年（変更なし）",
+    "release.v1_12_0.sensors.title": "対応ハードウェア",
+    "release.v1_12_0.sensors.body":
+      "新たに追加したセンサーの経路は実験的な対応で、対象の機種は限られます。メーカーの全製品への対応ではありません。",
+    "release.v1_12_0.sensors.cpu.title": "CPUのコア別・CCD別温度",
+    "release.v1_12_0.sensors.cpu.body":
+      "Windowsで、対象のIntel製CPUではコア別、対象のAMD製CPUではCCD別の温度を表示します。現在値のみで、履歴には記録しません。",
+    "release.v1_12_0.sensors.board.title": "Windowsのマザーボードセンサー",
+    "release.v1_12_0.sensors.board.body":
+      "NuvotonのNCT67xx系と一部のITE製チップで、温度やファン回転数を取得できるようになりました。取得できる項目はチップと基板によって異なります。",
+    "release.v1_12_0.sensors.linux.title": "LinuxのマザーボードとDIMM",
+    "release.v1_12_0.sensors.linux.body":
+      "MSIのB850・X870E 4機種でマザーボードの値を取得できます。条件を満たすODROID-H4とProtectli VP2430では、クラシックナビゲーションのダッシュボードにDIMM温度を表示します。どちらもhwmonドライバーがバインド済みである必要があります。",
+    "release.v1_12_0.sensors.gpu.title": "LinuxのNVIDIA GPU",
+    "release.v1_12_0.sensors.gpu.body":
+      "NVIDIAドライバーのNVMLライブラリを通じて、使用率、温度、専用VRAMの使用量を取得します。取得できる値はGPUとドライバーによって異なります。",
+    "release.v1_12_0.sensors.link": "GitHubの互換性表（英語）",
+    "release.v1_12_0.performance.title": "パフォーマンスとシステム仕様",
+    "release.v1_12_0.performance.process.title": "プロセス別のGPU使用率",
+    "release.v1_12_0.performance.process.body":
+      "ライブプロセスの表にGPU使用率の列を追加しました。すべてのGPUとエンジンの合計のため、100%を超えることがあります。DuckDBを使う環境では、インサイトのプロセス履歴にも、v1.12.0で記録を始めた時点からの平均GPU使用率を表示します。",
+    "release.v1_12_0.performance.network.title": "ネットワークのリンク速度",
+    "release.v1_12_0.performance.network.body":
+      "ネットワークパネルに、OSが報告する各インターフェースのリンク速度を表示します。通信量は計測しません。",
+    "release.v1_12_0.performance.layout.title": "パネルのレイアウト",
+    "release.v1_12_0.performance.layout.body":
+      "新規のレイアウトではすべてのパネルを表示します。保存済みのレイアウトは変わらないため、ネットワークパネルは「パネルを編集」から追加してください。",
+    "release.v1_12_0.performance.report.title": "ハードウェア互換性レポート",
+    "release.v1_12_0.performance.report.body":
+      "システム仕様から、ハードウェアの型番とセンサーの取得状況をまとめたレポートを作成できます。内容を確認して保存するか、コピーしてご自身でGitHubに投稿します。自動では投稿しません。",
+    "release.v1_12_0.faq.pawnio.q": "PawnIOは引き続き必要ですか？",
+    "release.v1_12_0.faq.pawnio.a":
+      "このサービスが読み取るセンサーには必要です。サービスにドライバーは含まれません。MSIでPawnIOを選ぶか、「設定 → 高度な設定」から導入してください。基本的なモニタリングはPawnIOなしで動作します。",
+    "release.v1_12_0.faq.repair.q": "サービスを利用できない場合は？",
+    "release.v1_12_0.faq.repair.a":
+      "「設定 → 高度な設定」で状態を確認してください。.exe版やポータブル版の場合は、Program FilesにMSI版をインストールします。すでにMSI版の場合は、同じバージョンのMSIで修復します。",
+    "release.v1_12_0.faq.analytics.q": "この版は利用状況を送信しますか？",
+    "release.v1_12_0.faq.analytics.a":
+      "同意の記録がなければ送信しません。予定している任意参加のプロダクトアナリティクスのクライアントを含みますが、v1.12.0に有効化する画面はありません。",
+    "release.v1_12_0.faq.guide": "センサーサービスの導入と修復",
+    "release.v1_12_0.final.title": "HardwareVisualizer v1.12.0",
+    "release.v1_12_0.final.body":
+      "Windowsでセンサーサービスを使う場合は、MSIまたはWingetでインストールしてください。変更点の一覧は更新履歴に掲載しています。",
     "nav.home": "ホーム",
     "nav.Features": "機能",
     "nav.Download": "ダウンロード",
@@ -817,7 +1019,7 @@ export const ui = {
     "hero.facts.price": "価格",
     "hero.facts.priceValue": "無料",
     "scale.live.span": "1秒〜60秒",
-    "scale.record.span": "10分〜30日",
+    "scale.record.span": "10分〜1年",
     "scale.notice.span": "24時間〜1年",
     "matrix.notesLabel": "補足",
     "hero.facts.label": "リリース情報",
@@ -842,7 +1044,7 @@ export const ui = {
     "screens.live.body":
       "CPU・メモリ・GPUのゲージと、直近60秒のグラフが並びます。",
     "screens.live.row1.term": "選べるパネル",
-    "screens.live.row1.value": "5種類。表示と順番を変更可",
+    "screens.live.row1.value": "6種類。表示と順番を変更可",
     "screens.live.row2.term": "表示",
     "screens.live.row2.value": "パネル、コンパクト、モニター",
     "screens.live.row3.term": "トレイ",
@@ -850,7 +1052,7 @@ export const ui = {
     "screens.live.row4.term": "見た目",
     "screens.live.row4.value": "テーマ、グラフの色、壁紙、°C／°F",
     "screens.record.body":
-      "記録した使用率や温度を、10分から30日までの期間で表示します。値は1秒ごとに取得し、1分ごとの平均・最大・最小をPC内のデータベースに保存します。",
+      "記録した使用率や温度を10分から1年まで、プロセスの履歴を最長30日の期間で表示します。値は1秒ごとに取得し、1分ごとの平均・最大・最小をPC内のデータベースに保存します。",
     "screens.record.note":
       "記録されるのはアプリが動いている間です。ウィンドウを閉じても続けるには、設定でトレイに常駐させます。",
     "screens.notice.body":
@@ -858,9 +1060,9 @@ export const ui = {
     "screens.notice.bands.term": "負荷帯",
     "screens.notice.bands.value": "アイドル、低負荷、中負荷、高負荷",
     "scale.live.caption":
-      "「パフォーマンス」画面。CPU・メモリ・GPUの現在の状態に加えて、コアごとの使用率、動作中のプロセス、マザーボードのセンサーとファン、消費電力を表示します。表示できる項目はOSとハードウェアによって異なります。",
+      "「パフォーマンス」画面。CPU・メモリ・GPUの現在の状態に加えて、コアごとの使用率、動作中のプロセス、マザーボードのセンサーとファン、消費電力、ネットワークのリンク速度を表示します。表示できる項目はOSとハードウェアによって異なります。",
     "scale.record.caption":
-      "「インサイト」画面。記録した使用率や温度を、10分から30日までの期間で振り返ります。",
+      "「インサイト」画面。記録した使用率や温度を、10分から1年までの期間で振り返ります。",
     "scale.notice.caption":
       "Cooling Insight（「インサイト」画面の「冷却」タブ）。温度・負荷・電力・ファン・室温を同じ時間軸に並べ、24時間から1年までの期間で比べます。Windows版の機能です。",
     "record.fact1.term": "保存の間隔",
@@ -868,7 +1070,7 @@ export const ui = {
     "record.fact2.term": "保存期間",
     "record.fact2.value": "標準365日（変更可）",
     "record.fact3.term": "インサイトの表示期間",
-    "record.fact3.value": "10分〜30日",
+    "record.fact3.value": "10分〜1年（プロセスは最長30日）",
     "record.fact4.term": "保存先",
     "record.fact4.value": "PC内のデータベースファイル",
     "notice.note":
@@ -890,11 +1092,11 @@ export const ui = {
     "matrix.row2.feature": "GPU使用率",
     "matrix.row2.windows": "NVIDIA、AMD。その他はPDH経由",
     "matrix.row2.macos": "対応",
-    "matrix.row2.linux": "AMD、Intel ¹",
+    "matrix.row2.linux": "AMD、Intel、NVIDIA ¹",
     "matrix.row3.feature": "GPU温度",
     "matrix.row3.windows": "NVIDIA、AMD",
     "matrix.row3.macos": "—",
-    "matrix.row3.linux": "AMD",
+    "matrix.row3.linux": "AMD、NVIDIA ¹",
     "matrix.row4.feature": "CPU温度",
     "matrix.row4.windows": "PawnIO ² またはACPIサーマルゾーン",
     "matrix.row4.macos": "—",
@@ -906,34 +1108,40 @@ export const ui = {
     "matrix.row6.feature": "マザーボードの温度とファン",
     "matrix.row6.windows": "対応するSuper I/Oチップ ²",
     "matrix.row6.macos": "—",
-    "matrix.row6.linux": "—",
-    "matrix.row7.feature": "ストレージヘルス（SMART）",
-    "matrix.row7.windows": "対応",
-    "matrix.row7.macos": "smartctlが必要 ³",
-    "matrix.row7.linux": "smartctlが必要 ³",
-    "matrix.row8.feature": "ネットワークインターフェースの情報",
+    "matrix.row6.linux": "一部のMSI製基板 ⁵",
+    "matrix.row7.feature": "DIMM温度",
+    "matrix.row7.windows": "—",
+    "matrix.row7.macos": "—",
+    "matrix.row7.linux": "一部の構成 ⁵",
+    "matrix.row8.feature": "ストレージヘルス（SMART）",
     "matrix.row8.windows": "対応",
-    "matrix.row8.macos": "対応",
-    "matrix.row8.linux": "対応",
-    "matrix.row9.feature": "室温（SwitchBot）",
+    "matrix.row8.macos": "smartctlが必要 ³",
+    "matrix.row8.linux": "smartctlが必要 ³",
+    "matrix.row9.feature": "ネットワークインターフェースの情報",
     "matrix.row9.windows": "対応",
-    "matrix.row9.macos": "—",
-    "matrix.row9.linux": "—",
-    "matrix.row10.feature": "Cooling Insight",
-    "matrix.row10.windows": "対応 ⁴",
+    "matrix.row9.macos": "対応",
+    "matrix.row9.linux": "対応",
+    "matrix.row10.feature": "室温（SwitchBot）",
+    "matrix.row10.windows": "対応",
     "matrix.row10.macos": "—",
     "matrix.row10.linux": "—",
-    "matrix.row11.feature": "トレイウィジェット",
-    "matrix.row11.windows": "フライアウト",
-    "matrix.row11.macos": "メニューバー",
-    "matrix.row11.linux": "トレイのタイトル表示",
+    "matrix.row11.feature": "Cooling Insight",
+    "matrix.row11.windows": "対応 ⁴",
+    "matrix.row11.macos": "—",
+    "matrix.row11.linux": "—",
+    "matrix.row12.feature": "トレイウィジェット",
+    "matrix.row12.windows": "フライアウト",
+    "matrix.row12.macos": "メニューバー",
+    "matrix.row12.linux": "トレイのタイトル表示",
     "matrix.note1":
-      "LinuxではNVIDIAのGPUは一覧に表示されますが、値の取得にはまだ対応していません。IntelのGPU使用率にはintel_gpu_topが必要です。",
+      "LinuxでNVIDIAの値を取得するには、NVIDIAドライバーとNVMLライブラリが必要で、取得できる値はGPUによって異なります。IntelのGPU使用率にはintel_gpu_topが必要です。",
     "matrix.note2":
-      "PawnIOと管理者権限が必要です。マザーボードセンサーはNuvoton NCT6799Dに対応しています。NCT6796DとITE IT8728F（温度のみ）は試験的な対応です。",
+      "PawnIOと、MSI版がProgram Filesに導入するWindowsセンサーサービスが必要です。Nuvoton NCT6799Dは1構成で動作を確認済みです。ほかのNuvoton NCT67xx系と一部のITE製チップは実験的な対応です。",
     "matrix.note3": "smartmontoolsが必要です。",
     "matrix.note4":
       "CPU温度の取得が必要です。電力・ファン・室温は、それぞれのセンサーを使える場合に表示されます。",
+    "matrix.note5":
+      "一部の機種での実験的な対応です。対応するhwmonドライバーがバインド済みである必要があります。",
     "matrix.linkSpecs": "対応状況の詳細",
     "matrix.linkGuide": "導入ガイド",
     "matrix.linkCompare": "ほかのモニターとの比較",
@@ -948,7 +1156,7 @@ export const ui = {
     "trust.item2.link": "ダウンロードを検証する",
     "trust.item3.title": "データはPCの中に",
     "trust.item3.body":
-      "アカウントは不要で、テレメトリーもありません。アプリが通信するのは、GitHub Releasesでの更新確認、導入を選んだ場合のPawnIOの取得、Google Fontsからの表示用フォントの読み込みです。",
+      "アカウントは不要で、同意なしに利用状況を送信しません。アプリが通信するのは、GitHub Releasesでの更新確認、導入を選んだ場合のPawnIOの取得、Google Fontsからの表示用フォントの読み込みです。",
     "trust.item3.link": "アプリの通信先",
     "trust.item4.title": "オープンソース",
     "trust.item4.body":
@@ -1090,7 +1298,7 @@ export const ui = {
     "specs.overview.history.label": "履歴データ",
     "specs.overview.privacy.label": "プライバシー",
     "specs.overview.privacy.value":
-      "収集したハードウェア情報の外部テレメトリはありません。",
+      "収集したハードウェア情報は外部に送信しません。同意なしに利用状況を送信することもありません。",
     "specs.overview.customization.label": "カスタマイズ",
     "specs.overview.customization.value":
       "カラーテーマ、グラフ色、背景画像、透明UI、ガラスぼかし、トレイウィジェット設定。",
@@ -1119,17 +1327,17 @@ export const ui = {
     "specs.matrix.cpu.linux":
       "ライブ使用率、メモリ詳細、履歴は主要な対応領域です。",
     "specs.matrix.cpuTemperature.windows":
-      "ACPIサーマルゾーンはベストエフォートです。対応CPUではPawnIOでCPUパッケージ温度を改善できる場合があります。",
+      "ACPIサーマルゾーンはベストエフォートです。PawnIOとWindowsセンサーサービスがあれば対応CPUのパッケージ温度を、さらに一部の機種ではコア別・CCD別の現在温度（実験的）を取得できます。",
     "specs.matrix.storage.windows":
       "ネイティブまたはフォールバック経路で、利用可能なSMART/NVMeヘルス項目を表示します。",
     "specs.matrix.process.windows":
-      "Live Process TableとProcess Insightで、現在の負荷と履歴をつなげて確認できます。",
+      "ライブプロセスの表にCPU・メモリと、取得できる場合はGPUの使用率を表示します。インサイトのプロセス履歴では、CPU・メモリと、DuckDBを使う環境ではGPUの使用率を最長30日表示します。",
     "specs.matrix.process.macos":
-      "Live Process TableとProcess Insightで、現在の負荷と履歴をつなげて確認できます。",
+      "ライブプロセスの表にCPU・メモリと、取得できる場合はGPUの使用率を表示します。インサイトのプロセス履歴では、CPU・メモリと、DuckDBを使う環境ではGPUの使用率を最長30日表示します。",
     "specs.matrix.process.linux":
-      "Live Process TableとProcess Insightで、現在の負荷と履歴をつなげて確認できます。",
+      "ライブプロセスの表にCPU・メモリと、取得できる場合はGPUの使用率を表示します。インサイトのプロセス履歴では、CPU・メモリと、DuckDBを使う環境ではGPUの使用率を最長30日表示します。",
     "specs.matrix.fan.windows":
-      "Windowsでは、任意コンポーネントのPawnIO LpcIO経由で、対応するSuper I/Oセンサーのファン速度を取得できます。対応範囲はマザーボードにより異なり、この読み取り専用の経路ではファン制御に対応しません。",
+      "Windowsでは、PawnIOとWindowsセンサーサービスを通じて、対応するSuper I/Oセンサーのファン速度を取得できます。対応範囲はマザーボードにより異なり、この読み取り専用の経路ではファン制御に対応しません。",
     "specs.matrix.language.windows":
       "アプリは英語、日本語、ロシア語に対応しています。",
     "specs.matrix.language.macos":
@@ -1137,7 +1345,7 @@ export const ui = {
     "specs.matrix.language.linux":
       "アプリは英語、日本語、ロシア語に対応しています。",
     "specs.signals.cpuTemperature.coverage":
-      "利用可能な場合のCPUパッケージ温度とサーマルゾーン温度",
+      "利用可能な場合のCPUパッケージ・コア・CCD・サーマルゾーンの温度",
     "specs.section.appearance.eyebrow": "見た目のカスタマイズ",
     "specs.appearance.title": "見た目とカスタマイズ",
     "specs.appearance.description":
@@ -1175,7 +1383,7 @@ export const ui = {
     "specs.section.storage.eyebrow": "追加コンポーネント",
     "specs.storage.title": "Storage Healthと任意コンポーネント",
     "specs.storage.description":
-      "任意コンポーネントはアプリに同梱していません。WindowsではMSIのセットアップ時にPawnIOを選ぶか、後から設定画面で管理者承認のうえ導入できます。",
+      "任意コンポーネントはアプリに同梱していません。WindowsのMSIにはアプリ自身のセンサーサービスが含まれます。PawnIOはMSIのセットアップ時に選ぶか、後から設定画面で管理者承認のうえ導入できます。",
     "specs.storage.live.title": "リアルタイムのストレージ情報",
     "specs.storage.live.body":
       "フォーカス中のストレージ情報は、smartctlをライブポーリング周期で実行せず、軽量なネイティブ読み取り経路で更新します。",
@@ -1184,14 +1392,14 @@ export const ui = {
       "日次のヘルス記録では、利用可能な場合にSMART総合ヘルス、温度、NVMe使用率、利用可能スペア、代替処理済みセクター、保留中セクター、オフライン訂正不能セクター、NVMeメディアエラーを扱います。",
     "specs.storage.pawnio.title": "CPUパッケージ温度向けPawnIO",
     "specs.storage.pawnio.body":
-      "Windowsでは「設定 → 高度な設定 → 任意コンポーネントのセットアップ」からPawnIOを取得・導入できます。管理者承認後、対応するCPUやマザーボードの温度・電力・センサー情報を取得できる場合があります。",
+      "Windowsでは「設定 → 高度な設定 → 任意コンポーネントのセットアップ」から、管理者承認のうえでPawnIOを取得・導入できます。MSI版のセンサーサービスとあわせて、対応するCPUやマザーボードの温度・電力・ファンの値を取得できる場合があります。",
     "specs.storage.smartctl.title": "より詳しいストレージ情報向けsmartctl",
     "specs.storage.smartctl.body":
       "ネイティブOS経路で重要なSMART/NVMeヘルス情報を読めない場合、smartmontoolsによってStorage Healthが改善されることがあります。",
     "specs.section.verification.eyebrow": "プライバシーと検証",
     "specs.verification.title": "プライバシーとダウンロード検証",
     "specs.verification.description":
-      "HardwareVisualizerはオープンソースで、収集したハードウェア情報の外部テレメトリを行わず、公式リリースファイルの検証方法をドキュメント化しています。",
+      "HardwareVisualizerはオープンソースで、収集したハードウェア情報を外部に送信せず、公式リリースファイルの検証方法をドキュメント化しています。",
     "specs.verification.official.name": "公式配布元",
     "specs.verification.official.detail":
       "GitHub Releases、hardviz.com、利用可能な場合はWingetを使用してください。第三者ミラーやパスワード付きアーカイブは公式ではありません。",
@@ -1245,9 +1453,10 @@ export const ui = {
     "specs.compat.storage.coverage":
       "ストレージ概要、Storage Health Record、Live Storage Health",
     "specs.compat.network.coverage":
-      "インターフェース、IP、サブネット、ゲートウェイ",
-    "specs.compat.process.coverage": "Live Process TableとProcess Insight",
-    "specs.compat.fan.coverage": "Windowsの対応Super I/Oセンサーのファン速度",
+      "インターフェース、IP、サブネット、ゲートウェイ、リンク速度",
+    "specs.compat.process.coverage": "ライブプロセスとプロセスの履歴",
+    "specs.compat.fan.coverage":
+      "Windowsの対応Super I/Oセンサーと、Linuxの一部のMSI製基板",
     "specs.compat.language.coverage": "英語、日本語、ロシア語",
     "specs.cta.download": "ダウンロードへ",
     "specs.cta.verify": "検証ガイドを開く",
@@ -1282,18 +1491,18 @@ export const ui = {
     "faq.a1":
       "HardwareVisualizerは、Windows・macOS・Linuxで使える無料・オープンソースのハードウェアモニターです。CPU・メモリ・GPUの状態をリアルタイムに表示し、その履歴をPCの中に残すので、あとから何が起きていたかを確認できます。",
     "faq.a4":
-      "HardwareVisualizerは、1分ごとに値を記録し、アプリの中でグラフにします。インサイトでは最長30日、Cooling Insightでは最長1年の期間を表示でき、履歴は標準で365日保存されます。Windowsでは、Cooling InsightがCPU温度を同じくらいの負荷だったときの基準と比べます。一方、HWiNFOは電圧など、より多くの種類のセンサーを読み取れ、オンスクリーン表示もあります。出典付きの違いは比較ページにまとめています。",
+      "HardwareVisualizerは、1分ごとに値を記録し、アプリの中でグラフにします。インサイト（プロセスは最長30日）とCooling Insightで最長1年の期間を表示でき、履歴は標準で365日保存されます。Windowsでは、Cooling InsightがCPU温度を同じくらいの負荷だったときの基準と比べます。一方、HWiNFOは電圧など、より多くの種類のセンサーを読み取れ、オンスクリーン表示もあります。出典付きの違いは比較ページにまとめています。",
     "faq.a5":
       "はい。記録はバックグラウンドで続き、「閉じるボタンで終了せずトレイに格納する」をオンにすると、ウィンドウを閉じてもシステムトレイに常駐します。あとからインサイトで、CPU・GPUの使用率や温度の変化と、動いていたプロセスを確認できます。ゲーム画面に重ねて表示するオーバーレイはありません。",
     "faq.a6":
-      "Windowsでは、NVIDIAとAMDのGPUで使用率と温度を、その他のGPUで使用率を取得できます。Linuxでは、AMDのGPUで使用率と温度を、IntelのGPUでintel_gpu_topを使って使用率を取得できます。NVIDIAのGPUは一覧に表示されますが、値はまだ取得できません。macOSでは、GPU使用率を取得でき、GPU温度は取得できません。",
+      "Windowsでは、NVIDIAとAMDのGPUで使用率と温度を、その他のGPUで使用率を取得できます。Linuxでは、AMDのGPUで使用率と温度を、IntelのGPUでintel_gpu_topを使って使用率を取得できます。NVIDIAのGPUでは、ドライバーのNVMLライブラリを通じて使用率・温度・VRAM使用量を取得できますが、項目はGPUによって異なります。macOSでは、GPU使用率を取得でき、GPU温度は取得できません。",
     "seo.home.description":
       "Windows・macOS・Linux対応の無料・オープンソースのハードウェアモニター。CPU・GPU・温度をリアルタイムに表示し、標準で1年ぶんの履歴をPCに残して、冷却の変化を月単位で比べられます。",
-    "seo.home.feature4": "アカウント不要・テレメトリーなし",
+    "seo.home.feature4": "アカウント不要・同意なしに利用状況を送信しない",
     "footer.description":
       "CPU・GPU・メモリの状態を表示し、1分ごとにPC内へ記録する、無料・オープンソースのハードウェアモニターです。",
     "specs.overview.history.value":
-      "ハードウェアの履歴は、新規インストールでは標準で365日保存されます。インサイトでは最長30日、Cooling Insightでは最長1年の期間を表示できます。",
+      "ハードウェアの履歴は、新規インストールでは標準で365日保存されます。インサイトとCooling Insightでは最長1年、プロセスの履歴は最長30日の期間を表示できます。",
     "specs.signals.description":
       "どのOSでも使える項目と、ベストエフォートのセンサー経路を分け、OSごとに取得できない項目も示しています。",
     "specs.matrix.gpu.windows":
@@ -1301,7 +1510,7 @@ export const ui = {
     "specs.matrix.gpu.macos":
       "GPU使用率を取得できます。GPU温度は取得できません。",
     "specs.matrix.gpu.linux":
-      "AMDは使用率と温度を取得できます。Intelはintel_gpu_topで使用率を取得します。NVIDIAのGPUは一覧に表示されますが、値の取得にはまだ対応していません。",
+      "AMDは使用率と温度を取得できます。Intelはintel_gpu_topで使用率を取得します。NVIDIAはドライバーのNVMLライブラリを通じて使用率・温度・VRAM使用量を取得しますが、項目はGPUによって異なります。",
     "specs.matrix.cpuTemperature.macos": "macOSではCPU温度を取得できません。",
     "specs.matrix.cpuTemperature.linux":
       "LinuxではCPU温度をまだ取得できません。",
@@ -1310,15 +1519,16 @@ export const ui = {
     "specs.matrix.storage.linux":
       "ストレージヘルスはsmartctlで取得します。smartmontoolsが必要で、通常はroot権限も必要です。",
     "specs.matrix.network.windows":
-      "インターフェース、IP、サブネット、ゲートウェイの情報を取得できます。通信量は計測しません。",
+      "インターフェース、IP、サブネット、ゲートウェイの情報と、OSが報告する場合はリンク速度を取得できます。通信量は計測しません。",
     "specs.matrix.network.macos":
-      "インターフェース、IP、サブネット、ゲートウェイの情報を取得できます。通信量は計測しません。",
+      "インターフェース、IP、サブネット、ゲートウェイの情報と、OSが報告する場合はリンク速度を取得できます。通信量は計測しません。",
     "specs.matrix.network.linux":
-      "インターフェース、IP、サブネット、ゲートウェイの情報を取得できます。通信量は計測しません。",
+      "インターフェース、IP、サブネット、ゲートウェイの情報と、OSが報告する場合はリンク速度を取得できます。通信量は計測しません。",
     "specs.matrix.fan.macos": "macOSではファン回転数を取得できません。",
-    "specs.matrix.fan.linux": "Linuxではファン回転数をまだ取得できません。",
+    "specs.matrix.fan.linux":
+      "MSIのB850・X870Eの一部機種で実験的に対応します。hwmonドライバーがバインド済みである必要があります。",
     "specs.compat.gpu.coverage":
-      "使用率は3つのOSで対応。温度はWindowsのNVIDIA・AMDと、LinuxのAMDで対応",
+      "使用率は3つのOSで対応。温度はWindowsとLinuxのNVIDIA・AMDで対応",
     "specs.compat.status.unavailable": "非対応",
     "about.heading": "HardwareVisualizer について",
     "about.contact.emailLabel": "メール",

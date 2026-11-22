@@ -12,6 +12,10 @@ export const releaseArticles = {
     // article:published_time and the sitemap lastmod. Leave null until then.
     publishedAt: "2026-09-26",
   },
+  "windows-sensor-service": {
+    version: "1.12.0",
+    publishedAt: null,
+  },
 } as const satisfies Record<
   string,
   { version: string; publishedAt: string | null }

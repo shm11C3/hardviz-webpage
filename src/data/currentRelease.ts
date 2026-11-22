@@ -8,8 +8,8 @@ type TranslationKey = keyof typeof ui.en;
  * Per-article metadata (version, publication date) lives in ./releases.ts.
  */
 export const currentRelease = {
-  slug: "cooling-insight",
-  announcementKey: "release.announcement",
+  slug: "windows-sensor-service",
+  announcementKey: "release.v1_12_0.announcement",
 } as const satisfies {
   slug: ReleaseSlug;
   announcementKey: TranslationKey;

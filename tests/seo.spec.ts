@@ -114,7 +114,9 @@ test("home page JSON-LD has SoftwareApplication", async ({ page }) => {
   expect(jsonLd.featureList).toContain(
     "Review what happened after gaming and heavy workloads",
   );
-  expect(jsonLd.featureList).toContain("No account and no telemetry");
+  expect(jsonLd.featureList).toContain(
+    "No account, and no usage data sent without consent",
+  );
   expect(jsonLd.featureList).toContain(
     "Authenticode-signed Windows release installer",
   );
@@ -170,7 +172,9 @@ test("JA home metadata and JSON-LD use the same monitor positioning", async ({
   expect(jsonLd.featureList).toContain(
     "ゲームや重い処理のあとに何が起きていたか確認",
   );
-  expect(jsonLd.featureList).toContain("アカウント不要・テレメトリーなし");
+  expect(jsonLd.featureList).toContain(
+    "アカウント不要・同意なしに利用状況を送信しない",
+  );
 });
 
 test("FAQ page JSON-LD has FAQPage type", async ({ page }) => {

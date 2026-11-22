@@ -164,7 +164,7 @@ test("platform matrix lists every feature for three operating systems", async ({
     "macOS",
     "Linux",
   ]);
-  await expect(matrix.locator("tbody tr")).toHaveCount(11);
+  await expect(matrix.locator("tbody tr")).toHaveCount(12);
   for (const cell of await matrix.locator("tbody td").all()) {
     await expect(cell).toHaveText(/\S/);
   }

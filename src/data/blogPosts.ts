@@ -13,6 +13,10 @@ export const blogPosts = {
     titleKey: "release.hero.title",
     summaryKey: "release.meta.description",
   },
+  "windows-sensor-service": {
+    titleKey: "release.v1_12_0.hero.title",
+    summaryKey: "release.v1_12_0.meta.description",
+  },
 } as const satisfies Record<
   ReleaseSlug,
   { titleKey: TranslationKey; summaryKey: TranslationKey }

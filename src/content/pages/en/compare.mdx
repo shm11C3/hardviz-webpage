@@ -5,15 +5,15 @@ title: "How HardwareVisualizer compares with other hardware monitors"
 metaTitle: "HardwareVisualizer vs Task Manager, HWiNFO, HWMonitor, LibreHardwareMonitor, MSI Afterburner"
 metaDescription: "A sourced comparison of HardwareVisualizer with Windows Task Manager, HWiNFO, HWMonitor, LibreHardwareMonitor, and MSI Afterburner: platforms, licence, sensors, history, logging, overlay, and fan control."
 lead: "What each tool states about itself, side by side. Every cell about another tool comes from that tool's own website, documentation, or repository, and several of them do things HardwareVisualizer does not."
-basedOn: "1.11.3"
-updated: 2026-11-12
+basedOn: "1.12.0"
+updated: 2026-12-03
 ---
 
 ## How to read this table
 
 - Statements about other tools were taken from their official pages on 11 and 12 November 2026. The sources are listed [below](#sources).
 - A dash (—) means the official sources we read do not say. It does not mean the tool lacks the feature.
-- The HardwareVisualizer column describes v1.11.3.
+- The HardwareVisualizer column describes v1.12.0.
 
 ## Comparison
 
@@ -25,29 +25,29 @@ updated: 2026-11-12
 | Price and licence | Free, GPL-3.0-or-later | Part of Windows | Free for personal and non-commercial use; a paid Pro licence for commercial use of HWiNFO 64 and ARM64 | Free and proprietary; a separate PRO edition | Free, MPL 2.0 | Free |
 | Source code | Published | — | — | — | Published | — |
 | CPU temperature | Windows only | — | Yes | Yes | Yes; some sensors need administrator rights | States that it shows CPU statistics; temperature is not named |
-| GPU temperature | Windows (NVIDIA, AMD) and Linux (AMD) | Yes, with a dedicated GPU card | Yes | Yes | Yes | Yes |
-| Motherboard fan speeds | Windows, on supported Super I/O chips | — | Yes | Yes | Yes | — |
+| GPU temperature | Windows and Linux (NVIDIA, AMD) | Yes, with a dedicated GPU card | Yes | Yes | Yes | Yes |
+| Motherboard fan speeds | Windows, on supported Super I/O chips; Linux, on selected MSI boards | — | Yes | Yes | Yes | — |
 | Voltages | No | — | Yes | Yes | Yes | — |
-| Charts of past days and months inside the app | Yes: up to 30 days in Insights and up to 1 year in Cooling Insight | — | — | — | — | — |
+| Charts of past days and months inside the app | Yes: up to 1 year in Insights (30 days for processes) and Cooling Insight | — | — | — | — | — |
 | Logging to a file | No | — | CSV; JSON and YAML in HWiNFO 64/ARM64 | CSV | CSV | — |
 | In-game overlay | No | — | Its own on-screen display; in games through RTSS | — | — | Yes, through RivaTuner Statistics Server |
 | Fan control or overclocking | No | — | The changelog refers to a fan control feature | — | Fan control on specific motherboards | GPU overclocking and custom fan curves |
-| Low-level access on Windows | PawnIO, optional | — | Its own kernel driver | — | PawnIO, from v0.9.5 | — |
-| Stated data handling | No telemetry; [connections are listed](/security/#network) | — | States that it collects no personal information and contacts its servers only for version information | — | — | — |
+| Low-level access on Windows | PawnIO, optional, through the app's sensor service | — | Its own kernel driver | — | PawnIO, from v0.9.5 | — |
+| Stated data handling | No usage data sent without consent; [connections are listed](/security/#network) | — | States that it collects no personal information and contacts its servers only for version information | — | — | — |
 
 </div>
 
 ## Where the other tools do more
 
-- **Voltages and motherboard coverage.** HWiNFO, HWMonitor, and LibreHardwareMonitor read voltages, which HardwareVisualizer does not. HardwareVisualizer reads motherboard temperatures and fans only on the chips listed in the [compatibility notes](/specs/).
+- **Voltages and motherboard coverage.** HWiNFO, HWMonitor, and LibreHardwareMonitor read voltages, which HardwareVisualizer does not. HardwareVisualizer reads motherboard temperatures and fans only on [supported chips and boards](https://github.com/shm11C3/HardwareVisualizer/blob/develop/docs/user/hardware-compatibility.md#compatibility-table).
 - **In-game overlay.** MSI Afterburner, with RivaTuner Statistics Server, and HWiNFO can show readings on screen while a game runs. HardwareVisualizer has no overlay.
 - **Fan control and overclocking.** MSI Afterburner adjusts GPU clocks, voltage, and fan curves. HardwareVisualizer reads sensors and does not change hardware settings.
-- **Log files.** HWiNFO, HWMonitor, and LibreHardwareMonitor can write readings to CSV files that you can open in other software. HardwareVisualizer keeps history in its own database and has no export.
+- **Log files.** HWiNFO, HWMonitor, and LibreHardwareMonitor can write readings to CSV files that you can open in other software. HardwareVisualizer keeps history in its own database and has no history export.
 - **Nothing to install.** Task Manager is already part of Windows.
 
 ## What HardwareVisualizer is built around
 
-- **History you can read inside the app.** Recording is on by default. Insights charts periods from 10 minutes to 30 days, Cooling Insight from 24 hours to 1 year, and history is kept for 365 days by default.
+- **History you can read inside the app.** Recording is on by default. Insights charts periods from 10 minutes to 1 year (30 days for processes), Cooling Insight from 24 hours to 1 year, and history is kept for 365 days by default.
 - **Temperature compared at the same load.** [Cooling Insight](/cooling-insight/) compares CPU temperature with your PC's own baseline within each CPU-load band, and can take room temperature into account.
 - **One application on three operating systems.** Windows, macOS, and Linux, with [different sensor coverage on each](/#platforms).
 - **Open source, with signed Windows and macOS builds.** See [Security and data](/security/).
