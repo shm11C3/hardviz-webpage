@@ -9,7 +9,7 @@ Official website for [HardwareVisualizer](https://github.com/shm11C3/HardwareVis
 ## Commands
 
 ```bash
-pnpm install --frozen-lockfile  # Install dependencies (pnpm only, Node >=24 required)
+pnpm install --frozen-lockfile  # Install dependencies (pnpm only; Node 26, set in .node-version)
 pnpm dev                        # Dev server with hot reload
 pnpm build                      # Production build (static HTML to dist/)
 pnpm preview                    # Preview production build locally (port 4321)
@@ -38,7 +38,7 @@ npx playwright test -g "test name"               # Run tests matching a pattern
 
 **Code Quality**: Biome handles both linting and formatting (2-space indent). Some lint rules are relaxed for `.astro` files (see `biome.json` overrides). No unused imports/variables allowed in `.ts`/`.tsx` files.
 
-**Deployment**: Cloudflare Pages (project `hardviz-webpage`) via its Git integration: pushes to `master` deploy to production at hardviz.com, and other branches get preview deployments. Pages runs `pnpm build` and serves the static `dist/` output. Response headers and redirects are configured in `public/_headers` and `public/_redirects` (Pages syntax); `astro preview` does not apply them, so check them on a Pages preview deployment.
+**Deployment**: Cloudflare Pages (project `hardviz-webpage`) via its Git integration: pushes to `master` deploy to production at hardviz.com, and other branches get preview deployments. Pages runs `pnpm build` and serves the static `dist/` output. The Node version for Pages and CI comes from `.node-version`; the Pages build image ignores `engines` in `package.json`, and a `NODE_VERSION` variable in the Pages dashboard is another way to set it, so leave that unset or keep it the same. Response headers and redirects are configured in `public/_headers` and `public/_redirects` (Pages syntax); `astro preview` does not apply them, so check them on a Pages preview deployment.
 
 ## Key Conventions
 
