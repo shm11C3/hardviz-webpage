@@ -1,0 +1,49 @@
+---
+import { ClipboardList } from "lucide-react";
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../i18n/utils";
+import { addJapaneseLineBreaks } from "../lib/japaneseLineBreaks";
+import { type SurveyEntry, surveyHref } from "../lib/survey";
+
+interface Props {
+  /** Page type the reader came from; sent as `utm_source`. */
+  entry: SurveyEntry;
+  /** Release the page describes (e.g. "1.12.0"); sent as `utm_content`. */
+  version: string;
+  class?: string;
+}
+
+const { entry, version, class: className } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { translatePath } = useTranslatedPath(lang);
+const href = surveyHref(translatePath("/survey"), { entry, version });
+---
+
+<aside
+  class:list={[
+    "panel flex flex-col gap-4 sm:flex-row sm:items-center",
+    className,
+  ]}
+  aria-labelledby="survey-invite-heading"
+>
+  <div class="flex-1">
+    <h2 id="survey-invite-heading" class="panel-label">
+      <ClipboardList aria-hidden="true" />
+      {t("feedback.survey.title")}
+    </h2>
+    <p class="panel-body">
+      {addJapaneseLineBreaks(lang, t("about.feedback.body"))}
+    </p>
+  </div>
+  <a
+    href={href}
+    class="btn btn-primary self-start sm:self-center"
+    data-astro-prefetch
+  >
+    {t("about.feedback.cta")}
+  </a>
+</aside>

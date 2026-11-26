@@ -102,8 +102,8 @@ const paramDefaults = { locale: lang, source: "web" };
       const iframe = document.getElementById("survey-frame");
       if (!iframe) return;
 
-      // Forward whitelisted, non-identifying context (app_version, os,
-      // source, locale) into the Tally embed URL so it lands in the form's
+      // Forward whitelisted, non-identifying context (SURVEY_FORWARDED_PARAMS
+      // in src/lib/survey.ts) into the Tally embed URL so it lands in the form's
       // hidden fields. Values come from the page URL, falling back to
       // paramDefaults (locale = page language, source = "web").
       const base = iframe.getAttribute("data-tally-src");

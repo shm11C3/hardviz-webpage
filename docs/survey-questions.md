@@ -6,13 +6,16 @@ forms** — one English, one Japanese — and embed them on `/survey` and
 
 ## Tally setup (applies to both forms)
 
-- **Hidden fields** — add four hidden fields with these exact keys (they are
+- **Hidden fields** — add six hidden fields with these exact keys (they are
   populated automatically from the embed URL query params; keep the keys
   identical across both forms):
-  - `app_version` — app release (e.g. `1.8.1`)
+  - `app_version` — app release the respondent runs (e.g. `1.8.1`); sent by the app
   - `os` — `windows` | `macos` | `linux`
   - `source` — entry point: `app` | `web`
   - `locale` — `en` | `ja`
+  - `utm_source` — site page the link sits on: `changelog` | `release`
+  - `utm_content` — release that page describes (e.g. `1.12.0`), not
+    necessarily the version the respondent runs
 - **Required:** only Q6 (satisfaction) and Q7 (continuation). Everything else is
   optional.
 - **"Other":** for the multi-select questions (Q2, Q3), enable Tally's built-in

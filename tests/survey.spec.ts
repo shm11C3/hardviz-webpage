@@ -45,3 +45,35 @@ test("about page invites feedback and links to the survey", async ({
   await expect(cta).toBeVisible();
   await expect(cta).toHaveAttribute("href", "/survey/?source=web");
 });
+
+test("changelog entries link to the survey with the release they describe", async ({
+  page,
+}) => {
+  await page.goto("/changelog/1.12.0/");
+  await expect(
+    page.getByRole("link", { name: "Answer the survey" }),
+  ).toHaveAttribute(
+    "href",
+    "/survey/?source=web&utm_source=changelog&utm_content=1.12.0",
+  );
+
+  await page.goto("/ja/changelog/1.12.0/");
+  await expect(
+    page.getByRole("link", { name: "アンケートに回答する" }),
+  ).toHaveAttribute(
+    "href",
+    "/ja/survey/?source=web&utm_source=changelog&utm_content=1.12.0",
+  );
+});
+
+test("release articles link to the survey with their release", async ({
+  page,
+}) => {
+  await page.goto("/releases/cooling-insight/");
+  await expect(
+    page.getByRole("link", { name: "Answer the survey" }),
+  ).toHaveAttribute(
+    "href",
+    /^\/survey\/\?source=web&utm_source=release&utm_content=\d+\.\d+\.\d+$/,
+  );
+});

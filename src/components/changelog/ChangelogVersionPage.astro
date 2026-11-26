@@ -10,6 +10,7 @@ import { getChangelogEntryByVersion } from "../../lib/changelog";
 import { githubReleaseTagUrl } from "../../lib/github";
 import Footer from "../Footer.astro";
 import Header from "../Header.astro";
+import SurveyInvite from "../SurveyInvite.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -104,6 +105,12 @@ const dateFormatter = new Intl.DateTimeFormat(isJa ? "ja-JP" : "en-US", {
         ) : null}
 
         <article class="doc prose mt-8 max-w-none"><Content /></article>
+
+        <SurveyInvite
+          entry="changelog"
+          version={entry.data.version}
+          class="mt-12"
+        />
       </div>
     </div>
   </main>
