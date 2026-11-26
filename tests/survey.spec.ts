@@ -74,7 +74,7 @@ test("release articles link to the survey with their release", async ({
     page.getByRole("link", { name: "Answer the survey" }),
   ).toHaveAttribute(
     "href",
-    /^\/survey\/\?source=web&utm_source=release&utm_content=\d+\.\d+\.\d+$/,
+    "/survey/?source=web&utm_source=release&utm_content=1.11.0",
   );
 });
 
