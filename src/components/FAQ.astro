@@ -95,59 +95,59 @@ const faqJsonLd = {
     <div>
       <h1
         id="faq-heading"
-        class="font-bold text-3xl text-foreground md:text-4xl"
+        class="text-foreground text-3xl font-bold md:text-4xl"
       >
         {t("faq.title")}
       </h1>
-      <p class="mt-4 text-muted-foreground">
+      <p class="text-muted-foreground mt-4">
         {addJapaneseLineBreaks(lang, t("faq.description"))}
       </p>
     </div>
 
     <div class="panel ruled min-w-0">
       {faqs.map((faq, index) => (
-          <details
-            class="faq-item group"
-            id={`faq-${index + 1}`}
-            open={index === 0}
-          >
-            <summary>
-              <span class="item-title">
-                {addJapaneseLineBreaks(lang, faq.question)}
-              </span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="faq-chevron"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-                focusable="false"
+        <details
+          class="faq-item group"
+          id={`faq-${index + 1}`}
+          open={index === 0}
+        >
+          <summary>
+            <span class="item-title">
+              {addJapaneseLineBreaks(lang, faq.question)}
+            </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="faq-chevron"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.75"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </summary>
+          <div class="faq-answer">
+            <p>{addJapaneseLineBreaks(lang, faq.answer)}</p>
+            {faq.link && (
+              <a
+                href={faq.link.href}
+                class="link mt-3 inline-block"
+                {...(faq.link.href.startsWith("http")
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : { "data-astro-prefetch": true })}
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.75"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </summary>
-            <div class="faq-answer">
-              <p>{addJapaneseLineBreaks(lang, faq.answer)}</p>
-              {faq.link && (
-                <a
-                  href={faq.link.href}
-                  class="link mt-3 inline-block"
-                  {...(faq.link.href.startsWith("http")
-                    ? { target: "_blank", rel: "noopener noreferrer" }
-                    : { "data-astro-prefetch": true })}
-                >
-                  {faq.link.text}
-                </a>
-              )}
-            </div>
-          </details>
-        ))}
+                {faq.link.text}
+              </a>
+            )}
+          </div>
+        </details>
+      ))}
     </div>
   </div>
 

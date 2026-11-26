@@ -17,7 +17,11 @@ const Frame = placeholder ? "div" : "a";
 <figure class="release-screenshot">
   {lightSrc ? (
     <>
-      <a class="screenshot-frame light-screenshot" href={lightSrc.src} aria-label={alt}>
+      <a
+        class="screenshot-frame light-screenshot"
+        href={lightSrc.src}
+        aria-label={alt}
+      >
         <Image
           src={lightSrc}
           alt={alt}
@@ -27,7 +31,11 @@ const Frame = placeholder ? "div" : "a";
           decoding="async"
         />
       </a>
-      <a class="screenshot-frame dark-screenshot" href={src.src} aria-label={alt}>
+      <a
+        class="screenshot-frame dark-screenshot"
+        href={src.src}
+        aria-label={alt}
+      >
         <Image
           src={src}
           alt={alt}
@@ -52,7 +60,11 @@ const Frame = placeholder ? "div" : "a";
         loading="lazy"
         decoding="async"
       />
-      {placeholder && <span class="placeholder-label" aria-hidden="true">{caption}</span>}
+      {placeholder && (
+        <span class="placeholder-label" aria-hidden="true">
+          {caption}
+        </span>
+      )}
     </Frame>
   )}
   <figcaption>{caption}</figcaption>

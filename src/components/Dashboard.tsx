@@ -72,17 +72,17 @@ export default function HardwareMonitor() {
                 style={{ transform: `rotate(${cpuUsage * 3.6 + 45}deg)` }}
               />
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="font-bold text-2xl text-white">
+                <span className="text-2xl font-bold text-white">
                   {cpuUsage}%
                 </span>
-                <span className="flex items-center text-slate-400 text-xs">
+                <span className="flex items-center text-xs text-slate-400">
                   <Zap size={12} className="mr-1" />
                   Usage
                 </span>
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-2 text-slate-300 text-xs">
+          <div className="grid grid-cols-2 gap-2 text-xs text-slate-300">
             <div>
               <p className="text-slate-400">Name</p>
               <p>AMD Ryzen 7 7800X3D</p>
@@ -116,17 +116,17 @@ export default function HardwareMonitor() {
                 style={{ transform: `rotate(${memoryUsage * 3.6}deg)` }}
               />
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="font-bold text-2xl text-white">
+                <span className="text-2xl font-bold text-white">
                   {memoryUsage}%
                 </span>
-                <span className="flex items-center text-slate-400 text-xs">
+                <span className="flex items-center text-xs text-slate-400">
                   <Zap size={12} className="mr-1" />
                   Usage
                 </span>
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-2 text-slate-300 text-xs">
+          <div className="grid grid-cols-2 gap-2 text-xs text-slate-300">
             <div>
               <p className="text-slate-400">Memory Type</p>
               <p>DDR5</p>
@@ -162,10 +162,10 @@ export default function HardwareMonitor() {
                 style={{ transform: `rotate(${gpuUsage * 3.6 + 45}deg)` }}
               />
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="font-bold text-white text-xl">
+                <span className="text-xl font-bold text-white">
                   {gpuUsage}%
                 </span>
-                <span className="flex items-center text-slate-400 text-xs">
+                <span className="flex items-center text-xs text-slate-400">
                   <Zap size={12} className="mr-1" />
                   Usage
                 </span>
@@ -182,15 +182,15 @@ export default function HardwareMonitor() {
                 }}
               />
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="font-bold text-white text-xl">
+                <span className="text-xl font-bold text-white">
                   {gpuTemp}°C
                 </span>
-                <span className="text-slate-400 text-xs">Temp</span>
+                <span className="text-xs text-slate-400">Temp</span>
               </div>
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-2 text-slate-300 text-xs">
+        <div className="grid grid-cols-4 gap-2 text-xs text-slate-300">
           <div>
             <p className="text-slate-400">Name</p>
             <p>NVIDIA GeForce RTX 5080</p>

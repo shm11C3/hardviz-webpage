@@ -99,61 +99,61 @@ const imageSizes = "(max-width: 960px) 100vw, 680px";
     </div>
     <div class="screens">
       {screens.map((screen, index) => (
-          <article
-            id={screen.id}
-            class:list={["screen-row panel", index % 2 === 1 && "screen-row-rev"]}
-          >
-            <div class="min-w-0">
-              <p class="span">
-                <i style={`background:var(--${screen.hue})`}></i>
-                {screen.span}
+        <article
+          id={screen.id}
+          class:list={["screen-row panel", index % 2 === 1 && "screen-row-rev"]}
+        >
+          <div class="min-w-0">
+            <p class="span">
+              <i style={`background:var(--${screen.hue})`}></i>
+              {screen.span}
+            </p>
+            <h3>{screen.name}</h3>
+            <p class="body">{screen.body}</p>
+            {screen.extra && <p class="fine">{screen.extra}</p>}
+            <dl class="rows">
+              {screen.rows.map((row) => (
+                <div>
+                  <dt>{row.term}</dt>
+                  <dd>{row.value}</dd>
+                </div>
+              ))}
+            </dl>
+            {screen.note && <p class="fine">{screen.note}</p>}
+            {screen.link && (
+              <p class="mt-5">
+                <a
+                  href={screen.link.href}
+                  class="btn btn-sm btn-outline"
+                  data-astro-prefetch
+                >
+                  {screen.link.label}
+                </a>
               </p>
-              <h3>{screen.name}</h3>
-              <p class="body">{screen.body}</p>
-              {screen.extra && <p class="fine">{screen.extra}</p>}
-              <dl class="rows">
-                {screen.rows.map((row) => (
-                  <div>
-                    <dt>{row.term}</dt>
-                    <dd>{row.value}</dd>
-                  </div>
-                ))}
-              </dl>
-              {screen.note && <p class="fine">{screen.note}</p>}
-              {screen.link && (
-                <p class="mt-5">
-                  <a
-                    href={screen.link.href}
-                    class="btn btn-sm btn-outline"
-                    data-astro-prefetch
-                  >
-                    {screen.link.label}
-                  </a>
-                </p>
-              )}
-            </div>
-            <div class="shot">
-              <Image
-                src={screen.light}
-                alt={screen.alt}
-                class="shot-light"
-                style={`object-position:${screen.anchor}`}
-                widths={imageWidths}
-                sizes={imageSizes}
-                loading="lazy"
-              />
-              <Image
-                src={screen.dark}
-                alt={screen.alt}
-                class="shot-dark"
-                style={`object-position:${screen.anchor}`}
-                widths={imageWidths}
-                sizes={imageSizes}
-                loading="lazy"
-              />
-            </div>
-          </article>
-        ))}
+            )}
+          </div>
+          <div class="shot">
+            <Image
+              src={screen.light}
+              alt={screen.alt}
+              class="shot-light"
+              style={`object-position:${screen.anchor}`}
+              widths={imageWidths}
+              sizes={imageSizes}
+              loading="lazy"
+            />
+            <Image
+              src={screen.dark}
+              alt={screen.alt}
+              class="shot-dark"
+              style={`object-position:${screen.anchor}`}
+              widths={imageWidths}
+              sizes={imageSizes}
+              loading="lazy"
+            />
+          </div>
+        </article>
+      ))}
     </div>
   </div>
 </section>

@@ -48,29 +48,57 @@ const basis = t("doc.basedOn")
     </header>
 
     {entry.data.page === "cooling-insight" && (
-        <div class="mt-10">
-          <ThemedImage
-            light={isJa ? coolingLightJa : coolingLightEn}
-            dark={isJa ? coolingJa : coolingEn}
-            alt={t("screenshots.coolingInsightAlt")}
-            caption={t("release.screenshot.cooling.caption")}
-          />
-        </div>
-      )}
+      <div class="mt-10">
+        <ThemedImage
+          light={isJa ? coolingLightJa : coolingLightEn}
+          dark={isJa ? coolingJa : coolingEn}
+          alt={t("screenshots.coolingInsightAlt")}
+          caption={t("release.screenshot.cooling.caption")}
+        />
+      </div>
+    )}
 
     {wide ? (
-        <div class="mt-10">
-          <nav class="panel text-sm" aria-label={t("release.contents")}>
+      <div class="mt-10">
+        <nav class="panel text-sm" aria-label={t("release.contents")}>
+          <p class="panel-label">
+            <ListTree aria-hidden="true" />
+            {t("release.contents")}
+          </p>
+          <ul class="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+            {sections.map((section) => (
+              <li>
+                <a
+                  href={`#${section.slug}`}
+                  class="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {section.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div class="doc doc-wide prose mt-10 max-w-none min-w-0">
+          <Content />
+        </div>
+      </div>
+    ) : (
+      <div class="mt-10 grid grid-cols-[minmax(0,1fr)] gap-x-12 gap-y-8 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)]">
+        {sections.length > 1 ? (
+          <nav
+            class="panel self-start text-sm lg:sticky lg:top-24"
+            aria-label={t("release.contents")}
+          >
             <p class="panel-label">
               <ListTree aria-hidden="true" />
               {t("release.contents")}
             </p>
-            <ul class="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+            <ul class="mt-3 space-y-2">
               {sections.map((section) => (
                 <li>
                   <a
                     href={`#${section.slug}`}
-                    class="text-muted-foreground transition-colors hover:text-foreground"
+                    class="text-muted-foreground hover:text-foreground block transition-colors"
                   >
                     {section.text}
                   </a>
@@ -78,43 +106,15 @@ const basis = t("doc.basedOn")
               ))}
             </ul>
           </nav>
-          <div class="doc doc-wide prose mt-10 min-w-0 max-w-none">
-            <Content />
-          </div>
-        </div>
-      ) : (
-        <div class="mt-10 grid grid-cols-[minmax(0,1fr)] gap-x-12 gap-y-8 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)]">
-          {sections.length > 1 ? (
-            <nav
-              class="panel self-start text-sm lg:sticky lg:top-24"
-              aria-label={t("release.contents")}
-            >
-              <p class="panel-label">
-                <ListTree aria-hidden="true" />
-                {t("release.contents")}
-              </p>
-              <ul class="mt-3 space-y-2">
-                {sections.map((section) => (
-                  <li>
-                    <a
-                      href={`#${section.slug}`}
-                      class="block text-muted-foreground transition-colors hover:text-foreground"
-                    >
-                      {section.text}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          ) : (
-            <div class="hidden lg:block" />
-          )}
+        ) : (
+          <div class="hidden lg:block" />
+        )}
 
-          <div class="doc prose min-w-0 max-w-[46rem]">
-            <Content />
-          </div>
+        <div class="doc prose max-w-[46rem] min-w-0">
+          <Content />
         </div>
-      )}
+      </div>
+    )}
   </div>
 </article>
 

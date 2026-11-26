@@ -55,13 +55,13 @@ const cellClass = (value: string) => (value === "—" ? undefined : "yes");
           </thead>
           <tbody>
             {rows.map((row) => (
-                <tr>
-                  <th scope="row">{row.feature}</th>
-                  <td class={cellClass(row.windows)}>{row.windows}</td>
-                  <td class={cellClass(row.macos)}>{row.macos}</td>
-                  <td class={cellClass(row.linux)}>{row.linux}</td>
-                </tr>
-              ))}
+              <tr>
+                <th scope="row">{row.feature}</th>
+                <td class={cellClass(row.windows)}>{row.windows}</td>
+                <td class={cellClass(row.macos)}>{row.macos}</td>
+                <td class={cellClass(row.linux)}>{row.linux}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

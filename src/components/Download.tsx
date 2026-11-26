@@ -171,10 +171,10 @@ const Download = ({
                 >
                   <div className="flex min-w-0 items-center justify-between gap-3">
                     <div className="min-w-0">
-                      <p className="break-words text-[0.9375rem] text-foreground">
+                      <p className="text-foreground text-[0.9375rem] break-words">
                         {version.name}
                       </p>
-                      <p className="mt-0.5 text-muted-foreground text-xs tabular-nums">
+                      <p className="text-muted-foreground mt-0.5 text-xs tabular-nums">
                         {version.size}
                       </p>
                     </div>
@@ -208,23 +208,23 @@ const Download = ({
                   </div>
                   {checksumLabels && version.url ? (
                     <details
-                      className="group/checksum relative z-20 mt-3 overflow-visible rounded-xl border border-input border-dashed text-sm"
+                      className="group/checksum border-input relative z-20 mt-3 overflow-visible rounded-xl border border-dashed text-sm"
                       data-download-checksum={version.type}
                     >
                       <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-3 py-1.5 [&::-webkit-details-marker]:hidden">
                         <span className="flex min-w-0 items-center gap-2">
                           <ChevronRight
-                            className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-open/checksum:rotate-90"
+                            className="text-muted-foreground h-4 w-4 shrink-0 transition-transform group-open/checksum:rotate-90"
                             aria-hidden="true"
                           />
-                          <span className="font-medium text-muted-foreground text-xs">
+                          <span className="text-muted-foreground text-xs font-medium">
                             {checksumLabels.sha256}
                           </span>
                         </span>
                         {version.sha256 ? (
                           <button
                             type="button"
-                            className="group/copy relative inline-flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-md text-muted-foreground hover:bg-muted hover:text-foreground"
+                            className="group/copy text-muted-foreground hover:bg-muted hover:text-foreground relative inline-flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-md"
                             aria-label={copyLabel(
                               version.artifactName ?? version.type,
                             )}
@@ -250,7 +250,7 @@ const Download = ({
                               />
                             )}
                             <span
-                              className="pointer-events-none absolute right-0 bottom-full z-50 mb-2 hidden whitespace-nowrap rounded-md bg-primary px-2 py-1 font-medium text-primary-foreground text-xs shadow-lg group-hover/copy:block group-focus-visible/copy:block"
+                              className="bg-primary text-primary-foreground pointer-events-none absolute right-0 bottom-full z-50 mb-2 hidden rounded-md px-2 py-1 text-xs font-medium whitespace-nowrap shadow-lg group-hover/copy:block group-focus-visible/copy:block"
                               aria-hidden="true"
                               data-copy-tooltip
                             >
@@ -261,12 +261,12 @@ const Download = ({
                       </summary>
                       <div className="border-input border-t border-dashed p-3">
                         {version.sha256 ? (
-                          <code className="block overflow-x-auto break-all font-mono text-foreground text-xs">
+                          <code className="text-foreground block overflow-x-auto font-mono text-xs break-all">
                             {version.sha256}
                           </code>
                         ) : (
                           <div
-                            className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-amber-800 text-sm dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-100"
+                            className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-800 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-100"
                             data-checksum-warning
                           >
                             {checksumLabels.checksumUnavailable}
@@ -278,7 +278,7 @@ const Download = ({
                 </div>
               ))}
               {platform.versions.length === 0 && (
-                <p className="py-3 text-muted-foreground text-sm">
+                <p className="text-muted-foreground py-3 text-sm">
                   {translations.noDownloads.replace(
                     "{platform}",
                     platform.platform,
@@ -337,7 +337,7 @@ const Download = ({
           </div>
           {displayedReleaseDetails.highlights.length ? (
             <ul
-              className="budoux-ja mt-3 list-disc space-y-1.5 pl-5 text-[0.9375rem] text-foreground marker:text-muted-foreground"
+              className="budoux-ja text-foreground marker:text-muted-foreground mt-3 list-disc space-y-1.5 pl-5 text-[0.9375rem]"
               data-release-notes-highlights=""
             >
               {displayedReleaseDetails.highlights.map((highlight) => (
@@ -346,7 +346,7 @@ const Download = ({
             </ul>
           ) : displayedReleaseDetails.changesSummary ? (
             <p
-              className="budoux-ja mt-3 text-[0.9375rem] text-foreground"
+              className="budoux-ja text-foreground mt-3 text-[0.9375rem]"
               data-release-notes-summary=""
             >
               {displayedReleaseDetails.changesSummary}

@@ -129,12 +129,12 @@ const structuredData = [...buildBaseGraph(lang), ...pageJsonLd];
 
     <!-- JSON-LD Structured Data -->
     {structuredData.map((data) => (
-        <script
-          is:inline
-          type="application/ld+json"
-          set:html={JSON.stringify(data).replace(/</g, "\\u003c")}
-        />
-      ))}
+      <script
+        is:inline
+        type="application/ld+json"
+        set:html={JSON.stringify(data).replace(/</g, "\\u003c")}
+      />
+    ))}
 
     <!-- Page-level additions -->
     <slot name="head" />

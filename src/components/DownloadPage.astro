@@ -79,7 +79,7 @@ const pageTitleSeparator = t("download.pageTitleSeparator");
       <div class="min-w-0">
         <div class:list={["max-w-6xl min-w-0", lang === "ja" && "budoux-ja"]}>
           <h1
-            class="font-semibold text-3xl text-foreground leading-tight tracking-tight md:text-4xl"
+            class="text-foreground text-3xl leading-tight font-semibold tracking-tight md:text-4xl"
           >
             <span class="inline-block"
               >{t("download.pageTitleBeforeBreak")}</span
@@ -91,13 +91,15 @@ const pageTitleSeparator = t("download.pageTitleSeparator");
             >
           </h1>
           <p
-            class="mt-4 max-w-3xl text-base text-muted-foreground leading-7 md:text-lg"
+            class="text-muted-foreground mt-4 max-w-3xl text-base leading-7 md:text-lg"
           >
             {formatText(t("download.pageDescription"))}
           </p>
-          <div class="mt-5 space-y-2 text-muted-foreground text-sm">
+          <div class="text-muted-foreground mt-5 space-y-2 text-sm">
             <p>
-              {latestVersion ? `${t("download.currentVersion")} v${latestVersion}` : t("download.currentVersion")}
+              {latestVersion
+                ? `${t("download.currentVersion")} v${latestVersion}`
+                : t("download.currentVersion")}
             </p>
             {latestReleaseDetails.publishedAt ? (
               <p>
@@ -106,7 +108,7 @@ const pageTitleSeparator = t("download.pageTitleSeparator");
             ) : null}
             <a
               href={changelogHref}
-              class="inline-flex font-medium text-foreground hover:text-foreground hover:underline"
+              class="text-foreground hover:text-foreground inline-flex font-medium hover:underline"
               data-astro-prefetch
             >
               {t("download.latestChangesLink")}
@@ -115,22 +117,22 @@ const pageTitleSeparator = t("download.pageTitleSeparator");
         </div>
 
         <div class="mt-12 max-w-6xl min-w-0" id="download">
-          <h2 class="font-semibold text-2xl text-foreground md:text-3xl">
+          <h2 class="text-foreground text-2xl font-semibold md:text-3xl">
             {t("download.sectionTitle")}
           </h2>
 
-          <div class="rounded-2xl border border-border mt-6 p-5">
+          <div class="border-border mt-6 rounded-2xl border p-5">
             <div class="flex items-start gap-3">
               <ShieldCheck
-                className="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground"
+                className="text-muted-foreground mt-0.5 h-5 w-5 shrink-0"
                 aria-hidden="true"
               />
               <div class:list={["min-w-0", lang === "ja" && "budoux-ja"]}>
-                <h3 class="font-semibold text-foreground text-sm sm:text-base">
+                <h3 class="text-foreground text-sm font-semibold sm:text-base">
                   {formatText(sourceCheckEntry.data.title)}
                 </h3>
                 <div
-                  class="mt-2 text-foreground text-sm leading-6 sm:text-base sm:leading-7 [&_a]:font-medium [&_a]:underline [&_a]:underline-offset-4 [&_code]:break-words [&_code]:rounded-sm [&_code]:bg-muted [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.875em] [&_p+p]:mt-3 [&_p]:m-0"
+                  class="text-foreground [&_code]:bg-muted mt-2 text-sm leading-6 sm:text-base sm:leading-7 [&_a]:font-medium [&_a]:underline [&_a]:underline-offset-4 [&_code]:rounded-sm [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.875em] [&_code]:break-words [&_p]:m-0 [&_p+p]:mt-3"
                 >
                   <SourceCheckContent />
                 </div>
@@ -155,7 +157,7 @@ const pageTitleSeparator = t("download.pageTitleSeparator");
 
         <div
           id="installation"
-          class="mt-16 min-w-0 border-border border-t pt-12 md:mt-20 md:pt-16"
+          class="border-border mt-16 min-w-0 border-t pt-12 md:mt-20 md:pt-16"
         >
           <article
             class:list={[guideArticleClass, lang === "ja" && "budoux-ja"]}

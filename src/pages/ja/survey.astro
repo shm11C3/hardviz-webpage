@@ -41,10 +41,10 @@ const paramDefaults = { locale: lang, source: "web" };
     <section class="border-border border-b pt-12 pb-12">
       <div class="shell">
         <div class="max-w-3xl">
-          <h1 class="font-semibold text-3xl text-foreground md:text-4xl">
+          <h1 class="text-foreground text-3xl font-semibold md:text-4xl">
             {t("survey.heading")}
           </h1>
-          <p class="mt-4 max-w-2xl text-lg text-muted-foreground">
+          <p class="text-muted-foreground mt-4 max-w-2xl text-lg">
             {t("survey.description")}
           </p>
         </div>
@@ -54,12 +54,12 @@ const paramDefaults = { locale: lang, source: "web" };
     <div class="shell py-12">
       <div class="max-w-3xl">
         <p
-          class="rounded-2xl border border-border mb-8 p-4 text-muted-foreground text-sm"
+          class="border-border text-muted-foreground mb-8 rounded-2xl border p-4 text-sm"
         >
           {t("survey.privacyNote")}{" "}
           <a
             href={privacyHref}
-            class="font-medium text-foreground underline underline-offset-2 hover:text-foreground"
+            class="text-foreground hover:text-foreground font-medium underline underline-offset-2"
             data-astro-prefetch
           >
             {t("survey.privacyNoteLink")}
@@ -67,27 +67,27 @@ const paramDefaults = { locale: lang, source: "web" };
         </p>
 
         {configured ? (
-            <div class="overflow-hidden rounded-3xl border border-border bg-white">
-              <iframe
-                id="survey-frame"
-                data-tally-src={embedSrc}
-                loading="lazy"
-                referrerpolicy="strict-origin-when-cross-origin"
-                title={t("survey.heading")}
-                class="w-full"
-                style="min-height: 640px;"
-              />
-            </div>
-          ) : (
-            <div class="rounded-2xl border border-input border-dashed p-10 text-center text-muted-foreground">
-              {t("survey.preparing")}
-            </div>
-          )}
+          <div class="border-border overflow-hidden rounded-3xl border bg-white">
+            <iframe
+              id="survey-frame"
+              data-tally-src={embedSrc}
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              title={t("survey.heading")}
+              class="w-full"
+              style="min-height: 640px;"
+            />
+          </div>
+        ) : (
+          <div class="border-input text-muted-foreground rounded-2xl border border-dashed p-10 text-center">
+            {t("survey.preparing")}
+          </div>
+        )}
 
         <div class="mt-10 text-center">
           <a
             href={homeHref}
-            class="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 font-medium text-foreground text-sm transition-colors hover:bg-muted"
+            class="border-border text-foreground hover:bg-muted inline-flex items-center gap-2 rounded-lg border px-5 py-2.5 text-sm font-medium transition-colors"
             data-astro-prefetch
           >
             <ArrowLeft className="h-4 w-4" />

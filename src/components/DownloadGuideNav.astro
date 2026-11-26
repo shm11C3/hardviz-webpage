@@ -29,7 +29,7 @@ const downloadChildren = [
 ---
 
 <nav
-  class="rounded-2xl border border-border top-28 w-full min-w-0 max-w-full overflow-hidden p-2.5 text-[0.8125rem] sm:p-3 sm:text-sm lg:sticky lg:self-start"
+  class="border-border top-28 w-full max-w-full min-w-0 overflow-hidden rounded-2xl border p-2.5 text-[0.8125rem] sm:p-3 sm:text-sm lg:sticky lg:self-start"
   aria-label={t("download.nav.ariaLabel")}
   data-download-guide-nav
 >
@@ -48,12 +48,12 @@ const downloadChildren = [
       {formatText(t("download.nav.download"))}
     </a>
     <div
-      class="ml-2 min-w-0 space-y-1 border-border border-l pl-2 sm:ml-3 sm:pl-3"
+      class="border-border ml-2 min-w-0 space-y-1 border-l pl-2 sm:ml-3 sm:pl-3"
     >
       {downloadChildren.map((item) => (
         <a
           href={item.href}
-          class="block min-w-0 break-words rounded-md px-2.5 py-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:px-3"
+          class="text-muted-foreground hover:bg-muted hover:text-foreground block min-w-0 rounded-md px-2.5 py-1.5 break-words transition-colors sm:px-3"
           data-astro-prefetch
         >
           {item.label}
