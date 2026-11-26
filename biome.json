@@ -1,70 +1,70 @@
 {
-  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "assist": { "actions": { "source": { "organizeImports": "on" } } },
-  "vcs": {
-    "enabled": true,
-    "clientKind": "git",
-    "useIgnoreFile": true
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true,
-      "nursery": {
-        "useSortedClasses": {
-          "level": "error",
-          "fix": "safe",
-          "options": {}
-        }
-      },
-      "correctness": {
-        "noUnusedImports": {
-          "level": "error",
-          "fix": "safe"
-        },
-        "noUnusedVariables": {
-          "level": "error",
-          "fix": "safe"
-        },
-        "noUnreachable": {
-          "level": "error"
-        }
-      }
-    }
-  },
-  "formatter": {
-    "enabled": true,
-    "indentStyle": "space",
-    "indentWidth": 2
-  },
-  "css": {
-    "parser": {
-      "tailwindDirectives": true
-    }
-  },
-  "html": {
-    "experimentalFullSupportEnabled": true
-  },
-  "overrides": [
-    {
-      "includes": ["**/*.astro"],
-      "linter": {
-        "rules": {
-          "style": {
-            "useConst": "off",
-            "useImportType": "off"
-          },
-          "correctness": {
-            "noUnusedVariables": "off",
-            "noUnusedImports": "off",
-            "useJsxKeyInIterable": "off",
-            "useHookAtTopLevel": "off"
-          }
-        }
-      },
-      "formatter": {
-        "enabled": true
-      }
-    }
-  ]
+	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"assist": { "actions": { "source": { "organizeImports": "on" } } },
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"preset": "recommended",
+			"nursery": {
+				"useTailwindSortedClasses": {
+					"level": "error",
+					"fix": "safe",
+					"options": {}
+				}
+			},
+			"correctness": {
+				"noUnusedImports": {
+					"level": "error",
+					"fix": "safe"
+				},
+				"noUnusedVariables": {
+					"level": "error",
+					"fix": "safe"
+				},
+				"noUnreachable": {
+					"level": "error"
+				}
+			}
+		}
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "space",
+		"indentWidth": 2
+	},
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
+		}
+	},
+	"html": {
+		"experimentalFullSupportEnabled": true
+	},
+	"overrides": [
+		{
+			"includes": ["**/*.astro"],
+			"linter": {
+				"rules": {
+					"style": {
+						"useConst": "off",
+						"useImportType": "off"
+					},
+					"correctness": {
+						"noUnusedVariables": "off",
+						"noUnusedImports": "off",
+						"useJsxKeyInIterable": "off",
+						"useHookAtTopLevel": "off"
+					}
+				}
+			},
+			"formatter": {
+				"enabled": true
+			}
+		}
+	]
 }
