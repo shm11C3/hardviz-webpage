@@ -1,34 +1,12 @@
 ---
-import { ArrowLeft } from "lucide-react";
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
-import {
-  getLangFromUrl,
-  useTranslatedPath,
-  useTranslations,
-} from "../../i18n/utils";
+import SurveyPage from "../../components/SurveyPage.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
-import {
-  buildSurveyEmbedSrc,
-  getSurveyFormId,
-  isSurveyConfigured,
-  SURVEY_FORWARDED_PARAMS,
-} from "../../lib/survey";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const { translatePath } = useTranslatedPath(lang);
-const privacyHref = translatePath("/privacy");
-const homeHref = translatePath("/");
-
-const configured = isSurveyConfigured(lang);
-const embedSrc = configured ? buildSurveyEmbedSrc(getSurveyFormId(lang)) : "";
-const forwardedParams = [...SURVEY_FORWARDED_PARAMS];
-// Defaults used when a param is absent from the page URL: `locale` follows the
-// page language and `source` falls back to "web". Explicit query params (e.g.
-// the app's source=app) still override these. app_version/os have no web
-// default — they only arrive when the app opens the survey.
-const paramDefaults = { locale: lang, source: "web" };
 ---
 
 <Layout
@@ -38,119 +16,7 @@ const paramDefaults = { locale: lang, source: "web" };
 >
   <Header />
   <main id="main-content" class="pt-20">
-    <section class="border-border border-b pt-12 pb-12">
-      <div class="shell">
-        <div class="max-w-3xl">
-          <h1 class="text-foreground text-3xl font-semibold md:text-4xl">
-            {t("survey.heading")}
-          </h1>
-          <p class="text-muted-foreground mt-4 max-w-2xl text-lg">
-            {t("survey.description")}
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <div class="shell py-12">
-      <div class="max-w-3xl">
-        <p
-          class="border-border text-muted-foreground mb-8 rounded-2xl border p-4 text-sm"
-        >
-          {t("survey.privacyNote")}{" "}
-          <a
-            href={privacyHref}
-            class="text-foreground hover:text-foreground font-medium underline underline-offset-2"
-            data-astro-prefetch
-          >
-            {t("survey.privacyNoteLink")}
-          </a>
-        </p>
-
-        {configured ? (
-          <div class="border-border overflow-hidden rounded-3xl border bg-white">
-            <iframe
-              id="survey-frame"
-              data-tally-src={embedSrc}
-              loading="lazy"
-              referrerpolicy="strict-origin-when-cross-origin"
-              title={t("survey.heading")}
-              class="w-full"
-              style="min-height: 640px;"
-            />
-          </div>
-        ) : (
-          <div class="border-input text-muted-foreground rounded-2xl border border-dashed p-10 text-center">
-            {t("survey.preparing")}
-          </div>
-        )}
-
-        <div class="mt-10 text-center">
-          <a
-            href={homeHref}
-            class="border-border text-foreground hover:bg-muted inline-flex items-center gap-2 rounded-lg border px-5 py-2.5 text-sm font-medium transition-colors"
-            data-astro-prefetch
-          >
-            <ArrowLeft className="h-4 w-4" />
-            {t("survey.backHome")}
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <script define:vars={{ forwardedParams, paramDefaults }}>
-    (() => {
-      const iframe = document.getElementById("survey-frame");
-      if (!iframe) return;
-
-      // Forward whitelisted, non-identifying context (SURVEY_FORWARDED_PARAMS
-      // in src/lib/survey.ts) into the Tally embed URL so it lands in the form's
-      // hidden fields. Values come from the page URL, falling back to
-      // paramDefaults (locale = page language, source = "web").
-      const base = iframe.getAttribute("data-tally-src");
-      if (base) {
-        try {
-          const url = new URL(base);
-          const current = new URLSearchParams(window.location.search);
-          for (const key of forwardedParams) {
-            const value = current.get(key) ?? paramDefaults[key];
-            if (value) url.searchParams.set(key, value);
-          }
-          iframe.setAttribute("data-tally-src", url.toString());
-        } catch {
-          /* keep the original embed URL if parsing fails */
-        }
-      }
-
-      const apply = () => {
-        if (window.Tally && typeof window.Tally.loadEmbeds === "function") {
-          window.Tally.loadEmbeds();
-          return;
-        }
-        // Fallback if Tally's script is unavailable: load the form directly.
-        for (const el of document.querySelectorAll("iframe[data-tally-src]")) {
-          if (!el.src) el.src = el.getAttribute("data-tally-src");
-        }
-      };
-
-      if (window.Tally) {
-        apply();
-        return;
-      }
-      const existing = document.querySelector(
-        'script[src="https://tally.so/widgets/embed.js"]',
-      );
-      if (existing) {
-        existing.addEventListener("load", apply);
-        existing.addEventListener("error", apply);
-        return;
-      }
-      const script = document.createElement("script");
-      script.src = "https://tally.so/widgets/embed.js";
-      script.onload = apply;
-      script.onerror = apply;
-      document.body.appendChild(script);
-    })();
-    </script>
+    <SurveyPage />
   </main>
   <Footer />
 </Layout>

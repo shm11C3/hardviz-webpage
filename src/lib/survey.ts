@@ -72,6 +72,15 @@ export function isSurveyConfigured(lang: SurveyLang): boolean {
 }
 
 /**
+ * The form on Tally's own page, linked under the embed for readers whose
+ * browser does not show the embedded form. Context params are appended
+ * client-side, as for the embed.
+ */
+export function buildSurveyFormUrl(formId: string): string {
+  return `https://tally.so/r/${formId}`;
+}
+
+/**
  * Base Tally embed URL. The per-response context params are appended
  * client-side from the page URL (see the survey page's inline script).
  */
