@@ -3,6 +3,13 @@ ignoredBuiltDependencies:
   - sharp
 
 minimumReleaseAge: 1440
+# astro2tsx (via @astrojs/check) takes @emnapi/runtime as a peer but pins
+# @emnapi/core to 1.x. Without this, pnpm can hand it the 2.0 beta that the
+# rolldown wasm binding brings in, and `astro check` crashes on load (#458).
+packageExtensions:
+  '@astrojs/language-server':
+    dependencies:
+      '@emnapi/runtime': ^1.11.3
 overrides:
   devalue@<5.6.4: '>=5.6.4'
   devalue@<=5.6.3: '>=5.6.4'
