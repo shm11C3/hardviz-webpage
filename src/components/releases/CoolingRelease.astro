@@ -108,16 +108,19 @@ const benchmarkSource = "/benchmarks/history-storage-2026-09-27.json";
         <span class="recent-legend">{t("release.figure.recent")}</span>
       </div>
       <div class="comparison-chart" aria-hidden="true">
-        {bands.map(({key, baseline, recent}) => (
-            <div class="band-row">
-              <span>{t(`release.figure.${key}`)}</span>
-              <div class="band-track">
-                <span class="range-line" style={`left:${baseline}%;width:${recent - baseline}%`}></span>
-                <i class="baseline-dot" style={`left:${baseline}%`}></i>
-                <i class="recent-dot" style={`left:${recent}%`}></i>
-              </div>
+        {bands.map(({ key, baseline, recent }) => (
+          <div class="band-row">
+            <span>{t(`release.figure.${key}`)}</span>
+            <div class="band-track">
+              <span
+                class="range-line"
+                style={`left:${baseline}%;width:${recent - baseline}%`}
+              ></span>
+              <i class="baseline-dot" style={`left:${baseline}%`}></i>
+              <i class="recent-dot" style={`left:${recent}%`}></i>
             </div>
-          ))}
+          </div>
+        ))}
         <div class="chart-axis">
           <span>{t("release.figure.lower")}</span
           ><span>{t("release.figure.axis")}</span
@@ -129,7 +132,9 @@ const benchmarkSource = "/benchmarks/history-storage-2026-09-27.json";
   </div>
   <ReleaseScreenshot
     src={lang === "ja" ? coolingScreenshotJa : coolingScreenshotEn}
-    lightSrc={lang === "ja" ? coolingScreenshotLightJa : coolingScreenshotLightEn}
+    lightSrc={lang === "ja"
+      ? coolingScreenshotLightJa
+      : coolingScreenshotLightEn}
     alt={t("release.screenshot.cooling.alt")}
     caption={t("release.screenshot.cooling.caption")}
   />
@@ -141,14 +146,17 @@ const benchmarkSource = "/benchmarks/history-storage-2026-09-27.json";
     </div>
     <div class="readings-list">
       {readings.map(({ key, supportedOnly, path }) => (
-            <div class="reading-row">
-              <div><span>{t(`release.reading.${key}`)}</span>{supportedOnly && <small>{t("release.reading.available")}</small>}</div>
-              <svg viewBox="0 0 160 36" fill="none" aria-hidden="true">
-                <path class="reading-grid" d="M0 32H160M40 0V36M80 0V36M120 0V36" />
-                <path class:list={["reading-wave", `wave-${key}`]} d={path} />
-              </svg>
-            </div>
-          ))}
+        <div class="reading-row">
+          <div>
+            <span>{t(`release.reading.${key}`)}</span>
+            {supportedOnly && <small>{t("release.reading.available")}</small>}
+          </div>
+          <svg viewBox="0 0 160 36" fill="none" aria-hidden="true">
+            <path class="reading-grid" d="M0 32H160M40 0V36M80 0V36M120 0V36" />
+            <path class:list={["reading-wave", `wave-${key}`]} d={path} />
+          </svg>
+        </div>
+      ))}
       <p class="small-note">{t("release.reading.caption")}</p>
     </div>
   </div>
@@ -209,7 +217,7 @@ const benchmarkSource = "/benchmarks/history-storage-2026-09-27.json";
             </tr>
           </thead>
           <tbody>
-            {storageBenchmark.map(row => (
+            {storageBenchmark.map((row) => (
               <tr>
                 <th scope="row">{t(`release.duck.benchmark.${row.period}`)}</th>
                 <td>{row.sqlite}MiB</td>
@@ -244,9 +252,12 @@ const benchmarkSource = "/benchmarks/history-storage-2026-09-27.json";
 <section id="questions" class="faq-section" aria-labelledby="questions-heading">
   <h2 id="questions-heading">{t("release.faq.name")}</h2>
   <div>
-    {questions.map(question => (
-        <details><summary>{t(`release.faq.${question}.q`)}</summary><p>{t(`release.faq.${question}.a`)}</p></details>
-      ))}
+    {questions.map((question) => (
+      <details>
+        <summary>{t(`release.faq.${question}.q`)}</summary>
+        <p>{t(`release.faq.${question}.a`)}</p>
+      </details>
+    ))}
   </div>
 </section>
 

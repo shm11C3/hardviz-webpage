@@ -9,11 +9,11 @@ const currentPath =
   noTranslatePath(Astro.url.pathname) + Astro.url.search + Astro.url.hash;
 ---
 
-<div class="relative group" id="language-menu">
+<div class="group relative" id="language-menu">
   <button
     id="langToggle"
     type="button"
-    class="flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground"
+    class="text-muted-foreground hover:text-foreground flex h-9 w-9 items-center justify-center rounded-full transition-colors"
     aria-label="Select Language"
     aria-haspopup="true"
     aria-expanded="false"
@@ -30,13 +30,13 @@ const currentPath =
   >
     <div
       role="menu"
-      class="w-32 rounded-2xl border border-border bg-popover p-1 text-popover-foreground shadow-xl"
+      class="border-border bg-popover text-popover-foreground w-32 rounded-2xl border p-1 shadow-xl"
     >
       {Object.entries(languages).map(([langCode, label]) => (
         <a
           href={translatePath(currentPath, langCode)}
           role="menuitem"
-          class={`block rounded-full px-3 py-2 text-sm transition-colors hover:bg-muted ${
+          class={`hover:bg-muted block rounded-full px-3 py-2 text-sm transition-colors ${
             langCode === lang ? "font-medium" : "text-muted-foreground"
           }`}
           aria-current={langCode === lang ? "true" : undefined}

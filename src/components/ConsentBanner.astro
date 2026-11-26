@@ -18,12 +18,11 @@ const plausibleDomain =
   (import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as string | undefined) ?? "";
 ---
 
-<div
+<section
   id="consent-banner"
-  role="region"
   aria-labelledby="consent-message"
   hidden
-  class="fixed inset-x-0 bottom-0 z-[60] border-border border-t bg-background/95 py-3 backdrop-blur-md"
+  class="border-border bg-background/95 fixed inset-x-0 bottom-0 z-[60] border-t py-3 backdrop-blur-md"
 >
   <div
     class="shell flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between"
@@ -51,7 +50,7 @@ const plausibleDomain =
       </button>
     </div>
   </div>
-</div>
+</section>
 
 <script define:vars={{ gaId, plausibleDomain }}>
 const KEY = "analytics-consent";

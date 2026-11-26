@@ -59,25 +59,25 @@ const items = [
     </div>
     <ul class="mt-[clamp(2rem,4vw,3rem)] grid gap-5 md:grid-cols-2">
       {items.map((item) => (
-          <li class="panel flex flex-col">
-            <h3 class="panel-label">
-              <item.Icon aria-hidden="true" />
-              {item.title}
-            </h3>
-            <p class="panel-body">{item.body}</p>
-            <p class="mt-auto pt-4 text-sm">
-              <a
-                href={item.href}
-                class="link"
-                {...(item.external
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : { "data-astro-prefetch": true })}
-              >
-                {item.link}
-              </a>
-            </p>
-          </li>
-        ))}
+        <li class="panel flex flex-col">
+          <h3 class="panel-label">
+            <item.Icon aria-hidden="true" />
+            {item.title}
+          </h3>
+          <p class="panel-body">{item.body}</p>
+          <p class="mt-auto pt-4 text-sm">
+            <a
+              href={item.href}
+              class="link"
+              {...(item.external
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : { "data-astro-prefetch": true })}
+            >
+              {item.link}
+            </a>
+          </p>
+        </li>
+      ))}
     </ul>
   </div>
 </section>

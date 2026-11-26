@@ -67,7 +67,9 @@ const compatibilityUrl =
         <p>{t(`release.v1_12_0.update.${key}.body`)}</p>
         {key === "downgrade" && (
           <p>
-            <a class="text-link" href={`${translatePath("/guide")}#downgrade`}>{t("release.v1_12_0.update.downgrade.link")}</a>
+            <a class="text-link" href={`${translatePath("/guide")}#downgrade`}>
+              {t("release.v1_12_0.update.downgrade.link")}
+            </a>
           </p>
         )}
       </div>

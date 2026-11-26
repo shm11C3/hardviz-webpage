@@ -147,18 +147,18 @@ const facts = [
         <div class="window-bar">
           <div class="seg" role="tablist" aria-label={t("hero.tabsLabel")}>
             {screens.map((screen, index) => (
-                <button
-                  type="button"
-                  role="tab"
-                  id={`screen-tab-${screen.key}`}
-                  aria-selected={index === 0 ? "true" : "false"}
-                  aria-controls="screen-panel"
-                  tabindex={index === 0 ? 0 : -1}
-                  data-screenshot-tab={screen.key}
-                >
-                  {screen.name}
-                </button>
-              ))}
+              <button
+                type="button"
+                role="tab"
+                id={`screen-tab-${screen.key}`}
+                aria-selected={index === 0 ? "true" : "false"}
+                aria-controls="screen-panel"
+                tabindex={index === 0 ? 0 : -1}
+                data-screenshot-tab={screen.key}
+              >
+                {screen.name}
+              </button>
+            ))}
           </div>
           {version && <p>HardwareVisualizer v{version}</p>}
         </div>
@@ -183,35 +183,35 @@ const facts = [
       </div>
 
       {screens.map((screen, index) => (
-          <figcaption data-screenshot-caption={screen.key} hidden={index !== 0}>
-            {screen.caption}
-          </figcaption>
-        ))}
+        <figcaption data-screenshot-caption={screen.key} hidden={index !== 0}>
+          {screen.caption}
+        </figcaption>
+      ))}
 
       {screens.map((screen, index) => (
-          <>
-            <template data-screenshot-template={screen.key} data-theme="light">
-              <Image
-                src={screen.light}
-                alt={screen.alt}
-                widths={imageWidths}
-                sizes={imageSizes}
-                loading="eager"
-                fetchpriority={index === 0 ? "high" : "auto"}
-              />
-            </template>
-            <template data-screenshot-template={screen.key} data-theme="dark">
-              <Image
-                src={screen.dark}
-                alt={screen.alt}
-                widths={imageWidths}
-                sizes={imageSizes}
-                loading="eager"
-                fetchpriority={index === 0 ? "high" : "auto"}
-              />
-            </template>
-          </>
-        ))}
+        <>
+          <template data-screenshot-template={screen.key} data-theme="light">
+            <Image
+              src={screen.light}
+              alt={screen.alt}
+              widths={imageWidths}
+              sizes={imageSizes}
+              loading="eager"
+              fetchpriority={index === 0 ? "high" : "auto"}
+            />
+          </template>
+          <template data-screenshot-template={screen.key} data-theme="dark">
+            <Image
+              src={screen.dark}
+              alt={screen.alt}
+              widths={imageWidths}
+              sizes={imageSizes}
+              loading="eager"
+              fetchpriority={index === 0 ? "high" : "auto"}
+            />
+          </template>
+        </>
+      ))}
 
       <script is:inline>
       (() => {
@@ -293,19 +293,19 @@ const facts = [
 
     <dl class="facts panel" aria-label={t("hero.facts.label")}>
       {facts.map((fact) => (
-          <div>
-            <dt>{fact.term}</dt>
-            <dd>
-              {fact.href ? (
-                <a href={fact.href} class="link" data-astro-prefetch>
-                  {fact.value}
-                </a>
-              ) : (
-                fact.value
-              )}
-            </dd>
-          </div>
-        ))}
+        <div>
+          <dt>{fact.term}</dt>
+          <dd>
+            {fact.href ? (
+              <a href={fact.href} class="link" data-astro-prefetch>
+                {fact.value}
+              </a>
+            ) : (
+              fact.value
+            )}
+          </dd>
+        </div>
+      ))}
     </dl>
   </div>
 </section>
