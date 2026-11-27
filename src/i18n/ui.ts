@@ -401,7 +401,7 @@ export const ui = {
     "feedback.discussions.ideas": "Feature ideas",
     "feedback.survey.title": "Anonymous survey",
     "feedback.survey.body":
-      "Takes about 2 to 3 minutes, with no account. Most questions are optional.",
+      "Takes about 30 seconds, with no account. Only the star rating is required.",
     "feedback.survey.cta": "Open the survey",
     "screenshots.insightsAlt":
       "HardwareVisualizer Insights - review historical CPU and GPU usage after a workload",
@@ -770,10 +770,10 @@ export const ui = {
     "footer.survey": "Survey",
     "survey.metaTitle": "Survey | HardwareVisualizer",
     "survey.metaDescription":
-      "Share your feedback on HardwareVisualizer — which features you use, what's missing, and how we can improve. Anonymous and takes about 2–3 minutes.",
+      "Rate HardwareVisualizer and tell us what you like and what to improve. Anonymous and takes about 30 seconds.",
     "survey.heading": "Survey",
     "survey.description":
-      "This survey is anonymous and takes about 2–3 minutes.",
+      "This survey is anonymous and takes about 30 seconds.",
     "survey.privacyNote":
       "Responses are anonymous. We add only non-identifying context, such as where you opened the survey and your app version. The form runs on Tally.",
     "survey.privacyNoteLink": "Read our Privacy Policy",
@@ -1174,7 +1174,7 @@ export const ui = {
     "feedback.discussions.ideas": "機能のアイデア",
     "feedback.survey.title": "匿名アンケート",
     "feedback.survey.body":
-      "2〜3分で回答できます。アカウントは不要で、ほとんどの設問は任意です。",
+      "約30秒で回答できます。アカウントは不要で、必須は星評価だけです。",
     "feedback.survey.cta": "アンケートを開く",
     "screenshots.insightsAlt":
       "処理後にCPUとGPUの使用履歴を振り返るHardwareVisualizerのInsights画面",
@@ -1541,9 +1541,9 @@ export const ui = {
     "footer.survey": "アンケート",
     "survey.metaTitle": "アンケート | HardwareVisualizer",
     "survey.metaDescription":
-      "HardwareVisualizerへのご意見をお聞かせください。よく使う機能、足りない機能、改善してほしい点など。匿名で約2〜3分です。",
+      "HardwareVisualizerの満足度と、気に入っている点や改善してほしいことをお聞かせください。匿名で約30秒です。",
     "survey.heading": "アンケート",
-    "survey.description": "アンケートは匿名で、約2〜3分で回答できます。",
+    "survey.description": "アンケートは匿名で、約30秒で回答できます。",
     "survey.privacyNote":
       "回答は匿名です。開いた場所やアプリのバージョンなど、個人を特定しない情報だけを付けます。フォームはTallyで動いています。",
     "survey.privacyNoteLink": "プライバシーポリシーを読む",
