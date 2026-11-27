@@ -56,28 +56,27 @@ _プレースホルダー: 不満点、バグ、追加してほしい機能な�
 
 ## English form
 
-Same three questions in the same order as the Japanese form. The wording
-below is a translation; when the live English form differs, the live form is
-the source of truth and this section should be updated to match it.
+Copied from the live form. Same three questions in the same order as the
+Japanese form.
 
 **Intro / welcome:**
 > Thanks for using HardwareVisualizer!
-> **Anonymous, about 30 seconds. A star rating alone is welcome.**
-> Your feedback helps shape what comes next. Aggregated results may be shared
-> publicly; we never publish anything that identifies you.
+> **Anonymous, about 30 seconds. A star rating alone is enough.**
+> Your feedback helps shape future development. Aggregated results may be
+> shared publicly, but we never publish information that identifies you.
 
 **Q1. How satisfied are you with HardwareVisualizer?**
 _Type: Rating (5 stars) · **Required**_
 
-**Q2. What do you like most? (optional)**
+**Q2. What do you like most? (Optional)**
 _Type: Choice · Optional_
-- Lightweight, low resource use
+- Lightweight and low resource usage
 - UI and design
 - Hardware monitoring
 - Long-term history and Insights
 - Customization
 - Other
 
-**Q3. What should be improved? (optional)**
+**Q3. What could we improve? (Optional)**
 _Type: Long text · Optional_
-_Placeholder: Anything: complaints, bugs, features you'd like to see._
+_Placeholder: Issues, bugs, feature requests, or anything else._
