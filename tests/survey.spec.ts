@@ -45,3 +45,50 @@ test("about page invites feedback and links to the survey", async ({
   await expect(cta).toBeVisible();
   await expect(cta).toHaveAttribute("href", "/survey/?source=web");
 });
+
+test("changelog entries link to the survey with the release they describe", async ({
+  page,
+}) => {
+  await page.goto("/changelog/1.12.0/");
+  await expect(
+    page.getByRole("link", { name: "Answer the survey" }),
+  ).toHaveAttribute(
+    "href",
+    "/survey/?source=web&utm_source=changelog&utm_content=1.12.0",
+  );
+
+  await page.goto("/ja/changelog/1.12.0/");
+  await expect(
+    page.getByRole("link", { name: "アンケートに回答する" }),
+  ).toHaveAttribute(
+    "href",
+    "/ja/survey/?source=web&utm_source=changelog&utm_content=1.12.0",
+  );
+});
+
+test("release articles link to the survey with their release", async ({
+  page,
+}) => {
+  await page.goto("/releases/cooling-insight/");
+  await expect(
+    page.getByRole("link", { name: "Answer the survey" }),
+  ).toHaveAttribute(
+    "href",
+    "/survey/?source=web&utm_source=release&utm_content=1.11.0",
+  );
+});
+
+test("the link under the form opens it on Tally with the same context", async ({
+  page,
+}) => {
+  await page.goto("/survey/?source=app&app_version=1.12.1&os=windows");
+  const link = page.getByRole("link", { name: "Open it on Tally" });
+  await expect(link).toHaveAttribute(
+    "href",
+    /^https:\/\/tally\.so\/r\/\w+\?.*source=app/,
+  );
+  const href = new URL((await link.getAttribute("href")) ?? "");
+  expect(href.searchParams.get("app_version")).toBe("1.12.1");
+  expect(href.searchParams.get("os")).toBe("windows");
+  expect(href.searchParams.get("locale")).toBe("en");
+});

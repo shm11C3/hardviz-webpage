@@ -66,6 +66,17 @@
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
+/* Site panels placed in an article (the survey invite) keep the site's panel type. */
+.release-page .panel-label {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: normal;
+}
+.release-page .panel-body {
+  color: var(--soft);
+  line-height: inherit;
+}
 .release-page h3 {
   font-weight: 600;
   font-size: 1.2rem;

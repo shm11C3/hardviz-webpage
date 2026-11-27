@@ -31,13 +31,37 @@ export const surveyFormIds: Record<SurveyLang, string> = {
  * - `os`: `windows` | `macos` | `linux`
  * - `source`: entry point — `app` or `web`
  * - `locale`: UI language — `en` | `ja`
+ * - `utm_source`: site page type the link sits on (see {@link SurveyEntry})
+ * - `utm_content`: release that page describes (e.g. `1.12.0`)
  */
 export const SURVEY_FORWARDED_PARAMS = [
   "app_version",
   "os",
   "source",
   "locale",
+  "utm_source",
+  "utm_content",
 ] as const;
+
+/** Site pages that link to the survey with the release they describe. */
+export type SurveyEntry = "changelog" | "release";
+
+/**
+ * Survey link from a page about one release. `utm_content` is the release the
+ * page describes, not the reader's installed version (that is `app_version`,
+ * which only the app sends).
+ */
+export function surveyHref(
+  surveyPath: string,
+  { entry, version }: { entry: SurveyEntry; version: string },
+): string {
+  const params = new URLSearchParams({
+    source: "web",
+    utm_source: entry,
+    utm_content: version,
+  });
+  return `${surveyPath}?${params.toString()}`;
+}
 
 export function getSurveyFormId(lang: SurveyLang): string {
   return surveyFormIds[lang];
@@ -45,6 +69,15 @@ export function getSurveyFormId(lang: SurveyLang): string {
 
 export function isSurveyConfigured(lang: SurveyLang): boolean {
   return surveyFormIds[lang].trim().length > 0;
+}
+
+/**
+ * The form on Tally's own page, linked under the embed for readers whose
+ * browser does not show the embedded form. Context params are appended
+ * client-side, as for the embed.
+ */
+export function buildSurveyFormUrl(formId: string): string {
+  return `https://tally.so/r/${formId}`;
 }
 
 /**

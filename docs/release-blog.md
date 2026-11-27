@@ -30,6 +30,7 @@ v1.11.0で採用した構成を、次回以降のリリースでも利用する�
 - `<title>`とH1には機能名と検索されやすい語（例: CPU temperature, load, history）を含め、バージョン番号を先頭に置かない。英語のmeta descriptionは160文字前後に収める。
 - 公開日は`src/data/releases.ts`の該当エントリの`publishedAt`だけで管理する。Heroの`<time>`、JSON-LDの`datePublished`、`article:published_time`、サイトマップの`lastmod`がこの値から生成される。
 - 末尾CTAの下にGitHubリリース・機能一覧・システム要件へのリンクが出る。対象の更新履歴（MDX）からも記事へリンクし、双方向にする。
+- 末尾CTAの後に匿名アンケートへの案内（`SurveyInvite.astro`）が自動で入る。リンクには`utm_source=release`と記事の`version`（`utm_content`）が付き、更新履歴のページからは`utm_source=changelog`が付く。
 - 記事内のダウンロードCTAは`landing_download_click`イベントの`cta_location`が`release_hero` / `release_final`として、ホームの告知バーは`release_announcement_click`として計測される。
 
 ## 内容の基本形
