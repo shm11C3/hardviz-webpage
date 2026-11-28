@@ -5,8 +5,8 @@ title: "Security and data"
 metaTitle: "Security and Data: Official Sources, Signing, and Network Use | HardwareVisualizer"
 metaDescription: "Where HardwareVisualizer is officially distributed, how its installers are signed, what the app connects to over the network, where history is stored, and how to report a vulnerability."
 lead: "Where the app is officially distributed, how installers are signed, what it connects to, and where your data is kept. Each statement here can be checked against the source code or the linked document."
-basedOn: "1.12.0"
-updated: 2026-11-22
+basedOn: "1.13.0"
+updated: 2026-12-03
 ---
 
 ## Official sources
@@ -49,7 +49,7 @@ The steps are on the [Installer verification](/verification/) page. The full pol
 
 ## What the app connects to
 
-HardwareVisualizer has no account, and it sends no usage data without consent. Hardware readings and history are not sent anywhere. As of v1.12.0, the app itself makes these connections:
+HardwareVisualizer has no account, and it sends no usage data without consent. Hardware readings and history are not sent anywhere. As of v1.13.0, the app itself makes these connections:
 
 <div class="table-scroll">
 
@@ -58,16 +58,19 @@ HardwareVisualizer has no account, and it sends no usage data without consent. H
 | At startup, and every 6 hours while running | GitHub Releases (`github.com`) | Checks whether a newer version exists |
 | When you choose to set up PawnIO | Official GitHub releases of PawnIO | Downloads the pinned PawnIO 2.2.0 runtime installer and PawnIO.Modules 0.2.11, then checks each against a recorded size and SHA-256 digest |
 | When the interface loads | Google Fonts (`fonts.googleapis.com`) | The app's stylesheet imports the Noto Sans font |
+| Only if you choose to share product analytics: about a minute after start, every 6 hours while running, and right after you turn it on | Product analytics service (`analytics.hardviz.com`) | Sends aggregate usage counts; see [Product analytics](#product-analytics) |
 
 </div>
 
 ### Product analytics
 
-v1.12.0 contains the client for planned opt-in product analytics, described in the [product analytics notice](https://github.com/shm11C3/HardwareVisualizer/blob/develop/docs/user/product-analytics.md).
+From v1.13.0, the app can share aggregate usage counts if you agree. The full data contract is the [product analytics notice](https://github.com/shm11c3/HardwareVisualizer/blob/develop/docs/user/product-analytics.md).
 
-- It is off by default, and this version has no screen to turn it on.
-- It sends only when consent is recorded in the app's settings file. The destination would be `analytics.hardviz.com`.
-- Its contract excludes hardware readings, model names, and process names.
+- It is off by default. The first time the app starts after the update, a dialog asks once, and "Share" and "Don't share" carry the same weight. Closing the dialog or quitting the app without choosing counts as "Don't share", and a declined installation is not asked again.
+- You can turn it on or off at any time in **Settings → Advanced → Product analytics**. Turning it off cancels any upload in progress, discards anything queued, and deletes the local random seed.
+- What is sent: daily counts of which screens and capabilities are used, which features are switched on, CPU and GPU vendor class, whether a sensor provider works, app version, OS family, CPU architecture, the month you turned it on, and tokens that change every day and every month.
+- What is never sent: hardware readings, device model names, serial numbers, persistent device or user identifiers, process names, or error text.
+- The [client source](https://github.com/shm11c3/HardwareVisualizer/tree/develop/hardviz/app/src/analytics) and the [service source](https://github.com/shm11c3/hardviz-product-analytics) are public.
 
 ### Interface font
 

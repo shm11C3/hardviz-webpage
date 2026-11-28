@@ -385,7 +385,7 @@ export const ui = {
     "trust.item2.link": "Verify a download",
     "trust.item3.title": "Your data stays on your PC",
     "trust.item3.body":
-      "No account, and no usage data is sent without consent. The app connects to the internet to check GitHub Releases for updates, to download PawnIO if you choose to set it up, and to load its interface font from Google Fonts.",
+      "No account, and no usage data is sent without consent. The app connects to the internet to check GitHub Releases for updates, to download PawnIO if you choose to set it up, to load its interface font from Google Fonts, and, only if you agree, to share aggregate usage counts.",
     "trust.item3.link": "What the app connects to",
     "trust.item4.title": "Open source",
     "trust.item4.body":
@@ -1158,7 +1158,7 @@ export const ui = {
     "trust.item2.link": "ダウンロードを検証する",
     "trust.item3.title": "データはPCの中に",
     "trust.item3.body":
-      "アカウントは不要で、同意なしに利用状況を送信しません。アプリが通信するのは、GitHub Releasesでの更新確認、導入を選んだ場合のPawnIOの取得、Google Fontsからの表示用フォントの読み込みです。",
+      "アカウントは不要で、同意なしに利用状況を送信しません。アプリが通信するのは、GitHub Releasesでの更新確認、導入を選んだ場合のPawnIOの取得、Google Fontsからの表示用フォントの読み込み、同意した場合に限った集計済みの利用回数の共有です。",
     "trust.item3.link": "アプリの通信先",
     "trust.item4.title": "オープンソース",
     "trust.item4.body":
